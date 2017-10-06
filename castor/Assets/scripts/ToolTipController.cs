@@ -12,11 +12,18 @@ public class ToolTipController : MonoBehaviour,
 	void Start ()
 	{
 		HideToolTip ();
+		AddToToolTipLayer (ToolTip);
 	}
 
 	void Update ()
 	{
 		
+	}
+
+	private void AddToToolTipLayer (GameObject toolTip)
+	{
+		int layer = LayerMask.NameToLayer ("ToolTips");
+		toolTip.layer = layer;
 	}
 
 	private void ShowTooltip ()
