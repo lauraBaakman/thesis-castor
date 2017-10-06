@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -33,6 +34,6 @@ public class MenuController : MonoBehaviour
 
 	public void OnNewReductionButton ()
 	{
-		Debug.Log ("Button Pressed!");
+		SceneManager.LoadScene ("reduction");
 	}
 }
