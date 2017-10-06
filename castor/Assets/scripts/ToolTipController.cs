@@ -7,28 +7,35 @@ public class ToolTipController : MonoBehaviour,
 	IPointerEnterHandler, 
 	IPointerExitHandler
 {
+	public GameObject ToolTip;
 
-	public string tooltiptext;
-
-	// Use this for initialization
 	void Start ()
 	{
-		
+		HideToolTip ();
 	}
-	
-	// Update is called once per frame
+
 	void Update ()
 	{
 		
 	}
 
+	private void ShowTooltip ()
+	{
+		ToolTip.gameObject.SetActive (true);	
+	}
+
+	private void HideToolTip ()
+	{
+		ToolTip.gameObject.SetActive (false);	
+	}
+
 	public void OnPointerEnter (PointerEventData data)
 	{
-		Debug.Log ("Enter");
+		ShowTooltip ();
 	}
 
 	public void OnPointerExit (PointerEventData data)
 	{
-		Debug.Log ("Exit");
+		HideToolTip ();
 	}
 }
