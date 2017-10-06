@@ -45,29 +45,38 @@ public class ToolTipController : MonoBehaviour,
 
 	public void OnPointerEnter (PointerEventData data)
 	{
-		timer.Start ();
+		timer.Activate ();
 	}
 
 	public void OnPointerExit (PointerEventData data)
 	{
-		timer.Reset ();
+		timer.Deactivate ();
 		HideToolTip ();
 	}
 }
 
 public class Timer
 {
-	private float TimeToReach;
+	private float TimeToReach = 0;
 	private float TimePassed = 0;
+
+	private bool active = false;
 
 	public Timer (float timeToReach)
 	{
 		TimeToReach = timeToReach;
 	}
 
-	public void Start ()
+	public void Activate ()
 	{
-		TimePassed = 0;
+		active = true;
+		Reset ();
+	}
+
+	public void Deactivate ()
+	{
+		active = false;
+		Reset ();
 	}
 
 	public void Reset ()
@@ -77,11 +86,13 @@ public class Timer
 
 	public bool IsCompleted ()
 	{
-		return 	TimePassed >= TimeToReach;
+		return 	active && TimePassed >= TimeToReach;
 	}
 
 	public void update ()
 	{
-		TimePassed += Time.deltaTime;
+		if (active) {
+			TimePassed += Time.deltaTime;	
+		}
 	}
 }
