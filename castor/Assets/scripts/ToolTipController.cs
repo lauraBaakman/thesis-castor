@@ -9,15 +9,22 @@ public class ToolTipController : MonoBehaviour,
 {
 	public GameObject ToolTip;
 
+	private Timer timer;
+
 	void Start ()
 	{
+		timer = new Timer (1.0f);
+
 		HideToolTip ();
 		AddToToolTipLayer (ToolTip);
 	}
 
 	void Update ()
 	{
-		
+		timer.update ();
+		if (timer.IsCompleted ()) {
+			ShowTooltip ();
+		}
 	}
 
 	private void AddToToolTipLayer (GameObject toolTip)
@@ -38,11 +45,43 @@ public class ToolTipController : MonoBehaviour,
 
 	public void OnPointerEnter (PointerEventData data)
 	{
-		ShowTooltip ();
+		timer.Start ();
 	}
 
 	public void OnPointerExit (PointerEventData data)
 	{
+		timer.Reset ();
 		HideToolTip ();
+	}
+}
+
+public class Timer
+{
+	private float TimeToReach;
+	private float TimePassed = 0;
+
+	public Timer (float timeToReach)
+	{
+		TimeToReach = timeToReach;
+	}
+
+	public void Start ()
+	{
+		TimePassed = 0;
+	}
+
+	public void Reset ()
+	{
+		TimePassed = 0;
+	}
+
+	public bool IsCompleted ()
+	{
+		return 	TimePassed >= TimeToReach;
+	}
+
+	public void update ()
+	{
+		TimePassed += Time.deltaTime;
 	}
 }
