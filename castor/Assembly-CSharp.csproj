@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\mainMenu\scripts\MenuController.cs" />
      <Compile Include="Assets\scripts\PersistentObject.cs" />
      <Compile Include="Assets\scripts\ToolTipController.cs" />
  <Reference Include="UnityEngine.Analytics">
