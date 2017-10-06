@@ -20,13 +20,8 @@ public class MenuController : MonoBehaviour
 
 	public void AttachListeners ()
 	{
-		AttachOnClickListenerToButton ("New Fracture Reduction Button", OnNewReductionButton);
-	}
-
-	private void AttachOnClickListenerToButton (string name, UnityAction listener)
-	{
-		Button button = GetButtonByName (name);
-		button.onClick.AddListener (listener);
+		Button button = GetButtonByName ("New Fracture Reduction Button");
+		button.onClick.AddListener (OnNewReductionButton);
 	}
 
 	private Button GetButtonByName (string name)
