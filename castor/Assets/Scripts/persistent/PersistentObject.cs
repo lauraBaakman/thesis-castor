@@ -8,6 +8,10 @@ public class PersistentObject : MonoBehaviour
 	void Start ()
 	{
 		DontDestroyOnLoad (gameObject);
+
+		new PlayerPrefsUpdater ().update();
+
 		SceneManager.LoadScene ("mainMenu");
 	}
+		
 }

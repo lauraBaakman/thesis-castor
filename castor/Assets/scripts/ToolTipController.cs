@@ -13,7 +13,9 @@ public class ToolTipController : MonoBehaviour,
 
 	void Start ()
 	{
-		timer = new Timer (1.0f);
+		float toolTipDelayInS = PlayerPrefs.GetFloat("help.tooltips.delayInS");
+
+		timer = new Timer (toolTipDelayInS);
 
 		HideToolTip ();
 		AddToToolTipLayer (ToolTip);
