@@ -1,5 +1,8 @@
-# castor
-An application for computer assisted orthopaedic fracture reduction. 
+# Computer ASsisTed Orhopaedic fracture Reconstruction (CAstOR)
+
+## Usage
+
+## Development
 
 ## Requirements
 
