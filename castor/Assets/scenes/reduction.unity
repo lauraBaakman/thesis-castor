@@ -679,30 +679,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1966058218903892, guid: f243f1ab4ca584ad7b7f3510dbac9b18,
     type: 2}
   m_PrefabInternal: {fileID: 522946203}
---- !u!1 &328505585 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1024049390822872, guid: ec554fde99b434c5f8723c96a26fb909,
-    type: 2}
-  m_PrefabInternal: {fileID: 1495766490}
---- !u!114 &328505590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328505585}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: 80
-  m_MinHeight: -1
-  m_PreferredWidth: 120
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &369323809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,30 +1877,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1966058218903892, guid: f243f1ab4ca584ad7b7f3510dbac9b18,
     type: 2}
   m_PrefabInternal: {fileID: 2118024177}
---- !u!1 &1217119656 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1644926970937740, guid: ec554fde99b434c5f8723c96a26fb909,
-    type: 2}
-  m_PrefabInternal: {fileID: 1495766490}
---- !u!114 &1217119661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1217119656}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: 30
-  m_MinHeight: -1
-  m_PreferredWidth: 30
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &1258073909
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,9 +2600,24 @@ Prefab:
     - target: {fileID: 224651510901864066, guid: ec554fde99b434c5f8723c96a26fb909,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1857798004994608, guid: ec554fde99b434c5f8723c96a26fb909, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224096539396659386, guid: ec554fde99b434c5f8723c96a26fb909,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 114059485793819406, guid: ec554fde99b434c5f8723c96a26fb909,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114879955190918110, guid: ec554fde99b434c5f8723c96a26fb909, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ec554fde99b434c5f8723c96a26fb909, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1568538722 stripped
@@ -2670,54 +2637,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ToolTip: {fileID: 487402528}
---- !u!1 &1701384908 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1857798004994608, guid: ec554fde99b434c5f8723c96a26fb909,
-    type: 2}
-  m_PrefabInternal: {fileID: 1495766490}
---- !u!114 &1701384913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1701384908}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: 80
-  m_MinHeight: -1
-  m_PreferredWidth: 120
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
---- !u!1 &1722379469 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1270097060774912, guid: ec554fde99b434c5f8723c96a26fb909,
-    type: 2}
-  m_PrefabInternal: {fileID: 1495766490}
---- !u!114 &1722379474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1722379469}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: 30
-  m_MinHeight: 30
-  m_PreferredWidth: 30
-  m_PreferredHeight: 30
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1001 &1740261950
 Prefab:
   m_ObjectHideFlags: 0
