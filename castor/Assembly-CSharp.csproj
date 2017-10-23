@@ -55,6 +55,8 @@
      <Compile Include="Assets\Scripts\persistent\PersistentObject.cs" />
      <Compile Include="Assets\Scripts\persistent\PlayerPrefsUpdater.cs" />
      <Compile Include="Assets\Scripts\sidemenu\FileMenuBoxController.cs" />
+     <Compile Include="Assets\Scripts\sidemenu\FragmentListElementController.cs" />
+     <Compile Include="Assets\Scripts\sidemenu\FragmentsMenuBoxController.cs" />
      <Compile Include="Assets\Scripts\ToolTipController.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
