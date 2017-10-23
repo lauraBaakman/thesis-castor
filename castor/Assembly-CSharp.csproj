@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\FractureFragments.cs" />
      <Compile Include="Assets\Scripts\mainmenu\MenuController.cs" />
      <Compile Include="Assets\Scripts\ObjImporter.cs" />
      <Compile Include="Assets\Scripts\persistent\PersistentObject.cs" />
