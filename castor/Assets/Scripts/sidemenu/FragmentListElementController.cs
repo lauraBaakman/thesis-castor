@@ -53,22 +53,17 @@ public class EditableTextField
 		setUpTextEventTriggers ();
 	}
 
-	private void setUpTextEventTriggers(){
+	private void setUpTextEventTriggers ()
+	{
 		//Add Event Trigger to the game object
 		EventTrigger eventTrigger = text.gameObject.AddComponent (typeof(EventTrigger)) as EventTrigger;
 
-		// Create a new trigger event
+
 		EventTrigger.TriggerEvent triggerEvent = new EventTrigger.TriggerEvent ();
-
-		// Assign a listener to the trigger event
 		triggerEvent.AddListener ((PointerEventData) => onPointerClick ());
-
-		// Create a EventTrigger Entry
 		EventTrigger.Entry entry = new EventTrigger.Entry () {
 			callback = triggerEvent, eventID = EventTriggerType.PointerClick
 		};
-
-		// Register the EventTrigger Entry
 		eventTrigger.triggers.Add (entry);				
 	}
 
@@ -80,18 +75,21 @@ public class EditableTextField
 
 	public void onPointerClick ()
 	{
-		Debug.Log ("A click has been detected!");
+		enterEditMode ();
 	}
 
-	//Hide the input field
+	private void enterEditMode ()
+	{
+		toggleEditMode (true);
+	}
 
-	//Onclick of the text field:
-	// hide the text field,
-	// show the input field
+	private void exitEditMode ()
+	{
+		toggleEditMode (false);
+		text.text = input.text;
+	}
 
-
-	//On leaving the input field:
-	// hide the input field
-	// store the text in the input field in the text field
-	// show the text field
+	//Levae edit mode upon:
+	// tab
+	// Enter
 }
