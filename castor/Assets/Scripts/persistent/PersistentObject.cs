@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using SimpleFileBrowser;
 
 public class PersistentObject : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class PersistentObject : MonoBehaviour
 	{
 		DontDestroyOnLoad (gameObject);
 
-		new PlayerPrefsUpdater ().update();
+		new PlayerPrefsUpdater ().update ();
+
+		FileBrowser.SetDefaultFilter (".obj");
 
 		SceneManager.LoadScene ("mainMenu");
 	}

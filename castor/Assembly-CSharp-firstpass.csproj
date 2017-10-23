@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{1318A362-4983-BE01-673A-7ABD76191D5C}</ProjectGuid>
+    <ProjectGuid>{4602BF1A-EA68-59A9-8CA2-278917052D83}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -51,56 +51,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\mainmenu\MenuController.cs" />
-     <Compile Include="Assets\Scripts\persistent\PersistentObject.cs" />
-     <Compile Include="Assets\Scripts\persistent\PlayerPrefsUpdater.cs" />
-     <Compile Include="Assets\Scripts\sidemenu\FileMenuBoxController.cs" />
-     <Compile Include="Assets\Scripts\sidemenu\FragmentListElementController.cs" />
-     <Compile Include="Assets\Scripts\sidemenu\FragmentsMenuBoxController.cs" />
-     <Compile Include="Assets\Scripts\ToolTipController.cs" />
-     <Compile Include="Assets\Scripts\UserEditableText.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\CheckMethod.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\ActionBase.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\BoolComparer.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\ColliderComparer.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\ComparerBase.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\FloatComparer.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\GeneralComparer.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\IntComparer.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\IsRenderedByCamera.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\StringComparer.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\TransformComparer.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\ValueDoesNotChange.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\Vector2Comparer.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\Vector3Comparer.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\Vector4Comparer.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\Comparers\VectorComparerBase.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\InvalidPathException.cs" />
-     <Compile Include="Assets\UnityTestTools\Assertions\MemberResolver.cs" />
-     <Compile Include="Assets\UnityTestTools\Common\ITestResult.cs" />
-     <Compile Include="Assets\UnityTestTools\Common\TestResultState.cs" />
-     <Compile Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Scripts\GameScore.cs" />
-     <Compile Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\CodeBasedAssertionExample.cs" />
-     <Compile Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\CustomComponent.cs" />
-     <Compile Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\DynamicIntegrationTest.cs" />
-     <Compile Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\ThrowCustomException.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestingAssets\CallTesting.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\DTOFormatter.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTest.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTestAttribute.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTestsProvider.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\ITestRunnerCallback.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\NetworkResultSender.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\ResultDTO.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestComponent.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestResult.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestResultRenderer.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunner.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerCallbackList.cs" />
-     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
+     <Compile Include="Assets\Plugins\SimpleFileBrowser\Scripts\FileBrowser.cs" />
+     <Compile Include="Assets\Plugins\SimpleFileBrowser\Scripts\FileBrowserItem.cs" />
+     <Compile Include="Assets\Plugins\SimpleFileBrowser\Scripts\FileBrowserMovement.cs" />
+     <Compile Include="Assets\Plugins\SimpleFileBrowser\Scripts\FileBrowserQuickLink.cs" />
+     <Compile Include="Assets\Plugins\SimpleFileBrowser\Scripts\SimpleRecycledListView\IListViewAdapter.cs" />
+     <Compile Include="Assets\Plugins\SimpleFileBrowser\Scripts\SimpleRecycledListView\ListItem.cs" />
+     <Compile Include="Assets\Plugins\SimpleFileBrowser\Scripts\SimpleRecycledListView\RecycledListView.cs" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\Cursor.shader" />
      <None Include="Assets\UnityTestTools\LICENSE.txt" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\ParticleAdditiveBlend.shader" />
@@ -138,10 +95,6 @@
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{4602BF1A-EA68-59A9-8CA2-278917052D83}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
