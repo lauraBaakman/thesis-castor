@@ -14,6 +14,7 @@ public class FileMenuBoxController : MonoBehaviour {
 	}
 
 	public void onQuitClick(){
-		Debug.Log ("Quit Button Clicked");
+		//Note: Application.Quit() is ignored when playing in editor mode.
+		Application.Quit ();
 	}
 }
