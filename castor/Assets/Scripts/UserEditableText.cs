@@ -21,13 +21,6 @@ public class UserEditableText : MonoBehaviour
 		setUpEventTriggers ();
 	}
 
-	void Update ()
-	{
-		if (field.isFocused) {
-			Debug.Log ("Field has focus!");
-		}
-	}
-
 	private void setUpEventTriggers ()
 	{
 		setUpTextEventTriggers ();
@@ -62,7 +55,7 @@ public class UserEditableText : MonoBehaviour
 
 	public void onSubmit (string inputText)
 	{
-		Debug.Log ("On Submit!");
+		exitEditMode ();
 	}
 
 	public void toggleEditMode (bool toggle)
