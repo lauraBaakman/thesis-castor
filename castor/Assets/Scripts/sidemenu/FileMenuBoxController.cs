@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FileMenuBoxController : MonoBehaviour {
 
 	public void onHomeClick(){
-		Debug.Log ("Home Button Clicked");
+		SceneManager.LoadScene ("mainMenu");
 	}
 
 	public void onSaveClick(){
