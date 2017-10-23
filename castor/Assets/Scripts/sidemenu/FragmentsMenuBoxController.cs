@@ -18,6 +18,13 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 	private void onSelect (string path)
 	{
-		Debug.Log ("Load: " + path);
+		Mesh holderMesh = new Mesh ();
+		ObjImporter newMesh = new ObjImporter ();
+		holderMesh = newMesh.ImportFile (path);
+		ObjImporter.AverageVertices (holderMesh);
+
+		MeshRenderer renderer = gameObject.AddComponent<MeshRenderer> ();
+		MeshFilter filter = gameObject.AddComponent<MeshFilter> ();
+		filter.mesh = holderMesh;
 	}
 }
