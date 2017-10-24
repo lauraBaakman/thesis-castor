@@ -15,20 +15,11 @@ public sealed class FractureFragments
 			return instance;
 		}
 	}
+
+	public Fragment AddFragmentFromFile (string path)
+	{
+		Fragment fragment = Fragment.FromFile (path);
+
+		return fragment;
+	}
 }
-
-
-//public sealed class Singleton
-//{
-//	private static readonly Singleton instance = new Singleton();
-//
-//	private Singleton(){}
-//
-//	public static Singleton Instance
-//	{
-//		get
-//		{
-//			return instance;
-//		}
-//	}
-//}
