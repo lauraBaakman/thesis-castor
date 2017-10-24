@@ -34,9 +34,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 	{
 		GameObject fragment = addFragmentGameObject (path);
 
-		GameObject listElement = Instantiate (Resources.Load ("FragmentListElement")) as GameObject;
-		listElement.name = fragment.name;
-		listElement.transform.SetParent (FragmentListView.transform);
+		addFragmentListElement (fragment);
 	}
 
 	private GameObject addFragmentGameObject (string path)
@@ -50,5 +48,12 @@ public class FragmentsMenuBoxController : MonoBehaviour
 		fragmentGameObject.transform.localScale = new Vector3 (1000, 1000, 1000);		
 
 		return fragmentGameObject;
+	}
+
+	private void addFragmentListElement (GameObject fragment)
+	{
+		GameObject listElement = Instantiate (Resources.Load ("FragmentListElement")) as GameObject;
+		listElement.name = fragment.name + " list element";
+		listElement.transform.SetParent (FragmentListView.transform);		
 	}
 }
