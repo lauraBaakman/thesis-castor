@@ -32,12 +32,12 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 	private void onSelect (string path)
 	{
-		GameObject fragment = addFragmentGameObject (path);
+		Fragment fragment = addFragmentGameObject (path);
 
 		addFragmentListElement (fragment);
 	}
 
-	private GameObject addFragmentGameObject (string path)
+	private Fragment addFragmentGameObject (string path)
 	{
 		Fragment fragment = FractureFragments.Instance.AddFragmentFromFile (path);
 		GameObject fragmentGameObject = fragment.GameObject ();
@@ -47,10 +47,10 @@ public class FragmentsMenuBoxController : MonoBehaviour
 		Debug.Log ("Fragments are scaled with a factor 1000 for now.");
 		fragmentGameObject.transform.localScale = new Vector3 (1000, 1000, 1000);		
 
-		return fragmentGameObject;
+		return fragment;
 	}
 
-	private void addFragmentListElement (GameObject fragment)
+	private void addFragmentListElement (Fragment fragment)
 	{
 		GameObject listElement = Instantiate (Resources.Load ("FragmentListElement")) as GameObject;
 		listElement.name = fragment.name + " list element";
