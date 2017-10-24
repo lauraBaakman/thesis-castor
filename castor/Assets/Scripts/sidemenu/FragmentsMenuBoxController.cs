@@ -8,8 +8,7 @@ using SimpleFileBrowser;
 public class FragmentsMenuBoxController : MonoBehaviour
 {
 
-	public GameObject parentObject;
-	public GameObject fragmentListElementPrefab;
+	public GameObject BoneFragmentParentObject;
 
 	public void Start ()
 	{
@@ -41,7 +40,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 	{
 		Fragment fragment = FractureFragments.Instance.AddFragmentFromFile (path);
 		GameObject fragmentGameObject = fragment.GameObject ();
-		fragmentGameObject.transform.parent = parentObject.transform;
+		fragmentGameObject.transform.parent = BoneFragmentParentObject.transform;
 
 		//Scale the mesh
 		Debug.Log ("Fragments are scaled with a factor 1000 for now.");
