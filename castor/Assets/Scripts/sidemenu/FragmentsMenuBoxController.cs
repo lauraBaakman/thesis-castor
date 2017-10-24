@@ -36,6 +36,6 @@ public class FragmentsMenuBoxController : MonoBehaviour
 		fragment.transform.parent = parentObject.transform;
 
 		//Scale the mesh
-		fragment.transform.localScale = new Vector3 (100, 100, 100);
+		fragment.transform.localScale = new Vector3 (1000, 1000, 1000);
 	}
 }

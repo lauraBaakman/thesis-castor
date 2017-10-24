@@ -45,10 +45,13 @@ public class Fragment
 		GameObject gameobject = new GameObject (name);
 
 		MeshRenderer renderer = gameobject.AddComponent<MeshRenderer> ();
-		//		renderer.material = Material.Instantiate (material) as Material;
+		renderer.material = new Material (Shader.Find ("Standard"));
 
 		MeshFilter filter = gameobject.AddComponent<MeshFilter> ();
 		filter.mesh = mesh;		
+
+		FragmentComponent fragmentComponent = gameobject.AddComponent<FragmentComponent> ();
+		fragmentComponent.fragment = this;
 
 		return gameobject;
 	}
