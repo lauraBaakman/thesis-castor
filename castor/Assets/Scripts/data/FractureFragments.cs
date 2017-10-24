@@ -5,21 +5,23 @@ public sealed class FractureFragments
 {
 	private static readonly FractureFragments instance = new FractureFragments ();
 
+	private List<Fragment> fragments;
+
 	private FractureFragments ()
 	{
-		//The Constructor
+		fragments = new List<Fragment> ();
+	}
+
+	public Fragment AddFragmentFromFile (string path)
+	{
+		Fragment fragment = Fragment.FromFile (path);
+		fragments.Add (fragment);
+		return fragment;
 	}
 
 	public static FractureFragments Instance {
 		get {
 			return instance;
 		}
-	}
-
-	public Fragment AddFragmentFromFile (string path)
-	{
-		Fragment fragment = Fragment.FromFile (path);
-
-		return fragment;
 	}
 }
