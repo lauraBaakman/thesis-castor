@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentObject: {fileID: 1851333512}
-  material: {fileID: 2100000, guid: 19ceeeb1dc2924823a1eba0fea495732, type: 2}
+  fragmentListElementPrefab: {fileID: 0}
 --- !u!1 &195497116
 GameObject:
   m_ObjectHideFlags: 0

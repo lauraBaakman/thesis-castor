@@ -9,7 +9,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 {
 
 	public GameObject parentObject;
-	public Material material;
+	public GameObject fragmentListElementPrefab;
 
 	public void Start ()
 	{
@@ -33,6 +33,8 @@ public class FragmentsMenuBoxController : MonoBehaviour
 	private void onSelect (string path)
 	{
 		GameObject fragment = addFragmentGameObject (path);
+
+		GameObject listElement = Instantiate (Resources.Load ("FragmentListElement")) as GameObject;
 	}
 
 	private GameObject addFragmentGameObject (string path)
