@@ -32,12 +32,19 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 	private void onSelect (string path)
 	{
+		GameObject fragment = addFragmentGameObject (path);
+	}
+
+	private GameObject addFragmentGameObject (string path)
+	{
 		Fragment fragment = FractureFragments.Instance.AddFragmentFromFile (path);
 		GameObject fragmentGameObject = fragment.GameObject ();
 		fragmentGameObject.transform.parent = parentObject.transform;
 
 		//Scale the mesh
 		Debug.Log ("Fragments are scaled with a factor 1000 for now.");
-		fragmentGameObject.transform.localScale = new Vector3 (1000, 1000, 1000);
+		fragmentGameObject.transform.localScale = new Vector3 (1000, 1000, 1000);		
+
+		return fragmentGameObject;
 	}
 }
