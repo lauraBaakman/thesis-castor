@@ -9,10 +9,13 @@ public class Fragment
 
 	public string name { get; private set; }
 
+	private GameObject gameobject;
+
 	public Fragment (Mesh mesh, string name)
 	{
 		this.mesh = mesh;
 		this.name = name;
+		this.gameobject = null;
 	}
 
 	public static Fragment FromFile (string path)
@@ -27,5 +30,26 @@ public class Fragment
 	{
 		string name = Path.GetFileNameWithoutExtension (path);
 		return name;
+	}
+
+	public GameObject GameObject ()
+	{
+		if (gameobject == null) {
+			gameobject = createGameObject ();
+		}
+		return gameobject;
+	}
+
+	private GameObject createGameObject ()
+	{	
+		GameObject gameobject = new GameObject (name);
+
+		MeshRenderer renderer = gameobject.AddComponent<MeshRenderer> ();
+		//		renderer.material = Material.Instantiate (material) as Material;
+
+		MeshFilter filter = gameobject.AddComponent<MeshFilter> ();
+		filter.mesh = mesh;		
+
+		return gameobject;
 	}
 }
