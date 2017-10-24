@@ -8,13 +8,12 @@ using SimpleFileBrowser;
 public class FragmentsMenuBoxController : MonoBehaviour
 {
 
-	public GameObject objectToAddTo;
+	public GameObject parentObject;
 	public Material material;
 
 	public void Start ()
 	{
 		if (Application.isEditor) {
-//			onSelect ("/Users/laura/Repositories/castor/castor/Assets/Models/andrewCube.obj");	
 			onSelect (Path.Combine (Application.dataPath, "Models/andrewCube.obj"));
 		}
 
@@ -32,13 +31,22 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 	private void onSelect (string path)
 	{
-		Mesh holderMesh = ObjImporter.ImportFile (path);
-		ObjImporter.AverageVertices (holderMesh);
+		//Create the empty game object
+		string objname = Path.GetFileNameWithoutExtension (path);
+		GameObject fragment = new GameObject (objname);
+		fragment.transform.parent = parentObject.transform;
 
-		MeshRenderer renderer = objectToAddTo.AddComponent<MeshRenderer> ();
+		//Read the mesh
+		Mesh holderMesh = ObjImporter.ImportFile (path);
+
+		//Add the components to the empty object to show the mesh
+		MeshRenderer renderer = fragment.AddComponent<MeshRenderer> ();
 		renderer.material = Material.Instantiate (material) as Material;
 
-		MeshFilter filter = objectToAddTo.AddComponent<MeshFilter> ();
+		MeshFilter filter = fragment.AddComponent<MeshFilter> ();
 		filter.mesh = holderMesh;
+
+		//Scale the mesh
+		fragment.transform.localScale = new Vector3 (100, 100, 100);
 	}
 }
