@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToAddTo: {fileID: 1168923777}
+  material: {fileID: 2100000, guid: 19ceeeb1dc2924823a1eba0fea495732, type: 2}
 --- !u!1 &195497116
 GameObject:
   m_ObjectHideFlags: 0

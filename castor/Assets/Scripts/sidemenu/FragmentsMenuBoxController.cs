@@ -7,6 +7,14 @@ using SimpleFileBrowser;
 public class FragmentsMenuBoxController : MonoBehaviour
 {
 
+	public GameObject objectToAddTo;
+	public Material material;
+
+	public void Start ()
+	{
+		onSelect ("/Users/laura/Repositories/castor/castor/Assets/Models/andrewCube.obj");
+	}
+
 	public void onAddFragmentClick ()
 	{
 		FileBrowser.ShowLoadDialog (onSelect, 
@@ -21,8 +29,10 @@ public class FragmentsMenuBoxController : MonoBehaviour
 		Mesh holderMesh = ObjImporter.ImportFile (path);
 		ObjImporter.AverageVertices (holderMesh);
 
-		MeshRenderer renderer = gameObject.AddComponent<MeshRenderer> ();
-		MeshFilter filter = gameObject.AddComponent<MeshFilter> ();
+		MeshRenderer renderer = objectToAddTo.AddComponent<MeshRenderer> ();
+		renderer.material = Material.Instantiate (material) as Material;
+
+		MeshFilter filter = objectToAddTo.AddComponent<MeshFilter> ();
 		filter.mesh = holderMesh;
 	}
 }
