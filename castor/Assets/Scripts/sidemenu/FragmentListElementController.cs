@@ -9,6 +9,8 @@ public class FragmentListElementController : MonoBehaviour
 {
 	public Text name;
 
+	private Fragment fragment;
+
 	void Start ()
 	{
 	}
@@ -31,5 +33,10 @@ public class FragmentListElementController : MonoBehaviour
 	public void SetName (string name)
 	{
 		this.name.text = name;
+	}
+
+	public void SetFragment (Fragment fragment)
+	{
+		this.fragment = fragment;
 	}
 }
