@@ -9,6 +9,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 {
 
 	public GameObject BoneFragmentParentObject;
+	public GameObject FragmentListView;
 
 	public void Start ()
 	{
@@ -34,6 +35,8 @@ public class FragmentsMenuBoxController : MonoBehaviour
 		GameObject fragment = addFragmentGameObject (path);
 
 		GameObject listElement = Instantiate (Resources.Load ("FragmentListElement")) as GameObject;
+		listElement.name = fragment.name;
+		listElement.transform.SetParent (FragmentListView.transform);
 	}
 
 	private GameObject addFragmentGameObject (string path)
