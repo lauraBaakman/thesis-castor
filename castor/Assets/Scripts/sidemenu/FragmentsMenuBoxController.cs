@@ -12,7 +12,6 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 	public void Start ()
 	{
-		onSelect ("/Users/laura/Repositories/castor/castor/Assets/Models/andrewCube.obj");
 	}
 
 	public void onAddFragmentClick ()
