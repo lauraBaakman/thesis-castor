@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 using SimpleFileBrowser;
@@ -12,6 +13,11 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 	public void Start ()
 	{
+		if (Application.isEditor) {
+//			onSelect ("/Users/laura/Repositories/castor/castor/Assets/Models/andrewCube.obj");	
+			onSelect (Path.Combine (Application.dataPath, "Models/andrewCube.obj"));
+		}
+
 	}
 
 	public void onAddFragmentClick ()
