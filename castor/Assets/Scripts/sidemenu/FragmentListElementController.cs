@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class FragmentListElementController : MonoBehaviour
 {
+	public Text name;
+
 	void Start ()
 	{
 	}
@@ -24,5 +26,10 @@ public class FragmentListElementController : MonoBehaviour
 	public void onToggleFragmentValueChanged (bool toggle)
 	{
 		Debug.Log ("Pressed the toggle fragment checkmark");
+	}
+
+	public void SetName (string name)
+	{
+		this.name.text = name;
 	}
 }
