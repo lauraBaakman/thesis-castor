@@ -7,7 +7,7 @@ public class Fragment
 {
 	public Mesh mesh { get; private set; }
 
-	public string name { get; set; }
+	public string name { get; private set; }
 
 	public Fragment (Mesh mesh, string name)
 	{
