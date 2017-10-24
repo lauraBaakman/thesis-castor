@@ -1,16 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
-public class Fragment : MonoBehaviour {
+public class Fragment
+{
+	public Mesh mesh { get; private set; }
 
-	// Use this for initialization
-	void Start () {
-		
+	public string name { get; set; }
+
+	public Fragment (Mesh mesh, string name)
+	{
+		this.mesh = mesh;
+		this.name = name;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public static Fragment FromFile (string path)
+	{
+		Mesh mesh = ObjImporter.ImportFile (path);		
+		string name = extractNameFromPath (path);
+
+		return new Fragment (mesh, name);
+	}
+
+	private static string extractNameFromPath (string path)
+	{
+		string name = Path.GetFileNameWithoutExtension (path);
+		return name;
 	}
 }

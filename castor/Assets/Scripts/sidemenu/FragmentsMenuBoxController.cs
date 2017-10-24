@@ -32,22 +32,20 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 	private void onSelect (string path)
 	{
-		//Create the empty game object
-		string objname = Path.GetFileNameWithoutExtension (path);
-		GameObject fragment = new GameObject (objname);
-		fragment.transform.parent = parentObject.transform;
+		Fragment fragment = Fragment.FromFile (path);
 
-		//Read the mesh
-		Mesh holderMesh = ObjImporter.ImportFile (path);
+		//Create the empty game object
+		GameObject fragmentGO = new GameObject (fragment.name);
+		fragmentGO.transform.parent = parentObject.transform;
 
 		//Add the components to the empty object to show the mesh
-		MeshRenderer renderer = fragment.AddComponent<MeshRenderer> ();
+		MeshRenderer renderer = fragmentGO.AddComponent<MeshRenderer> ();
 		renderer.material = Material.Instantiate (material) as Material;
 
-		MeshFilter filter = fragment.AddComponent<MeshFilter> ();
-		filter.mesh = holderMesh;
+		MeshFilter filter = fragmentGO.AddComponent<MeshFilter> ();
+		filter.mesh = fragment.mesh;
 
 		//Scale the mesh
-		fragment.transform.localScale = new Vector3 (100, 100, 100);
+		fragmentGO.transform.localScale = new Vector3 (100, 100, 100);
 	}
 }
