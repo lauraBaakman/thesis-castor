@@ -51,9 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\FractureFragments.cs" />
+     <Compile Include="Assets\Scripts\data\FractureFragments.cs" />
+     <Compile Include="Assets\Scripts\data\Fragment.cs" />
      <Compile Include="Assets\Scripts\mainmenu\MenuController.cs" />
-     <Compile Include="Assets\Scripts\ObjImporter.cs" />
      <Compile Include="Assets\Scripts\persistent\PersistentObject.cs" />
      <Compile Include="Assets\Scripts\persistent\PlayerPrefsUpdater.cs" />
      <Compile Include="Assets\Scripts\sidemenu\FileMenuBoxController.cs" />
@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\sidemenu\FragmentsMenuBoxController.cs" />
      <Compile Include="Assets\Scripts\ToolTipController.cs" />
      <Compile Include="Assets\Scripts\UserEditableText.cs" />
+     <Compile Include="Assets\Scripts\utils\ObjImporter.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
