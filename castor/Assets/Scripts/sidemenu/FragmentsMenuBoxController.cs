@@ -17,11 +17,12 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 	public void onAddFragmentClick ()
 	{
-		FileBrowser.ShowLoadDialog (onSelect, 
-			() => {
-				//No need to do anything if the file dialog is cancelled
-			}
-		);
+		FileBrowser.ShowLoadDialog (onSelect, onCancel);
+	}
+
+	private void onCancel ()
+	{
+		//No need to do anything if the file dialog is cancelled
 	}
 
 	private void onSelect (string path)
