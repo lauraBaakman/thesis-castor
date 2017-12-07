@@ -12,13 +12,13 @@ public class ToolTipController : MonoBehaviour,
 	/// </summary>
 	public GameObject ToolTip;
 
-	private Timer timer;
+	private Timer Timer;
 
 	void Start ()
 	{
 		float toolTipDelayInS = PlayerPrefs.GetFloat("help.tooltips.delayInS");
 
-		timer = new Timer (toolTipDelayInS);
+		Timer = new Timer (toolTipDelayInS);
 
 		HideToolTip ();
 		AddToToolTipLayer (ToolTip);
@@ -26,8 +26,8 @@ public class ToolTipController : MonoBehaviour,
 
 	void Update ()
 	{
-		timer.update ();
-		if (timer.IsCompleted ()) {
+		Timer.Update ();
+		if (Timer.IsCompleted ()) {
 			ShowTooltip ();
 		}
 	}
@@ -54,7 +54,7 @@ public class ToolTipController : MonoBehaviour,
 	/// <param name="data">Data contains unused point event data.</param>
 	public void OnPointerEnter (PointerEventData data)
 	{
-		timer.Activate ();
+		Timer.Activate ();
 	}
 
 	/// <summary>
@@ -63,7 +63,7 @@ public class ToolTipController : MonoBehaviour,
 	/// <param name="data">Data contains unused pointer event data.</param>
 	public void OnPointerExit (PointerEventData data)
 	{
-		timer.Deactivate ();
+		Timer.Deactivate ();
 		HideToolTip ();
 	}
 }
@@ -73,7 +73,7 @@ public class Timer
 	private float TimeToReach = 0;
 	private float TimePassed = 0;
 
-	private bool active = false;
+	private bool Active = false;
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Timer"/> class.
@@ -89,7 +89,7 @@ public class Timer
 	/// </summary>
 	public void Activate ()
 	{
-		active = true;
+		Active = true;
 		Reset ();
 	}
 
@@ -98,7 +98,7 @@ public class Timer
 	/// </summary>
 	public void Deactivate ()
 	{
-		active = false;
+		Active = false;
 		Reset ();
 	}
 
@@ -116,15 +116,15 @@ public class Timer
 	/// <returns><c>true</c> if this instance is completed; otherwise, <c>false</c>.</returns>
 	public bool IsCompleted ()
 	{
-		return 	active && TimePassed >= TimeToReach;
+		return 	Active && TimePassed >= TimeToReach;
 	}
 
 	/// <summary>
 	/// Update this instance with the time between frames.
 	/// </summary>
-	public void update ()
+	public void Update ()
 	{
-		if (active) {
+		if (Active) {
 			TimePassed += Time.deltaTime;	
 		}
 	}
