@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05adac745ff6f4f10b9ab265939d9f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fragmentNameText: {fileID: 114059485793819406}
+  FragmentNameText: {fileID: 114059485793819406}
 --- !u!114 &114844994726265236
 MonoBehaviour:
   m_ObjectHideFlags: 1
