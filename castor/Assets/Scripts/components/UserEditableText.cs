@@ -11,83 +11,83 @@ public class UserEditableText : MonoBehaviour
 	/// <summary>
 	/// The field represents the InputField that is used when the user is editing the text.
 	/// </summary>
-	public InputField field;
-	private Text text;
+	public InputField Field;
+	private Text Text;
 
 	void Start ()
 	{
-		text = GetComponent<Text> ();
-		field.text = text.text;
+		Text = GetComponent<Text> ();
+		Field.text = Text.text;
 
-		toggleEditMode (false);
+		ToggleEditMode (false);
 
-		setUpEventTriggers ();
+		SetUpEventTriggers ();
 	}
 
-	private void setUpEventTriggers ()
+	private void SetUpEventTriggers ()
 	{
-		setUpTextEventTriggers ();
-		setUpFieldEventTriggers ();
+		SetUpTextEventTriggers ();
+		SetUpFieldEventTriggers ();
 	}
 
-	private void setUpTextEventTriggers ()
+	private void SetUpTextEventTriggers ()
 	{
 		//Add Event Trigger to the game object
-		EventTrigger eventTrigger = text.gameObject.AddComponent (typeof(EventTrigger)) as EventTrigger;
+		EventTrigger eventTrigger = Text.gameObject.AddComponent (typeof(EventTrigger)) as EventTrigger;
 		
 		
 		EventTrigger.TriggerEvent triggerEvent = new EventTrigger.TriggerEvent ();
-		triggerEvent.AddListener ((PointerEventData) => onPointerClick ());
+		triggerEvent.AddListener ((PointerEventData) => OnPointerClick ());
 		EventTrigger.Entry entry = new EventTrigger.Entry () {
 			callback = triggerEvent, eventID = EventTriggerType.PointerClick
 		};
 		eventTrigger.triggers.Add (entry);
 	}
 
-	private void setUpFieldEventTriggers ()
+	private void SetUpFieldEventTriggers ()
 	{
 		InputField.SubmitEvent submitEvent = new InputField.SubmitEvent ();
-		submitEvent.AddListener (onSubmit);
-		field.onEndEdit = submitEvent;
+		submitEvent.AddListener (OnSubmit);
+		Field.onEndEdit = submitEvent;
 	}
 
 	/// <summary>
 	/// On the pointer click the field becomes editable, i.e. the text is replaced with an input field.
 	/// </summary>
-	public void onPointerClick ()
+	public void OnPointerClick ()
 	{
-		enterEditMode ();
+		EnterEditMode ();
 	}
 
 	/// <summary>
 	/// On the submit the inputfield is no longer shown, instead the updated text is shown.
 	/// </summary>
 	/// <param name="inputText">Input text contains the new value of <c>text</c>.</param>
-	public void onSubmit (string inputText)
+	public void OnSubmit (string inputText)
 	{
-		exitEditMode ();
+		ExitEditMode ();
 	}
 
 	/// <summary>
 	/// Toggles the edit mode, i.e. the static text is replaced with an input field.
 	/// </summary>
 	/// <param name="toggle">If set to <c>true</c> the text becomes editable.</param>
-	public void toggleEditMode (bool toggle)
+	public void ToggleEditMode (bool toggle)
 	{
-		text.gameObject.SetActive (!toggle);
-		field.gameObject.SetActive (toggle);
+		Text.gameObject.SetActive (!toggle);
+		Field.gameObject.SetActive (toggle);
 	}
 
-	private void enterEditMode ()
+	private void EnterEditMode ()
 	{
-		toggleEditMode (true);
-		field.Select ();
-		field.ActivateInputField ();
+		ToggleEditMode (true);
+		Field.Select ();
+		Field.ActivateInputField ();
 	}
 
-	private void exitEditMode ()
+	private void ExitEditMode ()
 	{
-		toggleEditMode (false);
-		text.text = field.text;
+		ToggleEditMode (false);
+		Text.text = Field.text;
 	}
 }
