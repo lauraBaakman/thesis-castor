@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 public sealed class FractureFragments
 {
-	private static readonly FractureFragments instance = new FractureFragments ();
+	private static readonly FractureFragments Instance = new FractureFragments ();
 
-	private List<Fragment> fragments;
+	private List<Fragment> Fragments;
 
 	private FractureFragments ()
 	{
-		fragments = new List<Fragment> ();
+		Fragments = new List<Fragment> ();
 	}
 
 	/// <summary>
@@ -20,7 +20,7 @@ public sealed class FractureFragments
 	public Fragment AddFragmentFromFile (string path)
 	{
 		Fragment fragment = Fragment.FromFile (path);
-		fragments.Add (fragment);
+		Fragments.Add (fragment);
 		return fragment;
 	}
 
@@ -28,9 +28,9 @@ public sealed class FractureFragments
 	/// Gets the instance of the singleton.
 	/// </summary>
 	/// <value>The instance represents the list of fracture fragments.</value>
-	public static FractureFragments Instance {
+	public static FractureFragments GetInstance {
 		get {
-			return instance;
+			return Instance;
 		}
 	}
 }
