@@ -24,7 +24,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 	{
 		if (Application.isEditor) {
 			Debug.Log ("Automatically loading some fragment for development.");
-			onSelect (Path.Combine (Application.dataPath, "Models/andrewCube.obj"));
+			OnSelect (Path.Combine (Application.dataPath, "Models/andrewCube.obj"));
 		}
 
 	}
@@ -32,24 +32,24 @@ public class FragmentsMenuBoxController : MonoBehaviour
 	/// <summary>
 	/// On the add fragment click show the dialog that allows the user to select a file to read the fragment from.
 	/// </summary>
-	public void onAddFragmentClick ()
+	public void OnAddFragmentClick ()
 	{
-		FileBrowser.ShowLoadDialog (onSelect, onCancel);
+		FileBrowser.ShowLoadDialog (OnSelect, OnCancel);
 	}
 
-	private void onCancel ()
+	private void OnCancel ()
 	{
 		//No need to do anything if the file dialog is cancelled
 	}
 
-	private void onSelect (string path)
+	private void OnSelect (string path)
 	{
-		Fragment fragment = addFragmentGameObject (path);
+		Fragment fragment = AddFragmentGameObject (path);
 
-		addFragmentListElement (fragment);
+		AddFragmentListElement (fragment);
 	}
 
-	private Fragment addFragmentGameObject (string path)
+	private Fragment AddFragmentGameObject (string path)
 	{
 		Fragment fragment = FractureFragments.GetInstance.AddFragmentFromFile (path);
 		GameObject fragmentGameObject = fragment.GetGameObject ();
@@ -62,7 +62,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 		return fragment;
 	}
 
-	private void addFragmentListElement (Fragment fragment)
+	private void AddFragmentListElement (Fragment fragment)
 	{
 		GameObject listElement = Instantiate (Resources.Load ("FragmentListElement")) as GameObject;
 		listElement.name = fragment.Name + " list element";
