@@ -8,9 +8,18 @@ using SimpleFileBrowser;
 public class FragmentsMenuBoxController : MonoBehaviour
 {
 
+	/// <summary>
+	/// The bone fragment parent object.
+	/// </summary>
 	public GameObject BoneFragmentParentObject;
+	/// <summary>
+	/// The fragment list view.
+	/// </summary>
 	public GameObject FragmentListView;
 
+	/// <summary>
+	/// Start this instance.
+	/// </summary>
 	public void Start ()
 	{
 		if (Application.isEditor) {
@@ -20,6 +29,9 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 	}
 
+	/// <summary>
+	/// On the add fragment click show the dialog that allows the user to select a file to read the fragment from.
+	/// </summary>
 	public void onAddFragmentClick ()
 	{
 		FileBrowser.ShowLoadDialog (onSelect, onCancel);

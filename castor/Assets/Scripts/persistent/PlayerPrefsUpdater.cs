@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class PlayerPrefsUpdater {
 
+	/// <summary>
+	/// Initializes a new instance of the <see cref="PlayerPrefsUpdater"/> class.
+	/// </summary>
 	public PlayerPrefsUpdater(){}
 
+	/// <summary>
+	/// Update this instance of the player preferencs, if any preferences are not set in the local preferences file the default preferences in <updateHelpPreferences cref="updateHelpPreferences"/>. are added to the local preferences.
+	/// </summary>
 	public void update(){
 		updateHelpPreferences ();
 

@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour
 {
 
+	/// <summary>
+	/// Start this instance of the menu controller by getting buttons from the scene.
+	/// </summary>
 	public void Start ()
 	{
 		Button loadButton = GetButtonByName ("Load Fracture Reduction Button");
@@ -19,6 +22,9 @@ public class MenuController : MonoBehaviour
 		AttachListeners ();
 	}
 
+	/// <summary>
+	/// Attachs the listeners to the buttons in menu.
+	/// </summary>
 	public void AttachListeners ()
 	{
 		Button button = GetButtonByName ("New Fracture Reduction Button");
@@ -32,6 +38,9 @@ public class MenuController : MonoBehaviour
 		return button;
 	}
 
+	/// <summary>
+	/// If the new reduction button is clicked this function is called to create a new empty scene. 
+	/// </summary>
 	public void OnNewReductionButton ()
 	{
 		SceneManager.LoadScene ("reduction");

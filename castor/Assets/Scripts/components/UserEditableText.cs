@@ -8,6 +8,9 @@ using UnityEngine.EventSystems;
 public class UserEditableText : MonoBehaviour
 {
 
+	/// <summary>
+	/// The field represents the InputField that is used when the user is editing the text.
+	/// </summary>
 	public InputField field;
 	private Text text;
 
@@ -48,16 +51,27 @@ public class UserEditableText : MonoBehaviour
 		field.onEndEdit = submitEvent;
 	}
 
+	/// <summary>
+	/// On the pointer click the field becomes editable, i.e. the text is replaced with an input field.
+	/// </summary>
 	public void onPointerClick ()
 	{
 		enterEditMode ();
 	}
 
+	/// <summary>
+	/// On the submit the inputfield is no longer shown, instead the updated text is shown.
+	/// </summary>
+	/// <param name="inputText">Input text contains the new value of <c>text</c>.</param>
 	public void onSubmit (string inputText)
 	{
 		exitEditMode ();
 	}
 
+	/// <summary>
+	/// Toggles the edit mode, i.e. the static text is replaced with an input field.
+	/// </summary>
+	/// <param name="toggle">If set to <c>true</c> the text becomes editable.</param>
 	public void toggleEditMode (bool toggle)
 	{
 		text.gameObject.SetActive (!toggle);
