@@ -10,7 +10,7 @@ public class PersistentObject : MonoBehaviour
 	{
 		DontDestroyOnLoad (gameObject);
 
-		new PlayerPrefsUpdater ().update ();
+		new PlayerPrefsUpdater ().Update ();
 
 		FileBrowser.SetDefaultFilter (".obj");
 

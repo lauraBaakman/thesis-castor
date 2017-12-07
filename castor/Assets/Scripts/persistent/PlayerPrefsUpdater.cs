@@ -12,13 +12,13 @@ public class PlayerPrefsUpdater {
 	/// <summary>
 	/// Update this instance of the player preferencs, if any preferences are not set in the local preferences file the default preferences in <updateHelpPreferences cref="updateHelpPreferences"/>. are added to the local preferences.
 	/// </summary>
-	public void update(){
-		updateHelpPreferences ();
+	public void Update(){
+		UpdateHelpPreferences ();
 
 		PlayerPrefs.Save ();		
 	}
 
-	private void updateHelpPreferences(){
+	private void UpdateHelpPreferences(){
 		UpdatePlayerPref ("help.tooltips.delayInS", 1.0f);
 	}
 
