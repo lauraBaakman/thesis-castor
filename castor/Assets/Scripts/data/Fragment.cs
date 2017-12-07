@@ -73,7 +73,7 @@ public class Fragment
 		filter.mesh = mesh;		
 
 		FragmentComponent fragmentComponent = gameobject.AddComponent<FragmentComponent> ();
-		fragmentComponent.fragment = this;
+		fragmentComponent.Fragment = this;
 
 		return gameobject;
 	}

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class FragmentComponent : MonoBehaviour
 {
-	public Fragment fragment { get; set; }
+	public Fragment Fragment { get; set; }
 }
