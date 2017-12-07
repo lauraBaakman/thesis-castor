@@ -52,7 +52,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 	private Fragment addFragmentGameObject (string path)
 	{
 		Fragment fragment = FractureFragments.GetInstance.AddFragmentFromFile (path);
-		GameObject fragmentGameObject = fragment.GameObject ();
+		GameObject fragmentGameObject = fragment.GetGameObject ();
 		fragmentGameObject.transform.parent = BoneFragmentParentObject.transform;
 
 		//Scale the mesh
@@ -65,10 +65,10 @@ public class FragmentsMenuBoxController : MonoBehaviour
 	private void addFragmentListElement (Fragment fragment)
 	{
 		GameObject listElement = Instantiate (Resources.Load ("FragmentListElement")) as GameObject;
-		listElement.name = fragment.name + " list element";
+		listElement.name = fragment.Name + " list element";
 		listElement.transform.SetParent (FragmentListView.transform);		
 
 		FragmentListElementController controller = listElement.GetComponent<FragmentListElementController> ();
-		controller.SetName (fragment.name);
+		controller.SetName (fragment.Name);
 	}
 }
