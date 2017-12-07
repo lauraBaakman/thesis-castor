@@ -10,7 +10,7 @@ public class FragmentListElementController : MonoBehaviour
 	/// <summary>
 	/// The name of the fragment.
 	/// </summary>
-	public Text name;
+	public Text fragmentNameText;
 
 	private Fragment fragment;
 
@@ -49,7 +49,7 @@ public class FragmentListElementController : MonoBehaviour
 	/// <param name="name">Name contains the new name of the fragment.</param>
 	public void SetName (string name)
 	{
-		this.name.text = name;
+		this.fragmentNameText.text = name;
 	}
 
 	/// <summary>
