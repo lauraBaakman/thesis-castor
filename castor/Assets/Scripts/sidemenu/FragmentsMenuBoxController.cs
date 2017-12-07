@@ -51,7 +51,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 	private Fragment addFragmentGameObject (string path)
 	{
-		Fragment fragment = FractureFragments.Instance.AddFragmentFromFile (path);
+		Fragment fragment = FractureFragments.GetInstance.AddFragmentFromFile (path);
 		GameObject fragmentGameObject = fragment.GameObject ();
 		fragmentGameObject.transform.parent = BoneFragmentParentObject.transform;
 
