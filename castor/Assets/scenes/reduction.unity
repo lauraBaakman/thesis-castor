@@ -1251,7 +1251,7 @@ Prefab:
     - target: {fileID: 114115153954244800, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: onAddFragmentClick
+      value: OnAddFragmentClick
       objectReference: {fileID: 0}
     - target: {fileID: 114115153954244800, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}

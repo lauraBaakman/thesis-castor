@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\sidemenu\FragmentsMenuBoxController.cs" />
      <Compile Include="Assets\Scripts\ToolTipController.cs" />
      <Compile Include="Assets\Scripts\utils\ObjImporter.cs" />
+     <Compile Include="Assets\Scripts\view3D\FragmentController.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />

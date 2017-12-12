@@ -20,9 +20,13 @@ public sealed class FractureFragments
 	public Fragment AddFragmentFromFile (string path)
 	{
 		Fragment fragment = Fragment.FromFile (path);
-		Fragments.Add (fragment);
+        AddFragment(fragment);
 		return fragment;
 	}
+
+    public void AddFragment(Fragment fragment){
+        Fragments.Add(fragment);
+    }
 
 	/// <summary>
 	/// Gets the instance of the singleton.
