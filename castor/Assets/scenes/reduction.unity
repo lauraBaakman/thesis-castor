@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5df2e226fe334d58b40a65187ed76d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoneFragmentParentObject: {fileID: 1851333512}
+  FragmentParentObject: {fileID: 1851333512}
   FragmentListView: {fileID: 285448511}
 --- !u!1 &195497116
 GameObject:
@@ -2411,7 +2411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1851333513}
   m_Layer: 0
-  m_Name: Bone Fragments
+  m_Name: Fragments
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

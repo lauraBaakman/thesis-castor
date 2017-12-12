@@ -11,7 +11,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 	/// <summary>
 	/// The bone fragment parent object.
 	/// </summary>
-	public GameObject BoneFragmentParentObject;
+    public GameObject FragmentParentObject;
 	/// <summary>
 	/// The fragment list view.
 	/// </summary>
@@ -53,7 +53,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 	{
 		Fragment fragment = FractureFragments.GetInstance.AddFragmentFromFile (path);
 		GameObject fragmentGameObject = fragment.GetGameObject ();
-		fragmentGameObject.transform.parent = BoneFragmentParentObject.transform;
+		fragmentGameObject.transform.parent = FragmentParentObject.transform;
 
 		//Scale the mesh
 		Debug.Log ("Fragments are scaled with a factor 1000 for now.");
