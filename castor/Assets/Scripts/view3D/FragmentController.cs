@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FragmentComponent : MonoBehaviour
+public class FragmentController : MonoBehaviour
 {
 	public Fragment Fragment { get; set; }
 }

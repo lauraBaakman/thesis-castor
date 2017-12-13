@@ -51,9 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\FragmentsController.cs" />
-     <Compile Include="Assets\Scripts\components\FragmentComponent.cs" />
-     <Compile Include="Assets\Scripts\components\UserEditableText.cs" />
      <Compile Include="Assets\Scripts\data\FractureFragments.cs" />
      <Compile Include="Assets\Scripts\data\Fragment.cs" />
      <Compile Include="Assets\Scripts\mainmenu\MenuController.cs" />
@@ -62,8 +59,11 @@
      <Compile Include="Assets\Scripts\sidemenu\FileMenuBoxController.cs" />
      <Compile Include="Assets\Scripts\sidemenu\FragmentListElementController.cs" />
      <Compile Include="Assets\Scripts\sidemenu\FragmentsMenuBoxController.cs" />
-     <Compile Include="Assets\Scripts\ToolTipController.cs" />
+     <Compile Include="Assets\Scripts\ui\ToolTipController.cs" />
+     <Compile Include="Assets\Scripts\ui\UserEditableText.cs" />
      <Compile Include="Assets\Scripts\utils\ObjImporter.cs" />
+     <Compile Include="Assets\Scripts\view3D\FragmentController.cs" />
+     <Compile Include="Assets\Scripts\view3D\FragmentsController.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
