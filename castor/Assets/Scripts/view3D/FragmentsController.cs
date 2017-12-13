@@ -1,21 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FragmentsController : MonoBehaviour {
 
 	private static Material DefaultMaterial;
 
 	void Start () {
-		DefaultMaterial = new Material (Shader.Find ("Standard"));
+		
 	}
 
-	/// <summary>
-	/// Adds a fragment to the visible fragments.
-	/// </summary>
-	/// <param name="fragment">Fragment to add.</param>
-	public FragmentController AddFragment(Fragment fragment){
+    private void Awake()
+    {
+        DefaultMaterial = new Material(Shader.Find("Standard"));
+    }
+
+    /// <summary>
+    /// Adds a fragment to the visible fragments.
+    /// </summary>
+    /// <param name="fragment">Fragment to add.</param>
+    public FragmentController AddFragment(Fragment fragment){
 
 		GameObject fragmentGameObject = new GameObject (fragment.Name);	
 
@@ -37,8 +39,8 @@ public class FragmentsController : MonoBehaviour {
 	}
 
     private void AttatchMeshRenderer(GameObject fragmentGameObject){
-		MeshRenderer renderer = fragmentGameObject.AddComponent<MeshRenderer> ();
-		renderer.material = DefaultMaterial;
+        MeshRenderer meshRenderer = fragmentGameObject.AddComponent<MeshRenderer> ();
+		meshRenderer.material = DefaultMaterial;
 	}
 
     private void AttatchMeshFilter(GameObject fragmentGameObject, Mesh mesh){
