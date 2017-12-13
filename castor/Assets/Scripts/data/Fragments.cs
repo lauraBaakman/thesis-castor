@@ -15,6 +15,16 @@ public sealed class Fragments
 	}
 
 	/// <summary>
+	/// Gets the instance of the singleton.
+	/// </summary>
+	/// <value>The Singleton with fragments.</value>
+	public static Fragments GetInstance {
+		get {
+			return Instance;
+		}
+	}
+
+	/// <summary>
 	/// Add a the fragment from a file. The name of the fragment is determined based on the file name.
 	/// </summary>
 	/// <returns>The fragment read from the file.</returns>
@@ -34,14 +44,14 @@ public sealed class Fragments
 	private string ExtractFragmentNameFromPath(string path){
 		return Path.GetFileNameWithoutExtension(path);
 	}
-
+		
 	/// <summary>
-	/// Gets the instance of the singleton.
+	/// Removes the fragment from the list of fragments.
 	/// </summary>
-	/// <value>The Singleton with fragments.</value>
-	public static Fragments GetInstance {
-		get {
-			return Instance;
-		}
+	/// <returns><c>true</c>, if fragment was succesfully removed, <c>false</c> otherwise.</returns>
+	/// <param name="fragment">The fragment to be removed.</param>
+	public bool RemoveFragment(Fragment fragment){
+		bool succes = FragmentList.Remove (fragment);
+		return succes;
 	}
 }

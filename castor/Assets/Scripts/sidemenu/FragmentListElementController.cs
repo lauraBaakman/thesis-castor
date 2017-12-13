@@ -32,6 +32,7 @@ public class FragmentListElementController : MonoBehaviour
 	public void OnDeleteFragmentClick ()
 	{
 		Debug.Log ("Pressed the delete fragment button.");
+		FragmentController.DeleteFragment ();
 	}
 
 	/// <summary>
