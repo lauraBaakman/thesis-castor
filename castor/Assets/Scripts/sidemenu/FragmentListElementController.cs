@@ -10,8 +10,18 @@ public class FragmentListElementController : MonoBehaviour
 
     private FragmentController FragmentController;
 
+    private static Color SelectedColor;
+    private static Color NormalColor;
+
+
     void Start()
     {
+        NormalColor = gameObject.GetComponent<Image>().color;
+        SelectedColor = new Color(
+            NormalColor.r,
+            NormalColor.g,
+            NormalColor.b,
+            NormalColor.a * 5.0f);
     }
 
     /// <summary>
@@ -55,8 +65,8 @@ public class FragmentListElementController : MonoBehaviour
     /// <param name="toggle">If set to <c>true</c> the object is marked as selected.</param>
     public void OnToggleSelected(bool toggle)
     {
-        Debug.Log("Pressed the toggle selection checkmark, toggle: " + toggle);
-        FragmentController.ToggleSelection(toggle);
+        FragmentController.Selected = toggle;
+        gameObject.GetComponent<Image>().color = toggle ? SelectedColor : NormalColor;
     }
 
     /// <summary>
@@ -74,10 +84,5 @@ public class FragmentListElementController : MonoBehaviour
     public void Delete()
     {
         Destroy(gameObject);
-    }
-
-    public void Deselect()
-    {
-        Debug.Log("FragmentListElementController: The fragment with name " + FragmentController.Fragment.Name + " has been deselected.");
     }
 }

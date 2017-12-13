@@ -26,6 +26,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
         {
             Debug.Log("Automatically loading some fragment for development.");
             OnSelectFile(Path.Combine(Application.dataPath, "Models/andrewCube.obj"));
+            OnSelectFile(Path.Combine(Application.dataPath, "Models/andrewArrow.obj"));
         }
 
     }
