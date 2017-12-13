@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 
 public class FragmentsController : MonoBehaviour {
@@ -30,23 +31,23 @@ public class FragmentsController : MonoBehaviour {
 		return controller;
 	}
 
-	private void AttatchMesh(GameObject gameObject, Mesh mesh){
-		AttatchMeshRenderer(gameObject);
-		AttatchMeshFilter(gameObject, mesh);
+    private void AttatchMesh(GameObject fragmentGameObject, Mesh mesh){
+        AttatchMeshRenderer(fragmentGameObject);
+		AttatchMeshFilter(fragmentGameObject, mesh);
 	}
 
-	private void AttatchMeshRenderer(GameObject gameObject){
-		MeshRenderer renderer = gameObject.AddComponent<MeshRenderer> ();
+    private void AttatchMeshRenderer(GameObject fragmentGameObject){
+		MeshRenderer renderer = fragmentGameObject.AddComponent<MeshRenderer> ();
 		renderer.material = DefaultMaterial;
 	}
 
-	private void AttatchMeshFilter(GameObject gameObject, Mesh mesh){
-		MeshFilter filter = gameObject.AddComponent<MeshFilter> ();
+    private void AttatchMeshFilter(GameObject fragmentGameObject, Mesh mesh){
+		MeshFilter filter = fragmentGameObject.AddComponent<MeshFilter> ();
 		filter.mesh = mesh;			
 	}
 
-	private FragmentController AttatchController(GameObject gameObject, Fragment fragment){
-		FragmentController controller = gameObject.AddComponent<FragmentController> ();
+    private FragmentController AttatchController(GameObject fragmentGameObject, Fragment fragment){
+		FragmentController controller = fragmentGameObject.AddComponent<FragmentController> ();
 		controller.Fragment = fragment;		
 
 		return controller;
