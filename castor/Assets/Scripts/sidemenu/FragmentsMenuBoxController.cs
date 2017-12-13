@@ -52,10 +52,13 @@ public class FragmentsMenuBoxController : MonoBehaviour
 		FragmentController fragmentController = FragmentsController.AddFragment(fragment);
 
         //Create Fragment List Element GameObject
-		this.AddFragmentToListView(fragment.Name, fragmentController);
+		FragmentListElementController listElementController = AddFragmentToListView(fragment.Name, fragmentController);
+
+		fragmentController.Populate (listElementController);
+		listElementController.Populate (fragmentController);
     }
 
-	private void AddFragmentToListView(string fragmentName, FragmentController fragmentController){
+	private FragmentListElementController AddFragmentToListView(string fragmentName, FragmentController fragmentController){
 		GameObject listElement = Instantiate(Resources.Load("FragmentListElement")) as GameObject;
 
 		listElement.name = BuildListElementName(fragmentName);
@@ -63,7 +66,8 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
 		FragmentListElementController controller = listElement.GetComponent<FragmentListElementController>();
 		controller.ChangeFragmentName(fragmentName);
-		controller.Populate (fragmentController);
+
+		return controller;
 	}
 
 	private string BuildListElementName(string fragmentName){

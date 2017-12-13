@@ -10,6 +10,8 @@ public class FragmentController : MonoBehaviour
 	/// <value>The fragment.</value>
 	public Fragment Fragment { get; set; }
 
+	private FragmentListElementController ListElementController; 
+
 
 	/// <summary>
 	/// Deletes the fragment associated with this controller from the reduction.
@@ -24,6 +26,14 @@ public class FragmentController : MonoBehaviour
 
 		//Remove Fragment GameObject
 
-		//Remove Fragment ListView
+
+	}
+
+	/// <summary>
+	/// Populate the FragmentController.
+	/// </summary>
+	/// <param name="listElementController">List element controller associated with the Fragment controlled by this FragmentController.</param>
+	public void Populate(FragmentListElementController listElementController){
+		this.ListElementController = listElementController;
 	}
 }
