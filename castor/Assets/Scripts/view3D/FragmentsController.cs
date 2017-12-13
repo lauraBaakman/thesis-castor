@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class FragmentsController : MonoBehaviour {
 
+	private static Material DefaultMaterial;
+
 	void Start () {
-		
+		DefaultMaterial = new Material (Shader.Find ("Standard"));
 	}
 
 	void Update () {
 		
 	}
 
+	/// <summary>
+	/// Adds a fragment to the visible fragments.
+	/// </summary>
+	/// <param name="fragment">Fragment to add.</param>
 	public void AddFragment(Fragment fragment){
-		//TODO store material in private static
 
 		GameObject gameObject = new GameObject (fragment.Name);	
 
@@ -34,7 +39,7 @@ public class FragmentsController : MonoBehaviour {
 
 	private void AttatchMeshRenderer(GameObject gameObject){
 		MeshRenderer renderer = gameObject.AddComponent<MeshRenderer> ();
-		renderer.material = new Material (Shader.Find ("Standard"));		
+		renderer.material = DefaultMaterial;
 	}
 
 	private void AttatchMeshFilter(GameObject gameObject, Mesh mesh){

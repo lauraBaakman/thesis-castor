@@ -7,16 +7,14 @@ using SimpleFileBrowser;
 
 public class FragmentsMenuBoxController : MonoBehaviour
 {
-
     /// <summary>
-    /// The bone fragment parent object.
-    /// </summary>
-    public GameObject FragmentParentObject;
-    /// <summary>
-    /// The fragment list view.
+    /// The list that gives an overview of all fragments in the current reduction.
     /// </summary>
     public GameObject FragmentListView;
 
+	/// <summary>
+	/// The gameobject that is the parent of all fragments.
+	/// </summary>
 	public FragmentsController FragmentsController;
 
     /// <summary>

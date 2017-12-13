@@ -17,7 +17,7 @@ public class FragmentListElementController : MonoBehaviour
 	}
 
 	/// <summary>
-	/// On the delete fragment button click the fragment is deleted from <FractureFragments cref="FractureFragments">
+	/// On the delete fragment button click the fragment is deleted from <Fragments cref="Fragments">, the 3D view and the list view.
 	/// </summary>
 	public void OnDeleteFragmentClick ()
 	{
@@ -44,7 +44,7 @@ public class FragmentListElementController : MonoBehaviour
 	/// <summary>
 	/// Change the name of the fragment.
 	/// </summary>
-	/// <param name="name">Name contains the new name of the fragment.</param>
+	/// <param name="name">the new name of the fragment.</param>
 	public void ChangeFragmentName (string newName)
 	{
 		this.FragmentNameText.text = newName;

@@ -14,6 +14,11 @@ public sealed class Fragments
 		FragmentList = new List<Fragment> ();
 	}
 
+	/// <summary>
+	/// Add a the fragment from a file. The name of the fragment is determined based on the file name.
+	/// </summary>
+	/// <returns>The fragment read from the file.</returns>
+	/// <param name="path">The absolute path to the file containing the fragment.</param>
 	public Fragment AddFragmentFromFile(string path){
 		string name = ExtractFragmentNameFromPath (path);
 
@@ -33,7 +38,7 @@ public sealed class Fragments
 	/// <summary>
 	/// Gets the instance of the singleton.
 	/// </summary>
-	/// <value>The instance represents the list of fracture fragments.</value>
+	/// <value>The Singleton with fragments.</value>
 	public static Fragments GetInstance {
 		get {
 			return Instance;
