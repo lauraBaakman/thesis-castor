@@ -18,16 +18,16 @@ public class FragmentsController : MonoBehaviour {
 	/// <param name="fragment">Fragment to add.</param>
 	public FragmentController AddFragment(Fragment fragment){
 
-		GameObject gameObject = new GameObject (fragment.Name);	
+		GameObject fragmentGameObject = new GameObject (fragment.Name);	
 
-		this.AttatchMesh (gameObject, fragment.Mesh);
-		FragmentController controller = this.AttatchController (gameObject, fragment);
+        this.AttatchMesh (fragmentGameObject, fragment.Mesh);
+        FragmentController controller = this.AttatchController (fragmentGameObject, fragment);
 
-		gameObject.transform.parent = this.gameObject.transform;
+        fragmentGameObject.transform.parent = gameObject.transform;
 
 		// Temporarily: Scale mesh
 		Debug.Log("Fragments are scaled with a factor 1000 for now.");
-		gameObject.transform.localScale = new Vector3(1000, 1000, 1000);
+        fragmentGameObject.transform.localScale = new Vector3(1000, 1000, 1000);
 
 		return controller;
 	}
