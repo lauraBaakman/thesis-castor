@@ -25,7 +25,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
         if (Application.isEditor)
         {
             Debug.Log("Automatically loading some fragment for development.");
-            OnSelect(Path.Combine(Application.dataPath, "Models/andrewCube.obj"));
+            OnSelectFile(Path.Combine(Application.dataPath, "Models/andrewCube.obj"));
         }
 
     }
@@ -35,15 +35,15 @@ public class FragmentsMenuBoxController : MonoBehaviour
     /// </summary>
     public void OnAddFragmentClick()
     {
-        FileBrowser.ShowLoadDialog(OnSelect, OnCancel);
+        FileBrowser.ShowLoadDialog(OnSelectFile, OnCancelFileSelectionDialog);
     }
 
-    private void OnCancel()
+    private void OnCancelFileSelectionDialog()
     {
         //No need to do anything if the file dialog is cancelled
     }
 
-    private void OnSelect(string path)
+    private void OnSelectFile(string path)
     {
 		// Create Fragment Data Object
 		Fragment fragment = Fragments.GetInstance.AddFragmentFromFile (path);
