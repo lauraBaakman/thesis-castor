@@ -32,25 +32,6 @@ public class Fragment
 	}
 
 	/// <summary>
-	/// Reades a fragment from a file.
-	/// </summary>
-	/// <returns>A new fragment with the name of the file as its name.</returns>
-	/// <param name="path">Path the absolute path to the file from which the fragment should be read.</param>
-	public static Fragment FromFile (string path)
-	{
-		Mesh mesh = ObjImporter.ImportFile (path);		
-		string name = ExtractNameFromPath (path);
-
-		return new Fragment (mesh, name);
-	}
-
-	private static string ExtractNameFromPath (string path)
-	{
-		string name = Path.GetFileNameWithoutExtension (path);
-		return name;
-	}
-
-	/// <summary>
 	/// Gets the gameobject associated with the fragment. If no such gameobject exists it is created.
 	/// </summary>
 	/// <returns>The gameobject object associated with the fragment.</returns>

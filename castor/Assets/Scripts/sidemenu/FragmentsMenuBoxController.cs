@@ -57,25 +57,31 @@ public class FragmentsMenuBoxController : MonoBehaviour
             
             // 3. Create Game Object for the Mesh
 			GameObject fragmentGameObject = fragmentData.GetGameObject();
+			
+			// 4. Set Parent
 			fragmentGameObject.transform.parent = FragmentParentObject.transform;
 
+			// 5. Scale mesh
 			Debug.Log("Fragments are scaled with a factor 1000 for now.");
 			fragmentGameObject.transform.localScale = new Vector3(1000, 1000, 1000);
 
         //Create Fragment List Element
-		AddFragmentListElement(fragmentName);
+			// 1. Create Game Object for List Element
+			GameObject listElement = Instantiate(Resources.Load("FragmentListElement")) as GameObject;
+			
+			// 2. Set Name
+			listElement.name = fragmentName + " list element";
+			
+			// 3. Set Parent
+			listElement.transform.SetParent(FragmentListView.transform);
+
+			// 4. Create Controller
+			FragmentListElementController controller = listElement.GetComponent<FragmentListElementController>();
+			
+			// 5. Set name of Controller
+			controller.SetName(fragmentName);
 
         // Add Fragment to the Big Fragment List
         FractureFragments.GetInstance.AddFragment(fragmentData);
-    }
-
-    private void AddFragmentListElement(string fragmentName)
-    {
-        GameObject listElement = Instantiate(Resources.Load("FragmentListElement")) as GameObject;
-        listElement.name = fragmentName + " list element";
-        listElement.transform.SetParent(FragmentListView.transform);
-
-        FragmentListElementController controller = listElement.GetComponent<FragmentListElementController>();
-        controller.SetName(fragmentName);
     }
 }

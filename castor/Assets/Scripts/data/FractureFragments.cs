@@ -12,18 +12,6 @@ public sealed class FractureFragments
 		Fragments = new List<Fragment> ();
 	}
 
-	/// <summary>
-	/// Adds the fragment from file <c>path</c>.
-	/// </summary>
-	/// <returns>The fragment from file.</returns>
-	/// <param name="path">Path contains the absolute path to fragment that should be loaded.</param>
-	public Fragment AddFragmentFromFile (string path)
-	{
-		Fragment fragment = Fragment.FromFile (path);
-        AddFragment(fragment);
-		return fragment;
-	}
-
     public void AddFragment(Fragment fragment){
         Fragments.Add(fragment);
     }
