@@ -79,13 +79,12 @@ public class FragmentsMenuBoxController : MonoBehaviour
 			fragmentGameObject.transform.localScale = new Vector3(1000, 1000, 1000);
 
         //Create Fragment List Element
-		AddFragmentToList(fragmentName);
+		AddFragmentToListView(fragmentName);
 
-        // Add Fragment to the Big Fragment List
         FractureFragments.GetInstance.AddFragment(fragmentData);
     }
 
-	private void AddFragmentToList(string fragmentName){
+	private void AddFragmentToListView(string fragmentName){
 		GameObject listElement = Instantiate(Resources.Load("FragmentListElement")) as GameObject;
 
 		listElement.name = BuildListElementName(fragmentName);
