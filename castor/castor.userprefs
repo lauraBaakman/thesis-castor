@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{4602BF1A-EA68-59A9-8CA2-278917052D83}|Unit Tests">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/view3D/FragmentController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/view3D/EdgeRenderer.cs">
     <Files>
-      <File FileName="Assets/Scripts/view3D/EdgeRenderer.cs" Line="19" Column="28" />
-      <File FileName="Assets/Scripts/view3D/FragmentController.cs" Line="17" Column="1" />
+      <File FileName="Assets/Scripts/view3D/EdgeRenderer.cs" Line="26" Column="46" />
+      <File FileName="Assets/Scripts/view3D/FragmentController.cs" Line="48" Column="46" />
+      <File FileName="Assets/Scripts/data/Fragment.cs" Line="12" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -10,9 +11,10 @@
           <Node name="castor" expanded="True">
             <Node name="Assembly-CSharp" expanded="True">
               <Node name="Scripts" expanded="True">
+                <Node name="data" expanded="True" />
                 <Node name="sidemenu" expanded="True" />
                 <Node name="view3D" expanded="True">
-                  <Node name="FragmentController.cs" selected="True" />
+                  <Node name="EdgeRenderer.cs" selected="True" />
                 </Node>
               </Node>
             </Node>
@@ -24,7 +26,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/laura/Repositories/thesis-castor/castor/Assets/Scripts/view3D/FragmentController.cs" relfile="Assets/Scripts/view3D/FragmentController.cs" line="69" column="1" />
+      <Breakpoint file="/Users/laura/Repositories/thesis-castor/castor/Assets/Scripts/view3D/FragmentController.cs" relfile="Assets/Scripts/view3D/FragmentController.cs" line="84" column="1" />
+      <Breakpoint file="/Users/laura/Repositories/thesis-castor/castor/Assets/Scripts/view3D/EdgeRenderer.cs" relfile="Assets/Scripts/view3D/EdgeRenderer.cs" line="17" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

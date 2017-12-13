@@ -2,20 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EdgeRenderer : MonoBehaviour {
+public class EdgeRenderer : MonoBehaviour
+{
 
     private Fragment Fragment;
+    private Mesh Mesh;
+    private Color edgeColor;
 
-	void Start () {
-        Debug.Log("Starting the Edge Renderer");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+    {
+        edgeColor = Color.red;
+    }
 
-    public void Populate(Fragment fragment){
+    // Update is called once per frame
+    void Update()
+    {
+        RenderEdges();
+    }
+
+    public void Populate(Fragment fragment)
+    {
         Fragment = fragment;
+        Mesh = Fragment.Mesh;
+    }
+
+    private void RenderEdges()
+    {
+        int[] vertexIndices = Mesh.triangles;
+
+        for (int i = 0; i < vertexIndices.Length; i += 3)
+        {
+            try
+            {
+                RenderTriangleEdges(Mesh.vertices[i + 0], Mesh.vertices[i + 1], Mesh.vertices[i + 2]);
+            }
+            catch {
+                break;
+            }
+        }
+    }
+
+    private void RenderTriangleEdges(Vector3 vertex0, Vector3 vertex1, Vector3 vertex2)
+    {
+        Debug.Log(vertex0 + " " + vertex1 + " " + vertex2);
     }
 }
