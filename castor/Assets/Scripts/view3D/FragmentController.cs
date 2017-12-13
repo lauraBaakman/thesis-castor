@@ -12,6 +12,11 @@ public class FragmentController : MonoBehaviour
 
 	private FragmentListElementController ListElementController; 
 
+	private FragmentsController FragmentsController;
+
+	void Start(){
+		FragmentsController = GetComponentInParent<FragmentsController> ();
+	}
 
 	/// <summary>
 	/// Deletes the fragment associated with this controller from the reduction.
@@ -35,5 +40,14 @@ public class FragmentController : MonoBehaviour
 	/// <param name="listElementController">List element controller associated with the Fragment controlled by this FragmentController.</param>
 	public void Populate(FragmentListElementController listElementController){
 		this.ListElementController = listElementController;
+	}
+
+	public void ToggleSelection(bool toggle){
+		FragmentsController.ToggleFragmentSelection (this, toggle);
+	}
+
+	public void Deselect(){
+		Debug.Log("The fragment with name " + Fragment.Name + " has been deselected.");
+		ListElementController.Deselect ();
 	}
 }

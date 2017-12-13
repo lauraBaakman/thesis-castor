@@ -52,8 +52,13 @@ public class FragmentListElementController : MonoBehaviour
 		Debug.Log ("Pressed the toggle visibility checkmark");
 	}
 
+	/// <summary>
+	/// Toggle the selection of the associated fragment.
+	/// </summary>
+	/// <param name="toggle">If set to <c>true</c> the object is marked as selected.</param>
 	public void OnToggleSelected(bool toggle){
 		Debug.Log ("Pressed the toggle selection checkmark");
+		FragmentController.ToggleSelection (toggle);
 	}
 
 	/// <summary>
@@ -70,5 +75,9 @@ public class FragmentListElementController : MonoBehaviour
 	/// </summary>
 	public void Delete(){
 		Destroy (gameObject);
+	}
+
+	public void Deselect(){
+		Debug.Log("FragmentListElementController: The fragment with name " + FragmentController.Fragment.Name + " has been deselected.");		
 	}
 }

@@ -6,12 +6,10 @@ public class FragmentsController : MonoBehaviour {
 
 	private static Material DefaultMaterial;
 
+	private FragmentController SelectedFragment;
+
 	void Start () {
 		DefaultMaterial = new Material (Shader.Find ("Standard"));
-	}
-
-	void Update () {
-		
 	}
 
 	/// <summary>
@@ -54,5 +52,19 @@ public class FragmentsController : MonoBehaviour {
 		controller.Fragment = fragment;		
 
 		return controller;
+	}
+
+	/// <summary>
+	/// Toggles the fragments selection. 
+	/// </summary>
+	/// <param name="fragment">The Fragment whose selection should be toggled.</param>
+	/// <param name="toggle">If set to <c>true</c> the object is marked as selected, otherwise it is marked as not selected.</param>
+	public void ToggleFragmentSelection(FragmentController fragment, bool toggle){
+		if (toggle) {
+			SelectedFragment = fragment;
+		} else {
+			SelectedFragment.Deselect ();
+			SelectedFragment = null;
+		}
 	}
 }
