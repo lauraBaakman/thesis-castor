@@ -49,23 +49,24 @@ public class FragmentsMenuBoxController : MonoBehaviour
         string fragmentName = ExtractNameFromPath(path);
 
         //Create Fragment 3D View GameObject
-            
-
             // 1. Read Mesh
             Mesh mesh = ObjImporter.ImportFile(path);
 
             // 2. Create Fragment
-            Fragment fragment = new Fragment(mesh, name);
+			Fragment fragmentData = new Fragment(mesh, name);
             
-            // 3. Everything Else
-            AddFragmentGameObject(fragment);
+            // 3. Create Game Object for the Mesh
+			GameObject fragmentGameObject = fragmentData.GetGameObject();
+			fragmentGameObject.transform.parent = FragmentParentObject.transform;
+
+			Debug.Log("Fragments are scaled with a factor 1000 for now.");
+			fragmentGameObject.transform.localScale = new Vector3(1000, 1000, 1000);
 
         //Create Fragment List Element
-        AddFragmentListElement(fragment);
+		AddFragmentListElement(fragmentName);
 
         // Add Fragment to the Big Fragment List
-        FractureFragments.GetInstance.AddFragment(fragment);
-
+        FractureFragments.GetInstance.AddFragment(fragmentData);
     }
 
     private void AddFragmentGameObject(Fragment fragment)
@@ -84,13 +85,13 @@ public class FragmentsMenuBoxController : MonoBehaviour
         return name;
     }
 
-    private void AddFragmentListElement(Fragment fragment)
+    private void AddFragmentListElement(string fragmentName)
     {
         GameObject listElement = Instantiate(Resources.Load("FragmentListElement")) as GameObject;
-        listElement.name = fragment.Name + " list element";
+        listElement.name = fragmentName + " list element";
         listElement.transform.SetParent(FragmentListView.transform);
 
         FragmentListElementController controller = listElement.GetComponent<FragmentListElementController>();
-        controller.SetName(fragment.Name);
+        controller.SetName(fragmentName);
     }
 }
