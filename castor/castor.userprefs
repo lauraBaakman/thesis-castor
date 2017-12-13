@@ -1,16 +1,18 @@
-﻿<Properties StartupConfiguration="{1318A362-4983-BE01-673A-7ABD76191D5C}|Unit Tests" StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/view3D/FragmentController.cs">
+﻿<Properties StartupConfiguration="{1318A362-4983-BE01-673A-7ABD76191D5C}|Unit Tests">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/sidemenu/FileMenuBoxController.cs">
     <Files>
-      <File FileName="Assets/Scripts/view3D/FragmentController.cs" Line="27" Column="1" />
-      <File FileName="Assets/Scripts/data/Fragments.cs" Line="57" Column="2" NotebookId="1" />
-      <File FileName="Assets/Scripts/sidemenu/FragmentListElementController.cs" Line="68" Column="12" NotebookId="1" />
+      <File FileName="Assets/Scripts/view3D/FragmentController.cs" Line="9" Column="1" />
+      <File FileName="Assets/Scripts/sidemenu/FragmentsMenuBoxController.cs" Line="39" Column="1" />
+      <File FileName="Assets/Scripts/sidemenu/FileMenuBoxController.cs" Line="30" Column="1" />
+      <File FileName="Assets/Scripts/data/Fragment.cs" Line="31" Column="1" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-firstpass PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
 </Properties>
