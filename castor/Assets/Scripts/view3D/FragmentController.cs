@@ -16,6 +16,8 @@ public class FragmentController : MonoBehaviour
 
     void Start()
     {
+        EdgeRenderer edgeRenderer = gameObject.AddComponent<EdgeRenderer>();
+        edgeRenderer.Populate(Fragment);
     }
 
     /// <summary>

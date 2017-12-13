@@ -1,13 +1,16 @@
-﻿<Properties StartupConfiguration="{1318A362-4983-BE01-673A-7ABD76191D5C}|Unit Tests">
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/sidemenu/FragmentListElementController.cs">
+﻿<Properties StartupConfiguration="{4602BF1A-EA68-59A9-8CA2-278917052D83}|Unit Tests">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/view3D/FragmentsController.cs">
     <Files>
-      <File FileName="Assets/Scripts/sidemenu/FragmentListElementController.cs" Line="48" Column="45" />
+      <File FileName="Assets/Scripts/view3D/FragmentController.cs" Line="26" Column="33" />
+      <File FileName="Assets/Scripts/view3D/EdgeRenderer.cs" Line="19" Column="28" />
+      <File FileName="Assets/Scripts/view3D/FragmentsController.cs" Line="49" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/laura/Repositories/thesis-castor/castor/Assets/Scripts/view3D/FragmentController.cs" relfile="Assets/Scripts/view3D/FragmentController.cs" line="51" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-firstpass PreferredExecutionTarget="MonoDevelop.Default" />
