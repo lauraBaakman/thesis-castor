@@ -12,8 +12,18 @@ public class FragmentListElementController : MonoBehaviour
 	/// </summary>
 	public Text FragmentNameText;
 
+	private FragmentController FragmentController;
+
 	void Start ()
 	{
+	}
+
+	/// <summary>
+	/// Populate the properties of the fragmentController.
+	/// </summary>
+	/// <param name="fragmentController">Fragment controller.</param>
+	public void Populate (FragmentController fragmentController){
+		this.FragmentController = fragmentController;
 	}
 
 	/// <summary>

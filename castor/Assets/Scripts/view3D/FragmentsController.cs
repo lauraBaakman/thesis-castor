@@ -18,18 +18,20 @@ public class FragmentsController : MonoBehaviour {
 	/// Adds a fragment to the visible fragments.
 	/// </summary>
 	/// <param name="fragment">Fragment to add.</param>
-	public void AddFragment(Fragment fragment){
+	public FragmentController AddFragment(Fragment fragment){
 
 		GameObject gameObject = new GameObject (fragment.Name);	
 
 		this.AttatchMesh (gameObject, fragment.Mesh);
-		this.AttatchController (gameObject, fragment);
+		FragmentController controller = this.AttatchController (gameObject, fragment);
 
 		gameObject.transform.parent = this.gameObject.transform;
 
 		// Temporarily: Scale mesh
 		Debug.Log("Fragments are scaled with a factor 1000 for now.");
 		gameObject.transform.localScale = new Vector3(1000, 1000, 1000);
+
+		return controller;
 	}
 
 	private void AttatchMesh(GameObject gameObject, Mesh mesh){
@@ -47,8 +49,10 @@ public class FragmentsController : MonoBehaviour {
 		filter.mesh = mesh;			
 	}
 
-	private void AttatchController(GameObject gameObject, Fragment fragment){
-		FragmentController fragmentController = gameObject.AddComponent<FragmentController> ();
-		fragmentController.Fragment = fragment;		
+	private FragmentController AttatchController(GameObject gameObject, Fragment fragment){
+		FragmentController controller = gameObject.AddComponent<FragmentController> ();
+		controller.Fragment = fragment;		
+
+		return controller;
 	}
 }
