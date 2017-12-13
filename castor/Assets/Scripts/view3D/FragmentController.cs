@@ -12,12 +12,29 @@ public class FragmentController : MonoBehaviour
 
     private FragmentListElementController ListElementController;
 
+    private static Material DefaultMaterial;
+
     public bool Selected { get; set; }
+
+    private void Awake()
+    {
+        DefaultMaterial = new Material(Shader.Find("Standard"));
+    }
 
     void Start()
     {
         EdgeRenderer edgeRenderer = gameObject.AddComponent<EdgeRenderer>();
         edgeRenderer.Populate(Fragment);
+
+        MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
+        meshRenderer.material = DefaultMaterial;
+
+        MeshFilter filter = gameObject.AddComponent<MeshFilter> ();
+        filter.mesh = Fragment.Mesh;         
+
+        // Temporarily: Scale mesh
+        Debug.Log("Fragments are scaled with a factor 1000 for now.");
+        gameObject.transform.localScale = new Vector3(1000, 1000, 1000);
     }
 
     /// <summary>
@@ -42,8 +59,9 @@ public class FragmentController : MonoBehaviour
     /// Populate the FragmentController.
     /// </summary>
     /// <param name="listElementController">List element controller associated with the Fragment controlled by this FragmentController.</param>
-    public void Populate(FragmentListElementController listElementController)
+    public void Populate(Fragment fragment, FragmentListElementController listElementController)
     {
+        this.Fragment = fragment;
         this.ListElementController = listElementController;
     }
 }

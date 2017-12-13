@@ -55,7 +55,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
         //Create Fragment List Element GameObject
 		FragmentListElementController listElementController = AddFragmentToListView(fragment.Name, fragmentController);
 
-		fragmentController.Populate (listElementController);
+		fragmentController.Populate (fragment, listElementController);
 		listElementController.Populate (fragmentController);
     }
 
