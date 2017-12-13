@@ -69,16 +69,6 @@ public class FragmentsMenuBoxController : MonoBehaviour
         FractureFragments.GetInstance.AddFragment(fragmentData);
     }
 
-    private void AddFragmentGameObject(Fragment fragment)
-    {
-        GameObject fragmentGameObject = fragment.GetGameObject();
-        fragmentGameObject.transform.parent = FragmentParentObject.transform;
-
-        //Scale the mesh
-        Debug.Log("Fragments are scaled with a factor 1000 for now.");
-        fragmentGameObject.transform.localScale = new Vector3(1000, 1000, 1000);
-    }
-
     private static string ExtractNameFromPath(string path)
     {
         string name = Path.GetFileNameWithoutExtension(path);
