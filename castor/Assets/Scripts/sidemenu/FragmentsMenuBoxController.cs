@@ -17,6 +17,8 @@ public class FragmentsMenuBoxController : MonoBehaviour
     /// </summary>
     public GameObject FragmentListView;
 
+	public FragmentsController FragmentsController;
+
     /// <summary>
     /// Start this instance.
     /// </summary>
@@ -45,33 +47,14 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
     private void OnSelect(string path)
     {
+		// Create Fragment Data Object
 		Fragment fragment = Fragments.GetInstance.AddFragmentFromFile (path);
 
         //Create Fragment 3D View GameObject
-            // 3. Create Game Object for the Mesh
-			GameObject fragmentGameObject = new GameObject (fragment.Name);
-				
-				// 3a. Attatch MeshRender Component
-				MeshRenderer renderer = fragmentGameObject.AddComponent<MeshRenderer> ();
-				renderer.material = new Material (Shader.Find ("Standard"));
-				
-				// 3b. Attatch MeshFilter Component
-				MeshFilter filter = fragmentGameObject.AddComponent<MeshFilter> ();
-				filter.mesh = fragment.Mesh;		
+		FragmentsController.AddFragment(fragment);
 
-				// 3c. Attatch FragmentComponent
-				FragmentController fragmentController = fragmentGameObject.AddComponent<FragmentController> ();
-				fragmentController.Fragment = fragment;
-
-			// 4. Set Parent
-			fragmentGameObject.transform.parent = FragmentParentObject.transform;
-
-			// 5. Scale mesh
-			Debug.Log("Fragments are scaled with a factor 1000 for now.");
-			fragmentGameObject.transform.localScale = new Vector3(1000, 1000, 1000);
-
-        //Create Fragment List Element
-		AddFragmentToListView(fragment.Name);
+        //Create Fragment List Element GameObject
+		this.AddFragmentToListView(fragment.Name);
     }
 
 	private void AddFragmentToListView(string fragmentName){
