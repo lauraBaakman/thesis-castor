@@ -30,6 +30,7 @@ public class FragmentController : MonoBehaviour
     private FragmentListElementController ListElementController;
 
     private static Material DefaultMaterial;
+
     private void Awake()
     {
         DefaultMaterial = new Material(Shader.Find("Standard"));

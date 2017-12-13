@@ -18,6 +18,8 @@ public class EdgeRenderer : MonoBehaviour
     void Update()
     {
         RenderEdges();
+
+        Graphics.DrawMesh(Mesh, new Vector3(50, 50, 50), Quaternion.identity, new Material(Shader.Find("Standard")), 0);
     }
 
     public void Populate(Fragment fragment)

@@ -2476,8 +2476,10 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 100, y: -100, z: -100}
+  - {x: 100, y: -100, z: 100}
+  - {x: -100, y: -100, z: 100}
+  - {x: 100, y: -100, z: -100}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -2528,7 +2530,7 @@ LineRenderer:
     textureMode: 0
     generateLightingData: 0
   m_UseWorldSpace: 1
-  m_Loop: 0
+  m_Loop: 1
 --- !u!1 &1882038925
 GameObject:
   m_ObjectHideFlags: 0
