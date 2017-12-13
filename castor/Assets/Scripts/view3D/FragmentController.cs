@@ -26,9 +26,7 @@ public class FragmentController : MonoBehaviour
 
 		ListElementController.Delete ();
 
-		//Remove Fragment GameObject
-
-
+		Destroy (gameObject);
 	}
 
 	/// <summary>
