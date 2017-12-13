@@ -60,4 +60,11 @@ public class FragmentListElementController : MonoBehaviour
 	{
 		this.FragmentNameText.text = newName;
 	}
+
+	/// <summary>
+	/// Delete the GameObject associated with this controller.
+	/// </summary>
+	public void Delete(){
+		Destroy (gameObject);
+	}
 }
