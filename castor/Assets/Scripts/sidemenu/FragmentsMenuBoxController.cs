@@ -46,7 +46,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
     private void OnSelect(string path)
     {
 
-        string fragmentName = ExtractNameFromPath(path);
+		string fragmentName = Path.GetFileNameWithoutExtension(path);
 
         //Create Fragment 3D View GameObject
             // 1. Read Mesh
@@ -67,12 +67,6 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
         // Add Fragment to the Big Fragment List
         FractureFragments.GetInstance.AddFragment(fragmentData);
-    }
-
-    private static string ExtractNameFromPath(string path)
-    {
-        string name = Path.GetFileNameWithoutExtension(path);
-        return name;
     }
 
     private void AddFragmentListElement(string fragmentName)
