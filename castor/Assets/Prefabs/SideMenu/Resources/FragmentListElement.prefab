@@ -430,7 +430,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114843017190778508}
-        m_MethodName: onChangeColorFragmentClick
+        m_MethodName: OnChangeColorFragmentClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -521,7 +521,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114843017190778508}
-        m_MethodName: onDeleteFragmentClick
+        m_MethodName: OnDeleteFragmentClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -610,8 +610,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114843017190778508}
-        m_MethodName: onToggleFragmentValueChanged
-        m_Mode: 0
+        m_MethodName: OnToggleFragmentValueChanged
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
