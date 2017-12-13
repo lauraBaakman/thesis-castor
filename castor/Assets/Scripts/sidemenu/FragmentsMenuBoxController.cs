@@ -45,19 +45,11 @@ public class FragmentsMenuBoxController : MonoBehaviour
 
     private void OnSelect(string path)
     {
-
-		string fragmentName = Path.GetFileNameWithoutExtension(path);
+		Fragment fragment = Fragments.GetInstance.AddFragmentFromFile (path);
 
         //Create Fragment 3D View GameObject
-            // 1. Read Mesh
-            Mesh mesh = ObjImporter.ImportFile(path);
-
-            // 2. Create Fragment
-			Fragment fragmentData = new Fragment(mesh, name);
-            
             // 3. Create Game Object for the Mesh
-//			GameObject fragmentGameObject = fragmentData.GetGameObject();
-			GameObject fragmentGameObject = new GameObject (fragmentName);
+			GameObject fragmentGameObject = new GameObject (fragment.Name);
 				
 				// 3a. Attatch MeshRender Component
 				MeshRenderer renderer = fragmentGameObject.AddComponent<MeshRenderer> ();
@@ -65,11 +57,11 @@ public class FragmentsMenuBoxController : MonoBehaviour
 				
 				// 3b. Attatch MeshFilter Component
 				MeshFilter filter = fragmentGameObject.AddComponent<MeshFilter> ();
-				filter.mesh = mesh;		
+				filter.mesh = fragment.Mesh;		
 
 				// 3c. Attatch FragmentComponent
 				FragmentController fragmentController = fragmentGameObject.AddComponent<FragmentController> ();
-				fragmentController.Fragment = fragmentData;
+				fragmentController.Fragment = fragment;
 
 			// 4. Set Parent
 			fragmentGameObject.transform.parent = FragmentParentObject.transform;
@@ -79,9 +71,7 @@ public class FragmentsMenuBoxController : MonoBehaviour
 			fragmentGameObject.transform.localScale = new Vector3(1000, 1000, 1000);
 
         //Create Fragment List Element
-		AddFragmentToListView(fragmentName);
-
-        FractureFragments.GetInstance.AddFragment(fragmentData);
+		AddFragmentToListView(fragment.Name);
     }
 
 	private void AddFragmentToListView(string fragmentName){
