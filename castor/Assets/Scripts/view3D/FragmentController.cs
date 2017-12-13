@@ -10,12 +10,26 @@ public class FragmentController : MonoBehaviour
     /// <value>The fragment.</value>
     public Fragment Fragment { get; set; }
 
+    public bool Selected
+    {
+        get
+        {
+            return selected;
+        }
+
+        set
+        {
+            selected = value;
+
+            EdgeRenderer edgeRenderer = GetComponentInParent<EdgeRenderer>();
+            edgeRenderer.enabled = value;
+        }
+    }
+    private bool selected;
+
     private FragmentListElementController ListElementController;
 
     private static Material DefaultMaterial;
-
-    public bool Selected { get; set; }
-
     private void Awake()
     {
         DefaultMaterial = new Material(Shader.Find("Standard"));
@@ -25,6 +39,7 @@ public class FragmentController : MonoBehaviour
     {
         EdgeRenderer edgeRenderer = gameObject.AddComponent<EdgeRenderer>();
         edgeRenderer.Populate(Fragment);
+        edgeRenderer.enabled = Selected;
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.material = DefaultMaterial;
