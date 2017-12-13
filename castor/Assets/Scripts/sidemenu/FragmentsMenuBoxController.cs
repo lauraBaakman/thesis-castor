@@ -56,6 +56,21 @@ public class FragmentsMenuBoxController : MonoBehaviour
 			Fragment fragmentData = new Fragment(mesh, name);
             
             // 3. Create Game Object for the Mesh
+//			GameObject fragmentGameObject = fragmentData.GetGameObject();
+			GameObject fragmentGameObject = new GameObject (fragmentName);
+				
+				// 3a. Attatch MeshRender Component
+				MeshRenderer renderer = fragmentGameObject.AddComponent<MeshRenderer> ();
+				renderer.material = new Material (Shader.Find ("Standard"));
+				
+				// 3b. Attatch MeshFilter Component
+				MeshFilter filter = fragmentGameObject.AddComponent<MeshFilter> ();
+				filter.mesh = mesh;		
+
+				// 3c. Attatch FragmentComponent
+				FragmentComponent fragmentComponent = fragmentGameObject.AddComponent<FragmentComponent> ();
+				fragmentComponent.Fragment = fragmentData;
+
 			// 4. Set Parent
 			fragmentGameObject.transform.parent = FragmentParentObject.transform;
 

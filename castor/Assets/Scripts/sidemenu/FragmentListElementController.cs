@@ -8,11 +8,9 @@ using UnityEngine.EventSystems;
 public class FragmentListElementController : MonoBehaviour
 {
 	/// <summary>
-	/// The name of the fragment.
+	/// The UI element that displays the name of the fragment.
 	/// </summary>
 	public Text FragmentNameText;
-
-	private Fragment Fragment;
 
 	void Start ()
 	{
@@ -44,20 +42,11 @@ public class FragmentListElementController : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Sets the name of the fragment.
+	/// Change the name of the fragment.
 	/// </summary>
 	/// <param name="name">Name contains the new name of the fragment.</param>
-	public void SetName (string name)
+	public void ChangeFragmentName (string newName)
 	{
-		this.FragmentNameText.text = name;
-	}
-
-	/// <summary>
-	/// Sets the fragment.
-	/// </summary>
-	/// <param name="fragment">Fragment contains the reference to the fragment.</param>
-	public void SetFragment (Fragment fragment)
-	{
-		this.Fragment = fragment;
+		this.FragmentNameText.text = newName;
 	}
 }
