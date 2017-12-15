@@ -24,16 +24,12 @@ public class FragmentController : MonoBehaviour
 
     private FragmentListElementController ListElementController;
 
-    private static Material DefaultMaterial;
-
     private void Awake()
     {
-        DefaultMaterial = new Material(Shader.Find("Standard"));
+        gameObject.AddComponent<MeshFilter>();
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
-        meshRenderer.material = DefaultMaterial;
-
-        gameObject.AddComponent<MeshFilter>();
+        meshRenderer.material = new Material(Shader.Find("Standard"));
 
         gameObject.AddComponent<SelectableFragmentController>();
 
@@ -45,7 +41,7 @@ public class FragmentController : MonoBehaviour
     void Start()
     {
         gameObject.GetComponent<MeshFilter>().mesh = Fragment.Mesh;
-        gameObject.GetComponent<SelectableFragmentController>().Populate(Fragment.Mesh);
+        gameObject.GetComponent<SelectableFragmentController>().Populate(gameObject);
     }
 
     /// <summary>

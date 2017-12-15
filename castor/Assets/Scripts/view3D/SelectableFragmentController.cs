@@ -4,14 +4,16 @@
 
 public class SelectableFragmentController : MonoBehaviour
 {
+    GameObject Ghost;
+
     private void Awake()
     {
-
+        Ghost = new GameObject();
     }
 
     void Start()
     {
-        
+        Debug.Log("SelectableFragmentController Start!");   
     }
 
     void Update()
@@ -19,12 +21,12 @@ public class SelectableFragmentController : MonoBehaviour
 
     }
 
-    public void Populate(){
-        //Pass the parent obejct
+    public void Populate(GameObject selectable){
+        Ghost.name = selectable.name + " ghost";
+        Ghost.transform.parent = selectable.transform;
 
-        // Copy parent obejct
-
-        // Set parent obejct copy as child op parent obejct
+        //Copy MeshFilter
+        //Copy MeshRenderer
 
         // Increase size of child object
 
