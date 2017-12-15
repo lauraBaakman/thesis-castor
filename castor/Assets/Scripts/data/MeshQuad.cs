@@ -14,7 +14,7 @@ public class MeshQuad
         TriangleIndices = new int[6];
     }
 
-    static MeshQuad FromLine(Vector3 start, Vector3 end, float lineWidth = DEFAULTLINEWIDTH) {
+    public static MeshQuad FromLine(Vector3 start, Vector3 end, float lineWidth = DEFAULTLINEWIDTH) {
         MeshQuad quad = new MeshQuad();
 
         Vector3 planeNormal = Vector3.Cross(start, end);
