@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(FragmentController))]
+
 public class SelectableFragmentController : MonoBehaviour
 {
-
-    private static Material DefaultMaterial;
     private GameObject EdgeMeshGameObject;
+
+    private Material DefaultMaterial;
+    private float LineWidth = 5.0f;
 
     private void Awake()
     {
@@ -33,9 +36,10 @@ public class SelectableFragmentController : MonoBehaviour
         EdgeMeshGameObject.GetComponent<MeshFilter>().mesh = BuildEdgeMesh(objectMesh);
     }
 
-    private Mesh BuildEdgeMesh(Mesh objectMesh)
+    private Mesh BuildEdgeMesh(Mesh fragmentMesh)
     {
         Debug.Log("Build Edge Mesh!");
         return null;
     }
+
 }

@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\data\Fragment.cs" />
     <Compile Include="Assets\Scripts\data\Fragments.cs" />
+    <Compile Include="Assets\Scripts\data\MeshQuad.cs" />
     <Compile Include="Assets\Scripts\mainmenu\MenuController.cs" />
     <Compile Include="Assets\Scripts\persistent\PersistentObject.cs" />
     <Compile Include="Assets\Scripts\persistent\PlayerPrefsUpdater.cs" />
