@@ -4,22 +4,9 @@
 
 public class SelectableFragmentController : MonoBehaviour
 {
-    private GameObject EdgeMeshGameObject;
-
-    private Material DefaultMaterial;
-    private float LineWidth = 5.0f;
-
     private void Awake()
     {
-        DefaultMaterial = new Material(Shader.Find("Standard"));
 
-        EdgeMeshGameObject = new GameObject(name + " edges");
-        EdgeMeshGameObject.transform.parent = gameObject.transform;
-
-        MeshRenderer meshRenderer = EdgeMeshGameObject.AddComponent<MeshRenderer>();
-        meshRenderer.material = DefaultMaterial;
-
-        EdgeMeshGameObject.AddComponent<MeshFilter>();
     }
 
     void Start()
@@ -32,14 +19,15 @@ public class SelectableFragmentController : MonoBehaviour
 
     }
 
-    public void Populate(Mesh objectMesh){
-        EdgeMeshGameObject.GetComponent<MeshFilter>().mesh = BuildEdgeMesh(objectMesh);
-    }
+    public void Populate(){
+        //Pass the parent obejct
 
-    private Mesh BuildEdgeMesh(Mesh fragmentMesh)
-    {
-        Debug.Log("Build Edge Mesh!");
-        return null;
-    }
+        // Copy parent obejct
 
+        // Set parent obejct copy as child op parent obejct
+
+        // Increase size of child object
+
+        // Set material of child obeject to transperent: change render mode and change alpha value of albedo. 
+    }
 }
