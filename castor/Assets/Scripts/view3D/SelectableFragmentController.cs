@@ -6,6 +6,8 @@ public class SelectableFragmentController : MonoBehaviour
 {
     GameObject Ghost;
 
+    public float scaleFactor = 2.0f;
+
     private void Awake()
     {
         Ghost = new GameObject();
@@ -40,7 +42,7 @@ public class SelectableFragmentController : MonoBehaviour
 
     private void IncreaseGhostSize(){
         // Increase size of child object
-        Ghost.transform.localScale = new Vector3(2, 2, 2);
+        Ghost.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
     }
 
     private void SetGhostMaterial(){
