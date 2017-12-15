@@ -8,6 +8,8 @@ public class FragmentController : MonoBehaviour
     /// <value>The fragment.</value>
     public Fragment Fragment { get; set; }
 
+    public Material DefaultMaterial;
+
     public bool Selected
     {
         get
@@ -26,10 +28,12 @@ public class FragmentController : MonoBehaviour
 
     private void Awake()
     {
+        DefaultMaterial = new Material(Shader.Find("Standard"));
+
         gameObject.AddComponent<MeshFilter>();
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
-        meshRenderer.material = new Material(Shader.Find("Standard"));
+        meshRenderer.material = DefaultMaterial;
 
         gameObject.AddComponent<SelectableFragmentController>();
 

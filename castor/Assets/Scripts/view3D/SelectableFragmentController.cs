@@ -6,7 +6,8 @@ public class SelectableFragmentController : MonoBehaviour
 {
     GameObject Ghost;
 
-    public float scaleFactor = 2.0f;
+    public float scaleFactor = 1.3f;
+    public float Alpha = 0.1f;
 
     private void Awake()
     {
@@ -30,22 +31,29 @@ public class SelectableFragmentController : MonoBehaviour
         CopyParenComponentsToGhost(selectable);
 
         IncreaseGhostSize();
-        SetGhostMaterial();
+        SetGhostMaterial(selectable);
     }
 
     private void CopyParenComponentsToGhost(GameObject parent){
         Ghost.AddComponent<MeshFilter>(parent.GetComponent<MeshFilter>());
-
-        MeshRenderer ghostMeshRender = Ghost.AddComponent<MeshRenderer>(parent.GetComponent<MeshRenderer>());
-        ghostMeshRender.material = parent.GetComponent<MeshRenderer>().material;
+        Ghost.AddComponent<MeshRenderer>(parent.GetComponent<MeshRenderer>());
     }
 
     private void IncreaseGhostSize(){
-        // Increase size of child object
         Ghost.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
     }
 
-    private void SetGhostMaterial(){
-        // Set material of child obeject to transperent: change render mode and change alpha value of albedo. 
+    private void SetGhostMaterial(GameObject parent){
+        Material parentMaterial = parent.GetComponent<MeshRenderer>().material; 
+        Color parentColor = parentMaterial.color;
+
+        Material ghostMaterial = parent.GetComponent<FragmentController>().DefaultMaterial;
+
+        //Source: https://forum.unity.com/threads/access-rendering-mode-var-on-standard-shader-via-scripting.287002/#post-1911639
+        Color ghostColor = new Color(parentColor.r, parentColor.g, parentColor.b, Alpha);
+        ghostMaterial.SetColor("_Color", ghostColor);
+        ghostMaterial.SetFloat("_Mode", 3.0f);
+
+        Ghost.GetComponent<MeshRenderer>().material = ghostMaterial;
     }
 }
