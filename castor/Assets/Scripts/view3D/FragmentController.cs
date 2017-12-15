@@ -33,6 +33,10 @@ public class FragmentController : MonoBehaviour
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.material = DefaultMaterial;
 
+        gameObject.AddComponent<MeshFilter>();
+
+        gameObject.AddComponent<SelectableFragmentController>();
+
         // Temporarily: Scale mesh
         Debug.Log("Fragments are scaled with a factor 1000 for now.");
         gameObject.transform.localScale = new Vector3(1000, 1000, 1000);
@@ -40,8 +44,8 @@ public class FragmentController : MonoBehaviour
 
     void Start()
     {
-        MeshFilter filter = gameObject.AddComponent<MeshFilter>();
-        filter.mesh = Fragment.Mesh;
+        gameObject.GetComponent<MeshFilter>().mesh = Fragment.Mesh;
+        gameObject.GetComponent<SelectableFragmentController>().Populate(Fragment.Mesh);
     }
 
     /// <summary>
