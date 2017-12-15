@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FragmentController : MonoBehaviour
 {
@@ -20,9 +18,6 @@ public class FragmentController : MonoBehaviour
         set
         {
             selected = value;
-
-            EdgeRenderer edgeRenderer = GetComponentInParent<EdgeRenderer>();
-            edgeRenderer.enabled = value;
         }
     }
     private bool selected;
@@ -34,23 +29,19 @@ public class FragmentController : MonoBehaviour
     private void Awake()
     {
         DefaultMaterial = new Material(Shader.Find("Standard"));
-    }
-
-    void Start()
-    {
-        EdgeRenderer edgeRenderer = gameObject.AddComponent<EdgeRenderer>();
-        edgeRenderer.Populate(Fragment);
-        edgeRenderer.enabled = Selected;
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.material = DefaultMaterial;
 
-        MeshFilter filter = gameObject.AddComponent<MeshFilter> ();
-        filter.mesh = Fragment.Mesh;         
-
         // Temporarily: Scale mesh
         Debug.Log("Fragments are scaled with a factor 1000 for now.");
         gameObject.transform.localScale = new Vector3(1000, 1000, 1000);
+    }
+
+    void Start()
+    {
+        MeshFilter filter = gameObject.AddComponent<MeshFilter>();
+        filter.mesh = Fragment.Mesh;
     }
 
     /// <summary>
