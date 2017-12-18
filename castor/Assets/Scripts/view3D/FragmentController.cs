@@ -8,7 +8,7 @@ public class FragmentController : MonoBehaviour
     /// <value>The fragment.</value>
     public Fragment Fragment { get; set; }
 
-    public Material DefaultMaterial;
+    public static Material DefaultMaterial;
 
     private FragmentListElementController ListElementController;
 

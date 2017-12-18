@@ -9,7 +9,7 @@ public class SelectionGhostController : MonoBehaviour
 
     public void OnMouseDown()
     {
-        gameObject.GetComponentInParent<SelectableFragmentController>().OnMouseDown();
+        Debug.Log("Selected Object: Mouse Down!");
     }
 
     public void Populate(GameObject parent)
@@ -24,7 +24,9 @@ public class SelectionGhostController : MonoBehaviour
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>(
             parent.GetComponent<MeshRenderer>()
         );
-        meshRenderer.material = BuildMaterial(parent);
+        meshRenderer.material = BuildMaterial(
+            parent.GetComponent<MeshRenderer>().material.color
+        );
 
         gameObject.AddComponent<MeshCollider>();
 
@@ -41,12 +43,9 @@ public class SelectionGhostController : MonoBehaviour
         transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
     }
 
-    private Material BuildMaterial(GameObject parent)
+    private Material BuildMaterial(Color parentColor)
     {
-        Material parentMaterial = parent.GetComponent<MeshRenderer>().material;
-        Color parentColor = parentMaterial.color;
-
-        Material material = parent.GetComponent<FragmentController>().DefaultMaterial;
+        Material material = FragmentController.DefaultMaterial;
 
         //Source: https://forum.unity.com/threads/access-rendering-mode-var-on-standard-shader-via-scripting.287002/#post-1911639
         Color ghostColor = new Color(parentColor.r, parentColor.g, parentColor.b, Alpha);

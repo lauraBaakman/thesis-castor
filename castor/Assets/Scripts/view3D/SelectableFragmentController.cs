@@ -27,7 +27,7 @@ public class SelectableFragmentController : MonoBehaviour
 
     public void OnMouseDown()
     {
-        Debug.Log("Mouse Down!");
+        Debug.Log("Not Selected Object: Mouse Down!");
     }
 
     public void UpdateParent(GameObject parent){
