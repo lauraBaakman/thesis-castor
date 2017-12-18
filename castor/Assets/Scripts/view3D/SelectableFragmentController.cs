@@ -6,8 +6,8 @@ public class SelectableFragmentController : MonoBehaviour
 {
     GameObject Ghost;
 
-    public float scaleFactor = 1.3f;
-    public float Alpha = 0.1f;
+    public float scaleFactor = 1.1f;
+    public float Alpha = 0.4f;
 
     private void Awake()
     {
