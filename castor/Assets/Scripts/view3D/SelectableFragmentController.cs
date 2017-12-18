@@ -37,8 +37,14 @@ public class SelectableFragmentController : MonoBehaviour
         IncreaseGhostSize();
 
         Ghost.GetComponent<MeshRenderer>().material = BuildGhostMaterial(selectable);
+        selectable.AddComponent<MeshCollider>();
 
         ToggleVisibility(false);
+    }
+
+    public void OnMouseDown()
+    {
+        Debug.Log("Mouse Down!");
     }
 
     private void CopyParenComponentsToGhost(GameObject parent){
