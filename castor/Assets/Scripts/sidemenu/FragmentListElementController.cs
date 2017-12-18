@@ -54,7 +54,7 @@ public class FragmentListElementController : MonoBehaviour
     /// Ons the toggle fragment value changed, the fragment should be shown or hidden depending on its previous state.
     /// </summary>
     /// <param name="toggle">If set to <c>true</c> the fragment should be shown.</param>
-    public void OnToggleVisibility(bool toggle)
+    public void OnToggleVisibility(bool toggle) 
     {
         Debug.Log("Pressed the toggle visibility checkmark, toggle: " + toggle);
     }
