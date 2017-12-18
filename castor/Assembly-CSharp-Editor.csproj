@@ -164,9 +164,6 @@
  <Reference Include="NSubstitute">
  <HintPath>/Users/laura/Repositories/thesis-castor/castor/Assets/UnityTestTools/UnitTesting/Editor/NSubstitute/NSubstitute.dll</HintPath>
  </Reference>
- <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
- <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
- </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">

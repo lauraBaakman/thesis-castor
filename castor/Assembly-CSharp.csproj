@@ -53,10 +53,13 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\data\Fragment.cs" />
      <Compile Include="Assets\Scripts\data\Fragments.cs" />
+     <Compile Include="Assets\Scripts\extensions\ComponentExtensions.cs" />
+     <Compile Include="Assets\Scripts\extensions\GameObjectExtensions.cs" />
      <Compile Include="Assets\Scripts\mainmenu\MenuController.cs" />
      <Compile Include="Assets\Scripts\persistent\PersistentObject.cs" />
      <Compile Include="Assets\Scripts\persistent\PlayerPrefsUpdater.cs" />
      <Compile Include="Assets\Scripts\sidemenu\FileMenuBoxController.cs" />
+     <Compile Include="Assets\Scripts\sidemenu\FragmentListElement.cs" />
      <Compile Include="Assets\Scripts\sidemenu\FragmentListElementController.cs" />
      <Compile Include="Assets\Scripts\sidemenu\FragmentsMenuBoxController.cs" />
      <Compile Include="Assets\Scripts\ui\ToolTipController.cs" />
@@ -64,6 +67,7 @@
      <Compile Include="Assets\Scripts\utils\ObjImporter.cs" />
      <Compile Include="Assets\Scripts\view3D\FragmentController.cs" />
      <Compile Include="Assets\Scripts\view3D\FragmentsController.cs" />
+     <Compile Include="Assets\Scripts\view3D\SelectableFragmentController.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
