@@ -7,11 +7,13 @@ public class FragmentListElementController : MonoBehaviour
     /// The UI element that displays the name of the fragment.
     /// </summary>
     public Text FragmentNameText;
+    public Toggle SelectionToggle;
 
     private GameObject Fragment;
 
     private static Color SelectedColor;
     private static Color NormalColor;
+    private static string VisibilityCheckBoxName = "Selection Toggle";
 
 
     void Start()
@@ -64,8 +66,7 @@ public class FragmentListElementController : MonoBehaviour
     /// <param name="toggle">If set to <c>true</c> the object is marked as selected.</param>
     public void OnToggleSelected(bool toggle)
     {
-        Fragment.GetComponent<SelectableFragmentController>().ToggleVisibility(toggle);
-        gameObject.GetComponent<Image>().color = toggle ? SelectedColor : NormalColor;
+        Fragment.GetComponent<FragmentController>().ToggleSelection(toggle);
     }
 
     /// <summary>
@@ -83,5 +84,10 @@ public class FragmentListElementController : MonoBehaviour
     public void Delete()
     {
         Destroy(gameObject);
+    }
+
+    public void ToggleSelectionLocally(bool toggle){
+        gameObject.GetComponent<Image>().color = toggle ? SelectedColor : NormalColor;
+        SelectionToggle.isOn = toggle;
     }
 }

@@ -61,4 +61,9 @@ public class FragmentController : MonoBehaviour
         this.Fragment = fragment;
         this.ListElementController = listElementController;
     }
+
+    public void ToggleSelection(bool toggle){
+        gameObject.GetComponent<SelectableFragmentController>().ToggleSelectionLocally(toggle);  
+        ListElementController.ToggleSelectionLocally(toggle);
+    }
 }

@@ -10,6 +10,7 @@ public class SelectionGhostController : MonoBehaviour
     public void OnMouseDown()
     {
         Debug.Log("Selected Object: Mouse Down!");
+        GetComponentInParent<FragmentController>().ToggleSelection(false);
     }
 
     public void Populate(GameObject parent)

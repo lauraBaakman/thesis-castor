@@ -11,7 +11,7 @@ public class SelectableFragmentController : MonoBehaviour
         Ghost = new GameObject();
     }
 
-    public void ToggleVisibility(bool toggle){
+    public void ToggleSelectionLocally(bool toggle){
         Ghost.SetActive(toggle);
     }
 
@@ -22,11 +22,12 @@ public class SelectableFragmentController : MonoBehaviour
 
         UpdateParent(parent);
 
-        ToggleVisibility(false);
+        ToggleSelectionLocally(false);
     }
 
     public void OnMouseDown()
     {
+        GetComponent<FragmentController>().ToggleSelection(true);
         Debug.Log("Not Selected Object: Mouse Down!");
     }
 
