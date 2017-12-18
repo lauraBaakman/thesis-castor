@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
 using SimpleFileBrowser;
@@ -53,13 +51,13 @@ public class FragmentsMenuBoxController : MonoBehaviour
 		FragmentController fragmentController = FragmentsController.AddFragment(fragment);
 
         //Create Fragment List Element GameObject
-		FragmentListElementController listElementController = AddFragmentToListView(fragment.Name, fragmentController);
+		FragmentListElementController listElementController = AddFragmentToListView(fragment.Name);
 
 		fragmentController.Populate (fragment, listElementController);
 		listElementController.Populate (fragmentController);
     }
 
-	private FragmentListElementController AddFragmentToListView(string fragmentName, FragmentController fragmentController){
+	private FragmentListElementController AddFragmentToListView(string fragmentName){
 		GameObject listElement = Instantiate(Resources.Load("FragmentListElement")) as GameObject;
 
 		listElement.name = BuildListElementName(fragmentName);
