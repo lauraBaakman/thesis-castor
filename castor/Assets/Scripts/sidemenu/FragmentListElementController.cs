@@ -8,7 +8,7 @@ public class FragmentListElementController : MonoBehaviour
     /// </summary>
     public Text FragmentNameText;
 
-    private FragmentController FragmentController;
+    private GameObject Fragment;
 
     private static Color SelectedColor;
     private static Color NormalColor;
@@ -28,9 +28,9 @@ public class FragmentListElementController : MonoBehaviour
     /// Populate the properties of the fragmentController.
     /// </summary>
     /// <param name="fragmentController">Fragment controller.</param>
-    public void Populate(FragmentController fragmentController)
+    public void Populate(GameObject fragment)
     {
-        this.FragmentController = fragmentController;
+        this.Fragment = fragment;
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ public class FragmentListElementController : MonoBehaviour
     public void OnDeleteFragmentClick()
     {
         Debug.Log("Pressed the delete fragment button.");
-        FragmentController.DeleteFragment();
+        Fragment.GetComponent<FragmentController>().DeleteFragment();
     }
 
     /// <summary>
@@ -65,14 +65,14 @@ public class FragmentListElementController : MonoBehaviour
     /// <param name="toggle">If set to <c>true</c> the object is marked as selected.</param>
     public void OnToggleSelected(bool toggle)
     {
-        FragmentController.Selected = toggle;
+        Fragment.GetComponent<SelectableFragmentController>().ToggleVisibility(toggle);
         gameObject.GetComponent<Image>().color = toggle ? SelectedColor : NormalColor;
     }
 
     /// <summary>
     /// Change the name of the fragment.
     /// </summary>
-    /// <param name="name">the new name of the fragment.</param>
+    /// <param name="newName">the new name of the fragment.</param>
     public void ChangeFragmentName(string newName)
     {
         this.FragmentNameText.text = newName;

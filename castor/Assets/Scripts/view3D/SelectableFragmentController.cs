@@ -23,6 +23,10 @@ public class SelectableFragmentController : MonoBehaviour
 
     }
 
+    public void ToggleVisibility(bool toggle){
+        Ghost.SetActive(toggle);
+    }
+
     public void Populate(GameObject selectable)
     {
         Ghost.name = selectable.name + " ghost";
@@ -33,6 +37,8 @@ public class SelectableFragmentController : MonoBehaviour
         IncreaseGhostSize();
 
         Ghost.GetComponent<MeshRenderer>().material = BuildGhostMaterial(selectable);
+
+        ToggleVisibility(false);
     }
 
     private void CopyParenComponentsToGhost(GameObject parent){

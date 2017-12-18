@@ -10,20 +10,6 @@ public class FragmentController : MonoBehaviour
 
     public Material DefaultMaterial;
 
-    public bool Selected
-    {
-        get
-        {
-            return selected;
-        }
-
-        set
-        {
-            selected = value;
-        }
-    }
-    private bool selected;
-
     private FragmentListElementController ListElementController;
 
     private void Awake()
