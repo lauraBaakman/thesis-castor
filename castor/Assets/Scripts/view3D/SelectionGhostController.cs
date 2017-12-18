@@ -18,6 +18,9 @@ public class SelectionGhostController : MonoBehaviour
         {
             GetComponentInParent<FragmentController>().DeleteFragment();
         }
+        if (Input.GetButtonDown("Hide")){
+            GetComponentInParent<FragmentController>().ToggleVisibility(false);
+        }
     }
 
     public void Populate(GameObject parent)

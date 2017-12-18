@@ -674,6 +674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FragmentNameText: {fileID: 114059485793819406}
   SelectionToggle: {fileID: 114844994726265236}
+  VisibilityToggle: {fileID: 114125663256980480}
 --- !u!114 &114844994726265236
 MonoBehaviour:
   m_ObjectHideFlags: 1

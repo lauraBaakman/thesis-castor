@@ -39,6 +39,20 @@ public class FragmentController : MonoBehaviour
 
     }
 
+    public void ToggleVisibility(bool toggle){
+        ToggleVisibilityLocally(toggle);
+
+        //Deselect the object if it is selected and should be hidden.
+        if(!toggle){
+            ToggleSelection(false);
+        }
+        ListElementController.ToggleVisibilityLocally(toggle);
+    }
+
+    public void ToggleVisibilityLocally(bool toggle){
+        gameObject.SetActive(toggle);
+    }
+
     /// <summary>
     /// Deletes the fragment associated with this controller from the reduction.
     /// </summary>

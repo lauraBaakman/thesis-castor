@@ -8,6 +8,7 @@ public class FragmentListElementController : MonoBehaviour
     /// </summary>
     public Text FragmentNameText;
     public Toggle SelectionToggle;
+    public Toggle VisibilityToggle;
 
     private GameObject Fragment;
 
@@ -56,7 +57,7 @@ public class FragmentListElementController : MonoBehaviour
     /// <param name="toggle">If set to <c>true</c> the fragment should be shown.</param>
     public void OnToggleVisibility(bool toggle) 
     {
-        Debug.Log("Pressed the toggle visibility checkmark, toggle: " + toggle);
+        Fragment.GetComponent<FragmentController>().ToggleVisibility(toggle);
     }
 
     /// <summary>
@@ -88,5 +89,8 @@ public class FragmentListElementController : MonoBehaviour
     public void ToggleSelectionLocally(bool toggle){
         gameObject.GetComponent<Image>().color = toggle ? SelectedColor : NormalColor;
         SelectionToggle.isOn = toggle;
+    }
+    public void ToggleVisibilityLocally(bool toggle){
+        VisibilityToggle.isOn = toggle;   
     }
 }
