@@ -32,12 +32,13 @@ public class SelectableFragmentController : MonoBehaviour
         Ghost.name = selectable.name + " ghost";
         Ghost.transform.parent = selectable.transform;
 
-        CopyParenComponentsToGhost(selectable);
+        CopyParentComponentsToGhost(selectable);
 
         IncreaseGhostSize();
 
         Ghost.GetComponent<MeshRenderer>().material = BuildGhostMaterial(selectable);
-        selectable.AddComponent<MeshCollider>();
+
+        UpdateParent(selectable);
 
         ToggleVisibility(false);
     }
@@ -47,7 +48,11 @@ public class SelectableFragmentController : MonoBehaviour
         Debug.Log("Mouse Down!");
     }
 
-    private void CopyParenComponentsToGhost(GameObject parent){
+    public void UpdateParent(GameObject parent){
+        parent.AddComponent<MeshCollider>();
+    }
+
+    private void CopyParentComponentsToGhost(GameObject parent){
         Ghost.AddComponent<MeshFilter>(parent.GetComponent<MeshFilter>());
         Ghost.AddComponent<MeshRenderer>(parent.GetComponent<MeshRenderer>());
     }
