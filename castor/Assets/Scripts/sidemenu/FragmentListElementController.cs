@@ -27,7 +27,7 @@ public class FragmentListElementController : MonoBehaviour
     /// <summary>
     /// Populate the properties of the fragmentController.
     /// </summary>
-    /// <param name="fragmentController">Fragment controller.</param>
+    /// <param name="fragment">Fragment.</param>
     public void Populate(GameObject fragment)
     {
         this.Fragment = fragment;
