@@ -12,6 +12,14 @@ public class SelectionGhostController : MonoBehaviour
         GetComponentInParent<FragmentController>().ToggleSelection(false);
     }
 
+    public void Update()
+    {
+        if (Input.GetButtonDown("Delete"))
+        {
+            GetComponentInParent<FragmentController>().DeleteFragment();
+        }
+    }
+
     public void Populate(GameObject parent)
     {
         name = DetermineName(parent.name);

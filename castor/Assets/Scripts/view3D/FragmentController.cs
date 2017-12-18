@@ -34,6 +34,11 @@ public class FragmentController : MonoBehaviour
         gameObject.GetComponent<SelectableFragmentController>().Populate(gameObject);
     }
 
+    public void Update()
+    {
+
+    }
+
     /// <summary>
     /// Deletes the fragment associated with this controller from the reduction.
     /// </summary>

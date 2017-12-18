@@ -13,7 +13,6 @@ public class FragmentListElementController : MonoBehaviour
 
     private static Color SelectedColor;
     private static Color NormalColor;
-    private static string VisibilityCheckBoxName = "Selection Toggle";
 
 
     void Start()
