@@ -105,6 +105,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DollyController.cs" />
     <Compile Include="Assets\Scripts\data\Fragment.cs" />
     <Compile Include="Assets\Scripts\data\Fragments.cs" />
     <Compile Include="Assets\Scripts\extensions\ComponentExtensions.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Assets\Scripts\view3D\FragmentController.cs" />
     <Compile Include="Assets\Scripts\view3D\FragmentsController.cs" />
     <Compile Include="Assets\Scripts\view3D\SelectableFragmentController.cs" />
+    <Compile Include="Assets\Scripts\view3D\SelectionGhostController.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
@@ -163,7 +165,6 @@
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunner.cs" />
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerCallbackList.cs" />
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
-    <Compile Include="Assets\Scripts\view3D\SelectionGhostController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\AngryInclude.cginc" />
