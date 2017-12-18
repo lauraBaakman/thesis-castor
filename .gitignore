@@ -5,7 +5,8 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -65,7 +66,7 @@ $RECYCLE.BIN/
 /*.sln
 /*.suo
 /*.user
-/*.userprefs
+*.userprefs
 /*.pidb
 /*.booproj
 
