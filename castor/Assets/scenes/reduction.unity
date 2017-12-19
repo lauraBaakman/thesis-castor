@@ -447,7 +447,7 @@ Prefab:
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -847.05
+      value: -360.1
       objectReference: {fileID: 0}
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
@@ -1440,7 +1440,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 197162303}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2454,6 +2454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a062aad2a30415498d8327be41fdf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyboardSpeed: 0.1
 --- !u!1 &1882038925
 GameObject:
   m_ObjectHideFlags: 0
