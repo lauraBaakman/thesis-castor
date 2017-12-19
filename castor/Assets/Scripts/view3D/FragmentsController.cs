@@ -6,6 +6,14 @@ public class FragmentsController : MonoBehaviour
     private void Awake()
     {
         gameObject.AddComponent<DollyController>();
+        gameObject.AddComponent<VerticalPanController>().Populate(
+            mouseAxis: "Mouse Y",
+            keyboardAxis: "Vertical"
+        );
+        gameObject.AddComponent<HorizontalPanController>().Populate(
+            mouseAxis: "Mouse X",
+            keyboardAxis: "Horizontal"
+        );
     }
 
     /// <summary>
