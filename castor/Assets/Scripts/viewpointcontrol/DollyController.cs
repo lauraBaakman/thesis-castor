@@ -13,24 +13,21 @@ public class DollyController : MonoBehaviour
     private static float minLocalScale = float.Epsilon;
     private static float maxLocalScale = float.MaxValue;
 
-    // Use this for initialization
     void Start()
     {
-        Debug.Log(Input.multiTouchEnabled);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButton(KeyboardAxisName))
         {
             Dolly(keyboardSpeed, Input.GetAxis(KeyboardAxisName));
         };
+
         float mouseScroll = Input.GetAxis(MouseAxisName);
         if (mouseScroll > 0.05 && mouseScroll < -0.05)
         {
-            Debug.Log("Detected Zoom with Scroll Wheel Axis");
-            //TODO test with normal mouse, use mousescroll instead of speed when calling dolly()
+            Dolly(mouseScroll, Input.GetAxis(MouseAxisName));
         }
     }
 
@@ -42,7 +39,5 @@ public class DollyController : MonoBehaviour
         newLocalScale = newLocalScale.Clamped(minLocalScale, maxLocalScale);
 
         transform.localScale = newLocalScale;
-
-        Debug.Log("Local Scale: " + transform.localScale);
     }
 }
