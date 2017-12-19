@@ -32,7 +32,7 @@ public class DollyController : MonoBehaviour
 
     private void Dolly(float speed, float direction)
     {
-        float scalingTerm = direction * speed;
+        float scalingTerm = direction * speed * Time.deltaTime;
 
         Vector3 newLocalScale = transform.localScale + new Vector3().Fill(scalingTerm);
         newLocalScale = newLocalScale.Clamped(minLocalScale, maxLocalScale);
