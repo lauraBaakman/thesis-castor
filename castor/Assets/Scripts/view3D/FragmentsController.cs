@@ -2,7 +2,12 @@
 
 public class FragmentsController : MonoBehaviour
 {
-    
+
+    private void Awake()
+    {
+        gameObject.AddComponent<DollyController>();
+    }
+
     /// <summary>
     /// Adds a fragment to the visible fragments.
     /// </summary>

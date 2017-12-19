@@ -447,7 +447,7 @@ Prefab:
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -451.05002
       objectReference: {fileID: 0}
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
@@ -1078,7 +1078,7 @@ Prefab:
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -55.05
       objectReference: {fileID: 0}
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 197162304}
   m_HandleRect: {fileID: 197162303}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2411,8 +2411,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1851333513}
   - component: {fileID: 1851333514}
-  - component: {fileID: 1851333515}
-  - component: {fileID: 1851333516}
   m_Layer: 0
   m_Name: Fragments
   m_TagString: Untagged
@@ -2442,28 +2440,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5eafcf8cd6dd45d48d0264fd812c739, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1851333515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1851333512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4a062aad2a30415498d8327be41fdf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1851333516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1851333512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31c69f6d07ca741339168b023c95f166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1882038925
