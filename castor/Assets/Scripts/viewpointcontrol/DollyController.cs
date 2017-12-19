@@ -10,6 +10,9 @@ public class DollyController : MonoBehaviour
     private static string KeyboardAxisName = "Keyboard Dolly";
     private static string MouseAxisName = "Mouse Dolly";
 
+    private static float minLocalScale = float.Epsilon;
+    private static float maxLocalScale = float.MaxValue;
+
     // Use this for initialization
     void Start()
     {
@@ -34,6 +37,12 @@ public class DollyController : MonoBehaviour
     private void Dolly(float speed, float direction)
     {
         float scalingTerm = direction * speed;
-        transform.localScale += new Vector3(scalingTerm, scalingTerm, scalingTerm);
+
+        Vector3 newLocalScale = transform.localScale + new Vector3().Fill(scalingTerm);
+        newLocalScale = newLocalScale.Clamped(minLocalScale, maxLocalScale);
+
+        transform.localScale = newLocalScale;
+
+        Debug.Log("Local Scale: " + transform.localScale);
     }
 }
