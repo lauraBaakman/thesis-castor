@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DollyController : MonoBehaviour
 {
 
-    public float keyboardSpeed = 0.1f;
+    private float KeyboardSpeed;
 
     private static string KeyboardAxisName = "Keyboard Dolly";
     private static string MouseAxisName = "Mouse Dolly";
@@ -13,15 +11,16 @@ public class DollyController : MonoBehaviour
     private static float minLocalScale = float.Epsilon;
     private static float maxLocalScale = float.MaxValue;
 
-    void Start()
+    void Awake()
     {
+        KeyboardSpeed = PlayerPrefs.GetFloat("ui.viewpoint.dolly.speed");
     }
 
-    void Update()
+    public void Update()
     {
         if (Input.GetButton(KeyboardAxisName))
         {
-            Dolly(keyboardSpeed, Input.GetAxis(KeyboardAxisName));
+            Dolly(KeyboardSpeed, Input.GetAxis(KeyboardAxisName));
         };
 
         float mouseScroll = Input.GetAxis(MouseAxisName);

@@ -10,7 +10,8 @@ public class PersistentObject : MonoBehaviour
 	{
 		DontDestroyOnLoad (gameObject);
 
-		new PlayerPrefsUpdater ().Update ();
+        Debug.Log("Overwriting all player preferences with the default values.");
+        new PlayerPrefsUpdater (replace:true).Update ();
 
 		FileBrowser.SetDefaultFilter (".obj");
 
