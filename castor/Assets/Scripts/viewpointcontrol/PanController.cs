@@ -12,12 +12,12 @@ abstract public class DirectionlessPanController : MonoBehaviour
     {
         if (DetectedKeyboardPan())
         {
-            HandleKeyBoardPan();
+            Pan(KeyBoardAxis);
         }
 
         if (DetectedMousePan())
         {
-            HandleMousePan();
+            Pan(MouseAxis);
         }
     }
 
@@ -26,29 +26,16 @@ abstract public class DirectionlessPanController : MonoBehaviour
         return Input.GetButton(KeyBoardAxis);
     }
 
-    private void HandleKeyBoardPan()
-    {
-        float speed = Input.GetAxis(KeyBoardAxis);
-
-        Pan(speed, DirectionVector);
-    }
-
     private bool DetectedMousePan()
     {
         float value = Input.GetAxis(MouseAxis);
         return !value.Equals(0.0f) && Input.GetKey(KeyCode.Mouse0);
     }
 
-    private void HandleMousePan()
+    private void Pan(string axis)
     {
-        float speed = Input.GetAxis(MouseAxis);
-
-        Pan(speed, DirectionVector);
-    }
-
-    private void Pan(float speed, Vector3 direction)
-    {
-        Vector3 panVector = direction * (speed * KeyboardSpeedScalingFactor);
+        float speed = Input.GetAxis(axis);
+        Vector3 panVector = DirectionVector * (speed * KeyboardSpeedScalingFactor);
         transform.localPosition += panVector;
     }
 
@@ -58,7 +45,8 @@ abstract public class DirectionlessPanController : MonoBehaviour
         KeyBoardAxis = keyboardAxis;
     }
 
-    protected void BaseAwake(){
+    protected void BaseAwake()
+    {
         KeyboardSpeedScalingFactor = KeyboardSpeedScalingFactor = PlayerPrefs.GetFloat("ui.viewpoint.pan.speed");
     }
 }
