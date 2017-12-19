@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\data\Fragments.cs" />
     <Compile Include="Assets\Scripts\extensions\ComponentExtensions.cs" />
     <Compile Include="Assets\Scripts\extensions\GameObjectExtensions.cs" />
+    <Compile Include="Assets\Scripts\extensions\Vector3Extensions.cs" />
     <Compile Include="Assets\Scripts\mainmenu\MenuController.cs" />
     <Compile Include="Assets\Scripts\persistent\PersistentObject.cs" />
     <Compile Include="Assets\Scripts\persistent\PlayerPrefsUpdater.cs" />
