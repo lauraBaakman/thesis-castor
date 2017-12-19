@@ -36,7 +36,7 @@ abstract public class DirectionlessPanController : MonoBehaviour
     private bool DetectedMousePan()
     {
         float value = Input.GetAxis(MouseAxis);
-        return false;
+        return !value.Equals(0.0f) && Input.GetKey(KeyCode.Mouse0);
     }
 
     private void HandleMousePan()
