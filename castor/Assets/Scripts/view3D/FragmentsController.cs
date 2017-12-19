@@ -6,6 +6,7 @@ public class FragmentsController : MonoBehaviour
     private void Awake()
     {
         gameObject.AddComponent<DollyController>();
+        gameObject.AddComponent<RotationController>();
         gameObject.AddComponent<VerticalPanController>().Populate(
             mouseAxis: "Mouse Y",
             keyboardAxis: "Vertical"
