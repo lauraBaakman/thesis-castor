@@ -41,7 +41,9 @@ abstract public class DirectionlessPanController : MonoBehaviour
 
     private void HandleMousePan()
     {
-        Debug.Log("Handled Mouse Pan");
+        float speed = Input.GetAxis(MouseAxis);
+
+        Pan(speed, DirectionVector);
     }
 
     private void Pan(float speed, Vector3 direction)
