@@ -23,18 +23,16 @@ public class PanController : MonoBehaviour
 
     }
 
-    private void DetectKeyboardPan(){
-        if (Input.GetButton(KeyboardAxisName)){
-            Debug.Log("Detected Keyboard Pan");
-        }
+    private bool DetectKeyboardPan(){
+        return Input.GetButton(KeyboardAxisName);
     }
 
     private void HandleKeyBoardPan(){
         Debug.Log("Handled Keyboard Pan");
     }
 
-    private void DetectMousePan(){
-        Debug.Log("Detected Mouse Pan");
+    private bool DetectMousePan(){
+        return false;
     }
 
     private void HandleMousePan()
