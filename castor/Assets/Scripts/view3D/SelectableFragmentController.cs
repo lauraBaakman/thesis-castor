@@ -6,7 +6,7 @@ public class SelectableFragmentController : MonoBehaviour
 {
     GameObject Ghost;
 
-    private void Awake()
+    void Awake()
     {
         Ghost = new GameObject();
     }

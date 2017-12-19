@@ -2,16 +2,7 @@
 
 public class FragmentsController : MonoBehaviour
 {
-
-    void Start()
-    {
-
-    }
-
-    private void Awake()
-    {
-    }
-
+    
     /// <summary>
     /// Adds a fragment to the visible fragments.
     /// </summary>
