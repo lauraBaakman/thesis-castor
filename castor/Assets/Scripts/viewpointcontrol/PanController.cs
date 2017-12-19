@@ -8,36 +8,53 @@ public class PanController : MonoBehaviour
 
     private float KeyboardSpeed;
 
-    void Awake(){
+    void Awake()
+    {
         KeyboardSpeed = KeyboardSpeed = PlayerPrefs.GetFloat("ui.viewpoint.pan.speed");
     }
 
     void Update()
     {
-        if(DetectKeyboardPan()){
+        if (DetectedKeyboardPan())
+        {
             HandleKeyBoardPan();
         }
 
-        if(DetectMousePan()){
+        if (DetectedMousePan())
+        {
             HandleMousePan();
         }
 
     }
 
-    private bool DetectKeyboardPan(){
+    private bool DetectedKeyboardPan()
+    {
         return Input.GetButton(KeyboardAxisName);
     }
 
-    private void HandleKeyBoardPan(){
-        Debug.Log("Handled Keyboard Pan");
+    private void HandleKeyBoardPan()
+    {
+        Vector3 direction = DirectionToVector(Input.GetAxis(KeyboardAxisName));
+        Pan(KeyboardSpeed, direction);
     }
 
-    private bool DetectMousePan(){
+    private bool DetectedMousePan()
+    {
         return false;
     }
 
     private void HandleMousePan()
     {
         Debug.Log("Handled Mouse Pan");
+    }
+
+    private Vector3 DirectionToVector(float axisDirection)
+    {
+        return axisDirection < 0 ? Vector3.left : Vector3.right;
+    }
+
+    private void Pan(float speed, Vector3 direction)
+    {
+        transform.localPosition += direction * (speed * Time.deltaTime);
     }
 }
