@@ -3,12 +3,13 @@ using System.Collections;
 
 public class PanController : MonoBehaviour
 {
-    private static string KeyboardAxisName = "Keyboard Pan";
-    private static string MouseAxisName = "Mouse Pan";
+    private static string KeyboardAxisName = "Horizontal";
+    private static string MouseAxisName = "Mouse X";
 
-    void Start()
-    {
+    private float KeyboardSpeed;
 
+    void Awake(){
+        KeyboardSpeed = KeyboardSpeed = PlayerPrefs.GetFloat("ui.viewpoint.pan.speed");
     }
 
     void Update()
