@@ -26,6 +26,7 @@ public class DollyController : MonoBehaviour
         if(DetectedMouseDolly()){
             Dolly(MouseAxisName);
         }
+        ClampScale();
     }
 
     private void ClampScale(){
