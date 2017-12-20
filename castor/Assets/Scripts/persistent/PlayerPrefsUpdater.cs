@@ -26,7 +26,7 @@ public class PlayerPrefsUpdater
 
     private void UpdateUIPreferences()
     {
-        UpdatePlayerPref("ui.viewpoint.dolly.speed", 0.5f);
+        UpdatePlayerPref("ui.viewpoint.dolly.speed", 0.3f);
         UpdatePlayerPref("ui.viewpoint.pan.speed", 5.0f);
     }
 
