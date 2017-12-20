@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\data\Fragments.cs" />
     <Compile Include="Assets\Scripts\extensions\ComponentExtensions.cs" />
     <Compile Include="Assets\Scripts\extensions\GameObjectExtensions.cs" />
+    <Compile Include="Assets\Scripts\extensions\TransformExtensions.cs" />
     <Compile Include="Assets\Scripts\extensions\Vector3Extensions.cs" />
     <Compile Include="Assets\Scripts\mainmenu\MenuController.cs" />
     <Compile Include="Assets\Scripts\persistent\PersistentObject.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Assets\Scripts\view3D\SelectableFragmentController.cs" />
     <Compile Include="Assets\Scripts\view3D\SelectionGhostController.cs" />
     <Compile Include="Assets\Scripts\viewpointcontrol\DollyController.cs" />
+    <Compile Include="Assets\Scripts\viewpointcontrol\PanController.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
@@ -166,8 +168,6 @@
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunner.cs" />
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerCallbackList.cs" />
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
-    <Compile Include="Assets\Scripts\viewpointcontrol\PanController.cs" />
-    <Compile Include="Assets\Scripts\extensions\TransformExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\AngryInclude.cginc" />
