@@ -3,7 +3,7 @@
 public class PlayerPrefsUpdater
 {
 
-    private bool Replace;
+    private readonly bool Replace;
 
     public PlayerPrefsUpdater(bool replace = false){
         Replace = replace;
