@@ -61,7 +61,8 @@ public class FragmentsMenuBoxController : MonoBehaviour
 		GameObject listElement = Instantiate(Resources.Load("FragmentListElement")) as GameObject;
 
 		listElement.name = BuildListElementName(fragmentName);
-		listElement.transform.SetParent(FragmentListView.transform);
+        listElement.transform.SetParent(FragmentListView.transform);
+        listElement.transform.ResetLocally();
 
 		FragmentListElementController controller = listElement.GetComponent<FragmentListElementController>();
 		controller.ChangeFragmentName(fragmentName);
