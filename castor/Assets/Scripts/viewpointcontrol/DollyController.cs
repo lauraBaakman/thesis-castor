@@ -3,7 +3,7 @@
 public class DollyController : MonoBehaviour
 {
 
-    private float KeyboardSpeed;
+    private float ScalingFactor;
 
     private static string KeyboardAxisName = "Keyboard Dolly";
     private static string MouseAxisName = "Mouse Dolly";
@@ -13,30 +13,42 @@ public class DollyController : MonoBehaviour
 
     void Awake()
     {
-        KeyboardSpeed = PlayerPrefs.GetFloat("ui.viewpoint.dolly.speed");
+        ScalingFactor = PlayerPrefs.GetFloat("ui.viewpoint.dolly.speed");
     }
 
     public void Update()
     {
-        if (Input.GetButton(KeyboardAxisName))
+        if (DetectedKeyboardDolly())
         {
-            Dolly(KeyboardSpeed, Input.GetAxis(KeyboardAxisName));
-        };
+            Dolly(KeyboardAxisName);
+        }
 
-        float mouseScroll = Input.GetAxis(MouseAxisName);
-        if (mouseScroll > 0.05 && mouseScroll < -0.05)
-        {
-            Dolly(mouseScroll, Input.GetAxis(MouseAxisName));
+        if(DetectedMouseDolly()){
+            Dolly(MouseAxisName);
         }
     }
 
-    private void Dolly(float speed, float direction)
+    private void ClampScale(){
+        Vector3 scale = transform.localScale;
+
+        scale = scale.Clamped(minLocalScale, maxLocalScale);
+
+        transform.localScale = scale;
+    }
+
+    private bool DetectedKeyboardDolly()
     {
-        float scalingTerm = direction * speed * Time.deltaTime;
+        return Input.GetButton(KeyboardAxisName);
+    }
 
-        Vector3 newLocalScale = transform.localScale + new Vector3().Fill(scalingTerm);
-        newLocalScale = newLocalScale.Clamped(minLocalScale, maxLocalScale);
+    private bool DetectedMouseDolly(){
+        float value = Input.GetAxis(MouseAxisName);
+        return !value.Equals(0.0f);
+    }
 
-        transform.localScale = newLocalScale;
+    private void Dolly(string axis)
+    {
+        float scale = ScalingFactor * Input.GetAxis(axis);
+        transform.localScale = transform.localScale + new Vector3().Fill(scale);
     }
 }
