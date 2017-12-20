@@ -6,7 +6,7 @@ abstract public class DirectionlessPanController : MonoBehaviour
     private string MouseAxis;
 
     protected Vector3 DirectionVector;
-    protected float KeyboardSpeedScalingFactor;
+    protected float ScalingFactor;
 
     void Update()
     {
@@ -46,7 +46,7 @@ abstract public class DirectionlessPanController : MonoBehaviour
     private void Pan(string axis)
     {
         float speed = Input.GetAxis(axis);
-        Vector3 panVector = DirectionVector * (speed * KeyboardSpeedScalingFactor);
+        Vector3 panVector = DirectionVector * (speed * ScalingFactor);
         transform.localPosition += panVector;
     }
 
@@ -58,7 +58,7 @@ abstract public class DirectionlessPanController : MonoBehaviour
 
     protected void BaseAwake()
     {
-        KeyboardSpeedScalingFactor = KeyboardSpeedScalingFactor = PlayerPrefs.GetFloat("ui.viewpoint.pan.speed");
+        ScalingFactor = ScalingFactor = PlayerPrefs.GetFloat("ui.viewpoint.pan.speed");
     }
 }
 
