@@ -2,12 +2,6 @@ using UnityEngine;
 
 public static class Vector3Extensions
 {
-    private static float ClampFloat(float value, float min, float max){
-        value = value < min ? min : value;
-        value = value > max ? max : value;
-        return value;
-    }
-
     /// <summary>
     /// Limit the values of this to the inclusive range 
     /// <paramref name="min"/>, <paramref name = "max" /> ,
@@ -18,9 +12,9 @@ public static class Vector3Extensions
     /// <returns>Returns the clamped vector.</returns>
     public static Vector3 Clamped(this Vector3 vector, float min, float max){
         Vector3 clampedVector = new Vector3(
-            ClampFloat(vector.x, min, max),
-            ClampFloat(vector.y, min, max),
-            ClampFloat(vector.z, min, max)
+            Mathf.Clamp(vector.x, min, max),
+            Mathf.Clamp(vector.y, min, max),
+            Mathf.Clamp(vector.z, min, max)
         );
         return clampedVector;
     }
