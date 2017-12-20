@@ -19,6 +19,17 @@ abstract public class DirectionlessPanController : MonoBehaviour
         {
             Pan(MouseAxis);
         }
+
+        ClampPositionToViewPort();
+    }
+
+    private void ClampPositionToViewPort(){
+        Vector3 position = Camera.main.WorldToViewportPoint(transform.position);
+
+        position.x = Mathf.Clamp01(position.x);
+        position.y = Mathf.Clamp01(position.y);
+
+        transform.position = Camera.main.ViewportToWorldPoint(position);        
     }
 
     private bool DetectedKeyboardPan()
