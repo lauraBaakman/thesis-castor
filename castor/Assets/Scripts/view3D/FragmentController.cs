@@ -22,10 +22,6 @@ public class FragmentController : MonoBehaviour
         meshRenderer.material = DefaultMaterial;
 
         gameObject.AddComponent<SelectableFragmentController>();
-
-        // Temporarily: Scale mesh
-        Debug.Log("Fragments are scaled with a factor 1000 for now.");
-        gameObject.transform.localScale = new Vector3(1000, 1000, 1000);
     }
 
     void Start()
