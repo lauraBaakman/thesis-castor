@@ -1,3 +1,7 @@
+###Blender###
+*.blend1*
+__pycache__/
+
 ###OSX###
 
 .DS_Store
