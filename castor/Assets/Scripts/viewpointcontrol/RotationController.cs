@@ -2,13 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotationController : MonoBehaviour {
+public abstract class TransformController : MonoBehaviour
+{
+    public abstract void ToggleActivity(bool toggle);
+}
 
-	void Start () {
-		
-	}
-	
-	void Update () {
-		
-	}
+public class RotationController : TransformController
+{
+    public override void ToggleActivity(bool toggle)
+    {
+        Debug.Log("Toggle Activity: " + toggle);
+    }
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+
+    }
 }

@@ -6,7 +6,6 @@ public class FragmentsController : MonoBehaviour
     private void Awake()
     {
         gameObject.AddComponent<DollyController>();
-        gameObject.AddComponent<RotationController>();
         gameObject.AddComponent<VerticalPanController>().Populate(
             mouseAxis: "Mouse Y",
             keyboardAxis: "Vertical"
@@ -15,6 +14,8 @@ public class FragmentsController : MonoBehaviour
             mouseAxis: "Mouse X",
             keyboardAxis: "Horizontal"
         );
+        //The Transform-Rotation button needs a reference to the rotation controller, therefore
+        //the rotation controller is added to Fragments in the editor.
     }
 
     /// <summary>
