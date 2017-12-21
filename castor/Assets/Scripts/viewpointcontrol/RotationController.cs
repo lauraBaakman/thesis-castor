@@ -9,18 +9,25 @@ public abstract class TransformController : MonoBehaviour
 
 public class RotationController : TransformController
 {
-    public override void ToggleActivity(bool toggle)
-    {
-        Debug.Log("Toggle Activity: " + toggle);
-    }
+    public GameObject RotationWidget;
 
     void Start()
     {
-
+        ToggleWidget(false);
     }
 
     void Update()
     {
 
+    }
+
+    public override void ToggleActivity(bool toggle)
+    {
+        ToggleWidget(toggle);
+    }
+
+    private void ToggleWidget(bool toggle)
+    {
+        RotationWidget.SetActive(toggle);
     }
 }
