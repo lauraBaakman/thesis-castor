@@ -118,6 +118,7 @@
     <Compile Include="Assets\Scripts\sidemenu\FragmentListElementController.cs" />
     <Compile Include="Assets\Scripts\sidemenu\FragmentsMenuBoxController.cs" />
     <Compile Include="Assets\Scripts\ui\ToolTipController.cs" />
+    <Compile Include="Assets\Scripts\ui\TransformationButtonController.cs" />
     <Compile Include="Assets\Scripts\ui\UserEditableText.cs" />
     <Compile Include="Assets\Scripts\utils\ObjImporter.cs" />
     <Compile Include="Assets\Scripts\view3D\FragmentController.cs" />
