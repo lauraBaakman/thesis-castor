@@ -120,6 +120,7 @@
     <Compile Include="Assets\Scripts\ui\ToolTipController.cs" />
     <Compile Include="Assets\Scripts\ui\TransformationButtonController.cs" />
     <Compile Include="Assets\Scripts\ui\UserEditableText.cs" />
+    <Compile Include="Assets\Scripts\ui\widgets\rotation\ViewVectorRotation.cs" />
     <Compile Include="Assets\Scripts\utils\ObjImporter.cs" />
     <Compile Include="Assets\Scripts\view3D\FragmentController.cs" />
     <Compile Include="Assets\Scripts\view3D\FragmentsController.cs" />
