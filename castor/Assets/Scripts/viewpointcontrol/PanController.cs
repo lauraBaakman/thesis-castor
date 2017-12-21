@@ -58,7 +58,7 @@ abstract public class DirectionlessPanController : MonoBehaviour
 
     protected void BaseAwake()
     {
-        ScalingFactor = ScalingFactor = PlayerPrefs.GetFloat("ui.viewpoint.pan.speed");
+        ScalingFactor = PlayerPrefs.GetFloat("ui.viewpoint.pan.speed");
     }
 }
 
