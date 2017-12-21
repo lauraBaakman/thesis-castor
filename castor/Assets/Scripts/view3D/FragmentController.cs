@@ -14,7 +14,11 @@ public class FragmentController : MonoBehaviour
 
     void Awake()
     {
-        DefaultMaterial = new Material(Shader.Find("Standard"));
+        DefaultMaterial = Resources.Load("Materials/DefaultMaterial", typeof(Material)) as Material;
+
+        if(DefaultMaterial == null){
+            Debug.Log("Oh no!");
+        }
 
         gameObject.AddComponent<MeshFilter>();
 
