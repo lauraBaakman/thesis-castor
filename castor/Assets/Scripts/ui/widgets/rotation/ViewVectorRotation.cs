@@ -26,12 +26,13 @@ public class ViewVectorRotation : MonoBehaviour
 
     void Start()
     {
-        MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
+        gameObject.AddComponent<MeshCollider>();
     }
 
     public void Update()
     {
         WidgetCenter = gameObject.GetComponent<MeshRenderer>().bounds.center;
+        WidgetCenter.z = 0;
 
         if (CancelButtonPressed())
         {
@@ -107,8 +108,8 @@ public class ViewVectorRotation : MonoBehaviour
         if (OnWidget)
         {
             Vector3 currentVector = GetVectorFromCenterToCurrentMousePosition();
-
             Debug.DrawRay(WidgetCenter, currentVector.normalized * 200, Color.blue, 200);
+            float angle = Vector3.SignedAngle(InitialVector, currentVector, RotationAxis);
         }
     }
 
@@ -168,6 +169,8 @@ public class ViewVectorRotation : MonoBehaviour
     private Vector3 GetVectorFromCenterToCurrentMousePosition()
     {
         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        position.z = 0;
+
         Vector3 vector = position - WidgetCenter;
         return vector;
     }
