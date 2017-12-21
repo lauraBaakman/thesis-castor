@@ -106,7 +106,9 @@ public class ViewVectorRotation : MonoBehaviour
     {
         if (OnWidget)
         {
-            Vector3 currentPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 currentVector = GetVectorFromCenterToCurrentMousePosition();
+
+            Debug.DrawRay(WidgetCenter, currentVector.normalized * 200, Color.blue, 200);
         }
     }
 
@@ -116,8 +118,7 @@ public class ViewVectorRotation : MonoBehaviour
         InitialRotation = transform.rotation;
 
         //Store Mouse Position
-        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        InitialVector = PositionToVectorFromWidgetCenter(position);
+        InitialVector = GetVectorFromCenterToCurrentMousePosition();
 
         Debug.DrawRay(WidgetCenter, InitialVector.normalized * 200, Color.red, 200);
 
@@ -164,8 +165,9 @@ public class ViewVectorRotation : MonoBehaviour
         OnWidget = false;
     }
 
-    private Vector3 PositionToVectorFromWidgetCenter(Vector3 position)
+    private Vector3 GetVectorFromCenterToCurrentMousePosition()
     {
+        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 vector = position - WidgetCenter;
         return vector;
     }
