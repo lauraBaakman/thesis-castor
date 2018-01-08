@@ -8,23 +8,19 @@ public class ViewVectorRotation : MonoBehaviour
     public GameObject ClickPositionIndicator;
     public GameObject Sphere;
 
-    private static Vector3 RotationAxis;
     private static string VerticalMouseAxis = "Mouse X";
     private static string HorizontalMouseAxis = "Mouse Y";
 
     private Vector3 WidgetCenter;
 
     private Quaternion InitialRotation;
-    private Vector3 InitialVector;
+    private Vector3 InitialClickVector;
 
     private bool OnWidget = false;
     private int State = 1;
 
 
-    private void Awake()
-    {
-        RotationAxis = new Vector3(0, 0, 1);
-    }
+    private void Awake() { }
 
     void Start()
     {
@@ -110,9 +106,9 @@ public class ViewVectorRotation : MonoBehaviour
     {
         if (OnWidget)
         {
-            // Show rotation
-            float angle = ComputeAngleBetweenPointAndMousePosition(InitialVector);
+            float angle = ComputeAngleBetweenPointAndMousePosition(InitialClickVector);
 
+            //Debug stuff
             Vector3 currentVector = GetVectorFromWidgetCenterToCurrentMousePosition();
             Debug.DrawRay(WidgetCenter, currentVector.normalized * 200, Color.blue, 200);
 
@@ -126,7 +122,7 @@ public class ViewVectorRotation : MonoBehaviour
         InitialRotation = transform.rotation;
 
         //Store Mouse Position
-        InitialVector = GetVectorFromWidgetCenterToCurrentMousePosition();
+        InitialClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
 
         ShowClickPosition();
 
@@ -135,19 +131,21 @@ public class ViewVectorRotation : MonoBehaviour
         State = 2;
     }
 
-    private void ShowClickPosition(){
+    private void ShowClickPosition()
+    {
         ClickPositionIndicator.SetActive(true);
 
         Vector3 initialVector = GetVectorFromWidgetCenterTo(ClickPositionIndicator.transform.position);
         float angle = ComputeAngleBetweenPointAndMousePosition(initialVector);
 
-        ClickPositionIndicator.transform.RotateAround(WidgetCenter, RotationAxis, angle);        
+        ClickPositionIndicator.transform.RotateAround(WidgetCenter, Vector3.forward, angle);
     }
 
     //Angle is based on the widget center in the x,y plane
-    private float ComputeAngleBetweenPointAndMousePosition(Vector3 point){
+    private float ComputeAngleBetweenPointAndMousePosition(Vector3 point)
+    {
         Vector3 currentVector = GetVectorFromWidgetCenterToCurrentMousePosition();
-        float angle = Vector3.SignedAngle(point, currentVector, RotationAxis);
+        float angle = Vector3.SignedAngle(point, currentVector, Vector3.forward);
         return angle;
     }
 
@@ -196,11 +194,12 @@ public class ViewVectorRotation : MonoBehaviour
         ClickPositionIndicator.SetActive(false);
     }
 
-    private void Reset(){
+    private void Reset()
+    {
         OnWidget = false;
         WidgetCenter = Vector3.zero;
         InitialRotation = Quaternion.identity;
-        InitialVector = Vector3.zero;        
+        InitialClickVector = Vector3.zero;
     }
 
     private Vector3 GetVectorFromWidgetCenterToCurrentMousePosition()
@@ -211,8 +210,9 @@ public class ViewVectorRotation : MonoBehaviour
         return GetVectorFromWidgetCenterTo(position);
     }
 
-    private Vector3 GetVectorFromWidgetCenterTo(Vector3 destination){
+    private Vector3 GetVectorFromWidgetCenterTo(Vector3 destination)
+    {
         Vector3 vector = destination - WidgetCenter;
-        return vector;        
+        return vector;
     }
 }
