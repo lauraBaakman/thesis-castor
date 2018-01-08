@@ -6,6 +6,7 @@ public class ViewVectorRotation : MonoBehaviour
 
     public GameObject RotatedObject;
     public GameObject ClickPositionIndicator;
+    public GameObject Sphere;
 
     private static Vector3 RotationAxis;
     private static string VerticalMouseAxis = "Mouse X";
@@ -127,8 +128,9 @@ public class ViewVectorRotation : MonoBehaviour
         //Store Mouse Position
         InitialVector = GetVectorFromWidgetCenterToCurrentMousePosition();
 
-        //TODO Hide Sphere
         ShowClickPosition();
+
+        Sphere.SetActive(false);
 
         State = 2;
     }
@@ -190,7 +192,8 @@ public class ViewVectorRotation : MonoBehaviour
         InitialRotation = Quaternion.identity;
         InitialVector = Vector3.zero;
 
-        //TODO Show Sphere
+        //Show Sphere
+        Sphere.SetActive(true);
 
         //Hide Click Position
         ClickPositionIndicator.SetActive(false);

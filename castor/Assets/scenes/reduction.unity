@@ -506,6 +506,10 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &271151057 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100012, guid: 993b6ee5c114d46ad9588f564579ac0e, type: 3}
+  m_PrefabInternal: {fileID: 855265722}
 --- !u!1001 &278454643
 Prefab:
   m_ObjectHideFlags: 0
@@ -1829,6 +1833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotatedObject: {fileID: 1851333512}
   ClickPositionIndicator: {fileID: 564221461}
+  Sphere: {fileID: 271151057}
 --- !u!1 &884061607
 GameObject:
   m_ObjectHideFlags: 0
