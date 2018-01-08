@@ -128,6 +128,8 @@ public class ViewVectorRotation : MonoBehaviour
         Sphere.SetActive(false);
 
         State = 2;
+
+        OnWidget = true;
     }
 
     private void ShowClickPosition()
