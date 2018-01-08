@@ -5,6 +5,7 @@ public class ViewVectorRotation : MonoBehaviour
     //All stored positions are in world coordinates
 
     public GameObject RotatedObject;
+    public GameObject RotationIndicator;
 
     private static Vector3 RotationAxis;
     private static string VerticalMouseAxis = "Mouse X";
@@ -22,6 +23,7 @@ public class ViewVectorRotation : MonoBehaviour
     private void Awake()
     {
         RotationAxis = new Vector3(0, 0, -1);
+        RotationIndicator.SetActive(false);
     }
 
     void Start()
