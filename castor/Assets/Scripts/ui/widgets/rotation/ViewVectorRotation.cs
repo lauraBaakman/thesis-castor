@@ -22,7 +22,7 @@ public class ViewVectorRotation : MonoBehaviour
 
     private void Awake()
     {
-        RotationAxis = new Vector3(0, 0, -1);
+        RotationAxis = new Vector3(0, 0, 1);
     }
 
     void Start()
@@ -131,6 +131,12 @@ public class ViewVectorRotation : MonoBehaviour
 
         //Show Click Position
         ClickPositionIndicator.SetActive(true);
+        Vector3 currentVector = GetVectorFromCenterToCurrentMousePosition();
+        Vector3 position = ClickPositionIndicator.transform.position;
+        Vector3 initialVector = position - WidgetCenter;
+        float angle = Vector3.SignedAngle(initialVector, currentVector, RotationAxis);
+        ClickPositionIndicator.transform.RotateAround(WidgetCenter, RotationAxis, angle);
+        //TODO rotate indicator to indicate position
 
         State = 2;
     }
