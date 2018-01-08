@@ -14,11 +14,10 @@ public class ViewVectorRotation : MonoBehaviour
     private Vector3 WidgetCenter;
 
     private Quaternion InitialRotation;
-    private Vector3 InitialClickVector;
+    private Vector3 LastClickVector;
 
     private bool OnWidget = false;
     private int State = 1;
-
 
     private void Awake() { }
 
@@ -106,13 +105,13 @@ public class ViewVectorRotation : MonoBehaviour
     {
         if (OnWidget)
         {
-            float angle = ComputeAngleBetweenPointAndMousePosition(InitialClickVector);
+            float angle = ComputeAngleBetweenPointAndMousePosition(LastClickVector);
 
-            //Debug stuff
-            Vector3 currentVector = GetVectorFromWidgetCenterToCurrentMousePosition();
-            Debug.DrawRay(WidgetCenter, currentVector.normalized * 200, Color.blue, 200);
+            //Apply rotation to RotatedObject
+            RotatedObject.transform.Rotate(RotatedObject.transform.forward, angle, Space.Self);
 
-            //TODO Apply rotation to RotatedObject
+            //Update the last click vector
+            LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
         }
     }
 
@@ -122,7 +121,7 @@ public class ViewVectorRotation : MonoBehaviour
         InitialRotation = transform.rotation;
 
         //Store Mouse Position
-        InitialClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
+        LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
 
         ShowClickPosition();
 
@@ -199,7 +198,7 @@ public class ViewVectorRotation : MonoBehaviour
         OnWidget = false;
         WidgetCenter = Vector3.zero;
         InitialRotation = Quaternion.identity;
-        InitialClickVector = Vector3.zero;
+        LastClickVector = Vector3.zero;
     }
 
     private Vector3 GetVectorFromWidgetCenterToCurrentMousePosition()
