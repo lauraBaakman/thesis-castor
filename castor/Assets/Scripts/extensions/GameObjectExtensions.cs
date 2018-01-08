@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class GameObjectExtensions
@@ -23,18 +24,30 @@ public static class GameObjectExtensions
 	/// <param name="go">Gameobject</param>
 	public static Bounds Bounds (this GameObject go)
 	{
-		Bounds bounds = new Bounds (); 
+        throw new Exception("This implementation is extremely faulty, don't use before fixing!");
+		Bounds totalBounds = new Bounds ();
+        Bounds bounds; 
 
 		Renderer renderer = go.GetComponent<Renderer> ();
 		if (renderer != null) {
-			bounds.Encapsulate (renderer.bounds);
+            bounds = renderer.bounds; 
+            if(renderer is MeshRenderer){
+                bounds = renderer.transform.TransformToWorldSpace(bounds);
+            }
+            totalBounds.Encapsulate (bounds);
 		}
 		Renderer[] renderers = go.GetComponentsInChildren<Renderer> ();
 		foreach (Renderer childRenderer in renderers) {
-			bounds.Encapsulate (childRenderer.bounds);
+            bounds = childRenderer.bounds; 
+            if(childRenderer is MeshRenderer){
+                // Mesh renderers give their bounds in local space
+                Bounds temporary; 
+                temporary = childRenderer.transform.TransformToWorldSpace(bounds);
+                bounds = temporary;
+            }
+            totalBounds.Encapsulate(bounds);
 		}
-
-		return bounds;
+        return totalBounds;
 	}
 }
 
