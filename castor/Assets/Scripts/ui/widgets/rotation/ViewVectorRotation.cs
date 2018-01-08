@@ -110,9 +110,10 @@ public class ViewVectorRotation : MonoBehaviour
         if (OnWidget)
         {
             // Show rotation
-            Vector3 currentVector = GetVectorFromCenterToCurrentMousePosition();
+            float angle = ComputeAngleBetweenPointAndMousePosition(InitialVector);
+
+            Vector3 currentVector = GetVectorFromWidgetCenterToCurrentMousePosition();
             Debug.DrawRay(WidgetCenter, currentVector.normalized * 200, Color.blue, 200);
-            float angle = Vector3.SignedAngle(InitialVector, currentVector, RotationAxis);
 
             //TODO Apply rotation to RotatedObject
         }
@@ -124,21 +125,28 @@ public class ViewVectorRotation : MonoBehaviour
         InitialRotation = transform.rotation;
 
         //Store Mouse Position
-        InitialVector = GetVectorFromCenterToCurrentMousePosition();
-        Debug.DrawRay(WidgetCenter, InitialVector.normalized * 200, Color.red, 200);
+        InitialVector = GetVectorFromWidgetCenterToCurrentMousePosition();
 
         //TODO Hide Sphere
-
-        //Show Click Position
-        ClickPositionIndicator.SetActive(true);
-        Vector3 currentVector = GetVectorFromCenterToCurrentMousePosition();
-        Vector3 position = ClickPositionIndicator.transform.position;
-        Vector3 initialVector = position - WidgetCenter;
-        float angle = Vector3.SignedAngle(initialVector, currentVector, RotationAxis);
-        ClickPositionIndicator.transform.RotateAround(WidgetCenter, RotationAxis, angle);
-        //TODO rotate indicator to indicate position
+        ShowClickPosition();
 
         State = 2;
+    }
+
+    private void ShowClickPosition(){
+        ClickPositionIndicator.SetActive(true);
+
+        Vector3 initialVector = GetVectorFromWidgetCenterTo(ClickPositionIndicator.transform.position);
+        float angle = ComputeAngleBetweenPointAndMousePosition(initialVector);
+
+        ClickPositionIndicator.transform.RotateAround(WidgetCenter, RotationAxis, angle);        
+    }
+
+    //Angle is based on the widget center in the x,y plane
+    private float ComputeAngleBetweenPointAndMousePosition(Vector3 point){
+        Vector3 currentVector = GetVectorFromWidgetCenterToCurrentMousePosition();
+        float angle = Vector3.SignedAngle(point, currentVector, RotationAxis);
+        return angle;
     }
 
     private void MouseDownState2()
@@ -188,12 +196,16 @@ public class ViewVectorRotation : MonoBehaviour
         ClickPositionIndicator.SetActive(false);
     }
 
-    private Vector3 GetVectorFromCenterToCurrentMousePosition()
+    private Vector3 GetVectorFromWidgetCenterToCurrentMousePosition()
     {
         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         position.z = 0;
 
-        Vector3 vector = position - WidgetCenter;
-        return vector;
+        return GetVectorFromWidgetCenterTo(position);
+    }
+
+    private Vector3 GetVectorFromWidgetCenterTo(Vector3 destination){
+        Vector3 vector = destination - WidgetCenter;
+        return vector;        
     }
 }
