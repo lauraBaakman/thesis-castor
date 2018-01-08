@@ -16,7 +16,7 @@ public class ViewVectorRotation : MonoBehaviour
     private Vector3 InitialVector;
 
     private bool OnWidget = false;
-    private int State = 0;
+    private int State = 1;
 
 
     private void Awake()
@@ -60,11 +60,11 @@ public class ViewVectorRotation : MonoBehaviour
     {
         switch (State)
         {
-            case 0:
-                MouseDownState0();
-                break;
             case 1:
                 MouseDownState1();
+                break;
+            case 2:
+                MouseDownState2();
                 break;
         }
     }
@@ -73,18 +73,18 @@ public class ViewVectorRotation : MonoBehaviour
     {
         switch (State)
         {
-            case 0:
-                MouseMovedState0();
-                break;
             case 1:
                 MouseMovedState1();
+                break;
+            case 2:
+                MouseMovedState2();
                 break;
         }
     }
 
     public void OnMouseEnter()
     {
-        if (State == 1)
+        if (State == 2)
         {
             OnWidget = true;
         }
@@ -92,18 +92,18 @@ public class ViewVectorRotation : MonoBehaviour
 
     public void OnMouseExit()
     {
-        if (State == 1)
+        if (State == 2)
         {
             OnWidget = false;
         }
     }
 
-    private void MouseMovedState0()
+    private void MouseMovedState1()
     {
         //Do Nothing
     }
 
-    private void MouseMovedState1()
+    private void MouseMovedState2()
     {
         if (OnWidget)
         {
@@ -113,56 +113,53 @@ public class ViewVectorRotation : MonoBehaviour
         }
     }
 
-    private void MouseDownState0()
+    private void MouseDownState1()
     {
         //Store Intial Rotation
         InitialRotation = transform.rotation;
 
         //Store Mouse Position
         InitialVector = GetVectorFromCenterToCurrentMousePosition();
-
         Debug.DrawRay(WidgetCenter, InitialVector.normalized * 200, Color.red, 200);
 
         //Show Mouse Position
 
-        State = 1;
+        State = 2;
     }
 
-    private void MouseDownState1()
+    private void MouseDownState2()
     {
-        StateToZero();
+        StateToOne();
     }
 
     private void OnEsc()
     {
         switch (State)
         {
-            case 0:
-                EscState0();
-                break;
             case 1:
                 EscState1();
+                break;
+            case 2:
+                EscState2();
                 break;
         }
     }
 
-    private void EscState1()
+    private void EscState2()
     {
-        //Debug.Log("EscState1");
         RotatedObject.transform.rotation = InitialRotation;
 
-        StateToZero();
+        StateToOne();
     }
 
-    private void EscState0()
+    private void EscState1()
     {
-        //Debug.Log("EscState0");
         //Do nothing
     }
 
-    private void StateToZero()
+    private void StateToOne()
     {
-        State = 0;
+        State = 1;
         OnWidget = false;
     }
 
