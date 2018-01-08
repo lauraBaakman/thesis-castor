@@ -107,9 +107,12 @@ public class ViewVectorRotation : MonoBehaviour
     {
         if (OnWidget)
         {
+            // Show rotation
             Vector3 currentVector = GetVectorFromCenterToCurrentMousePosition();
             Debug.DrawRay(WidgetCenter, currentVector.normalized * 200, Color.blue, 200);
             float angle = Vector3.SignedAngle(InitialVector, currentVector, RotationAxis);
+
+            //TODO Apply rotation to RotatedObject
         }
     }
 
@@ -122,7 +125,9 @@ public class ViewVectorRotation : MonoBehaviour
         InitialVector = GetVectorFromCenterToCurrentMousePosition();
         Debug.DrawRay(WidgetCenter, InitialVector.normalized * 200, Color.red, 200);
 
-        //Show Mouse Position
+        //TODO Hide Sphere
+
+        //TODO Show Mouse Position
 
         State = 2;
     }
@@ -147,6 +152,7 @@ public class ViewVectorRotation : MonoBehaviour
 
     private void EscState2()
     {
+        //Go back to initial rotation
         RotatedObject.transform.rotation = InitialRotation;
 
         StateToOne();
@@ -160,7 +166,16 @@ public class ViewVectorRotation : MonoBehaviour
     private void StateToOne()
     {
         State = 1;
+
+        // Reset Object
         OnWidget = false;
+        WidgetCenter = Vector3.zero;
+        InitialRotation = Quaternion.identity;
+        InitialVector = Vector3.zero;
+
+        //TODO Show Sphere
+
+        //TODO Hide Click Position
     }
 
     private Vector3 GetVectorFromCenterToCurrentMousePosition()
