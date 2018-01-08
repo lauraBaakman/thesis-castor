@@ -187,16 +187,20 @@ public class ViewVectorRotation : MonoBehaviour
         State = 1;
 
         // Reset Object
-        OnWidget = false;
-        WidgetCenter = Vector3.zero;
-        InitialRotation = Quaternion.identity;
-        InitialVector = Vector3.zero;
+        Reset();
 
         //Show Sphere
         Sphere.SetActive(true);
 
         //Hide Click Position
         ClickPositionIndicator.SetActive(false);
+    }
+
+    private void Reset(){
+        OnWidget = false;
+        WidgetCenter = Vector3.zero;
+        InitialRotation = Quaternion.identity;
+        InitialVector = Vector3.zero;        
     }
 
     private Vector3 GetVectorFromWidgetCenterToCurrentMousePosition()
