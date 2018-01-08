@@ -565,7 +565,7 @@ Prefab:
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -564.05005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
@@ -1067,6 +1067,19 @@ RectTransform:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 993b6ee5c114d46ad9588f564579ac0e, type: 3}
   m_PrefabInternal: {fileID: 855265722}
+--- !u!114 &531452923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 531452922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b2e703719f54f328012b84c81b6dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectControlledByWidget: {fileID: 1851333512}
+  MinimumSize: {x: 1, y: 1, z: 1}
 --- !u!1 &564221461 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100014, guid: 993b6ee5c114d46ad9588f564579ac0e, type: 3}
@@ -1247,7 +1260,7 @@ Prefab:
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -55.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
@@ -1988,7 +2001,7 @@ Prefab:
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
@@ -2555,7 +2568,7 @@ Prefab:
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
@@ -2830,7 +2843,7 @@ Prefab:
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
@@ -2919,7 +2932,6 @@ GameObject:
   - component: {fileID: 1851333513}
   - component: {fileID: 1851333514}
   - component: {fileID: 1851333515}
-  - component: {fileID: 1851333516}
   m_Layer: 0
   m_Name: Fragments
   m_TagString: Untagged
@@ -2963,17 +2975,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationWidget: {fileID: 531452922}
---- !u!114 &1851333516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1851333512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf9a21052db384ab1a8da037dbb09e41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1882038925
 GameObject:
   m_ObjectHideFlags: 0
