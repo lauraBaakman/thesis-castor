@@ -16,38 +16,5 @@ public static class GameObjectExtensions
 	{
 		return go.AddComponent<T> ().GetCopyOf (toAdd) as T;
 	}
-
-	/// <summary>
-	/// Compute the bounds of gameobject, taking all its active children into 
-    /// account.
-	/// </summary>
-	/// <param name="go">Gameobject</param>
-	public static Bounds Bounds (this GameObject go)
-	{
-        throw new Exception("This implementation is extremely faulty, don't use before fixing!");
-		Bounds totalBounds = new Bounds ();
-        Bounds bounds; 
-
-		Renderer renderer = go.GetComponent<Renderer> ();
-		if (renderer != null) {
-            bounds = renderer.bounds; 
-            if(renderer is MeshRenderer){
-                bounds = renderer.transform.TransformToWorldSpace(bounds);
-            }
-            totalBounds.Encapsulate (bounds);
-		}
-		Renderer[] renderers = go.GetComponentsInChildren<Renderer> ();
-		foreach (Renderer childRenderer in renderers) {
-            bounds = childRenderer.bounds; 
-            if(childRenderer is MeshRenderer){
-                // Mesh renderers give their bounds in local space
-                Bounds temporary; 
-                temporary = childRenderer.transform.TransformToWorldSpace(bounds);
-                bounds = temporary;
-            }
-            totalBounds.Encapsulate(bounds);
-		}
-        return totalBounds;
-	}
 }
 
