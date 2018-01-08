@@ -129,7 +129,7 @@
     <Compile Include="Assets\Scripts\viewpointcontrol\DollyController.cs" />
     <Compile Include="Assets\Scripts\viewpointcontrol\PanController.cs" />
     <Compile Include="Assets\Scripts\viewpointcontrol\RotationController.cs" />
-    <Compile Include="Assets\SizeController.cs" />
+    <Compile Include="Assets\Scripts\ui\widgets\SizeController.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
