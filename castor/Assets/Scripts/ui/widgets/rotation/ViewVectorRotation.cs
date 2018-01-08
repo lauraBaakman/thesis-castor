@@ -5,7 +5,7 @@ public class ViewVectorRotation : MonoBehaviour
     //All stored positions are in world coordinates
 
     public GameObject RotatedObject;
-    public GameObject RotationIndicator;
+    public GameObject ClickPositionIndicator;
 
     private static Vector3 RotationAxis;
     private static string VerticalMouseAxis = "Mouse X";
@@ -23,12 +23,12 @@ public class ViewVectorRotation : MonoBehaviour
     private void Awake()
     {
         RotationAxis = new Vector3(0, 0, -1);
-        RotationIndicator.SetActive(false);
     }
 
     void Start()
     {
         gameObject.AddComponent<MeshCollider>();
+        ClickPositionIndicator.SetActive(false);
     }
 
     public void Update()
@@ -129,7 +129,8 @@ public class ViewVectorRotation : MonoBehaviour
 
         //TODO Hide Sphere
 
-        //TODO Show Mouse Position
+        //Show Click Position
+        ClickPositionIndicator.SetActive(true);
 
         State = 2;
     }
@@ -177,7 +178,8 @@ public class ViewVectorRotation : MonoBehaviour
 
         //TODO Show Sphere
 
-        //TODO Hide Click Position
+        //Hide Click Position
+        ClickPositionIndicator.SetActive(false);
     }
 
     private Vector3 GetVectorFromCenterToCurrentMousePosition()

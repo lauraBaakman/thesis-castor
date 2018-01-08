@@ -1774,7 +1774,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100014, guid: 993b6ee5c114d46ad9588f564579ac0e, type: 3}
       propertyPath: m_Name
-      value: ViewVectorRotationIndicator
+      value: ViewVectorClickPositionIndicator
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 993b6ee5c114d46ad9588f564579ac0e, type: 3}
       propertyPath: m_IsActive
@@ -1800,7 +1800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotatedObject: {fileID: 1851333512}
-  RotationIndicator: {fileID: 564221461}
+  ClickPositionIndicator: {fileID: 564221461}
 --- !u!1 &884061607
 GameObject:
   m_ObjectHideFlags: 0
