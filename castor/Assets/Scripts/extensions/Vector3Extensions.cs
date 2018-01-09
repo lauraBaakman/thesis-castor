@@ -31,4 +31,13 @@ public static class Vector3Extensions
         vector.z = value;
         return vector;        
     }
+
+    public static Vector3 DivideElementWise(this Vector3 vector, Vector3 other){
+        Vector3 result = new Vector3(
+            vector.x / other.x,
+            vector.y / other.y,
+            vector.z / other.z
+        );
+        return result;
+    }
 }
