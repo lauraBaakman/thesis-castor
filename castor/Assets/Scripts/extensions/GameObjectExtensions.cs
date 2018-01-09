@@ -47,11 +47,16 @@ public static class GameObjectExtensions
 
 	private static Bounds GetInitialBounds (GameObject go)
 	{
-		MeshRenderer renderer = go.GetComponent<MeshRenderer> ();
-		if (!renderer) {
-			renderer = go.GetComponentInChildren<MeshRenderer> ();
-		}
-		return renderer.bounds;
+        MeshRenderer renderer = FindMeshRenderer(go);
+        Bounds bounds = renderer ? renderer.bounds : new Bounds();
+
+        return bounds;
 	}
+
+    private static MeshRenderer FindMeshRenderer(GameObject go){
+        MeshRenderer renderer = go.GetComponent<MeshRenderer>();
+        if (!renderer) renderer = go.GetComponentInChildren<MeshRenderer>();
+        return renderer;
+    }
 }
 
