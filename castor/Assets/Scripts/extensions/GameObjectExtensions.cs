@@ -20,11 +20,11 @@ public static class GameObjectExtensions
     //Source: https://forum.unity.com/threads/bounds-of-a-whole-hierarchy.4525/#post-1276595
     public static Bounds Bounds(this GameObject go){
         Bounds bounds = GetInitialBounds(go);
-        AddChildrenToBounds(go.transform, bounds);
+        bounds = AddChildrenToBounds(go.transform, bounds);
         return bounds;
     }
 
-    private static void AddChildrenToBounds(Transform child, Bounds bounds){
+    private static Bounds AddChildrenToBounds(Transform child, Bounds bounds){
         MeshRenderer renderer;
         foreach (Transform grandChild in child){
             renderer = grandChild.GetComponent<MeshRenderer>();
@@ -33,8 +33,9 @@ public static class GameObjectExtensions
                 bounds.Encapsulate(renderer.bounds.max);    
             }
 
-            AddChildrenToBounds(grandChild, bounds);
+            bounds = AddChildrenToBounds(grandChild, bounds);
         }
+        return bounds;
     }
 
     private static Bounds GetInitialBounds(GameObject go){
