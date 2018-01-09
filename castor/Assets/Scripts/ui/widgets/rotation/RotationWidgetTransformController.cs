@@ -44,12 +44,4 @@ public class RotationWidgetTransformController : MonoBehaviour
         transform.position = objectBounds.center;
         transform.localScale = transform.localScale * scalingFactor;
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        //Draw Object Bounds
-        Bounds objectBounds = ObjectControlledByWidget.Bounds();
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(objectBounds.center, objectBounds.size);
-    }
 }
