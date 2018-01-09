@@ -30,7 +30,7 @@ public class ViewVectorRotation : MonoBehaviour
 	}
 
 	public void Update ()
-	{
+	{   
 		WidgetCenter = gameObject.GetComponent<MeshRenderer> ().bounds.center;
 		WidgetCenter.z = 0;
 

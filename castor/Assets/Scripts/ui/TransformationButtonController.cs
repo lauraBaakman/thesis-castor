@@ -22,4 +22,5 @@ public class TransformationButtonController : MonoBehaviour
         Image.color = clicked ? ColorBlock.pressedColor : ColorBlock.normalColor;
         Controller.ToggleActivity(clicked);
     }
+
 }

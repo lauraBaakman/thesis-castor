@@ -19,7 +19,7 @@ public class RotationWidgetTransformController : MonoBehaviour
 
     private float ComputeLocalScale(Bounds ObjectBounds)
     {
-        Bounds widgetBounds = SizeControllingWidgetElement.GetComponent<MeshRenderer>().bounds;
+        Bounds widgetBounds = SizeControllingWidgetElement.Bounds();
         Vector3 widgetSize = widgetBounds.size;
 
         Vector3 objectSize = ObjectBounds.size;
@@ -33,20 +33,18 @@ public class RotationWidgetTransformController : MonoBehaviour
     {
         Bounds objectBounds = ObjectControlledByWidget.Bounds();
 
-        float localScale = ComputeLocalScale(objectBounds);
-
-        float scale = Mathf.Clamp(localScale, MinimumScale, MaximumScale);
+        float scalingFactor = ComputeLocalScale(objectBounds);
+        scalingFactor = Mathf.Clamp(scalingFactor, MinimumScale, MaximumScale);
 
         transform.position = objectBounds.center;
-        transform.localScale = new Vector3().Fill(scale);
+        transform.localScale = transform.localScale * scalingFactor;
     }
 
     private void OnDrawGizmosSelected()
     {
-        Bounds bounds = ObjectControlledByWidget.Bounds();
-        Debug.Log("Bounds: " + bounds);
-
+        //Draw Object Bounds
+        Bounds objectBounds = ObjectControlledByWidget.Bounds();
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(bounds.center, bounds.size);
+        Gizmos.DrawWireCube(objectBounds.center, objectBounds.size);
     }
 }
