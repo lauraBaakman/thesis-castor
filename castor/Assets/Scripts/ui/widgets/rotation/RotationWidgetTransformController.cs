@@ -31,6 +31,11 @@ public class RotationWidgetTransformController : MonoBehaviour
 
     public void OnEnable()
     {
+        FitWidgetToControlledObject();
+    }
+
+    private void FitWidgetToControlledObject()
+    {
         Bounds objectBounds = ObjectControlledByWidget.Bounds();
 
         float scalingFactor = ComputeLocalScale(objectBounds);
