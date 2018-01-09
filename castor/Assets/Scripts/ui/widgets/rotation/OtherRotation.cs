@@ -21,9 +21,14 @@ public class OtherRotation : MonoBehaviour
     private bool OnWidget = false;
     private bool InRotationMode = false;
 
-    void Start()
+    private void Awake()
     {
         gameObject.AddComponent<MeshCollider>();
+    }
+
+    void Start()
+    {
+        
     }
 
     void Update()
