@@ -19,6 +19,15 @@ public class SizeController : MonoBehaviour {
         return size;
     }
 
+    private void OnDrawGizmos()
+    {
+        Bounds bounds = ObjectControlledByWidget.Bounds();
+        Debug.Log("Bounds: " + bounds);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(bounds.center, bounds.size);
+    }
+
     void Update () {
 		
 	}
