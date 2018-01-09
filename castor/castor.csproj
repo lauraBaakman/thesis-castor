@@ -120,6 +120,8 @@
     <Compile Include="Assets\Scripts\ui\ToolTipController.cs" />
     <Compile Include="Assets\Scripts\ui\TransformationButtonController.cs" />
     <Compile Include="Assets\Scripts\ui\UserEditableText.cs" />
+    <Compile Include="Assets\Scripts\ui\widgets\rotation\OtherRotation.cs" />
+    <Compile Include="Assets\Scripts\ui\widgets\rotation\RotationWidgetTransformController.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\rotation\ViewVectorRotation.cs" />
     <Compile Include="Assets\Scripts\utils\ObjImporter.cs" />
     <Compile Include="Assets\Scripts\view3D\FragmentController.cs" />
@@ -129,7 +131,6 @@
     <Compile Include="Assets\Scripts\viewpointcontrol\DollyController.cs" />
     <Compile Include="Assets\Scripts\viewpointcontrol\PanController.cs" />
     <Compile Include="Assets\Scripts\viewpointcontrol\RotationController.cs" />
-    <Compile Include="Assets\Scripts\ui\widgets\rotation\RotationWidgetTransformController.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
