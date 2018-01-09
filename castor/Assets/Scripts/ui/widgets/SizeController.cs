@@ -19,7 +19,7 @@ public class SizeController : MonoBehaviour {
         return size;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Bounds bounds = ObjectControlledByWidget.Bounds();
         Debug.Log("Bounds: " + bounds);
