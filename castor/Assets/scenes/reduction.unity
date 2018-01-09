@@ -521,7 +521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372fe582a87db4bb685e7961be185357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationObject: {fileID: 1851333512}
+  RotatedObject: {fileID: 1851333512}
+  Fragments: {fileID: 1851333512}
   Donut: {fileID: 855265723}
 --- !u!1001 &278454643
 Prefab:

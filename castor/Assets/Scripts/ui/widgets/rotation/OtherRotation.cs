@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OtherRotation : MonoBehaviour
@@ -16,6 +14,9 @@ public class OtherRotation : MonoBehaviour
     private static string HorizontalMouseAxis = "Mouse Y";
 
     private Quaternion InitialRotation;
+    private Vector3 InitialClick;
+
+    private float Radius = 0.0f;
 
     private bool OnWidget = false;
     private bool InRotationMode = false;
@@ -27,11 +28,8 @@ public class OtherRotation : MonoBehaviour
 
     void Update()
     {
-        if (InRotationMode)
-        {
-            if (CancelButtonPressed()) CancelRotation();
-            if (MouseMovedOnWidget()) Rotate();
-        }
+        if (InRotationMode && CancelButtonPressed()) CancelRotation();
+        if (InRotationMode && MouseMovedOnWidget()) Rotate();
     }
 
     private bool MouseMovedOnWidget()
@@ -64,8 +62,8 @@ public class OtherRotation : MonoBehaviour
         InRotationMode = true;
         Donut.SetActive(false);
         InitialRotation = RotatedObject.transform.rotation;
+        InitialClick = MousePositionToSphereCoordinates(Input.mousePosition);
 
-        //TODO Show click position
         ToggleMeshCollidersOnFragments(false);
     }
 
@@ -75,18 +73,21 @@ public class OtherRotation : MonoBehaviour
         InRotationMode = false;
         Donut.SetActive(true);
 
-        //TODO Hide click position
         ToggleMeshCollidersOnFragments(true);
     }
 
-    private void CancelRotation(){
+    private void CancelRotation()
+    {
         RotatedObject.transform.rotation = InitialRotation;
-        ExitRotationMode();   
+        ExitRotationMode();
     }
 
     private void Rotate()
     {
         Debug.Log("Rotate!");
+        Vector3 mousePosition = MousePositionToSphereCoordinates(Input.mousePosition);
+
+        //TODO Compute rotation
     }
 
     public void OnMouseDown()
@@ -101,7 +102,40 @@ public class OtherRotation : MonoBehaviour
         }
     }
 
-    private void ToggleMeshCollidersOnFragments(bool toggle){
+    private Vector3 MousePositionToSphereCoordinates(Vector3 mousePosition)
+    {
+        // X and y of the mouse position on the sphere, with (0, 0, 0) in the center of the sphere
+        Vector3 spherePosition = gameObject.transform.InverseTransformPoint(
+            Camera.main.ScreenToWorldPoint(mousePosition)
+        );
+
+        spherePosition.z = Mathf.Abs(
+            Mathf.Sqrt(
+                Radius * Radius +
+                spherePosition.x * spherePosition.x +
+                spherePosition.y * spherePosition.y
+            )
+        );
+
+        return spherePosition;
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log("On Enable: Computing the radius of the sphere, somehow....");
+        Radius = RecomputeRadius();
+    }
+
+    private float RecomputeRadius(){
+        //TODO Check!
+        Vector3 size = gameObject.GetComponent<MeshCollider>().bounds.size;
+        float radius = size.Max();
+        Debug.Log("Radius: " + radius);
+        return radius;
+    }
+
+    private void ToggleMeshCollidersOnFragments(bool toggle)
+    {
         MeshCollider[] colliders = Fragments.GetComponentsInChildren<MeshCollider>();
 
         foreach (MeshCollider meshCollider in colliders)
