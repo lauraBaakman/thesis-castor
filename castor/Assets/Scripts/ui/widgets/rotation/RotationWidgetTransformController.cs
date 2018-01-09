@@ -10,6 +10,7 @@ public class RotationWidgetTransformController : MonoBehaviour
     public GameObject SizeControllingWidgetElement;
 
     public float MinimumScale = 1.0f;
+    public float MaximumScale = 5.0f;
 
 
     private void Start() { }
@@ -28,20 +29,13 @@ public class RotationWidgetTransformController : MonoBehaviour
         return localScale.Max();
     }
 
-    private float ComputeMaximumScale(Vector3 position)
-    {
-        return 5.0f;
-    }
-
     public void OnEnable()
     {
         Bounds objectBounds = ObjectControlledByWidget.Bounds();
 
         float localScale = ComputeLocalScale(objectBounds);
 
-        float maximumScale = ComputeMaximumScale(objectBounds.center);
-
-        float scale = Mathf.Clamp(localScale, MinimumScale, maximumScale);
+        float scale = Mathf.Clamp(localScale, MinimumScale, MaximumScale);
 
         transform.position = objectBounds.center;
         transform.localScale = new Vector3().Fill(scale);
