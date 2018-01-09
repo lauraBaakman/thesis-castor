@@ -116,7 +116,7 @@ public class ViewVectorRotation : MonoBehaviour
 	private void MouseDownState1 ()
 	{
 		//Store Intial Rotation
-		InitialRotation = transform.rotation;
+        InitialRotation = RotatedObject.transform.rotation;
 
 		//Store Mouse Position
 		LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition ();
