@@ -3,48 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotationWidgetTransformController : MonoBehaviour {
+public class RotationWidgetTransformController : MonoBehaviour
+{
 
     public GameObject ObjectControlledByWidget;
     public GameObject SizeControllingWidgetElement;
 
-    public Vector3 MinimumSize = Vector3.one;
-    private Vector3 MaximumSize;
+    public float MinimumScale = 1.0f;
 
 
-    private void Start()
-    {
-        //MaximumSize = ComputeMaximumSize();
-    }
+    private void Start() { }
 
-    void Update()
-    {
-        Bounds objectBounds = ObjectControlledByWidget.Bounds();
+    void Update() { }
 
-        transform.position = objectBounds.center;
-        transform.localScale = ComputeLocalScale(objectBounds);
-    }
-
-    private Vector3 ComputeLocalScale(Bounds ObjectBounds)
+    private float ComputeLocalScale(Bounds ObjectBounds)
     {
         Bounds widgetBounds = SizeControllingWidgetElement.GetComponent<MeshRenderer>().bounds;
         Vector3 widgetSize = widgetBounds.size;
 
         Vector3 objectSize = ObjectBounds.size;
 
-        //Vector3 localScale = objectSize / widgetSize;
+        Vector3 localScale = objectSize.DivideElementWise(widgetSize);
 
-        //Fix minimum 
-
-        //Fix maximum
-
-        return new Vector3(3.0f, 3.0f, 3.0f);
+        return localScale.Max();
     }
 
-    private Vector3 ComputeMaximumSize(){
-        throw new NotImplementedException("The maximum size of the thing needs to be controlled based on the screensize, minus the sidebar, or something.");
-        Vector3 size = new Vector3();
-        return size;
+    private float ComputeMaximumScale(Vector3 position)
+    {
+        return 5.0f;
+    }
+
+    public void OnEnable()
+    {
+        Bounds objectBounds = ObjectControlledByWidget.Bounds();
+
+        float localScale = ComputeLocalScale(objectBounds);
+
+        float maximumScale = ComputeMaximumScale(objectBounds.center);
+
+        float scale = Mathf.Clamp(localScale, MinimumScale, maximumScale);
+
+        transform.position = objectBounds.center;
+        transform.localScale = new Vector3().Fill(scale);
     }
 
     private void OnDrawGizmosSelected()
