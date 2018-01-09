@@ -8,7 +8,8 @@ public class OtherRotation : MonoBehaviour
 
     //All stored positions are in world coordinates
 
-    public GameObject RotationObject;
+    public GameObject RotatedObject;
+    public GameObject Fragments;
     public GameObject Donut;
 
     private static string VerticalMouseAxis = "Mouse X";
@@ -28,7 +29,7 @@ public class OtherRotation : MonoBehaviour
     {
         if (InRotationMode)
         {
-            if (CancelButtonPressed()) ExitRotationMode();
+            if (CancelButtonPressed()) CancelRotation();
             if (MouseMovedOnWidget()) Rotate();
         }
     }
@@ -61,12 +62,26 @@ public class OtherRotation : MonoBehaviour
     {
         Debug.Log("Enter Rotation Mode");
         InRotationMode = true;
+        Donut.SetActive(false);
+        InitialRotation = RotatedObject.transform.rotation;
+
+        //TODO Show click position
+        ToggleMeshCollidersOnFragments(false);
     }
 
     private void ExitRotationMode()
     {
         Debug.Log("Exit Rotation Mode");
         InRotationMode = false;
+        Donut.SetActive(true);
+
+        //TODO Hide click position
+        ToggleMeshCollidersOnFragments(true);
+    }
+
+    private void CancelRotation(){
+        RotatedObject.transform.rotation = InitialRotation;
+        ExitRotationMode();   
     }
 
     private void Rotate()
@@ -84,5 +99,12 @@ public class OtherRotation : MonoBehaviour
         {
             EnterRotationMode();
         }
+    }
+
+    private void ToggleMeshCollidersOnFragments(bool toggle){
+        MeshCollider[] colliders = Fragments.GetComponentsInChildren<MeshCollider>();
+
+        foreach (MeshCollider meshCollider in colliders)
+            meshCollider.enabled = toggle;
     }
 }
