@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +12,16 @@ public class SizeController : MonoBehaviour {
 
     private void Start()
     {
-        MaximumSize = ComputeMaximumSize();
+        //MaximumSize = ComputeMaximumSize();
+    }
+
+    void Update()
+    {
+        transform.position = ObjectControlledByWidget.Bounds().center;
     }
 
     private Vector3 ComputeMaximumSize(){
+        throw new NotImplementedException("The maximum size of the thing needs to be controlled based on the screensize, minus the sidebar, or something.");
         Vector3 size = new Vector3();
         return size;
     }
@@ -28,7 +35,5 @@ public class SizeController : MonoBehaviour {
         Gizmos.DrawWireCube(bounds.center, bounds.size);
     }
 
-    void Update () {
-		
-	}
+
 }
