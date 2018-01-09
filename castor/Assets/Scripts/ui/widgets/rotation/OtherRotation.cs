@@ -26,11 +26,6 @@ public class OtherRotation : MonoBehaviour
         gameObject.AddComponent<MeshCollider>();
     }
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if (InRotationMode && CancelButtonPressed()) CancelRotation();
@@ -132,10 +127,7 @@ public class OtherRotation : MonoBehaviour
     }
 
     private float RecomputeRadius(){
-        //TODO Check!
-        Vector3 size = gameObject.GetComponent<MeshCollider>().bounds.size;
-        float radius = size.Max();
-        Debug.Log("Radius: " + radius);
+        float radius = gameObject.Bounds().extents.Max();
         return radius;
     }
 
@@ -145,5 +137,12 @@ public class OtherRotation : MonoBehaviour
 
         foreach (MeshCollider meshCollider in colliders)
             meshCollider.enabled = toggle;
+    }
+
+    public void OnDrawGizmos()
+    {
+        //Bounds bounds = gameObject.Bounds();
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(bounds.center, bounds.extents.Max());
     }
 }
