@@ -40,4 +40,15 @@ public static class Vector3Extensions
         );
         return result;
     }
+
+    public static float Min(this Vector3 vector)
+    {
+        return Mathf.Min(Mathf.Min(vector.x, vector.y), vector.z);
+    }
+
+    public static float Max(this Vector3 vector)
+    {
+        return Mathf.Max(Mathf.Max(vector.x, vector.y), vector.z);
+    }
+
 }

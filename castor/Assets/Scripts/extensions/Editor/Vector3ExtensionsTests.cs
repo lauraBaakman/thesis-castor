@@ -120,6 +120,72 @@ public class Vector3ExtensionsTests
         Assert.That(denominator.y, Is.EqualTo(5.0f).Within(0.000001));
         Assert.That(denominator.z, Is.EqualTo(8.0f).Within(0.000001));
     }
+
+    [Test]
+    public void Min_firstValueNegative()
+    {
+        Vector3 vector = new Vector3(-3.0f, 0.0f, 24.0f);
+
+        float actual = vector.Min();
+        float expected = -3.0f;
+
+        Assert.That(actual, Is.EqualTo(expected).Within(0.000001));
+    }
+
+    [Test]
+    public void Min_secondValuePositive()
+    {
+        Vector3 vector = new Vector3(3.0f, 0.0f, 24.0f);
+
+        float actual = vector.Min();
+        float expected = 0.0f;
+
+        Assert.That(actual, Is.EqualTo(expected).Within(0.000001));
+    }
+
+    [Test]
+    public void Min_thirdValuePositive()
+    {
+        Vector3 vector = new Vector3(3.0f, 10.0f, 1.5f);
+
+        float actual = vector.Min();
+        float expected = 1.5f;
+
+        Assert.That(actual, Is.EqualTo(expected).Within(0.000001));
+    }
+
+    [Test]
+    public void Max_firstValuePositive()
+    {
+        Vector3 vector = new Vector3(30.0f, 0.0f, 24.0f);
+
+        float actual = vector.Max();
+        float expected = 30.0f;
+
+        Assert.That(actual, Is.EqualTo(expected).Within(0.000001));
+    }
+
+    [Test]
+    public void Max_secondValuePositive()
+    {
+        Vector3 vector = new Vector3(3.0f, 50.0f, 24.0f);
+
+        float actual = vector.Max();
+        float expected = 50.0f;
+
+        Assert.That(actual, Is.EqualTo(expected).Within(0.000001));
+    }
+
+    [Test]
+    public void Max_thirdValueNegative()
+    {
+        Vector3 vector = new Vector3(-3.0f, -10.0f, -1.5f);
+
+        float actual = vector.Max();
+        float expected = -1.5f;
+
+        Assert.That(actual, Is.EqualTo(expected).Within(0.000001));
+    }
 }
 
 
