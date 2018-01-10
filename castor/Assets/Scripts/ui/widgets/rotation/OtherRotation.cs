@@ -161,7 +161,8 @@ public class Sphere
         Center = center;
     }
 
-    public override string ToString(){
-        return "Sphere (center: " + Center + ", radius: " + Radius;   
+    public override string ToString()
+    {
+        return "Sphere (center: " + Center + ", radius: " + Radius;
     }
 }
