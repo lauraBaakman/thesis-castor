@@ -9,6 +9,9 @@ public class RotationWidgetTransformController : MonoBehaviour
     public GameObject ObjectControlledByWidget;
     public GameObject SizeControllingWidgetElement;
 
+    //The Scaling factor is applied before the minimum and maximum scale.
+    public static float ScalingFactor = 2.5f;
+
     public float MinimumScale = 1.0f;
     public float MaximumScale = 5.0f;
 
@@ -26,7 +29,7 @@ public class RotationWidgetTransformController : MonoBehaviour
 
         Vector3 localScale = objectSize.DivideElementWise(widgetSize);
 
-        return localScale.Max();
+        return localScale.Max() * ScalingFactor;
     }
 
     public void OnEnable()
