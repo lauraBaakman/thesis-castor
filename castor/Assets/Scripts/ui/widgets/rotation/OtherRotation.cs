@@ -59,9 +59,9 @@ public class OtherRotation : MonoBehaviour
 
     private void EnterRotationMode()
     {
-        Debug.Log("Enter Rotation Mode");
         InRotationMode = true;
         Donut.SetActive(false);
+
         InitialRotation = RotatedObject.transform.rotation;
         ClickPosition = MousePositionToSphereCoordinates(Input.mousePosition);
 
@@ -70,7 +70,6 @@ public class OtherRotation : MonoBehaviour
 
     private void ExitRotationMode()
     {
-        Debug.Log("Exit Rotation Mode");
         InRotationMode = false;
         Donut.SetActive(true);
 
@@ -85,10 +84,24 @@ public class OtherRotation : MonoBehaviour
 
     private void Rotate()
     {
-        Debug.Log("Rotate!");
-        Vector3 mousePosition = MousePositionToSphereCoordinates(Input.mousePosition);
+        Vector3 hoverPosition = MousePositionToSphereCoordinates(Input.mousePosition);
+        Quaternion rotation = ComputeRotation(ClickPosition, hoverPosition);
 
-        //TODO Compute rotation
+        RotatedObject.transform.rotation = rotation * InitialRotation;
+    }
+
+    private Quaternion ComputeRotation(Vector3 arcStart, Vector3 arcEnd)
+    {
+        Vector3 crossProduct = Vector3.Cross(arcStart, arcEnd);
+        float dotProduct = Vector3.Dot(arcStart, arcEnd);
+
+        Quaternion rotation = new Quaternion(
+            crossProduct.x,
+            crossProduct.y,
+            crossProduct.z,
+            dotProduct
+        );
+        return rotation;
     }
 
     public void OnMouseDown()
@@ -105,20 +118,21 @@ public class OtherRotation : MonoBehaviour
 
     private Vector3 MousePositionToSphereCoordinates(Vector3 mousePosition)
     {
-        // X and y of the mouse position on the sphere, with (0, 0, 0) in the center of the sphere
-        Vector3 spherePosition = gameObject.transform.InverseTransformPoint(
-            Camera.main.ScreenToWorldPoint(mousePosition)
-        );
+        Vector3 spherePoint = (mousePosition - InnerSphere.Center) / InnerSphere.Radius;
 
-        spherePosition.z = Mathf.Abs(
-            Mathf.Sqrt(
-                (Radius * Radius) -
-                (spherePosition.x * spherePosition.x) -
-                (spherePosition.y * spherePosition.y)
-            )
-        );
+        float distance = (spherePoint.x * spherePoint.x)
+            + (spherePoint.y * spherePoint.y);
 
-        return spherePosition;
+        if (distance > 1.0)
+        {
+            Debug.LogError(
+                "The distance to the center of the unit sphere should never " +
+                "be greater than one if this method is called. See p b104.");
+        }
+
+        spherePoint.z = Mathf.Sqrt(1 - distance);
+
+        return spherePoint;
     }
 
     private void OnEnable()
