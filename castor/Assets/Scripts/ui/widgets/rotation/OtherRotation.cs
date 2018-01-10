@@ -122,7 +122,6 @@ public class OtherRotation : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("On Enable: Computing the radius of the sphere, somehow....");
         Radius = RecomputeRadius();
     }
 
