@@ -30,16 +30,16 @@ public class OtherRotation : MonoBehaviour
     void Update()
     {
         if (InRotationMode && CancelButtonPressed()) CancelRotation();
-        if (InRotationMode && MouseMovedOnWidget()) Rotate();
+        if (InRotationMode && MouseMoved()) Rotate();
     }
 
-    private bool MouseMovedOnWidget()
+    private bool MouseMoved()
     {
         bool mouseMoved = (
             !Input.GetAxis(VerticalMouseAxis).Equals(0.0f) ||
             !Input.GetAxis(HorizontalMouseAxis).Equals(0.0f)
         );
-        return mouseMoved && OnWidget;
+        return mouseMoved;
     }
 
     private bool CancelButtonPressed()
@@ -110,12 +110,15 @@ public class OtherRotation : MonoBehaviour
 
         if (distance > 1.0)
         {
-            Debug.LogError(
-                "The distance to the center of the unit sphere should never " +
-                "be greater than one if this method is called. See p b104.");
+            //mousePosition is outside the sphere
+            float s = 1.0f / Mathf.Sqrt(distance);
+            spherePoint.x = s * spherePoint.x;
+            spherePoint.y = s * spherePoint.y;
+            spherePoint.z = 0.0f;
+        } else {
+            //mousePosition is within the sphere
+            spherePoint.z = Mathf.Sqrt(1 - distance);    
         }
-
-        spherePoint.z = Mathf.Sqrt(1 - distance);
 
         return spherePoint;
     }
