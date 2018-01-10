@@ -19,7 +19,6 @@ public class OtherRotation : MonoBehaviour
 
     private Sphere InnerSphere;
 
-    private bool OnWidget = false;
     private bool InRotationMode = false;
 
     private void Awake()
@@ -47,15 +46,6 @@ public class OtherRotation : MonoBehaviour
         return Input.GetButton("Cancel");
     }
 
-    public void OnMouseEnter()
-    {
-        OnWidget = true;
-    }
-
-    public void OnMouseExit()
-    {
-        OnWidget = false;
-    }
 
     private void ToggleRotationMode(bool toggle){
         InRotationMode = toggle;
