@@ -76,6 +76,13 @@ public class OtherRotation : MonoBehaviour
         ToggleMeshCollidersOnFragments(true);
     }
 
+    private void ToggleRotationMode(bool toggle){
+        InRotationMode = toggle;
+        Donut.SetActive(!toggle);
+
+        ToggleMeshCollidersOnFragments(!toggle);
+    }
+
     private void CancelRotation()
     {
         RotatedObject.transform.rotation = InitialRotation;
@@ -106,14 +113,11 @@ public class OtherRotation : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (InRotationMode)
-        {
-            ExitRotationMode();
+        if (InRotationMode){
+            InitialRotation = RotatedObject.transform.rotation;
+            ClickPosition = MousePositionToSphereCoordinates(Input.mousePosition);   
         }
-        else
-        {
-            EnterRotationMode();
-        }
+        ToggleRotationMode(!InRotationMode);
     }
 
     private Vector3 MousePositionToSphereCoordinates(Vector3 mousePosition)
