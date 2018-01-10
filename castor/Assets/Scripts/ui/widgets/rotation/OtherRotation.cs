@@ -84,7 +84,7 @@ public class OtherRotation : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (InRotationMode){
+        if (!InRotationMode){
             InitialRotation = RotatedObject.transform.rotation;
             ClickPosition = MousePositionToSphereCoordinates(Input.mousePosition);   
         }
