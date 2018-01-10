@@ -124,9 +124,13 @@ public class OtherRotation : MonoBehaviour
     private void OnEnable()
     {
         Bounds innerSphereBounds = gameObject.Bounds();
+        float radius = (
+            Camera.main.WorldToScreenPoint(innerSphereBounds.max) - 
+            Camera.main.WorldToScreenPoint(innerSphereBounds.min)
+        ).Max();
         InnerSphere = new Sphere(
-            center:Camera.main.WorldToScreenPoint(innerSphereBounds.center),
-            radius:innerSphereBounds.extents.Max()
+            center: Camera.main.WorldToScreenPoint(innerSphereBounds.center),
+            radius: radius
         );
     }
 
