@@ -111,9 +111,9 @@ public class OtherRotation : MonoBehaviour
 
         spherePosition.z = Mathf.Abs(
             Mathf.Sqrt(
-                Radius * Radius +
-                spherePosition.x * spherePosition.x +
-                spherePosition.y * spherePosition.y
+                (Radius * Radius) -
+                (spherePosition.x * spherePosition.x) -
+                (spherePosition.y * spherePosition.y)
             )
         );
 
