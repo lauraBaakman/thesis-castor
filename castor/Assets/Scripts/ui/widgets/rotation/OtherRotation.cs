@@ -14,9 +14,10 @@ public class OtherRotation : MonoBehaviour
     private static string HorizontalMouseAxis = "Mouse Y";
 
     private Quaternion InitialRotation;
-    private Vector3 InitialClick;
 
-    private float Radius = 0.0f;
+    private Vector3 ClickPosition;
+
+    private Sphere InnerSphere;
 
     private bool OnWidget = false;
     private bool InRotationMode = false;
@@ -62,7 +63,7 @@ public class OtherRotation : MonoBehaviour
         InRotationMode = true;
         Donut.SetActive(false);
         InitialRotation = RotatedObject.transform.rotation;
-        InitialClick = MousePositionToSphereCoordinates(Input.mousePosition);
+        ClickPosition = MousePositionToSphereCoordinates(Input.mousePosition);
 
         ToggleMeshCollidersOnFragments(false);
     }
@@ -122,12 +123,11 @@ public class OtherRotation : MonoBehaviour
 
     private void OnEnable()
     {
-        Radius = RecomputeRadius();
-    }
-
-    private float RecomputeRadius(){
-        float radius = gameObject.Bounds().extents.Max();
-        return radius;
+        Bounds innerSphereBounds = gameObject.Bounds();
+        InnerSphere = new Sphere(
+            center:Camera.main.WorldToScreenPoint(innerSphereBounds.center),
+            radius:innerSphereBounds.extents.Max()
+        );
     }
 
     private void ToggleMeshCollidersOnFragments(bool toggle)
@@ -143,5 +143,21 @@ public class OtherRotation : MonoBehaviour
         //Bounds bounds = gameObject.Bounds();
         //Gizmos.color = Color.red;
         //Gizmos.DrawWireSphere(bounds.center, bounds.extents.Max());
+    }
+}
+
+public class Sphere
+{
+    public Vector3 Center;
+    public float Radius;
+
+    public Sphere(Vector3 center, float radius)
+    {
+        Radius = radius;
+        Center = center;
+    }
+
+    public override string ToString(){
+        return "Sphere (center: " + Center + ", radius: " + Radius;   
     }
 }
