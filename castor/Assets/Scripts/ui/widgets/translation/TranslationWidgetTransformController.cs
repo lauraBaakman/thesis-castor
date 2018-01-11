@@ -7,7 +7,7 @@ public class TranslationWidgetTransformController : MonoBehaviour {
     public GameObject ObjectControlledByWidget;
 
     public float MinimumScale = 0.5f;
-    public float MaximumScale = 9.0f;
+    public float MaximumScale = 5.0f;
 
 
     private void Update()
@@ -18,9 +18,10 @@ public class TranslationWidgetTransformController : MonoBehaviour {
     private void FitWidgetToControlledObject(){
         Bounds bounds = ObjectControlledByWidget.Bounds();
 
-        Vector3 scale = ComputeScale(bounds);
+        Vector3 scale = transform.localScale.Multiply(ComputeScale(bounds));
+        scale = scale.Clamped(MinimumScale, MaximumScale);
 
-        transform.localScale = transform.localScale.Multiply(scale);
+        transform.localScale = scale;
         transform.position = bounds.center;
     }
 
