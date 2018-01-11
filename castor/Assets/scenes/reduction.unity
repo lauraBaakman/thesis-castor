@@ -514,6 +514,20 @@ RectTransform:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}
   m_PrefabInternal: {fileID: 1883324459}
+--- !u!114 &261753825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 261753824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acf48011d06a4999987df245d13c983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectControlledByWidget: {fileID: 913092897}
+  MinimumScale: 1
+  MaximumScale: 9
 --- !u!1 &271151057 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100012, guid: 993b6ee5c114d46ad9588f564579ac0e, type: 3}
@@ -1358,7 +1372,7 @@ Prefab:
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -55.05
+      value: -55.050003
       objectReference: {fileID: 0}
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
@@ -3347,6 +3361,18 @@ Prefab:
     - target: {fileID: 100000, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}
       propertyPath: m_Name
       value: Translation Widget
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}

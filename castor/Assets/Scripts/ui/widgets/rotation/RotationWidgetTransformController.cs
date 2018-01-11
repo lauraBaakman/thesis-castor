@@ -20,18 +20,6 @@ public class RotationWidgetTransformController : MonoBehaviour
 
     void Update() { }
 
-    private float ComputeLocalScale(Bounds ObjectBounds)
-    {
-        Bounds widgetBounds = SizeControllingWidgetElement.Bounds();
-        Vector3 widgetSize = widgetBounds.size;
-
-        Vector3 objectSize = ObjectBounds.size;
-
-        Vector3 localScale = objectSize.DivideElementWise(widgetSize);
-
-        return localScale.Max() * ScalingFactor;
-    }
-
     public void OnEnable()
     {
         FitWidgetToControlledObject();
@@ -46,5 +34,17 @@ public class RotationWidgetTransformController : MonoBehaviour
 
         transform.position = objectBounds.center;
         transform.localScale = transform.localScale * scalingFactor;
+    }
+
+    private float ComputeLocalScale(Bounds ObjectBounds)
+    {
+        Bounds widgetBounds = SizeControllingWidgetElement.Bounds();
+        Vector3 widgetSize = widgetBounds.size;
+
+        Vector3 objectSize = ObjectBounds.size;
+
+        Vector3 localScale = objectSize.DivideElementWise(widgetSize);
+
+        return localScale.Max() * ScalingFactor;
     }
 }
