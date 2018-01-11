@@ -9,6 +9,8 @@ public class TranslationWidgetTransformController : MonoBehaviour {
     public float MinimumScale = 0.5f;
     public float MaximumScale = 5.0f;
 
+    public float ScalingFactor = 1.25f;
+
 
     private void Update()
     {
@@ -27,7 +29,7 @@ public class TranslationWidgetTransformController : MonoBehaviour {
 
     private Vector3 ComputeScale(Bounds objectsBounds){
         Vector3 widgetSize = gameObject.Bounds().size;
-        Vector3 objectSize = objectsBounds.size;
+        Vector3 objectSize = ScalingFactor * objectsBounds.size;
 
         Vector3 scale = objectSize.DivideElementWise(widgetSize);
 
