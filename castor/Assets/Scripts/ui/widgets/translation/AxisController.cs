@@ -21,21 +21,16 @@ public class AxisController : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        Debug.Log("Detected A click!");
+        ToggleAxisTranslationMode(!InAxisTranslationMode);   
     }
 
-    private void EnterAxisTranslationMode(){
-        InAxisTranslationMode = true;
-        MeshRenderer.material = SelectedMaterial;
-    }
-
-    private void ExitAxisTranslationMode(){
-        InAxisTranslationMode = false;
-        MeshRenderer.material = NormalMaterial;
+    private void ToggleAxisTranslationMode(bool toggle){
+        InAxisTranslationMode = toggle;
+        MeshRenderer.material = toggle ? SelectedMaterial : NormalMaterial;        
     }
 
     private void OnEnable()
     {
-        ExitAxisTranslationMode();
+        ToggleAxisTranslationMode(false);
     }
 }
