@@ -12,6 +12,9 @@ public class FragmentController : MonoBehaviour
 
     private FragmentListElementController ListElementController;
 
+    private Transform FragmentsTransform;
+    private Transform SelectedFragmentsTransform;
+
     void Awake()
     {
         DefaultMaterial = Resources.Load("Materials/DefaultMaterial", typeof(Material)) as Material;
@@ -33,6 +36,9 @@ public class FragmentController : MonoBehaviour
     {
         gameObject.GetComponent<MeshFilter>().mesh = Fragment.Mesh;
         gameObject.GetComponent<SelectableFragmentController>().Populate(gameObject);
+        FragmentsTransform = gameObject.transform.root;
+        SelectedFragmentsTransform = FragmentsTransform.Find("Selected Fragments");
+        if (!SelectedFragmentsTransform) Debug.LogError("Could not find Selected Fragments object.");
     }
 
     public void Update()
@@ -104,5 +110,11 @@ public class FragmentController : MonoBehaviour
             parameter: toggle,
             options: SendMessageOptions.DontRequireReceiver
         );
+        ChangeParent(toggle);
+    }
+
+    private void ChangeParent(bool selected)
+    {
+        gameObject.transform.parent = selected ? SelectedFragmentsTransform : FragmentsTransform;
     }
 }
