@@ -16,7 +16,8 @@ public class FragmentController : MonoBehaviour
     {
         DefaultMaterial = Resources.Load("Materials/DefaultMaterial", typeof(Material)) as Material;
 
-        if(DefaultMaterial == null){
+        if (DefaultMaterial == null)
+        {
             Debug.Log("Oh no!");
         }
 
@@ -39,26 +40,30 @@ public class FragmentController : MonoBehaviour
 
     }
 
-    public void ToggleVisibility(bool toggle){
+    public void ToggleVisibility(bool toggle)
+    {
         ToggleVisibilityLocally(toggle);
 
         //Deselect the object if it is selected and should be hidden.
-        if(!toggle){
+        if (!toggle)
+        {
             ToggleSelection(false);
         }
         ListElementController.ToggleVisibilityLocally(toggle);
     }
 
-    public void ToggleSelectability(bool toggle){
+    public void ToggleSelectability(bool toggle)
+    {
         Debug.Log("FragmentController:ToggleSelectability");
         gameObject.GetComponent<MeshCollider>().enabled = toggle;
         ListElementController.SendMessage(
-            methodName:"ToggleSelectability", 
-            value:toggle
+            methodName: "ToggleSelectability",
+            value: toggle
         );
     }
 
-    public void ToggleVisibilityLocally(bool toggle){
+    public void ToggleVisibilityLocally(bool toggle)
+    {
         gameObject.SetActive(toggle);
     }
 
@@ -90,8 +95,14 @@ public class FragmentController : MonoBehaviour
         this.ListElementController = listElementController;
     }
 
-    public void ToggleSelection(bool toggle){
-        gameObject.GetComponent<SelectableFragmentController>().ToggleSelectionLocally(toggle);  
+    public void ToggleSelection(bool toggle)
+    {
+        gameObject.GetComponent<SelectableFragmentController>().ToggleSelectionLocally(toggle);
         ListElementController.ToggleSelectionLocally(toggle);
+        gameObject.transform.root.BroadcastMessage(
+            methodName: "FragmentSelected",
+            parameter: toggle,
+            options: SendMessageOptions.DontRequireReceiver
+        );
     }
 }

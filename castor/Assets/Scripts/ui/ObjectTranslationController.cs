@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ObjectTranslationController : TransformController {
+public class ObjectTranslationController : TransformController
+{
 
     public Toggle TranslationToggle;
+
+    private int NumberOfSelectedObjects = 0;
 
     public void Start()
     {
@@ -15,5 +18,12 @@ public class ObjectTranslationController : TransformController {
     public override void ToggleActivity(bool toggle)
     {
         Debug.Log("ObjectTranslationController:ToggleActivity");
+    }
+
+    public void FragmentSelected(bool selected)
+    {
+        NumberOfSelectedObjects += (selected ? 1 : -1);
+        Debug.Log("Number of selected objects: " + NumberOfSelectedObjects);
+        TranslationToggle.interactable = (NumberOfSelectedObjects > 0);
     }
 }
