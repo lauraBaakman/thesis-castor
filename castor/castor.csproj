@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\sidemenu\FileMenuBoxController.cs" />
     <Compile Include="Assets\Scripts\sidemenu\FragmentListElementController.cs" />
     <Compile Include="Assets\Scripts\sidemenu\FragmentsMenuBoxController.cs" />
+    <Compile Include="Assets\Scripts\ui\ObjectTranslationController.cs" />
     <Compile Include="Assets\Scripts\ui\ToolTipController.cs" />
     <Compile Include="Assets\Scripts\ui\TransformationButtonController.cs" />
     <Compile Include="Assets\Scripts\ui\UserEditableText.cs" />
