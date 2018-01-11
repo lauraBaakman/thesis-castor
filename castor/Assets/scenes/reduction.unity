@@ -1868,6 +1868,7 @@ MonoBehaviour:
   RotatedObject: {fileID: 1851333512}
   ClickPositionIndicator: {fileID: 564221461}
   Sphere: {fileID: 271151057}
+  Fragments: {fileID: 1851333512}
 --- !u!1 &884061607
 GameObject:
   m_ObjectHideFlags: 0
