@@ -2,215 +2,238 @@
 
 public class ViewVectorRotation : MonoBehaviour
 {
-	//All stored positions are in world coordinates
+    //All stored positions are in world coordinates
 
-	public GameObject RotatedObject;
-	public GameObject ClickPositionIndicator;
-	public GameObject Sphere;
+    public GameObject RotatedObject;
+    public GameObject ClickPositionIndicator;
+    public GameObject Sphere;
 
-	private static string VerticalMouseAxis = "Mouse X";
-	private static string HorizontalMouseAxis = "Mouse Y";
+    public GameObject Fragments;
 
-	private Vector3 WidgetCenter;
+    private static string VerticalMouseAxis = "Mouse X";
+    private static string HorizontalMouseAxis = "Mouse Y";
 
-	private Quaternion InitialRotation;
-	private Vector3 LastClickVector;
+    private Vector3 WidgetCenter;
 
-	private bool OnWidget = false;
-	private int State = 1;
+    private Quaternion InitialRotation;
+    private Vector3 LastClickVector;
 
-	private void Awake ()
-	{
-	}
+    private bool OnWidget = false;
+    private int State = 1;
 
-	void Start ()
-	{
-		gameObject.AddComponent<MeshCollider> ();
-		ClickPositionIndicator.SetActive (false);
-	}
+    private void Awake()
+    {
+    }
 
-	public void Update ()
-	{   
-		WidgetCenter = gameObject.GetComponent<MeshRenderer> ().bounds.center;
-		WidgetCenter.z = 0;
+    void Start()
+    {
+        gameObject.AddComponent<MeshCollider>();
+        ClickPositionIndicator.SetActive(false);
+    }
 
-		if (CancelButtonPressed ()) {
-			OnEsc ();
-		}
+    public void Update()
+    {
+        WidgetCenter = gameObject.GetComponent<MeshRenderer>().bounds.center;
+        WidgetCenter.z = 0;
 
-		if (MouseMoved ()) {
-			OnMouseMoved ();
-		}
-	}
+        if (CancelButtonPressed())
+        {
+            OnEsc();
+        }
 
-	private bool MouseMoved ()
-	{
-		return (!Input.GetAxis (VerticalMouseAxis).Equals (0.0f) ||
-		!Input.GetAxis (HorizontalMouseAxis).Equals (0.0f));
-	}
+        if (MouseMoved())
+        {
+            OnMouseMoved();
+        }
+    }
 
-	private bool CancelButtonPressed ()
-	{
-		return Input.GetButton ("Cancel");
-	}
+    private bool MouseMoved()
+    {
+        return (!Input.GetAxis(VerticalMouseAxis).Equals(0.0f) ||
+        !Input.GetAxis(HorizontalMouseAxis).Equals(0.0f));
+    }
 
-	public void OnMouseDown ()
-	{
-		switch (State) {
-		case 1:
-			MouseDownState1 ();
-			break;
-		case 2:
-			MouseDownState2 ();
-			break;
-		}
-	}
+    private bool CancelButtonPressed()
+    {
+        return Input.GetButton("Cancel");
+    }
 
-	public void OnMouseMoved ()
-	{
-		switch (State) {
-		case 1:
-			MouseMovedState1 ();
-			break;
-		case 2:
-			MouseMovedState2 ();
-			break;
-		}
-	}
+    public void OnMouseDown()
+    {
+        switch (State)
+        {
+            case 1:
+                MouseDownState1();
+                break;
+            case 2:
+                MouseDownState2();
+                break;
+        }
+    }
 
-	public void OnMouseEnter ()
-	{
-		if (State == 2) {
-			OnWidget = true;
-		}
-	}
+    public void OnMouseMoved()
+    {
+        switch (State)
+        {
+            case 1:
+                MouseMovedState1();
+                break;
+            case 2:
+                MouseMovedState2();
+                break;
+        }
+    }
 
-	public void OnMouseExit ()
-	{
-		if (State == 2) {
-			OnWidget = false;
-		}
-	}
+    public void OnMouseEnter()
+    {
+        if (State == 2)
+        {
+            OnWidget = true;
+        }
+    }
 
-	private void MouseMovedState1 ()
-	{
-		//Do Nothing
-	}
+    public void OnMouseExit()
+    {
+        if (State == 2)
+        {
+            OnWidget = false;
+        }
+    }
 
-	private void MouseMovedState2 ()
-	{
-		if (OnWidget) {
-			float angle = ComputeAngleBetweenPointAndMousePosition (LastClickVector);
+    private void MouseMovedState1()
+    {
+        //Do Nothing
+    }
 
-			//Apply rotation to RotatedObject
+    private void MouseMovedState2()
+    {
+        if (OnWidget)
+        {
+            float angle = ComputeAngleBetweenPointAndMousePosition(LastClickVector);
+
+            //Apply rotation to RotatedObject
             Vector3 position = RotatedObject.transform.position;
             RotatedObject.transform.position = Vector3.zero;
             RotatedObject.transform.Rotate(RotatedObject.transform.forward, angle, Space.Self);
             RotatedObject.transform.position = position;
 
-			//Update the last click vector
-			LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition ();
-		}
-	}
+            //Update the last click vector
+            LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
+        }
+    }
 
-	private void MouseDownState1 ()
-	{
-		//Store Intial Rotation
+    private void MouseDownState1()
+    {
+        //Store Intial Rotation
         InitialRotation = RotatedObject.transform.rotation;
 
-		//Store Mouse Position
-		LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition ();
+        //Store Mouse Position
+        LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
 
-		ShowClickPosition ();
+        ShowClickPosition();
 
-		Sphere.SetActive (false);
+        Sphere.SetActive(false);
 
-		State = 2;
+        State = 2;
 
-		OnWidget = true;
-	}
+        OnWidget = true;
 
-	private void ShowClickPosition ()
-	{
-		ClickPositionIndicator.SetActive (true);
+        Fragments.BroadcastMessage(
+            methodName: "ToggleSelectability",
+            parameter: false,
+            options: SendMessageOptions.DontRequireReceiver
+        );
+    }
 
-		Vector3 initialVector = GetVectorFromWidgetCenterTo (ClickPositionIndicator.transform.position);
-		float angle = ComputeAngleBetweenPointAndMousePosition (initialVector);
+    private void ShowClickPosition()
+    {
+        ClickPositionIndicator.SetActive(true);
 
-		ClickPositionIndicator.transform.RotateAround (WidgetCenter, Vector3.forward, angle);
-	}
+        Vector3 initialVector = GetVectorFromWidgetCenterTo(ClickPositionIndicator.transform.position);
+        float angle = ComputeAngleBetweenPointAndMousePosition(initialVector);
 
-	//Angle is based on the widget center in the x,y plane
-	private float ComputeAngleBetweenPointAndMousePosition (Vector3 point)
-	{
-		Vector3 currentVector = GetVectorFromWidgetCenterToCurrentMousePosition ();
-		float angle = Vector3.SignedAngle (point, currentVector, Vector3.forward);
-		return angle;
-	}
+        ClickPositionIndicator.transform.RotateAround(WidgetCenter, Vector3.forward, angle);
+    }
 
-	private void MouseDownState2 ()
-	{
-		StateToOne ();
-	}
+    //Angle is based on the widget center in the x,y plane
+    private float ComputeAngleBetweenPointAndMousePosition(Vector3 point)
+    {
+        Vector3 currentVector = GetVectorFromWidgetCenterToCurrentMousePosition();
+        float angle = Vector3.SignedAngle(point, currentVector, Vector3.forward);
+        return angle;
+    }
 
-	private void OnEsc ()
-	{
-		switch (State) {
-		case 1:
-			EscState1 ();
-			break;
-		case 2:
-			EscState2 ();
-			break;
-		}
-	}
+    private void MouseDownState2()
+    {
+        StateToOne();
+    }
 
-	private void EscState2 ()
-	{
-		//Go back to initial rotation
-		RotatedObject.transform.rotation = InitialRotation;
+    private void OnEsc()
+    {
+        switch (State)
+        {
+            case 1:
+                EscState1();
+                break;
+            case 2:
+                EscState2();
+                break;
+        }
+    }
 
-		StateToOne ();
-	}
+    private void EscState2()
+    {
+        //Go back to initial rotation
+        RotatedObject.transform.rotation = InitialRotation;
 
-	private void EscState1 ()
-	{
-		//Do nothing
-	}
+        StateToOne();
+    }
 
-	private void StateToOne ()
-	{
-		State = 1;
+    private void EscState1()
+    {
+        //Do nothing
+    }
 
-		// Reset Object
-		Reset ();
+    private void StateToOne()
+    {
+        State = 1;
 
-		//Show Sphere
-		Sphere.SetActive (true);
+        // Reset Object
+        Reset();
 
-		//Hide Click Position
-		ClickPositionIndicator.SetActive (false);
-	}
+        //Show Sphere
+        Sphere.SetActive(true);
 
-	private void Reset ()
-	{
-		OnWidget = false;
-		WidgetCenter = Vector3.zero;
-		InitialRotation = Quaternion.identity;
-		LastClickVector = Vector3.zero;
-	}
+        //Hide Click Position
+        ClickPositionIndicator.SetActive(false);
 
-	private Vector3 GetVectorFromWidgetCenterToCurrentMousePosition ()
-	{
-		Vector3 position = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		position.z = 0;
+        //Handle Selectability
+        Fragments.BroadcastMessage(
+            methodName: "ToggleSelectability",
+            parameter: true,
+            options: SendMessageOptions.DontRequireReceiver
+        );
+    }
 
-		return GetVectorFromWidgetCenterTo (position);
-	}
+    private void Reset()
+    {
+        OnWidget = false;
+        WidgetCenter = Vector3.zero;
+        InitialRotation = Quaternion.identity;
+        LastClickVector = Vector3.zero;
+    }
 
-	private Vector3 GetVectorFromWidgetCenterTo (Vector3 destination)
-	{
-		Vector3 vector = destination - WidgetCenter;
-		return vector;
-	}
+    private Vector3 GetVectorFromWidgetCenterToCurrentMousePosition()
+    {
+        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        position.z = 0;
+
+        return GetVectorFromWidgetCenterTo(position);
+    }
+
+    private Vector3 GetVectorFromWidgetCenterTo(Vector3 destination)
+    {
+        Vector3 vector = destination - WidgetCenter;
+        return vector;
+    }
 }
