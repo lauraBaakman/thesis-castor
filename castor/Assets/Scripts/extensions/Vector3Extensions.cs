@@ -41,6 +41,22 @@ public static class Vector3Extensions
         return result;
     }
 
+    /// <summary>
+    /// Multiply the specified vector and other elementwise.
+    /// </summary>
+    /// <returns>A new vector containing the element wise multiplication of this and other.</returns>
+    /// <param name="vector">The left hand side.</param>
+    /// <param name="other">The right hand side.</param>
+    public static Vector3 Multiply(this Vector3 vector, Vector3 other)
+    {
+        Vector3 result = new Vector3(
+            vector.x * other.x,
+            vector.y * other.y,
+            vector.z * other.z
+        );
+        return result;
+    }
+
     public static float Min(this Vector3 vector)
     {
         return Mathf.Min(Mathf.Min(vector.x, vector.y), vector.z);

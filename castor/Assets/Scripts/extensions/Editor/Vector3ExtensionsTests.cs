@@ -122,6 +122,53 @@ public class Vector3ExtensionsTests
     }
 
     [Test]
+    public void MultiplyElementWise_simpleCase()
+    {
+        Vector3 lhs = new Vector3(3.0f, 10.0f, 24.0f);
+        Vector3 rhs = new Vector3(2.0f, 5.0f, 8.0f);
+
+        Vector3 actual = lhs.Multiply(rhs);
+
+        Vector3 expected = new Vector3(6.0f, 50.0f, 192.0f);
+
+
+        Assert.That(actual.x, Is.EqualTo(expected.x).Within(0.000001));
+        Assert.That(actual.y, Is.EqualTo(expected.y).Within(0.000001));
+        Assert.That(actual.z, Is.EqualTo(expected.z).Within(0.000001));
+
+        Assert.That(lhs.x, Is.EqualTo(3.0f).Within(0.000001));
+        Assert.That(lhs.y, Is.EqualTo(10.0f).Within(0.000001));
+        Assert.That(lhs.z, Is.EqualTo(24.0f).Within(0.000001));
+
+        Assert.That(rhs.x, Is.EqualTo(2.0f).Within(0.000001));
+        Assert.That(rhs.y, Is.EqualTo(5.0f).Within(0.000001));
+        Assert.That(rhs.z, Is.EqualTo(8.0f).Within(0.000001));
+    }
+
+    [Test]
+    public void MultiplyElementWise_containsZero()
+    {
+        Vector3 numerator = new Vector3(3.0f, 10.0f, 24.0f);
+        Vector3 denominator = new Vector3(2.0f, 0.0f, 8.0f);
+
+        Vector3 actual = numerator.Multiply(denominator);
+
+        Vector3 expected = new Vector3(6.0f, 0.0f, 192.0f);
+
+        Assert.That(actual.x, Is.EqualTo(expected.x).Within(0.000001));
+        Assert.That(actual.y, Is.EqualTo(expected.y).Within(0.000001));
+        Assert.That(actual.z, Is.EqualTo(expected.z).Within(0.000001));
+
+        Assert.That(numerator.x, Is.EqualTo(3.0f).Within(0.000001));
+        Assert.That(numerator.y, Is.EqualTo(10.0f).Within(0.000001));
+        Assert.That(numerator.z, Is.EqualTo(24.0f).Within(0.000001));
+
+        Assert.That(denominator.x, Is.EqualTo(2.0f).Within(0.000001));
+        Assert.That(denominator.y, Is.EqualTo(0.0f).Within(0.000001));
+        Assert.That(denominator.z, Is.EqualTo(8.0f).Within(0.000001));
+    }
+
+    [Test]
     public void Min_firstValueNegative()
     {
         Vector3 vector = new Vector3(-3.0f, 0.0f, 24.0f);
