@@ -6,8 +6,9 @@ public class TranslationWidgetTransformController : MonoBehaviour {
 
     public GameObject ObjectControlledByWidget;
 
-    public float MinimumScale = 1.0f;
+    public float MinimumScale = 0.5f;
     public float MaximumScale = 9.0f;
+
 
     private void Update()
     {
@@ -17,12 +18,18 @@ public class TranslationWidgetTransformController : MonoBehaviour {
     private void FitWidgetToControlledObject(){
         Bounds bounds = ObjectControlledByWidget.Bounds();
 
-        transform.localScale = ComputeLocalScale(bounds);
+        Vector3 scale = ComputeScale(bounds);
+
+        transform.localScale = transform.localScale.Multiply(scale);
         transform.position = bounds.center;
     }
 
-    private Vector3 ComputeLocalScale(Bounds bounds){
-        //TODO Implement
-        return new Vector3(5.0f, 5.0f, 5.0f);
+    private Vector3 ComputeScale(Bounds objectsBounds){
+        Vector3 widgetSize = gameObject.Bounds().size;
+        Vector3 objectSize = objectsBounds.size;
+
+        Vector3 scale = objectSize.DivideElementWise(widgetSize);
+
+        return scale;
     }
 }
