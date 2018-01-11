@@ -527,7 +527,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectControlledByWidget: {fileID: 913092897}
   MinimumScale: 0.5
-  MaximumScale: 9
+  MaximumScale: 5
+  ScalingFactor: 1.25
 --- !u!1 &271151057 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100012, guid: 993b6ee5c114d46ad9588f564579ac0e, type: 3}
