@@ -522,11 +522,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 255314087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1062fdf6176f4b17ab2defce74030e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a5e2ac53296949449507f175c508e0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedMaterial: {fileID: 2100000, guid: 10b7ece37d35447f9b55a28c61a7b6a9, type: 2}
   TranslatedObject: {fileID: 913092897}
+  DirectionVector: {x: 0, y: 1, z: 0}
+  MouseAxis: Mouse Y
 --- !u!1 &261753824 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}
@@ -619,7 +621,7 @@ Prefab:
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -417.86252
       objectReference: {fileID: 0}
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
@@ -1084,11 +1086,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 453439845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1062fdf6176f4b17ab2defce74030e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 828adc16edc35441bafd040e9dafd0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedMaterial: {fileID: 2100000, guid: 2f29381dbd519458fb7bd9f5b79fba0b, type: 2}
   TranslatedObject: {fileID: 913092897}
+  DirectionVector: {x: 0, y: 0, z: 1}
 --- !u!1 &487402528 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1966058218903892, guid: f243f1ab4ca584ad7b7f3510dbac9b18,
@@ -1249,11 +1252,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 590086762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1062fdf6176f4b17ab2defce74030e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a5e2ac53296949449507f175c508e0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedMaterial: {fileID: 2100000, guid: b72dac362c67a42bd932e4bd0180fd18, type: 2}
   TranslatedObject: {fileID: 913092897}
+  DirectionVector: {x: 1, y: 0, z: 0}
+  MouseAxis: Mouse X
 --- !u!1 &608888542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1430,7 @@ Prefab:
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -55.050003
       objectReference: {fileID: 0}
     - target: {fileID: 224090712429341278, guid: 4b7f6de65777f40a1b2b38de137047a2,
         type: 2}
@@ -2167,7 +2172,7 @@ Prefab:
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
@@ -2914,7 +2919,7 @@ Prefab:
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
@@ -3189,7 +3194,7 @@ Prefab:
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
         type: 2}

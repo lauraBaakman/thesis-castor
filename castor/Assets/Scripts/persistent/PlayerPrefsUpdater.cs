@@ -28,6 +28,8 @@ public class PlayerPrefsUpdater
     {
         UpdatePlayerPref("ui.viewpoint.dolly.speed", 0.3f);
         UpdatePlayerPref("ui.viewpoint.pan.speed", 5.0f);
+
+        UpdatePlayerPref("ui.translate.scalingFactor", 5.0f);
     }
 
     private void UpdatePlayerPref(string variableName, float value)

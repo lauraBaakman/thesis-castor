@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
-public class AxisController : MonoBehaviour {
+public abstract class AbstractAxisController : MonoBehaviour {
 
     //All stored positions are in world space
-
     public Material SelectedMaterial;
     private Material NormalMaterial;
 
@@ -17,7 +16,10 @@ public class AxisController : MonoBehaviour {
     private static string VerticalMouseAxis = "Mouse X";
     private static string HorizontalMouseAxis = "Mouse Y";
 
+    protected float ScalingFactor = 5.0f;
+
     private Vector3 InitialPosition;
+    public Vector3 DirectionVector;
 
 	void Awake () {
         MeshRenderer = gameObject.GetComponent<MeshRenderer>();
@@ -62,12 +64,9 @@ public class AxisController : MonoBehaviour {
     }
 
     private void CancelTranslation(){
-        Debug.Log("Cancel Translation!");
         TranslatedObject.transform.position = InitialPosition;
         ToggleAxisTranslationMode(false);
     }
 
-    private void Translate(){
-        Debug.Log("Translating!");
-    }
+    protected abstract void Translate();
 }

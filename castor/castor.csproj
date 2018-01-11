@@ -124,8 +124,10 @@
     <Compile Include="Assets\Scripts\ui\widgets\rotation\OtherRotation.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\rotation\RotationWidgetTransformController.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\rotation\ViewVectorRotation.cs" />
-    <Compile Include="Assets\Scripts\ui\widgets\translation\AxisController.cs" />
+    <Compile Include="Assets\Scripts\ui\widgets\translation\AbstractAxisController.cs" />
+    <Compile Include="Assets\Scripts\ui\widgets\translation\SingleAxisTranslationController.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\translation\TranslationWidgetTransformController.cs" />
+    <Compile Include="Assets\Scripts\ui\widgets\translation\ZAxisTranslationController.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\WidgetTransformController.cs" />
     <Compile Include="Assets\Scripts\utils\ObjImporter.cs" />
     <Compile Include="Assets\Scripts\view3D\FragmentController.cs" />
