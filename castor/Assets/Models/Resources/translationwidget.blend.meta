@@ -40,6 +40,7 @@ ModelImporter:
     6400000: axis
     6400002: xaxis
     6400004: zaixs
+    6400006: yaxis
     7400000: Default Take
     9500000: //RootNode
   materials:
