@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
-public abstract class AbstractAxisController : MonoBehaviour {
+public abstract class AbstractAxisController : MonoBehaviour
+{
 
     //All stored positions are in world space
     public Material SelectedMaterial;
@@ -16,24 +17,32 @@ public abstract class AbstractAxisController : MonoBehaviour {
     private static string VerticalMouseAxis = "Mouse X";
     private static string HorizontalMouseAxis = "Mouse Y";
 
-    protected float ScalingFactor = 5.0f;
+    protected float ScalingFactor = 1.0f;
 
     private Vector3 InitialPosition;
     public Vector3 DirectionVector;
 
-	void Awake () {
+    void Awake()
+    {
         MeshRenderer = gameObject.GetComponent<MeshRenderer>();
         NormalMaterial = MeshRenderer.material;
-	}
-	
-	void Update () {
+    }
+
+    void Update()
+    {
         if (InAxisTranslationMode && CancelButtonPressed()) CancelTranslation();
         if (InAxisTranslationMode && MouseMoved()) Translate();
-	}
+        if (InAxisTranslationMode && EnterButtonPressed()) ToggleAxisTranslationMode(false);
+    }
 
     private bool CancelButtonPressed()
     {
         return Input.GetButton("Cancel");
+    }
+
+    private bool EnterButtonPressed()
+    {
+        return Input.GetKey(KeyCode.Return);
     }
 
     private bool MouseMoved()
@@ -47,15 +56,17 @@ public abstract class AbstractAxisController : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if(!InAxisTranslationMode){
+        if (!InAxisTranslationMode)
+        {
             InitialPosition = TranslatedObject.transform.position;
         }
-        ToggleAxisTranslationMode(!InAxisTranslationMode);   
+        ToggleAxisTranslationMode(!InAxisTranslationMode);
     }
 
-    private void ToggleAxisTranslationMode(bool toggle){
+    private void ToggleAxisTranslationMode(bool toggle)
+    {
         InAxisTranslationMode = toggle;
-        MeshRenderer.material = toggle ? SelectedMaterial : NormalMaterial;        
+        MeshRenderer.material = toggle ? SelectedMaterial : NormalMaterial;
     }
 
     private void OnEnable()
@@ -63,7 +74,8 @@ public abstract class AbstractAxisController : MonoBehaviour {
         ToggleAxisTranslationMode(false);
     }
 
-    private void CancelTranslation(){
+    private void CancelTranslation()
+    {
         TranslatedObject.transform.position = InitialPosition;
         ToggleAxisTranslationMode(false);
     }

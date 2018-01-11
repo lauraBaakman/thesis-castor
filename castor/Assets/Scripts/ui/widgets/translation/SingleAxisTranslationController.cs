@@ -9,6 +9,6 @@ public class SingleAxisTranslationController : AbstractAxisController
     {
         float speed = Input.GetAxis(MouseAxis);
         Vector3 translation = DirectionVector * speed * ScalingFactor;
-        transform.localPosition += translation;
+        TranslatedObject.transform.position += translation;
     }
 }
