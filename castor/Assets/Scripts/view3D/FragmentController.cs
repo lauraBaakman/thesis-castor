@@ -49,6 +49,15 @@ public class FragmentController : MonoBehaviour
         ListElementController.ToggleVisibilityLocally(toggle);
     }
 
+    public void ToggleSelectability(bool toggle){
+        Debug.Log("FragmentController:ToggleSelectability");
+        gameObject.GetComponent<MeshCollider>().enabled = toggle;
+        ListElementController.SendMessage(
+            methodName:"ToggleSelectability", 
+            value:toggle
+        );
+    }
+
     public void ToggleVisibilityLocally(bool toggle){
         gameObject.SetActive(toggle);
     }

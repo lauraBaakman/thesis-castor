@@ -53,8 +53,11 @@ public class OtherRotation : MonoBehaviour
     {
         InRotationMode = toggle;
         Donut.SetActive(!toggle);
-
-        ToggleMeshCollidersOnFragments(!toggle);
+        Fragments.BroadcastMessage(
+            methodName:"ToggleSelectability", 
+            parameter:!toggle,
+            options:SendMessageOptions.DontRequireReceiver
+        );
     }
 
     private void CancelRotation()
@@ -131,14 +134,6 @@ public class OtherRotation : MonoBehaviour
             center: Camera.main.WorldToScreenPoint(innerSphereBounds.center),
             radius: radius
         );
-    }
-
-    private void ToggleMeshCollidersOnFragments(bool toggle)
-    {
-        MeshCollider[] colliders = Fragments.GetComponentsInChildren<MeshCollider>();
-
-        foreach (MeshCollider meshCollider in colliders)
-            meshCollider.enabled = toggle;
     }
 }
 
