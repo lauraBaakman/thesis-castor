@@ -125,6 +125,7 @@
     <Compile Include="Assets\Scripts\ui\widgets\rotation\RotationWidgetTransformController.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\rotation\ViewVectorRotation.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\translation\TranslationWidgetTransformController.cs" />
+    <Compile Include="Assets\Scripts\ui\widgets\WidgetTransformController.cs" />
     <Compile Include="Assets\Scripts\utils\ObjImporter.cs" />
     <Compile Include="Assets\Scripts\view3D\FragmentController.cs" />
     <Compile Include="Assets\Scripts\view3D\FragmentsController.cs" />

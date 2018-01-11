@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-public class TranslationWidgetTransformController : MonoBehaviour
+public class TranslationWidgetTransformController : WidgetTransformController
 {
-
-    public GameObject ObjectControlledByWidget;
-
     public float MinimumScale = 0.5f;
     public float MaximumScale = 5.0f;
 

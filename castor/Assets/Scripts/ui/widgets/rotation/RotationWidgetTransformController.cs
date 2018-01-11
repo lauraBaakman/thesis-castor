@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 
-public class RotationWidgetTransformController : MonoBehaviour
+public class RotationWidgetTransformController : WidgetTransformController
 {
-
-    public GameObject ObjectControlledByWidget;
     public GameObject SizeControllingWidgetElement;
 
-    //The Scaling factor is applied before the minimum and maximum scale.
     public static float ScalingFactor = 2.5f;
 
     public float MinimumScale = 1.0f;
@@ -15,10 +12,7 @@ public class RotationWidgetTransformController : MonoBehaviour
 
     private void Start() { }
 
-    void Update() { }
-
-    public void OnEnable()
-    {
+    void Update() { 
         FitWidgetToControlledObject();
     }
 
