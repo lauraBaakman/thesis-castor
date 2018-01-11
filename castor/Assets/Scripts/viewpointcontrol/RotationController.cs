@@ -9,7 +9,7 @@ public abstract class TransformController : MonoBehaviour
 
 public class RotationController : TransformController
 {
-    public GameObject RotationWidget;
+    public GameObject Widget;
 
     void Start()
     {
@@ -28,6 +28,6 @@ public class RotationController : TransformController
 
     private void ToggleWidget(bool toggle)
     {
-        RotationWidget.SetActive(toggle);
+        Widget.SetActive(toggle);
     }
 }

@@ -6,23 +6,41 @@ using UnityEngine.UI;
 public class ObjectTranslationController : TransformController
 {
 
-    public Toggle TranslationToggle;
+    public Toggle Toggle;
+    public GameObject Widget;
 
     private int NumberOfSelectedObjects = 0;
 
     public void Start()
     {
-        TranslationToggle.interactable = false;
+        Toggle.interactable = false;
+        Widget.SetActive(false);
     }
 
     public override void ToggleActivity(bool toggle)
     {
-        Debug.Log("ObjectTranslationController:ToggleActivity");
+        Widget.SetActive(toggle);
     }
 
     public void FragmentSelected(bool selected)
     {
         NumberOfSelectedObjects += (selected ? 1 : -1);
-        TranslationToggle.interactable = (NumberOfSelectedObjects > 0);
+        Toggle.interactable = AreObjectsSelected();
+
+        if (NoObjectsSelected()) ExitTranslationMode();
+    }
+
+    private void ExitTranslationMode(){
+        Widget.SetActive(false);
+        Toggle.isOn = false;
+    }
+
+    private bool NoObjectsSelected(){
+        return !AreObjectsSelected();
+    }
+
+    private bool AreObjectsSelected()
+    {
+        return NumberOfSelectedObjects > 0;
     }
 }
