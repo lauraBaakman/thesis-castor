@@ -17,8 +17,6 @@ public abstract class AbstractAxisController : MonoBehaviour
     private static string VerticalMouseAxis = "Mouse X";
     private static string HorizontalMouseAxis = "Mouse Y";
 
-    protected float ScalingFactor = 1.0f;
-
     private Vector3 InitialPosition;
     public Vector3 DirectionVector;
 

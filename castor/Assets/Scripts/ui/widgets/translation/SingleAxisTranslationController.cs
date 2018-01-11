@@ -8,7 +8,7 @@ public class SingleAxisTranslationController : AbstractAxisController
     protected override void Translate()
     {
         float speed = Input.GetAxis(MouseAxis);
-        Vector3 translation = DirectionVector * speed * ScalingFactor;
+        Vector3 translation = DirectionVector * speed;
         TranslatedObject.transform.position += translation;
     }
 }
