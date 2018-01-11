@@ -510,6 +510,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &255314087 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100004, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}
+  m_PrefabInternal: {fileID: 1883324459}
+--- !u!114 &255314088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 255314087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1062fdf6176f4b17ab2defce74030e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedMaterial: {fileID: 2100000, guid: 10b7ece37d35447f9b55a28c61a7b6a9, type: 2}
 --- !u!1 &261753824 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}
@@ -1055,6 +1071,22 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &453439845 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100006, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}
+  m_PrefabInternal: {fileID: 1883324459}
+--- !u!114 &453439846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 453439845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1062fdf6176f4b17ab2defce74030e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedMaterial: {fileID: 2100000, guid: 2f29381dbd519458fb7bd9f5b79fba0b, type: 2}
 --- !u!1 &487402528 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1966058218903892, guid: f243f1ab4ca584ad7b7f3510dbac9b18,
@@ -1203,6 +1235,22 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224623372435918904, guid: dfdc0e0f2908641999cc4d7dbf88ff7f,
     type: 2}
   m_PrefabInternal: {fileID: 1740261950}
+--- !u!1 &590086762 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: 0c6747c4a955149e6b7d0d34c26e8496, type: 3}
+  m_PrefabInternal: {fileID: 1883324459}
+--- !u!114 &590086763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 590086762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1062fdf6176f4b17ab2defce74030e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedMaterial: {fileID: 2100000, guid: b72dac362c67a42bd932e4bd0180fd18, type: 2}
 --- !u!1 &608888542
 GameObject:
   m_ObjectHideFlags: 0
