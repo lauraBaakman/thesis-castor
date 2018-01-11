@@ -68,11 +68,6 @@ public class OtherRotation : MonoBehaviour
         Vector3 hoverPosition = MousePositionToSphereCoordinates(Input.mousePosition);
         Quaternion rotation = ComputeRotation(ClickPositionOnSphere, hoverPosition);
 
-        //DrawArc(arcStart: ClickPositionWorld,
-        //        arcEnd: Camera.main.ScreenToWorldPoint(Input.mousePosition),
-        //        numPieces: 3
-        //);
-
         RotatedObject.transform.rotation = rotation * InitialRotation;
     }
 
@@ -136,11 +131,6 @@ public class OtherRotation : MonoBehaviour
             center: Camera.main.WorldToScreenPoint(innerSphereBounds.center),
             radius: radius
         );
-
-        //Temporary
-        DrawArc(arcStart:Camera.main.ScreenToWorldPoint(new Vector3(876.8f, 579.7f, 0.0f)),
-                arcEnd:Camera.main.ScreenToWorldPoint(new Vector3(868.5f, 462.9f, 0.0f)), 
-                numPieces:3);
     }
 
     private void ToggleMeshCollidersOnFragments(bool toggle)
@@ -149,46 +139,6 @@ public class OtherRotation : MonoBehaviour
 
         foreach (MeshCollider meshCollider in colliders)
             meshCollider.enabled = toggle;
-    }
-
-    //Source: Shoemake, Ken. "Animating rotation with quaternion curves." ACM SIGGRAPH computer graphics. Vol. 19. No. 3. ACM, 1985.
-    private void DrawArc(Vector3 arcStart, Vector3 arcEnd, int numPieces = 10)
-    {
-        //TODO only draw if arcEnd is on the sphere
-        //TODO fix the computation of the arc points, right now it seems to draw a straight line
-        //TODO make the lines show up in game view
-
-        if (arcStart.Equals(arcEnd)) return;
-
-        float dotProduct = Vector3.Dot(arcStart, arcEnd);
-
-        List<Vector3> points = new List<Vector3>(numPieces + 1);
-
-        float angle = Mathf.Acos(dotProduct / (arcStart.magnitude * arcEnd.magnitude));
-        float sinAngle = Mathf.Sin(angle);
-
-        Vector3 point;
-        float stepSize = 1.0f / numPieces;
-
-        points.Add(arcStart);
-        for (float u = stepSize; u < 1.0; u += stepSize)
-        {
-            point = (Mathf.Sin((1 - u) * angle) / sinAngle) * arcStart +
-                     (Mathf.Sin(u * angle) / sinAngle) * arcEnd;
-            points.Add(point);
-        }
-        points.Add(arcEnd);
-
-        Vector3 previous, current;
-        previous = points[0];
-        for (int i = 1; i < points.Count; i++)
-        {
-            current = points[i];
-
-            Debug.DrawLine(previous, current, Color.red, duration:1, depthTest:false);
-
-            previous = current;
-        }
     }
 }
 
