@@ -23,7 +23,6 @@ public class ObjectTranslationController : TransformController
     public void FragmentSelected(bool selected)
     {
         NumberOfSelectedObjects += (selected ? 1 : -1);
-        Debug.Log("Number of selected objects: " + NumberOfSelectedObjects);
         TranslationToggle.interactable = (NumberOfSelectedObjects > 0);
     }
 }
