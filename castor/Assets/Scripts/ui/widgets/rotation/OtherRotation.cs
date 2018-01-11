@@ -17,7 +17,6 @@ public class OtherRotation : MonoBehaviour
     private Quaternion InitialRotation;
 
     private Vector3 ClickPositionOnSphere;
-    private Vector3 ClickPositionWorld;
 
     private Sphere InnerSphere;
 
@@ -94,7 +93,6 @@ public class OtherRotation : MonoBehaviour
         {
             InitialRotation = RotatedObject.transform.rotation;
             ClickPositionOnSphere = MousePositionToSphereCoordinates(Input.mousePosition);
-            ClickPositionWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         ToggleRotationMode(!InRotationMode);
     }
