@@ -9,7 +9,6 @@ public class ViewVectorRotation : RotationWidgetElement
     private Vector3 LastClickVector;
 
     private bool OnWidget = false;
-    private int State = 1;
 
     private bool InRotationMode = false;
 
@@ -82,8 +81,6 @@ public class ViewVectorRotation : RotationWidgetElement
     private void ToggleRotationMode(bool toggle)
     {
         InRotationMode = toggle;
-
-        State = toggle ? 2 : 1;
 
         RotationMode newMode = toggle ? RotationMode.ViewVector : RotationMode.Initial;
         gameObject.SendMessageUpwards(
