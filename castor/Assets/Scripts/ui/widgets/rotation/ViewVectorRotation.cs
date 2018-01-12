@@ -25,13 +25,15 @@ public class ViewVectorRotation : RotationWidgetElement
         if (InRotationMode && MouseMovedOnWidget()) Rotate();
     }
 
-    private void UpdateWidgetCenter(){
+    private void UpdateWidgetCenter()
+    {
         WidgetCenter = gameObject.GetComponent<MeshRenderer>().bounds.center;
         WidgetCenter.z = 0;
     }
 
-    private bool MouseMovedOnWidget(){
-        return MouseMoved() && OnWidget;   
+    private bool MouseMovedOnWidget()
+    {
+        return MouseMoved() && OnWidget;
     }
 
     public void OnMouseDown()
@@ -49,21 +51,16 @@ public class ViewVectorRotation : RotationWidgetElement
 
     public void OnMouseEnter()
     {
-        if (State == 2)
-        {
-            OnWidget = true;
-        }
+        OnWidget = true;
     }
 
     public void OnMouseExit()
     {
-        if (State == 2)
-        {
-            OnWidget = false;
-        }
+        OnWidget = false;
     }
 
-    private void Rotate(){
+    private void Rotate()
+    {
         float angle = ComputeAngleBetweenPointAndMousePosition(LastClickVector);
 
         //Apply rotation to RotatedObject
@@ -73,7 +70,7 @@ public class ViewVectorRotation : RotationWidgetElement
         RotatedObject.transform.position = position;
 
         //Update the last click vector
-        LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();        
+        LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
     }
 
     private void MouseDownState1()
@@ -92,8 +89,6 @@ public class ViewVectorRotation : RotationWidgetElement
             methodName: "OnRotationModeChanged",
             value: new RotationModeChangedMessage(RotationMode.ViewVector)
         );
-
-        OnWidget = true;
     }
 
     private void ShowClickPosition()
@@ -161,7 +156,6 @@ public class ViewVectorRotation : RotationWidgetElement
 
     private void Reset()
     {
-        OnWidget = false;
         gameObject.SendMessageUpwards(
             methodName: "OnRotationModeChanged",
             value: new RotationModeChangedMessage(RotationMode.Initial)
