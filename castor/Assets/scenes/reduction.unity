@@ -565,7 +565,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fragments: {fileID: 1851333512}
   RotatedObject: {fileID: 1851333512}
-  Donut: {fileID: 855265723}
 --- !u!1001 &278454643
 Prefab:
   m_ObjectHideFlags: 0
@@ -2028,7 +2027,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fragments: {fileID: 1851333512}
   RotatedObject: {fileID: 1851333512}
-  Sphere: {fileID: 271151057}
   ClickPositionIndicator: {fileID: 564221461}
 --- !u!1 &884061607
 GameObject:

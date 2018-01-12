@@ -17,6 +17,15 @@ public static class GameObjectExtensions
 		return go.AddComponent<T> ().GetCopyOf (toAdd) as T;
 	}
 
+    public static GameObject FindChildByName(this GameObject go, string childName)
+    {
+        Transform childTransform = go.transform.Find(childName);
+        if (childTransform) return childTransform.gameObject;
+
+        Debug.LogError("Could not find the gameobject with name " + childName);
+        return null;
+    }
+
 	//Source: https://forum.unity.com/threads/bounds-of-a-whole-hierarchy.4525/#post-1276595
 	/// <summary>
 	/// Compute the bounds the specified gameobject based on the MeshRenderers attatched to it 

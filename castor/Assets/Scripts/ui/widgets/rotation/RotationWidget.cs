@@ -12,18 +12,9 @@ public class RotationWidget : MonoBehaviour
 
     void Awake()
     {
-        Donut = FindGameObjectByName("OuterDonut");
-        ClickPositionIndicator = FindGameObjectByName("ViewVectorClickPositionIndicator");
-        Sphere = FindGameObjectByName("InnerSphere");
-    }
-
-    private GameObject FindGameObjectByName(string childName)
-    {
-        Transform childTransform = gameObject.transform.Find(childName);
-        if (childTransform) return childTransform.gameObject;
-
-        Debug.LogError("Could not find the gameobject with name " + childName);
-        return null;
+        Donut = gameObject.FindChildByName("OuterDonut");
+        ClickPositionIndicator = gameObject.FindChildByName("ViewVectorClickPositionIndicator");
+        Sphere = gameObject.FindChildByName("InnerSphere");
     }
 
     public void OnRotationModeChanged(RotationModeChangedMessage message){
