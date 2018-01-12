@@ -3,8 +3,6 @@
 public class ViewVectorRotation : RotationWidgetElement
 {
     //All stored positions are in world coordinates
-    public GameObject Sphere;
-
     public GameObject ClickPositionIndicator;
 
     private Vector3 WidgetCenter;
@@ -88,8 +86,6 @@ public class ViewVectorRotation : RotationWidgetElement
 
         ShowClickPosition();
 
-        Sphere.SetActive(false);
-
         State = 2;
         InRotationMode = true;
         gameObject.SendMessageUpwards(
@@ -98,18 +94,10 @@ public class ViewVectorRotation : RotationWidgetElement
         );
 
         OnWidget = true;
-
-        Fragments.BroadcastMessage(
-            methodName: "ToggleSelectability",
-            parameter: false,
-            options: SendMessageOptions.DontRequireReceiver
-        );
     }
 
     private void ShowClickPosition()
     {
-        ClickPositionIndicator.SetActive(true);
-
         Vector3 initialVector = GetVectorFromWidgetCenterTo(ClickPositionIndicator.transform.position);
         float angle = ComputeAngleBetweenPointAndMousePosition(initialVector);
 
@@ -162,12 +150,6 @@ public class ViewVectorRotation : RotationWidgetElement
 
         // Reset Object
         Reset();
-
-        //Show Sphere
-        Sphere.SetActive(true);
-
-        //Hide Click Position
-        ClickPositionIndicator.SetActive(false);
 
         //Handle Selectability
         Fragments.BroadcastMessage(
