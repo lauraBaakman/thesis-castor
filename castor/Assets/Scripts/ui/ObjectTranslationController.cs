@@ -25,7 +25,7 @@ public class ObjectTranslationController : TransformController
     public void FragmentSelected(bool selected)
     {
         NumberOfSelectedObjects += (selected ? 1 : -1);
-        Toggle.interactable = AreObjectsSelected();
+        Toggle.interactable = ObjectsSelected();
 
         if (NoObjectsSelected()) ExitTranslationMode();
     }
@@ -35,11 +35,13 @@ public class ObjectTranslationController : TransformController
         Toggle.isOn = false;
     }
 
+
+
     private bool NoObjectsSelected(){
-        return !AreObjectsSelected();
+        return !ObjectsSelected();
     }
 
-    private bool AreObjectsSelected()
+    private bool ObjectsSelected()
     {
         return NumberOfSelectedObjects > 0;
     }
