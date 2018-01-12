@@ -27,7 +27,7 @@ public class OtherRotation : RotationWidgetElement
         );
     }
 
-    private void Rotate()
+    protected override void Rotate()
     {
         Vector3 hoverPosition = MousePositionToSphereCoordinates(Input.mousePosition);
         Quaternion rotation = ComputeRotation(ClickPositionOnSphere, hoverPosition);

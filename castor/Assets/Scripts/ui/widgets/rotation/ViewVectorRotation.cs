@@ -40,7 +40,7 @@ public class ViewVectorRotation : RotationWidgetElement
         OnWidget = false;
     }
 
-    private void Rotate()
+    protected override void Rotate()
     {
         float angle = ComputeAngleBetweenPointAndMousePosition(LastClickVector);
 
