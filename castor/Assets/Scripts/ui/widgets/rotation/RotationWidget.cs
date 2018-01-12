@@ -3,6 +3,8 @@
 public class RotationWidget : MonoBehaviour
 {
 
+    public GameObject Fragments;
+
     private GameObject Donut;
     private GameObject ClickPositionIndicator;
     private GameObject Sphere;
@@ -27,18 +29,43 @@ public class RotationWidget : MonoBehaviour
     public void OnRotationModeChanged(RotationModeChangedMessage message){
         switch(message.NewMode){
             case RotationMode.Initial:
-                Debug.Log("To Initial Rotation Mode");
+                EnterInitialRotationMode();
                 break;
             case RotationMode.ViewVector:
-                Debug.Log("To ViewVector Rotation Mode" );
+                EnterViewVectorRotationMode();
                 break;
             case RotationMode.OtherVectors:
-                Debug.Log("To OtherVectors Rotation Mode");
-                break;
-            default:
-                Debug.Log("Oh No Entered the Default Mode");
+                EnterOtherVectorsRotationMode();
                 break;
         }
+    }
+
+    private void EnterInitialRotationMode(){
+        Fragments.BroadcastMessage(
+            methodName: "ToggleSelectability",
+            parameter: true,
+            options: SendMessageOptions.DontRequireReceiver
+        );
+        Donut.SetActive(true);
+        Sphere.SetActive(true);
+        ClickPositionIndicator.SetActive(false);
+    }
+
+    private void EnterElementRotationMode(){
+        Fragments.BroadcastMessage(
+            methodName: "ToggleSelectability",
+            parameter: false,
+            options: SendMessageOptions.DontRequireReceiver
+        );        
+    }
+
+    private void EnterViewVectorRotationMode(){
+        EnterElementRotationMode();
+    }
+
+    private void EnterOtherVectorsRotationMode(){
+        EnterElementRotationMode();
+        Donut.SetActive(false);
     }
 }
 

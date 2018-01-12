@@ -6,10 +6,7 @@ public class OtherRotation : RotationWidgetElement
 {
 
     //All stored positions are in world coordinates
-    public GameObject Donut;
-
     private Vector3 ClickPositionOnSphere;
-
     private Sphere InnerSphere;
 
     private bool InRotationMode = false;
@@ -23,13 +20,6 @@ public class OtherRotation : RotationWidgetElement
     private void ToggleRotationMode(bool toggle)
     {
         InRotationMode = toggle;
-        Donut.SetActive(!toggle);
-        Fragments.BroadcastMessage(
-            methodName: "ToggleSelectability",
-            parameter: !toggle,
-            options: SendMessageOptions.DontRequireReceiver
-        );
-
         RotationMode newMode = toggle ? RotationMode.OtherVectors : RotationMode.Initial;
 
         gameObject.SendMessageUpwards(

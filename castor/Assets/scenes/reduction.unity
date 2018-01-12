@@ -1231,6 +1231,18 @@ MonoBehaviour:
   MaximumScale: 5
   ScalingFactor: 1.25
   SizeControllingWidgetElement: {fileID: 271151057}
+--- !u!114 &531452925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 531452922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e9ba76076c94b3c9ac38d3fa4e0e2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fragments: {fileID: 1851333512}
 --- !u!1 &564221461 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100014, guid: 993b6ee5c114d46ad9588f564579ac0e, type: 3}
