@@ -15,6 +15,8 @@ public class RotationWidget : MonoBehaviour
         Donut = FindGameObjectByName("OuterDonut");
         ClickPositionIndicator = FindGameObjectByName("ViewVectorClickPositionIndicator");
         Sphere = FindGameObjectByName("InnerSphere");
+
+        EnterInitialRotationMode();
     }
 
     private GameObject FindGameObjectByName(string childName)
@@ -61,11 +63,18 @@ public class RotationWidget : MonoBehaviour
 
     private void EnterViewVectorRotationMode(){
         EnterElementRotationMode();
+
+        Donut.SetActive(true);
+        ClickPositionIndicator.SetActive(true);
+        Sphere.SetActive(false);
     }
 
     private void EnterOtherVectorsRotationMode(){
         EnterElementRotationMode();
+
         Donut.SetActive(false);
+        ClickPositionIndicator.SetActive(false);
+        Sphere.SetActive(true);
     }
 }
 
