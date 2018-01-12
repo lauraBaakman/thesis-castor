@@ -15,4 +15,9 @@ public class RotationWidgetElement : MonoBehaviour
         );
         return mouseMoved;
     }
+
+    protected bool CancelButtonPressed()
+    {
+        return Input.GetButton("Cancel");
+    }
 }

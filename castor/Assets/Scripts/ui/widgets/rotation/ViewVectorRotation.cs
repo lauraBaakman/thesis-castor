@@ -43,11 +43,6 @@ public class ViewVectorRotation : RotationWidgetElement
         }
     }
 
-    private bool CancelButtonPressed()
-    {
-        return Input.GetButton("Cancel");
-    }
-
     public void OnMouseDown()
     {
         switch (State)

@@ -29,12 +29,6 @@ public class OtherRotation : RotationWidgetElement
         if (InRotationMode && MouseMoved()) Rotate();
     }
 
-    private bool CancelButtonPressed()
-    {
-        return Input.GetButton("Cancel");
-    }
-
-
     private void ToggleRotationMode(bool toggle)
     {
         InRotationMode = toggle;
