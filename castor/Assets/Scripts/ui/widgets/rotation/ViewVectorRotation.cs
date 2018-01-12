@@ -24,7 +24,7 @@ public class ViewVectorRotation : RotationWidgetElement
 
     void Start()
     {
-        gameObject.AddComponent<MeshCollider>();
+        //gameObject.AddComponent<MeshCollider>();
         ClickPositionIndicator.SetActive(false);
     }
 
