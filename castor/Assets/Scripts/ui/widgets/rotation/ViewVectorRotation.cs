@@ -83,11 +83,19 @@ public class ViewVectorRotation : RotationWidgetElement
 
         ShowClickPosition();
 
-        State = 2;
-        InRotationMode = true;
+        ToggleRotationMode(true);
+    }
+
+    private void ToggleRotationMode(bool toggle)
+    {
+        InRotationMode = toggle;
+
+        State = toggle ? 2 : 1;
+
+        RotationMode newMode = toggle ? RotationMode.ViewVector : RotationMode.Initial;
         gameObject.SendMessageUpwards(
             methodName: "OnRotationModeChanged",
-            value: new RotationModeChangedMessage(RotationMode.ViewVector)
+            value: new RotationModeChangedMessage(newMode)
         );
     }
 
@@ -95,7 +103,6 @@ public class ViewVectorRotation : RotationWidgetElement
     {
         Vector3 initialVector = GetVectorFromWidgetCenterTo(ClickPositionIndicator.transform.position);
         float angle = ComputeAngleBetweenPointAndMousePosition(initialVector);
-
         ClickPositionIndicator.transform.RotateAround(WidgetCenter, Vector3.forward, angle);
     }
 
@@ -109,7 +116,7 @@ public class ViewVectorRotation : RotationWidgetElement
 
     private void MouseDownState2()
     {
-        StateToOne();
+        ToggleRotationMode(false);
     }
 
     private void OnEsc()
@@ -129,40 +136,12 @@ public class ViewVectorRotation : RotationWidgetElement
     {
         //Go back to initial rotation
         RotatedObject.transform.rotation = InitialRotation;
-
-        StateToOne();
+        ToggleRotationMode(false);
     }
 
     private void EscState1()
     {
         //Do nothing
-    }
-
-    private void StateToOne()
-    {
-        State = 1;
-        InRotationMode = false;
-
-        // Reset Object
-        Reset();
-
-        //Handle Selectability
-        Fragments.BroadcastMessage(
-            methodName: "ToggleSelectability",
-            parameter: true,
-            options: SendMessageOptions.DontRequireReceiver
-        );
-    }
-
-    private void Reset()
-    {
-        gameObject.SendMessageUpwards(
-            methodName: "OnRotationModeChanged",
-            value: new RotationModeChangedMessage(RotationMode.Initial)
-        );
-        WidgetCenter = Vector3.zero;
-        InitialRotation = Quaternion.identity;
-        LastClickVector = Vector3.zero;
     }
 
     private Vector3 GetVectorFromWidgetCenterToCurrentMousePosition()
