@@ -9,7 +9,7 @@ public class ObjectTranslationController : TransformController
     public Toggle Toggle;
     public GameObject Widget;
 
-    private int NumberOfSelectedObjects = 0;
+    int NumberOfSelectedObjects = 0;
 
     public void Start()
     {
