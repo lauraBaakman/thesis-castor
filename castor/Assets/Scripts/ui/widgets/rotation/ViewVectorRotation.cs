@@ -38,19 +38,6 @@ public class ViewVectorRotation : RotationWidgetElement
         return MouseMoved() && OnWidget;
     }
 
-    public void OnMouseDown()
-    {
-        switch (State)
-        {
-            case 1:
-                MouseDownState1();
-                break;
-            case 2:
-                MouseDownState2();
-                break;
-        }
-    }
-
     public void OnMouseEnter()
     {
         OnWidget = true;
@@ -75,7 +62,13 @@ public class ViewVectorRotation : RotationWidgetElement
         LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
     }
 
-    private void MouseDownState1()
+    public void OnMouseDown()
+    {
+        if (!InRotationMode) InitializeRotationMode();
+        ToggleRotationMode(!InRotationMode);
+    }
+
+    private void InitializeRotationMode()
     {
         //Store Intial Rotation
         InitialRotation = RotatedObject.transform.rotation;
@@ -84,8 +77,6 @@ public class ViewVectorRotation : RotationWidgetElement
         LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
 
         ShowClickPosition();
-
-        ToggleRotationMode(true);
     }
 
     private void ToggleRotationMode(bool toggle)
@@ -114,11 +105,6 @@ public class ViewVectorRotation : RotationWidgetElement
         Vector3 currentVector = GetVectorFromWidgetCenterToCurrentMousePosition();
         float angle = Vector3.SignedAngle(point, currentVector, Vector3.forward);
         return angle;
-    }
-
-    private void MouseDownState2()
-    {
-        ToggleRotationMode(false);
     }
 
     private Vector3 GetVectorFromWidgetCenterToCurrentMousePosition()
