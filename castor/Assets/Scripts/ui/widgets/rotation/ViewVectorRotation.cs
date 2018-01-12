@@ -13,29 +13,27 @@ public class ViewVectorRotation : RotationWidgetElement
     private bool OnWidget = false;
     private int State = 1;
 
-    private void Awake()
-    {
-    }
-
-    void Start()
-    {
-        ClickPositionIndicator.SetActive(false);
-    }
+    private bool InRotationMode = false;
 
     public void Update()
     {
-        WidgetCenter = gameObject.GetComponent<MeshRenderer>().bounds.center;
-        WidgetCenter.z = 0;
+        UpdateWidgetCenter();
 
         if (CancelButtonPressed())
         {
             OnEsc();
         }
 
-        if (MouseMoved())
-        {
-            OnMouseMoved();
-        }
+        if (InRotationMode && MouseMovedOnWidget()) Rotate();
+    }
+
+    private void UpdateWidgetCenter(){
+        WidgetCenter = gameObject.GetComponent<MeshRenderer>().bounds.center;
+        WidgetCenter.z = 0;
+    }
+
+    private bool MouseMovedOnWidget(){
+        return MouseMoved() && OnWidget;   
     }
 
     public void OnMouseDown()
@@ -47,19 +45,6 @@ public class ViewVectorRotation : RotationWidgetElement
                 break;
             case 2:
                 MouseDownState2();
-                break;
-        }
-    }
-
-    public void OnMouseMoved()
-    {
-        switch (State)
-        {
-            case 1:
-                MouseMovedState1();
-                break;
-            case 2:
-                MouseMovedState2();
                 break;
         }
     }
@@ -80,26 +65,17 @@ public class ViewVectorRotation : RotationWidgetElement
         }
     }
 
-    private void MouseMovedState1()
-    {
-        //Do Nothing
-    }
+    private void Rotate(){
+        float angle = ComputeAngleBetweenPointAndMousePosition(LastClickVector);
 
-    private void MouseMovedState2()
-    {
-        if (OnWidget)
-        {
-            float angle = ComputeAngleBetweenPointAndMousePosition(LastClickVector);
+        //Apply rotation to RotatedObject
+        Vector3 position = RotatedObject.transform.position;
+        RotatedObject.transform.position = Vector3.zero;
+        RotatedObject.transform.Rotate(RotatedObject.transform.forward, angle, Space.Self);
+        RotatedObject.transform.position = position;
 
-            //Apply rotation to RotatedObject
-            Vector3 position = RotatedObject.transform.position;
-            RotatedObject.transform.position = Vector3.zero;
-            RotatedObject.transform.Rotate(RotatedObject.transform.forward, angle, Space.Self);
-            RotatedObject.transform.position = position;
-
-            //Update the last click vector
-            LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
-        }
+        //Update the last click vector
+        LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();        
     }
 
     private void MouseDownState1()
@@ -115,6 +91,11 @@ public class ViewVectorRotation : RotationWidgetElement
         Sphere.SetActive(false);
 
         State = 2;
+        InRotationMode = true;
+        gameObject.SendMessageUpwards(
+            methodName: "OnRotationModeChanged",
+            value: new RotationModeChangedMessage(RotationMode.ViewVector)
+        );
 
         OnWidget = true;
 
@@ -177,6 +158,7 @@ public class ViewVectorRotation : RotationWidgetElement
     private void StateToOne()
     {
         State = 1;
+        InRotationMode = false;
 
         // Reset Object
         Reset();
@@ -198,6 +180,10 @@ public class ViewVectorRotation : RotationWidgetElement
     private void Reset()
     {
         OnWidget = false;
+        gameObject.SendMessageUpwards(
+            methodName: "OnRotationModeChanged",
+            value: new RotationModeChangedMessage(RotationMode.Initial)
+        );
         WidgetCenter = Vector3.zero;
         InitialRotation = Quaternion.identity;
         LastClickVector = Vector3.zero;
