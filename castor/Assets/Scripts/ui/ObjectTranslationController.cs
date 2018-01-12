@@ -7,19 +7,11 @@ public class ObjectTranslationController : TransformController
 {
 
     public Toggle Toggle;
-    public GameObject Widget;
-
-    int NumberOfSelectedObjects = 0;
 
     public void Start()
     {
         Toggle.interactable = false;
-        Widget.SetActive(false);
-    }
-
-    public override void ToggleActivity(bool toggle)
-    {
-        Widget.SetActive(toggle);
+        BaseStart();
     }
 
     public void FragmentSelected(bool selected)
@@ -34,8 +26,6 @@ public class ObjectTranslationController : TransformController
         Widget.SetActive(false);
         Toggle.isOn = false;
     }
-
-
 
     private bool NoObjectsSelected(){
         return !ObjectsSelected();
