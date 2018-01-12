@@ -15,6 +15,11 @@ public class RotationController : TransformController
 
     protected override void FragmentSelected()
     {
+        FindAndBroadcastRotatedObject();
+    }
+
+    private void FindAndBroadcastRotatedObject()
+    {
         GameObject rotatedObject = ObjectsSelected() ? SelectedFragments : Fragments;
 
         //If the rotationwidget is not active there won't be a receiver
