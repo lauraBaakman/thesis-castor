@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OtherRotation : MonoBehaviour
+public class OtherRotation : RotationWidgetElement
 {
 
     //All stored positions are in world coordinates

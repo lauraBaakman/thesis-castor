@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ViewVectorRotation : MonoBehaviour
+public class ViewVectorRotation : RotationWidgetElement
 {
     //All stored positions are in world coordinates
 

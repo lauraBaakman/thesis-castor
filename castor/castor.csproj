@@ -123,6 +123,7 @@
     <Compile Include="Assets\Scripts\ui\TransformationButtonController.cs" />
     <Compile Include="Assets\Scripts\ui\UserEditableText.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\rotation\OtherRotation.cs" />
+    <Compile Include="Assets\Scripts\ui\widgets\rotation\RotationWidgetElement.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\rotation\RotationWidgetTransformController.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\rotation\ViewVectorRotation.cs" />
     <Compile Include="Assets\Scripts\ui\widgets\TransformController.cs" />
