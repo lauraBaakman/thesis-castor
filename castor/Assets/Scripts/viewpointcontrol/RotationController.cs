@@ -1,11 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class TransformController : MonoBehaviour
-{
-    public abstract void ToggleActivity(bool toggle);
-}
+﻿using UnityEngine;
 
 public class RotationController : TransformController
 {
