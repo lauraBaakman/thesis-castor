@@ -17,12 +17,14 @@ public class ViewVectorRotation : RotationWidgetElement
     {
         UpdateWidgetCenter();
 
-        if (CancelButtonPressed())
-        {
-            OnEsc();
-        }
-
+        if (InRotationMode && CancelButtonPressed()) CancelRotation();
         if (InRotationMode && MouseMovedOnWidget()) Rotate();
+    }
+
+    private void CancelRotation()
+    {
+        RotatedObject.transform.rotation = InitialRotation;
+        ToggleRotationMode(false);
     }
 
     private void UpdateWidgetCenter()
@@ -117,31 +119,6 @@ public class ViewVectorRotation : RotationWidgetElement
     private void MouseDownState2()
     {
         ToggleRotationMode(false);
-    }
-
-    private void OnEsc()
-    {
-        switch (State)
-        {
-            case 1:
-                EscState1();
-                break;
-            case 2:
-                EscState2();
-                break;
-        }
-    }
-
-    private void EscState2()
-    {
-        //Go back to initial rotation
-        RotatedObject.transform.rotation = InitialRotation;
-        ToggleRotationMode(false);
-    }
-
-    private void EscState1()
-    {
-        //Do nothing
     }
 
     private Vector3 GetVectorFromWidgetCenterToCurrentMousePosition()
