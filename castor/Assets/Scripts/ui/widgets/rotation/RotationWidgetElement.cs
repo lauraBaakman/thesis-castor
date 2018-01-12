@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class RotationWidgetElement : MonoBehaviour
 {
@@ -8,7 +6,12 @@ public abstract class RotationWidgetElement : MonoBehaviour
     private static string HorizontalMouseAxis = "Mouse Y";
 
     public GameObject Fragments;
-    public GameObject RotatedObject;
+
+    protected GameObject RotatedObject;
+
+    public void SetRotatedObject(GameObject rotatedObject){
+        RotatedObject = rotatedObject;
+    }
 
     protected Quaternion InitialRotation;
 

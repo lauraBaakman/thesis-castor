@@ -9,7 +9,6 @@ public class RotationWidget : MonoBehaviour
     private GameObject ClickPositionIndicator;
     private GameObject Sphere;
 
-
     void Awake()
     {
         Donut = gameObject.FindChildByName("OuterDonut");
