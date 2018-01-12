@@ -11,8 +11,14 @@ public abstract class TransformController : MonoBehaviour
         Widget.SetActive(toggle);
     }
 
+    public void FragmentSelectionStateChanged(bool newSelectionState){
+        FragmentSelected(newSelectionState);
+    }
+
     protected void BaseStart()
     {
         ToggleActivity(false);
     }
+
+    protected abstract void FragmentSelected(bool selected);
 }

@@ -14,14 +14,6 @@ public class ObjectTranslationController : TransformController
         BaseStart();
     }
 
-    public void FragmentSelected(bool selected)
-    {
-        NumberOfSelectedObjects += (selected ? 1 : -1);
-        Toggle.interactable = ObjectsSelected();
-
-        if (NoObjectsSelected()) ExitTranslationMode();
-    }
-
     private void ExitTranslationMode(){
         Widget.SetActive(false);
         Toggle.isOn = false;
@@ -34,5 +26,13 @@ public class ObjectTranslationController : TransformController
     private bool ObjectsSelected()
     {
         return NumberOfSelectedObjects > 0;
+    }
+
+    protected override void FragmentSelected(bool selected)
+    {
+        NumberOfSelectedObjects += (selected ? 1 : -1);
+        Toggle.interactable = ObjectsSelected();
+
+        if (NoObjectsSelected()) ExitTranslationMode();
     }
 }

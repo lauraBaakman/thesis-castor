@@ -6,4 +6,9 @@ public class RotationController : TransformController
     {
         BaseStart();
     }
+
+    protected override void FragmentSelected(bool selected)
+    {
+        //Do nothing
+    }
 }

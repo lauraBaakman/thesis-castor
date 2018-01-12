@@ -106,7 +106,7 @@ public class FragmentController : MonoBehaviour
         gameObject.GetComponent<SelectableFragmentController>().ToggleSelectionLocally(toggle);
         ListElementController.ToggleSelectionLocally(toggle);
         gameObject.transform.root.BroadcastMessage(
-            methodName: "FragmentSelected",
+            methodName: "FragmentSelectionStateChanged",
             parameter: toggle,
             options: SendMessageOptions.DontRequireReceiver
         );
