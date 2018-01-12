@@ -6,7 +6,7 @@ public abstract class TransformController : MonoBehaviour
 
     private int NumberOfSelectedObjects = 0;
 
-    public void ToggleActivity(bool toggle)
+    public virtual void ToggleActivity(bool toggle)
     {
         Widget.SetActive(toggle);
     }

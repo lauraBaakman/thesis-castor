@@ -13,6 +13,12 @@ public class RotationController : TransformController
         BaseStart();
     }
 
+    public override void ToggleActivity(bool toggle)
+    {
+        Widget.SetActive(toggle);
+        FindAndBroadcastRotatedObject();
+    }
+
     protected override void FragmentSelected()
     {
         FindAndBroadcastRotatedObject();
