@@ -15,8 +15,6 @@ public class RotationWidget : MonoBehaviour
         Donut = FindGameObjectByName("OuterDonut");
         ClickPositionIndicator = FindGameObjectByName("ViewVectorClickPositionIndicator");
         Sphere = FindGameObjectByName("InnerSphere");
-
-        EnterInitialRotationMode();
     }
 
     private GameObject FindGameObjectByName(string childName)
@@ -75,6 +73,11 @@ public class RotationWidget : MonoBehaviour
         Donut.SetActive(false);
         ClickPositionIndicator.SetActive(false);
         Sphere.SetActive(true);
+    }
+
+    private void OnEnable()
+    {
+        EnterInitialRotationMode();
     }
 }
 
