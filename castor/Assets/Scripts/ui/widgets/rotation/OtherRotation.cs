@@ -27,12 +27,6 @@ public class OtherRotation : RotationWidgetElement
         );
     }
 
-    private void CancelRotation()
-    {
-        RotatedObject.transform.rotation = InitialRotation;
-        ToggleRotationMode(false);
-    }
-
     private void Rotate()
     {
         Vector3 hoverPosition = MousePositionToSphereCoordinates(Input.mousePosition);
@@ -59,7 +53,7 @@ public class OtherRotation : RotationWidgetElement
     {
         if (!InRotationMode)
         {
-            InitialRotation = RotatedObject.transform.rotation;
+            StoreInitialRotation();
             ClickPositionOnSphere = MousePositionToSphereCoordinates(Input.mousePosition);
         }
         ToggleRotationMode(!InRotationMode);

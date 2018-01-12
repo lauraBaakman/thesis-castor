@@ -19,12 +19,6 @@ public class ViewVectorRotation : RotationWidgetElement
         if (InRotationMode && MouseMovedOnWidget()) Rotate();
     }
 
-    private void CancelRotation()
-    {
-        RotatedObject.transform.rotation = InitialRotation;
-        ToggleRotationMode(false);
-    }
-
     private void UpdateWidgetCenter()
     {
         WidgetCenter = gameObject.GetComponent<MeshRenderer>().bounds.center;
@@ -68,8 +62,7 @@ public class ViewVectorRotation : RotationWidgetElement
 
     private void InitializeRotationMode()
     {
-        //Store Intial Rotation
-        InitialRotation = RotatedObject.transform.rotation;
+        StoreInitialRotation();
 
         //Store Mouse Position
         LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();

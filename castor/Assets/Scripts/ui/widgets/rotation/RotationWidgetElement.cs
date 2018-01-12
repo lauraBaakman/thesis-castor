@@ -28,7 +28,12 @@ public abstract class RotationWidgetElement : MonoBehaviour
 
     protected abstract void ToggleRotationMode(bool toggle);
 
-    //protected void CancelRotation(){
-        
-    //}
+    protected void CancelRotation(){
+        RotatedObject.transform.rotation = InitialRotation;
+        ToggleRotationMode(false);
+    }
+
+    protected void StoreInitialRotation(){
+        InitialRotation = RotatedObject.transform.rotation;
+    }
 }
