@@ -6,22 +6,13 @@ public class OtherRotation : RotationWidgetElement
 {
 
     //All stored positions are in world coordinates
-
-    public GameObject RotatedObject;
-    public GameObject Fragments;
     public GameObject Donut;
-
-    private Quaternion InitialRotation;
 
     private Vector3 ClickPositionOnSphere;
 
     private Sphere InnerSphere;
 
     private bool InRotationMode = false;
-
-    private void Awake()
-    {
-    }
 
     void Update()
     {

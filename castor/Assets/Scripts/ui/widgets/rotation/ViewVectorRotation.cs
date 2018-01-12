@@ -3,16 +3,11 @@
 public class ViewVectorRotation : RotationWidgetElement
 {
     //All stored positions are in world coordinates
-
-    public GameObject RotatedObject;
-    public GameObject ClickPositionIndicator;
     public GameObject Sphere;
 
-    public GameObject Fragments;
+    public GameObject ClickPositionIndicator;
 
     private Vector3 WidgetCenter;
-
-    private Quaternion InitialRotation;
     private Vector3 LastClickVector;
 
     private bool OnWidget = false;
