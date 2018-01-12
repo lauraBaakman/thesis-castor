@@ -16,7 +16,7 @@ public class OtherRotation : RotationWidgetElement
         if (InRotationMode && MouseMoved()) Rotate();
     }
 
-    private void ToggleRotationMode(bool toggle)
+    protected override void ToggleRotationMode(bool toggle)
     {
         InRotationMode = toggle;
         RotationMode newMode = toggle ? RotationMode.OtherVectors : RotationMode.Initial;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotationWidgetElement : MonoBehaviour
+public abstract class RotationWidgetElement : MonoBehaviour
 {
     private static string VerticalMouseAxis = "Mouse X";
     private static string HorizontalMouseAxis = "Mouse Y";
@@ -25,4 +25,10 @@ public class RotationWidgetElement : MonoBehaviour
     {
         return Input.GetButton("Cancel");
     }
+
+    protected abstract void ToggleRotationMode(bool toggle);
+
+    //protected void CancelRotation(){
+        
+    //}
 }

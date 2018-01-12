@@ -77,7 +77,7 @@ public class ViewVectorRotation : RotationWidgetElement
         ShowClickPosition();
     }
 
-    private void ToggleRotationMode(bool toggle)
+    protected override void ToggleRotationMode(bool toggle)
     {
         InRotationMode = toggle;
 
