@@ -25,9 +25,16 @@ public class OtherRotation : RotationWidgetElement
         InRotationMode = toggle;
         Donut.SetActive(!toggle);
         Fragments.BroadcastMessage(
-            methodName:"ToggleSelectability", 
-            parameter:!toggle,
-            options:SendMessageOptions.DontRequireReceiver
+            methodName: "ToggleSelectability",
+            parameter: !toggle,
+            options: SendMessageOptions.DontRequireReceiver
+        );
+
+        RotationMode newMode = toggle ? RotationMode.OtherVectors : RotationMode.Initial;
+
+        gameObject.SendMessageUpwards(
+            methodName: "OnRotationModeChanged",
+            value: new RotationModeChangedMessage(newMode)
         );
     }
 
