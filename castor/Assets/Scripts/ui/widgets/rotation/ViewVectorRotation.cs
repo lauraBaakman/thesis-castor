@@ -10,9 +10,6 @@ public class ViewVectorRotation : RotationWidgetElement
 
     public GameObject Fragments;
 
-    private static string VerticalMouseAxis = "Mouse X";
-    private static string HorizontalMouseAxis = "Mouse Y";
-
     private Vector3 WidgetCenter;
 
     private Quaternion InitialRotation;
@@ -45,12 +42,6 @@ public class ViewVectorRotation : RotationWidgetElement
         {
             OnMouseMoved();
         }
-    }
-
-    private bool MouseMoved()
-    {
-        return (!Input.GetAxis(VerticalMouseAxis).Equals(0.0f) ||
-        !Input.GetAxis(HorizontalMouseAxis).Equals(0.0f));
     }
 
     private bool CancelButtonPressed()
