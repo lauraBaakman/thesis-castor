@@ -19,20 +19,9 @@ public class ObjectTranslationController : TransformController
         Toggle.isOn = false;
     }
 
-    private bool NoObjectsSelected(){
-        return !ObjectsSelected();
-    }
-
-    private bool ObjectsSelected()
-    {
-        return NumberOfSelectedObjects > 0;
-    }
-
     protected override void FragmentSelected(bool selected)
     {
-        NumberOfSelectedObjects += (selected ? 1 : -1);
         Toggle.interactable = ObjectsSelected();
-
         if (NoObjectsSelected()) ExitTranslationMode();
     }
 }
