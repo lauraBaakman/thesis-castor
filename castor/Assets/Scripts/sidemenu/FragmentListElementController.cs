@@ -118,7 +118,6 @@ public class FragmentListElementController : MonoBehaviour
 
     public void ToggleSelectability(bool toggle)
     {
-        Debug.Log("FragmentListElementController:ToggleSelectability" + toggle);
         SelectionToggle.interactable = toggle;
     }
 }

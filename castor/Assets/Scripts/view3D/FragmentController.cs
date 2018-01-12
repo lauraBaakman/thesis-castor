@@ -60,7 +60,6 @@ public class FragmentController : MonoBehaviour
 
     public void ToggleSelectability(bool toggle)
     {
-        Debug.Log("FragmentController:ToggleSelectability");
         gameObject.GetComponent<MeshCollider>().enabled = toggle;
         ListElementController.SendMessage(
             methodName: "ToggleSelectability",
