@@ -8,9 +8,8 @@ public class ViewVectorRotation : RotationWidgetElement
     private Vector3 WidgetCenter;
     private Vector3 LastClickVector;
 
-    private bool OnWidget = false;
-
     private bool InRotationMode = false;
+    private bool OnWidget = false;
 
     public void Update()
     {

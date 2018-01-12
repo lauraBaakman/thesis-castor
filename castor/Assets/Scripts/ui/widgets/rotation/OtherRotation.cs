@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class OtherRotation : RotationWidgetElement
 {
-
     //All stored positions are in world coordinates
     private Vector3 ClickPositionOnSphere;
     private Sphere InnerSphere;
