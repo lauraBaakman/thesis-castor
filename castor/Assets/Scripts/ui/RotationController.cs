@@ -13,7 +13,7 @@ public class RotationController : TransformController
         BaseStart();
     }
 
-    protected override void FragmentSelected(bool selected)
+    protected override void FragmentSelected()
     {
         GameObject rotatedObject = ObjectsSelected() ? SelectedFragments : Fragments;
 

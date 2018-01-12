@@ -13,7 +13,7 @@ public abstract class TransformController : MonoBehaviour
 
     public void FragmentSelectionStateChanged(bool newSelectionState){
         UpdateNumberOfSelectedObjects(newSelectionState);
-        FragmentSelected(newSelectionState);
+        FragmentSelected();
     }
 
     private void UpdateNumberOfSelectedObjects(bool newSelectionState){
@@ -35,5 +35,5 @@ public abstract class TransformController : MonoBehaviour
         return NumberOfSelectedObjects > 0;
     }
 
-    protected abstract void FragmentSelected(bool selected);
+    protected abstract void FragmentSelected();
 }

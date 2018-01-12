@@ -16,7 +16,7 @@ public class ObjectTranslationController : TransformController
         Toggle.isOn = false;
     }
 
-    protected override void FragmentSelected(bool selected)
+    protected override void FragmentSelected()
     {
         Toggle.interactable = ObjectsSelected();
         if (NoObjectsSelected()) ExitTranslationMode();
