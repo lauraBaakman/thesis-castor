@@ -21,7 +21,6 @@ public class OtherRotation : RotationWidgetElement
 
     private void Awake()
     {
-        //gameObject.AddComponent<MeshCollider>();
     }
 
     void Update()
