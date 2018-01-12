@@ -10,7 +10,7 @@ public class RotationWidget : MonoBehaviour
     private GameObject Sphere;
 
 
-    void Start()
+    void Awake()
     {
         Donut = FindGameObjectByName("OuterDonut");
         ClickPositionIndicator = FindGameObjectByName("ViewVectorClickPositionIndicator");
