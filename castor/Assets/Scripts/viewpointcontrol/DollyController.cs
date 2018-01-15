@@ -26,7 +26,8 @@ public class DollyController : MonoBehaviour
         ClampScale();
     }
 
-    private void ClampScale(){
+    private void ClampScale()
+    {
         Vector3 scale = transform.localScale;
 
         scale = scale.Clamped(minLocalScale, maxLocalScale);
@@ -39,7 +40,8 @@ public class DollyController : MonoBehaviour
         return Input.GetButton(KeyboardAxisName);
     }
 
-    private bool DetectedMouseDolly(){
+    private bool DetectedMouseDolly()
+    {
         float value = Input.GetAxis(MouseAxisName);
         return !value.Equals(0.0f);
     }
