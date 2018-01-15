@@ -1,12 +1,14 @@
-using System;
 using UnityEngine;
 
+/// <summary>
+/// Game object extensions contains extensions for GameObjects.
+/// </summary>
 public static class GameObjectExtensions
 {
 
-	//source https://answers.unity.com/answers/641022/view.html
 	/// <summary>
 	/// Adds a copy component of type T to the gameobject. 
+    /// source https://answers.unity.com/answers/641022/view.html
 	/// </summary>
 	/// <returns>The copied component.</returns>
 	/// <param name="go">Gamobject</param>
@@ -17,6 +19,12 @@ public static class GameObjectExtensions
 		return go.AddComponent<T> ().GetCopyOf (toAdd) as T;
 	}
 
+    /// <summary>
+    /// Finds a child gameobject of this gameobject by name.
+    /// </summary>
+    /// <returns>The child.</returns>
+    /// <param name="go">This gamobject</param>
+    /// <param name="childName">The name of the looked for child object.</param>
     public static GameObject FindChildByName(this GameObject go, string childName)
     {
         Transform childTransform = go.transform.Find(childName);
@@ -26,10 +34,10 @@ public static class GameObjectExtensions
         return null;
     }
 
-	//Source: https://forum.unity.com/threads/bounds-of-a-whole-hierarchy.4525/#post-1276595
 	/// <summary>
 	/// Compute the bounds the specified gameobject based on the MeshRenderers attatched to it 
 	/// and its children.
+    /// Source: https://forum.unity.com/threads/bounds-of-a-whole-hierarchy.4525/#post-1276595
 	/// </summary>
 	/// <param name="go">The gameobject of which the bounds need to be compuated.</param>
 	public static Bounds Bounds (this GameObject go)

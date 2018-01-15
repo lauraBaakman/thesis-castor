@@ -2,9 +2,20 @@ using System;
 using System.Reflection;
 using UnityEngine;
 
+
+/// <summary>
+/// Component extensions contains extensions for Unity Components.
+/// </summary>
 public static class ComponentExtensions
 {
-    //source https://answers.unity.com/answers/641022/view.html
+    /// <summary>
+    /// Creates a copy of a Component.
+    /// //source https://answers.unity.com/answers/641022/view.html
+    /// </summary>
+    /// <returns>The copy of this component.</returns>
+    /// <param name="comp">The component to copy.</param>
+    /// <param name="other">The component the values of comp should be copied to.</param>
+    /// <typeparam name="T">The type of component.</typeparam>
     public static T GetCopyOf<T>(this Component comp, T other) where T : Component
     {
         Type type = comp.GetType();

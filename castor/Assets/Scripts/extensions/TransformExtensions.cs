@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Extension methods for the Transform class.
+/// </summary>
 public static class TransformExtensions
 {
 

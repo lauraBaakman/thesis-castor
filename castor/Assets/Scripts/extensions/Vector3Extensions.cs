@@ -32,6 +32,14 @@ public static class Vector3Extensions
         return vector;        
     }
 
+
+    /// <summary>
+    /// Divides vector elementwise with the other vector.
+    /// </summary>
+    /// <returns>A new vector with the element wise division of this vector and 
+    /// the passed vector.</returns>
+    /// <param name="vector">Vector.</param>
+    /// <param name="other">Other.</param>
     public static Vector3 DivideElementWise(this Vector3 vector, Vector3 other){
         Vector3 result = new Vector3(
             vector.x / other.x,
@@ -57,11 +65,21 @@ public static class Vector3Extensions
         return result;
     }
 
+    /// <summary>
+    /// Returns the minimum value present in the specified vector.
+    /// </summary>
+    /// <returns>The minimum value in the vector.</returns>
+    /// <param name="vector">Vector to find the minimum value of.</param>
     public static float Min(this Vector3 vector)
     {
         return Mathf.Min(Mathf.Min(vector.x, vector.y), vector.z);
     }
 
+    /// <summary>
+    /// Returns the maximum value present in the specified vector.
+    /// </summary>
+    /// <returns>The maximum value in the vector.</returns>
+    /// <param name="vector">Vector to find the maximum value of.</param>
     public static float Max(this Vector3 vector)
     {
         return Mathf.Max(Mathf.Max(vector.x, vector.y), vector.z);
