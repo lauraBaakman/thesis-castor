@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Fragment list element controller handles the functionality supported by a 
+/// single element of the Fragment list, i.e. it handles the UI representation 
+/// of a single fracture fragment.
+/// </summary>
 public class FragmentListElementController : MonoBehaviour
 {
 	/// <summary>
@@ -116,6 +121,12 @@ public class FragmentListElementController : MonoBehaviour
 		VisibilityToggle.isOn = toggle;   
 	}
 
+    /// <summary>
+    /// Toggles the selectability of a fragment, if an object is selectable it 
+    /// can be selected by the user for further manipulation.
+    /// </summary>
+    /// <param name="toggle">If set to <c>true</c> the object can be selected 
+    /// by the user for manipulation.</param>
     public void ToggleSelectability(bool toggle)
     {
         SelectionToggle.interactable = toggle;

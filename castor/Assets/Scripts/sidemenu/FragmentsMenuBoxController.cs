@@ -3,6 +3,9 @@ using UnityEngine;
 
 using SimpleFileBrowser;
 
+/// <summary>
+/// Fragments menu box controller controls the menu box that is responsible for the fragments.
+/// </summary>
 public class FragmentsMenuBoxController : MonoBehaviour
 {
     /// <summary>

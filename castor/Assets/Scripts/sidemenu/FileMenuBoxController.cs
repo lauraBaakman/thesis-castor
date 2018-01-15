@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// File menu box controller controls the File Menu Box that handles going back 
+/// to the start up menu, saving the reduction and termination the application.
+/// </summary>
 public class FileMenuBoxController : MonoBehaviour {
 
 	/// <summary>
