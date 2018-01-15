@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Fragments controller controls the parent object that contails all fragments.
+/// </summary>
 public class FragmentsController : MonoBehaviour
 {
 

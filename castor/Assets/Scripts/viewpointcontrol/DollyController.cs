@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Controls the Dolly of the Viewoint.
+/// </summary>
 public class DollyController : MonoBehaviour
 {
 
@@ -18,14 +21,8 @@ public class DollyController : MonoBehaviour
 
     public void Update()
     {
-        if (DetectedKeyboardDolly())
-        {
-            Dolly(KeyboardAxisName);
-        }
-
-        if(DetectedMouseDolly()){
-            Dolly(MouseAxisName);
-        }
+        if (DetectedKeyboardDolly()) Dolly(KeyboardAxisName);
+        if (DetectedMouseDolly()) Dolly(MouseAxisName);
         ClampScale();
     }
 

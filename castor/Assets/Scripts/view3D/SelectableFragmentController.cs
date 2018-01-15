@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Selectable fragment controller, component to attatch to fragments that 
+/// should be selectable.
+/// </summary>
 [RequireComponent(typeof(FragmentController))]
-
 public class SelectableFragmentController : MonoBehaviour
 {
+    /// <summary>
+    /// The object that is used to indicate the the fragment is selected.
+    /// </summary>
     GameObject Ghost;
 
     void Awake()

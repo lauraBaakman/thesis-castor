@@ -1,12 +1,23 @@
 using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Component attatched to the objects used to indicate selection.
+/// </summary>
 public class SelectionGhostController : MonoBehaviour
 {
+    /// <summary>
+    /// The alpha value of the ghost objects.
+    /// </summary>
     public float Alpha = 0.4f;
 
+    /// <summary>
+    /// The scale factor of the ghost objects.
+    /// </summary>
     public float scaleFactor = 1.1f;
 
+    /// <summary>
+    /// If the user clicks the ghost object the associated object is deselected.
+    /// </summary>
     public void OnMouseDown()
     {
         GetComponentInParent<FragmentController>().ToggleSelection(false);
@@ -23,6 +34,11 @@ public class SelectionGhostController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Populate the ghost object based on the specified parent, i.e. the objects
+    /// whose selection the ghost object indicates.
+    /// </summary>
+    /// <param name="parent">The parent of the current object.</param>
     public void Populate(GameObject parent)
     {
         name = DetermineName(parent.name);

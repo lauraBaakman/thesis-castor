@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Controls the Pan of the viewpoint in a single direction.
+/// </summary>
 abstract public class DirectionlessPanController : MonoBehaviour
 {
     private string KeyBoardAxis;
@@ -10,26 +13,20 @@ abstract public class DirectionlessPanController : MonoBehaviour
 
     void Update()
     {
-        if (DetectedKeyboardPan())
-        {
-            Pan(KeyBoardAxis);
-        }
-
-        if (DetectedMousePan())
-        {
-            Pan(MouseAxis);
-        }
+        if (DetectedKeyboardPan()) Pan(KeyBoardAxis);
+        if (DetectedMousePan()) Pan(MouseAxis);
 
         ClampPositionToViewPort();
     }
 
-    private void ClampPositionToViewPort(){
+    private void ClampPositionToViewPort()
+    {
         Vector3 position = Camera.main.WorldToViewportPoint(transform.position);
 
         position.x = Mathf.Clamp01(position.x);
         position.y = Mathf.Clamp01(position.y);
 
-        transform.position = Camera.main.ViewportToWorldPoint(position);        
+        transform.position = Camera.main.ViewportToWorldPoint(position);
     }
 
     private bool DetectedKeyboardPan()
@@ -62,6 +59,10 @@ abstract public class DirectionlessPanController : MonoBehaviour
     }
 }
 
+
+/// <summary>
+/// Controls the pan along the vertical axis.
+/// </summary>
 public class VerticalPanController : DirectionlessPanController
 {
     void Awake()
@@ -71,6 +72,9 @@ public class VerticalPanController : DirectionlessPanController
     }
 }
 
+/// <summary>
+/// Controls the pan along the horizontal axis.
+/// </summary>
 public class HorizontalPanController : DirectionlessPanController
 {
     private void Awake()
