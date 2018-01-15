@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// The Menu controller controls the menu that is shown on start up.  
+/// </summary>
 public class MenuController : MonoBehaviour
 {
 
@@ -31,10 +32,10 @@ public class MenuController : MonoBehaviour
 		button.onClick.AddListener (OnNewReductionButton);
 	}
 
-	private Button GetButtonByName (string name)
+    private Button GetButtonByName (string buttonName)
 	{
-		GameObject gameObject = GameObject.Find (name);
-		Button button = gameObject.GetComponent<Button> ();
+        GameObject buttonGO = GameObject.Find (buttonName);
+		Button button = buttonGO.GetComponent<Button> ();
 		return button;
 	}
 
