@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 
+
+/// <summary>
+/// Player prefs updater updates the player preferences to ensure that every required
+/// value that has not been stored previously is stored in the player preferences.
+/// </summary>
 public class PlayerPrefsUpdater
 {
 

@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using SimpleFileBrowser;
 
+/// <summary>
+/// Persistent object, that is created when starting the application and only 
+/// dies when the application is terminated.
+/// </summary>
 public class PersistentObject : MonoBehaviour
 {
 	void Start ()
