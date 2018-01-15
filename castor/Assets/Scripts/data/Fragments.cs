@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// Fragments, list with all the fragments that were imported.
+/// </summary>
 public sealed class Fragments
 {
 	private static readonly Fragments Instance = new Fragments ();
 
-	private List<Fragment> FragmentList;
+    private readonly List<Fragment> FragmentList;
 
-	private Fragments ()
+    private Fragments ()
 	{
 		FragmentList = new List<Fragment> ();
 	}

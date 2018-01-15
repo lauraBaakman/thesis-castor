@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Fragment, dataobject storing the information of a fragment that was imported.
+/// </summary>
 public class Fragment
 {
 	/// <summary>
