@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Transform controller for widgets, that keeps tracks of the number of selected objects.
+/// </summary>
 public abstract class TransformController : MonoBehaviour
 {
     public GameObject Widget;

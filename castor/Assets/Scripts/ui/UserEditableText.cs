@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Combine an InputField and a Text field to create a Text that is userEdditable.
+/// </summary>
 public class UserEditableText : MonoBehaviour
 {
 

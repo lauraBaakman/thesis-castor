@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// General implementation of the button controller for the buttons that handle 
+/// transformations.
+/// </summary>
 public class TransformationButtonController : MonoBehaviour
 {
-
     private ColorBlock ColorBlock;
     private Image Image;
 
+    /// <summary>
+    /// The associated TransformController that enables/disables the widget.
+    /// </summary>
     public TransformController Controller;
 
     private void Awake()

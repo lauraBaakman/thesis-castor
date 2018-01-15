@@ -11,8 +11,10 @@ using System.Linq;
 /**
     Class for importing .obj files at runtime.
 */
-public class ObjImporter {
-    private struct MeshStruct {
+public class ObjImporter
+{
+    private struct MeshStruct
+    {
         public Vector3[] vertices;
         public Vector3[] normals;
         public Vector2[] uv;
@@ -27,10 +29,11 @@ public class ObjImporter {
     }
 
     // Use this for initialization
-    public static Mesh ImportFile(string filePath) {
+    public static Mesh ImportFile(string filePath)
+    {
         var newMesh = CreateMeshStruct(filePath);
         PopulateMeshStruct(ref newMesh);
-        
+
         var newVerts = new Vector3[newMesh.faceData.Length];
         var newUVs = new Vector2[newMesh.faceData.Length];
         var newNormals = new Vector3[newMesh.faceData.Length];
@@ -38,17 +41,19 @@ public class ObjImporter {
         /* The following foreach loops through the facedata and assigns the appropriate vertex, uv, or normal
          * for the appropriate Unity mesh array. It also performs scaling.
          */
-        foreach (var v in newMesh.faceData) {
-            newVerts[i] = newMesh.vertices[(int) v.x - 1] / 10;
+        foreach (var v in newMesh.faceData)
+        {
+            newVerts[i] = newMesh.vertices[(int)v.x - 1] / 10;
             if (v.y >= 1)
-                newUVs[i] = newMesh.uv[(int) v.y - 1];
+                newUVs[i] = newMesh.uv[(int)v.y - 1];
 
             if (v.z >= 1)
-                newNormals[i] = newMesh.normals[(int) v.z - 1];
+                newNormals[i] = newMesh.normals[(int)v.z - 1];
             i++;
         }
 
-        var mesh = new Mesh {
+        var mesh = new Mesh
+        {
             vertices = newVerts,
             uv = newUVs,
             normals = newNormals,
@@ -61,19 +66,21 @@ public class ObjImporter {
         return mesh;
     }
 
-    public static void AverageVertices(Mesh mesh) {
+    public static void AverageVertices(Mesh mesh)
+    {
         mesh.vertices = AverageVertices(mesh.vertices);
         mesh.RecalculateBounds();
     }
 
-    public static Vector3[] AverageVertices(Vector3[] vertices) {
+    public static Vector3[] AverageVertices(Vector3[] vertices)
+    {
         var minX = vertices.Min(vertex => vertex.x);
         var minY = vertices.Min(vertex => vertex.y);
         var minZ = vertices.Min(vertex => vertex.z);
         var maxX = vertices.Max(vertex => vertex.x);
         var maxY = vertices.Max(vertex => vertex.y);
         var maxZ = vertices.Max(vertex => vertex.z);
-        
+
         var average = new Vector3((minX + maxX) / 2, (minY + maxY) / 2, (minZ + maxZ) / 2);
 
         var newVertices = vertices.Select(vertex => vertex - average).ToArray();
@@ -81,32 +88,42 @@ public class ObjImporter {
     }
 
 
-    private static MeshStruct CreateMeshStruct(string filename) {
+    private static MeshStruct CreateMeshStruct(string filename)
+    {
         var triangles = 0;
         var vertices = 0;
         var vt = 0;
         var vn = 0;
         var face = 0;
-        var mesh = new MeshStruct {fileName = filename};
+        var mesh = new MeshStruct { fileName = filename };
         var stream = File.OpenText(filename);
         var entireText = stream.ReadToEnd();
         stream.Close();
-        using (var reader = new StringReader(entireText)) {
+        using (var reader = new StringReader(entireText))
+        {
             var currentText = reader.ReadLine();
-            char[] splitIdentifier = {' '};
-            while (currentText != null) {
-                if (!currentText.StartsWith("f ") && !currentText.StartsWith("v ") && !currentText.StartsWith("vt ")
-                    && !currentText.StartsWith("vn ")) {
+            char[] splitIdentifier = { ' ' };
+            while (currentText != null)
+            {
+                if (!currentText.StartsWith("f ") &&
+                    !currentText.StartsWith("v ") &&
+                    !currentText.StartsWith("vt ") &&
+                    !currentText.StartsWith("vn ")
+                )
+                {
                     currentText = reader.ReadLine();
-                    if (currentText != null) {
+                    if (currentText != null)
+                    {
                         currentText = currentText.Replace("  ", " ");
                     }
                 }
-                else {
+                else
+                {
                     currentText = currentText.Trim(); //Trim the current line
                     var brokenString = currentText.Split(splitIdentifier,
                         50);
-                    switch (brokenString[0]) {
+                    switch (brokenString[0])
+                    {
                         case "v":
                             vertices++;
                             break;
@@ -126,7 +143,8 @@ public class ObjImporter {
                             break;
                     }
                     currentText = reader.ReadLine();
-                    if (currentText != null) {
+                    if (currentText != null)
+                    {
                         currentText = currentText.Replace("  ", " ");
                     }
                 }
@@ -140,15 +158,17 @@ public class ObjImporter {
         return mesh;
     }
 
-    private static void PopulateMeshStruct(ref MeshStruct mesh) {
+    private static void PopulateMeshStruct(ref MeshStruct mesh)
+    {
         var stream = File.OpenText(mesh.fileName);
         var entireText = stream.ReadToEnd();
         stream.Close();
-        using (var reader = new StringReader(entireText)) {
+        using (var reader = new StringReader(entireText))
+        {
             var currentText = reader.ReadLine();
 
-            char[] splitIdentifier = {' '};
-            char[] splitIdentifier2 = {'/'};
+            char[] splitIdentifier = { ' ' };
+            char[] splitIdentifier2 = { '/' };
             var f = 0;
             var f2 = 0;
             var v = 0;
@@ -156,22 +176,27 @@ public class ObjImporter {
             var vt = 0;
             var vt1 = 0;
             var vt2 = 0;
-            while (currentText != null) {
+            while (currentText != null)
+            {
                 if (!currentText.StartsWith("f ") && !currentText.StartsWith("v ") && !currentText.StartsWith("vt ") &&
                     !currentText.StartsWith("vn ") && !currentText.StartsWith("g ") &&
                     !currentText.StartsWith("usemtl ") &&
                     !currentText.StartsWith("mtllib ") && !currentText.StartsWith("vt1 ") &&
                     !currentText.StartsWith("vt2 ") &&
-                    !currentText.StartsWith("vc ") && !currentText.StartsWith("usemap ")) {
+                    !currentText.StartsWith("vc ") && !currentText.StartsWith("usemap "))
+                {
                     currentText = reader.ReadLine();
-                    if (currentText != null) {
+                    if (currentText != null)
+                    {
                         currentText = currentText.Replace("  ", " ");
                     }
                 }
-                else {
+                else
+                {
                     currentText = currentText.Trim();
                     var brokenString = currentText.Split(splitIdentifier, 50);
-                    switch (brokenString[0]) {
+                    switch (brokenString[0])
+                    {
                         case "g":
                             break;
                         case "usemtl":
@@ -213,7 +238,8 @@ public class ObjImporter {
 
                             var j = 1;
                             var intArray = new List<int>();
-                            while (j < brokenString.Length && ("" + brokenString[j]).Length > 0) {
+                            while (j < brokenString.Length && ("" + brokenString[j]).Length > 0)
+                            {
                                 var temp = new Vector3();
                                 var brokenBrokenString = brokenString[j]
                                     .Split(splitIdentifier2,
@@ -249,7 +275,8 @@ public class ObjImporter {
                             break;
                     }
                     currentText = reader.ReadLine();
-                    if (currentText != null) {
+                    if (currentText != null)
+                    {
                         currentText =
                             currentText.Replace("  ", " "); //Some .obj files insert double spaces, this removes them.
                     }

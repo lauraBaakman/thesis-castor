@@ -1,8 +1,13 @@
 ﻿using UnityEngine.UI;
 
+/// <summary>
+/// Rotation controller handles the enable/disabling of the general rotation mode.
+/// </summary>
 public class ObjectTranslationController : TransformController
 {
-
+    /// <summary>
+    /// The toggle that enables/disable translation mode.
+    /// </summary>
     public Toggle Toggle;
 
     public void Start()

@@ -1,8 +1,17 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// View Vector rotation should be linked to the donut that controls the rotation around 
+/// the view vector.
+/// 
+/// All positions stored in this class are in world space.
+/// </summary>
 public class ViewVectorRotation : RotationWidgetElement
 {
-    //All stored positions are in world coordinates
+    /// <summary>
+    /// The part of the widget that indicates where the user clicked to start 
+    /// the rotation around the view vector.
+    /// </summary>
     public GameObject ClickPositionIndicator;
 
     private Vector3 WidgetCenter;
@@ -30,11 +39,15 @@ public class ViewVectorRotation : RotationWidgetElement
         return MouseMoved() && OnWidget;
     }
 
+    /// <summary>
+    /// Method that fires when the mouse enters the widget element.
+    /// </summary>
     public void OnMouseEnter()
     {
         OnWidget = true;
     }
 
+    /// Method that fires when the mouse leaves the widget element.
     public void OnMouseExit()
     {
         OnWidget = false;
@@ -54,6 +67,10 @@ public class ViewVectorRotation : RotationWidgetElement
         LastClickVector = GetVectorFromWidgetCenterToCurrentMousePosition();
     }
 
+
+    /// <summary>
+    /// Method that fires when the user clicks on the widget.
+    /// </summary>
     public void OnMouseDown()
     {
         if (!InRotationMode) InitializeRotationMode();

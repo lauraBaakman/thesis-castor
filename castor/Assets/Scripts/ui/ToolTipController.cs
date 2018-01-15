@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Ensures that the tooltip is shown when needed.
+/// </summary>
 public class ToolTipController : MonoBehaviour, 
 	IPointerEnterHandler, 
 	IPointerExitHandler
@@ -68,10 +69,13 @@ public class ToolTipController : MonoBehaviour,
 	}
 }
 
+/// <summary>
+/// Timer implements a timer.
+/// </summary>
 public class Timer
 {
-	private float TimeToReach = 0;
-	private float TimePassed = 0;
+    private float TimeToReachInS = 0;
+    private float TimePassedInS = 0;
 
 	private bool Active = false;
 
@@ -81,7 +85,7 @@ public class Timer
 	/// <param name="timeToReach">Time to reach, the time the timer should run before it 'rings'.</param>
 	public Timer (float timeToReach)
 	{
-		TimeToReach = timeToReach;
+		TimeToReachInS = timeToReach;
 	}
 
 	/// <summary>
@@ -107,16 +111,16 @@ public class Timer
 	/// </summary>
 	public void Reset ()
 	{
-		TimePassed = 0;
+		TimePassedInS = 0;
 	}
 
 	/// <summary>
-	/// Determines whether the timer has been completed, i.e. if <TimeToReach cref="TimeToReach"> has passed since the timer was activated
+	/// Determines whether the timer has been completed, i.e. if <TimeToReach cref="TimeToReachInS"> has passed since the timer was activated
 	/// </summary>
 	/// <returns><c>true</c> if this instance is completed; otherwise, <c>false</c>.</returns>
 	public bool IsCompleted ()
 	{
-		return 	Active && TimePassed >= TimeToReach;
+		return 	Active && TimePassedInS >= TimeToReachInS;
 	}
 
 	/// <summary>
@@ -125,7 +129,7 @@ public class Timer
 	public void Update ()
 	{
 		if (Active) {
-			TimePassed += Time.deltaTime;	
+			TimePassedInS += Time.deltaTime;	
 		}
 	}
 }

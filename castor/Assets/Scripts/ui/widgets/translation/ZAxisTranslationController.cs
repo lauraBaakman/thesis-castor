@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Controller of translation along the z-axis.
+/// </summary>
 public class ZAxisTranslationController : AbstractAxisController
 {
 

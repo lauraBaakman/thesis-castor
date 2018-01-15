@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Rotation controller handles the enable/disabling of the general rotation mode.
+/// </summary>
 public class RotationController : TransformController
 {
     private GameObject Fragments;

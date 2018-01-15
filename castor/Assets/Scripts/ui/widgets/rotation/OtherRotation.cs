@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Other rotation should be linked to a sphere that controls the rotation around 
+/// other vectors than the view vector.
+/// 
+/// All positions stored in this class are in world space.
+/// </summary>
 public class OtherRotation : RotationWidgetElement
 {
-    //All stored positions are in world coordinates
     private Vector3 ClickPositionOnSphere;
     private Sphere InnerSphere;
 
@@ -49,6 +52,11 @@ public class OtherRotation : RotationWidgetElement
         return rotation;
     }
 
+
+    /// <summary>
+    /// Method that triggers when the user has pressed the mouse while over the 
+    /// associated gameobject.
+    /// </summary>
     public void OnMouseDown()
     {
         if (!InRotationMode)
@@ -97,6 +105,9 @@ public class OtherRotation : RotationWidgetElement
     }
 }
 
+/// <summary>
+/// Sphere represents a Sphere.
+/// </summary>
 public class Sphere
 {
     public Vector3 Center;

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Abstract implementation of a widget transform controller.
+/// </summary>
 public abstract class WidgetTransformController : MonoBehaviour
 {
     public GameObject ObjectControlledByWidget;

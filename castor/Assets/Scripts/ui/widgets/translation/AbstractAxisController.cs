@@ -1,13 +1,24 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Abstract axis controller, abstract implementation of the translation along a 
+/// single axis.
+/// 
+/// All stored positions are in world space
+/// </summary>
 [RequireComponent(typeof(MeshRenderer))]
 public abstract class AbstractAxisController : MonoBehaviour
 {
 
-    //All stored positions are in world space
+    /// <summary>
+    /// The material of the axis when the axis is selected.
+    /// </summary>
     public Material SelectedMaterial;
     private Material NormalMaterial;
 
+    /// <summary>
+    /// The gamobject that is translatd.
+    /// </summary>
     public GameObject TranslatedObject;
 
     private bool InAxisTranslationMode = false;
@@ -18,6 +29,11 @@ public abstract class AbstractAxisController : MonoBehaviour
     private static string HorizontalMouseAxis = "Mouse Y";
 
     private Vector3 InitialPosition;
+
+    /// <summary>
+    /// The vector along which the translation occurs that is controlled by this
+    ///  axis of the widget.
+    /// </summary>
     public Vector3 DirectionVector;
 
     void Awake()
