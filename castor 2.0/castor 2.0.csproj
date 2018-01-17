@@ -97,14 +97,52 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms">
-      <HintPath>Assets/StandaloneFileBrowser/Plugins/System.Windows.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Ookii.Dialogs">
-      <HintPath>Assets/StandaloneFileBrowser/Plugins/Ookii.Dialogs.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\FileBrowser.cs" />
+    <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\FileBrowserItem.cs" />
+    <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\FileBrowserMovement.cs" />
+    <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\FileBrowserQuickLink.cs" />
+    <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\SimpleRecycledListView\IListViewAdapter.cs" />
+    <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\SimpleRecycledListView\ListItem.cs" />
+    <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\SimpleRecycledListView\RecycledListView.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\AssertionComponent.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\AssertionException.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Assertions.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\CheckMethod.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\ActionBase.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\BoolComparer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\ColliderComparer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\ComparerBase.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\FloatComparer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\GeneralComparer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\IntComparer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\IsRenderedByCamera.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\StringComparer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\TransformComparer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\ValueDoesNotChange.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\Vector2Comparer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\Vector3Comparer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\Vector4Comparer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\VectorComparerBase.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\InvalidPathException.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Assertions\MemberResolver.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Common\ITestResult.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\Common\TestResultState.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestingAssets\CallTesting.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\DTOFormatter.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTest.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTestAttribute.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTestsProvider.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\ITestRunnerCallback.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\NetworkResultSender.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\ResultDTO.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestComponent.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestResult.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestResultRenderer.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunner.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerCallbackList.cs" />
+    <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
     <Compile Include="Assets\Scripts\Buttons\AbstractButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\AddFragmentButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
@@ -115,57 +153,10 @@
     <Compile Include="Assets\Scripts\Ticker\Messages.cs" />
     <Compile Include="Assets\Scripts\Ticker\Receiver.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\StandaloneFileBrowser\IStandaloneFileBrowser.cs" />
-    <Compile Include="Assets\StandaloneFileBrowser\Sample\BasicSample.cs" />
-    <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileImage.cs" />
-    <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileText.cs" />
-    <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleSaveFileImage.cs" />
-    <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleSaveFileText.cs" />
-    <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowser.cs" />
-    <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserEditor.cs" />
-    <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserMac.cs" />
-    <Compile Include="Assets\StandaloneFileBrowser\StandaloneFileBrowserWindows.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\CheckMethod.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\ActionBase.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\BoolComparer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\ColliderComparer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\ComparerBase.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\FloatComparer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\GeneralComparer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\IntComparer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\IsRenderedByCamera.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\StringComparer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\TransformComparer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\ValueDoesNotChange.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\Vector2Comparer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\Vector3Comparer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\Vector4Comparer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Comparers\VectorComparerBase.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\InvalidPathException.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\MemberResolver.cs" />
-    <Compile Include="Assets\UnityTestTools\Common\ITestResult.cs" />
-    <Compile Include="Assets\UnityTestTools\Common\TestResultState.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestingAssets\CallTesting.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\DTOFormatter.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTest.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTestAttribute.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTestsProvider.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\ITestRunnerCallback.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\NetworkResultSender.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\ResultDTO.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestComponent.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestResult.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestResultRenderer.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunner.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerCallbackList.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\UnityTestTools\LICENSE.txt" />
-    <None Include="Assets\UnityTestTools\changelog.txt" />
+    <None Include="Assets\Libraries\UnityTestTools\LICENSE.txt" />
+    <None Include="Assets\Libraries\UnityTestTools\changelog.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
