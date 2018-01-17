@@ -104,6 +104,7 @@
     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Help\HelpMessageSender.cs" />
+    <Compile Include="Assets\Scripts\IO\FragmentImporter.cs" />
     <Compile Include="Assets\Scripts\Ticker\Messages.cs" />
     <Compile Include="Assets\Scripts\Ticker\Receiver.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunner.cs" />
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerCallbackList.cs" />
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
+    <Compile Include="Assets\Scripts\IO\ObjFileReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UnityTestTools\LICENSE.txt" />
