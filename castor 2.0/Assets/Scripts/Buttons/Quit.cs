@@ -18,7 +18,7 @@ namespace Buttons
         private void QuitApplication()
         {
             Application.Quit();
-            if (Application.isEditor) Debug.Log("Pressed the quit button, however Application.Quit() does not work in editor mode.");
+            if (Application.isEditor) Debug.Log("We should quit the application, however Application.Quit() does not work in editor mode.");
         }
 
         protected override void DetectKeyBoardShortCut()
