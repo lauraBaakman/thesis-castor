@@ -16,7 +16,7 @@ namespace Ticker
 
         protected string BuildMessage(string type, string text)
         {
-            string baseFormat = "{0}: {1}";
+            string baseFormat = "<b>{0}</b>: {1}";
             return string.Format(baseFormat, type, text);
         }
 
