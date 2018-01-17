@@ -37,11 +37,8 @@ namespace IO
 
     internal class FragmentImporter
     {
-
-        //TODO Extract object name from path name and set as fragment name
-
         private static string PrefabPath = "Fragment";
-        private GameObject Parent;
+        private readonly GameObject Parent;
 
         internal FragmentImporter(GameObject parent)
         {
@@ -55,7 +52,8 @@ namespace IO
             AddFragmentToScene(name, mesh);
         }
 
-        private string ExtractObjectName(string path){
+        private string ExtractObjectName(string path)
+        {
             return Path.GetFileNameWithoutExtension(path);
         }
 
