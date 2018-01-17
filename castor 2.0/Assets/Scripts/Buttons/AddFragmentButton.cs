@@ -18,7 +18,16 @@ namespace Buttons
 
         private void AddFragment()
         {
-            new IO.FragmentsImporter(FragmentsRoot).Import();
+            new IO.FragmentsImporter(
+                fragmentParent: FragmentsRoot,
+                callBack: NotifyUser
+            ).Import();
+        }
+
+        private void NotifyUser(Ticker.Message message)
+        {
+            //TODO Send mesage actually to ticker
+            Debug.Log(message.Text);
         }
     }
 }

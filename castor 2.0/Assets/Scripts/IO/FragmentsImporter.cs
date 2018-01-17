@@ -1,17 +1,21 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 using Utils;
 
 namespace IO
 {
+    public delegate void CallBack(Ticker.Message message);
+
     public class FragmentsImporter
     {
         public GameObject FragmentsRoot;
 
-        public FragmentsImporter(GameObject fragments)
+        private CallBack CallBack;
+
+        public FragmentsImporter(GameObject fragmentParent, CallBack callBack)
         {
-            FragmentsRoot = fragments;
+            FragmentsRoot = fragmentParent;
+            CallBack = callBack;
         }
 
         public void Import()
@@ -31,7 +35,7 @@ namespace IO
 
         private void ProcessFragmentFile(string path)
         {
-            FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot);
+            FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot, CallBack);
             fragmentImporter.Import(path);
         }
     }
@@ -41,9 +45,12 @@ namespace IO
         private static string PrefabPath = "Fragment";
         private readonly GameObject Parent;
 
-        internal FragmentImporter(GameObject parent)
+        private CallBack CallBack;
+
+        internal FragmentImporter(GameObject parent, CallBack callBack)
         {
             Parent = parent;
+            CallBack = callBack;
         }
 
         internal void Import(string path)
@@ -51,6 +58,14 @@ namespace IO
             Mesh mesh = ObjFileReader.ImportFile(path);
             string name = ExtractObjectName(path);
             AddFragmentToScene(name, mesh);
+            CallBack(
+                new Ticker.Message.InfoMessage(
+                    string.Format(
+                        "Added a fragment '{0}' to the scene from the file {1}.",
+                        name, path
+                    )
+                )
+            );
         }
 
         private string ExtractObjectName(string path)
