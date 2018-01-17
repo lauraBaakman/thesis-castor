@@ -16,7 +16,7 @@ namespace Buttons
 
         private void AddFragment()
         {
-            Debug.Log("Time to get a fragment from a file!");
+            new IO.FragmentImporter().Import();
         }
     }
 }
