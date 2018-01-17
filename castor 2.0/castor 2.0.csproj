@@ -152,6 +152,7 @@
     <Compile Include="Assets\Scripts\IO\ObjFileReader.cs" />
     <Compile Include="Assets\Scripts\Ticker\Messages.cs" />
     <Compile Include="Assets\Scripts\Ticker\Receiver.cs" />
+    <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
