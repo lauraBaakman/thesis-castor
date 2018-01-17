@@ -2,7 +2,7 @@
 
 namespace Buttons
 {
-    public class Quit : MonoBehaviour
+    public class Quit : AbstractButton
     {
 
         private void Update()
@@ -10,7 +10,7 @@ namespace Buttons
             DetectKeyBoardShortCut();
         }
 
-        public void OnClick()
+        public override void OnClick()
         {
             QuitApplication();
         }
@@ -21,7 +21,7 @@ namespace Buttons
             if (Application.isEditor) Debug.Log("Pressed the quit button, however Application.Quit() does not work in editor mode.");
         }
 
-        private void DetectKeyBoardShortCut()
+        protected override void DetectKeyBoardShortCut()
         {
             if (Input.GetButton("Quit")) QuitApplication();
         }
