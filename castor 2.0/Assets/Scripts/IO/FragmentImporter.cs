@@ -23,7 +23,6 @@ namespace IO
             throw new NotImplementedException();
         }
 
-
         private Mesh ReadMeshFromFile(string file)
         {
             throw new NotImplementedException();
