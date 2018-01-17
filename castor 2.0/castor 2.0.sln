@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio for Mac
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "castor 2.0", "castor 2.0.csproj", "{9077229C-4CE1-B3B2-2554-17E10A3E5262}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "castor 2.0.Editor", "castor 2.0.Editor.csproj", "{5F5F2500-6982-0964-D965-22C4B2C619D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9077229C-4CE1-B3B2-2554-17E10A3E5262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9077229C-4CE1-B3B2-2554-17E10A3E5262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9077229C-4CE1-B3B2-2554-17E10A3E5262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9077229C-4CE1-B3B2-2554-17E10A3E5262}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F5F2500-6982-0964-D965-22C4B2C619D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F5F2500-6982-0964-D965-22C4B2C619D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F5F2500-6982-0964-D965-22C4B2C619D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F5F2500-6982-0964-D965-22C4B2C619D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
