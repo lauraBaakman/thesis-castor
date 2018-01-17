@@ -76,6 +76,9 @@
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="Assembly-UnityScript">
+      <HintPath>Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
     </Reference>
@@ -142,10 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="castor 2.0.csproj">
-      <Project>{9077229C-4CE1-B3B2-2554-17E10A3E5262}</Project>
-      <Name>castor 2.0</Name>
-    </ProjectReference>
-    <ProjectReference Include="castor 2.0.unityproj">
       <Project>{9077229C-4CE1-B3B2-2554-17E10A3E5262}</Project>
       <Name>castor 2.0</Name>
     </ProjectReference>
