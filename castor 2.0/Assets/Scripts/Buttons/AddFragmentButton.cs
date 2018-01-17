@@ -5,13 +5,12 @@ namespace Buttons{
     {
         public override void OnClick()
         {
-            Debug.Log("Detected A Click");
             AddFragment();
         }
 
         protected override void DetectKeyBoardShortCut()
         {
-            Debug.Log("Detected A KeyBoard Shortcut");
+            if (Input.GetButton("Add Fragment")) AddFragment();
         }
 
         private void AddFragment(){
