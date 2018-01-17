@@ -4,19 +4,21 @@ using UnityEngine;
 
 namespace IO
 {
-    public class FragmentImporter
+    public class FragmentsImporter
     {
         //TODO Fix Colors
         //TODO Add to fragment Singleton
 
         public GameObject FragmentsRoot;
 
+        public FragmentsImporter(GameObject fragments)
+        {
+            FragmentsRoot = fragments;
+        }
+
         public void Import()
         {
             GetFragmentFiles();
-            //Mesh mesh = ReadMeshFromFile(file);
-            //GameObject fragment = CreateGameObject(mesh);
-            //AddGameObjectToScene(fragment);
         }
 
         private void GetFragmentFiles()
@@ -32,23 +34,29 @@ namespace IO
 
         private void ProcessFragmentFiles(string[] paths)
         {
-            Debug.Log("Hi!");
-        }
+            FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot);
 
-        private Mesh ReadMeshFromFile(string file)
-        {
-            throw new NotImplementedException();
-        }
-
-        private GameObject CreateGameObject(Mesh mesh)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void AddGameObjectToScene(GameObject fragment)
-        {
-            throw new NotImplementedException();
+            foreach (string path in paths)
+            {
+                fragmentImporter.Import(path);
+            }
         }
     }
+
+    internal class FragmentImporter
+    {
+
+        private GameObject Parent;
+
+        internal FragmentImporter(GameObject parent)
+        {
+            Parent = parent;
+        }
+
+        internal void Import(string path)
+        {
+            Debug.Log("Trying to import " + path);
+        }
+    }   
 
 }

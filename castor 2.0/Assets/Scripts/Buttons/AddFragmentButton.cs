@@ -4,6 +4,8 @@ namespace Buttons
 {
     public class AddFragmentButton : AbstractButton
     {
+        public GameObject FragmentsRoot;
+
         public override void OnClick()
         {
             AddFragment();
@@ -16,7 +18,7 @@ namespace Buttons
 
         private void AddFragment()
         {
-            new IO.FragmentImporter().Import();
+            new IO.FragmentsImporter(FragmentsRoot).Import();
         }
     }
 }
