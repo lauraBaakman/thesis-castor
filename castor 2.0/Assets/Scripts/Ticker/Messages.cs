@@ -13,10 +13,31 @@ namespace Ticker
             return string.Format(baseFormat, type, text);
         }
 
-        public class HelpMessage : Message
+        public class InfoMessage : Message
         {
             private static readonly Color DefaultColor = new Color(
                 0.6352941176f, 0.9019607843f, 0.3843137255f
+            );
+
+            public InfoMessage(string text, string keyboard)
+            {
+                Text = BuildMessage(
+                    type: "info",
+                    text: BuildMessageText(text, keyboard)
+                );
+                Color = DefaultColor;
+            }
+
+            private string BuildMessageText(string text, string keyboard)
+            {
+                return string.Format("({0}) {1}", keyboard, text);
+            }
+        }
+
+        public class HelpMessage : Message
+        {
+            private static readonly Color DefaultColor = new Color(
+                0.3098039216f, 0.3647058824f, 0.8470588235f
             );
 
             public HelpMessage(string text, string keyboard)
