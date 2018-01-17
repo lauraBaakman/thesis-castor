@@ -6,6 +6,13 @@ namespace Ticker
     {
         public string Text;
         public Color Color;
+        public float DecayInS;
+
+        private static float DefaultDecayInS = 6.0f;
+
+        protected Message(){
+            DecayInS = DefaultDecayInS;
+        }
 
         protected string BuildMessage(string type, string text)
         {
@@ -19,7 +26,7 @@ namespace Ticker
                 0.6352941176f, 0.9019607843f, 0.3843137255f
             );
 
-            public InfoMessage(string text, string keyboard)
+            public InfoMessage(string text, string keyboard) : base()
             {
                 Text = BuildMessage(
                     type: "info",
@@ -58,7 +65,7 @@ namespace Ticker
         public class WarningMessage : Message
         {
             private static readonly Color DefaultColor = new Color(
-                0.9882352941f, 0.8862745098f, 0.2392156863f,
+                0.9882352941f, 0.8862745098f, 0.2392156863f
             );
 
             public WarningMessage(string text)

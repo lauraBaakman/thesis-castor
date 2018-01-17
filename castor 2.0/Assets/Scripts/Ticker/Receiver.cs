@@ -4,17 +4,9 @@ namespace Ticker
 {
     public class Receiver : MonoBehaviour
     {
-
-        // Use this for initialization
-        void Start()
+        public void OnMessage(Message message)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            Debug.Log("Received message: " + message.Text);
         }
     }
 }
