@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Buttons{
+namespace Buttons
+{
     public class AddFragmentButton : AbstractButton
     {
         public override void OnClick()
@@ -13,10 +14,9 @@ namespace Buttons{
             if (Input.GetButton("Add Fragment")) AddFragment();
         }
 
-        private void AddFragment(){
+        private void AddFragment()
+        {
             Debug.Log("Time to get a fragment from a file!");
         }
-    }    
+    }
 }
-
-
