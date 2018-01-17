@@ -1,14 +1,11 @@
 ﻿using System;
-using SFB;
+using System.IO;
 using UnityEngine;
 
 namespace IO
 {
     public class FragmentsImporter
     {
-        //TODO Fix Colors
-        //TODO Add to fragment Singleton
-
         public GameObject FragmentsRoot;
 
         public FragmentsImporter(GameObject fragments)
@@ -23,29 +20,27 @@ namespace IO
 
         private void GetFragmentFiles()
         {
-            StandaloneFileBrowser.OpenFilePanelAsync(
-                title: "Open File",
-                directory: "",
-                extension: "",
-                multiselect: true,
-                cb: ProcessFragmentFiles
+            SimpleFileBrowser.FileBrowser.SetDefaultFilter(".obj");
+            SimpleFileBrowser.FileBrowser.ShowLoadDialog(
+                onSuccess: ProcessFragmentFile,
+                onCancel: () => { },
+                initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models" : null
             );
         }
 
-        private void ProcessFragmentFiles(string[] paths)
+        private void ProcessFragmentFile(string path)
         {
             FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot);
-
-            foreach (string path in paths)
-            {
-                fragmentImporter.Import(path);
-            }
+            fragmentImporter.Import(path);
         }
     }
 
     internal class FragmentImporter
     {
 
+        //TODO Extract object name from path name and set as fragment name
+
+        private static string PrefabPath = "Fragment";
         private GameObject Parent;
 
         internal FragmentImporter(GameObject parent)
@@ -55,8 +50,27 @@ namespace IO
 
         internal void Import(string path)
         {
-            Debug.Log("Trying to import " + path);
+            Mesh mesh = ObjFileReader.ImportFile(path);
+            string name = ExtractObjectName(path);
+            AddFragmentToScene(name, mesh);
         }
-    }   
+
+        private string ExtractObjectName(string path){
+            return Path.GetFileNameWithoutExtension(path);
+        }
+
+        private void AddFragmentToScene(string name, Mesh mesh)
+        {
+            GameObject fragment = UnityEngine.Object.Instantiate(
+                original: Resources.Load(PrefabPath),
+                parent: Parent.transform
+            ) as GameObject;
+
+            fragment.name = name;
+
+            MeshFilter filter = fragment.GetComponent<MeshFilter>();
+            filter.mesh = mesh;
+        }
+    }
 
 }
