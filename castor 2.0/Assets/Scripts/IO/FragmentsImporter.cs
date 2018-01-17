@@ -1,4 +1,5 @@
 ﻿using System;
+using SFB;
 using UnityEngine;
 
 namespace IO
@@ -12,15 +13,26 @@ namespace IO
 
         public void Import()
         {
-            string file = GetFragmentFile();
-            Mesh mesh = ReadMeshFromFile(file);
-            GameObject fragment = CreateGameObject(mesh);
-            AddGameObjectToScene(fragment);
+            GetFragmentFiles();
+            //Mesh mesh = ReadMeshFromFile(file);
+            //GameObject fragment = CreateGameObject(mesh);
+            //AddGameObjectToScene(fragment);
         }
 
-        private string GetFragmentFile()
+        private void GetFragmentFiles()
         {
-            throw new NotImplementedException();
+            StandaloneFileBrowser.OpenFilePanelAsync(
+                title: "Open File",
+                directory: "",
+                extension: "",
+                multiselect: true,
+                cb: ProcessFragmentFiles
+            );
+        }
+
+        private void ProcessFragmentFiles(string[] paths)
+        {
+            Debug.Log("Hi!");
         }
 
         private Mesh ReadMeshFromFile(string file)
