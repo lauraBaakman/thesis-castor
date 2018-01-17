@@ -99,7 +99,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Buttons\Quit.cs" />
+    <Compile Include="Assets\Scripts\Buttons\AbstractButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\AddFragmentButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Help\HelpMessageSender.cs" />
     <Compile Include="Assets\Scripts\Ticker\Messages.cs" />
@@ -142,7 +144,6 @@
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunner.cs" />
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerCallbackList.cs" />
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
-    <Compile Include="Assets\Scripts\Buttons\AbstractButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UnityTestTools\LICENSE.txt" />
