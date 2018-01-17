@@ -3,7 +3,7 @@
 public static class GameObjectExtensions
 {
     /// <summary>
-    /// Finds a child gameobject of this gameobject by name.
+    /// Find a child gameobject of this gameobject by name.
     /// </summary>
     /// <returns>The child.</returns>
     /// <param name="go">This gamobject</param>

@@ -5,6 +5,9 @@ using Utils;
 
 namespace Ticker
 {
+    /// <summary>
+    /// Receiver of messages that displays them.
+    /// </summary>
     public class Receiver : MonoBehaviour
     {
         private Text TickerText;
@@ -23,28 +26,33 @@ namespace Ticker
             Timer.Tic();
         }
 
-        private Text FindTickerTextComponent(){
+        private Text FindTickerTextComponent()
+        {
             GameObject tickerTextGO = gameObject.FindChildByName("Ticker Text");
-            TickerText = tickerTextGO.GetComponent<Text>();            
+            TickerText = tickerTextGO.GetComponent<Text>();
 
-            if(!TickerText){
-                Debug.LogError("Could not find the Text Component of Ticker Text");
-            }
-
+            if (!TickerText) Debug.LogError("Could not find the Text Component of Ticker Text");
             return TickerText;
         }
 
-        private void OnMessageHasDecayed(){
+        private void OnMessageHasDecayed()
+        {
             TickerText.text = noMessageText;
         }
 
+
+        /// <summary>
+        /// On the receiving of a message this function is called, it displays the message and starts a timer for hiding it.
+        /// </summary>
+        /// <param name="message">Message.</param>
         public void OnMessage(Message message)
         {
             DisplayMessage(message);
             Timer.Set(message.DecayInS);
         }
 
-        private void DisplayMessage(Message message){
+        private void DisplayMessage(Message message)
+        {
             TickerText.text = message.Text;
             TickerText.color = message.Color;
         }

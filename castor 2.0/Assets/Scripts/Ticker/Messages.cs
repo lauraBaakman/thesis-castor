@@ -2,15 +2,30 @@
 
 namespace Ticker
 {
+    /// <summary>
+    /// Message, a message send to the ticker.
+    /// </summary>
     public abstract class Message
     {
+        /// <summary>
+        /// The text of the message.
+        /// </summary>
         public string Text;
+
+        /// <summary>
+        /// The color of the message.
+        /// </summary>
         public Color Color;
+
+        /// <summary>
+        /// How long the message should be show in seconds, default is 3s.
+        /// </summary>
         public float DecayInS;
 
         private static float DefaultDecayInS = 3.0f;
 
-        protected Message(){
+        protected Message()
+        {
             DecayInS = DefaultDecayInS;
         }
 
@@ -26,6 +41,9 @@ namespace Ticker
             return string.Format(baseFormat, type, text);
         }
 
+        /// <summary>
+        /// Info message, i.e. message with information for the user that the user does not need to act on.
+        /// </summary>
         public class InfoMessage : Message
         {
             private static readonly Color DefaultColor = new Color(
@@ -39,12 +57,20 @@ namespace Ticker
             public InfoMessage(string text) : base(text, DefaultColor) { }
         }
 
+        /// <summary>
+        /// Help message, i.e. message with help information for the user.
+        /// </summary>
         public class HelpMessage : Message
         {
             private static readonly Color DefaultColor = new Color(
                 0.3098039216f, 0.3647058824f, 0.8470588235f
             );
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:Ticker.Message.HelpMessage"/> class.
+            /// </summary>
+            /// <param name="text">Text of the message.</param>
+            /// <param name="keyboard">Keyboard shortcut of the operation.</param>
             public HelpMessage(string text, string keyboard)
             {
                 Text = BuildMessage(

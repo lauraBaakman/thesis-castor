@@ -1,11 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Help message sender sends help message on hover to be displayed by the specified receiver.
+/// </summary>
 public class HelpMessageSender : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
+    /// <summary>
+    /// The message to be sent.
+    /// </summary>
     public string Message;
+
+    /// <summary>
+    /// The key board shortcut for this operation.
+    /// </summary>
     public string KeyBoard;
+
+    /// <summary>
+    /// The receiver of the message.
+    /// </summary>
     public GameObject Receiver;
 
     private bool Hovering = false;
