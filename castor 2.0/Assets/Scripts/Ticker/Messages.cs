@@ -8,7 +8,7 @@ namespace Ticker
         public Color Color;
         public float DecayInS;
 
-        private static float DefaultDecayInS = 6.0f;
+        private static float DefaultDecayInS = 3.0f;
 
         protected Message(){
             DecayInS = DefaultDecayInS;
