@@ -1,15 +1,26 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using Utils;
+
 namespace Ticker
 {
     public class Receiver : MonoBehaviour
     {
         private Text TickerText;
+        private Timer Timer;
+
+        private static string noMessageText = "";
 
         private void Awake()
         {
             TickerText = FindTickerTextComponent();
+            Timer = new Timer(OnMessageHasDecayed);
+        }
+
+        private void Update()
+        {
+            Timer.Tic();
         }
 
         private Text FindTickerTextComponent(){
@@ -23,9 +34,14 @@ namespace Ticker
             return TickerText;
         }
 
+        private void OnMessageHasDecayed(){
+            TickerText.text = noMessageText;
+        }
+
         public void OnMessage(Message message)
         {
             DisplayMessage(message);
+            Timer.Set(message.DecayInS);
         }
 
         private void DisplayMessage(Message message){
