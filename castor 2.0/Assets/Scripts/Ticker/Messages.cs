@@ -14,6 +14,12 @@ namespace Ticker
             DecayInS = DefaultDecayInS;
         }
 
+        protected Message(string text, Color color)
+        {
+            Text = text;
+            Color = color;
+        }
+
         protected string BuildMessage(string type, string text)
         {
             string baseFormat = "<b>{0}</b>: {1}";
@@ -26,19 +32,11 @@ namespace Ticker
                 0.6352941176f, 0.9019607843f, 0.3843137255f
             );
 
-            public InfoMessage(string text, string keyboard) : base()
-            {
-                Text = BuildMessage(
-                    type: "info",
-                    text: BuildMessageText(text, keyboard)
-                );
-                Color = DefaultColor;
-            }
-
-            private string BuildMessageText(string text, string keyboard)
-            {
-                return string.Format("({0}) {1}", keyboard, text);
-            }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:Ticker.Message.InfoMessage"/> class.
+            /// </summary>
+            /// <param name="text">Text of the message.</param>
+            public InfoMessage(string text) : base(text, DefaultColor) { }
         }
 
         public class HelpMessage : Message
@@ -62,22 +60,21 @@ namespace Ticker
             }
         }
 
+        /// <summary>
+        /// Warning message, i.e. message warning the user that sometehing might be going wrong.
+        /// </summary>
         public class WarningMessage : Message
         {
             private static readonly Color DefaultColor = new Color(
                 0.9882352941f, 0.8862745098f, 0.2392156863f
             );
 
-            public WarningMessage(string text)
-            {
-                Text = BuildMessage(
-                    type: "warning",
-                    text: text
-                );
-                Color = DefaultColor;
-            }
+            public WarningMessage(string text) : base(text, DefaultColor) { }
         }
 
+        /// <summary>
+        /// Error message, i.e. message notifiying the user of an error that occured.
+        /// </summary>
         public class ErrorMessage : Message
         {
 
@@ -85,14 +82,11 @@ namespace Ticker
                 0.9607843137f, 0.4156862745f, 0.5058823529f
             );
 
-            public ErrorMessage(string text)
-            {
-                Text = BuildMessage(
-                    type: "error",
-                    text: text
-                );
-                Color = DefaultColor;
-            }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:Ticker.Message.ErrorMessage"/> class.
+            /// </summary>
+            /// <param name="text">Text of the message</param>
+            public ErrorMessage(string text) : base(text, DefaultColor) { }
         }
 
     }
