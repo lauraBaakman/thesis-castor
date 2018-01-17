@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
+using Utils;
 
 namespace IO
 {
@@ -68,6 +69,11 @@ namespace IO
 
             MeshFilter filter = fragment.GetComponent<MeshFilter>();
             filter.mesh = mesh;
+
+            MeshRenderer renderer = fragment.GetComponent<MeshRenderer>();
+            Material material = renderer.material;
+            material.color = ColorGenerator.Instance.GetNextColor();
+            renderer.material = material;
         }
     }
 
