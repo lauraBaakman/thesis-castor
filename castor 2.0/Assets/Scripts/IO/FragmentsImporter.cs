@@ -84,6 +84,9 @@ namespace IO
             material.color = ColorGenerator.Instance.GetNextColor();
             renderer.material = material;
 
+            MeshCollider collider = fragment.GetComponent<MeshCollider>();
+            collider.sharedMesh = filter.mesh;
+
             return fragment;
         }
     }

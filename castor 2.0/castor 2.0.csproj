@@ -156,6 +156,7 @@
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
     <Compile Include="Assets\Scripts\Fragment\IFragmentStateDependent.cs" />
+    <Compile Include="Assets\Scripts\Fragment\FragmentSelectionController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\UnityTestTools\LICENSE.txt" />
