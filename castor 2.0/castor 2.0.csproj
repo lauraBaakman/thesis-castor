@@ -145,6 +145,7 @@
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
     <Compile Include="Assets\Scripts\Buttons\AbstractButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\AddFragmentButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\HelpButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Fragment\Interfaces.cs" />
