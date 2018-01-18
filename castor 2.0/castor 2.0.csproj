@@ -147,17 +147,18 @@
     <Compile Include="Assets\Scripts\Buttons\AddFragmentButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
+    <Compile Include="Assets\Scripts\Fragment\Interfaces.cs" />
+    <Compile Include="Assets\Scripts\Fragment\MaterialController.cs" />
+    <Compile Include="Assets\Scripts\Fragment\SelectionController.cs" />
+    <Compile Include="Assets\Scripts\Fragment\StateTracker.cs" />
     <Compile Include="Assets\Scripts\Help\HelpMessageSender.cs" />
     <Compile Include="Assets\Scripts\IO\FragmentsImporter.cs" />
     <Compile Include="Assets\Scripts\IO\ObjFileReader.cs" />
     <Compile Include="Assets\Scripts\Ticker\Messages.cs" />
     <Compile Include="Assets\Scripts\Ticker\Receiver.cs" />
+    <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
-    <Compile Include="Assets\Scripts\Fragment\IFragmentStateDependent.cs" />
-    <Compile Include="Assets\Scripts\Fragment\SelectionController.cs" />
-    <Compile Include="Assets\Scripts\Fragment\MaterialController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\UnityTestTools\LICENSE.txt" />

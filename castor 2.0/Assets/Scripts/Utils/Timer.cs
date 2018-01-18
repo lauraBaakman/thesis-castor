@@ -12,7 +12,7 @@ namespace Utils
     /// </summary>
     public class Timer
     {
-        private TimerHasFinishedHandler TimerHasFinishedHandler;
+        private readonly TimerHasFinishedHandler TimerHasFinishedHandler;
 
         private float TimeToReachInS = 0;
         private float TimePassedInS = 0;

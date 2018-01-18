@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Fragment
 {
-    public class SelectionController : MonoBehaviour, IFragmentStateDependent
+    public class SelectionController : MonoBehaviour, IFragmentStateElementToggled
     {
 
         private GameObject SelectedFragments;
@@ -31,7 +31,7 @@ namespace Fragment
             SendMessage(
                 methodName: "OnToggleSelectionState",
                 value: true,
-                options: SendMessageOptions.DontRequireReceiver
+                options: SendMessageOptions.RequireReceiver
             );
         }
 
@@ -40,14 +40,11 @@ namespace Fragment
             SendMessage(
                 methodName: "OnToggleSelectionState",
                 value: false,
-                options: SendMessageOptions.DontRequireReceiver
+                options: SendMessageOptions.RequireReceiver
             );
         }
 
-        public void OnToggledLockedState(bool locked)
-        {
-            //No need to do antyhing
-        }
+        public void OnToggledLockedState(bool locked) { }
 
         public void OnToggleSelectionState(bool selected)
         {
