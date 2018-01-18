@@ -295,7 +295,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -1134,7 +1134,7 @@ MonoBehaviour:
     _name: Activate rotation gizmo
   _activateScaleGizmoShortcut:
     _keys: 7200000000000000
-    _numberOfKeys: 1
+    _numberOfKeys: 0
     _lCtrl: 0
     _lCmd: 0
     _lAlt: 0
@@ -1149,7 +1149,7 @@ MonoBehaviour:
     _name: Activate scale gizmo
   _activateVolumeScaleGizmoShortcut:
     _keys: 7500000000000000
-    _numberOfKeys: 1
+    _numberOfKeys: 0
     _lCtrl: 0
     _lCmd: 0
     _lAlt: 0
@@ -1229,7 +1229,7 @@ MonoBehaviour:
   _transformSpace: 1
   _activeGizmoType: 0
   _transformPivotPoint: 1
-  _gizmoTypeAvailableFlags: 01010101
+  _gizmoTypeAvailableFlags: 01010000
 --- !u!1 &1077825293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,7 +1831,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -2277,7 +2277,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
