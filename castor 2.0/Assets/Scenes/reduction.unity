@@ -636,7 +636,7 @@ MonoBehaviour:
     _useStrictMouseCheck: 0
     _name: Camera pan
   _zoomSettings:
-    _zoomMode: 0
+    _zoomMode: 1
     _isZoomEnabled: 1
     _orthographicSmoothValue: 0.1
     _perspectiveSmoothValue: 0.2
@@ -645,14 +645,14 @@ MonoBehaviour:
     _orthographicSmoothZoomSpeed: 65
     _perspectiveSmoothZoomSpeed: 400
   _panSettings:
-    _panMode: 0
+    _panMode: 1
     _smoothValue: 0.15
     _standardPanSpeed: 3
     _smoothPanSpeed: 3
     _invertXAxis: 0
     _invertYAxis: 0
   _focusSettings:
-    _focusMode: 1
+    _focusMode: 2
     _constantFocusSpeed: 10
     _smoothFocusTime: 0.3
     _focusDistanceScale: 1.5
