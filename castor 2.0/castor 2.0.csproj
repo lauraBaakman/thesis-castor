@@ -308,7 +308,6 @@
     <Compile Include="Assets\Scripts\Buttons\AbstractButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\AddFragmentButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
-    <Compile Include="Assets\Scripts\Camera\AutoDolly.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Fragment\Interfaces.cs" />
     <Compile Include="Assets\Scripts\Fragment\MaterialController.cs" />
