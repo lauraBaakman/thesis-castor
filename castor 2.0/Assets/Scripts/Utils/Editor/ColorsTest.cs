@@ -30,6 +30,35 @@ public class ColorGeneratorTests
 }
 
 [TestFixture]
+public class ColorSetTests
+{
+    [Test]
+    public void TestGenerateColorSet()
+    {
+        Color baseColor = new Color(0.55f, 0.00f, 0.20f);
+        ColorSet expected = new ColorSet(
+            normal: baseColor,
+            selected: new Color(1.0f, 0.0f, 0.3643f),
+            locked: new Color(0.54898f, 0.4118f, 0.4618f)
+        );
+
+        ColorSet actual = new ColorSet(baseColor);
+
+        AssertThatColorsAreEqual(actual.Normal, expected.Normal);
+        AssertThatColorsAreEqual(actual.Selected, expected.Selected);
+        AssertThatColorsAreEqual(actual.Locked, expected.Locked);
+
+    }
+
+    private void AssertThatColorsAreEqual(Color actual, Color expected){
+        Assert.That(actual.r, Is.EqualTo(expected.r).Within(0.2));
+        Assert.That(actual.g, Is.EqualTo(expected.g).Within(0.2));
+        Assert.That(actual.b, Is.EqualTo(expected.b).Within(0.2));
+        Assert.That(actual.a, Is.EqualTo(expected.a).Within(0.2));
+    }
+}
+
+[TestFixture]
 public class HSVColorTests
 {
     [Test]
