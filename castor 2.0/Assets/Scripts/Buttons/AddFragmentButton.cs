@@ -20,11 +20,11 @@ namespace Buttons
         {
             new IO.FragmentsImporter(
                 fragmentParent: FragmentsRoot,
-                callBack: NotifyUser
+                callBack: NotifyUserOfAddedFragment
             ).Import();
         }
 
-        private void NotifyUser(string path, GameObject fragment)
+        private void NotifyUserOfAddedFragment(string path, GameObject fragment)
         {
             Ticker.Message.InfoMessage message = new Ticker.Message.InfoMessage(
                 string.Format(
@@ -32,7 +32,11 @@ namespace Buttons
                     fragment.name, path
                 )
             );
-            Debug.Log(message.Text);
+            SendMessage(
+                methodName: "OnSendMessageToTicker",
+                value: message,
+                options: SendMessageOptions.RequireReceiver
+            );
         }
     }
 }

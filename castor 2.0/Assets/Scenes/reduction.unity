@@ -290,7 +290,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 531.9139
+      value: 553.08264
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -828,7 +828,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 1595.7417
+      value: 1659.2479
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -1063,6 +1063,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FragmentsRoot: {fileID: 1276394742}
+--- !u!114 &1898046819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1898046817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5821ba9b6cf944bd68067e0ec1a0d62c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Receiver: {fileID: 1437549639}
 --- !u!1 &2052437783 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1135060811400328, guid: f2474aba1b01746338cfb3d40f0d8cea,

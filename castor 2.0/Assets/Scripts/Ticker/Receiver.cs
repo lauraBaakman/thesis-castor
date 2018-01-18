@@ -15,6 +15,16 @@ namespace Ticker
 
         private static string noMessageText = "";
 
+        /// <summary>
+        /// On the receiving of a message this function is called, it displays the message and starts a timer for hiding it.
+        /// </summary>
+        /// <param name="message">Message.</param>
+        public void OnMessage(Message message)
+        {
+            DisplayMessage(message);
+            Timer.Set(message.DecayInS);
+        }
+
         private void Awake()
         {
             TickerText = FindTickerTextComponent();
@@ -38,17 +48,6 @@ namespace Ticker
         private void OnMessageHasDecayed()
         {
             TickerText.text = noMessageText;
-        }
-
-
-        /// <summary>
-        /// On the receiving of a message this function is called, it displays the message and starts a timer for hiding it.
-        /// </summary>
-        /// <param name="message">Message.</param>
-        public void OnMessage(Message message)
-        {
-            DisplayMessage(message);
-            Timer.Set(message.DecayInS);
         }
 
         private void DisplayMessage(Message message)

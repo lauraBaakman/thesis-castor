@@ -20,14 +20,11 @@ namespace Ticker
         /// <summary>
         /// How long the message should be show in seconds, default is 3s.
         /// </summary>
-        public float DecayInS;
+        public float DecayInS = DefaultDecayInS;
 
         private static float DefaultDecayInS = 3.0f;
 
-        protected Message()
-        {
-            DecayInS = DefaultDecayInS;
-        }
+        protected Message() { }
 
         protected Message(string text, Color color)
         {

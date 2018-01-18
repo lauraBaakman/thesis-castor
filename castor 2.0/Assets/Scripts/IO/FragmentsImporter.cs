@@ -58,6 +58,7 @@ namespace IO
             Mesh mesh = ObjFileReader.ImportFile(path);
             string name = ExtractObjectName(path);
             GameObject fragment = AddFragmentToScene(name, mesh);
+         
             CallBack(path, fragment);
         }
 
