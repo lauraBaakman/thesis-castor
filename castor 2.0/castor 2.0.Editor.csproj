@@ -183,7 +183,7 @@
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\Renderer\IntegrationTestRendererBase.cs" />
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\Renderer\RenderingOptions.cs" />
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\TestComponentEditor.cs" />
-    <Compile Include="Assets\Scripts\Utils\Editor\ColorGeneratorTest.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\ColorsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\UnityTestTools\LICENSE.txt" />
