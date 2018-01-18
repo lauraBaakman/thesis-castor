@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Fragment
 {
-    public class FragmentSelectionController : MonoBehaviour, IFragmentStateDependent
+    public class SelectionController : MonoBehaviour, IFragmentStateDependent
     {
 
         private GameObject SelectedFragments;
