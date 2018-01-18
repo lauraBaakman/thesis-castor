@@ -24,9 +24,14 @@ namespace Buttons
             ).Import();
         }
 
-        private void NotifyUser(Ticker.Message message)
+        private void NotifyUser(string path, GameObject fragment)
         {
-            //TODO Send mesage actually to ticker
+            Ticker.Message.InfoMessage message = new Ticker.Message.InfoMessage(
+                string.Format(
+                    "Added a fragment '{0}' to the scene from the file {1}.",
+                    fragment.name, path
+                )
+            );
             Debug.Log(message.Text);
         }
     }

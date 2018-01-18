@@ -4,7 +4,7 @@ using Utils;
 
 namespace IO
 {
-    public delegate void CallBack(Ticker.Message message);
+    public delegate void CallBack(string path, GameObject fragment);
 
     public class FragmentsImporter
     {
@@ -57,15 +57,8 @@ namespace IO
         {
             Mesh mesh = ObjFileReader.ImportFile(path);
             string name = ExtractObjectName(path);
-            AddFragmentToScene(name, mesh);
-            CallBack(
-                new Ticker.Message.InfoMessage(
-                    string.Format(
-                        "Added a fragment '{0}' to the scene from the file {1}.",
-                        name, path
-                    )
-                )
-            );
+            GameObject fragment = AddFragmentToScene(name, mesh);
+            CallBack(path, fragment);
         }
 
         private string ExtractObjectName(string path)
@@ -73,7 +66,7 @@ namespace IO
             return Path.GetFileNameWithoutExtension(path);
         }
 
-        private void AddFragmentToScene(string name, Mesh mesh)
+        private GameObject AddFragmentToScene(string name, Mesh mesh)
         {
             GameObject fragment = UnityEngine.Object.Instantiate(
                 original: Resources.Load(PrefabPath),
@@ -89,6 +82,8 @@ namespace IO
             Material material = renderer.material;
             material.color = ColorGenerator.Instance.GetNextColor();
             renderer.material = material;
+
+            return fragment;
         }
     }
 
