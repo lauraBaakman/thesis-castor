@@ -324,6 +324,7 @@
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Fragments\SelectionController.cs" />
     <Compile Include="Assets\Scripts\Buttons\TransformButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\TransformSpaceToggle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
