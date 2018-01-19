@@ -23,6 +23,11 @@ namespace IO
             GetFragmentFiles();
         }
 
+        public void Import(string file)
+        {
+            ProcessFragmentFile(file);
+        }
+
         private void GetFragmentFiles()
         {
             SimpleFileBrowser.FileBrowser.SetDefaultFilter(".obj");
@@ -58,7 +63,7 @@ namespace IO
             Mesh mesh = ObjFileReader.ImportFile(path);
             string name = ExtractObjectName(path);
             GameObject fragment = AddFragmentToScene(name, mesh);
-         
+
             CallBack(path, fragment);
         }
 

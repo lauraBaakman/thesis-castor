@@ -6,6 +6,21 @@ namespace Buttons
     {
         public GameObject FragmentsRoot;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if (Application.isEditor)
+            {
+                IO.FragmentsImporter importer = new IO.FragmentsImporter(
+                    fragmentParent: FragmentsRoot,
+                    callBack: NotifyUserOfAddedFragment
+                );
+                importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/cone.obj");
+                importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/cube.obj");
+            }
+        }
+
         public override void OnClick()
         {
             AddFragment();
