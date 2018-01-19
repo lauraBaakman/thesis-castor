@@ -13,7 +13,7 @@ namespace Buttons
 
         protected override void DetectKeyBoardShortCut()
         {
-            if (Input.GetButton("Add Fragment")) AddFragment();
+            if (Input.GetButtonDown("Add Fragment")) AddFragment();
         }
 
         private void AddFragment()

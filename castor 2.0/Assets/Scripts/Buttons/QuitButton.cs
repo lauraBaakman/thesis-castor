@@ -18,7 +18,7 @@ namespace Buttons
 
         protected override void DetectKeyBoardShortCut()
         {
-            if (Input.GetButton("Quit")) Quit();
+            if (Input.GetButtonDown("Quit")) Quit();
         }
     }
 }

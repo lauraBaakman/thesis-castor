@@ -18,7 +18,7 @@ namespace Buttons
 
         protected override void DetectKeyBoardShortCut()
         {
-            if (Input.GetButton("Help")) OpenHelpWebPage();
+            if (Input.GetButtonDown("Help")) OpenHelpWebPage();
         }
     }
 
