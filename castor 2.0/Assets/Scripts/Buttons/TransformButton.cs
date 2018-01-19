@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 using RTEditor;
 
 namespace Buttons
 {
-    public class TransformButton : AbstractButton
+    public class TransformButton : AbstractButton, Fragments.ISelectionControllerListener
     {
         private Button Button;
 
@@ -19,12 +18,16 @@ namespace Buttons
             base.Awake();
 
             Button = GetComponent<Button>();
-            Button.interactable = false;
         }
 
         public override void OnClick()
         {
             ToggleWidget();
+        }
+
+        public void OnEnable()
+        {
+            OnNumberOfSelectedObjectsChanged(RTEditor.EditorObjectSelection.Instance.NumberOfSelectedObjects);
         }
 
         protected void ToggleWidget()
@@ -33,7 +36,7 @@ namespace Buttons
             string method = isActive ? "DeactivateAllGizmoObjects" : "OnChangeActiveGizmo";
             EditorGizmoSystem.Instance.SendMessage(
                     methodName: method,
-                value: WidgetType,
+                    value: WidgetType,
                     options: SendMessageOptions.RequireReceiver
                 );
         }

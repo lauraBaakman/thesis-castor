@@ -28,5 +28,10 @@ namespace Fragments
         }
 
     }
+
+    public interface ISelectionControllerListener
+    {
+        void OnNumberOfSelectedObjectsChanged(int currentCount);
+    }
 }
 
