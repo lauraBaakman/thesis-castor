@@ -68,7 +68,7 @@ namespace RTEditor
             UseModifiers = false,
             UseMouseButtons = false
         };
-        
+
         /// <summary>
         /// The currently selected objects.
         /// </summary>
@@ -78,7 +78,7 @@ namespace RTEditor
         /// Holds the masked objects. Objects which reside inside this collection can not be selected.
         /// </summary>
         private HashSet<GameObject> _maskedObjects = new HashSet<GameObject>();
- 
+
         /// <summary>
         /// The last selected game object. Note: When the selection is adjusted using the selection rectangle,
         /// this object will be the first object available in the selected objects hash.
@@ -177,7 +177,7 @@ namespace RTEditor
             if (IsSelectionExactMatch(new List<GameObject> { gameObj })) return false;
 
             // Continue based on whether or not Undo/Redo is allowed
-            if(allowUndoRedo)
+            if (allowUndoRedo)
             {
                 // Take a pre-change snapshot
                 var preChangeSnapshot = new ObjectSelectionSnapshot();
@@ -242,14 +242,14 @@ namespace RTEditor
             if (!IsObjectSelected(gameObj)) return false;
 
             // Continue based on whether or not Undo/Redo is supported
-            if(allowUndoRedo)
+            if (allowUndoRedo)
             {
                 // Take a pre-change snapshot
                 var preChangeSnapshot = new ObjectSelectionSnapshot();
                 preChangeSnapshot.TakeSnapshot();
 
                 // Attempt to remove the object from the selection
-                if(RemoveObjectFromSelection(gameObj, ObjectDeselectActionType.RemoveObjectFromSelectionCall))
+                if (RemoveObjectFromSelection(gameObj, ObjectDeselectActionType.RemoveObjectFromSelectionCall))
                 {
                     // Take a post-change snapshot
                     var postChangeSnapshot = new ObjectSelectionSnapshot();
@@ -418,7 +418,7 @@ namespace RTEditor
 
             // Make sure that every game object in 'gameObjectsToMatch' is selected.
             // If we find at least one object which is not selected, we can return false.
-            foreach(GameObject objectToMatch in gameObjectsToMatch)
+            foreach (GameObject objectToMatch in gameObjectsToMatch)
             {
                 if (!IsObjectSelected(objectToMatch)) return false;
             }
@@ -446,7 +446,7 @@ namespace RTEditor
             // Inform the previosuly selected objects that they are no longer selected
             ObjectDeselectActionType deselectActionType = undoRedoActionType == UndoRedoActionType.Undo ? ObjectDeselectActionType.Undo : ObjectDeselectActionType.Redo;
             var deselectEventArgs = new ObjectDeselectEventArgs(deselectActionType);
-            foreach(var gameObj in previouslySelectedOjects)
+            foreach (var gameObj in previouslySelectedOjects)
             {
                 IRTEditorEventListener editorEventListener = gameObj.GetComponent<IRTEditorEventListener>();
                 if (editorEventListener != null) editorEventListener.OnDeselected(deselectEventArgs);
@@ -553,8 +553,8 @@ namespace RTEditor
         /// </summary>
         private bool CanOperate()
         {
-            return gameObject.activeSelf && enabled && 
-                   !EditorGizmoSystem.Instance.IsActiveGizmoReadyForObjectManipulation() && 
+            return gameObject.activeSelf && enabled &&
+                   !EditorGizmoSystem.Instance.IsActiveGizmoReadyForObjectManipulation() &&
                    !SceneGizmo.Instance.IsHovered();
         }
 
@@ -625,7 +625,7 @@ namespace RTEditor
             // entries can become available when objects are deleted from the scene.
             RemoveNullAndInactiveObjectRefs();
 
-            if(DeleteSelectionShortcut.IsActiveInCurrentFrame())
+            if (DeleteSelectionShortcut.IsActiveInCurrentFrame())
             {
                 var deleteAction = new DeleteSelectedObjectsAction();
                 deleteAction.Execute();
@@ -633,7 +633,7 @@ namespace RTEditor
             }
 
             // Duplicate objects if needed
-            if(_duplicateSelectionShortcut.IsActiveInCurrentFrame())
+            if (_duplicateSelectionShortcut.IsActiveInCurrentFrame())
             {
                 // Gather all selected objects which can be duplicated
                 List<GameObject> objectsToDuplicate = new List<GameObject>(EditorObjectSelection.Instance.SelectedGameObjects);
@@ -672,9 +672,9 @@ namespace RTEditor
             _maskedObjects.RemoveWhere(item => item == null);
 
             // If any inactive objects were found, fire an object selection changed event
-            if(inactiveObjects.Count != 0)
+            if (inactiveObjects.Count != 0)
             {
-                var selChangedEventArgs = new ObjectSelectionChangedEventArgs(ObjectSelectActionType.None, new List<GameObject>(), 
+                var selChangedEventArgs = new ObjectSelectionChangedEventArgs(ObjectSelectActionType.None, new List<GameObject>(),
                                                                               ObjectDeselectActionType.DeselectInactive, inactiveObjects);
                 OnSelectionChanged(selChangedEventArgs);
             }
@@ -694,7 +694,7 @@ namespace RTEditor
                 {
                     // Send a game object clicked event
                     if (GameObjectClicked != null) GameObjectClicked(pickedGameObject);
-                    
+
                     // If a game object was picked, the selection may need to change. It all depends on how the click
                     // handler handles the pick operation. So we will take a snapshot of the current object selection
                     // in order to use it later if the selection has indeed changed.
@@ -728,7 +728,7 @@ namespace RTEditor
                 _multiSelectPreChangeSnapshot = new ObjectSelectionSnapshot();
                 _multiSelectPreChangeSnapshot.TakeSnapshot();
             }
-       
+
             Vector2 inputDevPos;
             if (!InputDevice.Instance.GetPosition(out inputDevPos)) return;
 
@@ -866,9 +866,9 @@ namespace RTEditor
             if (_multiDeselectShortcut.IsActive())
             {
                 bool wasChanged = RemoveObjectCollectionFromSelection(objectCollection, ObjectDeselectActionType.MultiDeselect);
-                if(wasChanged)
+                if (wasChanged)
                 {
-                    var selChangedArgs = new ObjectSelectionChangedEventArgs(ObjectSelectActionType.None, new List<GameObject>(_selectedObjects), 
+                    var selChangedArgs = new ObjectSelectionChangedEventArgs(ObjectSelectActionType.None, new List<GameObject>(_selectedObjects),
                                                                              ObjectDeselectActionType.MultiDeselect, objectCollection);
                     OnSelectionChanged(selChangedArgs);
                 }
@@ -879,7 +879,7 @@ namespace RTEditor
             if (_appendToSelectionShortcut.IsActive())
             {
                 bool wasChanged = AddObjectCollectionToSelection(objectCollection, ObjectSelectActionType.MultiSelectAppend);   // Append the objects to the selection if the append key is active
-                if(wasChanged)
+                if (wasChanged)
                 {
                     var selChangedArgs = new ObjectSelectionChangedEventArgs(ObjectSelectActionType.MultiSelectAppend, new List<GameObject>(_selectedObjects),
                                                                              ObjectDeselectActionType.None, new List<GameObject>());
@@ -917,7 +917,7 @@ namespace RTEditor
                 {
                     var postChangeSnapshot = new ObjectSelectionSnapshot();
                     postChangeSnapshot.TakeSnapshot();
-    
+
                     var selChangedArgs = new ObjectSelectionChangedEventArgs(ObjectSelectActionType.MultiSelect, new List<GameObject>(_selectedObjects),
                                                                              ObjectDeselectActionType.MultiSelectNotInRect, preChangeSnapshot.GetDiff(postChangeSnapshot));
                     OnSelectionChanged(selChangedArgs);
@@ -955,7 +955,7 @@ namespace RTEditor
                 if (!ObjectSelectionSettings.CanSelectEmptyObjects) objectRayHits.RemoveAll(item => item.HitObject.IsEmpty());
 
                 // If we still have any ray hits, it means we have a valid picked object
-                if (objectRayHits.Count != 0) 
+                if (objectRayHits.Count != 0)
                 {
                     gameObjectRayHit = objectRayHits[0];
                     pickedObject = gameObjectRayHit.HitObject;
@@ -1033,7 +1033,7 @@ namespace RTEditor
             if (Camera.current != EditorCamera.Instance.Camera) return;
 
             // Draw the object selection boxes
-            if(ObjectSelectionSettings.ObjectSelectionBoxRenderSettings.DrawBoxes)
+            if (ObjectSelectionSettings.ObjectSelectionBoxRenderSettings.DrawBoxes)
             {
                 ObjectSelectionRenderer objectSelectionRenderer = ObjectSelectionRendererFactory.Create(_objectSelectionSettings.ObjectSelectionRenderMode);
                 objectSelectionRenderer.RenderObjectSelection(_selectedObjects, _objectSelectionSettings);
@@ -1126,7 +1126,7 @@ namespace RTEditor
         private bool AddObjectCollectionToSelection(List<GameObject> objectCollection, ObjectSelectActionType selectActionType)
         {
             bool selectionWasChanged = false;
-            foreach(GameObject gameObj in objectCollection)
+            foreach (GameObject gameObj in objectCollection)
             {
                 bool wasChanged = AddObjectToSelection(gameObj, selectActionType);
                 if (!selectionWasChanged && wasChanged) selectionWasChanged = true;
@@ -1201,7 +1201,7 @@ namespace RTEditor
         {
             if (!IsSelectionExactMatch(new List<GameObject> { gameObj }))
             {
-                foreach(var selectedObject in _selectedObjects)
+                foreach (var selectedObject in _selectedObjects)
                 {
                     IRTEditorEventListener editorEventListener = selectedObject.GetComponent<IRTEditorEventListener>();
                     if (editorEventListener != null)
@@ -1228,6 +1228,82 @@ namespace RTEditor
         {
             if (SelectionChanged != null) SelectionChanged(selectionChangedEventArgs);
         }
+        #endregion
+
+        #region Add By Me
+
+        public void OnSelectAll()
+        {
+            SelectAllChildrenOf(_objectSelectionSettings.SelectAllRoot, true);
+        }
+
+        public bool SelectAllChildrenOf(GameObject root, bool allowUndoRedo)
+        {
+            bool succeeded = allowUndoRedo ? SelectAllChildrenOfWithUndoRedo(root) : SelectAllChildrenOfWithoutUndoRedo(root);
+            return succeeded;
+        }
+
+        private bool SelectAllChildrenOfWithUndoRedo(GameObject root)
+        {
+            // Take a pre-change snapshot
+            ObjectSelectionSnapshot preChangeSnapshot = new ObjectSelectionSnapshot();
+            preChangeSnapshot.TakeSnapshot();
+
+            // Collect all children
+            Transform[] childTransforms = root.GetComponentsInChildren<Transform>();
+            List<GameObject> selectedObjects = new List<GameObject>();
+
+            // Add each child to the collection
+            bool succeededAtLeastOnce = false;
+            foreach (Transform child in childTransforms)
+            {
+                if (AddObjectToSelection(child.gameObject, ObjectSelectActionType.AddObjectToSelectionCall))
+                {
+                    succeededAtLeastOnce = true;
+                    selectedObjects.Add(child.gameObject);
+                }
+            }
+
+            if (succeededAtLeastOnce)
+            {
+                generateUndoRedoActions(preChangeSnapshot);
+
+                //Notify the world
+                OnSelectionChanged(
+                    new ObjectSelectionChangedEventArgs(
+                        selectActionType: ObjectSelectActionType.AddObjectToSelectionCall,
+                        selectedObjects: selectedObjects,
+                        deselectActionType: ObjectDeselectActionType.None,
+                        deselectedObjects: new List<GameObject>()
+                    )
+                );
+            }
+            return succeededAtLeastOnce;
+        }
+
+        private void generateUndoRedoActions(ObjectSelectionSnapshot preChangeSnapShot)
+        {
+            // Take a post-change snapshot
+            var postChangeSnapshot = new ObjectSelectionSnapshot();
+            postChangeSnapshot.TakeSnapshot();
+
+            // Execute the post-change action to allow for undo/redo
+            var action = new PostObjectSelectionChangedAction(preChangeSnapShot, postChangeSnapshot);
+            action.Execute();
+        }
+
+        private bool SelectAllChildrenOfWithoutUndoRedo(GameObject root)
+        {
+            throw new NotImplementedException();
+            //    if (AddObjectToSelection(gameObj, ObjectSelectActionType.AddObjectToSelectionCall))
+            //    {
+            //        // The selection has changed
+            //        var selChangedEventArgs = new ObjectSelectionChangedEventArgs(ObjectSelectActionType.AddObjectToSelectionCall, new List<GameObject> { gameObj },
+            //                                                                      ObjectDeselectActionType.None, new List<GameObject>());
+            //        OnSelectionChanged(selChangedEventArgs);
+            //        return true;            
+        }
+
         #endregion
     }
 }
