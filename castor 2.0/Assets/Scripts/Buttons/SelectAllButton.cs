@@ -16,7 +16,10 @@ namespace Buttons
 
         private void SelectAll()
         {
-            Debug.Log("Select All!");
+            RTEditor.EditorObjectSelection.Instance.SendMessage(
+                methodName: "OnSelectAll",
+                options: SendMessageOptions.RequireReceiver
+            );
         }
     }
 }
