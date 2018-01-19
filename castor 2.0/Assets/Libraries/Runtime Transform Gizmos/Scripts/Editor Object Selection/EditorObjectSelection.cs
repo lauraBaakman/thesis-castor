@@ -1234,16 +1234,10 @@ namespace RTEditor
 
         public void OnSelectAll()
         {
-            SelectAllChildrenOf(_objectSelectionSettings.SelectAllRoot, true);
+            SelectAllChildrenOf(_objectSelectionSettings.SelectAllRoot);
         }
 
-        public bool SelectAllChildrenOf(GameObject root, bool allowUndoRedo)
-        {
-            bool succeeded = allowUndoRedo ? SelectAllChildrenOfWithUndoRedo(root) : SelectAllChildrenOfWithoutUndoRedo(root);
-            return succeeded;
-        }
-
-        private bool SelectAllChildrenOfWithUndoRedo(GameObject root)
+        public bool SelectAllChildrenOf(GameObject root)
         {
             // Take a pre-change snapshot
             ObjectSelectionSnapshot preChangeSnapshot = new ObjectSelectionSnapshot();
@@ -1281,6 +1275,7 @@ namespace RTEditor
             return succeededAtLeastOnce;
         }
 
+
         private void generateUndoRedoActions(ObjectSelectionSnapshot preChangeSnapShot)
         {
             // Take a post-change snapshot
@@ -1291,19 +1286,6 @@ namespace RTEditor
             var action = new PostObjectSelectionChangedAction(preChangeSnapShot, postChangeSnapshot);
             action.Execute();
         }
-
-        private bool SelectAllChildrenOfWithoutUndoRedo(GameObject root)
-        {
-            throw new NotImplementedException();
-            //    if (AddObjectToSelection(gameObj, ObjectSelectActionType.AddObjectToSelectionCall))
-            //    {
-            //        // The selection has changed
-            //        var selChangedEventArgs = new ObjectSelectionChangedEventArgs(ObjectSelectActionType.AddObjectToSelectionCall, new List<GameObject> { gameObj },
-            //                                                                      ObjectDeselectActionType.None, new List<GameObject>());
-            //        OnSelectionChanged(selChangedEventArgs);
-            //        return true;            
-        }
-
         #endregion
     }
 }
