@@ -2189,7 +2189,7 @@ MonoBehaviour:
     _useStrictMouseCheck: 0
     _name: Enable vertex snapping
   _enableSurfacePlacementWithYAlignment:
-    _keys: 2000000000000000
+    _keys: 0000000000000000
     _numberOfKeys: 1
     _lCtrl: 0
     _lCmd: 0
@@ -2204,8 +2204,8 @@ MonoBehaviour:
     _useStrictMouseCheck: 0
     _name: Enable surface placement (with Y axis alignment)
   _enableSurfacePlacementWithXAlignment:
-    _keys: 2000000078000000
-    _numberOfKeys: 2
+    _keys: 0000000078000000
+    _numberOfKeys: 1
     _lCtrl: 0
     _lCmd: 0
     _lAlt: 0
@@ -2219,8 +2219,8 @@ MonoBehaviour:
     _useStrictMouseCheck: 0
     _name: Enable surface placement (with X axis alignment)
   _enableSurfacePlacementWithZAlignment:
-    _keys: 200000007a000000
-    _numberOfKeys: 2
+    _keys: 000000007a000000
+    _numberOfKeys: 1
     _lCtrl: 0
     _lCmd: 0
     _lAlt: 0
