@@ -79,6 +79,7 @@ namespace Ticker
 
             private string BuildMessageText(string text, string keyboard)
             {
+                if(keyboard.Length == 0) return text;
                 return string.Format("({0}) {1}", keyboard, text);
             }
         }
