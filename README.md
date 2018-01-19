@@ -1,8 +1,8 @@
 # Computer ASsisTed Orhopaedic fracture Reconstruction (CAstOR)
 
-## Usage
+## Manual
 
-## Development
+At some point I'll create a manual here.
 
 ## Requirements
 
