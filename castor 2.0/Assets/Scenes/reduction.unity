@@ -153,12 +153,12 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 1081.3186
+      value: 772.37036
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -262,6 +262,24 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
     type: 2}
   m_PrefabInternal: {fileID: 21273059}
+--- !u!1 &37977596 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1135060811400328, guid: f2474aba1b01746338cfb3d40f0d8cea,
+    type: 2}
+  m_PrefabInternal: {fileID: 85175361}
+--- !u!114 &37977597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 37977596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7b22c9ac89f41bea923a06fd89631f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WidgetType: 1
+  InputName: Toggle Rotation Widget
 --- !u!1001 &85175361
 Prefab:
   m_ObjectHideFlags: 0
@@ -307,12 +325,12 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 1390.2667
+      value: 1081.3186
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -1176,9 +1194,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 420831883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25da6ba5568de458b980e6a8d6b7b7aa, type: 3}
+  m_Script: {fileID: 11500000, guid: ce7b22c9ac89f41bea923a06fd89631f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WidgetType: 0
+  InputName: Toggle Translation Widget
 --- !u!1 &433014287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1579,9 +1599,9 @@ RectTransform:
   m_Children:
   - {fileID: 2052437784}
   - {fileID: 1811295927}
-  - {fileID: 1558011828}
   - {fileID: 21273060}
   - {fileID: 85175362}
+  - {fileID: 1558011828}
   m_Father: {fileID: 1863313829}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2035,12 +2055,12 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 772.37036
+      value: 1390.2667
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -2221,6 +2241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Listeners:
   - {fileID: 420831883}
+  - {fileID: 37977596}
 --- !u!1 &1586261602
 GameObject:
   m_ObjectHideFlags: 0
