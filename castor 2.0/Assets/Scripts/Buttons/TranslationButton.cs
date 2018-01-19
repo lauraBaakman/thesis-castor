@@ -1,9 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Buttons
 {
     public class TranslationButton : AbstractButton
     {
+
+        Button Button;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            Button = GetComponent<Button>();
+            Button.interactable = false;
+        }
 
         public override void OnClick()
         {
@@ -24,8 +35,14 @@ namespace Buttons
             if (Input.GetButton("Show Translation Widget")) ShowTranslationWidget();
         }
 
-        public void OnNumberOfSelectedObjectsChanged(int currentCount){
-            Debug.Log("TranslationButton: + " + currentCount);   
+        public void OnNumberOfSelectedObjectsChanged(int currentCount)
+        {
+            Button.interactable = ShouldButtonBeInteractable(currentCount) ? true : false;
+        }
+
+        private bool ShouldButtonBeInteractable(int numSelectedObjects)
+        {
+            return numSelectedObjects >= 1;
         }
     }
 }
