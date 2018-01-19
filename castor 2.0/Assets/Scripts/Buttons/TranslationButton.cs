@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using RTEditor;
+
 namespace Buttons
 {
     public class TranslationButton : AbstractButton
     {
-
-        Button Button;
+        private Button Button;
+        private RTEditor.GizmoType GizmoType = GizmoType.Translation;
 
         protected override void Awake()
         {
@@ -18,21 +20,23 @@ namespace Buttons
 
         public override void OnClick()
         {
-            ShowTranslationWidget();
+            ToggleWidget();
         }
 
-        private void ShowTranslationWidget()
+        private void ToggleWidget()
         {
-            RTEditor.EditorGizmoSystem.Instance.SendMessage(
-                methodName: "OnChangeActiveGizmo",
-                value: RTEditor.GizmoType.Translation,
-                options: SendMessageOptions.RequireReceiver
-            );
+            bool isActive = EditorGizmoSystem.Instance.IsGizmoActive(GizmoType);
+            string method = isActive ? "DeactivateAllGizmoObjects" : "OnChangeActiveGizmo";
+            EditorGizmoSystem.Instance.SendMessage(
+                    methodName: method,
+                    value: GizmoType,
+                    options: SendMessageOptions.RequireReceiver
+                );
         }
 
         protected override void DetectKeyBoardShortCut()
         {
-            if (Input.GetButton("Show Translation Widget")) ShowTranslationWidget();
+            if (Input.GetButtonDown("Show Translation Widget")) ToggleWidget();
         }
 
         public void OnNumberOfSelectedObjectsChanged(int currentCount)
@@ -46,3 +50,4 @@ namespace Buttons
         }
     }
 }
+ 
