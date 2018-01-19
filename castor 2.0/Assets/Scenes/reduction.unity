@@ -655,7 +655,7 @@ MonoBehaviour:
     _focusMode: 2
     _constantFocusSpeed: 10
     _smoothFocusTime: 0.3
-    _focusDistanceScale: 1.5
+    _focusDistanceScale: 2
   _moveSettings:
     _moveSpeed: 10
   _rotationSpeedInDegrees: 4.8
