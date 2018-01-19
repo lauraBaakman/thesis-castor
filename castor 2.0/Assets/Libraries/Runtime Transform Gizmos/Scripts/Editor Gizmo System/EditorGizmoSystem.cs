@@ -661,6 +661,14 @@ namespace RTEditor
             ChangeActiveGizmo(type);
         }
 
+        /// <summary>
+        /// Changes the active transform space to the specified value.
+        /// <param name="transformSpace"> The type of the transform space to switch to.</param>
+        /// </summary>
+        public void OnChangeTransformSpace(TransformSpace transformSpace){
+            ChangeTransformSpace(transformSpace);
+        }
+
         public bool IsGizmoActive(GizmoType type)
         {
             Dictionary<GizmoType, Gizmo> typeToGameObjectMapping = new Dictionary<GizmoType, Gizmo>();
