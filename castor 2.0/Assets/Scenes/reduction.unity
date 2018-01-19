@@ -290,7 +290,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 211.8382
+      value: 139.5965
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -1719,7 +1719,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 1059.1909
+      value: 697.98254
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -2165,7 +2165,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 635.5146
+      value: 418.7895
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -2456,7 +2456,7 @@ MonoBehaviour:
     _multiSelectOverlapMode: 1
     _objectSelectionRenderMode: 0
     _selectableLayers: -1
-    _duplicatableLayers: -1
+    _duplicatableLayers: -56
     _canSelectTerrainObjects: 0
     _canSelectLightObjects: 0
     _canSelectParticleSystemObjects: 0
