@@ -165,12 +165,12 @@ namespace RTEditor
                 if (value == null) return;
 
                 // Allow only scene objects
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 if (value.gameObject.IsSceneObject()) _translationGizmo = value;
                 else Debug.LogWarning("RTEditorGizmoSystem.TranslationGizmo: Only scene gizmo object instances are allowed.");
-                #else
+#else
                 _translationGizmo = value;
-                #endif
+#endif
             }
         }
 
@@ -186,12 +186,12 @@ namespace RTEditor
                 if (value == null) return;
 
                 // Allow only scene objects
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 if (value.gameObject.IsSceneObject()) _rotationGizmo = value;
                 else Debug.LogWarning("EditorGizmoSystem.RotationGizmo: Only scene gizmo object instances are allowed.");
-                #else
+#else
                 _rotationGizmo = value;
-                #endif
+#endif
             }
         }
 
@@ -207,12 +207,12 @@ namespace RTEditor
                 if (value == null) return;
 
                 // Allow only scene objects
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 if (value.gameObject.IsSceneObject()) _scaleGizmo = value;
                 else Debug.LogWarning("EditorGizmoSystem.ScaleGizmo: Only scene gizmo object instances are allowed.");
-                #else
+#else
                 _scaleGizmo = value;
-                #endif
+#endif
             }
         }
 
@@ -224,12 +224,12 @@ namespace RTEditor
                 if (value == null) return;
 
                 // Allow only scene objects
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 if (value.gameObject.IsSceneObject()) _volumeScaleGizmo = value;
                 else Debug.LogWarning("EditorGizmoSystem.VolumeScaleGizmo: Only scene gizmo object instances are allowed.");
-                #else
+#else
                 _volumeScaleGizmo = value;
-                #endif
+#endif
             }
         }
 
@@ -254,7 +254,7 @@ namespace RTEditor
         {
             _gizmoTypeAvailableFlags[(int)gizmoType] = available;
 
-            if(!available && gizmoType == _activeGizmoType)
+            if (!available && gizmoType == _activeGizmoType)
             {
                 int firstAvailable = GetFirstAvailableGizmoTypeIndex();
                 if (firstAvailable >= 0) ActiveGizmoType = (GizmoType)firstAvailable;
@@ -269,7 +269,7 @@ namespace RTEditor
 
         public bool IsAnyGizmoTypeAvailable()
         {
-            foreach(var availableFlag in _gizmoTypeAvailableFlags)
+            foreach (var availableFlag in _gizmoTypeAvailableFlags)
             {
                 if (availableFlag) return true;
             }
@@ -326,7 +326,7 @@ namespace RTEditor
             ConnectObjectSelectionToGizmos();                   // Make sure the gizmos know which objects they control
             ChangeActiveGizmo(_activeGizmoType);                // Make sure we are using the correct gizmo initially 
             ChangeTransformPivotPoint(_transformPivotPoint);    // Make sure the transform pivot point is setup correctly
-         
+
             // Register as listener
             MessageListenerDatabase listenerDatabase = MessageListenerDatabase.Instance;
             listenerDatabase.RegisterListenerForMessage(MessageType.GizmoTransformedObjects, this);
@@ -384,7 +384,7 @@ namespace RTEditor
                 allPropertiesAreValid = false;
             }
 
-            if(_volumeScaleGizmo == null)
+            if (_volumeScaleGizmo == null)
             {
                 Debug.LogError("EditorGizmoSystem.Start: Missing volume scale gizmo. Please assign a game object with the 'VolumeScaleGizmo' script attached to it.");
                 allPropertiesAreValid = false;
@@ -417,15 +417,6 @@ namespace RTEditor
             _rotationGizmo.gameObject.SetActive(false);
             _scaleGizmo.gameObject.SetActive(false);
             _volumeScaleGizmo.gameObject.SetActive(false);
-        }
-
-
-        /// <summary>
-        /// Changes the active gizmo to the passed type. 
-        /// </summary>
-        /// <param name="type"> The type of gizmo to be activated.</param>
-        public void OnChangeActiveGizmo(GizmoType type){
-            ChangeActiveGizmo(type);
         }
 
         /// <summary>
@@ -528,7 +519,7 @@ namespace RTEditor
         {
             EditorObjectSelection objectSelection = EditorObjectSelection.Instance;
             if (_activeGizmo.GetGizmoType() != GizmoType.VolumeScale && _activeGizmo != null /*&& !_activeGizmo.IsTransformingObjects()*/) // TODO: Why was this here? Seems that it is not necessary...
-            {             
+            {
                 // Update the position based on the specified transform pivot point. If the transform pivot
                 // point is set to 'MeshPivot', we will set the position of the gizmo to the position of the
                 // last selected game objects. Otherwise, we will set it to the center of the selection.
@@ -536,7 +527,7 @@ namespace RTEditor
                 else _activeGizmo.transform.position = objectSelection.GetSelectionWorldCenter();
             }
 
-            if(_volumeScaleGizmo != null && objectSelection.NumberOfSelectedObjects == 1)
+            if (_volumeScaleGizmo != null && objectSelection.NumberOfSelectedObjects == 1)
             {
                 _volumeScaleGizmo.transform.position = objectSelection.LastSelectedGameObject.transform.position;
                 _volumeScaleGizmo.RefreshTargets();
@@ -550,14 +541,14 @@ namespace RTEditor
         private void UpdateActiveGizmoRotation()
         {
             EditorObjectSelection objectSelection = EditorObjectSelection.Instance;
-            if(_activeGizmoType == GizmoType.VolumeScale)
+            if (_activeGizmoType == GizmoType.VolumeScale)
             {
                 if (objectSelection.NumberOfSelectedObjects == 1)
                     _activeGizmo.transform.rotation = objectSelection.LastSelectedGameObject.transform.rotation;
                 return;
             }
             else
-            {               
+            {
                 // If the global transform space is used, we will set the gizmo's rotation to identity. Otherwise,
                 // we will set the rotation to the rotation of the last object which was selected in the scene.
                 // Note: The scale gizmo will always be oriented in the last selected object's local space because
@@ -607,7 +598,7 @@ namespace RTEditor
 
                     RespondToMessage(message as GizmoTransformOperationWasUndoneMessage);
                     break;
-                
+
                 case MessageType.GizmoTransformOperationWasRedone:
 
                     RespondToMessage(message as GizmoTransformOperationWasRedoneMessage);
@@ -657,6 +648,30 @@ namespace RTEditor
             // accordingly because when vertex snapping is used, its position my change to that
             // of the object mesh vertices.
             EstablishActiveGizmoPosition();
+        }
+        #endregion
+
+        #region Methods I Added
+        /// <summary>
+        /// Changes the active gizmo to the passed type. 
+        /// </summary>
+        /// <param name="type"> The type of gizmo to be activated.</param>
+        public void OnChangeActiveGizmo(GizmoType type)
+        {
+            ChangeActiveGizmo(type);
+        }
+
+        public bool IsGizmoActive(GizmoType type)
+        {
+            Dictionary<GizmoType, Gizmo> typeToGameObjectMapping = new Dictionary<GizmoType, Gizmo>();
+            typeToGameObjectMapping.Add(GizmoType.Translation, _translationGizmo);
+            typeToGameObjectMapping.Add(GizmoType.Rotation, _rotationGizmo);
+            typeToGameObjectMapping.Add(GizmoType.Scale, _scaleGizmo);
+            typeToGameObjectMapping.Add(GizmoType.VolumeScale, _volumeScaleGizmo);
+
+            Gizmo gizmo;
+            typeToGameObjectMapping.TryGetValue(type, out gizmo);
+            return gizmo.isActiveAndEnabled;
         }
         #endregion
     }
