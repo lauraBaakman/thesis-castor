@@ -158,12 +158,12 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 643.64197
+      value: 595.9861
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -330,12 +330,12 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 901.09875
+      value: 834.3805
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -611,12 +611,12 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 128.7284
+      value: 119.19721
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -786,7 +786,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Message: Toggle the axis system of the transform between world space and local space.
-  KeyBoard: '-'
+    In world space the object is translated along the global axes, and the rotation
+    circles occur along those axes. In local space the local axes are used for translation
+    and rotation.
+  KeyBoard: 
   Receiver: {fileID: 1437549639}
 --- !u!114 &270521292
 MonoBehaviour:
@@ -1610,7 +1613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activateTranslationGizmoShortcut:
-    _keys: 7700000000000000
+    _keys: 0000000000000000
     _numberOfKeys: 1
     _lCtrl: 0
     _lCmd: 0
@@ -1625,7 +1628,7 @@ MonoBehaviour:
     _useStrictMouseCheck: 1
     _name: Activate move gizmo
   _activateRotationGizmoShortcut:
-    _keys: 6500000000000000
+    _keys: 0000000000000000
     _numberOfKeys: 1
     _lCtrl: 0
     _lCmd: 0
@@ -1670,7 +1673,7 @@ MonoBehaviour:
     _useStrictMouseCheck: 1
     _name: Activate volume scale gizmo
   _activateGlobalTransformShortcut:
-    _keys: 6700000000000000
+    _keys: 0000000000000000
     _numberOfKeys: 1
     _lCtrl: 0
     _lCmd: 0
@@ -1685,7 +1688,7 @@ MonoBehaviour:
     _useStrictMouseCheck: 1
     _name: Activate global transform
   _activateLocalTransformShortcut:
-    _keys: 6c00000000000000
+    _keys: 0000000000000000
     _numberOfKeys: 1
     _lCtrl: 0
     _lCmd: 0
@@ -2229,12 +2232,12 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 1416.0122
+      value: 1311.1694
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -2411,6 +2414,7 @@ MonoBehaviour:
   Listeners:
   - {fileID: 420831883}
   - {fileID: 37977596}
+  - {fileID: 270521288}
 --- !u!1 &1586261602
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,12 +2709,12 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 386.18518
+      value: 357.59164
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
