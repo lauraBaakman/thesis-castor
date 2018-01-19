@@ -366,13 +366,43 @@ Prefab:
     - target: {fileID: 114446561927247790, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: Message
-      value: 
+      value: "Show the rotation widget for the selected fragment(s). \n\tPress control
+        while dragging to drag with small steps. "
       objectReference: {fileID: 0}
     - target: {fileID: 114446561927247790, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: KeyBoard
       value: R
       objectReference: {fileID: 0}
+    - target: {fileID: 114446561927247790, guid: f2474aba1b01746338cfb3d40f0d8cea,
+        type: 2}
+      propertyPath: Receiver
+      value: 
+      objectReference: {fileID: 1437549639}
+    - target: {fileID: 114381264252899704, guid: f2474aba1b01746338cfb3d40f0d8cea,
+        type: 2}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6343fae92d06d416f9bffb5022c7437e,
+        type: 3}
+    - target: {fileID: 114381264252899704, guid: f2474aba1b01746338cfb3d40f0d8cea,
+        type: 2}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b809a27866abd4308a9b8f8d44cd114d,
+        type: 3}
+    - target: {fileID: 114962448904664432, guid: f2474aba1b01746338cfb3d40f0d8cea,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6e5fff49bc15e4a61851d266062ea689,
+        type: 3}
+    - target: {fileID: 114381264252899704, guid: f2474aba1b01746338cfb3d40f0d8cea,
+        type: 2}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f0fa17cc06c70467d8e881fcaa2fc365,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2474aba1b01746338cfb3d40f0d8cea, type: 2}
   m_IsPrefabParent: 0
@@ -1304,11 +1334,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'blabla
-
-    blabla2
-
-    blabla3'
+  m_Text: 
 --- !u!222 &761854652
 CanvasRenderer:
   m_ObjectHideFlags: 0
