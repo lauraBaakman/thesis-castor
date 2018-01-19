@@ -39,6 +39,9 @@ namespace RTEditor
 
         [SerializeField]
         private ObjectSelectionBoxRenderSettings _objectSelectionBoxRenderSettings = new ObjectSelectionBoxRenderSettings();
+
+        [SerializeField]
+        private GameObject _selectAllRoot = null;
         #endregion
 
         #region Public Properties
@@ -53,6 +56,7 @@ namespace RTEditor
         public bool CanSelectEmptyObjects { get { return _canSelectEmptyObjects; } set { _canSelectEmptyObjects = value; } }
         public bool CanClickSelect { get { return _canClickSelect; } set { _canClickSelect = value; } }
         public bool CanMultiSelect { get { return _canMultiSelect; } set { _canMultiSelect = value; } }
+        public GameObject SelectAllRoot { get { return _selectAllRoot; } set { _selectAllRoot = value; } }
         public ObjectSelectionBoxRenderSettings ObjectSelectionBoxRenderSettings { get { return _objectSelectionBoxRenderSettings; } }
         #endregion
     }
