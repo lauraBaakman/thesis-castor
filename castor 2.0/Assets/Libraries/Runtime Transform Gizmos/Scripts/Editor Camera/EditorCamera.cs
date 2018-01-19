@@ -196,12 +196,12 @@ namespace RTEditor
 
         public EditorCameraBk Background { get { return _background; } }
         public Vector3 LastFocusPoint { get { return _lastFocusPoint; } }
-        public Camera Camera 
-        { 
-            get 
+        public Camera Camera
+        {
+            get
             {
                 if (RuntimeEditorApplication.Instance.UseCustomCamera) return RuntimeEditorApplication.Instance.CustomCamera;
-                return _camera; 
+                return _camera;
             }
         }
 
@@ -349,7 +349,7 @@ namespace RTEditor
         /// </summary>
         private void Update()
         {
-            if(RuntimeEditorApplication.Instance.UseCustomCamera)
+            if (RuntimeEditorApplication.Instance.UseCustomCamera)
             {
                 _camera.enabled = false;
             }
@@ -389,19 +389,19 @@ namespace RTEditor
                 nearPlanePoints.Add(viewVolume.BottomRightPointOnNearPlane);
 
                 Plane xzGridPlane = RuntimeEditorApplication.Instance.XZGrid.Plane;
-                if(!xzGridPlane.AreAllPointsInFrontOrBehindPlane(nearPlanePoints))
+                if (!xzGridPlane.AreAllPointsInFrontOrBehindPlane(nearPlanePoints))
                 {
                     Vector3 pivotPoint = Vector3.zero;
                     float dot = Vector3.Dot(xzGridPlane.normal, Camera.transform.forward);
-                    if(dot > 0.0f) xzGridPlane.GetFurthestPointInFront(nearPlanePoints, out pivotPoint);
+                    if (dot > 0.0f) xzGridPlane.GetFurthestPointInFront(nearPlanePoints, out pivotPoint);
                     else
                     if (dot < 0.0f) xzGridPlane.GetFurthestPointBehind(nearPlanePoints, out pivotPoint);
 
-                    if(dot != 0.0f)
+                    if (dot != 0.0f)
                     {
                         Ray ray = new Ray(pivotPoint, -Camera.transform.forward);
                         float t;
-                        if(xzGridPlane.Raycast(ray, out t))
+                        if (xzGridPlane.Raycast(ray, out t))
                         {
                             Vector3 intersectPt = ray.GetPoint(t);
                             float distance = (intersectPt - pivotPoint).magnitude;
@@ -776,7 +776,7 @@ namespace RTEditor
             float elapsedTime = 0.0f;
             Quaternion desiredRotation = Quaternion.LookRotation(axisVector);
             Quaternion initialRotation = Camera.transform.rotation;
-            while(elapsedTime <= duration)
+            while (elapsedTime <= duration)
             {
                 Camera.transform.rotation = Quaternion.Slerp(initialRotation, desiredRotation, elapsedTime / duration);
                 elapsedTime += Time.deltaTime;
@@ -810,7 +810,7 @@ namespace RTEditor
             float elapsedTime = 0.0f;
 
             _isDoingPerspectiveSwitch = true;
-            while(elapsedTime <= duration)
+            while (elapsedTime <= duration)
             {
                 float t = elapsedTime / duration;
                 SetProjectionMatrix(Matrix4x4Extensions.Lerp(initialProjectionMatrix, desiredProjectionMatrix, t));
