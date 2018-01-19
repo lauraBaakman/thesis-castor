@@ -282,11 +282,23 @@ namespace RTEditor
         public void FocusOnSelection()
         {
             // No objects selected?
-            if (EditorObjectSelection.Instance.NumberOfSelectedObjects == 0) return;
+            if (EditorObjectSelection.Instance.NumberOfSelectedObjects == 0 &&
+                (_focusSettings.FocusMode == EditorCameraFocusMode.ConstantSpeed || _focusSettings.FocusMode == EditorCameraFocusMode.Smooth)
+               ) return;
 
             // Focus the camera based on the chosen focus method
             if (_focusSettings.FocusMode == EditorCameraFocusMode.Instant)
             {
+                //Select the default focus object
+                bool SelectedDefaultFocusObject = false;
+                if (EditorObjectSelection.Instance.NumberOfSelectedObjects == 0)
+                {
+                    Debug.Log("Selecting the default focus object: TODO define a select all given some parent gameobject");
+                    SelectedDefaultFocusObject = true;
+                    EditorObjectSelection.Instance.AddObjectToSelection(_focusSettings.DefaultFocusObject, false);
+                }
+
+                //EditorObjectSelection.Instance.AddObjectToSelection(_focusSettings.DefaultFocusObject, false);
                 // Get the focus info
                 EditorCameraFocusOperationInfo focusOpInfo = EditorCameraFocus.GetFocusOperationInfo(Camera, _focusSettings);
 
@@ -299,6 +311,13 @@ namespace RTEditor
                 _wasFocused = true;
                 _lastFocusPoint = focusOpInfo.FocusPoint;
                 CalculateOrbitOffsetAlongLook(focusOpInfo);
+
+                // Deselect the default focus object
+                if (SelectedDefaultFocusObject)
+                {
+                    Debug.Log("Deselecting the default focus object: TODO define a deselect all given some parent gameobject");
+                    EditorObjectSelection.Instance.RemoveObjectFromSelection(_focusSettings.DefaultFocusObject, false);
+                }
             }
             else
             if (_focusSettings.FocusMode == EditorCameraFocusMode.ConstantSpeed)
