@@ -12,7 +12,11 @@ namespace Buttons
 
         private void ShowTranslationWidget()
         {
-            Debug.Log("Time to show the translation widget");
+            RTEditor.EditorGizmoSystem.Instance.SendMessage(
+                methodName: "OnChangeActiveGizmo",
+                value: RTEditor.GizmoType.Translation,
+                options: SendMessageOptions.RequireReceiver
+            );
         }
 
         protected override void DetectKeyBoardShortCut()
@@ -20,5 +24,4 @@ namespace Buttons
             if (Input.GetButton("Show Translation Widget")) ShowTranslationWidget();
         }
     }
-
 }
