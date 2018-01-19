@@ -419,6 +419,15 @@ namespace RTEditor
             _volumeScaleGizmo.gameObject.SetActive(false);
         }
 
+
+        /// <summary>
+        /// Changes the active gizmo to the passed type. 
+        /// </summary>
+        /// <param name="type"> The type of gizmo to be activated.</param>
+        public void OnChangeActiveGizmo(GizmoType type){
+            ChangeActiveGizmo(type);
+        }
+
         /// <summary>
         /// Changes the active gizmo to the gizmo which is identified by the specified type.
         /// </summary>
