@@ -36,6 +36,12 @@ namespace RTEditor
         /// </summary>
         [SerializeField]
         private float _focusDistanceScale = 1.5f;
+
+        /// <summary>
+        /// The default object to focus the camera on, if no objects are selected during the focus camera call.
+        /// </summary>
+        [SerializeField]
+        private GameObject _defaultFocusObject = null;
         #endregion
 
         #region Public Static Properties
@@ -79,6 +85,11 @@ namespace RTEditor
         /// 'MinFocusScale'. Values smaller than that will be clamped accordingly.
         /// </summary>
         public float FocusDistanceScale { get { return _focusDistanceScale; } set { _focusDistanceScale = Mathf.Max(MinFocusScale, value); } }
+
+        /// <summary>
+        /// Gets/sets the object the camera should focus on if the focusCamera funtion is called when no objects are selected. 
+        /// </summary>
+        public GameObject DefaultFocusObject { get { return _defaultFocusObject; } set { _defaultFocusObject = value; } }
         #endregion
     }
 }
