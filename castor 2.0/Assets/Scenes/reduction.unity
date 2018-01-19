@@ -1967,7 +1967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6401bf28448259d4380cea6b8f42ff93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maskedObjectLayers: 0
+  _maskedObjectLayers: 54
   _axesColors:
   - {r: 0.85882354, g: 0.24313726, b: 0.11372549, a: 1}
   - {r: 0.6039216, g: 0.9529412, b: 0.28235295, a: 1}
@@ -2108,7 +2108,7 @@ MonoBehaviour:
   _screenSizeOfSpecialOpSquare: 25
   _snapSettings:
     _stepValueInWorldUnits: 1
-  _vertexSnapLayers: -1
+  _vertexSnapLayers: -56
   _moveScale: 0.5
 --- !u!1001 &1811295926
 Prefab:
