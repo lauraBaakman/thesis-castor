@@ -158,7 +158,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 753.7573
+      value: 832.80396
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -440,7 +440,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 150.75146
+      value: 166.56079
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -1886,7 +1886,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 1055.2603
+      value: 1165.9255
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -2188,64 +2188,79 @@ MonoBehaviour:
     _useMouseButtons: 0
     _useStrictMouseCheck: 0
     _name: Enable vertex snapping
+  _enableBoxSnappingShortcut:
+    _keys: 0000000000000000
+    _numberOfKeys: 1
+    _lCtrl: 1
+    _lCmd: 1
+    _lAlt: 1
+    _lShift: 1
+    _useModifiers: 1
+    _useStrictModifierCheck: 1
+    _lMouseBtn: 1
+    _rMouseBtn: 1
+    _mMouseBtn: 1
+    _useMouseButtons: 1
+    _useStrictMouseCheck: 0
+    _name: Enable box snapping
   _enableSurfacePlacementWithYAlignment:
     _keys: 0000000000000000
     _numberOfKeys: 1
-    _lCtrl: 0
-    _lCmd: 0
-    _lAlt: 0
-    _lShift: 0
-    _useModifiers: 0
+    _lCtrl: 1
+    _lCmd: 1
+    _lAlt: 1
+    _lShift: 1
+    _useModifiers: 1
     _useStrictModifierCheck: 1
-    _lMouseBtn: 0
-    _rMouseBtn: 0
-    _mMouseBtn: 0
-    _useMouseButtons: 0
+    _lMouseBtn: 1
+    _rMouseBtn: 1
+    _mMouseBtn: 1
+    _useMouseButtons: 1
     _useStrictMouseCheck: 0
     _name: Enable surface placement (with Y axis alignment)
   _enableSurfacePlacementWithXAlignment:
     _keys: 0000000078000000
     _numberOfKeys: 1
-    _lCtrl: 0
-    _lCmd: 0
-    _lAlt: 0
-    _lShift: 0
-    _useModifiers: 0
+    _lCtrl: 1
+    _lCmd: 1
+    _lAlt: 1
+    _lShift: 1
+    _useModifiers: 1
     _useStrictModifierCheck: 1
-    _lMouseBtn: 0
-    _rMouseBtn: 0
-    _mMouseBtn: 0
-    _useMouseButtons: 0
+    _lMouseBtn: 1
+    _rMouseBtn: 1
+    _mMouseBtn: 1
+    _useMouseButtons: 1
     _useStrictMouseCheck: 0
     _name: Enable surface placement (with X axis alignment)
   _enableSurfacePlacementWithZAlignment:
     _keys: 000000007a000000
     _numberOfKeys: 1
-    _lCtrl: 0
-    _lCmd: 0
-    _lAlt: 0
-    _lShift: 0
-    _useModifiers: 0
+    _lCtrl: 1
+    _lCmd: 1
+    _lAlt: 1
+    _lShift: 1
+    _useModifiers: 1
     _useStrictModifierCheck: 1
-    _lMouseBtn: 0
-    _rMouseBtn: 0
-    _mMouseBtn: 0
-    _useMouseButtons: 0
+    _lMouseBtn: 1
+    _rMouseBtn: 1
+    _mMouseBtn: 1
+    _useMouseButtons: 1
     _useStrictMouseCheck: 0
     _name: Enable surface placement (with Z axis alignment)
   _enableSurfacePlacementNoAxisAlignment:
-    _keys: 2000000000000000
+    _keys: 0000000000000000
     _numberOfKeys: 1
     _lCtrl: 1
-    _lCmd: 0
-    _lAlt: 0
-    _lShift: 0
+    _lCmd: 1
+    _lAlt: 1
+    _lShift: 1
     _useModifiers: 1
     _useStrictModifierCheck: 1
-    _lMouseBtn: 0
-    _rMouseBtn: 0
-    _mMouseBtn: 0
-    _useMouseButtons: 0
+    _lMouseBtn: 1
+    _rMouseBtn: 1
+    _mMouseBtn: 1
+    _useMouseButtons: 1
     _useStrictMouseCheck: 0
     _name: Enable surface placement (no alignment
   _enableMoveScale:
@@ -2266,7 +2281,7 @@ MonoBehaviour:
   _axisLength: 5
   _arrowConeRadius: 0.4
   _arrowConeLength: 1.19
-  _multiAxisSquareSize: 1
+  _multiAxisSquareSize: 1.5
   _adjustMultiAxisForBetterVisibility: 1
   _multiAxisSquareAlpha: 0.2
   _areArrowConesLit: 1
@@ -2332,7 +2347,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 452.2544
+      value: 499.68237
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
