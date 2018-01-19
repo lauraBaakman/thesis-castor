@@ -611,7 +611,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 119.19721
+      value: 119.197205
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -1703,7 +1703,7 @@ MonoBehaviour:
     _useStrictMouseCheck: 1
     _name: Activate local transform
   _turnOffGizmosShortcut:
-    _keys: 7100000000000000
+    _keys: 0000000000000000
     _numberOfKeys: 1
     _lCtrl: 0
     _lCmd: 0
@@ -1718,7 +1718,7 @@ MonoBehaviour:
     _useStrictMouseCheck: 1
     _name: Turn off gizmos
   _togglePivotShortcut:
-    _keys: 7000000000000000
+    _keys: 0000000000000000
     _numberOfKeys: 1
     _lCtrl: 0
     _lCmd: 0
