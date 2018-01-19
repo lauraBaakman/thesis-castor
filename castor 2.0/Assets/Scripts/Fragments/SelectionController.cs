@@ -1,21 +1,32 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace Fragments
 {
     public class SelectionController : MonoBehaviour
     {
-        // Use this for initialization
-        void Start()
+        public List<GameObject> Listeners;
+
+        /// <summary>
+        /// Is called when list of children of this object changes.
+        /// </summary>
+        private void OnTransformChildrenChanged()
         {
-            Debug.Log("Fragments Selection Controller");
+            NotifyListeners();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void NotifyListeners()
         {
-
+            foreach (GameObject listener in Listeners)
+            {
+                listener.SendMessage(
+                    methodName: "OnNumberOfSelectedObjectsChanged",
+                    value: transform.childCount,
+                    options: SendMessageOptions.DontRequireReceiver
+                );
+            }
         }
+
     }
 }
 

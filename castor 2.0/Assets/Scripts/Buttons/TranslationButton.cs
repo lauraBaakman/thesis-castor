@@ -23,5 +23,9 @@ namespace Buttons
         {
             if (Input.GetButton("Show Translation Widget")) ShowTranslationWidget();
         }
+
+        public void OnNumberOfSelectedObjectsChanged(int currentCount){
+            Debug.Log("TranslationButton: + " + currentCount);   
+        }
     }
 }
