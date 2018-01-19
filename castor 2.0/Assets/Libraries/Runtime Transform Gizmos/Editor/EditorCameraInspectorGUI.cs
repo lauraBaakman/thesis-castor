@@ -34,9 +34,9 @@ namespace RTEditor
         public override void OnInspectorGUI()
         {
             const int indentLevel = 2;
-            if(RuntimeEditorApplication.Instance.UseCustomCamera)
+            if (RuntimeEditorApplication.Instance.UseCustomCamera)
             {
-                EditorGUILayout.HelpBox("Some camera properties can not be modified when a custom camera is used. You can use the " + 
+                EditorGUILayout.HelpBox("Some camera properties can not be modified when a custom camera is used. You can use the " +
                                         "Runtime Editor Application Inspector to change this.", UnityEditor.MessageType.Info);
                 EditorGUILayout.BeginVertical("Box");
                 RenderCameraBackgroundSettingsCtrls(indentLevel);
@@ -51,14 +51,14 @@ namespace RTEditor
             // Let the user change the zoom settings
             EditorGUI.indentLevel = indentLevel - 1;
             _zoomSettingsAreVisible = EditorGUILayout.Foldout(_zoomSettingsAreVisible, "Zoom Settings");
-            if(_zoomSettingsAreVisible)
+            if (_zoomSettingsAreVisible)
             {
                 EditorCameraZoomSettings zoomSettings = _editorCamera.ZoomSettings;
                 EditorGUI.indentLevel = indentLevel;
 
                 // Let the user specify if camera zoom is enabled/disabled
                 bool newBool = EditorGUILayout.ToggleLeft("Is Zoom Enabled", zoomSettings.IsZoomEnabled);
-                if(newBool != zoomSettings.IsZoomEnabled)
+                if (newBool != zoomSettings.IsZoomEnabled)
                 {
                     UnityEditorUndoHelper.RecordObjectForInspectorPropertyChange(_editorCamera);
                     zoomSettings.IsZoomEnabled = newBool;
@@ -72,7 +72,7 @@ namespace RTEditor
                     zoomSettings.ZoomMode = newZoomMode;
                 }
 
-                if(newZoomMode == EditorCameraZoomMode.Smooth)
+                if (newZoomMode == EditorCameraZoomMode.Smooth)
                 {
                     // Let the user choose a smooth value for both camera types
                     EditorGUILayout.Separator();
@@ -90,7 +90,7 @@ namespace RTEditor
                         zoomSettings.PerspectiveSmoothValue = newFloatValue;
                     }
                 }
-             
+
                 if (newZoomMode == EditorCameraZoomMode.Standard)
                 {
                     // Let the user specify the zoom speed when the camera operates in ortho mode and the zoom mode is set to 'Standard'
@@ -135,25 +135,25 @@ namespace RTEditor
             // Let the user change the pan settings
             EditorGUI.indentLevel = indentLevel - 1;
             _panSettingsAreVisible = EditorGUILayout.Foldout(_panSettingsAreVisible, "Pan Settings");
-            if(_panSettingsAreVisible)
+            if (_panSettingsAreVisible)
             {
                 EditorCameraPanSettings panSettings = _editorCamera.PanSettings;
                 EditorGUI.indentLevel = indentLevel;
 
                 // Let the user choose the pan mode
                 EditorCameraPanMode newPanMode = (EditorCameraPanMode)EditorGUILayout.EnumPopup("Pan Mode", panSettings.PanMode);
-                if(newPanMode != panSettings.PanMode)
+                if (newPanMode != panSettings.PanMode)
                 {
                     UnityEditorUndoHelper.RecordObjectForInspectorPropertyChange(_editorCamera);
                     panSettings.PanMode = newPanMode;
                 }
 
-                if(panSettings.PanMode == EditorCameraPanMode.Smooth)
+                if (panSettings.PanMode == EditorCameraPanMode.Smooth)
                 {
                     // Let the user choose the pan smooth value
                     EditorGUILayout.Separator();
                     newFloatValue = EditorGUILayout.Slider("Smooth Value", panSettings.SmoothValue, EditorCameraPanSettings.MinSmoothValue, EditorCameraPanSettings.MaxSmoothValue);
-                    if(newFloatValue != panSettings.SmoothValue)
+                    if (newFloatValue != panSettings.SmoothValue)
                     {
                         UnityEditorUndoHelper.RecordObjectForInspectorPropertyChange(_editorCamera);
                         panSettings.SmoothValue = newFloatValue;
@@ -181,7 +181,7 @@ namespace RTEditor
                 // Let the user specify which pan axes should be inverted
                 EditorGUILayout.Separator();
                 bool newBoolean = EditorGUILayout.ToggleLeft("Invert X Axis", panSettings.InvertXAxis);
-                if(newBoolean != panSettings.InvertXAxis)
+                if (newBoolean != panSettings.InvertXAxis)
                 {
                     UnityEditorUndoHelper.RecordObjectForInspectorPropertyChange(_editorCamera);
                     panSettings.InvertXAxis = newBoolean;
@@ -198,38 +198,38 @@ namespace RTEditor
             // Let the user change the focus settings
             EditorGUI.indentLevel = indentLevel - 1;
             _focusSettingsAreVisible = EditorGUILayout.Foldout(_focusSettingsAreVisible, "Focus Settings");
-            if(_focusSettingsAreVisible)
+            if (_focusSettingsAreVisible)
             {
                 EditorCameraFocusSettings focusSettings = _editorCamera.FocusSettings;
                 EditorGUI.indentLevel = indentLevel;
 
                 // Let the user choose the focus mode
                 EditorCameraFocusMode newFocusMode = (EditorCameraFocusMode)EditorGUILayout.EnumPopup("Focus Mode", focusSettings.FocusMode);
-                if(newFocusMode != focusSettings.FocusMode)
+                if (newFocusMode != focusSettings.FocusMode)
                 {
                     UnityEditorUndoHelper.RecordObjectForInspectorPropertyChange(_editorCamera);
                     focusSettings.FocusMode = newFocusMode;
                 }
 
-                
+
                 // Continue drawing the GUI based on the active focus mode
-                if(focusSettings.FocusMode == EditorCameraFocusMode.ConstantSpeed)
+                if (focusSettings.FocusMode == EditorCameraFocusMode.ConstantSpeed)
                 {
                     // Let the user specify the constant focus speed
                     EditorGUILayout.Separator();
                     newFloatValue = EditorGUILayout.FloatField("Constant Focus Speed", focusSettings.ConstantFocusSpeed);
-                    if(newFloatValue != focusSettings.ConstantFocusSpeed)
+                    if (newFloatValue != focusSettings.ConstantFocusSpeed)
                     {
                         UnityEditorUndoHelper.RecordObjectForInspectorPropertyChange(_editorCamera);
                         focusSettings.ConstantFocusSpeed = newFloatValue;
                     }
                 }
                 else
-                if(focusSettings.FocusMode == EditorCameraFocusMode.Smooth)
+                if (focusSettings.FocusMode == EditorCameraFocusMode.Smooth)
                 {
                     // Let the user specify the smooth focus time
                     EditorGUILayout.Separator();
-                    EditorGUILayout.LabelField("Note: Time value is approximate.", EditorGUIStyles.GetInformativeLabelStyle());
+                    EditorGUILayout.LabelField(" Note: Time value is approximate.", EditorGUIStyles.GetInformativeLabelStyle());
                     newFloatValue = EditorGUILayout.FloatField("Smooth Focus Time", focusSettings.SmoothFocusTime);
                     if (newFloatValue != focusSettings.SmoothFocusTime)
                     {
@@ -237,10 +237,23 @@ namespace RTEditor
                         focusSettings.SmoothFocusTime = newFloatValue;
                     }
                 }
+                else
+                if (focusSettings.FocusMode == EditorCameraFocusMode.Instant)
+                {
+                    // Let the user specify the object that should be focused on if no objects are selected
+                    EditorGUILayout.Separator();
+                    EditorGUILayout.LabelField(" Note: Focussing on a default object is only supported in constant focus mode.", EditorGUIStyles.GetInformativeLabelStyle());
+                    GameObject defaultFocusObject = EditorGUILayout.ObjectField("Default Focus Object", focusSettings.DefaultFocusObject, typeof(GameObject), true) as GameObject;
+                    if (defaultFocusObject != focusSettings.DefaultFocusObject)
+                    {
+                        UnityEditorUndoHelper.RecordObjectForInspectorPropertyChange(_editorCamera);
+                        focusSettings.DefaultFocusObject = defaultFocusObject;
+                    }
+                }
 
                 // We always let the user choose the focus distance scale
                 newFloatValue = EditorGUILayout.FloatField("Focus Distance Scale", focusSettings.FocusDistanceScale);
-                if(newFloatValue != focusSettings.FocusDistanceScale)
+                if (newFloatValue != focusSettings.FocusDistanceScale)
                 {
                     UnityEditorUndoHelper.RecordObjectForInspectorPropertyChange(_editorCamera);
                     focusSettings.FocusDistanceScale = newFloatValue;
@@ -268,7 +281,7 @@ namespace RTEditor
             EditorGUILayout.EndVertical();
 
             _keyMappingsAreVisible = EditorGUILayout.Foldout(_keyMappingsAreVisible, "Key mappings");
-            if(_keyMappingsAreVisible)
+            if (_keyMappingsAreVisible)
             {
                 _editorCamera.MoveForwardShortcut.RenderView(_editorCamera);
                 _editorCamera.MoveBackShortcut.RenderView(_editorCamera);
