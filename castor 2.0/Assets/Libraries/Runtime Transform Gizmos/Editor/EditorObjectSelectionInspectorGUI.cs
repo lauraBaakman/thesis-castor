@@ -250,6 +250,25 @@ namespace RTEditor
                 EditorGUI.indentLevel -= indentLevel;
             }
 
+            // Let the user specify the root object for select all
+            EditorGUI.indentLevel += 1;
+            _selectableLayersListIsVisible = EditorGUILayout.Foldout(_selectableLayersListIsVisible, "'Select All' Root Object");
+            EditorGUI.indentLevel -= 1;
+            if (_selectableLayersListIsVisible)
+            {
+                EditorGUI.indentLevel += indentLevel;
+
+                // Let the user select a parent object for select all
+                GameObject selectAllParent = EditorGUILayout.ObjectField("Select All Root Object", objectSelectionSettings.SelectAllRoot, typeof(GameObject), true) as GameObject;
+                if (selectAllParent != objectSelectionSettings.SelectAllRoot)
+                {
+                    UnityEditorUndoHelper.RecordObjectForInspectorPropertyChange(_editorObjectSelection);
+                    objectSelectionSettings.SelectAllRoot = selectAllParent;
+                }
+                EditorGUI.indentLevel -= indentLevel;
+            }
+
+
             EditorGUILayout.EndVertical();
 
             _keyMappingsAreVisible = EditorGUILayout.Foldout(_keyMappingsAreVisible, "Key mappings");
