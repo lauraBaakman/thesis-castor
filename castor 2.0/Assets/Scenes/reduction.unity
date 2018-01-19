@@ -2274,7 +2274,7 @@ MonoBehaviour:
   _specialOpSquareColorWhenSelected: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _screenSizeOfSpecialOpSquare: 25
   _snapSettings:
-    _stepValueInWorldUnits: 1
+    _stepValueInWorldUnits: 0.25
   _vertexSnapLayers: -56
   _moveScale: 0.5
 --- !u!1001 &1811295926
