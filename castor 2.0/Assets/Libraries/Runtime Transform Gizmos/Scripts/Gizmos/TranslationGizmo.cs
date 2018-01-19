@@ -58,6 +58,7 @@ namespace RTEditor
             UseMouseButtons = false,
             UseStrictModifierCheck = true
         };
+        [SerializeField]
         private ShortcutKeys _enableBoxSnappingShortcut = new ShortcutKeys("Enable box snapping", 1)
         {
             Key0 = KeyCode.B,
