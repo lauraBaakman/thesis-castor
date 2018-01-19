@@ -9,6 +9,7 @@ public class HelpMessageSender : MonoBehaviour, IPointerEnterHandler, IPointerEx
     /// <summary>
     /// The message to be sent.
     /// </summary>
+    [TextArea]
     public string Message;
 
     /// <summary>
