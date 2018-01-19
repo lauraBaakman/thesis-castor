@@ -1,17 +1,49 @@
 using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
-public class NewMonoBehaviour : MonoBehaviour
+namespace Buttons
 {
-	// Use this for initialization
-	void Start()
-	{
+    /// Class to manage the transform space toggle, if the toggle is on we use worldspace.
+    public class TransformSpaceToggle : MonoBehaviour
+    {
+        public Sprite LocalSpaceSprite;
+        public SpriteState LocalSpaceSpriteState;
 
-	}
+        private Sprite WorldSpaceSprite;
+        private SpriteState WorldSpaceSpriteState;
 
-	// Update is called once per frame
-	void Update()
-	{
-			
-	}
+        private Toggle Toggle;
+        private Image Image;
+
+        public void Awake()
+        {
+            Toggle = GetComponent<Toggle>();
+            Toggle.onValueChanged.AddListener(OnToggleValueChanged);
+
+            Image = GetComponent<Image>();
+            WorldSpaceSprite = Image.sprite;
+
+            WorldSpaceSpriteState = new SpriteState
+            {
+                disabledSprite = Toggle.spriteState.disabledSprite,
+                highlightedSprite = Toggle.spriteState.highlightedSprite,
+                pressedSprite = Toggle.spriteState.pressedSprite
+            };
+        }
+
+        public void OnToggleValueChanged(bool inWorldSpace)
+        {
+            SetSpriteAndSpriteState(
+                sprite: inWorldSpace ? WorldSpaceSprite : LocalSpaceSprite,
+                state: inWorldSpace ? WorldSpaceSpriteState : LocalSpaceSpriteState
+            );
+        }
+
+        private void SetSpriteAndSpriteState(Sprite sprite, SpriteState state)
+        {
+            Image.sprite = sprite;
+            Toggle.spriteState = state;
+        }
+    }
 }
+
