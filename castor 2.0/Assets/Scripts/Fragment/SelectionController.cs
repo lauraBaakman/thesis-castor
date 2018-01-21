@@ -9,10 +9,6 @@ namespace Fragment
         private GameObject SelectedFragments;
         private GameObject DeselectedFragments;
 
-        private void Awake()
-        {
-        }
-
         private void Start()
         {
             DeselectedFragments = transform.root.gameObject;
