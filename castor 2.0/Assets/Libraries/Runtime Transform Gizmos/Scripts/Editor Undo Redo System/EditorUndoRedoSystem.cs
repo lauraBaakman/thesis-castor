@@ -66,7 +66,7 @@ namespace RTEditor
         public void RegisterAction(IUndoableAndRedoableAction action)
         {
             // Is this the first action registered?
-            if(_actionStackPointer < 0)
+            if (_actionStackPointer < 0)
             {
                 // Just add the action to the stack and set the pointer to the first element
                 _actionStack.Add(action);
@@ -175,11 +175,11 @@ namespace RTEditor
             // old one, we remove the surplus actions from the stack. For example, if the old action limit is 5, and the
             // new action limit is 4, and the stack points currently points at the last action, we have to remove the
             // first action from the stack (element 0) and adjust the stack pointer.
-            if(Application.isPlaying && _actionLimit < oldActionLimit && _actionStackPointer >= _actionLimit)
+            if (Application.isPlaying && _actionLimit < oldActionLimit && _actionStackPointer >= _actionLimit)
             {
                 // Remove the surplus actions from the stack, but leave the most recent ones intact
                 RemoveActionsRange(0, oldActionLimit - _actionLimit);
-                
+
                 // Adjust the stack pointer to point to the last action
                 _actionStackPointer = _actionStack.Count - 1;
             }
@@ -198,6 +198,25 @@ namespace RTEditor
             _actionStack.RemoveRange(startIndex, count);
             foreach (var action in actionsToRemove) action.OnRemovedFromUndoRedoStack();
         }
+        #endregion
+
+        #region Added By Me
+
+        /// <summary>
+        /// Call this method to undo the action on top of the stack.
+        /// </summary>
+        public void OnUndo(){
+            Undo();
+        }
+
+
+        /// <summary>
+        /// Call this method to redo the last undone action.
+        /// </summary>
+        public void OnRedo(){
+            Redo();
+        }
+
         #endregion
     }
 }
