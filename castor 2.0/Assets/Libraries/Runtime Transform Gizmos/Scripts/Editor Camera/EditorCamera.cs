@@ -281,7 +281,7 @@ namespace RTEditor
         /// </remarks>
         public void FocusOnSelection()
         {
-            // No objects selected?
+            // Focussing on the default object is not selected in constant and smooth focus mode
             if (EditorObjectSelection.Instance.NumberOfSelectedObjects == 0 &&
                 (_focusSettings.FocusMode == EditorCameraFocusMode.ConstantSpeed || _focusSettings.FocusMode == EditorCameraFocusMode.Smooth)
                ) return;
@@ -290,12 +290,10 @@ namespace RTEditor
             if (_focusSettings.FocusMode == EditorCameraFocusMode.Instant)
             {
                 //Select the default focus object
-                bool SelectedDefaultFocusObject = false;
+                bool selectedDefaultFocusObject = false;
                 if (EditorObjectSelection.Instance.NumberOfSelectedObjects == 0)
                 {
-                    Debug.Log("Selecting the default focus object: TODO define a select all given some parent gameobject");
-                    SelectedDefaultFocusObject = true;
-                    EditorObjectSelection.Instance.AddObjectToSelection(_focusSettings.DefaultFocusObject, false);
+                    selectedDefaultFocusObject = EditorObjectSelection.Instance.AddObjectAndItsChildrenToSelection(_focusSettings.DefaultFocusObject);
                 }
 
                 //EditorObjectSelection.Instance.AddObjectToSelection(_focusSettings.DefaultFocusObject, false);
@@ -313,10 +311,10 @@ namespace RTEditor
                 CalculateOrbitOffsetAlongLook(focusOpInfo);
 
                 // Deselect the default focus object
-                if (SelectedDefaultFocusObject)
+                if (selectedDefaultFocusObject)
                 {
-                    Debug.Log("Deselecting the default focus object: TODO define a deselect all given some parent gameobject");
-                    EditorObjectSelection.Instance.RemoveObjectFromSelection(_focusSettings.DefaultFocusObject, false);
+                    /// Undo select all
+                    EditorUndoRedoSystem.Instance.OnUndo();
                 }
             }
             else
