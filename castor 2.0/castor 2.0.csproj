@@ -326,6 +326,8 @@
     <Compile Include="Assets\Scripts\Buttons\TransformButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\TransformSpaceToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\SelectAllButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\UndoButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\RedoButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
