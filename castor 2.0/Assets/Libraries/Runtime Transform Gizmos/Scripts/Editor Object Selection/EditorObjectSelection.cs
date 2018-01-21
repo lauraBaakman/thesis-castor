@@ -1230,14 +1230,14 @@ namespace RTEditor
         }
         #endregion
 
-        #region Add By Me
+        #region Added By Me
 
         public void OnSelectAll()
         {
-            SelectAllChildrenOf(_objectSelectionSettings.SelectAllRoot);
+            AddObjectAndItsChildrenToSelection(_objectSelectionSettings.SelectAllRoot);
         }
 
-        public bool SelectAllChildrenOf(GameObject root)
+        public bool AddObjectAndItsChildrenToSelection(GameObject root)
         {
             // Take a pre-change snapshot
             ObjectSelectionSnapshot preChangeSnapshot = new ObjectSelectionSnapshot();
