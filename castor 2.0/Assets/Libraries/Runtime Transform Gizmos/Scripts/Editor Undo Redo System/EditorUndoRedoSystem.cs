@@ -105,22 +105,6 @@ namespace RTEditor
         #endregion
 
         #region Private Methods
-        private void Update()
-        {
-            if (!Application.isEditor)
-            {
-                if (Input.GetKeyDown(KeyCode.Z) && InputHelper.IsAnyCtrlOrCommandKeyPressed()) Undo();
-                else
-                if (Input.GetKeyDown(KeyCode.Y) && InputHelper.IsAnyCtrlOrCommandKeyPressed()) Redo();
-            }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.Z) && InputHelper.IsAnyCtrlOrCommandKeyPressed() && InputHelper.IsAnyShiftKeyPressed()) Undo();
-                else
-                if (Input.GetKeyDown(KeyCode.Y) && InputHelper.IsAnyCtrlOrCommandKeyPressed() && InputHelper.IsAnyShiftKeyPressed()) Redo();
-            }
-        }
-
         /// <summary>
         /// Performs an undo operation.
         /// </summary>
