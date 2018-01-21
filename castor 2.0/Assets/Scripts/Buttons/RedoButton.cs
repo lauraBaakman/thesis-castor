@@ -35,7 +35,10 @@ namespace Buttons
 
         private void Redo()
         {
-            Debug.Log("Redo!");
+            EditorUndoRedoSystem.Instance.SendMessage(
+                methodName: "OnRedo",
+                options: SendMessageOptions.RequireReceiver
+            );
         }
     }
 

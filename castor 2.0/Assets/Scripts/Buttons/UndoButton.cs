@@ -35,7 +35,10 @@ namespace Buttons
 
         private void Undo()
         {
-            Debug.Log("Undo!");
+            EditorUndoRedoSystem.Instance.SendMessage(
+                methodName: "OnUndo",
+                options: SendMessageOptions.RequireReceiver
+            );
         }
     }
 }
