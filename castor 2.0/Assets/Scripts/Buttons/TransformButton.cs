@@ -20,11 +20,6 @@ namespace Buttons
             Button = GetComponent<Button>();
         }
 
-        public override void OnClick()
-        {
-            ToggleWidget();
-        }
-
         public void OnEnable()
         {
             OnNumberOfSelectedObjectsChanged(RTEditor.EditorObjectSelection.Instance.NumberOfSelectedObjects);
@@ -51,9 +46,14 @@ namespace Buttons
             return numSelectedObjects >= 1;
         }
 
-        protected override void DetectKeyBoardShortCut()
+        protected override bool HasDetectedKeyBoardShortCut()
         {
-            if (Input.GetButtonDown(InputName)) ToggleWidget();
+            return Input.GetButtonDown(InputName);
+        }
+
+        protected override void ExecuteButtonAction()
+        {
+            ToggleWidget();
         }
     }
 }

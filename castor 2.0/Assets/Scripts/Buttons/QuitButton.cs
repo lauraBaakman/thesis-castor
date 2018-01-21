@@ -4,21 +4,25 @@ namespace Buttons
 {
     public class QuitButton : AbstractButton
     {
-
-        public override void OnClick()
+        protected override bool HasDetectedKeyBoardShortCut()
         {
-            Quit();
+            return Input.GetButtonDown("Quit");
         }
 
-        private void Quit()
+        protected override void ExecuteButtonAction()
+        {
+            if (Application.isEditor) QuitInEditorMode();
+            else QuitInDeploymentMode();
+        }
+
+        private void QuitInEditorMode()
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
+
+        private void QuitInDeploymentMode()
         {
             Application.Quit();
-            if (Application.isEditor) Debug.Log("We should quit the application, however Application.Quit() does not work in editor mode.");
-        }
-
-        protected override void DetectKeyBoardShortCut()
-        {
-            if (Input.GetButtonDown("Quit")) Quit();
         }
     }
 }

@@ -21,24 +21,6 @@ namespace Buttons
             }
         }
 
-        public override void OnClick()
-        {
-            AddFragment();
-        }
-
-        protected override void DetectKeyBoardShortCut()
-        {
-            if (Input.GetButtonDown("Add Fragment")) AddFragment();
-        }
-
-        private void AddFragment()
-        {
-            new IO.FragmentsImporter(
-                fragmentParent: FragmentsRoot,
-                callBack: NotifyUserOfAddedFragment
-            ).Import();
-        }
-
         private void NotifyUserOfAddedFragment(string path, GameObject fragment)
         {
             Ticker.Message.InfoMessage message = new Ticker.Message.InfoMessage(
@@ -52,6 +34,19 @@ namespace Buttons
                 value: message,
                 options: SendMessageOptions.RequireReceiver
             );
+        }
+
+        protected override bool HasDetectedKeyBoardShortCut()
+        {
+            return Input.GetButtonDown("Add Fragment");
+        }
+
+        protected override void ExecuteButtonAction()
+        {
+            new IO.FragmentsImporter(
+                fragmentParent: FragmentsRoot,
+                callBack: NotifyUserOfAddedFragment
+            ).Import();
         }
     }
 }

@@ -7,18 +7,14 @@ namespace Buttons
     {
         private string HelpPage = "https://laurabaakman.github.io/thesis-castor/";
 
-        public override void OnClick()
+        protected override bool HasDetectedKeyBoardShortCut()
         {
-            OpenHelpWebPage();
+            return Input.GetButtonDown("Help");
         }
 
-        private void OpenHelpWebPage(){
+        protected override void ExecuteButtonAction()
+        {
             Application.OpenURL(HelpPage);
-        }
-
-        protected override void DetectKeyBoardShortCut()
-        {
-            if (Input.GetButtonDown("Help")) OpenHelpWebPage();
         }
     }
 

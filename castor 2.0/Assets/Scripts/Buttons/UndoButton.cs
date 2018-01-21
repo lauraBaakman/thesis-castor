@@ -5,23 +5,14 @@ namespace Buttons
 {
     public class UndoButton : AbstractButton
     {
-        public override void OnClick()
+        protected override bool HasDetectedKeyBoardShortCut()
         {
-            Undo();
-        }
-
-        protected override void DetectKeyBoardShortCut()
-        {
-            if (IsEditorUndoCombinationPressed() ||
-                IsDeploymentUndoCombinationPressed()
-               ) Undo();
+            if (Application.isEditor) return IsEditorUndoCombinationPressed();
+            else return IsDeploymentUndoCombinationPressed();
         }
 
         private bool IsEditorUndoCombinationPressed()
         {
-            // We are running in deployment mode, not editor mode
-            if (!Application.isEditor) return false;
-
             return (Input.GetButtonDown("Undo") &&
                     InputHelper.IsAnyCtrlOrCommandKeyPressed() &&
                     InputHelper.IsAnyShiftKeyPressed());
@@ -33,7 +24,7 @@ namespace Buttons
                     InputHelper.IsAnyCtrlOrCommandKeyPressed());
         }
 
-        private void Undo()
+        protected override void ExecuteButtonAction()
         {
             EditorUndoRedoSystem.Instance.SendMessage(
                 methodName: "OnUndo",

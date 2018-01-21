@@ -4,22 +4,17 @@ namespace Buttons
 {
     public class SelectAllButton : AbstractButton
     {
-        public override void OnClick()
-        {
-            SelectAll();
-        }
-
-        protected override void DetectKeyBoardShortCut()
-        {
-            if (Input.GetButtonDown("Select All")) SelectAll();
-        }
-
-        private void SelectAll()
+        protected override void ExecuteButtonAction()
         {
             RTEditor.EditorObjectSelection.Instance.SendMessage(
                 methodName: "OnSelectAll",
                 options: SendMessageOptions.RequireReceiver
             );
+        }
+
+        protected override bool HasDetectedKeyBoardShortCut()
+        {
+            return Input.GetButtonDown("Select All");
         }
     }
 }
