@@ -43,6 +43,7 @@ namespace Registration {
             //}
 
             if (CallBack != null) CallBack();
+            SendMessageToAllListeners("OnICPFinished");
         }
 
         /// <summary>
@@ -90,5 +91,16 @@ namespace Registration {
             throw new NotImplementedException();
         }
 
+        private void SendMessageToAllListeners( string methodName )
+        {
+            ModelFragment.SendMessage(
+                methodName: methodName,
+                options: SendMessageOptions.RequireReceiver
+            );
+            ModelFragment.SendMessage(
+                methodName: methodName,
+                options: SendMessageOptions.RequireReceiver
+            );
+        }
     }
 }

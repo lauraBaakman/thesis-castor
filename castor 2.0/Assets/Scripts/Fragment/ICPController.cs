@@ -34,4 +34,9 @@ public class ICPController : MonoBehaviour, Registration.IICPListener {
         }
         ParticleSystem.SetParticles(particles, particles.Length);
     }
+
+    public void OnICPFinished()
+    {
+        ParticleSystem.Clear();
+    }
 }
