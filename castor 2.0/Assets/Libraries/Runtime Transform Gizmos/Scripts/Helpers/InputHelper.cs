@@ -93,5 +93,41 @@ namespace RTEditor
             return Input.GetMouseButtonUp((int)MouseButton.Middle);
         }
         #endregion
+
+        #region Functions added by me
+
+        /// <summary>
+        /// Checks if none of the  modifier keys (shift, alt, ctrl, cmd) were pressed. 
+        /// </summary>
+        /// <returns><c>true</c>, if no modifier was pressed, <c>false</c> otherwise.</returns>
+        public static bool IsNoModifierPressed()
+        {
+            return IsNoShiftKeyPressed()
+                && IsNoAltKeyPressed()
+                && IsNoCommandKeyPressed()
+                && IsNoControlKeyPressed();
+        }
+
+        private static bool IsNoShiftKeyPressed()
+        {
+            return !(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+        }
+
+        private static bool IsNoAltKeyPressed()
+        {
+            return !(Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt));
+        }
+
+        private static bool IsNoCommandKeyPressed()
+        {
+            return !(Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand));
+        }
+
+        private static bool IsNoControlKeyPressed()
+        {
+            return !(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
+        }
+
+        #endregion
     }
 }
