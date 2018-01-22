@@ -19,7 +19,7 @@ namespace Registration {
         {
             StaticFragment = staticFragment;
             ModelFragment = modelFragment;
-            Settings = (settings != null) ? settings : new Settings();
+            Settings = settings ?? new Settings();
             CallBack = callBack;
         }
 
