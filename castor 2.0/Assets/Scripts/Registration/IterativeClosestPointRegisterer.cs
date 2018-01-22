@@ -39,15 +39,24 @@ namespace Registration
             }
         }
 
+        /// <summary>
+        /// Selects the points to use for the computation of the correspondences from the gameobejct with the selector specified in the settings object. Notify the fragment of which the points are selected.
+        /// </summary>
+        /// <returns>The points.</returns>
+        /// <param name="fragment">Fragment.</param>
         private List<Vector3> SelectPoints(GameObject fragment)
         {
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
             List<Vector3> points = Settings.PointSelector.Select(mesh);
+
+            //Notify the fragment
             fragment.SendMessage(
-                methodName:,
-                value:,
-                options:
+                methodName: "OnICPPointsSelected",
+                value: points,
+                options: SendMessageOptions.DontRequireReceiver
             );
+
+            return points;
         }
 
         private object FilterCorrespondences(object correspondences)
@@ -60,7 +69,7 @@ namespace Registration
             throw new NotImplementedException();
         }
 
-        private Fragment ApplyTransform(Transform transform, GameObject modelFragment)
+        private GameObject ApplyTransform(Transform transform, GameObject modelFragment)
         {
             throw new NotImplementedException();
         }

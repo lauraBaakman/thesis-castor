@@ -5,10 +5,24 @@ namespace Registration
 {
     public class Settings : MonoBehaviour
     {
-        private IPointSelector pointSelector;
+        private IPointSelector _pointSelector;
 
-        Settings(){
-            pointSelector = new SelectAllPointsSelector();
+        public IPointSelector PointSelector
+        {
+            get
+            {
+                return _pointSelector;
+            }
+
+            set
+            {
+                _pointSelector = value;
+            }
+        }
+
+        public Settings()
+        {
+            PointSelector = new SelectAllPointsSelector();
         }
     }
 }

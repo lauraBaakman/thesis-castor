@@ -1,17 +1,15 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
-public class NewMonoBehaviour : MonoBehaviour
+public class ICPController : Registration.IICPListener
 {
-	// Use this for initialization
-	void Start()
-	{
+    void Start()
+    {
+        Debug.Log("Hi!");
+    }
 
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-			
-	}
+    public void OnICPPointsSelected(List<Vector3> points)
+    {
+        Debug.Log("Received points!");
+    }
 }
