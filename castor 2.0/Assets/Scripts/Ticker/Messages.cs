@@ -32,6 +32,12 @@ namespace Ticker
             Color = color;
         }
 
+        protected Message(string text, Color color, float decayInS){
+            Text = text;
+            Color = color;
+            DecayInS = decayInS;
+        }
+
         protected string BuildMessage(string type, string text)
         {
             string baseFormat = "<b>{0}</b>: {1}";
@@ -51,7 +57,7 @@ namespace Ticker
             /// Initializes a new instance of the <see cref="T:Ticker.Message.InfoMessage"/> class.
             /// </summary>
             /// <param name="text">Text of the message.</param>
-            public InfoMessage(string text) : base(text, DefaultColor) { }
+            public InfoMessage(string text) : base(text, DefaultColor, 5.0f) { }
         }
 
         /// <summary>
