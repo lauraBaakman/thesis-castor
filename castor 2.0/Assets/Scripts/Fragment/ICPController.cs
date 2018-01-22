@@ -28,7 +28,7 @@ public class ICPController : MonoBehaviour, Registration.IICPListener {
         ParticleSystem.Particle[] particles = new ParticleSystem.Particle[points.Count];
         for (int i = 0; i < points.Count; i++) {
             particles[i].position = points[i];
-            particles[i].startColor = Color.yellow;
+            particles[i].startColor = Color.white;
             particles[i].startSize = ParticleSize;
 
         }
