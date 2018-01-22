@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Registration
 {
@@ -7,7 +8,7 @@ namespace Registration
     {
         void OnICPPointsSelected(List<Vector3> points);
 
-        void OnICPFinished();
+        IEnumerator OnICPFinished();
     }
 }
 

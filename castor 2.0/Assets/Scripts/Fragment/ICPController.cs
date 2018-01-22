@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using System.Collections;
 
 public class ICPController : MonoBehaviour, Registration.IICPListener {
 
@@ -35,8 +35,12 @@ public class ICPController : MonoBehaviour, Registration.IICPListener {
         ParticleSystem.SetParticles(particles, particles.Length);
     }
 
-    public void OnICPFinished()
+    public IEnumerator OnICPFinished()
     {
+        if (Application.isEditor) {
+            Debug.Log("Entered OnICPFinished, yielding for a while");
+            yield return new WaitForSeconds(3);
+        }
         ParticleSystem.Clear();
     }
 }
