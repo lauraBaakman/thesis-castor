@@ -14,7 +14,7 @@ namespace Buttons
 
         protected override bool HasDetectedKeyBoardShortCut()
         {
-            return Input.GetButtonDown("Select All");
+            return Input.GetButtonDown("Select All") && RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed();
         }
     }
 }

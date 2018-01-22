@@ -6,7 +6,7 @@ namespace Buttons
     {
         protected override bool HasDetectedKeyBoardShortCut()
         {
-            return Input.GetButtonDown("Quit");
+            return Input.GetButtonDown("Quit") && RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed();
         }
 
         protected override void ExecuteButtonAction()

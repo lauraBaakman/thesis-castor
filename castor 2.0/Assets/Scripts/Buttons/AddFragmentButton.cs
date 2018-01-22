@@ -1,17 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace Buttons
-{
-    public class AddFragmentButton : AbstractButton
-    {
+namespace Buttons {
+    public class AddFragmentButton : AbstractButton {
         public GameObject FragmentsRoot;
 
         protected override void Awake()
         {
             base.Awake();
 
-            if (Application.isEditor)
-            {
+            if (Application.isEditor) {
                 IO.FragmentsImporter importer = new IO.FragmentsImporter(
                     fragmentParent: FragmentsRoot,
                     callBack: NotifyUserOfAddedFragment
@@ -21,7 +19,7 @@ namespace Buttons
             }
         }
 
-        private void NotifyUserOfAddedFragment(string path, GameObject fragment)
+        private void NotifyUserOfAddedFragment( string path, GameObject fragment )
         {
             Ticker.Message.InfoMessage message = new Ticker.Message.InfoMessage(
                 string.Format(
@@ -38,7 +36,18 @@ namespace Buttons
 
         protected override bool HasDetectedKeyBoardShortCut()
         {
-            return Input.GetButtonDown("Add Fragment");
+            if (Application.isEditor) return IsEditorAddFragmentCombinationPressed();
+            else return IsDeploymentAddFragmentCombinationPressed();
+        }
+
+        private bool IsDeploymentAddFragmentCombinationPressed()
+        {
+            return Input.GetButtonDown("Add Fragment") && RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed();
+        }
+
+        private bool IsEditorAddFragmentCombinationPressed()
+        {
+            return IsDeploymentAddFragmentCombinationPressed() && RTEditor.InputHelper.IsAnyShiftKeyPressed();
         }
 
         protected override void ExecuteButtonAction()
