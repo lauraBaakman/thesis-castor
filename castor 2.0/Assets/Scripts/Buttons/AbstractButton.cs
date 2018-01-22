@@ -6,21 +6,29 @@ namespace Buttons
     public abstract class AbstractButton : MonoBehaviour
     {
 
+        protected Button Button;
+
         protected virtual void Awake()
         {
+            Button = GetButton();
             AddListenerToButton();
+        }
+
+        private Button GetButton()
+        {
+            Button button = GetComponent<Button>();
+            if (!button) Debug.LogError("Could not get the button component, connecting a listener failed.");
+            return button;
         }
 
         protected void AddListenerToButton()
         {
-            Button button = GetComponent<Button>();
-            if (!button) Debug.LogError("Could not get the button component, connecting a listener failed.");
-            button.onClick.AddListener(OnClick);
+            Button.onClick.AddListener(OnClick);
         }
 
         protected virtual void Update()
         {
-            if (HasDetectedKeyBoardShortCut()) ExecuteButtonAction();
+            if (HasDetectedKeyBoardShortCut() && Button.IsInteractable()) ExecuteButtonAction();
         }
 
         protected void OnClick()
