@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Registration;
 
-public class ICPController : MonoBehaviour, Registration.IICPListener {
+public class ICPController : MonoBehaviour, IICPListener {
 
     public float ParticleSize = 0.01f;
     public Color ParticleColor = Color.white;
@@ -14,14 +15,6 @@ public class ICPController : MonoBehaviour, Registration.IICPListener {
         Debug.Assert(ParticleSystem, "Could not get the ParticleSystem component.");
     }
 
-    /// <summary>
-    /// If the points to be used for ICP are selected this function visualizes them.
-    /// </summary>
-    /// <param name="points">The selected points.</param>
-    public void OnICPPointsSelected( List<Vector3> points )
-    {
-        VisualizePoints(points);
-    }
 
     private void VisualizePoints( List<Vector3> points )
     {
@@ -42,5 +35,13 @@ public class ICPController : MonoBehaviour, Registration.IICPListener {
             yield return new WaitForSeconds(3);
         }
         ParticleSystem.Clear();
+    }
+
+    /// <summary>
+    /// If the points to be used for ICP are selected this function visualizes them.
+    /// </summary>
+    public void OnICPPointsSelected( ICPPointsSelectedMessage message )
+    {
+        VisualizePoints(message.Points);
     }
 }
