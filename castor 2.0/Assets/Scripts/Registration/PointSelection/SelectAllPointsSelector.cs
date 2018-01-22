@@ -29,15 +29,11 @@ namespace Registration {
         {
             List<Vector3> pointsReferenceTransform = new List<Vector3>(pointsLocalTransform.Count);
             foreach (Vector3 localPoint in pointsLocalTransform) {
-                pointsReferenceTransform.Add(
-                    //World space point to reference transform space
-                    ReferenceTransform.InverseTransformPoint(
-                        //Local point to world space
-                        localTransform.TransformPoint(
-                            localPoint
-                        )
-                    )
-                );
+
+                Vector3 worldTransformPoint = localTransform.TransformPoint(localPoint);
+                Vector3 referenceTransformPoint = ReferenceTransform.InverseTransformPoint(worldTransformPoint);
+
+                pointsReferenceTransform.Add(referenceTransformPoint);
             }
             return pointsReferenceTransform;
         }
