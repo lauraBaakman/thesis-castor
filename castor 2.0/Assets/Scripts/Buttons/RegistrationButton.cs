@@ -28,9 +28,7 @@ namespace Buttons
 
         protected override bool HasDetectedKeyBoardShortCut()
         {
-            return
-                RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed() &&
-                Input.GetButtonDown("Register");
+            return RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed() && Input.GetButtonDown("Register");
         }
     }
 
