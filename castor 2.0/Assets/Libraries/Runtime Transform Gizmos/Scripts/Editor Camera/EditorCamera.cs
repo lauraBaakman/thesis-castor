@@ -380,7 +380,7 @@ namespace RTEditor
             }
 
             // Make sure the mouse has its information updated for the current frame update
-            _mouse.UpdateInfoForCurrentFrame();        
+            _mouse.UpdateInfoForCurrentFrame();
 
             // Only process input if we are not using a custom camera
             if (!RuntimeEditorApplication.Instance.UseCustomCamera)
@@ -846,6 +846,16 @@ namespace RTEditor
 
             _isDoingPerspectiveSwitch = false;
             _background.OnCameraUpdate(Camera, _isDoingPerspectiveSwitch);
+        }
+        #endregion
+
+        #region Added By Me
+        /// <summary>
+        /// Method that focusses the camera on either the selected objects, or if no objects are selected all fragments in the scene.
+        /// </summary>
+        public void OnFocus()
+        {
+            FocusOnSelection();
         }
         #endregion
     }

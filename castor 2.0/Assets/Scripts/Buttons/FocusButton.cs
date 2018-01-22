@@ -12,7 +12,10 @@ namespace Buttons
 
         protected override void ExecuteButtonAction()
         {
-            Debug.Log("Time to focus!");   
+            RTEditor.EditorCamera.Instance.SendMessage(
+                methodName: "OnFocus",
+                options: SendMessageOptions.RequireReceiver
+            );
         }
     }
 }
