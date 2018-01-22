@@ -11,7 +11,7 @@ public class ICPController : MonoBehaviour, Registration.IICPListener {
     private void Awake()
     {
         ParticleSystem = GetComponent<ParticleSystem>();
-        Debug.Assert(!ParticleSystem, "Could not get the ParticleSystem component.");
+        Debug.Assert(ParticleSystem, "Could not get the ParticleSystem component.");
     }
 
     /// <summary>
