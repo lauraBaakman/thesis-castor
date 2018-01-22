@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class ICPController : MonoBehaviour, Registration.IICPListener {
 
-    private static float ParticleSize = 0.01f;
-    private static readonly Color ParticleColor = Color.white;
+    public float ParticleSize = 0.01f;
+    public Color ParticleColor = Color.white;
     private ParticleSystem ParticleSystem;
 
     private void Awake()
@@ -28,7 +28,7 @@ public class ICPController : MonoBehaviour, Registration.IICPListener {
         ParticleSystem.Particle[] particles = new ParticleSystem.Particle[points.Count];
         for (int i = 0; i < points.Count; i++) {
             particles[i].position = points[i];
-            particles[i].startColor = Color.white;
+            particles[i].startColor = ParticleColor;
             particles[i].startSize = ParticleSize;
 
         }
