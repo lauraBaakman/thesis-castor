@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 namespace Fragment {
 
@@ -12,7 +11,14 @@ namespace Fragment {
 
         private void TransformRandomly()
         {
-            Debug.Log(name + "HI!");
+            transform.rotation = Random.rotation;
+
+            Vector3 translation = new Vector3(
+                Random.Range(-2, 2),
+                Random.Range(-2, 2),
+                Random.Range(-2, 2)
+            );
+            transform.Translate(translation);
         }
 
 
