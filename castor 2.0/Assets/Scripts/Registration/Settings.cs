@@ -1,21 +1,15 @@
-using UnityEngine;
-using System.Collections;
+namespace Registration {
 
-namespace Registration
-{
-    public class Settings : MonoBehaviour
-    {
+    public class Settings {
+
         private IPointSelector _pointSelector;
 
-        public IPointSelector PointSelector
-        {
-            get
-            {
+        public IPointSelector PointSelector {
+            get {
                 return _pointSelector;
             }
 
-            set
-            {
+            set {
                 _pointSelector = value;
             }
         }
