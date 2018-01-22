@@ -62,7 +62,10 @@ namespace Registration {
             //Notify the fragment
             fragment.SendMessage(
                 methodName: "OnICPPointsSelected",
-                value: new ICPPointsSelectedMessage(points),
+                value: new ICPPointsSelectedMessage(
+                    points: points,
+                    pointsTransform: Settings.ReferenceTransform
+                ),
                 options: SendMessageOptions.DontRequireReceiver
             );
 
