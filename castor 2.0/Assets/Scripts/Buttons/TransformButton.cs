@@ -7,22 +7,13 @@ namespace Buttons
 {
     public class TransformButton : AbstractButton, Fragments.ISelectionControllerListener
     {
-        private Button Button;
-
         public GizmoType WidgetType;
 
         public string InputName;
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            Button = GetComponent<Button>();
-        }
-
         public void OnEnable()
         {
-            OnNumberOfSelectedObjectsChanged(RTEditor.EditorObjectSelection.Instance.NumberOfSelectedObjects);
+            OnNumberOfSelectedObjectsChanged(EditorObjectSelection.Instance.NumberOfSelectedObjects);
         }
 
         protected void ToggleWidget()
