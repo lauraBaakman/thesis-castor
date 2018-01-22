@@ -1,10 +1,37 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+
 public class ICPController : MonoBehaviour, Registration.IICPListener {
 
+    private static float ParticleSize = 0.01f;
+    private static readonly Color ParticleColor = Color.white;
+    private ParticleSystem ParticleSystem;
+
+    private void Awake()
+    {
+        ParticleSystem = GetComponent<ParticleSystem>();
+        Debug.Assert(!ParticleSystem, "Could not get the ParticleSystem component.");
+    }
+
+    /// <summary>
+    /// If the points to be used for ICP are selected this function visualizes them.
+    /// </summary>
+    /// <param name="points">The selected points.</param>
     public void OnICPPointsSelected( List<Vector3> points )
     {
-        Debug.Log("Received points!");
+        VisualizePoints(points);
+    }
+
+    private void VisualizePoints( List<Vector3> points )
+    {
+        ParticleSystem.Particle[] particles = new ParticleSystem.Particle[points.Count];
+        for (int i = 0; i < points.Count; i++) {
+            particles[i].position = points[i];
+            particles[i].startColor = Color.yellow;
+            particles[i].startSize = ParticleSize;
+
+        }
+        ParticleSystem.SetParticles(particles, particles.Length);
     }
 }
