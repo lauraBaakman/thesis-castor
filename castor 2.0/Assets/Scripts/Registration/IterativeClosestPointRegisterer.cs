@@ -32,15 +32,15 @@ namespace Registration {
             List<Vector3> StaticPoints = SelectPoints(StaticFragment);
             List<Vector3> ModelPoints = SelectPoints(ModelFragment);
 
-            while (!stop) {
-                correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
-                correspondences = FilterCorrespondences(correspondences);
+            //while (!stop) {
+            //    correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
+            //    correspondences = FilterCorrespondences(correspondences);
 
-                transform = DetermineTransform(correspondences);
-                ModelFragment = ApplyTransform(transform, ModelFragment);
+            //    transform = DetermineTransform(correspondences);
+            //    ModelFragment = ApplyTransform(transform, ModelFragment);
 
-                stop = StopCondition(StaticFragment, ModelFragment);
-            }
+            //    stop = StopCondition(StaticFragment, ModelFragment);
+            //}
 
             if (CallBack != null) CallBack();
         }
