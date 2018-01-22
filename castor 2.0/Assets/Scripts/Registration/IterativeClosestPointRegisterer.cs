@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace Registration
 {
@@ -8,10 +9,13 @@ namespace Registration
         private GameObject StaticFragment;
         private GameObject ModelFragment;
 
-        public IterativeClosestPointRegisterer(GameObject staticFragment, GameObject ModelFragment)
+        private Settings Settings;
+
+        public IterativeClosestPointRegisterer(GameObject staticFragment, GameObject modelFragment, Settings settings = null)
         {
             StaticFragment = staticFragment;
-            ModelFragment = ModelFragment;
+            ModelFragment = modelFragment;
+            Settings = settings ? settings : new Settings();
         }
 
         public void Register()
@@ -37,9 +41,13 @@ namespace Registration
 
         private List<Vector3> SelectPoints(GameObject fragment)
         {
-            IPointSelector selector = new SimplePointSelector();
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
-            return selector.Select(mesh);
+            List<Vector3> points = Settings.PointSelector.Select(mesh);
+            fragment.SendMessage(
+                methodName:,
+                value:,
+                options:
+            );
         }
 
         private object FilterCorrespondences(object correspondences)
