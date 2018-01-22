@@ -29,7 +29,7 @@ namespace Buttons {
             GameObject modelFragment, staticFragment;
             GetModelAndStaticFragment(out modelFragment, out staticFragment);
 
-            IterativeClosestPointRegisterer registerer = new IterativeClosestPointRegisterer(
+            ICPRegisterer registerer = new ICPRegisterer(
                 modelFragment: modelFragment,
                 staticFragment: staticFragment,
                 callBack: FinishedRegistrationCallBack

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 
 namespace Registration {
-    public class IterativeClosestPointRegisterer {
+    public class ICPRegisterer {
         private GameObject StaticFragment;
         private GameObject ModelFragment;
 
@@ -11,7 +11,7 @@ namespace Registration {
 
         private Action CallBack;
 
-        public IterativeClosestPointRegisterer(
+        public ICPRegisterer(
             GameObject staticFragment, GameObject modelFragment,
             Settings settings = null,
             Action callBack = null

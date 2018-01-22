@@ -328,7 +328,7 @@
     <Compile Include="Assets\Scripts\IO\ObjFileReader.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondence.cs" />
     <Compile Include="Assets\Scripts\Registration\IICPListener.cs" />
-    <Compile Include="Assets\Scripts\Registration\IterativeClosestPointRegisterer.cs" />
+    <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSelector.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\SelectAllPointsSelector.cs" />
     <Compile Include="Assets\Scripts\Registration\Settings.cs" />
