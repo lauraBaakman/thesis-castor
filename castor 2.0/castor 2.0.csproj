@@ -311,6 +311,7 @@
     <Compile Include="Assets\Scripts\Buttons\HelpButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\RedoButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\RegistrationButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\SelectAllButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\TransformButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\TransformSpaceToggle.cs" />
@@ -336,7 +337,6 @@
     <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Buttons\RegistrationButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
