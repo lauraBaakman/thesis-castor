@@ -9,7 +9,7 @@ namespace Buttons
     {
         private Button Button;
 
-        public RTEditor.GizmoType WidgetType;
+        public GizmoType WidgetType;
 
         public string InputName;
 
@@ -48,7 +48,7 @@ namespace Buttons
 
         protected override bool HasDetectedKeyBoardShortCut()
         {
-            return Input.GetButtonDown(InputName);
+            return Input.GetButtonDown(InputName) && InputHelper.IsNoModifierPressed();
         }
 
         protected override void ExecuteButtonAction()
