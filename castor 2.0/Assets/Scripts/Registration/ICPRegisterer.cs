@@ -97,7 +97,7 @@ namespace Registration {
                 methodName: methodName,
                 options: SendMessageOptions.RequireReceiver
             );
-            ModelFragment.SendMessage(
+            StaticFragment.SendMessage(
                 methodName: methodName,
                 options: SendMessageOptions.RequireReceiver
             );

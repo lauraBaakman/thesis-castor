@@ -9,7 +9,6 @@ namespace Buttons {
 
         public GameObject SelectedFragments;
 
-
         public void OnEnable()
         {
             OnNumberOfSelectedObjectsChanged(RTEditor.EditorObjectSelection.Instance.NumberOfSelectedObjects);
@@ -35,22 +34,7 @@ namespace Buttons {
                 callBack: FinishedRegistrationCallBack
             );
 
-            NotifyUserOfStartingRegistration(modelFragment.name, staticFragment.name);
-
             registerer.Register();
-        }
-
-        private void NotifyUserOfStartingRegistration(string modelFragmentName, string staticFragmentName){
-            SendMessage(
-                methodName: "OnSendMessageToTicker",
-                value: new Ticker.Message.InfoMessage(
-                    string.Format(
-                        "Starting registration of {0} to {1}",
-                        modelFragmentName, staticFragmentName
-                    )
-                ),
-                options: SendMessageOptions.RequireReceiver
-            );            
         }
 
         private void GetModelAndStaticFragment( out GameObject modelFragment, out GameObject staticFragment )
