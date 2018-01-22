@@ -1,22 +1,14 @@
+using UnityEngine;
+
 namespace Registration {
 
     public class Settings {
 
-        private IPointSelector _pointSelector;
+        public Transform ReferenceTransform { get; internal set; }
 
-        public IPointSelector PointSelector {
-            get {
-                return _pointSelector;
-            }
-
-            set {
-                _pointSelector = value;
-            }
-        }
-
-        public Settings()
+        public Settings(Transform referenceTransform)
         {
-            PointSelector = new SelectAllPointsSelector();
+            ReferenceTransform = referenceTransform;
         }
     }
 }

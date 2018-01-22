@@ -8,19 +8,22 @@ namespace Registration {
         private GameObject ModelFragment;
 
         private Settings Settings;
+        private IPointSelector Selector;
 
         private Action CallBack;
 
         public ICPRegisterer(
             GameObject staticFragment, GameObject modelFragment,
-            Settings settings = null,
+            Settings settings,
             Action callBack = null
         )
         {
             StaticFragment = staticFragment;
             ModelFragment = modelFragment;
-            Settings = settings ?? new Settings();
+            Settings = settings;
             CallBack = callBack;
+
+            Selector = new SelectAllPointsSelector(Settings.ReferenceTransform);
         }
 
         public void Register()
@@ -32,15 +35,15 @@ namespace Registration {
             List<Vector3> StaticPoints = SelectPoints(StaticFragment);
             List<Vector3> ModelPoints = SelectPoints(ModelFragment);
 
-            //while (!stop) {
-            //    correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
-            //    correspondences = FilterCorrespondences(correspondences);
+            while (!stop) {
+                correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
+                correspondences = FilterCorrespondences(correspondences);
 
-            //    transform = DetermineTransform(correspondences);
-            //    ModelFragment = ApplyTransform(transform, ModelFragment);
+                transform = DetermineTransform(correspondences);
+                ModelFragment = ApplyTransform(transform, ModelFragment);
 
-            //    stop = StopCondition(StaticFragment, ModelFragment);
-            //}
+                stop = StopCondition(StaticFragment, ModelFragment);
+            }
 
             if (CallBack != null) CallBack();
             SendMessageToAllListeners("OnICPFinished");
@@ -54,7 +57,7 @@ namespace Registration {
         private List<Vector3> SelectPoints( GameObject fragment )
         {
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
-            List<Vector3> points = Settings.PointSelector.Select(mesh);
+            List<Vector3> points = Selector.Select(fragment.transform, mesh);
 
             //Notify the fragment
             fragment.SendMessage(
@@ -68,27 +71,27 @@ namespace Registration {
 
         private object FilterCorrespondences( object correspondences )
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         private bool StopCondition( GameObject staticFragment, GameObject modelFragment )
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         private GameObject ApplyTransform( Transform transform, GameObject modelFragment )
         {
-            throw new NotImplementedException();
+            return modelFragment;
         }
 
         private Transform DetermineTransform( object correspondences )
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         private object ComputeCorrespondences( object staticPoint, object fragmentPoints )
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         private void SendMessageToAllListeners( string methodName )

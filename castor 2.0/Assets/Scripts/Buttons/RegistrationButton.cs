@@ -31,7 +31,10 @@ namespace Buttons {
             ICPRegisterer registerer = new ICPRegisterer(
                 modelFragment: modelFragment,
                 staticFragment: staticFragment,
-                callBack: FinishedRegistrationCallBack
+                callBack: FinishedRegistrationCallBack,
+                settings: new Settings(
+                    referenceTransform: SelectedFragments.transform
+                )
             );
 
             registerer.Register();
