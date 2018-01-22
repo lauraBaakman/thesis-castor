@@ -2,20 +2,25 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-namespace Registration
-{
-    public class IterativeClosestPointRegisterer
-    {
+namespace Registration {
+    public class IterativeClosestPointRegisterer {
         private GameObject StaticFragment;
         private GameObject ModelFragment;
 
         private Settings Settings;
 
-        public IterativeClosestPointRegisterer(GameObject staticFragment, GameObject modelFragment, Settings settings = null)
+        private Action CallBack;
+
+        public IterativeClosestPointRegisterer(
+            GameObject staticFragment, GameObject modelFragment,
+            Settings settings = null,
+            Action callBack = null
+        )
         {
             StaticFragment = staticFragment;
             ModelFragment = modelFragment;
-            Settings = settings ? settings : new Settings();
+            Settings = (settings != null) ? settings : new Settings();
+            CallBack = callBack;
         }
 
         public void Register()
@@ -27,8 +32,7 @@ namespace Registration
             List<Vector3> StaticPoints = SelectPoints(StaticFragment);
             List<Vector3> ModelPoints = SelectPoints(ModelFragment);
 
-            while (!stop)
-            {
+            while (!stop) {
                 correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
                 correspondences = FilterCorrespondences(correspondences);
 
@@ -37,6 +41,8 @@ namespace Registration
 
                 stop = StopCondition(StaticFragment, ModelFragment);
             }
+
+            if (CallBack != null) CallBack();
         }
 
         /// <summary>
@@ -44,7 +50,7 @@ namespace Registration
         /// </summary>
         /// <returns>The points.</returns>
         /// <param name="fragment">Fragment.</param>
-        private List<Vector3> SelectPoints(GameObject fragment)
+        private List<Vector3> SelectPoints( GameObject fragment )
         {
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
             List<Vector3> points = Settings.PointSelector.Select(mesh);
@@ -59,27 +65,27 @@ namespace Registration
             return points;
         }
 
-        private object FilterCorrespondences(object correspondences)
+        private object FilterCorrespondences( object correspondences )
         {
             throw new NotImplementedException();
         }
 
-        private bool StopCondition(GameObject staticFragment, GameObject modelFragment)
+        private bool StopCondition( GameObject staticFragment, GameObject modelFragment )
         {
             throw new NotImplementedException();
         }
 
-        private GameObject ApplyTransform(Transform transform, GameObject modelFragment)
+        private GameObject ApplyTransform( Transform transform, GameObject modelFragment )
         {
             throw new NotImplementedException();
         }
 
-        private Transform DetermineTransform(object correspondences)
+        private Transform DetermineTransform( object correspondences )
         {
             throw new NotImplementedException();
         }
 
-        private object ComputeCorrespondences(object staticPoint, object fragmentPoints)
+        private object ComputeCorrespondences( object staticPoint, object fragmentPoints )
         {
             throw new NotImplementedException();
         }
