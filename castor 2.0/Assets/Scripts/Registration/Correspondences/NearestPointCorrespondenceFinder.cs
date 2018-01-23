@@ -23,16 +23,16 @@ namespace Registration
         }
     }
 
-    public class DistanceNode : IComparable<DistanceNode>
+    public class DistanceNode : IComparable<DistanceNode>, IEquatable<DistanceNode>
     {
-        private Vector3 staticPoint;
+        private readonly Vector3 staticPoint;
         public Vector3 StaticPoint {
             get {
                 return staticPoint;
             }
         }
 
-        private Vector3 modelPoint;
+        private readonly Vector3 modelPoint;
         public Vector3 ModelPoint {
             get {
                 return modelPoint;
@@ -58,6 +58,35 @@ namespace Registration
             if (other == null) return 1;
 
             return this.distance.CompareTo(other.distance);
+        }
+
+        public bool Equals( DistanceNode other )
+        {
+            if (other == null) return false;
+
+            return (
+                this.staticPoint.Equals(other.staticPoint) &&
+                this.modelPoint.Equals(other.modelPoint) &&
+                this.distance.Equals(other.distance)
+            );
+        }
+
+        public override bool Equals( System.Object obj )
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            DistanceNode other = (DistanceNode)obj;
+            return this.Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)(
+                (this.staticPoint.x * this.staticPoint.y * this.staticPoint.z) +
+                (this.modelPoint.x * this.modelPoint.y * this.modelPoint.z) +
+                         distance
+            );
         }
     }
 }

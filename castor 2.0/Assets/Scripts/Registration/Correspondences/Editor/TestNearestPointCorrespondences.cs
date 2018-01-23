@@ -220,23 +220,44 @@ public class NearstPointCorrespondenceFinderTests
         Assert.That(actualPyramid, Is.EquivalentTo(expectedPyramid));
         Assert.That(actualCube, Is.EquivalentTo(expectedCube));
     }
+
+    [Test]
+    public void TestCreateDistanceNodeList()
+    {
+        List<Vector3> staticPoints = new List<Vector3> { 
+            //TODO fill
+        };
+        List<Vector3> modelPoints = new List<Vector3> { 
+            //TODO fill
+        };
+
+        List<DistanceNode> actual = new NearstPointCorrespondenceFinder().CreateDistanceNodeList(staticPoints, modelPoints);
+        List<DistanceNode> expected = new List<DistanceNode> {
+            //TODO fill
+        };
+
+        Assert.That(actual, Is.EquivalentTo(expected));
+    }
 }
 
 [TestFixture]
-public class DistanceNodeTests{
+public class DistanceNodeTests
+{
     [Test]
-    public void TestCompareToSmallerThan(){
+    public void TestCompareTo_SmallerThan()
+    {
         DistanceNode thisNode = new DistanceNode(RandomVector(), RandomVector(), 0.2f);
         DistanceNode otherNode = new DistanceNode(RandomVector(), RandomVector(), 0.7f);
 
         int expected = -1;
         int actual = thisNode.CompareTo(otherNode);
 
-        Assert.That(actual, Is.EqualTo(expected));        
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
-    public void TestCompareToGreaterThan(){
+    public void TestCompareTo_GreaterThan()
+    {
         DistanceNode thisNode = new DistanceNode(RandomVector(), RandomVector(), 0.5f);
         DistanceNode otherNode = new DistanceNode(RandomVector(), RandomVector(), 0.2f);
 
@@ -247,7 +268,8 @@ public class DistanceNodeTests{
     }
 
     [Test]
-    public void TestCompareToEqualTo(){
+    public void TestCompareTo_EqualTo()
+    {
         float distance = Random.value;
         DistanceNode thisNode = new DistanceNode(RandomVector(), RandomVector(), distance);
         DistanceNode otherNode = new DistanceNode(RandomVector(), RandomVector(), distance);
@@ -260,7 +282,95 @@ public class DistanceNodeTests{
         Assert.That(actual2, Is.EqualTo(expected));
     }
 
-    private Vector3 RandomVector(){
+    [Test]
+    public void TestEquals_Equal(){
+        DistanceNode thisNode = new DistanceNode(
+            new Vector3(1.0f, 2.0f, 3.0f), 
+            new Vector3(4.0f, 5.0f, 6.0f), 
+            7.0f
+        );
+        DistanceNode otherNode = new DistanceNode(
+            new Vector3(1.0f, 2.0f, 3.0f),
+            new Vector3(4.0f, 5.0f, 6.0f),
+            7.0f
+        );
+
+        bool expected = true;
+        bool actual1 = thisNode.Equals(otherNode);
+        bool actual2 = thisNode.Equals(otherNode);
+
+        Assert.That(expected, Is.EqualTo(actual1));
+        Assert.That(expected, Is.EqualTo(actual2));
+    }
+
+    [Test]
+    public void TestEquals_StaticVectorNotEqual()
+    {
+        DistanceNode thisNode = new DistanceNode(
+            new Vector3(1.0f, 2.0f, 3.0f),
+            new Vector3(4.0f, 5.0f, 6.0f),
+            7.0f
+        );
+        DistanceNode otherNode = new DistanceNode(
+            new Vector3(1.0f, 5.0f, 3.0f),
+            new Vector3(4.0f, 5.0f, 6.0f),
+            7.0f
+        );
+
+        bool expected = false;
+        bool actual1 = thisNode.Equals(otherNode);
+        bool actual2 = thisNode.Equals(otherNode);
+
+        Assert.That(expected, Is.EqualTo(actual1));
+        Assert.That(expected, Is.EqualTo(actual2));
+    }
+
+    [Test]
+    public void TestEquals_ModelVectorNotEqual()
+    {
+        DistanceNode thisNode = new DistanceNode(
+            new Vector3(1.0f, 2.0f, 3.0f),
+            new Vector3(4.0f, 5.0f, 6.0f),
+            7.0f
+        );
+        DistanceNode otherNode = new DistanceNode(
+            new Vector3(1.0f, 2.0f, 3.0f),
+            new Vector3(4.0f, 6.0f, 6.0f),
+            7.0f
+        );
+
+        bool expected = false;
+        bool actual1 = thisNode.Equals(otherNode);
+        bool actual2 = thisNode.Equals(otherNode);
+
+        Assert.That(expected, Is.EqualTo(actual1));
+        Assert.That(expected, Is.EqualTo(actual2));
+    }
+
+    [Test]
+    public void TestEquals_DistanceNotEqual()
+    {
+        DistanceNode thisNode = new DistanceNode(
+            new Vector3(1.0f, 2.0f, 3.0f),
+            new Vector3(4.0f, 5.0f, 6.0f),
+            7.0f
+        );
+        DistanceNode otherNode = new DistanceNode(
+            new Vector3(1.0f, 2.0f, 3.0f),
+            new Vector3(4.0f, 5.0f, 6.0f),
+            3.5f
+        );
+
+        bool expected = false;
+        bool actual1 = thisNode.Equals(otherNode);
+        bool actual2 = thisNode.Equals(otherNode);
+
+        Assert.That(expected, Is.EqualTo(actual1));
+        Assert.That(expected, Is.EqualTo(actual2));
+    }
+
+    private Vector3 RandomVector()
+    {
         return new Vector3(Random.value, Random.value, Random.value);
     }
 }
