@@ -128,11 +128,7 @@ namespace Registration
 
         public override int GetHashCode()
         {
-            return (int)(
-                (this.staticPoint.x * this.staticPoint.y * this.staticPoint.z) +
-                (this.modelPoint.x * this.modelPoint.y * this.modelPoint.z) +
-                         distance
-            );
+            return base.GetHashCode();
         }
 
         public override string ToString()
