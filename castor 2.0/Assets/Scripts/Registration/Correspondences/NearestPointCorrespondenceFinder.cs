@@ -16,9 +16,9 @@ namespace Registration
     {
         public List<Correspondence> Find(ReadOnlyCollection<Vector3> staticPoints, ReadOnlyCollection<Vector3> modelPoints)
         {
-            List<Correspondence> correspondences = new List<Correspondence>();
 
-            //TODO implement!
+            List<DistanceNode> distanceNodes = CreateDistanceNodeList(staticPoints, modelPoints);
+            List<Correspondence> correspondences = CreateCorrespondenceList(distanceNodes);
 
             return correspondences;
         }
@@ -61,9 +61,71 @@ namespace Registration
             float distance = intermediate.sqrMagnitude;
             return distance;
         }
+
+        public List<Correspondence> CreateCorrespondenceList(List<DistanceNode> distanceNodes)
+        {
+            return new CorrespondenceListBuilder(distanceNodes).Build();
+        }
     }
 
+    internal class CorrespondenceListBuilder
+    {
+        private Stack<DistanceNode> DistanceNodes;
+        private HashSet<Vector3> StaticPointsInACorrespondence;
+        private HashSet<Vector3> ModelPointsInACorrespondence;
+        private List<Correspondence> Correspondences;
 
+        internal CorrespondenceListBuilder(List<DistanceNode> distanceNodes)
+        {
+            distanceNodes.Sort(DistanceNode.SortDescendingOnDistance());
+            DistanceNodes = new Stack<DistanceNode>(distanceNodes);
+
+            StaticPointsInACorrespondence = new HashSet<Vector3>();
+            ModelPointsInACorrespondence = new HashSet<Vector3>();
+
+            Correspondences = new List<Correspondence>();
+        }
+
+        internal List<Correspondence> Build()
+        {
+            DistanceNode currentNode;
+            while (DistanceNodes.Count != 0)
+            {
+                currentNode = DistanceNodes.Pop();
+                if (ShouldBeCorrespondence(currentNode)) AddNodeToCorrespondences(currentNode);
+            }
+            return Correspondences;
+        }
+
+        private void AddNodeToCorrespondences(DistanceNode node)
+        {
+            Correspondences.Add(new Correspondence(node));
+
+            StaticPointsInACorrespondence.Add(node.StaticPoint);
+            ModelPointsInACorrespondence.Add(node.ModelPoint);
+        }
+
+        private bool ShouldBeCorrespondence(DistanceNode node)
+        {
+            return (
+                !StaticPointsInACorrespondence.Contains(node.StaticPoint) &&
+                !ModelPointsInACorrespondence.Contains(node.ModelPoint)
+            );
+        }
+    }
+
+    class SortDistanceNodeDescending : IComparer<DistanceNode>
+    {
+        public int Compare(DistanceNode x, DistanceNode y)
+        {
+            int original = x.CompareTo(y);
+
+            if (original < 0) return +1;
+            if (original > 0) return -1;
+
+            return 0;
+        }
+    }
 
     public class DistanceNode : IComparable<DistanceNode>, IEquatable<DistanceNode>
     {
@@ -146,6 +208,11 @@ namespace Registration
                 "[DistanceNode: StaticPoint={0}, ModelPoint={1}, Distance={2}]",
                 StaticPoint, ModelPoint, Distance
             );
+        }
+
+        public static IComparer<DistanceNode> SortDescendingOnDistance()
+        {
+            return (IComparer<DistanceNode>)new SortDistanceNodeDescending();
         }
     }
 }
