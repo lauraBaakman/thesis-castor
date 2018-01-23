@@ -2,13 +2,16 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-namespace Registration {
-    public class ICPRegisterer {
+namespace Registration
+{
+    public class ICPRegisterer
+    {
         private GameObject StaticFragment;
         private GameObject ModelFragment;
 
         private Settings Settings;
         private IPointSelector Selector;
+        private ICorrespondenceFinder CorrespondenceFinder;
 
         private Action CallBack;
 
@@ -24,6 +27,7 @@ namespace Registration {
             CallBack = callBack;
 
             Selector = new SelectAllPointsSelector(Settings.ReferenceTransform);
+            CorrespondenceFinder = new NearstPointCorrespondenceFinder();
         }
 
         public void Register()
@@ -32,11 +36,11 @@ namespace Registration {
             bool stop = false;
             object correspondences;
 
-            List<Vector3> StaticPoints = SelectPoints(StaticFragment);
-            List<Vector3> ModelPoints = SelectPoints(ModelFragment);
+            List<Vector3> staticPoints = SelectPoints(StaticFragment);
+            List<Vector3> modelPoints = SelectPoints(ModelFragment);
 
             while (!stop) {
-                correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
+                correspondences = ComputeCorrespondences(staticPoints, modelPoints);
                 correspondences = FilterCorrespondences(correspondences);
 
                 transform = DetermineTransform(correspondences);
@@ -72,6 +76,11 @@ namespace Registration {
             return points;
         }
 
+        private object ComputeCorrespondences( List<Vector3> staticPoints, List<Vector3> modelPoints )
+        {
+            return CorrespondenceFinder.Find(staticPoints, modelPoints);
+        }
+
         private object FilterCorrespondences( object correspondences )
         {
             return null;
@@ -88,11 +97,6 @@ namespace Registration {
         }
 
         private Transform DetermineTransform( object correspondences )
-        {
-            return null;
-        }
-
-        private object ComputeCorrespondences( object staticPoint, object fragmentPoints )
         {
             return null;
         }

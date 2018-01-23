@@ -18,7 +18,7 @@ namespace Registration
         /// </summary>
         /// <param name="modelPoint">The point of the correspondence from the model mesh..</param>
         /// <param name="staticPoint">The point of the correspondence from the static mesh.</param>
-        public Correspondence(Vector3 modelPoint, Vector3 staticPoint)
+        public Correspondence(Vector3 staticPoint, Vector3 modelPoint)
         {
             ModelPoint = modelPoint;
             StaticPoint = staticPoint;
