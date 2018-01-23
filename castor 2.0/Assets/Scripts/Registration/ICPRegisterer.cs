@@ -78,7 +78,7 @@ namespace Registration
 
         private object ComputeCorrespondences( List<Vector3> staticPoints, List<Vector3> modelPoints )
         {
-            return CorrespondenceFinder.Find(staticPoints, modelPoints);
+            return CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
         }
 
         private object FilterCorrespondences( object correspondences )

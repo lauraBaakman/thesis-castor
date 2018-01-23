@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System;
 
 namespace Registration
@@ -12,7 +13,7 @@ namespace Registration
     /// </summary>
     public class NearstPointCorrespondenceFinder : ICorrespondenceFinder
     {
-        public List<Correspondence> Find( List<Vector3> staticPoints, List<Vector3> modelPoints )
+        public List<Correspondence> Find(ReadOnlyCollection<Vector3> staticPoints, ReadOnlyCollection<Vector3> modelPoints)
         {
             List<Correspondence> correspondences = new List<Correspondence>();
 
@@ -28,7 +29,7 @@ namespace Registration
         /// <returns>The list with distance nodes..</returns>
         /// <param name="staticPoints">Static points.</param>
         /// <param name="modelPoints">Model points.</param>
-        public List<DistanceNode> CreateDistanceNodeList(List<Vector3> staticPoints, List<Vector3> modelPoints)
+        public List<DistanceNode> CreateDistanceNodeList(ReadOnlyCollection<Vector3> staticPoints, ReadOnlyCollection<Vector3> modelPoints)
         {
             List<DistanceNode> nodes = new List<DistanceNode>();
 
