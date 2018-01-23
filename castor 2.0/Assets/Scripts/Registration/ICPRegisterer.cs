@@ -79,7 +79,16 @@ namespace Registration
 
         private object ComputeCorrespondences(List<Vector3> staticPoints, List<Vector3> modelPoints)
         {
-            return CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
+            List<Correspondence> correspondences = CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
+
+            SendMessageToAllListeners(
+                methodName: "OnICPCorrespondencesDetermined",
+                message: new ICPCorrespondencesDeterminedMessage(
+                    correspondences,
+                    Settings.ReferenceTransform
+                )
+            );
+            return correspondences;
         }
 
         private object FilterCorrespondences(object correspondences)
@@ -100,6 +109,20 @@ namespace Registration
         private Transform DetermineTransform(object correspondences)
         {
             return null;
+        }
+
+        private void SendMessageToAllListeners(string methodName, object message)
+        {
+            ModelFragment.SendMessage(
+                methodName: methodName,
+                value: message,
+                options: SendMessageOptions.RequireReceiver
+            );
+            StaticFragment.SendMessage(
+                methodName: methodName,
+                value: message,
+                options: SendMessageOptions.RequireReceiver
+            );
         }
 
         private void SendMessageToAllListeners(string methodName)

@@ -51,4 +51,9 @@ public class ICPController : MonoBehaviour, IICPListener {
         particleConfiguration.simulationSpace = ParticleSystemSimulationSpace.Custom;
         particleConfiguration.customSimulationSpace = newTransform;        
     }
+
+    public void OnICPCorrespondencesDetermined(ICPCorrespondencesDeterminedMessage message)
+    {
+        Debug.Log("Received OnICPCorrespondencesDetermined message!");
+    }
 }

@@ -6,6 +6,8 @@ namespace Registration {
     public interface IICPListener {
         void OnICPPointsSelected( ICPPointsSelectedMessage message );
 
+        void OnICPCorrespondencesDetermined(ICPCorrespondencesDeterminedMessage message);
+
         IEnumerator OnICPFinished();
     }
 
@@ -28,6 +30,32 @@ namespace Registration {
         public Transform PointsTransform {
             get {
                 return pointsTransform;
+            }
+        }
+    }
+
+    public class ICPCorrespondencesDeterminedMessage {
+        private readonly List<Correspondence> correspondences;
+        private readonly Transform transform;
+
+        public ICPCorrespondencesDeterminedMessage(List<Correspondence> correspondences, Transform transform){
+            this.correspondences = correspondences;
+            this.transform = transform;
+        }
+
+        public List<Correspondence> Correspondences
+        {
+            get
+            {
+                return correspondences;
+            }
+        }
+
+        public Transform Transform
+        {
+            get
+            {
+                return transform;
             }
         }
     }
