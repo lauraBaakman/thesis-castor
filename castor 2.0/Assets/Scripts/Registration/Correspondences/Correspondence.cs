@@ -25,6 +25,11 @@ namespace Registration
             StaticPoint = staticPoint;
         }
 
+        public Correspondence(DistanceNode node){
+            ModelPoint = node.ModelPoint;
+            StaticPoint = node.StaticPoint;
+        }
+
         public override bool Equals( object obj )
         {
             if (obj == null || GetType() != obj.GetType())
