@@ -39,7 +39,8 @@ namespace Registration
             List<Vector3> staticPoints = SelectPoints(StaticFragment);
             List<Vector3> modelPoints = SelectPoints(ModelFragment);
 
-            while (!stop) {
+            while (!stop)
+            {
                 correspondences = ComputeCorrespondences(staticPoints, modelPoints);
                 correspondences = FilterCorrespondences(correspondences);
 
@@ -58,7 +59,7 @@ namespace Registration
         /// </summary>
         /// <returns>The points.</returns>
         /// <param name="fragment">Fragment.</param>
-        private List<Vector3> SelectPoints( GameObject fragment )
+        private List<Vector3> SelectPoints(GameObject fragment)
         {
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
             List<Vector3> points = Selector.Select(fragment.transform, mesh);
@@ -76,32 +77,32 @@ namespace Registration
             return points;
         }
 
-        private object ComputeCorrespondences( List<Vector3> staticPoints, List<Vector3> modelPoints )
+        private object ComputeCorrespondences(List<Vector3> staticPoints, List<Vector3> modelPoints)
         {
             return CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
         }
 
-        private object FilterCorrespondences( object correspondences )
+        private object FilterCorrespondences(object correspondences)
         {
             return null;
         }
 
-        private bool StopCondition( GameObject staticFragment, GameObject modelFragment )
+        private bool StopCondition(GameObject staticFragment, GameObject modelFragment)
         {
             return true;
         }
 
-        private GameObject ApplyTransform( Transform transform, GameObject modelFragment )
+        private GameObject ApplyTransform(Transform transform, GameObject modelFragment)
         {
             return modelFragment;
         }
 
-        private Transform DetermineTransform( object correspondences )
+        private Transform DetermineTransform(object correspondences)
         {
             return null;
         }
 
-        private void SendMessageToAllListeners( string methodName )
+        private void SendMessageToAllListeners(string methodName)
         {
             ModelFragment.SendMessage(
                 methodName: methodName,
