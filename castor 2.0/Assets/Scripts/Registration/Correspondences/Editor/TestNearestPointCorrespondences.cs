@@ -255,8 +255,8 @@ public class DistanceNodeTests
     public void TestCompareTo_EqualTo()
     {
         float distance = Random.value;
-        DistanceNode thisNode = new DistanceNode(RandomVector(), RandomVector(), distance);
-        DistanceNode otherNode = new DistanceNode(RandomVector(), RandomVector(), distance);
+        DistanceNode thisNode = new DistanceNode(new Vector3(1.0f, 2.0f, 3.0f), new Vector3(4.0f, 2.0f, 5.0f), distance);
+        DistanceNode otherNode = new DistanceNode(new Vector3(1.0f, 2.0f, 3.0f), new Vector3(4.0f, 2.0f, 5.0f), distance);
 
         int actual1 = thisNode.CompareTo(otherNode);
         int actual2 = otherNode.CompareTo(thisNode);
@@ -264,6 +264,32 @@ public class DistanceNodeTests
 
         Assert.That(actual1, Is.EqualTo(expected));
         Assert.That(actual2, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void TestCompareTo_EqualToDistanceEqual()
+    {
+        float distance = Random.value;
+        DistanceNode thisNode = new DistanceNode(new Vector3(1.0f, 2.0f, 3.0f), RandomVector(), distance);
+        DistanceNode otherNode = new DistanceNode(new Vector3(100.0f, 200.0f, 300.0f), RandomVector(), distance);
+
+        int actual = thisNode.CompareTo(otherNode);
+        int expected = -1;
+
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void TestCompareTo_EqualToDistanceAndStaticEqual()
+    {
+        float distance = Random.value;
+        DistanceNode thisNode = new DistanceNode(new Vector3(1.0f, 2.0f, 3.0f), new Vector3(1.0f, 2.0f, 3.0f), distance);
+        DistanceNode otherNode = new DistanceNode(new Vector3(1.0f, 2.0f, 3.0f), new Vector3(100.0f, 200.0f, 300.0f), distance);
+
+        int actual = thisNode.CompareTo(otherNode);
+        int expected = -1;
+
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]

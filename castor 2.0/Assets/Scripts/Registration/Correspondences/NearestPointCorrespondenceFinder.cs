@@ -105,7 +105,14 @@ namespace Registration
         {
             if (other == null) return 1;
 
-            return this.distance.CompareTo(other.distance);
+            /// If the distances are equal compare the points to ensure a consistent ordering for tests
+            int distanceComparison = this.distance.CompareTo(other.distance);
+            if (distanceComparison != 0) return distanceComparison;
+
+            int staticPointComparison = this.staticPoint.CompareTo(other.staticPoint);
+            if (staticPointComparison != 0) return staticPointComparison;
+
+            return this.modelPoint.CompareTo(other.modelPoint);
         }
 
         public bool Equals(DistanceNode other)
