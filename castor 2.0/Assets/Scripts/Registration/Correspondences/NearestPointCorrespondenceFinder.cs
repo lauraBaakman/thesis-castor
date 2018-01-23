@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace Registration
 {
@@ -22,4 +23,41 @@ namespace Registration
         }
     }
 
+    public class DistanceNode : IComparable<DistanceNode>
+    {
+        private Vector3 staticPoint;
+        public Vector3 StaticPoint {
+            get {
+                return staticPoint;
+            }
+        }
+
+        private Vector3 modelPoint;
+        public Vector3 ModelPoint {
+            get {
+                return modelPoint;
+            }
+        }
+
+        private readonly float distance;
+        public float Distance {
+            get {
+                return distance;
+            }
+        }
+
+        public DistanceNode( Vector3 staticPoint, Vector3 modelPoint, float distance )
+        {
+            this.staticPoint = staticPoint;
+            this.modelPoint = modelPoint;
+            this.distance = distance;
+        }
+
+        public int CompareTo( DistanceNode other )
+        {
+            if (other == null) return 1;
+
+            return this.distance.CompareTo(other.distance);
+        }
+    }
 }

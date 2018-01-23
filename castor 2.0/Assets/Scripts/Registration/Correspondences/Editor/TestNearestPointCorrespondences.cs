@@ -221,3 +221,46 @@ public class NearstPointCorrespondenceFinderTests
         Assert.That(actualCube, Is.EquivalentTo(expectedCube));
     }
 }
+
+[TestFixture]
+public class DistanceNodeTests{
+    [Test]
+    public void TestCompareToSmallerThan(){
+        DistanceNode thisNode = new DistanceNode(RandomVector(), RandomVector(), 0.2f);
+        DistanceNode otherNode = new DistanceNode(RandomVector(), RandomVector(), 0.7f);
+
+        int expected = -1;
+        int actual = thisNode.CompareTo(otherNode);
+
+        Assert.That(actual, Is.EqualTo(expected));        
+    }
+
+    [Test]
+    public void TestCompareToGreaterThan(){
+        DistanceNode thisNode = new DistanceNode(RandomVector(), RandomVector(), 0.5f);
+        DistanceNode otherNode = new DistanceNode(RandomVector(), RandomVector(), 0.2f);
+
+        int expected = 1;
+        int actual = thisNode.CompareTo(otherNode);
+
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void TestCompareToEqualTo(){
+        float distance = Random.value;
+        DistanceNode thisNode = new DistanceNode(RandomVector(), RandomVector(), distance);
+        DistanceNode otherNode = new DistanceNode(RandomVector(), RandomVector(), distance);
+
+        int actual1 = thisNode.CompareTo(otherNode);
+        int actual2 = otherNode.CompareTo(thisNode);
+        int expected = 0;
+
+        Assert.That(actual1, Is.EqualTo(expected));
+        Assert.That(actual2, Is.EqualTo(expected));
+    }
+
+    private Vector3 RandomVector(){
+        return new Vector3(Random.value, Random.value, Random.value);
+    }
+}
