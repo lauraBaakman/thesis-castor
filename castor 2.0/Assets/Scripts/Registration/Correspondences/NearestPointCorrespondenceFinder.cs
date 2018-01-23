@@ -18,7 +18,7 @@ namespace Registration
         {
 
             List<DistanceNode> distanceNodes = CreateDistanceNodeList(staticPoints, modelPoints);
-            List<Correspondence> correspondences = CreateCorrespondenceList(distanceNodes);
+            List<Correspondence> correspondences = CreateCorrespondenceList(distanceNodes, Mathf.Min(staticPoints.Count, modelPoints.Count));
 
             return correspondences;
         }
@@ -62,9 +62,9 @@ namespace Registration
             return distance;
         }
 
-        public List<Correspondence> CreateCorrespondenceList(List<DistanceNode> distanceNodes)
+        public List<Correspondence> CreateCorrespondenceList(List<DistanceNode> distanceNodes, int numPointsSmallestFragment)
         {
-            return new CorrespondenceListBuilder(distanceNodes).Build();
+            return new CorrespondenceListBuilder(distanceNodes, numPointsSmallestFragment).Build();
         }
     }
 
@@ -74,8 +74,9 @@ namespace Registration
         private HashSet<Vector3> StaticPointsInACorrespondence;
         private HashSet<Vector3> ModelPointsInACorrespondence;
         private List<Correspondence> Correspondences;
+        private int FinalCorrespondenceCount;
 
-        internal CorrespondenceListBuilder(List<DistanceNode> distanceNodes)
+        internal CorrespondenceListBuilder(List<DistanceNode> distanceNodes, int numPointsSmallestFragment)
         {
             distanceNodes.Sort(DistanceNode.SortDescendingOnDistance());
             DistanceNodes = new Stack<DistanceNode>(distanceNodes);
@@ -83,13 +84,15 @@ namespace Registration
             StaticPointsInACorrespondence = new HashSet<Vector3>();
             ModelPointsInACorrespondence = new HashSet<Vector3>();
 
+            FinalCorrespondenceCount = numPointsSmallestFragment;
+
             Correspondences = new List<Correspondence>();
         }
 
         internal List<Correspondence> Build()
         {
             DistanceNode currentNode;
-            while (DistanceNodes.Count != 0)
+            while (Correspondences.Count < FinalCorrespondenceCount)
             {
                 currentNode = DistanceNodes.Pop();
                 if (ShouldBeCorrespondence(currentNode)) AddNodeToCorrespondences(currentNode);
