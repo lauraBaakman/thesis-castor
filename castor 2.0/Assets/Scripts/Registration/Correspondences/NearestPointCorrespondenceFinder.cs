@@ -33,11 +33,34 @@ namespace Registration
         {
             List<DistanceNode> nodes = new List<DistanceNode>();
 
-            //TODO implement!
+            Vector3 staticPoint, modelPoint;
+            for (int staticIdx = 0; staticIdx < staticPoints.Count; staticIdx++) {
+                staticPoint = staticPoints[staticIdx];
 
+                for (int modelIdx = 0; modelIdx < modelPoints.Count; modelIdx++) {
+                    modelPoint = modelPoints[modelIdx];
+
+                    nodes.Add(
+                        new DistanceNode(
+                            staticPoint: staticPoint,
+                            modelPoint: modelPoint,
+                            distance: SquaredEuclideanDistance(staticPoint, modelPoint)
+                        )
+                    );
+                }
+            }
             return nodes;
         }
+
+        private float SquaredEuclideanDistance( Vector3 staticPoint, Vector3 modelPoint )
+        {
+            Vector3 intermediate = staticPoint - modelPoint;
+            float distance = intermediate.sqrMagnitude;
+            return distance;
+        }
     }
+
+
 
     public class DistanceNode : IComparable<DistanceNode>, IEquatable<DistanceNode>
     {
@@ -83,7 +106,7 @@ namespace Registration
             return (
                 this.staticPoint.Equals(other.staticPoint) &&
                 this.modelPoint.Equals(other.modelPoint) &&
-                this.distance.Equals(other.distance)
+                Mathf.Approximately(this.distance, other.distance)
             );
         }
 
@@ -102,6 +125,14 @@ namespace Registration
                 (this.staticPoint.x * this.staticPoint.y * this.staticPoint.z) +
                 (this.modelPoint.x * this.modelPoint.y * this.modelPoint.z) +
                          distance
+            );
+        }
+
+        public override string ToString()
+        {
+            return string.Format(
+                "[DistanceNode: StaticPoint={0}, ModelPoint={1}, Distance={2}]",
+                StaticPoint, ModelPoint, Distance
             );
         }
     }
