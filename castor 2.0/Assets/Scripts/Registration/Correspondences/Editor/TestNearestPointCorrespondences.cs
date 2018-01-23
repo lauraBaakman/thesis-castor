@@ -187,7 +187,7 @@ public class NearstPointCorrespondenceFinderTests
             ),
             new Correspondence(
                 pyramid[2],
-                cubeRight[7]
+                cubeRight[5]
             )
         };
         List<Correspondence> actual = new NearstPointCorrespondenceFinder().Find(staticPoints, modelPoints);
