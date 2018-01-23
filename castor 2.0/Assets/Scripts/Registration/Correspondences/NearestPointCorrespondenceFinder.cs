@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System;
 
@@ -29,15 +28,17 @@ namespace Registration
         /// <returns>The list with distance nodes..</returns>
         /// <param name="staticPoints">Static points.</param>
         /// <param name="modelPoints">Model points.</param>
-        public List<DistanceNode> CreateDistanceNodeList( List<Vector3> staticPoints, List<Vector3> modelPoints )
+        public List<DistanceNode> CreateDistanceNodeList(List<Vector3> staticPoints, List<Vector3> modelPoints)
         {
             List<DistanceNode> nodes = new List<DistanceNode>();
 
             Vector3 staticPoint, modelPoint;
-            for (int staticIdx = 0; staticIdx < staticPoints.Count; staticIdx++) {
+            for (int staticIdx = 0; staticIdx < staticPoints.Count; staticIdx++)
+            {
                 staticPoint = staticPoints[staticIdx];
 
-                for (int modelIdx = 0; modelIdx < modelPoints.Count; modelIdx++) {
+                for (int modelIdx = 0; modelIdx < modelPoints.Count; modelIdx++)
+                {
                     modelPoint = modelPoints[modelIdx];
 
                     nodes.Add(
@@ -52,7 +53,7 @@ namespace Registration
             return nodes;
         }
 
-        private float SquaredEuclideanDistance( Vector3 staticPoint, Vector3 modelPoint )
+        private float SquaredEuclideanDistance(Vector3 staticPoint, Vector3 modelPoint)
         {
             Vector3 intermediate = staticPoint - modelPoint;
             float distance = intermediate.sqrMagnitude;
@@ -65,41 +66,47 @@ namespace Registration
     public class DistanceNode : IComparable<DistanceNode>, IEquatable<DistanceNode>
     {
         private readonly Vector3 staticPoint;
-        public Vector3 StaticPoint {
-            get {
+        public Vector3 StaticPoint
+        {
+            get
+            {
                 return staticPoint;
             }
         }
 
         private readonly Vector3 modelPoint;
-        public Vector3 ModelPoint {
-            get {
+        public Vector3 ModelPoint
+        {
+            get
+            {
                 return modelPoint;
             }
         }
 
         private readonly float distance;
-        public float Distance {
-            get {
+        public float Distance
+        {
+            get
+            {
                 return distance;
             }
         }
 
-        public DistanceNode( Vector3 staticPoint, Vector3 modelPoint, float distance )
+        public DistanceNode(Vector3 staticPoint, Vector3 modelPoint, float distance)
         {
             this.staticPoint = staticPoint;
             this.modelPoint = modelPoint;
             this.distance = distance;
         }
 
-        public int CompareTo( DistanceNode other )
+        public int CompareTo(DistanceNode other)
         {
             if (other == null) return 1;
 
             return this.distance.CompareTo(other.distance);
         }
 
-        public bool Equals( DistanceNode other )
+        public bool Equals(DistanceNode other)
         {
             if (other == null) return false;
 
@@ -110,7 +117,7 @@ namespace Registration
             );
         }
 
-        public override bool Equals( System.Object obj )
+        public override bool Equals(System.Object obj)
         {
             if (obj == null || GetType() != obj.GetType())
                 return false;
