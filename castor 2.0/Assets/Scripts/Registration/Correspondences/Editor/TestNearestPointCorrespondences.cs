@@ -49,6 +49,10 @@ public class NearstPointCorrespondenceFinderTests
 
         List<Correspondence> expected = new List<Correspondence> {
             new Correspondence(
+                cubeLeft[0],
+                cubeLeft[0]
+            ),
+            new Correspondence(
                 cubeLeft[1],
                 cubeLeft[1]
             ),
@@ -75,10 +79,6 @@ public class NearstPointCorrespondenceFinderTests
             new Correspondence(
                 cubeLeft[7],
                 cubeLeft[7]
-            ),
-            new Correspondence(
-                cubeLeft[8],
-                cubeLeft[8]
             )
         };
         List<Correspondence> actual = new NearstPointCorrespondenceFinder().Find(staticPoints, modelPoints);
@@ -93,6 +93,10 @@ public class NearstPointCorrespondenceFinderTests
         ReadOnlyCollection<Vector3> modelPoints = cubeRight.AsReadOnly();
 
         List<Correspondence> expected = new List<Correspondence> {
+            new Correspondence(
+                cubeLeft[0],
+                cubeRight[0]
+            ),
             new Correspondence(
                 cubeLeft[1],
                 cubeRight[1]
@@ -120,10 +124,6 @@ public class NearstPointCorrespondenceFinderTests
             new Correspondence(
                 cubeLeft[4],
                 cubeRight[4]
-            ),
-            new Correspondence(
-                cubeLeft[8],
-                cubeRight[8]
             )
         };
         List<Correspondence> actual = new NearstPointCorrespondenceFinder().Find(staticPoints, modelPoints);
@@ -138,24 +138,24 @@ public class NearstPointCorrespondenceFinderTests
 
         List<Correspondence> expected = new List<Correspondence> {
             new Correspondence(
+                cubeLeft[0],
+                pyramid[0]
+            ),
+            new Correspondence(
+                cubeLeft[4],
+                pyramid[3]
+            ),
+            new Correspondence(
                 cubeLeft[1],
                 pyramid[1]
             ),
             new Correspondence(
                 cubeLeft[5],
-                pyramid[4]
-            ),
-            new Correspondence(
-                cubeLeft[2],
                 pyramid[2]
             ),
             new Correspondence(
-                cubeLeft[6],
-                pyramid[3]
-            ),
-            new Correspondence(
-                cubeLeft[4],
-                pyramid[5]
+                cubeLeft[3],
+                pyramid[4]
             )
         };
         List<Correspondence> actual = new NearstPointCorrespondenceFinder().Find(staticPoints, modelPoints);
@@ -170,24 +170,24 @@ public class NearstPointCorrespondenceFinderTests
 
         List<Correspondence> expected = new List<Correspondence> {
             new Correspondence(
-                pyramid[5],
-                cubeRight[8]
+                pyramid[4],
+                cubeRight[7]
+            ),
+            new Correspondence(
+                pyramid[0],
+                cubeRight[2]
+            ),
+            new Correspondence(
+                pyramid[3],
+                cubeRight[6]
             ),
             new Correspondence(
                 pyramid[1],
                 cubeRight[3]
             ),
             new Correspondence(
-                pyramid[4],
-                cubeRight[7]
-            ),
-            new Correspondence(
                 pyramid[2],
-                cubeRight[4]
-            ),
-            new Correspondence(
-                pyramid[3],
-                cubeRight[7]
+                cubeRight[6]
             )
         };
         List<Correspondence> actual = new NearstPointCorrespondenceFinder().Find(staticPoints, modelPoints);

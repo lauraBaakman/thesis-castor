@@ -28,7 +28,7 @@ cubeCubeDist = pdist2(cubeLeft, cubeRight);
 [~, indices] = sort(cubeCubeDist(:));
 for i = 1:length(indices)
     [x, y] = ind2sub(size(cubeCubeDist), indices(i));
-    fprintf(sprintf('cubeLeft: %d cubeRight:%d\n', x, y));
+    fprintf(sprintf('cubeLeft: %d cubeRight:%d\n', x - 1, y - 1));
 end
 
 
@@ -36,12 +36,12 @@ cubePyramidDist = pdist2(cubeLeft, pyramid);
 [~, indices] = sort(cubePyramidDist(:));
 for i = 1:length(indices)
     [x, y] = ind2sub(size(cubePyramidDist), indices(i));
-    fprintf(sprintf('cubeLeft: %d pyramid:%d\n', x, y));
+    fprintf(sprintf('cubeLeft: %d pyramid:%d\n', x - 1, y - 1));
 end
 
 pyramidCubeDist = pdist2(pyramid, cubeRight);
 [~, indices] = sort(pyramidCubeDist(:));
 for i = 1:length(indices)
     [x, y] = ind2sub(size(pyramidCubeDist), indices(i));
-    fprintf(sprintf('pyramid: %d cube:%d\n', x, y));
+    fprintf(sprintf('pyramid: %d cube:%d\n', x - 1, y - 1));
 end
