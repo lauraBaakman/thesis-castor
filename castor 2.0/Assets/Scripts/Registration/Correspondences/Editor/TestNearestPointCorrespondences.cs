@@ -1,8 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
 using NUnit.Framework;
 
 using Registration;
-using System.Collections.Generic;
+
 
 [TestFixture]
 public class NearstPointCorrespondenceFinderTests
@@ -40,9 +43,9 @@ public class NearstPointCorrespondenceFinderTests
     [Test]
     public void TestFindCorrespondencesStaticEqualsModel()
     {
-        List<Vector3> staticPoints = cubeLeft;
+        ReadOnlyCollection<Vector3> staticPoints = cubeLeft.AsReadOnly();
 
-        List<Vector3> modelPoints = cubeLeft;
+        ReadOnlyCollection<Vector3> modelPoints = cubeLeft.AsReadOnly();
 
         List<Correspondence> expected = new List<Correspondence> {
             new Correspondence(
@@ -85,9 +88,9 @@ public class NearstPointCorrespondenceFinderTests
     [Test]
     public void TestFindCorrespondencesStaticSameSizeAsModel()
     {
-        List<Vector3> staticPoints = cubeLeft;
+        ReadOnlyCollection<Vector3> staticPoints = cubeLeft.AsReadOnly();
 
-        List<Vector3> modelPoints = cubeRight;
+        ReadOnlyCollection<Vector3> modelPoints = cubeRight.AsReadOnly();
 
         List<Correspondence> expected = new List<Correspondence> {
             new Correspondence(
@@ -130,9 +133,9 @@ public class NearstPointCorrespondenceFinderTests
     [Test]
     public void TestFindCorrespondencesStaticLargerThanModel()
     {
-        List<Vector3> staticPoints = cubeLeft;
+        ReadOnlyCollection<Vector3> staticPoints = cubeLeft.AsReadOnly();
+        ReadOnlyCollection<Vector3> modelPoints = pyramid.AsReadOnly();
 
-        List<Vector3> modelPoints = pyramid;
         List<Correspondence> expected = new List<Correspondence> {
             new Correspondence(
                 cubeLeft[1],
@@ -162,9 +165,9 @@ public class NearstPointCorrespondenceFinderTests
     [Test]
     public void TestFindCorrespondencesStaticSmallerThanModel()
     {
-        List<Vector3> staticPoints = pyramid;
+        ReadOnlyCollection<Vector3> staticPoints = pyramid.AsReadOnly();
+        ReadOnlyCollection<Vector3> modelPoints = cubeRight.AsReadOnly();
 
-        List<Vector3> modelPoints = cubeRight;
         List<Correspondence> expected = new List<Correspondence> {
             new Correspondence(
                 pyramid[5],
@@ -192,48 +195,18 @@ public class NearstPointCorrespondenceFinderTests
     }
 
     [Test]
-    public void TestInputParametersNotChanged()
-    {
-        List<Vector3> actualPyramid = pyramid;
-        List<Vector3> actualCube = cubeRight;
-
-        List<Vector3> expectedPyramid = new List<Vector3> {
-            new Vector3(0.9f, 3.0f, 0.4f),
-            new Vector3(2.5f, 3.0f, 0.4f),
-            new Vector3(2.5f, 3.0f, 2.0f),
-            new Vector3(0.9f, 3.0f, 2.0f),
-            new Vector3(1.7f, 5.0f, 1.2f)
-        };
-
-        List<Vector3> expectedCube = new List<Vector3> {
-                new Vector3(0.7f, 1.2f, 0.5f),
-                new Vector3(1.2f, 1.2f, 0.5f),
-                new Vector3(0.7f, 4.2f, 0.5f),
-                new Vector3(1.2f, 4.2f, 0.5f),
-                new Vector3(0.7f, 1.2f, 1.7f),
-                new Vector3(1.2f, 1.2f, 1.7f),
-                new Vector3(0.7f, 4.2f, 1.7f),
-                new Vector3(1.2f, 4.2f, 1.7f)
-        };
-
-        List<Correspondence> actual = new NearstPointCorrespondenceFinder().Find(actualPyramid, actualCube);
-        Assert.That(actualPyramid, Is.EquivalentTo(expectedPyramid));
-        Assert.That(actualCube, Is.EquivalentTo(expectedCube));
-    }
-
-    [Test]
     public void TestCreateDistanceNodeList()
     {
-        List<Vector3> staticPoints = new List<Vector3> { 
+        ReadOnlyCollection<Vector3> staticPoints = new List<Vector3> { 
             new Vector3(8.10e-01f, 6.30e-01f, 9.60e-01f),
             new Vector3(9.10e-01f, 1.00e-01f, 9.60e-01f),
             new Vector3(1.30e-01f, 2.80e-01f, 1.60e-01f),
             new Vector3(9.10e-01f, 5.50e-01f, 9.70e-01f),
-        };
-        List<Vector3> modelPoints = new List<Vector3> { 
+        }.AsReadOnly();
+        ReadOnlyCollection<Vector3> modelPoints = new List<Vector3> { 
             new Vector3(9.60e-01f, 8.00e-01f, 4.20e-01f),
             new Vector3(4.90e-01f, 1.40e-01f, 9.20e-01f),
-        };
+        }.AsReadOnly();
 
         List<DistanceNode> actual = new NearstPointCorrespondenceFinder().CreateDistanceNodeList(staticPoints, modelPoints);
         List<DistanceNode> expected = new List<DistanceNode> {
