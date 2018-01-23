@@ -1,5 +1,6 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System;
 
 namespace Registration
 {
@@ -8,7 +9,7 @@ namespace Registration
     /// Correspondence, containing the two points that are considered paired in an 
     /// ICP iteration.
     /// </summary>
-    public class Correspondence
+    public class Correspondence : IEquatable<Correspondence>
     {
         private readonly Vector3 ModelPoint;
         private readonly Vector3 StaticPoint;
@@ -18,10 +19,34 @@ namespace Registration
         /// </summary>
         /// <param name="modelPoint">The point of the correspondence from the model mesh..</param>
         /// <param name="staticPoint">The point of the correspondence from the static mesh.</param>
-        public Correspondence(Vector3 staticPoint, Vector3 modelPoint)
+        public Correspondence( Vector3 staticPoint, Vector3 modelPoint )
         {
             ModelPoint = modelPoint;
             StaticPoint = staticPoint;
+        }
+
+        public override bool Equals( object obj )
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Correspondence other = (Correspondence)obj;
+            return this.Equals(other);
+        }
+
+        public bool Equals( Correspondence other )
+        {
+            if (other == null) return false;
+
+            return (
+                this.StaticPoint.Equals(other.StaticPoint) &&
+                this.ModelPoint.Equals(other.ModelPoint)
+            );
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public override string ToString()
