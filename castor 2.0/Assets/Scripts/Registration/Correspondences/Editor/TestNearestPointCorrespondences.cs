@@ -225,15 +225,31 @@ public class NearstPointCorrespondenceFinderTests
     public void TestCreateDistanceNodeList()
     {
         List<Vector3> staticPoints = new List<Vector3> { 
-            //TODO fill
+            new Vector3(8.10e-01f, 9.10e-01f, 1.30e-01f),
+            new Vector3(9.10e-01f, 6.30e-01f, 1.00e-01f),
+            new Vector3(2.80e-01f, 5.50e-01f, 9.60e-01f),
+            new Vector3(9.60e-01f, 1.60e-01f, 9.70e-01f)
         };
         List<Vector3> modelPoints = new List<Vector3> { 
-            //TODO fill
+            new Vector3(9.60e-01f, 4.90e-01f, 8.00e-01f),
+            new Vector3(1.40e-01f, 4.20e-01f, 9.20e-01f),
+            new Vector3(7.90e-01f, 9.60e-01f, 6.60e-01f)
         };
 
         List<DistanceNode> actual = new NearstPointCorrespondenceFinder().CreateDistanceNodeList(staticPoints, modelPoints);
         List<DistanceNode> expected = new List<DistanceNode> {
-            //TODO fill
+            new DistanceNode(staticPoints[1], modelPoints[0], 1.8166e-01f),
+            new DistanceNode(staticPoints[0], modelPoints[1], 3.8275e-01f),
+            new DistanceNode(staticPoints[0], modelPoints[2], 4.1737e-01f),
+            new DistanceNode(staticPoints[3], modelPoints[1], 4.3977e-01f),
+            new DistanceNode(staticPoints[3], modelPoints[0], 4.5056e-01f),
+            new DistanceNode(staticPoints[3], modelPoints[2], 4.9508e-01f),
+            new DistanceNode(staticPoints[1], modelPoints[1], 5.2802e-01f),
+            new DistanceNode(staticPoints[0], modelPoints[0], 5.3991e-01f),
+            new DistanceNode(staticPoints[1], modelPoints[2], 8.8006e-01f),
+            new DistanceNode(staticPoints[2], modelPoints[1], 8.8837e-01f),
+            new DistanceNode(staticPoints[2], modelPoints[0], 1.0514e+00f),
+            new DistanceNode(staticPoints[2], modelPoints[2], 1.0529e+00f),
         };
 
         Assert.That(actual, Is.EquivalentTo(expected));

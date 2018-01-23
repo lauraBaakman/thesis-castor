@@ -21,6 +21,22 @@ namespace Registration
 
             return correspondences;
         }
+
+        /// <summary>
+        /// Create the list of elements, where each element contains the distance
+        /// between two points of the each of the meshes.
+        /// </summary>
+        /// <returns>The list with distance nodes..</returns>
+        /// <param name="staticPoints">Static points.</param>
+        /// <param name="modelPoints">Model points.</param>
+        public List<DistanceNode> CreateDistanceNodeList( List<Vector3> staticPoints, List<Vector3> modelPoints )
+        {
+            List<DistanceNode> nodes = new List<DistanceNode>();
+
+            //TODO implement!
+
+            return nodes;
+        }
     }
 
     public class DistanceNode : IComparable<DistanceNode>, IEquatable<DistanceNode>
