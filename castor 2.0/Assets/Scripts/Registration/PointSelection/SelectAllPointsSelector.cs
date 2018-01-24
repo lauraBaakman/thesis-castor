@@ -21,10 +21,13 @@ namespace Registration
 
         public List<Vector3> Select(Transform fragmentTransform, Mesh fragment)
         {
-            List<Vector3> points = new List<Vector3>(
-                fragment.vertices
-            );
-            return ToReferenceTransfrom(points, fragmentTransform);
+            ///Use a set to avoid duplicate points when the mesh has duplicate vertices
+            HashSet<Vector3> points = new HashSet<Vector3>();
+
+            foreach(Vector3 vertex in fragment.vertices){
+                points.Add(vertex);
+            }
+            return ToReferenceTransfrom(new List<Vector3>(points), fragmentTransform);
         }
 
         private List<Vector3> ToReferenceTransfrom(List<Vector3> pointsLocalTransform, Transform localTransform)
