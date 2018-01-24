@@ -25,7 +25,7 @@ namespace Fragment
             if (Application.isEditor)
             {
                 Debug.Log("Fragment:ICPController:OnICPFinished: yielding for a while");
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(300);
             }
 
             ClearPoints();
