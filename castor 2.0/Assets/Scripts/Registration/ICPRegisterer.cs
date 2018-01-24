@@ -69,7 +69,7 @@ namespace Registration
                 methodName: "OnICPPointsSelected",
                 value: new ICPPointsSelectedMessage(
                     points: points,
-                    pointsTransform: Settings.ReferenceTransform
+                    transform: Settings.ReferenceTransform
                 ),
                 options: SendMessageOptions.DontRequireReceiver
             );
