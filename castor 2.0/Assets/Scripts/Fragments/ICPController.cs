@@ -8,7 +8,7 @@ namespace Fragments
 {
     public class ICPController : MonoBehaviour, Registration.IICPListener
     {
-        public Color CorrespondenceColor = Color.white;
+        public Color CorrespondenceColor;
 
         private List<Correspondence> Correspondences = new List<Correspondence>();
         private Transform ReferenceTransform;
