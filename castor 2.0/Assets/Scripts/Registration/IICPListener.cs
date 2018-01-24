@@ -6,7 +6,7 @@ namespace Registration
     {
         void OnICPPointsSelected(ICPPointsSelectedMessage message);
 
-        void OnICPCorrespondencesDetermined(ICPCorrespondencesDeterminedMessage message);
+        void OnICPCorrespondencesChanged(ICPCorrespondencesDeterminedMessage message);
 
         IEnumerator OnICPFinished();
     }

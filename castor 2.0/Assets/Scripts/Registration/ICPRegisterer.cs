@@ -87,11 +87,18 @@ namespace Registration
             return points;
         }
 
-        private object ComputeCorrespondences(List<Vector3> staticPoints, List<Vector3> modelPoints)
+        /// <summary>
+        /// Computes the correspondences based on the list of static and model points.
+        /// </summary>
+        /// <returns>The found correspondences.</returns>
+        /// <param name="staticPoints">Points of the static fragment.</param>
+        /// <param name="modelPoints">Points of the model fragment.</param>
+        private List<Correspondence> ComputeCorrespondences(List<Vector3> staticPoints, List<Vector3> modelPoints)
         {
             List<Correspondence> correspondences = CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
+
             SendMessageToAllListeners(
-                methodName: "OnICPCorrespondencesDetermined",
+                methodName: "OnICPCorrespondencesChanged",
                 message: new ICPCorrespondencesDeterminedMessage(
                     correspondences,
                     Settings.ReferenceTransform
