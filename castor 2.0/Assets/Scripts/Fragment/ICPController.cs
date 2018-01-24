@@ -42,7 +42,7 @@ public class ICPController : MonoBehaviour, IICPListener {
     /// </summary>
     public void OnICPPointsSelected( ICPPointsSelectedMessage message )
     {
-        SetParticleSystemTransform(message.PointsTransform);
+        SetParticleSystemTransform(message.Transform);
         VisualizePoints(message.Points);
     }
 

@@ -11,12 +11,12 @@ namespace Registration
     public class ICPPointsSelectedMessage : Message
     {
         private readonly List<Vector3> points;
-        private readonly Transform pointsTransform;
+        private readonly Transform transform;
 
         public ICPPointsSelectedMessage(List<Vector3> points, Transform pointsTransform)
         {
             this.points = points;
-            this.pointsTransform = pointsTransform;
+            this.transform = pointsTransform;
         }
 
         public List<Vector3> Points
@@ -27,11 +27,11 @@ namespace Registration
             }
         }
 
-        public Transform PointsTransform
+        public Transform Transform
         {
             get
             {
-                return pointsTransform;
+                return transform;
             }
         }
     }
