@@ -35,10 +35,7 @@ namespace Fragments
         {
             if (CorrespondencesPresent())
             {
-                CreateAndSetCorrespondenceMaterial();
-
-                // Apply the material
-                CorrespondenceMaterial.SetPass(0);
+                CreateSetApplyCorrespondenceMaterial();
 
                 // Set transformation matrix to match our transform
                 GL.PushMatrix();
@@ -74,7 +71,7 @@ namespace Fragments
             Correspondences.Clear();
         }
 
-        static void CreateAndSetCorrespondenceMaterial()
+        static void CreateSetApplyCorrespondenceMaterial()
         {
             //Source https://docs.unity3d.com/ScriptReference/GL.html
             Shader shader = Shader.Find("Hidden/Internal-Colored");
@@ -91,6 +88,9 @@ namespace Fragments
 
             // Turn off depth writes
             CorrespondenceMaterial.SetInt("_ZWrite", 0);
+
+            // Apply the material
+            CorrespondenceMaterial.SetPass(0);
         }
         #endregion
 
