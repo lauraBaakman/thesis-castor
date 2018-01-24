@@ -92,7 +92,7 @@ namespace Registration
         internal List<Correspondence> Build()
         {
             DistanceNode currentNode;
-            while (Correspondences.Count < FinalCorrespondenceCount && DistanceNodes.Count > 0)
+            while (DistanceNodes.Count > 0)
             {
                 currentNode = DistanceNodes.Pop();
                 if (ShouldBeCorrespondence(currentNode)) AddNodeToCorrespondences(currentNode);
