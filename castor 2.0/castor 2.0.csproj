@@ -317,6 +317,7 @@
     <Compile Include="Assets\Scripts\Buttons\TransformSpaceToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\UndoButton.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
+    <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPController.cs" />
     <Compile Include="Assets\Scripts\Fragment\Interfaces.cs" />
     <Compile Include="Assets\Scripts\Fragment\MaterialController.cs" />
@@ -330,6 +331,7 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\Correspondence.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\ICorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\NearestPointCorrespondenceFinder.cs" />
+    <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />
     <Compile Include="Assets\Scripts\Registration\IICPListener.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSelector.cs" />
@@ -340,8 +342,6 @@
     <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
-    <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />

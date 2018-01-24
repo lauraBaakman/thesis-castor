@@ -4,7 +4,11 @@ using System.Collections.Generic;
 
 namespace Registration
 {
-    public class ICPPointsSelectedMessage
+    public class Message {
+        
+    }
+
+    public class ICPPointsSelectedMessage : Message
     {
         private readonly List<Vector3> points;
         private readonly Transform pointsTransform;
@@ -32,7 +36,7 @@ namespace Registration
         }
     }
 
-    public class ICPCorrespondencesDeterminedMessage
+    public class ICPCorrespondencesDeterminedMessage : Message
     {
         private readonly List<Correspondence> correspondences;
         private readonly Transform transform;
