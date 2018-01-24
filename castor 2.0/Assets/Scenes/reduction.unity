@@ -2346,6 +2346,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1584437543}
+  - {fileID: 1803187211}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3093,6 +3094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79258ffc182614767a572ff42cc2e63d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CorrespondenceColor: {r: 0.98567903, g: 0, b: 0.4351896, a: 1}
 --- !u!1 &1586261602
 GameObject:
   m_ObjectHideFlags: 0
