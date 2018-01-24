@@ -1,10 +1,10 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace Registration
 {
     public interface ICorrespondenceFilter
     {
-        IList<Correspondence> Filter(IList<Correspondence> correspondences);
+        List<Correspondence> Filter(IList<Correspondence> correspondences);
     }
 }

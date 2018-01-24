@@ -12,8 +12,10 @@ namespace Registration
         private GameObject ModelFragment;
 
         private Settings Settings;
+
         private IPointSelector Selector;
         private ICorrespondenceFinder CorrespondenceFinder;
+        private List<ICorrespondenceFilter> CorrespondenceFilters = new List<ICorrespondenceFilter>();
 
         private Action CallBack;
 
@@ -44,7 +46,7 @@ namespace Registration
         {
             Transform transform;
             bool stop = false;
-            object correspondences;
+            List<Correspondence> correspondences;
 
             List<Vector3> staticPoints = SelectPoints(StaticFragment);
             List<Vector3> modelPoints = SelectPoints(ModelFragment);
@@ -107,9 +109,21 @@ namespace Registration
             return correspondences;
         }
 
-        private object FilterCorrespondences(object correspondences)
+        private List<Correspondence> FilterCorrespondences(List<Correspondence> correspondences)
         {
-            return null;
+            foreach (ICorrespondenceFilter filter in CorrespondenceFilters)
+            {
+                correspondences = filter.Filter(correspondences);
+            }
+
+            SendMessageToAllListeners(
+                methodName: "OnICPCorrespondencesChanged",
+                message: new ICPCorrespondencesDeterminedMessage(
+                    correspondences,
+                    Settings.ReferenceTransform
+                )
+            );
+            return correspondences;
         }
 
         private bool StopCondition(GameObject staticFragment, GameObject modelFragment)
