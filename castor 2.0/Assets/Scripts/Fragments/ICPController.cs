@@ -35,12 +35,14 @@ namespace Fragments
         {
             if (CorrespondencesPresent())
             {
+                Debug.Assert(ReferenceTransform, "The reference transform needs to be set");
+
                 //Needs to happen every render
                 CreateSetApplyCorrespondenceMaterial();
 
                 // Set transformation matrix to match our transform
                 GL.PushMatrix();
-                GL.MultMatrix(transform.localToWorldMatrix);
+                GL.MultMatrix(ReferenceTransform.localToWorldMatrix);
 
                 GL.Begin(GL.LINES);
                 GL.Color(CorrespondenceColor);
