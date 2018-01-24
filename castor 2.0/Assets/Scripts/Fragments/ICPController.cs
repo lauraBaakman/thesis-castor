@@ -48,13 +48,11 @@ namespace Fragments
                 float radius = 3.0f;
 
                 GL.Begin(GL.LINES);
+                GL.Color(CorrespondenceColor);
                 for (int i = 0; i < lineCount; ++i)
                 {
                     float a = i / (float)lineCount;
                     float angle = a * Mathf.PI * 2;
-
-                    GL.Color(CorrespondenceColor);
-
                     // One vertex at transform position
                     GL.Vertex3(0, 0, 0);
                     // Another vertex at edge of circle
