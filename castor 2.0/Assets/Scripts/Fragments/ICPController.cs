@@ -40,16 +40,6 @@ namespace Fragments
             return Correspondences.Count > 0;
         }
 
-        public IEnumerator OnICPFinished()
-        {
-            ClearCorrespondences();
-            if (Application.isEditor)
-            {
-                Debug.Log("Fragments:ICPController:OnICPFinished: yielding for a while");
-                yield return new WaitForSeconds(3);
-            }
-        }
-
         private void ClearCorrespondences()
         {
             Correspondences.Clear();
@@ -64,6 +54,17 @@ namespace Fragments
         public void OnRenderObject()
         {
             DrawCorrespondences();
+        }
+
+        public IEnumerator OnICPFinished()
+        {
+            if (Application.isEditor)
+            {
+                Debug.Log("Fragments:ICPController:OnICPFinished: yielding for a while");
+                yield return new WaitForSeconds(3);
+            }
+
+            ClearCorrespondences();
         }
     }
 }
