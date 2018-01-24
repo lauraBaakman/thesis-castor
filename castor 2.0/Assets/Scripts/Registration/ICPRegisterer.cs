@@ -6,6 +6,8 @@ namespace Registration
 {
     public class ICPRegisterer
     {
+        public List<GameObject> Listeners;
+
         private GameObject StaticFragment;
         private GameObject ModelFragment;
 
@@ -26,6 +28,11 @@ namespace Registration
             Settings = settings;
             CallBack = callBack;
 
+            Listeners = new List<GameObject>
+            {
+                StaticFragment,
+                ModelFragment
+            };
             Selector = new SelectAllPointsSelector(Settings.ReferenceTransform);
             CorrespondenceFinder = new NearstPointCorrespondenceFinder();
         }
@@ -111,30 +118,16 @@ namespace Registration
             return null;
         }
 
-        private void SendMessageToAllListeners(string methodName, object message)
+        private void SendMessageToAllListeners(string methodName, Message message = null)
         {
-            ModelFragment.SendMessage(
-                methodName: methodName,
-                value: message,
-                options: SendMessageOptions.RequireReceiver
-            );
-            StaticFragment.SendMessage(
-                methodName: methodName,
-                value: message,
-                options: SendMessageOptions.RequireReceiver
-            );
-        }
-
-        private void SendMessageToAllListeners(string methodName)
-        {
-            ModelFragment.SendMessage(
-                methodName: methodName,
-                options: SendMessageOptions.RequireReceiver
-            );
-            StaticFragment.SendMessage(
-                methodName: methodName,
-                options: SendMessageOptions.RequireReceiver
-            );
+            foreach (GameObject listener in Listeners)
+            {
+                listener.SendMessage(
+                    methodName: methodName,
+                    value: message,
+                    options: SendMessageOptions.RequireReceiver
+                );
+            }
         }
     }
 }
