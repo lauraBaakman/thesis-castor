@@ -31,7 +31,7 @@ namespace Fragments
             ReferenceTransform = message.Transform;
         }
 
-        private void DrawCorrespondences()
+        private void RenderCorrespondences()
         {
             if (CorrespondencesPresent())
             {
@@ -42,26 +42,32 @@ namespace Fragments
                 GL.PushMatrix();
                 GL.MultMatrix(transform.localToWorldMatrix);
 
-                int lineCount = 10;
-                float radius = 3.0f;
-
                 GL.Begin(GL.LINES);
                 GL.Color(CorrespondenceColor);
-                for (int i = 0; i < lineCount; ++i)
-                {
-                    float a = i / (float)lineCount;
-                    float angle = a * Mathf.PI * 2;
 
-                    Correspondence correspondence = new Correspondence(
-                        new Vector3(),
-                        new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0)
-                    );
-
-                    DrawCorrespondence(correspondence);
-                }
+                DrawCorrespondences();
 
                 GL.End();
                 GL.PopMatrix();
+            }
+        }
+
+        private void DrawCorrespondences()
+        {
+            int lineCount = 10;
+            float radius = 3.0f;
+
+            for (int i = 0; i < lineCount; ++i)
+            {
+                float a = i / (float)lineCount;
+                float angle = a * Mathf.PI * 2;
+
+                Correspondence correspondence = new Correspondence(
+                    new Vector3(),
+                    new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0)
+                );
+
+                DrawCorrespondence(correspondence);
             }
         }
 
@@ -119,7 +125,7 @@ namespace Fragments
         /// </summary>
         public void OnRenderObject()
         {
-            DrawCorrespondences();
+            RenderCorrespondences();
         }
 
         public IEnumerator OnICPFinished()
