@@ -56,19 +56,8 @@ namespace Fragments
 
         private void DrawCorrespondences()
         {
-            int lineCount = 10;
-            float radius = 3.0f;
-
-            for (int i = 0; i < lineCount; ++i)
+            foreach (Correspondence correspondence in Correspondences)
             {
-                float a = i / (float)lineCount;
-                float angle = a * Mathf.PI * 2;
-
-                Correspondence correspondence = new Correspondence(
-                    new Vector3(),
-                    new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0)
-                );
-
                 DrawCorrespondence(correspondence);
             }
         }
@@ -102,8 +91,10 @@ namespace Fragments
             //Source https://docs.unity3d.com/ScriptReference/GL.html
             Shader shader = Shader.Find("Hidden/Internal-Colored");
 
-            CorrespondenceMaterial = new Material(shader);
-            CorrespondenceMaterial.hideFlags = HideFlags.HideAndDontSave;
+            CorrespondenceMaterial = new Material(shader)
+            {
+                hideFlags = HideFlags.HideAndDontSave
+            };
 
             // Turn on alpha blending
             CorrespondenceMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
@@ -135,7 +126,7 @@ namespace Fragments
             if (Application.isEditor)
             {
                 Debug.Log("Fragments:ICPController:OnICPFinished: yielding for a while");
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(300);
             }
 
             ClearCorrespondences();
