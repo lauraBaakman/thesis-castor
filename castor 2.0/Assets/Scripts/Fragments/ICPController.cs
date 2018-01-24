@@ -8,6 +8,8 @@ namespace Fragments
 {
     public class ICPController : MonoBehaviour, Registration.IICPListener
     {
+        public Color CorrespondenceColor = Color.white;
+
         private List<Correspondence> Correspondences = new List<Correspondence>();
         private Transform ReferenceTransform;
 
@@ -50,8 +52,9 @@ namespace Fragments
                 {
                     float a = i / (float)lineCount;
                     float angle = a * Mathf.PI * 2;
-                    // Vertex colors change from red to green
-                    GL.Color(new Color(a, 1 - a, 0, 0.8F));
+
+                    GL.Color(CorrespondenceColor);
+
                     // One vertex at transform position
                     GL.Vertex3(0, 0, 0);
                     // Another vertex at edge of circle
