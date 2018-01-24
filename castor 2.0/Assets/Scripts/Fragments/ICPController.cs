@@ -35,6 +35,7 @@ namespace Fragments
         {
             if (CorrespondencesPresent())
             {
+                //Needs to happen every render
                 CreateSetApplyCorrespondenceMaterial();
 
                 // Set transformation matrix to match our transform
@@ -50,15 +51,32 @@ namespace Fragments
                 {
                     float a = i / (float)lineCount;
                     float angle = a * Mathf.PI * 2;
-                    // One vertex at transform position
-                    GL.Vertex3(0, 0, 0);
-                    // Another vertex at edge of circle
-                    GL.Vertex3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
+
+                    Correspondence correspondence = new Correspondence(
+                        new Vector3(),
+                        new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0)
+                    );
+
+                    DrawCorrespondence(correspondence);
                 }
 
                 GL.End();
                 GL.PopMatrix();
             }
+        }
+
+        private void DrawCorrespondence(Correspondence correspondence)
+        {
+            GL.Vertex3(
+                correspondence.StaticPoint.x,
+                correspondence.StaticPoint.y,
+                correspondence.StaticPoint.z
+            );
+            GL.Vertex3(
+                correspondence.ModelPoint.x,
+                correspondence.ModelPoint.y,
+                correspondence.ModelPoint.z
+            );
         }
 
         private bool CorrespondencesPresent()
