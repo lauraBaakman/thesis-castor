@@ -27,6 +27,7 @@ namespace Fragment
                 Debug.Log("Fragment:ICPController:OnICPFinished: yielding for a while");
                 yield return new WaitForSeconds(3);
             }
+
             ClearPoints();
         }
 
