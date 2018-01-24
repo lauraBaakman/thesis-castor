@@ -22,10 +22,10 @@ namespace Registration {
             List<Vector3> points = new List<Vector3>(
                 fragment.vertices
             );
-            return ToReferenceTransfrom(fragmentTransform, points);
+            return ToReferenceTransfrom(points, fragmentTransform);
         }
 
-        private List<Vector3> ToReferenceTransfrom( Transform localTransform, List<Vector3> pointsLocalTransform )
+        private List<Vector3> ToReferenceTransfrom(List<Vector3> pointsLocalTransform, Transform localTransform)
         {
             List<Vector3> pointsReferenceTransform = new List<Vector3>(pointsLocalTransform.Count);
             foreach (Vector3 localPoint in pointsLocalTransform) {
