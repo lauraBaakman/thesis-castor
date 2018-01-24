@@ -104,7 +104,7 @@ namespace Registration
 
         private bool FoundAllCorrespondences()
         {
-            return Correspondences.Count < FinalCorrespondenceCount;
+            return Correspondences.Count >= FinalCorrespondenceCount;
         }
 
         private void AddNodeToCorrespondences(DistanceNode node)
