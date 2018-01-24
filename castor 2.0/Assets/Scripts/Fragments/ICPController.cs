@@ -11,11 +11,6 @@ namespace Fragments
         private List<Correspondence> Correspondences = new List<Correspondence>();
         private Transform ReferenceTransform;
 
-        private void Awake()
-        {
-            Debug.Log("Hi!");
-        }
-
         #region Points
         public void OnICPPointsSelected(ICPPointsSelectedMessage message)
         {
@@ -26,8 +21,6 @@ namespace Fragments
         #region Correspondences
         public void OnICPCorrespondencesDetermined(ICPCorrespondencesDeterminedMessage message)
         {
-            Debug.Log("Fragments:ICPController:OnICPCorrespondencesDetermined received message with " + message.Correspondences.Count + " correspondences.");
-
             Correspondences.Clear();
             Correspondences.AddRange(message.Correspondences);
 
@@ -38,7 +31,7 @@ namespace Fragments
         {
             if (CorrespondencesPresent())
             {
-                Debug.Log("Drawing Correspondences");
+                
             }
         }
 
