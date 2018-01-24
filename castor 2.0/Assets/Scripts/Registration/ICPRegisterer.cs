@@ -6,7 +6,7 @@ namespace Registration
 {
     public class ICPRegisterer
     {
-        public List<GameObject> Listeners;
+        private List<GameObject> Listeners = new List<GameObject>();
 
         private GameObject StaticFragment;
         private GameObject ModelFragment;
@@ -28,13 +28,16 @@ namespace Registration
             Settings = settings;
             CallBack = callBack;
 
-            Listeners = new List<GameObject>
-            {
-                StaticFragment,
-                ModelFragment
-            };
+            AddListener(StaticFragment);
+            AddListener(ModelFragment);
+
             Selector = new SelectAllPointsSelector(Settings.ReferenceTransform);
             CorrespondenceFinder = new NearstPointCorrespondenceFinder();
+        }
+
+        public void AddListener(GameObject listener)
+        {
+            Listeners.Add(listener);
         }
 
         public void Register()
@@ -87,7 +90,6 @@ namespace Registration
         private object ComputeCorrespondences(List<Vector3> staticPoints, List<Vector3> modelPoints)
         {
             List<Correspondence> correspondences = CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
-
             SendMessageToAllListeners(
                 methodName: "OnICPCorrespondencesDetermined",
                 message: new ICPCorrespondencesDeterminedMessage(
