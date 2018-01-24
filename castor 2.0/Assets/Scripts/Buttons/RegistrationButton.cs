@@ -37,6 +37,7 @@ namespace Buttons {
                 )
             );
 
+            registerer.AddListener(SelectedFragments);
             registerer.Register();
         }
 
