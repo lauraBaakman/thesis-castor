@@ -11,6 +11,8 @@ namespace Fragments
         private List<Correspondence> Correspondences = new List<Correspondence>();
         private Transform ReferenceTransform;
 
+        static Material CorrespondenceMaterial;
+
         #region Points
         public void OnICPPointsSelected(ICPPointsSelectedMessage message)
         {
@@ -31,7 +33,33 @@ namespace Fragments
         {
             if (CorrespondencesPresent())
             {
-                
+                CreateAndSetCorrespondenceMaterial();
+
+                // Apply the material
+                CorrespondenceMaterial.SetPass(0);
+
+                // Set transformation matrix to match our transform
+                GL.PushMatrix();
+                GL.MultMatrix(transform.localToWorldMatrix);
+
+                int lineCount = 10;
+                float radius = 3.0f;
+
+                GL.Begin(GL.LINES);
+                for (int i = 0; i < lineCount; ++i)
+                {
+                    float a = i / (float)lineCount;
+                    float angle = a * Mathf.PI * 2;
+                    // Vertex colors change from red to green
+                    GL.Color(new Color(a, 1 - a, 0, 0.8F));
+                    // One vertex at transform position
+                    GL.Vertex3(0, 0, 0);
+                    // Another vertex at edge of circle
+                    GL.Vertex3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
+                }
+
+                GL.End();
+                GL.PopMatrix();
             }
         }
 
@@ -43,6 +71,25 @@ namespace Fragments
         private void ClearCorrespondences()
         {
             Correspondences.Clear();
+        }
+
+        static void CreateAndSetCorrespondenceMaterial()
+        {
+            //Source https://docs.unity3d.com/ScriptReference/GL.html
+            Shader shader = Shader.Find("Hidden/Internal-Colored");
+
+            CorrespondenceMaterial = new Material(shader);
+            CorrespondenceMaterial.hideFlags = HideFlags.HideAndDontSave;
+
+            // Turn on alpha blending
+            CorrespondenceMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            CorrespondenceMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+
+            // Turn backface culling off
+            CorrespondenceMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+
+            // Turn off depth writes
+            CorrespondenceMaterial.SetInt("_ZWrite", 0);
         }
         #endregion
 
