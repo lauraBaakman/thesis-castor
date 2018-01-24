@@ -57,9 +57,7 @@ namespace Registration
 
         private float SquaredEuclideanDistance(Vector3 staticPoint, Vector3 modelPoint)
         {
-            Vector3 intermediate = staticPoint - modelPoint;
-            float distance = intermediate.sqrMagnitude;
-            return distance;
+            return (staticPoint - modelPoint).sqrMagnitude;
         }
 
         public List<Correspondence> CreateCorrespondenceList(List<DistanceNode> distanceNodes, int numPointsSmallestFragment)
