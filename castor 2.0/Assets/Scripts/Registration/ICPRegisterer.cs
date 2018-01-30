@@ -136,7 +136,7 @@ namespace Registration
             return modelFragment;
         }
 
-        private Transform DetermineTransform(object correspondences)
+        private Transform DetermineTransform(List<Correspondence> correspondences)
         {
             return null;
         }
