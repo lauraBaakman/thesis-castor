@@ -17,12 +17,7 @@ namespace Utils
         }
         private int countToReach;
 
-        public Counter()
-        {
-            Reset();
-        }
-
-        public Counter(int CountToReach) : base()
+        public Counter(int CountToReach)
         {
             countToReach = CountToReach;
         }
@@ -30,7 +25,6 @@ namespace Utils
         public void Reset()
         {
             currentCount = 0;
-            countToReach = 0;
         }
 
         public void Increase()
@@ -40,7 +34,6 @@ namespace Utils
 
         public bool IsCompleted()
         {
-            if (countToReach == 0) return false;
             return currentCount >= countToReach;
         }
 
