@@ -18,6 +18,8 @@ namespace Registration
         private List<ICorrespondenceFilter> CorrespondenceFilters = new List<ICorrespondenceFilter>();
         private IErrorMetric ErrorMetric;
 
+        private Utils.Counter iterationCounter;
+
         private Action CallBack;
 
         public ICPRegisterer(
@@ -34,6 +36,8 @@ namespace Registration
             AddListener(StaticFragment);
             AddListener(ModelFragment);
 
+            iterationCounter = new Utils.Counter(Settings.MaxNumIterations);
+
             Selector = new SelectAllPointsSelector(Settings.ReferenceTransform);
             CorrespondenceFinder = new NearstPointCorrespondenceFinder();
             ErrorMetric = new PointToPointMeanSquaredDistance();
@@ -48,6 +52,8 @@ namespace Registration
         {
             Transform transform;
             bool stop = false;
+
+            iterationCounter.Reset();
 
             List<Vector3> staticPoints = SelectPoints(StaticFragment);
             List<Vector3> modelPoints = SelectPoints(ModelFragment);
@@ -145,6 +151,10 @@ namespace Registration
 
         private bool TerminateICP(List<Correspondence> correspondences)
         {
+            /// Make sure we do not exceed the maximum number of iterations
+            iterationCounter.Increase();
+            if (iterationCounter.IsCompleted()) return true;
+
             float error = ErrorMetric.ComputeError(correspondences);
             return error < Settings.ErrorThreshold;
         }
