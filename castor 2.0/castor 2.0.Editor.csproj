@@ -198,8 +198,6 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondence.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestNearestPointCorrespondences.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\ColorsTest.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointMeanSquaredError.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\IErrorMetric.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
