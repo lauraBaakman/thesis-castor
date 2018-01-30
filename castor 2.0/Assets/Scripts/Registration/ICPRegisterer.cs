@@ -155,6 +155,7 @@ namespace Registration
             iterationCounter.Increase();
             if (iterationCounter.IsCompleted()) return true;
 
+            /// Check if our error is small enough
             float error = ErrorMetric.ComputeError(correspondences);
             return error < Settings.ErrorThreshold;
         }
