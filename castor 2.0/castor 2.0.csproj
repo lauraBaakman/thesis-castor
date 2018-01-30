@@ -333,6 +333,8 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\Filters\ICorrespondenceFilter.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\ICorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\NearestPointCorrespondenceFinder.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\IErrorMetric.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointMeanSquaredError.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />
     <Compile Include="Assets\Scripts\Registration\IICPListener.cs" />
@@ -344,8 +346,6 @@
     <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointMeanSquaredError.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\IErrorMetric.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
