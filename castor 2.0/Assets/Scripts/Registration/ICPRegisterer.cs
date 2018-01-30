@@ -16,6 +16,7 @@ namespace Registration
         private IPointSelector Selector;
         private ICorrespondenceFinder CorrespondenceFinder;
         private List<ICorrespondenceFilter> CorrespondenceFilters = new List<ICorrespondenceFilter>();
+        private IErrorMetric ErrorMetric;
 
         private Action CallBack;
 
@@ -35,6 +36,7 @@ namespace Registration
 
             Selector = new SelectAllPointsSelector(Settings.ReferenceTransform);
             CorrespondenceFinder = new NearstPointCorrespondenceFinder();
+            ErrorMetric = new PointToPointMeanSquaredDistance();
         }
 
         public void AddListener(GameObject listener)
@@ -46,20 +48,25 @@ namespace Registration
         {
             Transform transform;
             bool stop = false;
-            List<Correspondence> correspondences;
 
             List<Vector3> staticPoints = SelectPoints(StaticFragment);
             List<Vector3> modelPoints = SelectPoints(ModelFragment);
 
+            List<Correspondence> correspondences = ComputeCorrespondences(staticPoints, modelPoints);
+            correspondences = FilterCorrespondences(correspondences);
+
             while (!stop)
             {
-                correspondences = ComputeCorrespondences(staticPoints, modelPoints);
-                correspondences = FilterCorrespondences(correspondences);
-
+                ///Minimize the current error
                 transform = DetermineTransform(correspondences);
                 ModelFragment = ApplyTransform(transform, ModelFragment);
 
-                stop = StopCondition(StaticFragment, ModelFragment);
+                // Update the correspondences
+                correspondences = ComputeCorrespondences(staticPoints, modelPoints);
+                correspondences = FilterCorrespondences(correspondences);
+
+                // Determine if we are done
+                stop = TerminateICP(correspondences);
             }
 
             if (CallBack != null) CallBack();
@@ -126,11 +133,6 @@ namespace Registration
             return correspondences;
         }
 
-        private bool StopCondition(GameObject staticFragment, GameObject modelFragment)
-        {
-            return true;
-        }
-
         private GameObject ApplyTransform(Transform transform, GameObject modelFragment)
         {
             return modelFragment;
@@ -139,6 +141,12 @@ namespace Registration
         private Transform DetermineTransform(List<Correspondence> correspondences)
         {
             return null;
+        }
+
+        private bool TerminateICP(List<Correspondence> correspondences)
+        {
+            float error = ErrorMetric.ComputeError(correspondences);
+            return error < Settings.ErrorThreshold;
         }
 
         private void SendMessageToAllListeners(string methodName, Message message = null)
