@@ -41,11 +41,11 @@ namespace Registration
         }
     }
 
-    public class ICPCorrespondencesDeterminedMessage : Message
+    public class ICPCorrespondencesChanged : Message
     {
         private readonly List<Correspondence> correspondences;
 
-        public ICPCorrespondencesDeterminedMessage(List<Correspondence> correspondences, Transform transform) : base(transform)
+        public ICPCorrespondencesChanged(List<Correspondence> correspondences, Transform transform) : base(transform)
         {
             this.correspondences = correspondences;
         }

@@ -68,7 +68,7 @@ namespace Fragment
         #endregion
 
         #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesDeterminedMessage message)
+        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
         {
             //Do nothing, correspondences are handled by Fragments.ICPController.
         }

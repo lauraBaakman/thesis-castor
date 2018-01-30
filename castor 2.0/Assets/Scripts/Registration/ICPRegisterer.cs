@@ -101,7 +101,7 @@ namespace Registration
 
             SendMessageToAllListeners(
                 methodName: "OnICPCorrespondencesChanged",
-                message: new ICPCorrespondencesDeterminedMessage(
+                message: new ICPCorrespondencesChanged(
                     correspondences,
                     Settings.ReferenceTransform
                 )
@@ -118,7 +118,7 @@ namespace Registration
 
             SendMessageToAllListeners(
                 methodName: "OnICPCorrespondencesChanged",
-                message: new ICPCorrespondencesDeterminedMessage(
+                message: new ICPCorrespondencesChanged(
                     correspondences,
                     Settings.ReferenceTransform
                 )

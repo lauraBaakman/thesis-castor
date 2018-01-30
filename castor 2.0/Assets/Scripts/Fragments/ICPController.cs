@@ -23,7 +23,7 @@ namespace Fragments
         #endregion
 
         #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesDeterminedMessage message)
+        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
         {
             Correspondences.Clear();
             Correspondences.AddRange(message.Correspondences);
