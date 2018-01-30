@@ -197,8 +197,9 @@
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\TestComponentEditor.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondence.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestNearestPointCorrespondences.cs" />
-    <Compile Include="Assets\Scripts\Utils\Editor\ColorsTest.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestPointToPointMeanSquaredDistance.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\ColorsTest.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />

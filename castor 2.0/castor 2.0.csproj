@@ -345,6 +345,7 @@
     <Compile Include="Assets\Scripts\Ticker\Receiver.cs" />
     <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
+    <Compile Include="Assets\Scripts\Utils\Counter.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
