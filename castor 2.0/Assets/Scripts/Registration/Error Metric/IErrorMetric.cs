@@ -6,6 +6,6 @@ namespace Registration
 {
     public interface IErrorMetric
     {
-        float ComputeError(IEnumerable<Correspondence> correspondences);
+        float ComputeError(List<Correspondence> correspondences);
     }
 }

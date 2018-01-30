@@ -10,6 +10,5 @@ modelPoints = [
     4.5, 5.6, 6.7;
 ];
 
-errors = sum((staticPoints - modelPoints),2);
-squaredErrors = errors.^2
-mse = mean(squaredErrors)
+distances = sum((staticPoints - modelPoints).^2, 2);
+mean(distances)
