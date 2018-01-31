@@ -349,6 +349,7 @@
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\HornTransformFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\ITransformFinder.cs" />
   </ItemGroup>
   <ItemGroup>
