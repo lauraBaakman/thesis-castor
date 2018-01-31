@@ -4,16 +4,13 @@ using System.Collections.Generic;
 
 namespace Registration
 {
-    public class PointToPointSumOfDistances : IPointToPointErrorMetric
+    public class PointToPointSumOfDistances : PointToPointErrorMetric
     {
-        private readonly PointToPointDistanceMetrics.DistanceMetric DistanceMetric;
+        public PointToPointSumOfDistances(
+            PointToPointDistanceMetrics.DistanceMetric distanceMetric = null
+        ) : base(distanceMetric) { }
 
-        public PointToPointSumOfDistances(PointToPointDistanceMetrics.DistanceMetric distanceMetric = null)
-        {
-            DistanceMetric = distanceMetric ?? PointToPointDistanceMetrics.SquaredEuclidean;
-        }
-
-        public float ComputeError(List<Correspondence> correspondences)
+        public override float ComputeError(List<Correspondence> correspondences)
         {
             float sumOfErrors = 0;
             foreach (Correspondence correspondence in correspondences)

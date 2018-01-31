@@ -3,16 +3,13 @@ using System.Collections.Generic;
 
 namespace Registration
 {
-    public class PointToPointMeanOfDistances : IPointToPointErrorMetric
+    public class PointToPointMeanOfDistances : PointToPointErrorMetric
     {
-        private readonly PointToPointDistanceMetrics.DistanceMetric DistanceMetric;
+        public PointToPointMeanOfDistances(
+            PointToPointDistanceMetrics.DistanceMetric distanceMetric = null
+        ) : base(distanceMetric) { }
 
-        public PointToPointMeanOfDistances(PointToPointDistanceMetrics.DistanceMetric distanceMetric = null)
-        {
-            DistanceMetric = distanceMetric ?? PointToPointDistanceMetrics.SquaredEuclidean;
-        }
-
-        public float ComputeError(List<Correspondence> correspondences)
+        public override float ComputeError(List<Correspondence> correspondences)
         {
             float error = 0;
             foreach (Correspondence correspondence in correspondences)

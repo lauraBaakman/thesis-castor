@@ -17,7 +17,7 @@ namespace Registration
         private IPointSelector Selector;
         private ICorrespondenceFinder CorrespondenceFinder;
         private List<ICorrespondenceFilter> CorrespondenceFilters = new List<ICorrespondenceFilter>();
-        private IPointToPointErrorMetric ErrorMetric;
+        private PointToPointErrorMetric ErrorMetric;
 
         private Counter iterationCounter;
 
