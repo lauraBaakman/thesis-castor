@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Registration
 {
-
     public class Settings
     {
         /// <summary>
@@ -24,13 +23,25 @@ namespace Registration
         /// <value>The max number iterations.</value>
         public int MaxNumIterations { get; set; }
 
-        public Settings(Transform referenceTransform, float errorThreshold = 0.001f, int maxNumIterations = 50)
+        /// <summary>
+        /// The method used to select points from a mesh, that can be used in a 
+        /// correspondence.
+        /// </summary>
+        /// <value>The selector.</value>
+        public IPointSelector Selector { get; set; }
+
+        public Settings(
+            Transform referenceTransform,
+            float errorThreshold = 0.001f, int maxNumIterations = 50
+        )
         {
             ReferenceTransform = referenceTransform;
 
             ErrorThreshold = errorThreshold;
 
             MaxNumIterations = maxNumIterations;
+
+            Selector = new SelectAllPointsSelector(ReferenceTransform);
         }
     }
 }

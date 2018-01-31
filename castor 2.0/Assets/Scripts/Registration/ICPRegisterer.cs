@@ -14,7 +14,6 @@ namespace Registration
 
         private Settings Settings;
 
-        private IPointSelector Selector;
         private ICorrespondenceFinder CorrespondenceFinder;
         private List<ICorrespondenceFilter> CorrespondenceFilters = new List<ICorrespondenceFilter>();
         private PointToPointErrorMetric ErrorMetric;
@@ -39,7 +38,6 @@ namespace Registration
 
             iterationCounter = new Utils.Counter(Settings.MaxNumIterations);
 
-            Selector = new SelectAllPointsSelector(Settings.ReferenceTransform);
             CorrespondenceFinder = new NearstPointCorrespondenceFinder();
             ErrorMetric = new PointToPointSumOfDistances();
         }
@@ -88,7 +86,7 @@ namespace Registration
         private List<Vector3> SelectPoints(GameObject fragment)
         {
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
-            List<Vector3> points = Selector.Select(fragment.transform, mesh);
+            List<Vector3> points = Settings.Selector.Select(fragment.transform, mesh);
 
             //Notify the fragment
             fragment.SendMessage(
