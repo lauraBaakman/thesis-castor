@@ -41,7 +41,7 @@ namespace Registration
 
             Selector = new SelectAllPointsSelector(Settings.ReferenceTransform);
             CorrespondenceFinder = new NearstPointCorrespondenceFinder();
-            ErrorMetric = new PointToPointMeanOfDistances();
+            ErrorMetric = new PointToPointSumOfDistances();
         }
 
         public void AddListener(GameObject listener)
