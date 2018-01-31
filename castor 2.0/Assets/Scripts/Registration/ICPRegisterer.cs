@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Utils;
 
 namespace Registration
 {
@@ -16,9 +17,9 @@ namespace Registration
         private IPointSelector Selector;
         private ICorrespondenceFinder CorrespondenceFinder;
         private List<ICorrespondenceFilter> CorrespondenceFilters = new List<ICorrespondenceFilter>();
-        private IErrorMetric ErrorMetric;
+        private IPointToPointErrorMetric ErrorMetric;
 
-        private Utils.Counter iterationCounter;
+        private Counter iterationCounter;
 
         private Action CallBack;
 

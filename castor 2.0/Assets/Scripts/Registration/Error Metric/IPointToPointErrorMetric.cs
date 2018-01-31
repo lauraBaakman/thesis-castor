@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Registration
 {
-    public interface IErrorMetric
+    internal interface IPointToPointErrorMetric
     {
         float ComputeError(List<Correspondence> correspondences);
     }
