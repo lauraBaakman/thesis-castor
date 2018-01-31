@@ -200,7 +200,6 @@
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestPointToPointMeanOfSquaredDistances.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\ColorsTest.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointSumOfSquaredDistances.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
