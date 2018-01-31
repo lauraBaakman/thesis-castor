@@ -60,6 +60,12 @@ namespace Registration
         /// <value>The error metric.</value>
         public PointToPointErrorMetric ErrorMetric { get; set; }
 
+        /// <summary>
+        /// The method used to find the transform between the static points and the model points.
+        /// </summary>
+        /// <value>The trans form finder.</value>
+        public ITransformFinder TransFormFinder { get; set; }
+
         public Settings(
             Transform referenceTransform,
             float errorThreshold = 0.001f, int maxNumIterations = 50
@@ -80,6 +86,8 @@ namespace Registration
             DistanceMetric = PointToPointDistanceMetrics.SquaredEuclidean;
 
             ErrorMetric = new PointToPointSumOfDistances(DistanceMetric);
+
+            TransFormFinder = new HornTransformFinder();
         }
     }
 }
