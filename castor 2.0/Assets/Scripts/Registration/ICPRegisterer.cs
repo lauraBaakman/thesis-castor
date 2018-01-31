@@ -14,7 +14,6 @@ namespace Registration
 
         private Settings Settings;
 
-        private ICorrespondenceFinder CorrespondenceFinder;
         private List<ICorrespondenceFilter> CorrespondenceFilters = new List<ICorrespondenceFilter>();
         private PointToPointErrorMetric ErrorMetric;
 
@@ -38,7 +37,6 @@ namespace Registration
 
             iterationCounter = new Utils.Counter(Settings.MaxNumIterations);
 
-            CorrespondenceFinder = new NearstPointCorrespondenceFinder();
             ErrorMetric = new PointToPointSumOfDistances();
         }
 
@@ -109,7 +107,7 @@ namespace Registration
         /// <param name="modelPoints">Points of the model fragment.</param>
         private List<Correspondence> ComputeCorrespondences(List<Vector3> staticPoints, List<Vector3> modelPoints)
         {
-            List<Correspondence> correspondences = CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
+            List<Correspondence> correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
 
             SendMessageToAllListeners(
                 methodName: "OnICPCorrespondencesChanged",

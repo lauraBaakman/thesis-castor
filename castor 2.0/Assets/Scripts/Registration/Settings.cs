@@ -30,6 +30,13 @@ namespace Registration
         /// <value>The selector.</value>
         public IPointSelector Selector { get; set; }
 
+        /// <summary>
+        /// The method used to find correspondecs within the points selected by
+        /// the Selector.
+        /// </summary>
+        /// <value>The correspondence finder.</value>
+        public ICorrespondenceFinder CorrespondenceFinder { get; set; }
+
         public Settings(
             Transform referenceTransform,
             float errorThreshold = 0.001f, int maxNumIterations = 50
@@ -42,6 +49,8 @@ namespace Registration
             MaxNumIterations = maxNumIterations;
 
             Selector = new SelectAllPointsSelector(ReferenceTransform);
+
+            CorrespondenceFinder = new NearstPointCorrespondenceFinder();
         }
     }
 }
