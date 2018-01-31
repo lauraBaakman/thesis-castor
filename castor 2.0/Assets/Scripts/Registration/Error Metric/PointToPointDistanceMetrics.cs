@@ -1,17 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-public class NewMonoBehaviour : MonoBehaviour
+namespace Registration
 {
-	// Use this for initialization
-	void Start()
-	{
-
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-			
-	}
+    public static class PointToPointDistanceMetrics
+    {
+        public static float SquaredEuclidean(Vector3 staticPoint, Vector3 modelPoint)
+        {
+            return Vector3.SqrMagnitude(staticPoint - modelPoint);
+        }
+    }
 }
+
+
