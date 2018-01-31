@@ -14,8 +14,6 @@ namespace Registration
 
         private Settings Settings;
 
-        private List<ICorrespondenceFilter> CorrespondenceFilters = new List<ICorrespondenceFilter>();
-
         private Counter iterationCounter;
 
         private Action CallBack;
@@ -118,7 +116,7 @@ namespace Registration
 
         private List<Correspondence> FilterCorrespondences(List<Correspondence> correspondences)
         {
-            foreach (ICorrespondenceFilter filter in CorrespondenceFilters)
+            foreach (ICorrespondenceFilter filter in Settings.CorrespondenceFilters)
             {
                 correspondences = filter.Filter(correspondences);
             }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace Registration
@@ -38,6 +40,15 @@ namespace Registration
         public ICorrespondenceFinder CorrespondenceFinder { get; set; }
 
         /// <summary>
+        /// The filters used to filter the correspondences.
+        /// </summary>
+        private List<ICorrespondenceFilter> correspondenceFilters;
+        public ReadOnlyCollection<ICorrespondenceFilter> CorrespondenceFilters
+        {
+            get { return correspondenceFilters.AsReadOnly(); }
+        }
+
+        /// <summary>
         /// The method used to compute the distances between points.
         /// </summary>
         /// <value>The point to point distance metric.</value>
@@ -61,6 +72,8 @@ namespace Registration
             MaxNumIterations = maxNumIterations;
 
             PointSelector = new SelectAllPointsSelector(ReferenceTransform);
+
+            correspondenceFilters = new List<ICorrespondenceFilter>();
 
             CorrespondenceFinder = new NearstPointCorrespondenceFinder();
 
