@@ -1,30 +1,26 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Registration
 {
     public class PointToPointMeanSquaredDistance : IPointToPointErrorMetric
     {
+        private PointToPointDistanceMetrics.DistanceMetric DistanceMetric;
+
+        public PointToPointMeanSquaredDistance(PointToPointDistanceMetrics.DistanceMetric distanceMetric = null)
+        {
+            DistanceMetric = distanceMetric ?? PointToPointDistanceMetrics.SquaredEuclidean;
+        }
+
         public float ComputeError(List<Correspondence> correspondences)
         {
             float error = 0;
             foreach (Correspondence correspondence in correspondences)
             {
-                error += CorrespondenceError(correspondence);
+                error += DistanceMetric(correspondence.StaticPoint, correspondence.ModelPoint);
             }
             error /= correspondences.Count;
             return error;
-        }
-
-        private float CorrespondenceError(Correspondence correspondence)
-        {
-            return SquaredDistance(correspondence.StaticPoint, correspondence.ModelPoint);
-        }
-
-        private float SquaredDistance(Vector3 staticPoint, Vector3 modelPoint)
-        {
-            return Vector3.SqrMagnitude(staticPoint - modelPoint);
         }
     }
 }
