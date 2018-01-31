@@ -5,7 +5,7 @@ namespace Registration
 {
     public class PointToPointMeanSquaredDistance : IPointToPointErrorMetric
     {
-        private PointToPointDistanceMetrics.DistanceMetric DistanceMetric;
+        private readonly PointToPointDistanceMetrics.DistanceMetric DistanceMetric;
 
         public PointToPointMeanSquaredDistance(PointToPointDistanceMetrics.DistanceMetric distanceMetric = null)
         {

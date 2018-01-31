@@ -11,4 +11,7 @@ modelPoints = [
 ];
 
 distances = sum((staticPoints - modelPoints).^2, 2);
-mean(distances)
+mean(distances);
+
+fprintf('Mean of squared distances: %f\n', mean(distances));
+fprintf('Sum of squared distances: %f\n', sum(distances));

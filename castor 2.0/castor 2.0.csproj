@@ -336,6 +336,7 @@
     <Compile Include="Assets\Scripts\Registration\Error Metric\IPointToPointErrorMetric.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointDistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointMeanOfSquaredDistances.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointSumOfSquaredDistances.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />
     <Compile Include="Assets\Scripts\Registration\IICPListener.cs" />

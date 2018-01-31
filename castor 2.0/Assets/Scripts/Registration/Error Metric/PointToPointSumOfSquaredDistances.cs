@@ -1,17 +1,26 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class NewMonoBehaviour : MonoBehaviour
+namespace Registration
 {
-	// Use this for initialization
-	void Start()
-	{
+    public class PointToPointSumOfSquaredDistances : IPointToPointErrorMetric
+    {
+        private readonly PointToPointDistanceMetrics.DistanceMetric DistanceMetric;
 
-	}
+        public PointToPointSumOfSquaredDistances(PointToPointDistanceMetrics.DistanceMetric distanceMetric = null)
+        {
+            DistanceMetric = distanceMetric ?? PointToPointDistanceMetrics.SquaredEuclidean;
+        }
 
-	// Update is called once per frame
-	void Update()
-	{
-			
-	}
+        public float ComputeError(List<Correspondence> correspondences)
+        {
+            float sumOfErrors = 0;
+            foreach (Correspondence correspondence in correspondences)
+            {
+                sumOfErrors += DistanceMetric(correspondence.StaticPoint, correspondence.ModelPoint);
+            }
+            return sumOfErrors;
+        }
+    }
 }
