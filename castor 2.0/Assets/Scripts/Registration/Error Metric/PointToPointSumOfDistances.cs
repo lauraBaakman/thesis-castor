@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace Registration
 {
-    public class PointToPointSumOfSquaredDistances : IPointToPointErrorMetric
+    public class PointToPointSumOfDistances : IPointToPointErrorMetric
     {
         private readonly PointToPointDistanceMetrics.DistanceMetric DistanceMetric;
 
-        public PointToPointSumOfSquaredDistances(PointToPointDistanceMetrics.DistanceMetric distanceMetric = null)
+        public PointToPointSumOfDistances(PointToPointDistanceMetrics.DistanceMetric distanceMetric = null)
         {
             DistanceMetric = distanceMetric ?? PointToPointDistanceMetrics.SquaredEuclidean;
         }

@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Registration;
 
 [TestFixture]
-public class TestPointToPointMeanSquaredDistance
+public class TestPointToPointMeanOfDistances
 {
     [Test]
     public void TestComputeError_NoConstructor()
@@ -27,7 +27,7 @@ public class TestPointToPointMeanSquaredDistance
         };
 
         float expected = 26.203333333333333f;
-        float actual = new PointToPointMeanSquaredDistance().ComputeError(correspondences);
+        float actual = new PointToPointMeanOfDistances().ComputeError(correspondences);
 
         Assert.AreEqual(expected, actual);
     }
@@ -53,7 +53,7 @@ public class TestPointToPointMeanSquaredDistance
 
         float expected = 26.203333333333333f;
         float actual =
-            new PointToPointMeanSquaredDistance(
+            new PointToPointMeanOfDistances(
                 PointToPointDistanceMetrics.SquaredEuclidean
             ).ComputeError(
                 correspondences

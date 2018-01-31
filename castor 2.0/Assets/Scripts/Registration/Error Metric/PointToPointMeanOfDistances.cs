@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Registration
 {
-    public class PointToPointMeanSquaredDistance : IPointToPointErrorMetric
+    public class PointToPointMeanOfDistances : IPointToPointErrorMetric
     {
         private readonly PointToPointDistanceMetrics.DistanceMetric DistanceMetric;
 
-        public PointToPointMeanSquaredDistance(PointToPointDistanceMetrics.DistanceMetric distanceMetric = null)
+        public PointToPointMeanOfDistances(PointToPointDistanceMetrics.DistanceMetric distanceMetric = null)
         {
             DistanceMetric = distanceMetric ?? PointToPointDistanceMetrics.SquaredEuclidean;
         }
