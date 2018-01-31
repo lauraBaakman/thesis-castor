@@ -28,7 +28,7 @@ namespace Registration
         /// correspondence.
         /// </summary>
         /// <value>The selector.</value>
-        public IPointSelector Selector { get; set; }
+        public IPointSelector PointSelector { get; set; }
 
         /// <summary>
         /// The method used to find correspondecs within the points selected by
@@ -36,6 +36,18 @@ namespace Registration
         /// </summary>
         /// <value>The correspondence finder.</value>
         public ICorrespondenceFinder CorrespondenceFinder { get; set; }
+
+        /// <summary>
+        /// The method used to compute the distances between points.
+        /// </summary>
+        /// <value>The point to point distance metric.</value>
+        public PointToPointDistanceMetrics.DistanceMetric DistanceMetric { get; set; }
+
+        /// <summary>
+        /// The error metric used to compute the error of a registration.
+        /// </summary>
+        /// <value>The error metric.</value>
+        public PointToPointErrorMetric ErrorMetric { get; set; }
 
         public Settings(
             Transform referenceTransform,
@@ -48,9 +60,13 @@ namespace Registration
 
             MaxNumIterations = maxNumIterations;
 
-            Selector = new SelectAllPointsSelector(ReferenceTransform);
+            PointSelector = new SelectAllPointsSelector(ReferenceTransform);
 
             CorrespondenceFinder = new NearstPointCorrespondenceFinder();
+
+            DistanceMetric = PointToPointDistanceMetrics.SquaredEuclidean;
+
+            ErrorMetric = new PointToPointSumOfDistances(DistanceMetric);
         }
     }
 }

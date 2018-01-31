@@ -15,7 +15,6 @@ namespace Registration
         private Settings Settings;
 
         private List<ICorrespondenceFilter> CorrespondenceFilters = new List<ICorrespondenceFilter>();
-        private PointToPointErrorMetric ErrorMetric;
 
         private Counter iterationCounter;
 
@@ -36,8 +35,6 @@ namespace Registration
             AddListener(ModelFragment);
 
             iterationCounter = new Utils.Counter(Settings.MaxNumIterations);
-
-            ErrorMetric = new PointToPointSumOfDistances();
         }
 
         public void AddListener(GameObject listener)
@@ -84,7 +81,7 @@ namespace Registration
         private List<Vector3> SelectPoints(GameObject fragment)
         {
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
-            List<Vector3> points = Settings.Selector.Select(fragment.transform, mesh);
+            List<Vector3> points = Settings.PointSelector.Select(fragment.transform, mesh);
 
             //Notify the fragment
             fragment.SendMessage(
@@ -153,7 +150,7 @@ namespace Registration
             if (iterationCounter.IsCompleted()) return true;
 
             /// Check if our error is small enough
-            float error = ErrorMetric.ComputeError(correspondences);
+            float error = Settings.ErrorMetric.ComputeError(correspondences);
             return error < Settings.ErrorThreshold;
         }
 
