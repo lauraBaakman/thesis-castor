@@ -19,10 +19,10 @@ namespace Registration
 
         private float CorrespondenceError(Correspondence correspondence)
         {
-            return Distance(correspondence.StaticPoint, correspondence.ModelPoint);
+            return SquaredDistance(correspondence.StaticPoint, correspondence.ModelPoint);
         }
 
-        private float Distance(Vector3 staticPoint, Vector3 modelPoint)
+        private float SquaredDistance(Vector3 staticPoint, Vector3 modelPoint)
         {
             return Vector3.SqrMagnitude(staticPoint - modelPoint);
         }
