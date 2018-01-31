@@ -333,7 +333,7 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\Filters\ICorrespondenceFilter.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\ICorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\NearestPointCorrespondenceFinder.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\IErrorMetric.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\IPointToPointErrorMetric.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointMeanSquaredDistance.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />

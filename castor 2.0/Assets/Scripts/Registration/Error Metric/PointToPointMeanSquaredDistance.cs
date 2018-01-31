@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Registration
 {
-    public class PointToPointMeanSquaredDistance : IErrorMetric
+    public class PointToPointMeanSquaredDistance : IPointToPointErrorMetric
     {
         public float ComputeError(List<Correspondence> correspondences)
         {
