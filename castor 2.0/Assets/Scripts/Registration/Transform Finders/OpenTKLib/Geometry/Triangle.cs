@@ -221,40 +221,7 @@ namespace OpenTKLib
             
             return normal;
         }
-        //public static Vector3d GetNormalForTriangle(Model3D myModel, Triangle t)
-        //{
-        //    if (t.IndNormals == null || t.IndNormals.Count == 0)
-        //    {
-        //        CalculateNormalForTriangle(myModel.VertexList, t);
 
-        //    }
-        //    return myModel.Normals[t.IndNormals[0]];
-        //}
-        public static Vector3d CalculateNormal(Model3D myModel, Triangle t)
-        {
-            if (t.IndNormals == null || t.IndNormals.Count == 0)
-            {
-                Vector3d a = myModel.VertexList[t.IndVertices[0]].Vector;
-                Vector3d b = myModel.VertexList[t.IndVertices[1]].Vector;
-                Vector3d c = myModel.VertexList[t.IndVertices[2]].Vector;
-
-                Vector3d normal = Vector3d.Cross(b - a, c - a);
-                //alternative:
-                //Vector3d normal = Vector3d.Cross(b - a, c - b);
-
-                Vector3d temp = normal;
-                normal = normal.NormalizeNew();
-                //if (!CheckVector(normal))
-                //{
-                //    System.Windows.Forms.MessageBox.Show("SW Error calculating normal");
-                //    return new Vector3d(0, 0, 0);
-
-                //}
-                return normal;
-
-            }
-            return myModel.Normals[t.IndNormals[0]];
-        }
         private static bool CheckVector(Vector3d v)
         {
             if (double.IsInfinity(v.X) || double.IsNaN(v.X) || double.IsInfinity(v.Y) || double.IsNaN(v.Y) || double.IsInfinity(v.Z) || double.IsNaN(v.Z))
