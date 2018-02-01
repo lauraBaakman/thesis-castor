@@ -473,7 +473,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\Vertex2D.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\VoronoiFortune\Voronoi.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\VoronoiFortune\VoronoiElements.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\CollisionDetector.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\Comparer.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\floatVector.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\MathBase.cs" />
