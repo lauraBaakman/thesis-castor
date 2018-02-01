@@ -409,7 +409,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\Hull_ORourke\InPolyh.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\Hull_ORourke\MinkConvol.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\Hull_ORourke\Sphere.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\Hull_ORourke\Template.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\KDTree\EllipseWrapper.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\KDTree\KDTree_Numerics.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\KDTree\KDTree_Rednaxela\IDistanceFunction.cs" />
