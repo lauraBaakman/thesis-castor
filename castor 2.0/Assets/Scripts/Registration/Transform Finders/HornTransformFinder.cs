@@ -34,8 +34,7 @@ namespace Registration
 
         private void CorrespondecesToVector3dLists(
             List<Correspondence> correspondences,
-            ref List<Vector3d> modelPoints, ref List<Vector3d> staticPoints
-        )
+            ref List<Vector3d> modelPoints, ref List<Vector3d> staticPoints)
         {
             foreach (Correspondence correspondence in correspondences)
             {
