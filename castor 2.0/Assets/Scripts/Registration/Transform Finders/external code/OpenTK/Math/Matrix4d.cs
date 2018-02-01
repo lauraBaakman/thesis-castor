@@ -1528,5 +1528,11 @@ namespace OpenTK
                 Row2 == other.Row2 &&
                 Row3 == other.Row3;
         }
+
+        public UnityEngine.Matrix4x4 ToUnityMatrix(){
+            UnityEngine.Matrix4x4 matrix = new UnityEngine.Matrix4x4();
+
+            return matrix;
+        }
     }
 }

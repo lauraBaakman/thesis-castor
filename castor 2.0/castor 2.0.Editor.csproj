@@ -202,6 +202,7 @@
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestPointToPointSumOfDistances .cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\ColorsTest.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Editor\TestMatrix4d.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
