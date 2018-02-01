@@ -16,7 +16,9 @@ Source: https://www.codeproject.com/Articles/865830/Point-cloud-alignment-ICP-me
 =========================================================================*/
 using System;
 using System.Collections.Generic;
-using OpenTKLib;
+using OpenTK.Math;
+using OpenTK;
+
 
 namespace ICPLib
 {
@@ -25,7 +27,7 @@ namespace ICPLib
     public class LandmarkTransform 
     {
        
-        public OpenTKLib.Matrix4d Matrix;
+        public Matrix4d Matrix;
       
         public List<Vector3d> SourceLandmarks;
         public List<Vector3d> TargetLandmarks;
