@@ -449,7 +449,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Globals\GeneralSettings.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Globals\TimeCalc.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\IO\IOUtils.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\NotUsed\TestData.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\AssemblyInfo.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\Resources.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\Resources.Designer.cs">
