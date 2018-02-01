@@ -160,23 +160,6 @@ namespace OpenTK
         }
 
         /// <summary>
-        /// Gets an approximation of the vector length (magnitude).
-        /// </summary>
-        /// <remarks>
-        /// This property uses an approximation of the square root function to calculate vector magnitude, with
-        /// an upper error bound of 0.001.
-        /// </remarks>
-        /// <see cref="Length"/>
-        /// <seealso cref="LengthSquared"/>
-        public double LengthFast
-        {
-            get
-            {
-                return 1.0 / MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z);
-            }
-        }
-
-        /// <summary>
         /// Gets the square of the vector length (magnitude).
         /// </summary>
         /// <remarks>
@@ -210,17 +193,6 @@ namespace OpenTK
         public void Normalize()
         {
             double scale = 1.0 / this.Length;
-            X *= scale;
-            Y *= scale;
-            Z *= scale;
-        }
-
-        /// <summary>
-        /// Scales the Vector3d to approximately unit length.
-        /// </summary>
-        public void NormalizeFast()
-        {
-            double scale = MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z);
             X *= scale;
             Y *= scale;
             Z *= scale;
