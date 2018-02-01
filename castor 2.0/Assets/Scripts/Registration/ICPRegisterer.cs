@@ -56,7 +56,7 @@ namespace Registration
             while (!stop)
             {
                 ///Minimize the current error
-                transform = DetermineTransform(correspondences);
+                transform = Settings.TransFormFinder.FindTransform(correspondences);
                 ModelFragment = ApplyTransform(transform, ModelFragment);
 
                 // Update the correspondences
@@ -134,11 +134,6 @@ namespace Registration
         private GameObject ApplyTransform(Transform transform, GameObject modelFragment)
         {
             return modelFragment;
-        }
-
-        private Transform DetermineTransform(List<Correspondence> correspondences)
-        {
-            return null;
         }
 
         private bool TerminateICP(List<Correspondence> correspondences)
