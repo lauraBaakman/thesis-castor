@@ -1394,8 +1394,12 @@ namespace OpenTK
 
         public UnityEngine.Vector4 ToUnityVector()
         {
-            UnityEngine.Vector4 vector = new UnityEngine.Vector4();
-
+            UnityEngine.Vector4 vector = new UnityEngine.Vector4(
+                x:(float) X,
+                y:(float) Y,
+                z:(float) Z,
+                w:(float) W
+            );
             return vector;
         }
     }
