@@ -30,13 +30,13 @@ namespace OpenTKLib
         public cEdgeList Edges;
         public cFaceList Faces;
 
-        
+
         public ConvexHull3D()
         {
             Vertices = new cVertexList();
             Edges = new cEdgeList();
             Faces = new cFaceList();
-           
+
         }
         protected bool Hull()
         {
@@ -50,10 +50,9 @@ namespace OpenTKLib
             }
             else
             {
-               System.Windows.Forms.MessageBox.Show("Hull Failed");
-                return false;
+                throw new Exception("Hull Failed");
             }
-           
+
 
         }
         protected void InitVectors(List<Vector3d> myListVectors)
@@ -65,7 +64,7 @@ namespace OpenTKLib
 
             }
         }
-        public ConvexHull3D(List<Vector3d> myListVectors):this()
+        public ConvexHull3D(List<Vector3d> myListVectors) : this()
         {
 
 
@@ -73,7 +72,7 @@ namespace OpenTKLib
             Hull();
 
             //Print();
-                
+
         }
 
         public void ReadVertices_SetIndexInModel()
@@ -94,7 +93,7 @@ namespace OpenTKLib
             } while (v != Vertices.head);
         }
 
-      
+
 
         /*---------------------------------------------------------------------
           Print: Prints out the vertices and the faces.  Uses the vnum indices 
@@ -202,7 +201,7 @@ namespace OpenTKLib
             System.Diagnostics.Debug.WriteLine("\nEdges:\tE = " + E);
             /* Edges not printed out (but easily added). */
 
-            
+
             CheckEuler(V, E, F);
         }
 
@@ -276,7 +275,7 @@ namespace OpenTKLib
 
             /* Insure that v3 will be the first added. */
             Vertices.head = v3;
-           
+
             return true;
         }
 
@@ -301,7 +300,7 @@ namespace OpenTKLib
                     changed = AddOne(v);
                     CleanUp();
 
-                  
+
                 }
                 v = vnext;
             } while (v != Vertices.head);
@@ -322,14 +321,14 @@ namespace OpenTKLib
             double vol;
             bool vis = false;
 
-        
+
 
             /* Mark faces visible from p. */
             face = Faces.head;
             do
             {
                 vol = VolumeSign(face, p);
-               
+
                 if (vol < 0)
                 {
                     face.visible = VISIBLE;
@@ -845,7 +844,7 @@ namespace OpenTKLib
 
             if (f != Faces.head)
                 System.Diagnostics.Debug.WriteLine("Checks: NOT convex.");
-            
+
         }
 
         /*---------------------------------------------------------------------
@@ -855,21 +854,21 @@ namespace OpenTKLib
           ---------------------------------------------------------------------*/
         protected void CheckEuler(double V, double E, double F)
         {
-           
+
 
             if ((V - E + F) != 2)
                 System.Diagnostics.Debug.WriteLine(" Checks: V-E+F != 2\n");
-          
+
 
 
             if (F != (2 * V - 4))
                 System.Diagnostics.Debug.WriteLine(" Checks: F=" + F + " != 2V-4=" + (2 * V - 4) + "; V=" + V);
 
-         
+
 
             if ((2 * E) != (3 * F))
                 System.Diagnostics.Debug.WriteLine(" Checks: 2E=" + 2 * E + " != 3F=" + 3 * F + "; E=" + E + ", F=" + F);
-          
+
         }
 
         /*-------------------------------------------------------------------*/
