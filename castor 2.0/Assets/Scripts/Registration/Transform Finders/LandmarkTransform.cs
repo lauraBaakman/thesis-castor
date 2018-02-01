@@ -22,31 +22,26 @@ using OpenTK;
 
 namespace ICPLib
 {
-
-
-    public class LandmarkTransform 
+    public class LandmarkTransform
     {
-       
+
         public Matrix4d Matrix;
-      
+
         public List<Vector3d> SourceLandmarks;
         public List<Vector3d> TargetLandmarks;
-   
+
 
         //----------------------------------------------------------------------------
         public LandmarkTransform()
         {
             Matrix = new Matrix4d();
-        
         }
 
-     
-      
         private void FindCentroids(int N_PTS, double[] source_centroid, double[] target_centroid)
         {
-           
+
             Vector3d p = new Vector3d();
-           
+
             for (int i = 0; i < N_PTS; i++)
             {
                 p = this.SourceLandmarks[i];
@@ -65,17 +60,18 @@ namespace ICPLib
             target_centroid[1] /= N_PTS;
             target_centroid[2] /= N_PTS;
         }
+
         private void UpdateCorrelationMatrix(int pointIndex, double[] source_centroid, double[] target_centroid, double[,] M, ref double scale)
         {
 
             double sSum = 0.0F, tSum = 0.0F;
 
-           
+
             Vector3d s = this.SourceLandmarks[pointIndex];
             s[0] -= source_centroid[0];
             s[1] -= source_centroid[1];
             s[2] -= source_centroid[2];
-          
+
             Vector3d t = this.TargetLandmarks[pointIndex];
             t[0] -= target_centroid[0];
             t[1] -= target_centroid[1];
@@ -104,6 +100,7 @@ namespace ICPLib
 
             scale = (float)Math.Sqrt(tSum / sSum);
         }
+
         private double[,] CreateMatrixForDiag(int pointIndex, double[] source_centroid, double[] target_centroid, double[,] M, ref double scale)
         {
             //updates M
@@ -145,9 +142,10 @@ namespace ICPLib
             return N;
 
         }
+
         private void ChooseFirstFourEigenvalues(ref double w, ref double x, ref double y, ref double z, double[,] eigenvectors, double[] eigenvalues, int N_PTS)
         {
-            
+
             // first: if points are collinear, choose the quaternion that 
             // results in the smallest rotation.
             if (eigenvalues[0] == eigenvalues[1] || N_PTS == 2)
@@ -157,7 +155,7 @@ namespace ICPLib
                 Vector3d s1 = this.SourceLandmarks[1];
                 Vector3d t1 = this.TargetLandmarks[1];
 
-          
+
 
                 double[] ds = new double[3];
                 double[] dt = new double[3];
@@ -214,6 +212,7 @@ namespace ICPLib
                 z = eigenvectors[3, 0];
             }
         }
+
         private Matrix4d CreateMatrixOutOfDiagonalizationResult(double[,] eigenvectors, double[] eigenvalues, int N_PTS, double[] source_centroid, double[] target_centroid, double scale)
         {
             // the eigenvector with the largest eigenvalue is the quaternion we want
@@ -243,29 +242,29 @@ namespace ICPLib
             double xz = x * z;
             double yz = y * z;
 
-            this.Matrix[0,0] = ww + xx - yy - zz;
+            this.Matrix[0, 0] = ww + xx - yy - zz;
             this.Matrix[1, 0] = 2.0 * (wz + xy);
-            this.Matrix[2, 0] =  2.0 * (-wy + xz);
+            this.Matrix[2, 0] = 2.0 * (-wy + xz);
 
-            this.Matrix[0, 1] =  2.0 * (-wz + xy);
-            this.Matrix[1, 1] =  ww - xx + yy - zz;
-            this.Matrix[2, 1] =  2.0 * (wx + yz);
+            this.Matrix[0, 1] = 2.0 * (-wz + xy);
+            this.Matrix[1, 1] = ww - xx + yy - zz;
+            this.Matrix[2, 1] = 2.0 * (wx + yz);
 
-            this.Matrix[0, 2] =  2.0 * (wy + xz);
-            this.Matrix[1, 2] =  2.0 * (-wx + yz);
-            this.Matrix[2, 2] =  ww - xx - yy + zz;
+            this.Matrix[0, 2] = 2.0 * (wy + xz);
+            this.Matrix[1, 2] = 2.0 * (-wx + yz);
+            this.Matrix[2, 2] = ww - xx - yy + zz;
 
             //if (this.Mode != VTK_LANDMARK_RIGIDBODY)
             //  { // add in the scale factor (if desired)
             for (int i = 0; i < 3; i++)
             {
-                double val = this.Matrix[i, 0]  * scale;
-                this.Matrix[i, 0] =  val;
+                double val = this.Matrix[i, 0] * scale;
+                this.Matrix[i, 0] = val;
                 val = this.Matrix[i, 1] * scale;
-                this.Matrix[i, 1] =  val;
+                this.Matrix[i, 1] = val;
 
-                val = this.Matrix[i, 2]  * scale;
-                this.Matrix[i, 2] =  val;
+                val = this.Matrix[i, 2] * scale;
+                this.Matrix[i, 2] = val;
 
             }
 
@@ -275,17 +274,17 @@ namespace ICPLib
             // centroid and the target centroid
             double sx, sy, sz;
 
-            sx = this.Matrix[0, 0]  * source_centroid[0] +
-                 this.Matrix[0, 1]   * source_centroid[1] +
+            sx = this.Matrix[0, 0] * source_centroid[0] +
+                 this.Matrix[0, 1] * source_centroid[1] +
                  this.Matrix[0, 2] * source_centroid[2];
-            sy = this.Matrix[1, 0]* source_centroid[0] +
+            sy = this.Matrix[1, 0] * source_centroid[0] +
                  this.Matrix[1, 1] * source_centroid[1] +
                  this.Matrix[1, 2] * source_centroid[2];
             sz = this.Matrix[2, 0] * source_centroid[0] +
                  this.Matrix[2, 1] * source_centroid[1] +
                  this.Matrix[2, 2] * source_centroid[2];
 
-            this.Matrix[0, 3] =  target_centroid[0] - sx;
+            this.Matrix[0, 3] = target_centroid[0] - sx;
             this.Matrix[1, 3] = target_centroid[1] - sy;
             this.Matrix[2, 3] = target_centroid[2] - sz;
 
@@ -297,6 +296,7 @@ namespace ICPLib
             return this.Matrix;
 
         }
+
         public bool Update()
         {
             /*
@@ -317,7 +317,7 @@ namespace ICPLib
 
             // --- compute the necessary transform to match the two sets of landmarks ---
 
-         
+
 
             int N_PTS = this.SourceLandmarks.Count;
             if (N_PTS != this.TargetLandmarks.Count)
@@ -336,18 +336,18 @@ namespace ICPLib
             }
             double[] source_centroid = { 0, 0, 0 };
             double[] target_centroid = { 0, 0, 0 };
-            
+
             FindCentroids(N_PTS, source_centroid, target_centroid);
-           
+
             ///-------------------------------
             // -- if only one point, stop right here
 
             if (N_PTS == 1)
             {
                 this.Matrix = new Matrix4d(Vector4d.UnitX, Vector4d.UnitY, Vector4d.UnitZ, Vector4d.UnitW);
-                Matrix[0, 3] =  target_centroid[0] - source_centroid[0];
-                this.Matrix[1, 3] =  target_centroid[1] - source_centroid[1];
-                this.Matrix[2, 3] =  target_centroid[2] - source_centroid[2];
+                Matrix[0, 3] = target_centroid[0] - source_centroid[0];
+                this.Matrix[1, 3] = target_centroid[1] - source_centroid[1];
+                this.Matrix[2, 3] = target_centroid[2] - source_centroid[2];
                 return true;
             }
 
@@ -363,8 +363,8 @@ namespace ICPLib
                 AAT[i, 2] = M[i, 2] = 0.0F;
             }
             int pt;
-          
-            
+
+
             for (pt = 0; pt < N_PTS; pt++)
             {
 
@@ -399,11 +399,7 @@ namespace ICPLib
             }
             return true;
         }
-    
 
-        //------------------------------------------------------------------------
-
-        //----------------------------------------------------------------------------
         void Inverse()
         {
             List<Vector3d> tmp1 = this.SourceLandmarks;
@@ -412,9 +408,5 @@ namespace ICPLib
             this.SourceLandmarks = tmp2;
 
         }
-
-
-
-
     }
 }
