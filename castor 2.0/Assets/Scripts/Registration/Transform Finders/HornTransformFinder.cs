@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+using ICPLib;
+
 namespace Registration
 {
     public class HornTransformFinder : ITransformFinder

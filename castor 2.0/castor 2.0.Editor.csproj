@@ -216,6 +216,8 @@
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Resources\Shaders\XZGrid.shader" />
     <None Include="Assets\Libraries\UnityTestTools\LICENSE.txt" />
     <None Include="Assets\Libraries\UnityTestTools\changelog.txt" />
+    <None Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ClassDiagram1.cd" />
+    <None Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\obj\Debug\OpenTKLib.csproj.FileListAbsolute.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
