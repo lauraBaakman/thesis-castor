@@ -363,6 +363,7 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Triangulation\VoronoiMesh.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Tuple.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTK\Math\Half.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTK\Math\MathHelper.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTK\Math\Matrix2.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTK\Math\Matrix2d.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTK\Math\Matrix2x3.cs" />
