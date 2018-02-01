@@ -26,7 +26,7 @@ namespace Registration
             LandmarkTransform transformComputer = new LandmarkTransform(modelPoints, staticPoints);
             if (transformComputer.ComputeTransform())
             {
-                Matrix4d transformMatrix = transformComputer.TransformMatrix;
+                Matrix4x4 transformMatrix = transformComputer.TransformMatrix.ToUnityMatrix()
                 throw new System.NotImplementedException("Convert transformMatrix to Transform.");
             }
             return null;
@@ -51,7 +51,6 @@ namespace Registration
                 throw new System.NotSupportedException("Cannot compute the transform if not correspondences are given.");
             }
         }
-
     }
 }
 
