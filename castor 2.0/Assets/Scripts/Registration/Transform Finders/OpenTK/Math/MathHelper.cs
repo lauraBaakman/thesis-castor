@@ -278,7 +278,7 @@ namespace OpenTK
         /// <returns>min, if n is lower than min; max, if n is higher than max; n otherwise.</returns>
         public static int Clamp(int n, int min, int max)
         {
-            return Math.Max(Math.Min(n, max), min);
+            return System.Math.Max(System.Math.Min(n, max), min);
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace OpenTK
         /// <returns>min, if n is lower than min; max, if n is higher than max; n otherwise.</returns>
         public static float Clamp(float n, float min, float max)
         {
-            return Math.Max(Math.Min(n, max), min);
+            return System.Math.Max(System.Math.Min(n, max), min);
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace OpenTK
         /// <returns>min, if n is lower than min; max, if n is higher than max; n otherwise.</returns>
         public static double Clamp(double n, double min, double max)
         {
-            return Math.Max(Math.Min(n, max), min);
+            return System.Math.Max(System.Math.Min(n, max), min);
         }
 
         private static unsafe int FloatToInt32Bits(float f)
@@ -335,7 +335,7 @@ namespace OpenTK
                 bInt = Int32.MinValue - bInt;
             }
 
-            long intDiff = Math.Abs(aInt - bInt);
+            long intDiff = System.Math.Abs(aInt - bInt);
             return intDiff <= (1 << maxDeltaBits);
         }
 
@@ -351,9 +351,9 @@ namespace OpenTK
         public static bool ApproximatelyEqualEpsilon(double a, double b, double epsilon)
         {
             const double doubleNormal = (1L << 52) * double.Epsilon;
-            double absA = Math.Abs(a);
-            double absB = Math.Abs(b);
-            double diff = Math.Abs(a - b);
+            double absA = System.Math.Abs(a);
+            double absB = System.Math.Abs(b);
+            double diff = System.Math.Abs(a - b);
 
             if (a == b)
             {
@@ -369,7 +369,7 @@ namespace OpenTK
             }
 
             // use relative error
-            return diff / Math.Min((absA + absB), double.MaxValue) < epsilon;
+            return diff / System.Math.Min((absA + absB), double.MaxValue) < epsilon;
         }
 
         /// <summary>
@@ -384,9 +384,9 @@ namespace OpenTK
         public static bool ApproximatelyEqualEpsilon(float a, float b, float epsilon)
         {
             const float floatNormal = (1 << 23) * float.Epsilon;
-            float absA = Math.Abs(a);
-            float absB = Math.Abs(b);
-            float diff = Math.Abs(a - b);
+            float absA = System.Math.Abs(a);
+            float absB = System.Math.Abs(b);
+            float diff = System.Math.Abs(a - b);
 
             if (a == b)
             {
@@ -402,7 +402,7 @@ namespace OpenTK
             }
 
             // use relative error
-            float relativeError = diff / Math.Min((absA + absB), float.MaxValue);
+            float relativeError = diff / System.Math.Min((absA + absB), float.MaxValue);
             return relativeError < epsilon;
         }
 
@@ -425,7 +425,7 @@ namespace OpenTK
                 return true;
             }
 
-            float diff = Math.Abs(a - b);
+            float diff = System.Math.Abs(a - b);
             return diff <= tolerance;
         }
 
@@ -448,7 +448,7 @@ namespace OpenTK
                 return true;
             }
 
-            double diff = Math.Abs(a - b);
+            double diff = System.Math.Abs(a - b);
             return diff <= tolerance;
         }
     }
