@@ -317,6 +317,7 @@
     <Compile Include="Assets\Scripts\Buttons\TransformSpaceToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\UndoButton.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
+    <Compile Include="Assets\Scripts\Extensions\Matrix4x4Extensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPController.cs" />
     <Compile Include="Assets\Scripts\Fragment\Interfaces.cs" />
