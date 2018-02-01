@@ -346,6 +346,8 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\HornTransformFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\ITransformFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\LandmarkTransform.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\MathUtils.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\MatrixUtilsNew.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Constants.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\ConvexHull\Collections.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\ConvexHull\ConvexFace.cs" />
