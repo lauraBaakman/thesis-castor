@@ -8,6 +8,12 @@ namespace Registration
 {
     public class HornTransformFinder : ITransformFinder
     {
+        /// <summary>
+        /// Finds the transform that should be applied to the model points to 
+        /// reduce the sum of squard distances error.
+        /// </summary>
+        /// <returns>The transform.</returns>
+        /// <param name="correspondences">Correspondences.</param>
         public Transform FindTransform(List<Correspondence> correspondences)
         {
             ValidateCorrespondences(correspondences);
