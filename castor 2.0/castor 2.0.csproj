@@ -471,8 +471,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\Plane.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\Polygon.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\Vertex2D.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\VoronoiFortune\FortuneVoronoiUI.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\VoronoiFortune\FortuneVoronoiUI.Designer.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\VoronoiFortune\Voronoi.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\VoronoiFortune\VoronoiElements.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\_OpenGLControl.cs" />
