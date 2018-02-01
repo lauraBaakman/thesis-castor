@@ -354,29 +354,5 @@ namespace OpenTKLib
                 } while (v != list.head);
         }
 
-        /* Draws a line and the quiry point of the InPoly request
-         */
-        public void DrawInPoly(System.Drawing.Graphics g, cPointi queryP,
-                   int CanW, int CanH, int w, int h)
-        {
-            //int k; 		      
-            //g.setColor(System.Drawing.Color.Black);
-            //g.drawLine(0, queryP.y, CanW, queryP.y);
-            //for(k = 0; k < intCount; k++)
-            //{
-            //  g.fillOval(GetInters(k)-(int)(w/2), queryP.y - (int)(h/2), w, h);
-            //}			
-            //g.setColor(System.Drawing.Color.Red);
-            //g.fillOval(queryP.x - (int)(w/2), queryP.y - (int)(h/2), w, h);
-        }
-
-        /* Draws Centroid
-         */
-        public void DrawCentroid(System.Drawing.Graphics g, int w, int h)
-        {
-            //g.setColor(System.Drawing.Color.Red);
-            //g.fillOval((int)CG.x - (int)(w/2), (int)CG.y - (int)(h/2), w,h);
-        }
-
     } //End class cPolygoni
 }
