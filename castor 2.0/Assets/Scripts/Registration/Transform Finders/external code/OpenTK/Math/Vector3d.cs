@@ -75,6 +75,16 @@ namespace OpenTK
         }
 
         /// <summary>
+        /// Constructs a new instance of the <see cref="T:OpenTK.Vector3d"/> from a <see cref="T:UnityEngine.Vector3"/>.
+        /// </summary>
+        /// <param name="vector">Vector.</param>
+        public Vector3d(UnityEngine.Vector3 vector){
+            X = vector.x;
+            Y = vector.y;
+            Z = vector.z;
+        }
+
+        /// <summary>
         /// Constructs a new instance from the given Vector2d.
         /// </summary>
         /// <param name="v">The Vector2d to copy components from.</param>
