@@ -360,6 +360,8 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Triangulation\TriangulationCell.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Triangulation\VoronoiEdge.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Triangulation\VoronoiMesh.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Tuple.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTK\Math\Half.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTK\Math\Matrix2.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTK\Math\Matrix2d.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTK\Math\Matrix2x3.cs" />
@@ -488,7 +490,6 @@
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Tuple.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
