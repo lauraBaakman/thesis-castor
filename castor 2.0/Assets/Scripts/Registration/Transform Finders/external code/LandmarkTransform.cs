@@ -24,8 +24,16 @@ namespace ICPLib
 {
     public class LandmarkTransform
     {
-        private List<Vector3d> sourceLandmarks;
-        private List<Vector3d> targetLandmarks;
+
+        /// <summary>
+        /// The model points, previously sourceLandmarks
+        /// </summary>
+        private List<Vector3d> modelPoints;
+
+        /// <summary>
+        /// The static points, previously targetLandmarks
+        /// </summary>
+        private List<Vector3d> staticPoints;
 
         public Matrix4d TransformMatrix
         {
@@ -34,10 +42,10 @@ namespace ICPLib
         }
         private Matrix4d transformMatrix;
 
-        public LandmarkTransform(List<Vector3d> sourceLandmarks, List<Vector3d> targetLandmarks)
+        public LandmarkTransform(List<Vector3d> modelPoints, List<Vector3d> staticPoints)
         {
-            this.sourceLandmarks = sourceLandmarks;
-            this.targetLandmarks = targetLandmarks;
+            this.modelPoints = modelPoints;
+            this.staticPoints = staticPoints;
             transformMatrix = new Matrix4d();
         }
 
@@ -48,11 +56,11 @@ namespace ICPLib
 
             for (int i = 0; i < N_PTS; i++)
             {
-                p = this.sourceLandmarks[i];
+                p = this.modelPoints[i];
                 source_centroid[0] += p[0];
                 source_centroid[1] += p[1];
                 source_centroid[2] += p[2];
-                p = this.targetLandmarks[i];
+                p = this.staticPoints[i];
                 target_centroid[0] += p[0];
                 target_centroid[1] += p[1];
                 target_centroid[2] += p[2];
@@ -71,12 +79,12 @@ namespace ICPLib
             double sSum = 0.0F, tSum = 0.0F;
 
 
-            Vector3d s = this.sourceLandmarks[pointIndex];
+            Vector3d s = this.modelPoints[pointIndex];
             s[0] -= source_centroid[0];
             s[1] -= source_centroid[1];
             s[2] -= source_centroid[2];
 
-            Vector3d t = this.targetLandmarks[pointIndex];
+            Vector3d t = this.staticPoints[pointIndex];
             t[0] -= target_centroid[0];
             t[1] -= target_centroid[1];
             t[2] -= target_centroid[2];
@@ -154,10 +162,10 @@ namespace ICPLib
             // results in the smallest rotation.
             if (eigenvalues[0] == eigenvalues[1] || N_PTS == 2)
             {
-                Vector3d s0 = this.sourceLandmarks[0];
-                Vector3d t0 = this.targetLandmarks[0];
-                Vector3d s1 = this.sourceLandmarks[1];
-                Vector3d t1 = this.targetLandmarks[1];
+                Vector3d s0 = this.modelPoints[0];
+                Vector3d t0 = this.staticPoints[0];
+                Vector3d s1 = this.modelPoints[1];
+                Vector3d t1 = this.staticPoints[1];
 
 
 
@@ -312,7 +320,7 @@ namespace ICPLib
 
             // Original python implementation by David G. Gobbi
 
-            if (this.sourceLandmarks == null || this.targetLandmarks == null)
+            if (this.modelPoints == null || this.staticPoints == null)
             {
                 //Identity Matrix
                 this.transformMatrix = new Matrix4d(Vector4d.UnitX, Vector4d.UnitY, Vector4d.UnitZ, Vector4d.UnitW);
@@ -323,8 +331,8 @@ namespace ICPLib
 
 
 
-            int N_PTS = this.sourceLandmarks.Count;
-            if (N_PTS != this.targetLandmarks.Count)
+            int N_PTS = this.modelPoints.Count;
+            if (N_PTS != this.staticPoints.Count)
             {
                 System.Diagnostics.Debug.WriteLine("Error:  Source and Target Landmarks contain a different number of points");
                 return false;
@@ -406,10 +414,10 @@ namespace ICPLib
 
         void Inverse()
         {
-            List<Vector3d> tmp1 = this.sourceLandmarks;
-            List<Vector3d> tmp2 = this.targetLandmarks;
-            this.targetLandmarks = tmp1;
-            this.sourceLandmarks = tmp2;
+            List<Vector3d> tmp1 = this.modelPoints;
+            List<Vector3d> tmp2 = this.staticPoints;
+            this.staticPoints = tmp1;
+            this.modelPoints = tmp2;
 
         }
     }
