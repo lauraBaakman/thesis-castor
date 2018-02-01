@@ -14,7 +14,7 @@ namespace Registration
         /// </summary>
         /// <returns>The transform.</returns>
         /// <param name="correspondences">Correspondences.</param>
-        public Transform FindTransform(List<Correspondence> correspondences)
+        public Matrix4x4 FindTransform(List<Correspondence> correspondences)
         {
             ValidateCorrespondences(correspondences);
 
@@ -24,12 +24,17 @@ namespace Registration
             CorrespondecesToVector3dLists(correspondences, ref modelPoints, ref staticPoints);
 
             LandmarkTransform transformComputer = new LandmarkTransform(modelPoints, staticPoints);
-            if (transformComputer.ComputeTransform())
+
+            bool computationSucceed = transformComputer.ComputeTransform();
+
+            if (!computationSucceed)
             {
-                Matrix4x4 transformMatrix = transformComputer.TransformMatrix.ToUnityMatrix();
-                throw new System.NotImplementedException("Convert transformMatrix to Transform.");
+                Debug.LogError(
+                    "Could not compute the transform, should not happen, since " +
+                    "ValidateCorrespondences should extract these issues");
             }
-            return null;
+
+            return transformComputer.TransformMatrix.ToUnityMatrix();
         }
 
         private void CorrespondecesToVector3dLists(

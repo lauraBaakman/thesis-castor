@@ -5,6 +5,6 @@ namespace Registration
 {
     public interface ITransformFinder
     {
-        Transform FindTransform(List<Correspondence> correspondences);
+        Matrix4x4 FindTransform(List<Correspondence> correspondences);
     }
 }

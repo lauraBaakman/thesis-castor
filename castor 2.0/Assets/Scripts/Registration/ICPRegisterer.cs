@@ -42,7 +42,7 @@ namespace Registration
 
         public void Register()
         {
-            Transform transform;
+            Matrix4x4 transformationMatrix;
             bool stop = false;
 
             iterationCounter.Reset();
@@ -56,8 +56,8 @@ namespace Registration
             while (!stop)
             {
                 ///Minimize the current error
-                transform = Settings.TransFormFinder.FindTransform(correspondences);
-                ModelFragment = ApplyTransform(transform, ModelFragment);
+                transformationMatrix = Settings.TransFormFinder.FindTransform(correspondences);
+                ApplyTransform(transformationMatrix, ModelFragment);
 
                 // Update the correspondences
                 correspondences = ComputeCorrespondences(staticPoints, modelPoints);
@@ -131,9 +131,9 @@ namespace Registration
             return correspondences;
         }
 
-        private GameObject ApplyTransform(Transform transform, GameObject modelFragment)
+        private void ApplyTransform(Matrix4x4 transform, GameObject modelFragment)
         {
-            return modelFragment;
+            throw new NotImplementedException();
         }
 
         private bool TerminateICP(List<Correspondence> correspondences)
