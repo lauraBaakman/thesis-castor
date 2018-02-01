@@ -38,7 +38,7 @@ namespace OpenTKLib
             //this.list = list;
             Edges = new cEdgeList();
             Faces = new cFaceList();
-           
+
         }
         public DelaunayTri_Old(List<Vector3d> myListVectors)
             : this()
@@ -63,7 +63,7 @@ namespace OpenTKLib
             }
             return mycList;
         }
-   
+
 
         public void Voronoi(List<Vector3d> myListVectors)
         {
@@ -80,12 +80,12 @@ namespace OpenTKLib
                     {
                         cFace adjFace = edge.Adjface[k];
                         cEdge newEdge = new cEdge();
-                        
+
                         //Kante m durch Verbindung der Umkreismittelpunkte von k und k+1
                     }
                 }
-                
-                
+
+
             }
 
             //var t = DelaunayTriangulation<TCell>.Create(data);
@@ -121,8 +121,7 @@ namespace OpenTKLib
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Delaunay Failed");
-
+                throw new Exception("Delaunay Failed");
             }
         }
 
@@ -130,7 +129,7 @@ namespace OpenTKLib
         {
             Edges.ClearEdgeList();
             Faces.ClearFaceList();
-            
+
         }
 
         /*---------------------------------------------------------------------
@@ -284,7 +283,7 @@ namespace OpenTKLib
             System.Diagnostics.Debug.WriteLine("\nEdges:\tE = " + E);
             /* Edges not printed out (but easily added). */
 
-           
+
             CheckEuler(V, E, F);
         }
 
@@ -312,7 +311,7 @@ namespace OpenTKLib
         {
             cVertex v0, v1, v2, v3, t;
             cFace f0, f1 = null;
-           
+
             double vol;
 
 
@@ -321,8 +320,7 @@ namespace OpenTKLib
             while (Collinear(v0, v0.NextVertex, v0.NextVertex.NextVertex))
                 if ((v0 = v0.NextVertex) == Vertices.head)
                 {
-                    System.Diagnostics.Debug.WriteLine("DoubleTriangle:  All points are Collinear!");
-                    return false;
+                    throw new Exception("DoubleTriangle:  All points are Collinear!");
                 }
             v1 = v0.NextVertex;
             v2 = v1.NextVertex;
@@ -359,7 +357,7 @@ namespace OpenTKLib
 
             /* Insure that v3 will be the first added. */
             Vertices.head = v3;
-           
+
             return true;
         }
 
@@ -384,7 +382,7 @@ namespace OpenTKLib
                     changed = AddOne(v);
                     CleanUp();
 
-                   
+
                 }
                 v = vnext;
             } while (v != Vertices.head);
@@ -405,14 +403,14 @@ namespace OpenTKLib
             double vol;
             bool vis = false;
 
-          
+
 
             /* Mark faces visible from p. */
             f = Faces.head;
             do
             {
                 vol = VolumeSign(f, p);
-             
+
                 if (vol < 0)
                 {
                     f.visible = VISIBLE;
@@ -497,7 +495,7 @@ namespace OpenTKLib
             double vol;
             double ax, ay, az, bx, by, bz, cx, cy, cz, dx, dy, dz;
             double bxdx, bydy, bzdz, cxdx, cydy, czdz;
-          
+
 
             ax = f.Vertices[0].Point.X;
             ay = f.Vertices[0].Point.Y;
@@ -938,19 +936,19 @@ namespace OpenTKLib
           ---------------------------------------------------------------------*/
         private void CheckEuler(double V, double E, double F)
         {
-            
+
             if ((V - E + F) != 2)
                 System.Diagnostics.Debug.WriteLine(" Checks: V-E+F != 2\n");
-           
+
 
             if (F != (2 * V - 4))
                 System.Diagnostics.Debug.WriteLine(" Checks: F=" + F + " != 2V-4=" + (2 * V - 4) + "; V=" + V);
 
-           
+
 
             if ((2 * E) != (3 * F))
                 System.Diagnostics.Debug.WriteLine(" Checks: 2E=" + 2 * E + " != 3F=" + 3 * F + "; E=" + E + ", F=" + F);
-           
+
         }
 
         /*-------------------------------------------------------------------*/
