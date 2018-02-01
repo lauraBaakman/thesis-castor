@@ -9,59 +9,6 @@ namespace NLinear
         public HullFrame() { }
         public static Box Box;
         public static Edge Edge;
-
-
-        public List<Line3<double>> ComputeVoronoi3d(List<Line3<double>> myLines, List<Vector3<double>> myVertices)
-        {
-            Box hu = new Box(myLines);
-            Hull[] hulls = new Hull[myVertices.Count];
-            /*
-                  for (int ii = 0;ii < y.Count;ii++){
-                    hull h = new hull(hu, y[ii]);
-                    for(int i = 0;i < y.Count;i++){
-                      if( i != ii && y[i].DistanceTo(y[ii]) < h.R * 2){
-                        Line3<double> cen = new Line3<double>(y[ii]);cen += y[i];cen /= 2;
-                        Vector3<double> v = y[ii] - y[i];
-                        Plane3<double> plane = new Plane3<double>(cen, v);
-                        h.IntersectVoronoi(plane);}
-                    }
-                    hulls.Add(h);
-                  }
-            */
-            ///*
-            //  System.Threading.Tasks.Parallel.ForEach(y, pt =>
-            // {
-            System.Threading.Tasks.Parallel.For(0, myVertices.Count, (iii) =>
-            {
-                Vector3<double> pt = myVertices[iii];
-                Hull h = new Hull(hu, pt);
-                for (int i = 0; i < myVertices.Count; i++)
-                {
-                    double t = myVertices[i].DistanceTo(pt, 1);
-                    if (t > 0.001 && t < h.R * 2)
-                    {
-                        Vector3<double> cen = new Vector3<double>(pt); 
-                        cen += myVertices[i]; cen /= 2;
-                        Vector3<double> v = pt - myVertices[i];
-                        Plane3<double> plane = new Plane3<double>(cen, v, 1);
-                        h.IntersectVoronoi(plane);
-                    }
-                }
-                hulls[iii] = h;
-            });
-            //  */
-            List<Line3<double>> tree = new List<Line3<double>>();
-            for (int k = 0; k < hulls.Length; k++)
-            {
-                Hull h = hulls[k];
-                for (int i = 0; i < h.Edges.Count; i++)
-                {
-                    tree.Add(new Line3<double>(h.Edges[i].p1.Vector, h.Edges[i].p2.Vector));
-                }
-            }
-            return tree;
-        }
-     
         
         //public List<Line3<double>> Offset3D(List<Polyline<double>> x, double y)
         //{
