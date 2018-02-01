@@ -192,34 +192,7 @@ namespace OpenTKLib
             }
             System.Diagnostics.Debug.WriteLine("Number of areas AFTER check: " + listTriangle.Count.ToString());
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="myModel"></param>
-        /// <param name="t"></param>
-        public static void CalculateNormal_UpdateNormalList(Model3D myModel, Triangle t)
-        {
 
-            Vector3d normal = CalculateNormalForTriangle(myModel.VertexList, t);
-            
-            if (normal != null)
-            {
-                myModel.Normals.Add(normal);
-                int indNewNormal = myModel.Normals.Count - 1;
-                
-                
-                t.IndNormals.Add(indNewNormal);
-                //adds the normal to each of the vertices in the triangle
-                for (int i = 0; i < t.IndVertices.Count; i++ )
-                {
-                    int indVertex = t.IndVertices[i];
-                    myModel.VertexList[indVertex].IndexNormals.Add(indNewNormal);
-                }
-                   
-            }
-
-
-        }
         /// <summary>
         /// 
         /// </summary>
