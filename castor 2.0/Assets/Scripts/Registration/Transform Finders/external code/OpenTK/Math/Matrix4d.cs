@@ -1531,7 +1531,10 @@ namespace OpenTK
 
         public UnityEngine.Matrix4x4 ToUnityMatrix(){
             UnityEngine.Matrix4x4 matrix = new UnityEngine.Matrix4x4();
-
+            matrix.SetRow(0, this.Row0.ToUnityVector());
+            matrix.SetRow(1, this.Row1.ToUnityVector());
+            matrix.SetRow(2, this.Row2.ToUnityVector());
+            matrix.SetRow(3, this.Row3.ToUnityVector());
             return matrix;
         }
     }
