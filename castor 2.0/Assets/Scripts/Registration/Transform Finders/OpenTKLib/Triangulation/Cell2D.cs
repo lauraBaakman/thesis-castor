@@ -20,7 +20,6 @@
  *************************************************************************/
 using System;
 using System.Linq;
-using System.Windows;
 using MIConvexHull;
 
 namespace OpenTKLib
@@ -33,8 +32,8 @@ namespace OpenTKLib
     public class Cell2D : TriangulationCell<Vertex2D, Cell2D>
     {
         static Random rnd = new Random();
-        OpenTK.Vector2d circumCenter;
-        OpenTK.Vector2d centroid;
+        OpenTK.Math.Vector2d circumCenter;
+        OpenTK.Math.Vector2d centroid;
 
         
         double Det(double[,] m)
@@ -53,7 +52,7 @@ namespace OpenTKLib
             return norm;
         }
 
-        OpenTK.Vector2d GetCircumcenter()
+        OpenTK.Math.Vector2d GetCircumcenter()
         {
             // From MathWorld: http://mathworld.wolfram.com/Circumcircle.html
 
@@ -93,16 +92,16 @@ namespace OpenTKLib
 
             var s = -1.0 / (2.0 * a);
             var r = System.Math.Abs(s) * System.Math.Sqrt(dx * dx + dy * dy - 4 * a * c);
-            return new OpenTK.Vector2d(s * dx, s * dy);
+            return new OpenTK.Math.Vector2d(s * dx, s * dy);
         }
 
-        OpenTK.Vector2d GetCentroid()
+        OpenTK.Math.Vector2d GetCentroid()
         {
-            return new OpenTK.Vector2d(Vertices.Select(v => v.Position[0]).Average(), Vertices.Select(v => v.Position[1]).Average());
+            return new OpenTK.Math.Vector2d(Vertices.Select(v => v.Position[0]).Average(), Vertices.Select(v => v.Position[1]).Average());
         }
 
 
-        public OpenTK.Vector2d Circumcenter
+        public OpenTK.Math.Vector2d Circumcenter
         {
             get
             {
@@ -112,7 +111,7 @@ namespace OpenTKLib
             }
         }
       
-        public OpenTK.Vector2d Centroid
+        public OpenTK.Math.Vector2d Centroid
         {
             get
             {
