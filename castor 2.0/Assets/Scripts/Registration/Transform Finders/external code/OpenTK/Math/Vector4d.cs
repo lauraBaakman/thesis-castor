@@ -1391,5 +1391,12 @@ namespace OpenTK
                 Z == other.Z &&
                 W == other.W;
         }
+
+        public UnityEngine.Vector4 ToUnityVector()
+        {
+            UnityEngine.Vector4 vector = new UnityEngine.Vector4();
+
+            return vector;
+        }
     }
 }
