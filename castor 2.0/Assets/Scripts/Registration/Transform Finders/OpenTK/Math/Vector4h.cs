@@ -26,6 +26,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
+using OpenTK.Math;
+
 namespace OpenTK
 {
     /// <summary>
