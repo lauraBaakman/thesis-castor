@@ -585,7 +585,7 @@ namespace OpenTK
         /// <param name="result">The distance</param>
         public static void Distance(ref Vector3 vec1, ref Vector3 vec2, out float result)
         {
-            result = (float)Math.Sqrt((vec2.X - vec1.X) * (vec2.X - vec1.X) + (vec2.Y - vec1.Y) * (vec2.Y - vec1.Y) + (vec2.Z - vec1.Z) * (vec2.Z - vec1.Z));
+            result = (float)System.Math.Sqrt((vec2.X - vec1.X) * (vec2.X - vec1.X) + (vec2.Y - vec1.Y) * (vec2.Y - vec1.Y) + (vec2.Z - vec1.Z) * (vec2.Z - vec1.Z));
         }
 
         /// <summary>
