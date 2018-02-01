@@ -421,46 +421,6 @@ namespace OpenTKLib
             return listcopy;
         }
 
-        public void DrawDots(System.Drawing.Graphics gContext, int w, int h)
-        {
-
-            cVertexList listcopy = new cVertexList();
-            listcopy.SetVertex(list.head.Point.X, list.head.Point.Y);
-
-            if (nlinks == 3)
-            {
-                /*for the first link:*/
-                listcopy = MakePoints(0, firstlinks, firstlinks - 1, list.head, list.head.NextVertex, listcopy);
-                /*set the middle link*/
-                listcopy.SetVertex(list.head.NextVertex.Point.X, list.head.NextVertex.Point.Y);
-                listcopy.SetVertex(list.head.NextVertex.NextVertex.Point.X, list.head.NextVertex.NextVertex.Point.Y);
-                /* for the last link, the third one*/
-                listcopy = MakePoints(firstlinks + 1, nlinksback, nlinksback, list.head.NextVertex.NextVertex, list.head.PrevVertex, listcopy);
-
-            }
-
-            else
-            {
-                if (nlinksback > 2)
-                /*if we have any extra - points*/
-                {
-                    /*first link:*/
-                    listcopy = MakePoints(0, firstlinks, firstlinks - 1, list.head, list.head.NextVertex, listcopy);
-                    /*set the middle point:*/
-                    listcopy.SetVertex(list.head.NextVertex.Point.X, list.head.NextVertex.Point.Y);
-                    /*set the last link*/
-                    listcopy = MakePoints(firstlinks, nlinksback + 1, nlinksback - 1, list.head.PrevVertex.PrevVertex, list.head.PrevVertex, listcopy);
-
-
-                }//end if nlinksback > 2
-            }// end else
-            /*set the last point and draw everything*/
-            listcopy.SetVertex(list.head.PrevVertex.Point.X, list.head.PrevVertex.Point.Y);
-            listcopy.DrawPoints(gContext, w, h);
-
-        }
-
-
         //********************************************************
         /*series of methods corresponding to the C code; just printing on the
           standard output */
