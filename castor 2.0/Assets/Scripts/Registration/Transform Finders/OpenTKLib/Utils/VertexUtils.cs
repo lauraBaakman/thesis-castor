@@ -311,36 +311,5 @@ namespace OpenTKLib
 
 
         }
-     
-        public static List<Vector3d> CreateVectorsFromPoint3D(List<Point3D> listPoints)
-        {
-            List<Vector3d> listOfVectors = new List<Vector3d>();
-            for (int i = 0; i < listPoints.Count; i++)
-            {
-                Point3D myPoint = listPoints[i];
-
-                listOfVectors.Add(new Vector3d(myPoint.X, myPoint.Y, myPoint.Z));
-            }
-
-
-            return listOfVectors;
-        }
- 
-        public static List<Vector3d> CreateVector3DFromPoint3D(List<Point3D> listPoints)
-        {
-            List<Vector3d> listOfVectors = new List<Vector3d>();
-            for (int i = 0; i < listPoints.Count; i++)
-            {
-                Point3D myPoint = listPoints[i];
-
-                listOfVectors.Add(new Vector3d(myPoint.X, myPoint.Y, myPoint.Z));
-            }
-
-
-            return listOfVectors;
-        }
-   
-
-   
     }
 }
