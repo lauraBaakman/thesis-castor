@@ -32,8 +32,10 @@ namespace ICPLib
 
 
         //----------------------------------------------------------------------------
-        public LandmarkTransform()
+        public LandmarkTransform(List<Vector3d> sourceLandmarks, List<Vector3d> targetLandmarks)
         {
+            this.sourceLandmarks = sourceLandmarks;
+            this.targetLandmarks = targetLandmarks;
             transformMatrix = new Matrix4d();
         }
 
@@ -297,7 +299,7 @@ namespace ICPLib
 
         }
 
-        public bool Update()
+        public bool ComputeTransform()
         {
             /*
            The solution is based on
