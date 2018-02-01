@@ -348,7 +348,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\LandmarkTransform.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Constants.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\ConvexHull\Collections.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\ConvexHull\Constants.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\ConvexHull\ConvexFace.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\ConvexHull\ConvexFaceInternal.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\ConvexHull\ConvexHull.cs" />
@@ -489,6 +488,7 @@
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Tuple.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />

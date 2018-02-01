@@ -22,6 +22,14 @@ namespace MIConvexHull
 
     internal class ConvexHullInternal
     {
+        internal static class Constants
+        {
+            /// <summary>
+            /// A value used to determine if a vertex lies on a plane.
+            /// </summary>
+            public const double PlaneDistanceTolerance = 0.0000001;
+        }
+
         bool Computed;
         readonly int Dimension;
 
@@ -783,7 +791,6 @@ namespace MIConvexHull
         /// Wraps the vertices and determines the dimension if it's unknown.
         /// </summary>
         /// <param name="vertices"></param>
-        /// <param name="dim"></param>
         private ConvexHullInternal(IEnumerable<IVertexPosition> vertices)
         {
             InputVertices = new List<VertexWrap>(vertices.Select((v, i) => new VertexWrap { Vertex = v, PositionData = v.Position, Index = i }));
