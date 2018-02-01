@@ -31,7 +31,6 @@ namespace OpenTK.Math
 {
 
     /// <summary>2-component Vector of the Half type. Occupies 4 Byte total.</summary>
-    [Obsolete("OpenTK.Math functions have been moved to the root OpenTK namespace (reason: XNA compatibility")]
     [Serializable, StructLayout(LayoutKind.Sequential)]
     public struct Vector2h : ISerializable, IEquatable<Vector2h>
     {
@@ -85,7 +84,6 @@ namespace OpenTK.Math
         /// The new Half2 instance will convert the Vector2 into 16-bit half-precision floating-point.
         /// </summary>
         /// <param name="v">OpenTK.Vector2</param>
-        [CLSCompliant(false)]
         public Vector2h(Vector2 v)
         {
             X = new Half(v.X);
@@ -97,7 +95,6 @@ namespace OpenTK.Math
         /// </summary>
         /// <param name="v">OpenTK.Vector2</param>
         /// <param name="throwOnError">Enable checks that will throw if the conversion result is not meaningful.</param>
-        [CLSCompliant(false)]
         public Vector2h(Vector2 v, bool throwOnError)
         {
             X = new Half(v.X, throwOnError);
