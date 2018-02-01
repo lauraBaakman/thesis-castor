@@ -478,7 +478,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\MathBase.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\MatrixUtilsOpenTK.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\Point3DUtils.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\PointCloudUtils.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\PointUtils.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\RandomUtils.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\ScreenSaver.cs" />
