@@ -19,13 +19,13 @@ namespace ICPLib
 
         public void GetOrientation(double[] orientation, Matrix4 amatrix)
         {
-           
+
             int i;
 
             // convenient access to matrix
             //double[] matrixElement = amatrix;
             //float[,] ortho = new float[3, 3];
-            Matrix3d ortho = new Matrix3d( );
+            Matrix3d ortho = new Matrix3d();
             for (i = 0; i < 3; i++)
             {
                 ortho[0, i] = amatrix[0, i];
@@ -41,7 +41,7 @@ namespace ICPLib
             }
             double[,] orthoArray = MatrixUtilsOpenTK.MatrixToDoubleArray(ortho);
             MathUtils.Orthogonalize3x3(orthoArray, orthoArray);
-          
+
             // first rotate about y axis
             double x2 = ortho[2, 0];
             double y2 = ortho[2, 1];
@@ -117,14 +117,14 @@ namespace ICPLib
 
         void GetOrientation(double[] orientation)
         {
-            
+
             this.GetOrientation(orientation, this.Matrix);
         }
         public void GetOrientationWXYZ(double[] wxyz)
         {
             int i;
 
-            Matrix3d ortho = new Matrix3d( );
+            Matrix3d ortho = new Matrix3d();
 
             for (i = 0; i < 3; i++)
             {
@@ -164,16 +164,16 @@ namespace ICPLib
 
         public void GetPosition(double[] position)
         {
-            
+
             position[0] = this.Matrix[0, 3];
             position[1] = this.Matrix[1, 3];
             position[2] = this.Matrix[2, 3];
         }
         public void GetScale(double[] scale)
         {
-           
 
-          
+
+
             double[,] U = new double[3, 3];
             double[,] VT = new double[3, 3];
 
@@ -186,19 +186,6 @@ namespace ICPLib
 
             MathUtils.SingularValueDecomposition3x3(U, U, scale, VT);
         }
-        public static void FindTransformationMatrix(List<Vector3d> pointsSource, List<Vector3d> pointsTarget, LandmarkTransform myLandmarkTransform)
-        {
-
-           
-            myLandmarkTransform.Matrix = new Matrix4d();
-            myLandmarkTransform.SourceLandmarks = pointsSource;
-            myLandmarkTransform.TargetLandmarks = pointsTarget;
-            myLandmarkTransform.Update();
-
-        }
-      
-     
     }
 }
 
-  
