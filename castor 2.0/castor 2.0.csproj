@@ -449,13 +449,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Globals\GeneralSettings.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Globals\TimeCalc.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\IO\IOUtils.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Models\CLEnum.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Models\ExampleModels.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Models\Model3D.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Models\Model3D_IO_Read.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Models\Model3D_IO_Write.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Models\Model3D_Triangulation.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Models\Model3D_Utils.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\NotUsed\TestData.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\AssemblyInfo.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\Resources.cs" />
