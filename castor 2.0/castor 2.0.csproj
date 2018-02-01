@@ -374,7 +374,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTK\Math\Vector4h.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Extensions\ListExtensions.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Extensions\Matrix3DExtension.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Extensions\TextRenderer.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Extensions\Vector3DExtension.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\Alglib\alglibinternal.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\Alglib\alglibmisc.cs" />
@@ -506,7 +505,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\EventHandling.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\GLSettings.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\Model.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\OpenGLRenderer.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\PointCloud.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\CollisionDetector.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\Comparer.cs" />
