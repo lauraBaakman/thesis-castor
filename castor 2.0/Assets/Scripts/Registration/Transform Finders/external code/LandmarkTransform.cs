@@ -24,14 +24,16 @@ namespace ICPLib
 {
     public class LandmarkTransform
     {
-
-        private Matrix4d transformMatrix;
-
         private List<Vector3d> sourceLandmarks;
         private List<Vector3d> targetLandmarks;
 
+        public Matrix4d TransformMatrix
+        {
+            get { return transformMatrix; }
+            set { transformMatrix = value; }
+        }
+        private Matrix4d transformMatrix;
 
-        //----------------------------------------------------------------------------
         public LandmarkTransform(List<Vector3d> sourceLandmarks, List<Vector3d> targetLandmarks)
         {
             this.sourceLandmarks = sourceLandmarks;
