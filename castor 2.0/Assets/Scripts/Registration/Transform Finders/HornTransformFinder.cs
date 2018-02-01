@@ -26,7 +26,7 @@ namespace Registration
             LandmarkTransform transformComputer = new LandmarkTransform(modelPoints, staticPoints);
             if (transformComputer.ComputeTransform())
             {
-                Matrix4x4 transformMatrix = transformComputer.TransformMatrix.ToUnityMatrix()
+                Matrix4x4 transformMatrix = transformComputer.TransformMatrix.ToUnityMatrix();
                 throw new System.NotImplementedException("Convert transformMatrix to Transform.");
             }
             return null;
