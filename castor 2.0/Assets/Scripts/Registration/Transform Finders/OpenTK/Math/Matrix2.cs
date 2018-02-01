@@ -21,6 +21,7 @@ SOFTWARE.
  */
 
 using System;
+using OpenTK.Math;
 
 namespace OpenTK
 {
@@ -157,28 +158,28 @@ namespace OpenTK
             {
                 if (rowIndex == 0)
                 {
-                    return Row0[columnIndex];
+                    if (columnIndex == 0) return Row0.X;
+                    if (columnIndex == 1) return Row0.Y;
                 }
                 else if (rowIndex == 1)
                 {
-                    return Row1[columnIndex];
+                    if (columnIndex == 0) return Row1.X;
+                    if (columnIndex == 1) return Row1.Y;
                 }
                 throw new IndexOutOfRangeException("You tried to access this matrix at: (" + rowIndex + ", " + columnIndex + ")");
             }
             set
             {
-                if (rowIndex == 0)
-                {
-                    Row0[columnIndex] = value;
-                }
-                else if (rowIndex == 1)
-                {
-                    Row1[columnIndex] = value;
-                }
+                Vector2 row;
+                if (rowIndex == 0) row = Row0;
+                else if (rowIndex == 1) row = Row1;
                 else
                 {
                     throw new IndexOutOfRangeException("You tried to set this matrix at: (" + rowIndex + ", " + columnIndex + ")");
                 }
+
+                if (columnIndex == 0) row.X = value;
+                if (columnIndex == 1) row.Y = value;
             }
         }
 
