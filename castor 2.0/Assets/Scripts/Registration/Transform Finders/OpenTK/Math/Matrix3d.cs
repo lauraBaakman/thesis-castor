@@ -358,7 +358,7 @@ namespace OpenTK
 
             if (trace > 0)
             {
-                double sq = Math.Sqrt(trace);
+                double sq = System.Math.Sqrt(trace);
 
                 q.W = sq;
                 sq = 1.0 / (4.0 * sq);
@@ -368,7 +368,7 @@ namespace OpenTK
             }
             else if (row0[0] > row1[1] && row0[0] > row2[2])
             {
-                double sq = 2.0 * Math.Sqrt(1.0 + row0[0] - row1[1] - row2[2]);
+                double sq = 2.0 * System.Math.Sqrt(1.0 + row0[0] - row1[1] - row2[2]);
 
                 q.X = 0.25 * sq;
                 sq = 1.0 / sq;
@@ -378,7 +378,7 @@ namespace OpenTK
             }
             else if (row1[1] > row2[2])
             {
-                double sq = 2.0 * Math.Sqrt(1.0 + row1[1] - row0[0] - row2[2]);
+                double sq = 2.0 * System.Math.Sqrt(1.0 + row1[1] - row0[0] - row2[2]);
 
                 q.Y = 0.25 * sq;
                 sq = 1.0 / sq;
@@ -388,7 +388,7 @@ namespace OpenTK
             }
             else
             {
-                double sq = 2.0 * Math.Sqrt(1.0 + row2[2] - row0[0] - row1[1]);
+                double sq = 2.0 * System.Math.Sqrt(1.0 + row2[2] - row0[0] - row1[1]);
 
                 q.Z = 0.25 * sq;
                 sq = 1.0 / sq;
