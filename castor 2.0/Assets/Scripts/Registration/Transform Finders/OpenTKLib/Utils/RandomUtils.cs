@@ -59,16 +59,14 @@ namespace OpenTKLib
                         return indices;
 
                 }
-                MessageBox.Show("No random Indices are found - please check routine UniqueRandomIndices");
-                return indices;
+                throw new Exception("No random Indices are found - please check routine UniqueRandomIndices");
             }
-            catch(Exception err)
+            catch (Exception err)
             {
-                MessageBox.Show("Error in UniqueRandomIndices " + err.Message);
-                return indices;
+                throw err;
             }
 
-            
+
         }
 
         public static List<Vertex> ExtractPoints(List<Vertex> points, List<int> indices)
@@ -87,8 +85,7 @@ namespace OpenTKLib
             }
             catch (Exception err)
             {
-                MessageBox.Show("Error in RandomUtils.ExtractPoints " + err.Message);
-                return null;
+                throw err;
             }
         }
 
