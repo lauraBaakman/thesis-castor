@@ -25,10 +25,10 @@ namespace ICPLib
     public class LandmarkTransform
     {
 
-        public Matrix4d transformMatrix;
+        private Matrix4d transformMatrix;
 
-        public List<Vector3d> sourceLandmarks;
-        public List<Vector3d> targetLandmarks;
+        private List<Vector3d> sourceLandmarks;
+        private List<Vector3d> targetLandmarks;
 
 
         //----------------------------------------------------------------------------
