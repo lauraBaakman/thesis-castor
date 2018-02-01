@@ -23,6 +23,7 @@ SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
+using OpenTK.Math;
 
 namespace OpenTK
 {

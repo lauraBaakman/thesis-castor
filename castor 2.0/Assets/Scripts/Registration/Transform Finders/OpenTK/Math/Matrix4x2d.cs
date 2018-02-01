@@ -21,6 +21,7 @@ SOFTWARE.
  */
 
 using System;
+using OpenTK.Math;
 
 namespace OpenTK
 {
