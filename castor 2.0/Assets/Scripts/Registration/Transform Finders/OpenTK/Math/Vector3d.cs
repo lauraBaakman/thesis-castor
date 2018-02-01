@@ -607,33 +607,6 @@ namespace OpenTK
         }
 
         /// <summary>
-        /// Scale a vector to approximately unit length
-        /// </summary>
-        /// <param name="vec">The input vector</param>
-        /// <returns>The normalized vector</returns>
-        public static Vector3d NormalizeFast(Vector3d vec)
-        {
-            double scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
-            vec.X *= scale;
-            vec.Y *= scale;
-            vec.Z *= scale;
-            return vec;
-        }
-
-        /// <summary>
-        /// Scale a vector to approximately unit length
-        /// </summary>
-        /// <param name="vec">The input vector</param>
-        /// <param name="result">The normalized vector</param>
-        public static void NormalizeFast(ref Vector3d vec, out Vector3d result)
-        {
-            double scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
-            result.X = vec.X * scale;
-            result.Y = vec.Y * scale;
-            result.Z = vec.Z * scale;
-        }
-
-        /// <summary>
         /// Calculate the dot (scalar) product of two vectors
         /// </summary>
         /// <param name="left">First operand</param>
