@@ -356,7 +356,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\ConvexHull\IVertexPosition.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\ConvexHull\MathHelper.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\ConvexHull\ObjectManager.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Properties\AssemblyInfo.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Triangulation\DelaunayTriangulation.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Triangulation\Triangulation.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\Triangulation\TriangulationCell.cs" />
@@ -468,14 +467,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Globals\GeneralSettings.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Globals\TimeCalc.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\IO\IOUtils.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\AssemblyInfo.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\Resources.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\Settings.Designer.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\Cell2D.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\Plane.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\Polygon.cs" />
@@ -535,10 +526,6 @@
     <None Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\obj\Debug\OpenTKLib.csproj.FileListAbsolute.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\_OpenGLControl.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>_OpenGLControl.Designer.cs</LastGenOutput>
