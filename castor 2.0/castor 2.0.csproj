@@ -473,18 +473,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\Vertex2D.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\VoronoiFortune\Voronoi.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Triangulation\VoronoiFortune\VoronoiElements.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\_OpenGLControl.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\_OpenGLControl.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_OpenGLControl.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\BusinessLogic.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\Display.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\EventHandling.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\GLSettings.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\Model.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\PointCloud.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\CollisionDetector.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\Comparer.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\floatVector.cs" />
@@ -522,12 +510,6 @@
     <None Include="Assets\Scripts\Registration\Transform Finders\MIConvexHull\obj\Debug\MIConvexHull.csproj.FileListAbsolute.txt" />
     <None Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ClassDiagram1.cd" />
     <None Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\obj\Debug\OpenTKLib.csproj.FileListAbsolute.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\UserControl\_OpenGLControl.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>_OpenGLControl.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
