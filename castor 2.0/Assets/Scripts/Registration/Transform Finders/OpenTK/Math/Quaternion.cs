@@ -79,12 +79,12 @@ namespace OpenTK
             rotationY *= 0.5f;
             rotationZ *= 0.5f;
 
-            float c1 = (float)Math.Cos(rotationX);
-            float c2 = (float)Math.Cos(rotationY);
-            float c3 = (float)Math.Cos(rotationZ);
-            float s1 = (float)Math.Sin(rotationX);
-            float s2 = (float)Math.Sin(rotationY);
-            float s3 = (float)Math.Sin(rotationZ);
+            float c1 = (float)System.Math.Cos(rotationX);
+            float c2 = (float)System.Math.Cos(rotationY);
+            float c3 = (float)System.Math.Cos(rotationZ);
+            float s1 = (float)System.Math.Sin(rotationX);
+            float s2 = (float)System.Math.Sin(rotationY);
+            float s3 = (float)System.Math.Sin(rotationZ);
 
             W = c1 * c2 * c3 - s1 * s2 * s3;
             Xyz.X = s1 * c2 * c3 + c1 * s2 * s3;
@@ -138,7 +138,7 @@ namespace OpenTK
         public Vector4 ToAxisAngle()
         {
             Quaternion q = this;
-            if (Math.Abs(q.W) > 1.0f)
+            if (System.Math.Abs(q.W) > 1.0f)
             {
                 q.Normalize();
             }
@@ -468,12 +468,12 @@ namespace OpenTK
         public static void FromEulerAngles(ref Vector3 eulerAngles, out Quaternion result)
         {
 
-            float c1 = (float)Math.Cos(eulerAngles.X * 0.5f);
-            float c2 = (float)Math.Cos(eulerAngles.Y * 0.5f);
-            float c3 = (float)Math.Cos(eulerAngles.Z * 0.5f);
-            float s1 = (float)Math.Sin(eulerAngles.X * 0.5f);
-            float s2 = (float)Math.Sin(eulerAngles.Y * 0.5f);
-            float s3 = (float)Math.Sin(eulerAngles.Z * 0.5f);
+            float c1 = (float)System.Math.Cos(eulerAngles.X * 0.5f);
+            float c2 = (float)System.Math.Cos(eulerAngles.Y * 0.5f);
+            float c3 = (float)System.Math.Cos(eulerAngles.Z * 0.5f);
+            float s1 = (float)System.Math.Sin(eulerAngles.X * 0.5f);
+            float s2 = (float)System.Math.Sin(eulerAngles.Y * 0.5f);
+            float s3 = (float)System.Math.Sin(eulerAngles.Z * 0.5f);
 
             result.W = c1 * c2 * c3 - s1 * s2 * s3;
             result.Xyz.X = s1 * c2 * c3 + c1 * s2 * s3;
@@ -504,7 +504,7 @@ namespace OpenTK
 
             if (trace > 0)
             {
-                float s = (float)Math.Sqrt(trace + 1) * 2;
+                float s = (float)System.Math.Sqrt(trace + 1) * 2;
                 float invS = 1f / s;
 
                 result.W = s * 0.25f;
@@ -518,7 +518,7 @@ namespace OpenTK
 
                 if (m00 > m11 && m00 > m22)
                 {
-                    float s = (float)Math.Sqrt(1 + m00 - m11 - m22) * 2;
+                    float s = (float)System.Math.Sqrt(1 + m00 - m11 - m22) * 2;
                     float invS = 1f / s;
 
                     result.W = (matrix.Row2.Y - matrix.Row1.Z) * invS;
@@ -528,7 +528,7 @@ namespace OpenTK
                 }
                 else if (m11 > m22)
                 {
-                    float s = (float)Math.Sqrt(1 + m11 - m00 - m22) * 2;
+                    float s = (float)System.Math.Sqrt(1 + m11 - m00 - m22) * 2;
                     float invS = 1f / s;
 
                     result.W = (matrix.Row0.Z - matrix.Row2.X) * invS;
@@ -538,7 +538,7 @@ namespace OpenTK
                 }
                 else
                 {
-                    float s = (float)Math.Sqrt(1 + m22 - m00 - m11) * 2;
+                    float s = (float)System.Math.Sqrt(1 + m22 - m00 - m11) * 2;
                     float invS = 1f / s;
 
                     result.W = (matrix.Row1.X - matrix.Row0.Y) * invS;
