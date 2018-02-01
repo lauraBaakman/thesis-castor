@@ -37,15 +37,14 @@ namespace OpenTKLib
 
                 //SeedRandom();
                 //cannot generate more unique numbers than than the size of the set we are sampling
-                if (numIndices > MaxIndex )
+                if (numIndices > MaxIndex)
                 {
-                    MessageBox.Show("SW Call error for UniqueRandomIndices");
-                    return indices;
+                    throw new Exception("SW Call error for UniqueRandomIndices");
                 }
                 Random rnd = new Random(DateTime.Now.Millisecond);
                 for (int i = 0; i < 100000; i++)
                 {
-                    double newRnd = rnd.NextDouble() * (MaxIndex - 1) -0.5;
+                    double newRnd = rnd.NextDouble() * (MaxIndex - 1) - 0.5;
                     int newIndex = Convert.ToInt32(newRnd);
                     if (newIndex < 0)
                         newIndex = 0;
