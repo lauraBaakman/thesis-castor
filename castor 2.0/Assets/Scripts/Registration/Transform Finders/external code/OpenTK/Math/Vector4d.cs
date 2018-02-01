@@ -169,8 +169,10 @@ namespace OpenTK
         /// <summary>
         /// Gets or sets the value at the index of the Vector.
         /// </summary>
-        public double this[int index] {
-            get{
+        public double this[int index]
+        {
+            get
+            {
                 if (index == 0)
                 {
                     return X;
@@ -188,7 +190,9 @@ namespace OpenTK
                     return W;
                 }
                 throw new IndexOutOfRangeException("You tried to access this vector at index: " + index);
-            } set{
+            }
+            set
+            {
                 if (index == 0)
                 {
                     X = value;
@@ -1301,7 +1305,7 @@ namespace OpenTK
         /// <param name="v">The instance.</param>
         /// <returns>A pointer to the first element of v.</returns>
         [CLSCompliant(false)]
-        unsafe public static explicit operator double*(Vector4d v)
+        unsafe public static explicit operator double* (Vector4d v)
         {
             return &v.X;
         }
