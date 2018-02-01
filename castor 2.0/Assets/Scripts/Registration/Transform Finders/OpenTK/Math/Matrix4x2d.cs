@@ -180,46 +180,29 @@ namespace OpenTK
         {
             get
             {
-                if (rowIndex == 0)
-                {
-                    return Row0[columnIndex];
-                }
-                else if (rowIndex == 1)
-                {
-                    return Row1[columnIndex];
-                }
-                else if (rowIndex == 2)
-                {
-                    return Row2[columnIndex];
-                }
-                else if (rowIndex == 3)
-                {
-                    return Row3[columnIndex];
-                }
-                throw new IndexOutOfRangeException("You tried to access this matrix at: (" + rowIndex + ", " + columnIndex + ")");
+                Vector2d row;
+                if (rowIndex == 0) row = Row0;
+                else if (rowIndex == 1) row = Row1;
+                else if (rowIndex == 2) row = Row2;
+                else if (rowIndex == 3) row = Row3;
+                else throw new IndexOutOfRangeException("You tried to access this matrix at: (" + rowIndex + ", " + columnIndex + ")");
+
+                if (columnIndex == 0) return row.X;
+                else if (columnIndex == 1) return row.Y;
+                else throw new IndexOutOfRangeException("You tried to access this matrix at: (" + rowIndex + ", " + columnIndex + ")");
             }
             set
             {
-                if (rowIndex == 0)
-                {
-                    Row0[columnIndex] = value;
-                }
-                else if (rowIndex == 1)
-                {
-                    Row1[columnIndex] = value;
-                }
-                else if (rowIndex == 2)
-                {
-                    Row2[columnIndex] = value;
-                }
-                else if (rowIndex == 3)
-                {
-                    Row3[columnIndex] = value;
-                }
-                else
-                {
-                    throw new IndexOutOfRangeException("You tried to set this matrix at: (" + rowIndex + ", " + columnIndex + ")");
-                }
+                Vector2d row;
+                if (rowIndex == 0) row = Row0;
+                else if (rowIndex == 1) row = Row1;
+                else if (rowIndex == 2) row = Row2;
+                else if (rowIndex == 3) row = Row3;
+                else throw new IndexOutOfRangeException("You tried to access this matrix at: (" + rowIndex + ", " + columnIndex + ")");
+
+                if (columnIndex == 0) row.X = value;
+                else if (columnIndex == 1) row.Y = value;
+                else throw new IndexOutOfRangeException("You tried to access this matrix at: (" + rowIndex + ", " + columnIndex + ")");
             }
         }
 
