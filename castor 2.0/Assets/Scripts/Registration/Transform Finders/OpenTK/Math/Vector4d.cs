@@ -24,6 +24,8 @@ using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 
+using OpenTK.Math;
+
 namespace OpenTK
 {
     /// <summary>Represents a 4D vector using four double-precision floating-point numbers.</summary>
