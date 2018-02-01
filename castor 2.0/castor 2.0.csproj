@@ -440,25 +440,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\Numerics\Utils\Operator.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\Numerics\Vector2.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\ExternalComponents\Numerics\Vector3.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Forms\OpenTKTestForm.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Forms\OpenTKTestForm.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OpenTKTestForm.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Forms\OpenTKUtils_Experimental.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\FormsOther\AboutForm.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\FormsOther\AboutForm.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AboutForm.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\FormsOther\SettingsForm.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\FormsOther\SettingsForm.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SettingsForm.resx</DependentUpon>
-    </Compile>
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Geometry\IntersectionResult.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Geometry\Part.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Geometry\Triangle.cs" />
@@ -542,18 +523,6 @@
     <None Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\obj\Debug\OpenTKLib.csproj.FileListAbsolute.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Forms\OpenTKTestForm.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>OpenTKTestForm.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\FormsOther\AboutForm.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>AboutForm.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\FormsOther\SettingsForm.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SettingsForm.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
