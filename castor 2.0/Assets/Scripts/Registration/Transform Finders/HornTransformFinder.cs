@@ -21,6 +21,7 @@ namespace Registration
             if (transformComputer.ComputeTransform())
             {
                 Matrix4d transformMatrix = transformComputer.TransformMatrix;
+                throw new System.NotImplementedException("Convert transformMatrix to Transform.");
             }
             return null;
         }
