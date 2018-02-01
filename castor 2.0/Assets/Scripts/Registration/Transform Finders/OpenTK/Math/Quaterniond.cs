@@ -77,12 +77,12 @@ namespace OpenTK
             pitch *= 0.5;
             roll *= 0.5;
 
-            double c1 = Math.Cos(yaw);
-            double c2 = Math.Cos(pitch);
-            double c3 = Math.Cos(roll);
-            double s1 = Math.Sin(yaw);
-            double s2 = Math.Sin(pitch);
-            double s3 = Math.Sin(roll);
+            double c1 = System.Math.Cos(yaw);
+            double c2 = System.Math.Cos(pitch);
+            double c3 = System.Math.Cos(roll);
+            double s1 = System.Math.Sin(yaw);
+            double s2 = System.Math.Sin(pitch);
+            double s3 = System.Math.Sin(roll);
 
             W = c1 * c2 * c3 - s1 * s2 * s3;
             Xyz.X = s1 * s2 * c3 + c1 * c2 * s3;
@@ -135,7 +135,7 @@ namespace OpenTK
         public Vector4d ToAxisAngle()
         {
             Quaterniond q = this;
-            if (Math.Abs(q.W) > 1.0f)
+            if (System.Math.Abs(q.W) > 1.0f)
             {
                 q.Normalize();
             }
@@ -458,12 +458,12 @@ namespace OpenTK
         /// <param name="result">The equivalent Quaterniond</param>
         public static void FromEulerAngles(ref Vector3d eulerAngles, out Quaterniond result)
         {
-            double c1 = Math.Cos(eulerAngles.Y * 0.5);
-            double c2 = Math.Cos(eulerAngles.X * 0.5);
-            double c3 = Math.Cos(eulerAngles.Z * 0.5);
-            double s1 = Math.Sin(eulerAngles.Y * 0.5);
-            double s2 = Math.Sin(eulerAngles.X * 0.5);
-            double s3 = Math.Sin(eulerAngles.Z * 0.5);
+            double c1 = System.Math.Cos(eulerAngles.Y * 0.5);
+            double c2 = System.Math.Cos(eulerAngles.X * 0.5);
+            double c3 = System.Math.Cos(eulerAngles.Z * 0.5);
+            double s1 = System.Math.Sin(eulerAngles.Y * 0.5);
+            double s2 = System.Math.Sin(eulerAngles.X * 0.5);
+            double s3 = System.Math.Sin(eulerAngles.Z * 0.5);
 
             result.W = c1 * c2 * c3 - s1 * s2 * s3;
             result.Xyz.X = s1 * s2 * c3 + c1 * c2 * s3;
@@ -494,7 +494,7 @@ namespace OpenTK
 
             if (trace > 0)
             {
-                double s = Math.Sqrt(trace + 1) * 2;
+                double s = System.Math.Sqrt(trace + 1) * 2;
                 double invS = 1.0 / s;
 
                 result.W = s * 0.25;
@@ -508,7 +508,7 @@ namespace OpenTK
 
                 if (m00 > m11 && m00 > m22)
                 {
-                    double s = Math.Sqrt(1 + m00 - m11 - m22) * 2;
+                    double s = System.Math.Sqrt(1 + m00 - m11 - m22) * 2;
                     double invS = 1.0 / s;
 
                     result.W = (matrix.Row2.Y - matrix.Row1.Z) * invS;
@@ -518,7 +518,7 @@ namespace OpenTK
                 }
                 else if (m11 > m22)
                 {
-                    double s = Math.Sqrt(1 + m11 - m00 - m22) * 2;
+                    double s = System.Math.Sqrt(1 + m11 - m00 - m22) * 2;
                     double invS = 1.0 / s;
 
                     result.W = (matrix.Row0.Z - matrix.Row2.X) * invS;
@@ -528,7 +528,7 @@ namespace OpenTK
                 }
                 else
                 {
-                    double s = Math.Sqrt(1 + m22 - m00 - m11) * 2;
+                    double s = System.Math.Sqrt(1 + m22 - m00 - m11) * 2;
                     double invS = 1.0 / s;
 
                     result.W = (matrix.Row1.X - matrix.Row0.Y) * invS;
