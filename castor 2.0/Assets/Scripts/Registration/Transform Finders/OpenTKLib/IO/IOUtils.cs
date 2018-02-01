@@ -12,19 +12,11 @@
 // limited to, claims, suits or causes of action involving alleged infringement of copyrights, patents, trademarks, trade secrets, or unfair competition. 
 //
 
-//using OpenCLTemplate;
-//using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
-//using System.Data;
-//using System.Drawing;
-//using System.Drawing.Drawing2D;
-//using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-//using System.Reflection;
 using OpenTK;
-using System.Windows.Forms;
 
 namespace OpenTKLib
 {
@@ -45,12 +37,11 @@ namespace OpenTKLib
             try
             {
 
-                lines = System.IO.File.ReadAllLines(fileNameLong);
+                lines = File.ReadAllLines(fileNameLong);
             }
             catch
             {
-                MessageBox.Show("File read error - e.g. cannot be found:  " + fileNameLong);
-                return null;
+                throw new IOException("File read error - e.g. cannot be found:  " + fileNameLong);
             }
             return ConvertLinesToVector3d(lines, rotatePoints);
         }
@@ -70,7 +61,7 @@ namespace OpenTKLib
                 }
                 catch
                 {
-                    MessageBox.Show("Error parsing file at line: " + i.ToString());
+                    throw new IOException("Error parsing file at line: " + i.ToString());
                 }
 
             }
@@ -127,16 +118,16 @@ namespace OpenTKLib
                                     vertex.IndexInModel = indexInModel;
                                     myVertices.Add(vertex);
                                     break;
-                           
+
                             }
                         }
                     }
-            
+
                 }
             }
             catch (Exception err)
             {
-                System.Windows.Forms.MessageBox.Show("Error reading obj file - Vertices: " + line + " ; " + err.Message);
+                throw new IOException("Error reading obj file - Vertices: " + line + " ; " + err.Message);
             }
             return myVertices;
 
