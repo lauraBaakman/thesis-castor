@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace OpenTKLib
 {
-  
-   
-    public partial class KDTreeVertex 
+
+
+    public partial class KDTreeVertex
     {
         public static KDTreeMode KDTreeMode = KDTreeMode.Rednaxala;
         public KDTreeRednaxela.KDTree_Rednaxela<EllipseWrapper> KdTree_Rednaxela;
         public KDTree_Stark KdTree_Stark;
-        
-        
+
+
 
         public int NumberOfNeighboursToSearch = 5;
         private static KDTreeVertex instance;
@@ -97,7 +97,7 @@ namespace OpenTKLib
             if (keepOnlyNearestPoints > 0)
                 RemovePointsWithDistanceGreaterThanAverage(listDistances, pointsSource, nearestNeighbours);
 
-            
+
 
             return nearestNeighbours;
         }
@@ -120,7 +120,7 @@ namespace OpenTKLib
         {
             double median = GetMedian(listDistances);
 
-            for (int i = listDistances.Count -1 ; i >=0 ; i--)
+            for (int i = listDistances.Count - 1; i >= 0; i--)
             {
                 if (listDistances[i] > median)
                 {
@@ -151,7 +151,7 @@ namespace OpenTKLib
         {
             // Create a copy of the input, and sort the copy
             double[] temp1 = source.ToArray();
-            double[] temp  = new double[temp1.Length];
+            double[] temp = new double[temp1.Length];
             temp1.CopyTo(temp, 0);
 
             Array.Sort(temp);
@@ -172,19 +172,19 @@ namespace OpenTKLib
             else
             {
                 // count is odd, return the middle element
-                return temp[Convert.ToInt32(count * 0.8)] ;
+                return temp[Convert.ToInt32(count * 0.8)];
             }
         }
         public List<Vertex> FindNearest_Stark(List<Vertex> source, List<Vertex> target)
         {
             KdTree_Stark.ResetSearch();
             List<Vertex> result = new List<Vertex>();
-            
+
             List<int> indicesTargetFound = new List<int>();
             for (int i = source.Count - 1; i >= 0; i--)
             //for (int i = 0; i < source.Count ; i ++)
             {
-                
+
                 int indexNearest = KdTree_Stark.FindNearest(source[i]);
                 //result.Add(target[indexNearest]);
 
@@ -209,7 +209,7 @@ namespace OpenTKLib
                         }
 
                     }
-                    if(!bfound)
+                    if (!bfound)
                         source.RemoveAt(i);
                 }
 
@@ -245,8 +245,8 @@ namespace OpenTKLib
                     }
                     if ((neighboursFound + 1) > NumberOfNeighboursToSearch)
                         break;
-                   
-                   
+
+
                 }
 
 
@@ -254,7 +254,7 @@ namespace OpenTKLib
 
             return result;
         }
-     
+
         public List<Vertex> FindNearest_BruteForce(List<Vertex> source, List<Vertex> target)
         {
 
@@ -278,7 +278,7 @@ namespace OpenTKLib
             return result;
 
 
-           
+
         }
         public List<Vertex> FindNearest_BruteForceOld(List<Vertex> vSource, List<Vertex> vTarget)
         {
@@ -307,12 +307,12 @@ namespace OpenTKLib
             }
             return nearestNeighbours;
         }
-       
-      
+
+
         public void InitVertices(List<Vertex> vertices)
         {
-             //List<Vertex> tempList = new List<Vertex>();
-            for (int i = vertices.Count -1; i >=0 ; i--)
+            //List<Vertex> tempList = new List<Vertex>();
+            for (int i = vertices.Count - 1; i >= 0; i--)
             {
                 Vertex v = vertices[i];
                 v.IndexNeighbours = new List<int>();
@@ -324,7 +324,7 @@ namespace OpenTKLib
         public void FindNearest_Points_Rednaxela(List<Vertex> vertices)
         {
 
-            
+
             //float fThreshold = kdTreeNeighbourThreshold;
             List<Vertex> nearestNeighbours = new List<Vertex>();
 
@@ -335,8 +335,8 @@ namespace OpenTKLib
                 // Perform a nearest neighbour search around that point.
                 KDTreeRednaxela.NearestNeighbour<EllipseWrapper> pIter = null;
                 KDTreeVertex kv = KDTreeVertex.Instance;
-                
-                pIter = kv.KdTree_Rednaxela.FindNearest_EuclidDistance(new double[] { vToCheck.Vector.X, vToCheck.Vector.Y, vToCheck.Vector.Z }, NumberOfNeighboursToSearch , -1);
+
+                pIter = kv.KdTree_Rednaxela.FindNearest_EuclidDistance(new double[] { vToCheck.Vector.X, vToCheck.Vector.Y, vToCheck.Vector.Z }, NumberOfNeighboursToSearch, -1);
                 int neighboursFound = 0;
 
                 while (pIter.MoveNext())
@@ -345,13 +345,13 @@ namespace OpenTKLib
                     Vertex vNeighbour = wr.Vertex;
                     if (vToCheck != vNeighbour)
                     {
-                        
+
                         if (!vToCheck.IndexNeighbours.Contains(vNeighbour.IndexInModel))
                         {
                             vToCheck.IndexNeighbours.Add(vNeighbour.IndexInModel);
                             vToCheck.DistanceNeighbours.Add(pIter.CurrentDistance);
                         }
-                        for (int j = vNeighbour.IndexNeighbours.Count -1; j >=0 ; j--)
+                        for (int j = vNeighbour.IndexNeighbours.Count - 1; j >= 0; j--)
                         {
                             if (vNeighbour.IndexNeighbours[j] == vToCheck.IndexInModel)
                             {
@@ -360,13 +360,13 @@ namespace OpenTKLib
                             }
                         }
                         neighboursFound = vToCheck.DistanceNeighbours.Count;
-                            //if (!vNeighbour.IndexNeighbours.Contains(vToCheck.IndexInModel))
-                            //{
-                            //    vNeighbour.IndexNeighbours.Add(vToCheck.IndexInModel);
-                            //    vNeighbour.DistanceNeighbours.Add(pIter.CurrentDistance);
-                            //}
-                            if ((neighboursFound) > NumberOfNeighboursToSearch)
-                                break;
+                        //if (!vNeighbour.IndexNeighbours.Contains(vToCheck.IndexInModel))
+                        //{
+                        //    vNeighbour.IndexNeighbours.Add(vToCheck.IndexInModel);
+                        //    vNeighbour.DistanceNeighbours.Add(pIter.CurrentDistance);
+                        //}
+                        if ((neighboursFound) > NumberOfNeighboursToSearch)
+                            break;
                     }
                 }
 
@@ -402,5 +402,5 @@ namespace OpenTKLib
             }
         }
     }
-  
+
 }
