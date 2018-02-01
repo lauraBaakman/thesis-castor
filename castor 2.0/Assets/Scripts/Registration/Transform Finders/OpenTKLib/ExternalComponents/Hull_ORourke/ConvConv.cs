@@ -270,16 +270,6 @@ namespace OpenTKLib
             InsertInters((int)p.x, (int)p.y);
             InsertInters((int)q.x, (int)q.y);
         }
-
-        public void DrawIntersection(System.Drawing.Graphics g, int w, int h, System.Drawing.Color fillColor)
-        {
-            if (!intersection)
-                return;
-            else
-            {
-                inters.DrawPolygon(g, w, h, fillColor, System.Drawing.Color.Red, true);
-            }
-        }
     }
 
     public class cInFlag

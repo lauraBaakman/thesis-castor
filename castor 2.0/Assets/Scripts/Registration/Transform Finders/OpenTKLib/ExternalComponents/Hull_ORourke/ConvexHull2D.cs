@@ -268,30 +268,5 @@ namespace OpenTKLib
             top.Delete(top.head.PrevVertex);
         }
 
-        public void DrawHull(System.Drawing.Graphics gContext, int w, int h)
-        {
-
-            if (list.head != null)
-                list.DrawPoints(gContext, w, h);
-
-            if (top.n == 0 || top.head == null)
-                System.Diagnostics.Debug.WriteLine("No drawing is possible.");
-            else
-            {
-                cVertex v1 = top.head;
-
-                if (top.n > 2)
-                {
-                    //do
-                    //{
-                    //    gContext.drawLine(v1.v.x, v1.v.y, v1.next.v.x, v1.next.v.y);
-                    //    v1 = v1.next;
-                    //} while (v1 != top.head);
-
-                }
-
-            }//end else     
-        }//end draw
-
     }//end class 
 }

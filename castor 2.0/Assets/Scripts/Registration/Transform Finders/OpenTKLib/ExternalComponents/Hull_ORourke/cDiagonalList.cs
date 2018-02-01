@@ -81,17 +81,5 @@ namespace OpenTKLib
             } while (temp != head);
 
         }
-
-        public void DrawDiagonals(System.Drawing.Graphics g, System.Drawing.Color inColor)
-        {
-            System.Diagnostics.Debug.WriteLine("Drawing diagonals");
-            cDiagonal dtemp = head;
-            //g.setColor(inColor);
-            //do
-            //{
-            //    g.drawLine(dtemp.v1.v.x, dtemp.v1.v.y, dtemp.v2.v.x, dtemp.v2.v.y);
-            //    dtemp = dtemp.next;
-            //} while (dtemp != head);
-        }
     }
 }
