@@ -25,16 +25,16 @@ namespace ICPLib
     public class LandmarkTransform
     {
 
-        public Matrix4d Matrix;
+        public Matrix4d transformMatrix;
 
-        public List<Vector3d> SourceLandmarks;
-        public List<Vector3d> TargetLandmarks;
+        public List<Vector3d> sourceLandmarks;
+        public List<Vector3d> targetLandmarks;
 
 
         //----------------------------------------------------------------------------
         public LandmarkTransform()
         {
-            Matrix = new Matrix4d();
+            transformMatrix = new Matrix4d();
         }
 
         private void FindCentroids(int N_PTS, double[] source_centroid, double[] target_centroid)
@@ -44,11 +44,11 @@ namespace ICPLib
 
             for (int i = 0; i < N_PTS; i++)
             {
-                p = this.SourceLandmarks[i];
+                p = this.sourceLandmarks[i];
                 source_centroid[0] += p[0];
                 source_centroid[1] += p[1];
                 source_centroid[2] += p[2];
-                p = this.TargetLandmarks[i];
+                p = this.targetLandmarks[i];
                 target_centroid[0] += p[0];
                 target_centroid[1] += p[1];
                 target_centroid[2] += p[2];
@@ -67,12 +67,12 @@ namespace ICPLib
             double sSum = 0.0F, tSum = 0.0F;
 
 
-            Vector3d s = this.SourceLandmarks[pointIndex];
+            Vector3d s = this.sourceLandmarks[pointIndex];
             s[0] -= source_centroid[0];
             s[1] -= source_centroid[1];
             s[2] -= source_centroid[2];
 
-            Vector3d t = this.TargetLandmarks[pointIndex];
+            Vector3d t = this.targetLandmarks[pointIndex];
             t[0] -= target_centroid[0];
             t[1] -= target_centroid[1];
             t[2] -= target_centroid[2];
@@ -150,10 +150,10 @@ namespace ICPLib
             // results in the smallest rotation.
             if (eigenvalues[0] == eigenvalues[1] || N_PTS == 2)
             {
-                Vector3d s0 = this.SourceLandmarks[0];
-                Vector3d t0 = this.TargetLandmarks[0];
-                Vector3d s1 = this.SourceLandmarks[1];
-                Vector3d t1 = this.TargetLandmarks[1];
+                Vector3d s0 = this.sourceLandmarks[0];
+                Vector3d t0 = this.targetLandmarks[0];
+                Vector3d s1 = this.sourceLandmarks[1];
+                Vector3d t1 = this.targetLandmarks[1];
 
 
 
@@ -242,29 +242,29 @@ namespace ICPLib
             double xz = x * z;
             double yz = y * z;
 
-            this.Matrix[0, 0] = ww + xx - yy - zz;
-            this.Matrix[1, 0] = 2.0 * (wz + xy);
-            this.Matrix[2, 0] = 2.0 * (-wy + xz);
+            this.transformMatrix[0, 0] = ww + xx - yy - zz;
+            this.transformMatrix[1, 0] = 2.0 * (wz + xy);
+            this.transformMatrix[2, 0] = 2.0 * (-wy + xz);
 
-            this.Matrix[0, 1] = 2.0 * (-wz + xy);
-            this.Matrix[1, 1] = ww - xx + yy - zz;
-            this.Matrix[2, 1] = 2.0 * (wx + yz);
+            this.transformMatrix[0, 1] = 2.0 * (-wz + xy);
+            this.transformMatrix[1, 1] = ww - xx + yy - zz;
+            this.transformMatrix[2, 1] = 2.0 * (wx + yz);
 
-            this.Matrix[0, 2] = 2.0 * (wy + xz);
-            this.Matrix[1, 2] = 2.0 * (-wx + yz);
-            this.Matrix[2, 2] = ww - xx - yy + zz;
+            this.transformMatrix[0, 2] = 2.0 * (wy + xz);
+            this.transformMatrix[1, 2] = 2.0 * (-wx + yz);
+            this.transformMatrix[2, 2] = ww - xx - yy + zz;
 
             //if (this.Mode != VTK_LANDMARK_RIGIDBODY)
             //  { // add in the scale factor (if desired)
             for (int i = 0; i < 3; i++)
             {
-                double val = this.Matrix[i, 0] * scale;
-                this.Matrix[i, 0] = val;
-                val = this.Matrix[i, 1] * scale;
-                this.Matrix[i, 1] = val;
+                double val = this.transformMatrix[i, 0] * scale;
+                this.transformMatrix[i, 0] = val;
+                val = this.transformMatrix[i, 1] * scale;
+                this.transformMatrix[i, 1] = val;
 
-                val = this.Matrix[i, 2] * scale;
-                this.Matrix[i, 2] = val;
+                val = this.transformMatrix[i, 2] * scale;
+                this.transformMatrix[i, 2] = val;
 
             }
 
@@ -274,26 +274,26 @@ namespace ICPLib
             // centroid and the target centroid
             double sx, sy, sz;
 
-            sx = this.Matrix[0, 0] * source_centroid[0] +
-                 this.Matrix[0, 1] * source_centroid[1] +
-                 this.Matrix[0, 2] * source_centroid[2];
-            sy = this.Matrix[1, 0] * source_centroid[0] +
-                 this.Matrix[1, 1] * source_centroid[1] +
-                 this.Matrix[1, 2] * source_centroid[2];
-            sz = this.Matrix[2, 0] * source_centroid[0] +
-                 this.Matrix[2, 1] * source_centroid[1] +
-                 this.Matrix[2, 2] * source_centroid[2];
+            sx = this.transformMatrix[0, 0] * source_centroid[0] +
+                 this.transformMatrix[0, 1] * source_centroid[1] +
+                 this.transformMatrix[0, 2] * source_centroid[2];
+            sy = this.transformMatrix[1, 0] * source_centroid[0] +
+                 this.transformMatrix[1, 1] * source_centroid[1] +
+                 this.transformMatrix[1, 2] * source_centroid[2];
+            sz = this.transformMatrix[2, 0] * source_centroid[0] +
+                 this.transformMatrix[2, 1] * source_centroid[1] +
+                 this.transformMatrix[2, 2] * source_centroid[2];
 
-            this.Matrix[0, 3] = target_centroid[0] - sx;
-            this.Matrix[1, 3] = target_centroid[1] - sy;
-            this.Matrix[2, 3] = target_centroid[2] - sz;
+            this.transformMatrix[0, 3] = target_centroid[0] - sx;
+            this.transformMatrix[1, 3] = target_centroid[1] - sy;
+            this.transformMatrix[2, 3] = target_centroid[2] - sz;
 
             // fill the bottom row of the 4x4 matrix
-            this.Matrix[3, 0] = 0.0;
-            this.Matrix[3, 1] = 0.0;
-            this.Matrix[3, 2] = 0.0;
-            this.Matrix[3, 3] = 1.0;
-            return this.Matrix;
+            this.transformMatrix[3, 0] = 0.0;
+            this.transformMatrix[3, 1] = 0.0;
+            this.transformMatrix[3, 2] = 0.0;
+            this.transformMatrix[3, 3] = 1.0;
+            return this.transformMatrix;
 
         }
 
@@ -308,10 +308,10 @@ namespace ICPLib
 
             // Original python implementation by David G. Gobbi
 
-            if (this.SourceLandmarks == null || this.TargetLandmarks == null)
+            if (this.sourceLandmarks == null || this.targetLandmarks == null)
             {
                 //Identity Matrix
-                this.Matrix = new Matrix4d(Vector4d.UnitX, Vector4d.UnitY, Vector4d.UnitZ, Vector4d.UnitW);
+                this.transformMatrix = new Matrix4d(Vector4d.UnitX, Vector4d.UnitY, Vector4d.UnitZ, Vector4d.UnitW);
                 return false;
             }
 
@@ -319,8 +319,8 @@ namespace ICPLib
 
 
 
-            int N_PTS = this.SourceLandmarks.Count;
-            if (N_PTS != this.TargetLandmarks.Count)
+            int N_PTS = this.sourceLandmarks.Count;
+            if (N_PTS != this.targetLandmarks.Count)
             {
                 System.Diagnostics.Debug.WriteLine("Error:  Source and Target Landmarks contain a different number of points");
                 return false;
@@ -331,7 +331,7 @@ namespace ICPLib
             if (N_PTS == 0)
             {
                 //Identity Matrix
-                this.Matrix = new Matrix4d(Vector4d.UnitX, Vector4d.UnitY, Vector4d.UnitZ, Vector4d.UnitW);
+                this.transformMatrix = new Matrix4d(Vector4d.UnitX, Vector4d.UnitY, Vector4d.UnitZ, Vector4d.UnitW);
                 return false;
             }
             double[] source_centroid = { 0, 0, 0 };
@@ -344,10 +344,10 @@ namespace ICPLib
 
             if (N_PTS == 1)
             {
-                this.Matrix = new Matrix4d(Vector4d.UnitX, Vector4d.UnitY, Vector4d.UnitZ, Vector4d.UnitW);
-                Matrix[0, 3] = target_centroid[0] - source_centroid[0];
-                this.Matrix[1, 3] = target_centroid[1] - source_centroid[1];
-                this.Matrix[2, 3] = target_centroid[2] - source_centroid[2];
+                this.transformMatrix = new Matrix4d(Vector4d.UnitX, Vector4d.UnitY, Vector4d.UnitZ, Vector4d.UnitW);
+                transformMatrix[0, 3] = target_centroid[0] - source_centroid[0];
+                this.transformMatrix[1, 3] = target_centroid[1] - source_centroid[1];
+                this.transformMatrix[2, 3] = target_centroid[2] - source_centroid[2];
                 return true;
             }
 
@@ -402,10 +402,10 @@ namespace ICPLib
 
         void Inverse()
         {
-            List<Vector3d> tmp1 = this.SourceLandmarks;
-            List<Vector3d> tmp2 = this.TargetLandmarks;
-            this.TargetLandmarks = tmp1;
-            this.SourceLandmarks = tmp2;
+            List<Vector3d> tmp1 = this.sourceLandmarks;
+            List<Vector3d> tmp2 = this.targetLandmarks;
+            this.targetLandmarks = tmp1;
+            this.sourceLandmarks = tmp2;
 
         }
     }
