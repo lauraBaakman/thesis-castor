@@ -71,8 +71,7 @@ namespace OpenTKLib
             }
             catch (System.Exception err)
             {
-                System.Windows.Forms.MessageBox.Show("Error building kd-tree " + err.Message);
-                return null;
+                throw err;
 
             }
         }

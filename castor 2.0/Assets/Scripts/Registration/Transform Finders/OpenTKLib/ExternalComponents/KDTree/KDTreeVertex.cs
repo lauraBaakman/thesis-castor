@@ -53,9 +53,7 @@ namespace OpenTKLib
             }
             catch (Exception err)
             {
-                MessageBox.Show("Error building kd-tree " + err.Message);
-                return false;
-
+                throw err;
             }
 
             TimeCalc.ShowLastTimeSpan("Build Tree Rednaxala");
