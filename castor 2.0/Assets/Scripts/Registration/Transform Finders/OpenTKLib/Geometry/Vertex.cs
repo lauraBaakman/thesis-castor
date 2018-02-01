@@ -14,15 +14,7 @@
 // limited to, claims, suits or causes of action involving alleged infringement of copyrights, patents, trademarks, trade secrets, or unfair competition. 
 //
 
-
-using OpenTK.Graphics.OpenGL;
-using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
 using OpenTK;
 
 namespace OpenTKLib
