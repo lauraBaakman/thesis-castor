@@ -972,7 +972,7 @@ namespace OpenTK
         {
             double temp;
             Vector3d.Dot(ref first, ref second, out temp);
-            result = System.Math.Acos(MathHelper.Clamp(temp / (first.Length * second.Length), -1.0, 1.0));
+            result = System.Math.Acos(UnityEngine.Mathf.Clamp((float) (temp / (first.Length * second.Length)), -1.0f, 1.0f));
         }
 
         /// <summary>
