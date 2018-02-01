@@ -19,11 +19,11 @@ namespace OpenTKLib
 
     public class DelaunayTri : ConvexHull3D
     {
-        
-        public DelaunayTri():base()
+
+        public DelaunayTri() : base()
         {
-           
-           
+
+
         }
         private bool Delaunay(List<Vector3d> myListVectors)
         {
@@ -33,18 +33,12 @@ namespace OpenTKLib
                 LowerFaces();
                 return true;
             }
-            else
-            {
-               System.Windows.Forms.MessageBox.Show("Delaunay Failed");
-                return false;
-            }
-            
-            
+            else throw new Exception("Delaunay Failed");
         }
         public DelaunayTri(List<Vector3d> myListVectors) : this()
         {
             Delaunay(myListVectors);
-            
+
 
         }
 
@@ -95,10 +89,10 @@ namespace OpenTKLib
             //    Edges = edges.ToList()
             //};
         }
-       
-        
 
-      
+
+
+
 
         private void LowerFaces()
         {
@@ -123,6 +117,6 @@ namespace OpenTKLib
             System.Diagnostics.Debug.WriteLine("A total of " + Flower + " lower faces identified.");
         }
 
-    
+
     }
 }
