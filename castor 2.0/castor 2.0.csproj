@@ -483,7 +483,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\RandomUtils.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\ScreenSaver.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\TransformPointsUtils.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Utils\VertexUtils.cs" />
     <Compile Include="Assets\Scripts\Ticker\Messages.cs" />
     <Compile Include="Assets\Scripts\Ticker\Receiver.cs" />
     <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
