@@ -449,7 +449,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Globals\GeneralSettings.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Globals\TimeCalc.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\IO\IOUtils.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\IO\PointCloudUtilsIO.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Models\CLEnum.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Models\ExampleModels.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\OpenTKLib\Models\Model3D.cs" />
