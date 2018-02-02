@@ -6,7 +6,7 @@ using NUnit.Framework;
 public class Matrix4ExtensionTests
 {
     [Test]
-    public void TestExtractPosition_OnlyTranslationSet()
+    public void TestExtractTranslation_OnlyTranslationSet()
     {
         Vector3 translation = new Vector3(Random.value, Random.value, Random.value);
 
@@ -18,7 +18,7 @@ public class Matrix4ExtensionTests
         );
 
         Vector3 expected = translation;
-        Vector3 actual = matrix.ExtractPosition();
+        Vector3 actual = matrix.ExtractTranslation();
 
         Assert.AreEqual(
             actual: actual,
@@ -27,7 +27,7 @@ public class Matrix4ExtensionTests
     }
 
     [Test]
-    public void TestExtractPosition_TRSSet()
+    public void TestExtractTranslation_TRSSet()
     {
         Vector3 translation = new Vector3(Random.value, Random.value, Random.value);
         Quaternion rotation = Random.rotation;
@@ -41,7 +41,7 @@ public class Matrix4ExtensionTests
         );
 
         Vector3 expected = translation;
-        Vector3 actual = matrix.ExtractPosition();
+        Vector3 actual = matrix.ExtractTranslation();
 
         Assert.AreEqual(
             actual: actual,

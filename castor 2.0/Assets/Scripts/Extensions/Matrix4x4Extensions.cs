@@ -9,7 +9,7 @@ public static class Matrix4x4Extensions
     /// </summary>
     /// <returns>The translation.</returns>
     /// <param name="matrix">Matrix.</param>
-    public static Vector3 ExtractPosition(this Matrix4x4 matrix){
+    public static Vector3 ExtractTranslation(this Matrix4x4 matrix){
         Vector3 position = matrix.GetColumn(3);
         return position;
     }
