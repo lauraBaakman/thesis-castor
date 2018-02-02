@@ -5,30 +5,40 @@ public class ApplicationInitializer : MonoBehaviour
 {
     public string nextSceneName = "reduction";
 
-	void Start()
-	{
-        DontDestroyOnLoad(gameObject);
-
+    void Start()
+    {
         Initialize();
-
         SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
-	}
-
-    private void Initialize(){
-        SharedInitialization();
-        DeploySpecificInitialization();
-        EditorSpecificInitialization();
     }
 
-    private void SharedInitialization(){
+    private void Initialize()
+    {
+        SharedInitialization();
+        if (Application.isEditor) EditorSpecificInitialization();
+        else DeploySpecificInitialization();
+    }
+
+    /// <summary>
+    /// Initialization that always needs to be done, indepedent of the appliction.
+    /// </summary>
+    private void SharedInitialization()
+    {
         Debug.Log("SharedInitialization");
     }
 
-    private void DeploySpecificInitialization(){
+    /// <summary>
+    /// Initialization that only needs to be done if we are running from a deployed application.
+    /// </summary>
+    private void DeploySpecificInitialization()
+    {
         Debug.Log("DeployInitialization");
     }
 
-    private void EditorSpecificInitialization(){
-        Debug.Log("EditorInitialization");
+    /// <summary>
+    /// Initialization that only needs to be done if wer are running from the editor.
+    /// </summary>
+    private void EditorSpecificInitialization()
+    {
+        Random.InitState(42);
     }
 }

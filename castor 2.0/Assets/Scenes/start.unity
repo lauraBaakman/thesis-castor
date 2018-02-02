@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 409172455}
   - component: {fileID: 409172456}
   m_Layer: 0
-  m_Name: Persistence
+  m_Name: Initializer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
