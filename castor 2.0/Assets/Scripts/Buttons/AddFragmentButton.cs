@@ -14,8 +14,8 @@ namespace Buttons {
                     fragmentParent: FragmentsRoot,
                     callBack: NotifyUserOfAddedFragment
                 );
-                importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/cone.obj", randomizeTransform:true);
-                importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/cube.obj", randomizeTransform:true);
+                importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/FracturedCubeXTranslationPart1.obj", randomizeTransform:false);
+                importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/FracturedCubeXTranslationPart2.obj", randomizeTransform:false);
             }
         }
 
