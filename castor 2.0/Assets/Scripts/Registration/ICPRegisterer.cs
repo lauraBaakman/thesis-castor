@@ -133,12 +133,23 @@ namespace Registration
 
         private void ApplyTransform(Matrix4x4 transform, GameObject modelFragment)
         {
-            modelFragment.transform.Translate(transform.ExtractTranslation(), Settings.ReferenceTransform);
-            //extract translation/rotation
-            //transform from reference space to world space
-            //transform from worldspace to modelFfragmentspace
-            //Apply
-            throw new NotImplementedException();
+            modelFragment.transform.Translate(
+                translation: transform.ExtractTranslation(), 
+                relativeTo: Settings.ReferenceTransform
+            );
+            ApplyRotation(transform.ExtratRotation(), modelFragment);
+        }
+
+        private void ApplyRotation(Quaternion rotationInReferenceTransform, GameObject modelFragment){
+            Transform worldTransform = modelFragment.transform.root;
+
+            Quaternion fromReferenceToWorld = Quaternion.FromToRotation(Settings.ReferenceTransform.forward, worldTransform.forward);
+            Quaternion rotationInWorld = rotationInReferenceTransform * fromReferenceToWorld;
+
+            modelFragment.transform.Rotate(
+                eulerAngles: rotationInWorld.eulerAngles,
+                relativeTo: Space.World
+            );            
         }
 
         private bool TerminateICP(List<Correspondence> correspondences)
