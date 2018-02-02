@@ -1,3 +1,4 @@
+using SimpleFileBrowser;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,7 +24,10 @@ public class ApplicationInitializer : MonoBehaviour
     /// </summary>
     private void SharedInitialization()
     {
-        SimpleFileBrowser.FileBrowser.SetDefaultFilter(".obj");
+        FileBrowser.SetFilters(
+            true,
+            new FileBrowser.Filter("Bones", ".obj", ".stl")
+        );
     }
 
     /// <summary>
