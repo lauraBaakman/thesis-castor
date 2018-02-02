@@ -147,7 +147,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\LoadStartSceneByDefault.cs" />
     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Editor\EditorCameraInspectorGUI.cs" />
     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Editor\EditorGizmoSystemInspectorGUI.cs" />
     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Editor\EditorObjectSelectionInspectorGUI.cs" />
