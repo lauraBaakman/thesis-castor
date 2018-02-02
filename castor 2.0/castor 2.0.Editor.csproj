@@ -195,6 +195,7 @@
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\Renderer\IntegrationTestRendererBase.cs" />
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\Renderer\RenderingOptions.cs" />
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\TestComponentEditor.cs" />
+    <Compile Include="Assets\Scripts\Extensions\Editor\TestMatrix4Extensions.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondence.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestNearestPointCorrespondences.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestPointToPointDistanceMetrics.cs" />
@@ -204,7 +205,6 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Editor\TestVector4d.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\ColorsTest.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
-    <Compile Include="Assets\Scripts\Extensions\Editor\TestMatrix4Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
