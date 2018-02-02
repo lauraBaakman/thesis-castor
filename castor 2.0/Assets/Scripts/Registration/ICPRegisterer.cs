@@ -32,7 +32,7 @@ namespace Registration
             AddListener(StaticFragment);
             AddListener(ModelFragment);
 
-            iterationCounter = new Utils.Counter(Settings.MaxNumIterations);
+            iterationCounter = new Counter(Settings.MaxNumIterations);
         }
 
         public void AddListener(GameObject listener)
