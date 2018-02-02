@@ -143,6 +143,7 @@ namespace Registration
         private void ApplyRotation(Quaternion rotationInReferenceTransform, GameObject modelFragment){
             Transform worldTransform = modelFragment.transform.root;
 
+            ///Source: https://answers.unity.com/questions/25305/rotation-relative-to-a-transform.html
             Quaternion fromReferenceToWorld = Quaternion.FromToRotation(Settings.ReferenceTransform.forward, worldTransform.forward);
             Quaternion rotationInWorld = rotationInReferenceTransform * fromReferenceToWorld;
 
