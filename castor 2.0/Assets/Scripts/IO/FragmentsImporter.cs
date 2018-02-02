@@ -23,9 +23,9 @@ namespace IO
             GetFragmentFiles();
         }
 
-        public void Import(string file)
+        public void Import(string file, bool randomizeTransform = false)
         {
-            ProcessFragmentFile(file);
+            ProcessFragmentFile(file, randomizeTransform);
         }
 
         private void GetFragmentFiles()
@@ -39,8 +39,12 @@ namespace IO
 
         private void ProcessFragmentFile(string path)
         {
-            FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot, CallBack);
-            fragmentImporter.Import(path);
+            ProcessFragmentFile(path, false);
+        }
+
+        private void ProcessFragmentFile(string path, bool randomizeTransform){
+            FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot, CallBack, randomizeTransform);
+            fragmentImporter.Import(path);            
         }
     }
 
@@ -49,12 +53,16 @@ namespace IO
         private static string PrefabPath = "Fragment";
         private readonly GameObject Parent;
 
+        private bool RandomizeTransform;
+
         private CallBack CallBack;
 
-        internal FragmentImporter(GameObject parent, CallBack callBack)
+        internal FragmentImporter(GameObject parent, CallBack callBack, bool randomizeTransform)
         {
             Parent = parent;
             CallBack = callBack;
+
+            RandomizeTransform = randomizeTransform;
         }
 
         internal void Import(string path)
@@ -87,6 +95,10 @@ namespace IO
             Material material = renderer.material;
             material.color = ColorGenerator.Instance.GetNextColor();
             renderer.material = material;
+
+            if(RandomizeTransform){
+                fragment.AddComponent<Fragment.RandomTransformer>();
+            }
 
             return fragment;
         }
