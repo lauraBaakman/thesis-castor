@@ -133,6 +133,7 @@ namespace Registration
 
         private void ApplyTransform(Matrix4x4 transform, GameObject modelFragment)
         {
+            modelFragment.transform.Translate(transform.ExtractTranslation(), Settings.ReferenceTransform);
             //extract translation/rotation
             //transform from reference space to world space
             //transform from worldspace to modelFfragmentspace
