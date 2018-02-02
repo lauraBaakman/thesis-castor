@@ -23,7 +23,7 @@ public class ApplicationInitializer : MonoBehaviour
     /// </summary>
     private void SharedInitialization()
     {
-        Debug.Log("SharedInitialization");
+        SimpleFileBrowser.FileBrowser.SetDefaultFilter(".obj");
     }
 
     /// <summary>

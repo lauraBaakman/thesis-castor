@@ -30,7 +30,6 @@ namespace IO
 
         private void GetFragmentFiles()
         {
-            SimpleFileBrowser.FileBrowser.SetDefaultFilter(".obj");
             SimpleFileBrowser.FileBrowser.ShowLoadDialog(
                 onSuccess: ProcessFragmentFile,
                 onCancel: () => { },
