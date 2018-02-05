@@ -59,6 +59,9 @@ namespace Registration
                 transformationMatrix = Settings.TransFormFinder.FindTransform(correspondences);
                 ApplyTransform(transformationMatrix, ModelFragment);
 
+                staticPoints = SelectPoints(StaticFragment);
+                modelPoints = SelectPoints(ModelFragment);
+
                 // Update the correspondences
                 correspondences = ComputeCorrespondences(staticPoints, modelPoints);
                 correspondences = FilterCorrespondences(correspondences);
