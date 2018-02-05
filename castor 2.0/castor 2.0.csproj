@@ -313,7 +313,7 @@
     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\RedoButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\AbstractRegistrationButton.cs" />
-    <Compile Include="Assets\Scripts\Buttons\Registration\ICPController.cs" />
+    <Compile Include="Assets\Scripts\Buttons\Registration\ICPGUIController.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationPlayButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationStepButton.cs" />

@@ -9,11 +9,11 @@ namespace Buttons
     {
         private int RequiredNumberOfSelectedFragments = 2;
 
-        private ICPController ICPController;
+        private ICPGUIController ICPController;
 
         private void Start()
         {
-            ICPController = this.GetComponent<ICPController>();
+            ICPController = this.GetComponent<ICPGUIController>();
         }
 
         public void OnEnable()

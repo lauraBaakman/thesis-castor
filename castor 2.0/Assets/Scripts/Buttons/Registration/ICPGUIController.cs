@@ -4,7 +4,7 @@ using Registration;
 
 namespace Buttons
 {
-    public class ICPController : MonoBehaviour, Registration.IICPListener
+    public class ICPGUIController : MonoBehaviour, Registration.IICPListener
     {
         public AbstractButton RegistrationButton;
         public AbstractRegistrationButton StepButton;
