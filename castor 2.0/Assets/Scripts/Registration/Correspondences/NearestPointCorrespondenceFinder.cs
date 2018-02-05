@@ -104,9 +104,20 @@ namespace Registration
 
         private bool FinishedCreatingCorrespondences()
         {
-            bool foundAll = Correspondences.Count >= FinalCorrespondenceCount;
-            bool distanceNodesLeft = DistanceNodes.Count <= 0;
-            return foundAll && distanceNodesLeft;
+            // Found all correspondences
+            if (Correspondences.Count >= FinalCorrespondenceCount) return true;
+
+            // Reviewed all distance nodes
+            if (DistanceNodes.Count <= 0){
+                Debug.LogError(
+                    "Stopped creating correspondences because we ran out of " +
+                    "posible pairs, not because all correspondences were found."
+                );
+                return true;  
+            }
+
+            // Continue with finding correspondences
+            return false;
         }
 
         private void AddNodeToCorrespondences(DistanceNode node)
