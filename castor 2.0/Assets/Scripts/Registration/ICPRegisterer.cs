@@ -53,7 +53,8 @@ namespace Registration
             Listeners.Add(listener);
         }
 
-        public void PrepareStep(){
+        public void PrepareStep()
+        {
             if (HasTerminated) return;
 
             StaticPoints = SelectPoints(StaticFragment);
@@ -75,14 +76,29 @@ namespace Registration
 
             SendMessageToAllListeners("OnStepCompleted");
 
-            if (IsFinished(Correspondences)) Terminate();
+            TerminateIfNeeded();
         }
 
-        public void Terminate()
+        private void TerminateIfNeeded()
+        {
+            if (iterationCounter.IsCompleted()) Terminate(ICPTerminatedMessage.TerminationReason.ExceededNumberOfIterations);
+            if (ErrorBelowThreshold()) Terminate(ICPTerminatedMessage.TerminationReason.ErrorBelowThreshold);
+        }
+
+        private bool ErrorBelowThreshold()
+        {
+            float error = Settings.ErrorMetric.ComputeError(Correspondences);
+            return error < Settings.ErrorThreshold;
+        }
+
+        public void Terminate(ICPTerminatedMessage.TerminationReason reason)
         {
             hasTerminated = true;
             if (FinishedCallBack != null) FinishedCallBack();
-            SendMessageToAllListeners("OnICPTerminated");
+            SendMessageToAllListeners(
+                methodName: "OnICPTerminated",
+                message: new ICPTerminatedMessage(reason)
+            );
         }
 
         /// <summary>
@@ -168,15 +184,7 @@ namespace Registration
             );
         }
 
-        private bool IsFinished(List<Correspondence> correspondences)
-        {
-            if (iterationCounter.IsCompleted()) return true;
-            /// Check if our error is small enough
-            float error = Settings.ErrorMetric.ComputeError(correspondences);
-            return error < Settings.ErrorThreshold;
-        }
-
-        private void SendMessageToAllListeners(string methodName, Message message = null)
+        private void SendMessageToAllListeners(string methodName, System.Object message = null)
         {
             foreach (GameObject listener in Listeners)
             {
