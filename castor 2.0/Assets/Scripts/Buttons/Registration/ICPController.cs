@@ -42,7 +42,7 @@ namespace Buttons
         private void ToggleICPModeInGUI(bool toggle)
         {
             StepButton.Button.interactable = toggle;
-            //PlayButton.Button.interactable = toggle;
+            PlayButton.Button.interactable = toggle;
             //StopButton.Button.interactable = toggle;
             RegistrationButton.Button.interactable = !toggle;
         }
