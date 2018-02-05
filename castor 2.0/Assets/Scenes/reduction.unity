@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7b22c9ac89f41bea923a06fd89631f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
   WidgetType: 1
   InputName: Toggle Rotation Widget
 --- !u!1001 &85175361
@@ -611,7 +612,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 107.64175
+      value: 107.64172
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -1369,6 +1370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7b22c9ac89f41bea923a06fd89631f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
   WidgetType: 0
   InputName: Toggle Translation Widget
 --- !u!1 &433014287
@@ -1435,6 +1437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4162b739f1654f29a70578c07a66b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
 --- !u!1 &567878341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,6 +1864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92db6a94cec04d7bba70779b174eb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
 --- !u!1 &1032894689
 GameObject:
   m_ObjectHideFlags: 0
@@ -2482,6 +2486,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: e5360dbdaf36544f9a0f341e4134b07b,
         type: 3}
+    - target: {fileID: 114381264252899704, guid: f2474aba1b01746338cfb3d40f0d8cea,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2474aba1b01746338cfb3d40f0d8cea, type: 2}
   m_IsPrefabParent: 0
@@ -2535,6 +2544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f908beac819734a52bb6879721dd7705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
 --- !u!1001 &1402689739
 Prefab:
   m_ObjectHideFlags: 0
@@ -2704,6 +2714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fce01a9fe462472abe9a6495938783a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
 --- !u!114 &1429508303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3221,6 +3232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8715a5d84457548c4bdaa43876bbf56d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
 --- !u!1 &1584437542
 GameObject:
   m_ObjectHideFlags: 0
@@ -3534,6 +3546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848140ccd0d394084bc7e45c4ef18151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
 --- !u!1001 &1811295926
 Prefab:
   m_ObjectHideFlags: 0
@@ -3823,6 +3836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d062261058840d8a9f1c27ac31efd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
   FragmentsRoot: {fileID: 1276394742}
 --- !u!114 &1898046819
 MonoBehaviour:
@@ -4129,6 +4143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4f7ab4a7f164b939e70bc5bc52611b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
 --- !u!1 &2053541292
 GameObject:
   m_ObjectHideFlags: 0
@@ -4185,3 +4200,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8be8b62fc13344e3aea29682ae0534e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 0}
