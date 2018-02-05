@@ -10,6 +10,8 @@ namespace Buttons
         {
             if (registerer == null) return;
 
+
+            Button.interactable = false;
             if (nextOperationIsStep)
             {
                 registerer.Step();

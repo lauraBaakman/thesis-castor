@@ -32,31 +32,34 @@ namespace Buttons
 
             StepButton.Registerer = registerer;
 
-            //while (!registerer.HasTerminated)
-            //{
-            //    registerer.PrepareStep();
-            //    registerer.Step();
-            //}
+            ToggleICPModeInGUI(true);
         }
 
         public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
 
         public void OnICPPointsSelected(ICPPointsSelectedMessage message) { }
 
-        public IEnumerator OnICPTerminated()
+        private void ToggleICPModeInGUI(bool toggle)
         {
-            Debug.Log("Buttons:ICPController:OnICPTerminated");
-            yield return new WaitForSeconds(1);
+            StepButton.Button.interactable = toggle;
+            //PlayButton.Button.interactable = toggle;
+            //StopButton.Button.interactable = toggle;
+            RegistrationButton.Button.interactable = !toggle;
+        }
+
+        public void OnICPTerminated()
+        {
+            ToggleICPModeInGUI(false);
         }
 
         public void OnPreparetionStepCompleted()
         {
-            Debug.Log("Buttons:ICPController:OnPreparetionStepCompleted");
+            StepButton.Button.interactable = true;
         }
 
         public void OnStepCompleted()
         {
-            Debug.Log("Buttons:ICPController:OnStepCompleted");
+            StepButton.Button.interactable = true;
         }
 
         private void GetModelAndStaticFragment(out GameObject modelFragment, out GameObject staticFragment)
