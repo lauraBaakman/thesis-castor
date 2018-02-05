@@ -20,6 +20,10 @@ namespace Registration
 
         private Action FinishedCallBack;
 
+        List<Vector3> StaticPoints;
+        List<Vector3> ModelPoints;
+        List<Correspondence> Correspondences;
+
         public bool HasTerminated
         {
             get { return hasTerminated; }
@@ -55,16 +59,16 @@ namespace Registration
 
             iterationCounter.Increase();
 
-            List<Vector3> staticPoints = SelectPoints(StaticFragment);
-            List<Vector3> modelPoints = SelectPoints(ModelFragment);
+            StaticPoints = SelectPoints(StaticFragment);
+            ModelPoints = SelectPoints(ModelFragment);
 
-            List<Correspondence> correspondences = ComputeCorrespondences(staticPoints, modelPoints);
-            correspondences = FilterCorrespondences(correspondences);
+            Correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
+            Correspondences = FilterCorrespondences(Correspondences);
 
-            Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(correspondences);
+            Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(Correspondences);
             ApplyTransform(transformationMatrix, ModelFragment);
 
-            if (IsFinished(correspondences)) Terminate();
+            if (IsFinished(Correspondences)) Terminate();
         }
 
         public void Terminate()
