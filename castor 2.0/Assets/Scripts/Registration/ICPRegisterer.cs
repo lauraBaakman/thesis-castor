@@ -14,9 +14,16 @@ namespace Registration
 
         private Settings Settings;
 
+        private bool hasTerminated;
+
         private Counter iterationCounter;
 
-        private Action CallBack;
+        private Action FinishedCallBack;
+
+        public bool HasTerminated
+        {
+            get { return hasTerminated; }
+        }
 
         public ICPRegisterer(
             GameObject staticFragment, GameObject modelFragment,
@@ -27,12 +34,14 @@ namespace Registration
             StaticFragment = staticFragment;
             ModelFragment = modelFragment;
             Settings = settings;
-            CallBack = callBack;
+            FinishedCallBack = callBack;
 
             AddListener(StaticFragment);
             AddListener(ModelFragment);
 
             iterationCounter = new Counter(Settings.MaxNumIterations);
+
+            hasTerminated = false;
         }
 
         public void AddListener(GameObject listener)
@@ -40,12 +49,11 @@ namespace Registration
             Listeners.Add(listener);
         }
 
-        public void Register()
+        public void Step()
         {
-            Matrix4x4 transformationMatrix;
-            bool stop = false;
+            if (HasTerminated) return;
 
-            iterationCounter.Reset();
+            iterationCounter.Increase();
 
             List<Vector3> staticPoints = SelectPoints(StaticFragment);
             List<Vector3> modelPoints = SelectPoints(ModelFragment);
@@ -53,24 +61,16 @@ namespace Registration
             List<Correspondence> correspondences = ComputeCorrespondences(staticPoints, modelPoints);
             correspondences = FilterCorrespondences(correspondences);
 
-            while (!stop)
-            {
-                ///Minimize the current error
-                transformationMatrix = Settings.TransFormFinder.FindTransform(correspondences);
-                ApplyTransform(transformationMatrix, ModelFragment);
+            Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(correspondences);
+            ApplyTransform(transformationMatrix, ModelFragment);
 
-                staticPoints = SelectPoints(StaticFragment);
-                modelPoints = SelectPoints(ModelFragment);
+            if (IsFinished(correspondences)) Terminate();
+        }
 
-                // Update the correspondences
-                correspondences = ComputeCorrespondences(staticPoints, modelPoints);
-                correspondences = FilterCorrespondences(correspondences);
-
-                // Determine if we are done
-                stop = TerminateICP(correspondences);
-            }
-
-            if (CallBack != null) CallBack();
+        public void Terminate()
+        {
+            hasTerminated = true;
+            if (FinishedCallBack != null) FinishedCallBack();
             SendMessageToAllListeners("OnICPFinished");
         }
 
@@ -137,13 +137,14 @@ namespace Registration
         private void ApplyTransform(Matrix4x4 transform, GameObject modelFragment)
         {
             modelFragment.transform.Translate(
-                translation: transform.ExtractTranslation(), 
+                translation: transform.ExtractTranslation(),
                 relativeTo: Settings.ReferenceTransform
             );
             ApplyRotation(transform.ExtratRotation(), modelFragment);
         }
 
-        private void ApplyRotation(Quaternion rotationInReferenceTransform, GameObject modelFragment){
+        private void ApplyRotation(Quaternion rotationInReferenceTransform, GameObject modelFragment)
+        {
             Transform worldTransform = modelFragment.transform.root;
 
             ///Source: https://answers.unity.com/questions/25305/rotation-relative-to-a-transform.html
@@ -153,13 +154,11 @@ namespace Registration
             modelFragment.transform.Rotate(
                 eulerAngles: rotationInWorld.eulerAngles,
                 relativeTo: Space.World
-            );            
+            );
         }
 
-        private bool TerminateICP(List<Correspondence> correspondences)
+        private bool IsFinished(List<Correspondence> correspondences)
         {
-            /// Make sure we do not exceed the maximum number of iterations
-            iterationCounter.Increase();
             if (iterationCounter.IsCompleted()) return true;
 
             /// Check if our error is small enough
