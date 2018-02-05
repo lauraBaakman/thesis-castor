@@ -20,11 +20,11 @@ namespace Fragment
             Debug.Assert(ParticleSystem, "Could not get the ParticleSystem component.");
         }
 
-        public IEnumerator OnICPFinished()
+        public IEnumerator OnICPTerminated()
         {
             if (Application.isEditor)
             {
-                Debug.Log("Fragment:ICPController:OnICPFinished: yielding for a while");
+                Debug.Log("Fragment:ICPController:OnICPTerminated: yielding for a while");
                 yield return new WaitForSeconds(300);
             }
 

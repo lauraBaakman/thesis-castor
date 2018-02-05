@@ -121,11 +121,11 @@ namespace Fragments
             RenderCorrespondences();
         }
 
-        public IEnumerator OnICPFinished()
+        public IEnumerator OnICPTerminated()
         {
             if (Application.isEditor)
             {
-                Debug.Log("Fragments:ICPController:OnICPFinished: yielding for a while");
+                Debug.Log("Fragments:ICPController:OnICPTerminated: yielding for a while");
                 yield return new WaitForSeconds(300);
             }
 

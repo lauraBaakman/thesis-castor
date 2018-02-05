@@ -8,7 +8,7 @@ namespace Registration
 
         void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message);
 
-        IEnumerator OnICPFinished();
+        IEnumerator OnICPTerminated();
     }
 }
 

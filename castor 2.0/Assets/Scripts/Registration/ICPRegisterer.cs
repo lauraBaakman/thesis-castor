@@ -71,7 +71,7 @@ namespace Registration
         {
             hasTerminated = true;
             if (FinishedCallBack != null) FinishedCallBack();
-            SendMessageToAllListeners("OnICPFinished");
+            SendMessageToAllListeners("OnICPTerminated");
         }
 
         /// <summary>
