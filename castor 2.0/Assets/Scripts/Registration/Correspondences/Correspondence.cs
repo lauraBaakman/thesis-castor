@@ -29,17 +29,15 @@ namespace Registration
             this.modelPoint = modelPoint;
             this.staticPoint = staticPoint;
 
-            Color = UnityEngine.Random.ColorHSV(
-                hueMin:0.0f, hueMax:1.0f, 
-                saturationMin: 1.0f, saturationMax: 1.0f, 
-                valueMin: 0.5f, valueMax: 0.5f
-            );
+            Color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         }
 
-        public Correspondence(DistanceNode node)
+        public Correspondence(DistanceNode node) 
         {
             this.modelPoint = node.ModelPoint;
             this.staticPoint = node.StaticPoint;
+
+            Color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         }
 
         public override bool Equals(object obj)

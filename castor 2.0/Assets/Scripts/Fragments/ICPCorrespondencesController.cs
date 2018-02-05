@@ -1,15 +1,11 @@
 using UnityEngine;
-using System.Collections;
 using Registration;
 using System.Collections.Generic;
-using System;
 
 namespace Fragments
 {
     public class ICPCorrespondencesController : MonoBehaviour, Registration.IICPListener
     {
-        public Color CorrespondenceColor;
-
         private List<Correspondence> Correspondences = new List<Correspondence>();
         private Transform ReferenceTransform;
 
@@ -45,7 +41,6 @@ namespace Fragments
                 GL.MultMatrix(ReferenceTransform.localToWorldMatrix);
 
                 GL.Begin(GL.LINES);
-                GL.Color(CorrespondenceColor);
 
                 DrawCorrespondences();
 
@@ -64,6 +59,8 @@ namespace Fragments
 
         private void DrawCorrespondence(Correspondence correspondence)
         {
+            GL.Color(correspondence.Color);
+
             GL.Vertex3(
                 correspondence.StaticPoint.x,
                 correspondence.StaticPoint.y,
