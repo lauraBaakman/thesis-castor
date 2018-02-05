@@ -15,6 +15,11 @@ namespace Buttons
 
         private ICPRegisterer registerer;
 
+        private void Awake()
+        {
+            RegistrationButton.ICPGUIController = this;
+        }
+
         public void InitializeICP()
         {
             GameObject modelFragment, staticFragment;
@@ -29,8 +34,6 @@ namespace Buttons
             );
             registerer.AddListener(SelectedFragments);
             registerer.AddListener(this.gameObject);
-
-            RegistrationButton.ICPGUIController = this;
 
             StepButton.Registerer = registerer;
             PlayButton.Registerer = registerer;

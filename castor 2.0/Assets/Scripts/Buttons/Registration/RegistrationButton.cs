@@ -11,9 +11,9 @@ namespace Buttons
 
         public ICPGUIController ICPGUIController
         {
-            set { icpController = value; }
+            set { icpGUIController = value; }
         }
-        private ICPGUIController icpController;
+        private ICPGUIController icpGUIController;
 
         public void OnEnable()
         {
@@ -31,7 +31,7 @@ namespace Buttons
 
         protected override void ExecuteButtonAction()
         {
-            icpController.InitializeICP();
+            icpGUIController.InitializeICP();
         }
 
         protected override bool HasDetectedKeyBoardShortCut()
