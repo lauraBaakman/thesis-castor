@@ -171,7 +171,6 @@ namespace Registration
         private bool IsFinished(List<Correspondence> correspondences)
         {
             if (iterationCounter.IsCompleted()) return true;
-
             /// Check if our error is small enough
             float error = Settings.ErrorMetric.ComputeError(correspondences);
             return error < Settings.ErrorThreshold;
