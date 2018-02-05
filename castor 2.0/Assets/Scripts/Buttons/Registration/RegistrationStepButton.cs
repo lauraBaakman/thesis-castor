@@ -5,11 +5,13 @@ namespace Buttons
 {
     public class RegistrationStepButton : AbstractRegistrationButton
     {
-        private bool nextOperationIsStep = false;
+        private Action nextAction;
 
         protected override void Awake()
         {
             base.Awake();
+
+            nextAction = PrepareStep;
 
             Button.interactable = false;
         }
@@ -21,25 +23,19 @@ namespace Buttons
 
             Button.interactable = false;
 
-            if (nextOperationIsStep)
-            {
-                ExecuteStep();
-            } else
-            {
-                PrepareStep();
-            }
+            nextAction();
         }
 
         private void ExecuteStep()
         {
             registerer.Step();
-            nextOperationIsStep = false;
+            nextAction = PrepareStep;
         }
 
         private void PrepareStep()
         {
             registerer.PrepareStep();
-            nextOperationIsStep = true;
+            nextAction = ExecuteStep;
         }
 
         protected override bool HasDetectedKeyBoardShortCut()
