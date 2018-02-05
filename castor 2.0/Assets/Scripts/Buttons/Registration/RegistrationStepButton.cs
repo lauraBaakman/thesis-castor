@@ -6,6 +6,13 @@ namespace Buttons
     {
         private bool nextOperationIsStep = false;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            Button.interactable = false;
+        }
+
         protected override void ExecuteButtonAction()
         {
             if (registerer == null) return;
