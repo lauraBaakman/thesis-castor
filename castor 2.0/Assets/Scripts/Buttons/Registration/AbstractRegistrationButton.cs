@@ -1,11 +1,15 @@
 namespace Buttons
 {
-    public abstract class AbstractRegistrationButton : AbstractButton
+    namespace RegistrationButtons
     {
-        public Registration.ICPRegisterer Registerer
+        public abstract class AbstractRegistrationButton : AbstractButton
         {
-            set { registerer = value; }
+            public Registration.ICPRegisterer Registerer
+            {
+                set { registerer = value; }
+            }
+            protected Registration.ICPRegisterer registerer;
         }
-        protected Registration.ICPRegisterer registerer;
     }
+
 }

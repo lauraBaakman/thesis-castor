@@ -3,39 +3,41 @@ using UnityEngine.UI;
 
 namespace Buttons
 {
-    public class RegistrationButton : AbstractButton, Fragments.ISelectionControllerListener
+    namespace RegistrationButtons
     {
-        private int RequiredNumberOfSelectedFragments = 2;
-
-        public GraphicalUI.ICPGUIController ICPGUIController
+        public class RegistrationButton : AbstractButton, Fragments.ISelectionControllerListener
         {
-            set { icpGUIController = value; }
-        }
-        private GraphicalUI.ICPGUIController icpGUIController;
+            private int RequiredNumberOfSelectedFragments = 2;
 
-        public void OnEnable()
-        {
-            OnNumberOfSelectedObjectsChanged(RTEditor.EditorObjectSelection.Instance.NumberOfSelectedObjects);
-        }
+            public GraphicalUI.ICPGUIController ICPGUIController
+            {
+                set { icpGUIController = value; }
+            }
+            private GraphicalUI.ICPGUIController icpGUIController;
 
-        /// <summary>
-        /// Called once the number of selected objects has changed, the button should only be active when two objects are selected.
-        /// </summary>
-        /// <param name="currentCount">Current nmber of selected fragments.</param>
-        public void OnNumberOfSelectedObjectsChanged(int currentCount)
-        {
-            Button.interactable = (currentCount == RequiredNumberOfSelectedFragments);
-        }
+            public void OnEnable()
+            {
+                OnNumberOfSelectedObjectsChanged(RTEditor.EditorObjectSelection.Instance.NumberOfSelectedObjects);
+            }
 
-        protected override void ExecuteButtonAction()
-        {
-            icpGUIController.InitializeICP();
-        }
+            /// <summary>
+            /// Called once the number of selected objects has changed, the button should only be active when two objects are selected.
+            /// </summary>
+            /// <param name="currentCount">Current nmber of selected fragments.</param>
+            public void OnNumberOfSelectedObjectsChanged(int currentCount)
+            {
+                Button.interactable = (currentCount == RequiredNumberOfSelectedFragments);
+            }
 
-        protected override bool HasDetectedKeyBoardShortCut()
-        {
-            return RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed() && Input.GetButtonDown("Register");
+            protected override void ExecuteButtonAction()
+            {
+                icpGUIController.InitializeICP();
+            }
+
+            protected override bool HasDetectedKeyBoardShortCut()
+            {
+                return RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed() && Input.GetButtonDown("Register");
+            }
         }
     }
-
 }

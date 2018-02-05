@@ -313,10 +313,10 @@
     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\RedoButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\AbstractRegistrationButton.cs" />
-    <Compile Include="Assets\Scripts\GUI\ICPGUIController.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationPlayButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationStepButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\Registration\StopButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\SelectAllButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\TransformButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\TransformSpaceToggle.cs" />
@@ -332,6 +332,7 @@
     <Compile Include="Assets\Scripts\Fragment\StateTracker.cs" />
     <Compile Include="Assets\Scripts\Fragments\ICPCorrespondencesController.cs" />
     <Compile Include="Assets\Scripts\Fragments\SelectionController.cs" />
+    <Compile Include="Assets\Scripts\GUI\ICPGUIController.cs" />
     <Compile Include="Assets\Scripts\Help\HelpMessageSender.cs" />
     <Compile Include="Assets\Scripts\IO\FragmentsImporter.cs" />
     <Compile Include="Assets\Scripts\IO\ObjFileReader.cs" />

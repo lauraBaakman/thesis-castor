@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Registration;
 
-using Buttons;
+using Buttons.RegistrationButtons;
 
 namespace GraphicalUI
 {

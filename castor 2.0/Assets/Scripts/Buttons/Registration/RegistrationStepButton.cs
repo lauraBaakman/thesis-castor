@@ -3,46 +3,51 @@ using System;
 
 namespace Buttons
 {
-    public class RegistrationStepButton : AbstractRegistrationButton
+    namespace RegistrationButtons
     {
-        private Action nextAction;
-
-        protected override void Awake()
+        public class RegistrationStepButton : AbstractRegistrationButton
         {
-            base.Awake();
+            private Action nextAction;
 
-            nextAction = PrepareStep;
+            protected override void Awake()
+            {
+                base.Awake();
 
-            Button.interactable = false;
-        }
+                nextAction = PrepareStep;
 
-        protected override void ExecuteButtonAction()
-        {
-            if (registerer == null) return;
+                Button.interactable = false;
+            }
+
+            protected override void ExecuteButtonAction()
+            {
+                if (registerer == null) return;
 
 
-            Button.interactable = false;
+                Button.interactable = false;
 
-            nextAction();
-        }
+                nextAction();
+            }
 
-        private void ExecuteStep()
-        {
-            registerer.Step();
-            nextAction = PrepareStep;
-        }
+            private void ExecuteStep()
+            {
+                registerer.Step();
+                nextAction = PrepareStep;
+            }
 
-        private void PrepareStep()
-        {
-            registerer.PrepareStep();
-            nextAction = ExecuteStep;
-        }
+            private void PrepareStep()
+            {
+                registerer.PrepareStep();
+                nextAction = ExecuteStep;
+            }
 
-        protected override bool HasDetectedKeyBoardShortCut()
-        {
-            return Input.GetKeyDown(KeyCode.Space);
+            protected override bool HasDetectedKeyBoardShortCut()
+            {
+                return Input.GetKeyDown(KeyCode.Space);
+            }
         }
     }
+
+
 
 }
 

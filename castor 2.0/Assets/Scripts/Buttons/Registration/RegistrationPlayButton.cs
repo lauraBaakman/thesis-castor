@@ -4,30 +4,34 @@ using UnityEngine;
 
 namespace Buttons
 {
-    public class RegistrationPlayButton : AbstractRegistrationButton
+    namespace RegistrationButtons
     {
-        protected override void Awake()
+        public class RegistrationPlayButton : AbstractRegistrationButton
         {
-            base.Awake();
-
-            Button.interactable = false;
-        }
-
-        protected override void ExecuteButtonAction()
-        {
-            if (registerer == null) return;
-            while (!registerer.HasTerminated)
+            protected override void Awake()
             {
-                registerer.PrepareStep();
-                registerer.Step();
+                base.Awake();
+
+                Button.interactable = false;
+            }
+
+            protected override void ExecuteButtonAction()
+            {
+                if (registerer == null) return;
+                while (!registerer.HasTerminated)
+                {
+                    registerer.PrepareStep();
+                    registerer.Step();
+                }
+            }
+
+            protected override bool HasDetectedKeyBoardShortCut()
+            {
+                // Has no keyboard short cut
+                return false;
             }
         }
-
-        protected override bool HasDetectedKeyBoardShortCut()
-        {
-            // Has no keyboard short cut
-            return false;
-        }
     }
+
 }
 
