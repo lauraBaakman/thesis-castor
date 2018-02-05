@@ -105,7 +105,7 @@ namespace Registration
         private bool FinishedCreatingCorrespondences()
         {
             bool foundAll = Correspondences.Count >= FinalCorrespondenceCount;
-            bool distanceNodesLeft = DistanceNodes.Count > 0;
+            bool distanceNodesLeft = DistanceNodes.Count <= 0;
             return foundAll && distanceNodesLeft;
         }
 
