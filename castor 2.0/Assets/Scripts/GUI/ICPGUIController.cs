@@ -39,6 +39,7 @@ namespace GraphicalUI
 
             StepButton.Registerer = registerer;
             PlayButton.Registerer = registerer;
+            StopButton.Registerer = registerer;
 
             ToggleICPModeInGUI(true);
         }
@@ -51,7 +52,7 @@ namespace GraphicalUI
         {
             StepButton.Button.interactable = toggle;
             PlayButton.Button.interactable = toggle;
-            //StopButton.Button.interactable = toggle;
+            StopButton.Button.interactable = toggle;
             RegistrationButton.Button.interactable = !toggle;
         }
 
