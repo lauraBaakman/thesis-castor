@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections;
 using Registration;
 
-namespace Buttons
+using Buttons;
+
+namespace GraphicalUI
 {
     public class ICPGUIController : MonoBehaviour, Registration.IICPListener
     {

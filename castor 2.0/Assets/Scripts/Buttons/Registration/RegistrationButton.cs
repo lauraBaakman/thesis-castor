@@ -1,19 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-using Registration;
-
 namespace Buttons
 {
     public class RegistrationButton : AbstractButton, Fragments.ISelectionControllerListener
     {
         private int RequiredNumberOfSelectedFragments = 2;
 
-        public ICPGUIController ICPGUIController
+        public GraphicalUI.ICPGUIController ICPGUIController
         {
             set { icpGUIController = value; }
         }
-        private ICPGUIController icpGUIController;
+        private GraphicalUI.ICPGUIController icpGUIController;
 
         public void OnEnable()
         {
