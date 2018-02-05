@@ -480,7 +480,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 250
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -714,6 +714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 218469452}
   - component: {fileID: 218469455}
+  - component: {fileID: 218469457}
   - component: {fileID: 218469454}
   - component: {fileID: 218469453}
   - component: {fileID: 218469456}
@@ -819,6 +820,22 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &218469457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 218469451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b317b82f6444f4c958f4f930a2b2206a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RegistrationButton: {fileID: 1429508302}
+  StepButton: {fileID: 508592876}
+  PlayButton: {fileID: 1458673334}
+  StopButton: {fileID: 0}
+  SelectedFragments: {fileID: 1584437542}
 --- !u!1001 &248657128
 Prefab:
   m_ObjectHideFlags: 0
@@ -2657,7 +2674,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 150
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -2993,22 +3010,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Receiver: {fileID: 1437549639}
---- !u!114 &1429508304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1429508301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b317b82f6444f4c958f4f930a2b2206a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RegistrationButton: {fileID: 1429508302}
-  StepButton: {fileID: 508592876}
-  PlayButton: {fileID: 1458673334}
-  StopButton: {fileID: 0}
-  SelectedFragments: {fileID: 1584437542}
 --- !u!1 &1437549639
 GameObject:
   m_ObjectHideFlags: 0
