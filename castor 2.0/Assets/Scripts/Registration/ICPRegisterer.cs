@@ -53,17 +53,24 @@ namespace Registration
             Listeners.Add(listener);
         }
 
-        public void Step()
-        {
-            if (HasTerminated) return;
+        public void PrepareStep(){
+            Debug.Log("Prepare step!");
 
-            iterationCounter.Increase();
+            if (HasTerminated) return;
 
             StaticPoints = SelectPoints(StaticFragment);
             ModelPoints = SelectPoints(ModelFragment);
 
             Correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
             Correspondences = FilterCorrespondences(Correspondences);
+        }
+
+        public void Step()
+        {
+            Debug.Log("Step!");
+
+            if (HasTerminated) return;
+            iterationCounter.Increase();
 
             Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(Correspondences);
             ApplyTransform(transformationMatrix, ModelFragment);

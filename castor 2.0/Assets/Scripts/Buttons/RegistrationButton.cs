@@ -41,7 +41,11 @@ namespace Buttons
 
             registerer.AddListener(SelectedFragments);
 
-            while (!registerer.HasTerminated) registerer.Step();
+            while (!registerer.HasTerminated)
+            {
+                registerer.PrepareStep();
+                registerer.Step();
+            }
         }
 
         private void GetModelAndStaticFragment(out GameObject modelFragment, out GameObject staticFragment)
