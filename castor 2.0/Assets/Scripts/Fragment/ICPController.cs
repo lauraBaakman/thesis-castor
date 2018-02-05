@@ -20,14 +20,8 @@ namespace Fragment
             Debug.Assert(ParticleSystem, "Could not get the ParticleSystem component.");
         }
 
-        public IEnumerator OnICPTerminated()
+        public void OnICPTerminated()
         {
-            if (Application.isEditor)
-            {
-                Debug.Log("Fragment:ICPController:OnICPTerminated: yielding for a while");
-                yield return new WaitForSeconds(300);
-            }
-
             ClearPoints();
         }
 
@@ -81,7 +75,7 @@ namespace Fragment
 
         public void OnStepCompleted()
         {
-            //Do nothing
+            ClearPoints();
         }
     }
 }

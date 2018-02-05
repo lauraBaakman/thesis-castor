@@ -12,7 +12,7 @@ namespace Registration
 
         void OnStepCompleted();
 
-        IEnumerator OnICPTerminated();
+        void OnICPTerminated();
     }
 }
 

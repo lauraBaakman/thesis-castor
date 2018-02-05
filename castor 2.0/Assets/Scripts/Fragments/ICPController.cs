@@ -115,20 +115,14 @@ namespace Fragments
         /// GL calls need to be placed in OnRenderObject to avoid executing before 
         /// the camera is rendered, since the camera clears the screen. 
         /// Source: https://docs.unity3d.com/ScriptReference/GL.html
-        /// </summary>
+        /// </summary
         public void OnRenderObject()
         {
             RenderCorrespondences();
         }
 
-        public IEnumerator OnICPTerminated()
+        public void OnICPTerminated()
         {
-            if (Application.isEditor)
-            {
-                Debug.Log("Fragments:ICPController:OnICPTerminated: yielding for a while");
-                yield return new WaitForSeconds(300);
-            }
-
             ClearCorrespondences();
         }
 
@@ -139,7 +133,7 @@ namespace Fragments
 
         public void OnStepCompleted()
         {
-            //Do nothing
+            ClearCorrespondences();
         }
     }
 }
