@@ -9,8 +9,6 @@ namespace Buttons
         protected override void ExecuteButtonAction()
         {
             if (registerer == null) return;
-
-            Debug.Log("ExecuteButtonAction");
             while (!registerer.HasTerminated)
             {
                 registerer.PrepareStep();

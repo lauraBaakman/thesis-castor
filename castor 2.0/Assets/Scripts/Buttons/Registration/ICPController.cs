@@ -31,6 +31,7 @@ namespace Buttons
             registerer.AddListener(this.gameObject);
 
             StepButton.Registerer = registerer;
+            PlayButton.Registerer = registerer;
 
             ToggleICPModeInGUI(true);
         }
