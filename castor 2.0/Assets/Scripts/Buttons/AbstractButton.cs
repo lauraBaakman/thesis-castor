@@ -6,7 +6,7 @@ namespace Buttons
     public abstract class AbstractButton : MonoBehaviour
     {
 
-        protected Button Button;
+        public Button Button;
 
         protected virtual void Awake()
         {
