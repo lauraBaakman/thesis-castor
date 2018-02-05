@@ -14,8 +14,6 @@ namespace Registration
 
         private Settings Settings;
 
-        private bool hasTerminated;
-
         private Counter iterationCounter;
 
         private Action FinishedCallBack;
@@ -28,6 +26,7 @@ namespace Registration
         {
             get { return hasTerminated; }
         }
+        private bool hasTerminated;
 
         public ICPRegisterer(
             GameObject staticFragment, GameObject modelFragment,
