@@ -8,7 +8,6 @@ namespace Buttons
 
         protected override void ExecuteButtonAction()
         {
-            Debug.Log("RegistrationStepButton:ExecuteButtonAction");
             if (registerer == null) return;
 
             if (nextOperationIsStep)
@@ -24,10 +23,6 @@ namespace Buttons
 
         protected override bool HasDetectedKeyBoardShortCut()
         {
-            
-            if(Input.GetKeyDown(KeyCode.Space)){
-                Debug.Log("Detected Space!");    
-            }
             return Input.GetKeyDown(KeyCode.Space);
         }
     }
