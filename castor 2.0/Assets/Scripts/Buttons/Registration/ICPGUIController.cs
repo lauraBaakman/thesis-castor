@@ -6,7 +6,7 @@ namespace Buttons
 {
     public class ICPGUIController : MonoBehaviour, Registration.IICPListener
     {
-        public AbstractButton RegistrationButton;
+        public RegistrationButton RegistrationButton;
         public AbstractRegistrationButton StepButton;
         public AbstractRegistrationButton PlayButton;
         public AbstractRegistrationButton StopButton;
@@ -29,6 +29,8 @@ namespace Buttons
             );
             registerer.AddListener(SelectedFragments);
             registerer.AddListener(this.gameObject);
+
+            RegistrationButton.ICPGUIController = this;
 
             StepButton.Registerer = registerer;
             PlayButton.Registerer = registerer;

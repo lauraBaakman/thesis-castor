@@ -9,12 +9,11 @@ namespace Buttons
     {
         private int RequiredNumberOfSelectedFragments = 2;
 
-        private ICPGUIController ICPController;
-
-        private void Start()
+        public ICPGUIController ICPGUIController
         {
-            ICPController = this.GetComponent<ICPGUIController>();
+            set { icpController = value; }
         }
+        private ICPGUIController icpController;
 
         public void OnEnable()
         {
@@ -32,7 +31,7 @@ namespace Buttons
 
         protected override void ExecuteButtonAction()
         {
-            ICPController.InitializeICP();
+            icpController.InitializeICP();
         }
 
         protected override bool HasDetectedKeyBoardShortCut()
