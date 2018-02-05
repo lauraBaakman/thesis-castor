@@ -131,5 +131,15 @@ namespace Fragments
 
             ClearCorrespondences();
         }
+
+        public void OnPreparetionStepCompleted()
+        {
+            //Do nothing
+        }
+
+        public void OnStepCompleted()
+        {
+            //Do nothing
+        }
     }
 }

@@ -8,6 +8,10 @@ namespace Registration
 
         void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message);
 
+        void OnPreparetionStepCompleted();
+
+        void OnStepCompleted();
+
         IEnumerator OnICPTerminated();
     }
 }

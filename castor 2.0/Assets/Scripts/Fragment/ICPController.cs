@@ -73,5 +73,15 @@ namespace Fragment
             //Do nothing, correspondences are handled by Fragments.ICPController.
         }
         #endregion
+
+        public void OnPreparetionStepCompleted()
+        {
+            //Do nothing
+        }
+
+        public void OnStepCompleted()
+        {
+            //Do nothing
+        }
     }
 }

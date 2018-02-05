@@ -13,12 +13,14 @@ namespace Buttons
 
         public GameObject SelectedFragments;
 
+        private ICPRegisterer registerer;
+
         public void InitializeICP()
         {
             GameObject modelFragment, staticFragment;
             GetModelAndStaticFragment(out modelFragment, out staticFragment);
 
-            ICPRegisterer registerer = new ICPRegisterer(
+            registerer = new ICPRegisterer(
                 modelFragment: modelFragment,
                 staticFragment: staticFragment,
                 settings: new Settings(
@@ -36,21 +38,24 @@ namespace Buttons
             }
         }
 
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
-        {
-            Debug.Log("Buttons:ICPController:OnICPCorrespondencesChanged");
-        }
+        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
 
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message)
-        {
-            Debug.Log("Buttons:ICPController:OnICPPointsSelected");
-        }
+        public void OnICPPointsSelected(ICPPointsSelectedMessage message) { }
 
         public IEnumerator OnICPTerminated()
         {
             Debug.Log("Buttons:ICPController:OnICPTerminated");
             yield return new WaitForSeconds(1);
+        }
 
+        public void OnPreparetionStepCompleted()
+        {
+            Debug.Log("Buttons:ICPController:OnPreparetionStepCompleted");
+        }
+
+        public void OnStepCompleted()
+        {
+            Debug.Log("Buttons:ICPController:OnStepCompleted");
         }
 
         private void GetModelAndStaticFragment(out GameObject modelFragment, out GameObject staticFragment)

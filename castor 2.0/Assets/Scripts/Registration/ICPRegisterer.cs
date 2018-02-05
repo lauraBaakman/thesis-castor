@@ -54,8 +54,6 @@ namespace Registration
         }
 
         public void PrepareStep(){
-            Debug.Log("Prepare step!");
-
             if (HasTerminated) return;
 
             StaticPoints = SelectPoints(StaticFragment);
@@ -63,17 +61,19 @@ namespace Registration
 
             Correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
             Correspondences = FilterCorrespondences(Correspondences);
+
+            SendMessageToAllListeners("OnPreparetionStepCompleted");
         }
 
         public void Step()
         {
-            Debug.Log("Step!");
-
             if (HasTerminated) return;
             iterationCounter.Increase();
 
             Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(Correspondences);
             ApplyTransform(transformationMatrix, ModelFragment);
+
+            SendMessageToAllListeners("OnStepCompleted");
 
             if (IsFinished(Correspondences)) Terminate();
         }
