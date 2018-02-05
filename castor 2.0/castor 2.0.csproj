@@ -330,7 +330,7 @@
     <Compile Include="Assets\Scripts\Fragment\RandomTransformer.cs" />
     <Compile Include="Assets\Scripts\Fragment\SelectionController.cs" />
     <Compile Include="Assets\Scripts\Fragment\StateTracker.cs" />
-    <Compile Include="Assets\Scripts\Fragments\ICPController.cs" />
+    <Compile Include="Assets\Scripts\Fragments\ICPCorrespondencesController.cs" />
     <Compile Include="Assets\Scripts\Fragments\SelectionController.cs" />
     <Compile Include="Assets\Scripts\Help\HelpMessageSender.cs" />
     <Compile Include="Assets\Scripts\IO\FragmentsImporter.cs" />

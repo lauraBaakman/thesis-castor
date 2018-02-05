@@ -6,7 +6,7 @@ using System;
 
 namespace Fragments
 {
-    public class ICPController : MonoBehaviour, Registration.IICPListener
+    public class ICPCorrespondencesController : MonoBehaviour, Registration.IICPListener
     {
         public Color CorrespondenceColor;
 
