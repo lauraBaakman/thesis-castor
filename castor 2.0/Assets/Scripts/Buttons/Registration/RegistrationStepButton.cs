@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 namespace Buttons
 {
@@ -19,15 +20,26 @@ namespace Buttons
 
 
             Button.interactable = false;
+
             if (nextOperationIsStep)
             {
-                registerer.Step();
-                nextOperationIsStep = false;
+                ExecuteStep();
             } else
             {
-                registerer.PrepareStep();
-                nextOperationIsStep = true;
+                PrepareStep();
             }
+        }
+
+        private void ExecuteStep()
+        {
+            registerer.Step();
+            nextOperationIsStep = false;
+        }
+
+        private void PrepareStep()
+        {
+            registerer.PrepareStep();
+            nextOperationIsStep = true;
         }
 
         protected override bool HasDetectedKeyBoardShortCut()
