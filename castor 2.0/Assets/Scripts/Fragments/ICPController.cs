@@ -121,17 +121,17 @@ namespace Fragments
             RenderCorrespondences();
         }
 
-        public void OnICPTerminated()
-        {
-            ClearCorrespondences();
-        }
-
         public void OnPreparetionStepCompleted()
         {
             //Do nothing
         }
 
         public void OnStepCompleted()
+        {
+            ClearCorrespondences();
+        }
+
+        public void OnICPTerminated(ICPTerminatedMessage message)
         {
             ClearCorrespondences();
         }

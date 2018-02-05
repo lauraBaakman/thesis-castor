@@ -12,7 +12,7 @@ namespace Registration
 
         void OnStepCompleted();
 
-        void OnICPTerminated();
+        void OnICPTerminated(ICPTerminatedMessage message);
     }
 }
 

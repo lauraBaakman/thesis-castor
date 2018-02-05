@@ -48,11 +48,6 @@ namespace Buttons
             RegistrationButton.Button.interactable = !toggle;
         }
 
-        public void OnICPTerminated()
-        {
-            ToggleICPModeInGUI(false);
-        }
-
         public void OnPreparetionStepCompleted()
         {
             StepButton.Button.interactable = true;
@@ -73,6 +68,11 @@ namespace Buttons
             );
             modelFragment = childMeshes[0].gameObject;
             staticFragment = childMeshes[1].gameObject;
+        }
+
+        public void OnICPTerminated(ICPTerminatedMessage message)
+        {
+            ToggleICPModeInGUI(false);
         }
     }
 

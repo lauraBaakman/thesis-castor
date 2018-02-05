@@ -20,10 +20,6 @@ namespace Fragment
             Debug.Assert(ParticleSystem, "Could not get the ParticleSystem component.");
         }
 
-        public void OnICPTerminated()
-        {
-            ClearPoints();
-        }
 
         #region Points
         /// <summary>
@@ -74,6 +70,11 @@ namespace Fragment
         }
 
         public void OnStepCompleted()
+        {
+            ClearPoints();
+        }
+
+        public void OnICPTerminated(ICPTerminatedMessage message)
         {
             ClearPoints();
         }
