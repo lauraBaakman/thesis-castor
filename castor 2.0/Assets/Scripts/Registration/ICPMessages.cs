@@ -4,58 +4,61 @@ using System.Collections.Generic;
 
 namespace Registration
 {
-    public class Message
+    public class ICPPointsSelectedMessage
     {
-        private readonly Transform transform;
-
-        protected Message(Transform transform)
-        {
-            this.transform = transform;
-        }
-
         public Transform Transform
         {
-            get
-            {
-                return transform;
-            }
+            get { return transform; }
         }
-
-    }
-
-    public class ICPPointsSelectedMessage : Message
-    {
-        private readonly List<Vector3> points;
-
-        public ICPPointsSelectedMessage(List<Vector3> points, Transform transform) : base(transform)
-        {
-            this.points = points;
-        }
+        private readonly Transform transform;
 
         public List<Vector3> Points
         {
-            get
-            {
-                return points;
-            }
+            get { return points; }
+        }
+        private readonly List<Vector3> points;
+
+        public ICPPointsSelectedMessage(List<Vector3> points, Transform transform)
+        {
+            this.transform = transform;
+            this.points = points;
         }
     }
 
-    public class ICPCorrespondencesChanged : Message
+    public class ICPCorrespondencesChanged
     {
-        private readonly List<Correspondence> correspondences;
-
-        public ICPCorrespondencesChanged(List<Correspondence> correspondences, Transform transform) : base(transform)
-        {
-            this.correspondences = correspondences;
-        }
-
         public List<Correspondence> Correspondences
         {
-            get
-            {
-                return correspondences;
-            }
+            get { return correspondences; }
+        }
+        private readonly List<Correspondence> correspondences;
+
+        public Transform Transform
+        {
+            get { return transform; }
+        }
+        private readonly Transform transform;
+
+        public ICPCorrespondencesChanged(List<Correspondence> correspondences, Transform transform)
+        {
+            this.correspondences = correspondences;
+            this.transform = transform;
+        }
+    }
+
+    public class ICPTerminatedMessage
+    {
+        public enum TerminationReason { UserTerminated, ExceededNumberOfIterations, ErrorBelowThreshold }
+
+        private TerminationReason reason;
+        public TerminationReason Reason
+        {
+            get { return reason; }
+        }
+
+        public ICPTerminatedMessage(TerminationReason reason)
+        {
+            this.reason = reason;
         }
     }
 }
