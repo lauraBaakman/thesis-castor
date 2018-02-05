@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System;
 
 namespace Registration
@@ -14,6 +13,8 @@ namespace Registration
         private readonly Vector3 modelPoint;
         private readonly Vector3 staticPoint;
 
+        public readonly Color Color;
+
         public Vector3 ModelPoint { get { return modelPoint; } }
 
         public Vector3 StaticPoint { get { return staticPoint; } }
@@ -27,6 +28,12 @@ namespace Registration
         {
             this.modelPoint = modelPoint;
             this.staticPoint = staticPoint;
+
+            Color = UnityEngine.Random.ColorHSV(
+                hueMin:0.0f, hueMax:1.0f, 
+                saturationMin: 1.0f, saturationMax: 1.0f, 
+                valueMin: 0.5f, valueMax: 0.5f
+            );
         }
 
         public Correspondence(DistanceNode node)
