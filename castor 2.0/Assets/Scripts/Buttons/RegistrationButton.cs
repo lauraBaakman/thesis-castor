@@ -9,7 +9,12 @@ namespace Buttons
     {
         private int RequiredNumberOfSelectedFragments = 2;
 
-        public GameObject SelectedFragments;
+        private ICPController ICPController;
+
+        private void Start()
+        {
+            ICPController = this.GetComponent<ICPController>();
+        }
 
         public void OnEnable()
         {
@@ -27,47 +32,12 @@ namespace Buttons
 
         protected override void ExecuteButtonAction()
         {
-            GameObject modelFragment, staticFragment;
-            GetModelAndStaticFragment(out modelFragment, out staticFragment);
-
-            ICPRegisterer registerer = new ICPRegisterer(
-                modelFragment: modelFragment,
-                staticFragment: staticFragment,
-                callBack: FinishedRegistrationCallBack,
-                settings: new Settings(
-                    referenceTransform: SelectedFragments.transform
-                )
-            );
-
-            registerer.AddListener(SelectedFragments);
-
-            while (!registerer.HasTerminated)
-            {
-                registerer.PrepareStep();
-                registerer.Step();
-            }
-        }
-
-        private void GetModelAndStaticFragment(out GameObject modelFragment, out GameObject staticFragment)
-        {
-            //We are interested in all children of SelectedFragmetns that have meshrenderes, i.e. the meshes.
-            MeshRenderer[] childMeshes = SelectedFragments.GetComponentsInChildren<MeshRenderer>();
-            Debug.Assert(
-                childMeshes.Length == 2,
-                "Expected SelectedFragments to have exactly two children with MeshRenders, not " + childMeshes.Length
-            );
-            modelFragment = childMeshes[0].gameObject;
-            staticFragment = childMeshes[1].gameObject;
+            ICPController.InitializeICP();
         }
 
         protected override bool HasDetectedKeyBoardShortCut()
         {
             return RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed() && Input.GetButtonDown("Register");
-        }
-
-        private void FinishedRegistrationCallBack()
-        {
-            Debug.Log("FinishedRegistrationCallBack!");
         }
     }
 
