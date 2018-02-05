@@ -7,9 +7,9 @@ namespace Buttons
     public class ICPController : MonoBehaviour, Registration.IICPListener
     {
         public AbstractButton RegistrationButton;
-        public AbstractButton StepButton;
-        public AbstractButton PlayButton;
-        public AbstractButton StopButton;
+        public AbstractRegistrationButton StepButton;
+        public AbstractRegistrationButton PlayButton;
+        public AbstractRegistrationButton StopButton;
 
         public GameObject SelectedFragments;
 
@@ -27,15 +27,16 @@ namespace Buttons
                     referenceTransform: SelectedFragments.transform
                 )
             );
-
             registerer.AddListener(SelectedFragments);
             registerer.AddListener(this.gameObject);
 
-            while (!registerer.HasTerminated)
-            {
-                registerer.PrepareStep();
-                registerer.Step();
-            }
+            StepButton.Registerer = registerer;
+
+            //while (!registerer.HasTerminated)
+            //{
+            //    registerer.PrepareStep();
+            //    registerer.Step();
+            //}
         }
 
         public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
