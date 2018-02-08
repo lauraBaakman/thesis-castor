@@ -308,6 +308,7 @@
     <Compile Include="Assets\Scripts\ApplicationInitializer.cs" />
     <Compile Include="Assets\Scripts\Buttons\AbstractButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\AddFragmentButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\DeleteFragmentButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\FocusButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\HelpButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
@@ -347,6 +348,7 @@
     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />
     <Compile Include="Assets\Scripts\Registration\IICPListener.cs" />
+    <Compile Include="Assets\Scripts\Registration\Point.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSelector.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\SelectAllPointsSelector.cs" />
     <Compile Include="Assets\Scripts\Registration\Settings.cs" />
@@ -498,8 +500,6 @@
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Buttons\DeleteFragmentButton.cs" />
-    <Compile Include="Assets\Scripts\Registration\Point.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
