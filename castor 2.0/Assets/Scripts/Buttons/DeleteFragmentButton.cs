@@ -5,6 +5,13 @@ namespace Buttons
 {
     public class DeleteFragmentButton : AbstractButton, Fragments.ISelectionControllerListener
     {
+        protected override void Awake()
+        {
+            base.Awake();
+
+            this.Button.interactable = false;
+        }
+
         protected override void ExecuteButtonAction()
         {
             Debug.Log("Delete fragment!");
@@ -17,7 +24,7 @@ namespace Buttons
 
         public void OnNumberOfSelectedObjectsChanged(int currentCount)
         {
-            Debug.Log("# Selected fragments changed!");
+            this.Button.interactable = (currentCount >= 1);
         }
     }
 }
