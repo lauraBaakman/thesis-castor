@@ -29,7 +29,8 @@ namespace Fragment
             SendMessage(
                 methodName: "OnToggleSelectionState",
                 value: false,
-                options: SendMessageOptions.RequireReceiver
+                //Breaks if we are deselecting the fragment before destroying it
+                options: SendMessageOptions.DontRequireReceiver
             );
         }
 

@@ -5,6 +5,8 @@ namespace Buttons
 {
     public class DeleteFragmentButton : AbstractButton, Fragments.ISelectionControllerListener
     {
+        public GameObject SelectedFragments;
+
         protected override void Awake()
         {
             base.Awake();
@@ -14,7 +16,22 @@ namespace Buttons
 
         protected override void ExecuteButtonAction()
         {
-            Debug.Log("Delete fragment!");
+            DeleteSelectedFragments();
+        }
+
+        private void DeleteSelectedFragments()
+        {
+            foreach (Transform childTransform in SelectedFragments.transform)
+            {
+                DeleteFragment(childTransform.gameObject);
+            }
+            RTEditor.EditorObjectSelection.Instance.ClearSelection(allowUndoRedo:false);
+        }
+
+        private void DeleteFragment(GameObject fragment)
+        {
+            fragment.SetActive(false);
+            Destroy(fragment, 5.0f);
         }
 
         protected override bool HasDetectedKeyBoardShortCut()
