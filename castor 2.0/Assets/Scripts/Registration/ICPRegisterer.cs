@@ -129,7 +129,7 @@ namespace Registration
         /// <returns>The found correspondences.</returns>
         /// <param name="staticPoints">Points of the static fragment.</param>
         /// <param name="modelPoints">Points of the model fragment.</param>
-        private List<Correspondence> ComputeCorrespondences(List<Vector3> staticPoints, List<Vector3> modelPoints)
+        private List<Correspondence> ComputeCorrespondences(List<Point> staticPoints, List<Point> modelPoints)
         {
             List<Correspondence> correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
 

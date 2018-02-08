@@ -14,7 +14,7 @@ namespace Registration
     /// </summary>
     public class NearstPointCorrespondenceFinder : ICorrespondenceFinder
     {
-        public List<Correspondence> Find(ReadOnlyCollection<Vector3> staticPoints, ReadOnlyCollection<Vector3> modelPoints)
+        public List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
         {
 
             List<DistanceNode> distanceNodes = CreateDistanceNodeList(staticPoints, modelPoints);
@@ -30,11 +30,11 @@ namespace Registration
         /// <returns>The list with distance nodes..</returns>
         /// <param name="staticPoints">Static points.</param>
         /// <param name="modelPoints">Model points.</param>
-        public List<DistanceNode> CreateDistanceNodeList(ReadOnlyCollection<Vector3> staticPoints, ReadOnlyCollection<Vector3> modelPoints)
+        public List<DistanceNode> CreateDistanceNodeList(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
         {
             List<DistanceNode> nodes = new List<DistanceNode>();
 
-            Vector3 staticPoint, modelPoint;
+            Point staticPoint, modelPoint;
             for (int staticIdx = 0; staticIdx < staticPoints.Count; staticIdx++)
             {
                 staticPoint = staticPoints[staticIdx];
@@ -55,9 +55,9 @@ namespace Registration
             return nodes;
         }
 
-        private float SquaredEuclideanDistance(Vector3 staticPoint, Vector3 modelPoint)
+        private float SquaredEuclideanDistance(Point staticPoint, Point modelPoint)
         {
-            return (staticPoint - modelPoint).sqrMagnitude;
+            return (staticPoint.Position - modelPoint.Position).sqrMagnitude;
         }
 
         public List<Correspondence> CreateCorrespondenceList(List<DistanceNode> distanceNodes, int numPointsSmallestFragment)
@@ -69,8 +69,8 @@ namespace Registration
     internal class CorrespondenceListBuilder
     {
         private Stack<DistanceNode> DistanceNodes;
-        private HashSet<Vector3> StaticPointsInACorrespondence;
-        private HashSet<Vector3> ModelPointsInACorrespondence;
+        private HashSet<Point> StaticPointsInACorrespondence;
+        private HashSet<Point> ModelPointsInACorrespondence;
         private List<Correspondence> Correspondences;
         private int FinalCorrespondenceCount;
 
@@ -79,8 +79,8 @@ namespace Registration
             distanceNodes.Sort(DistanceNode.SortDescendingOnDistance());
             DistanceNodes = new Stack<DistanceNode>(distanceNodes);
 
-            StaticPointsInACorrespondence = new HashSet<Vector3>();
-            ModelPointsInACorrespondence = new HashSet<Vector3>();
+            StaticPointsInACorrespondence = new HashSet<Point>();
+            ModelPointsInACorrespondence = new HashSet<Point>();
 
             FinalCorrespondenceCount = numPointsSmallestFragment;
 
@@ -152,8 +152,8 @@ namespace Registration
 
     public class DistanceNode : IComparable<DistanceNode>, IEquatable<DistanceNode>
     {
-        private readonly Vector3 staticPoint;
-        public Vector3 StaticPoint
+        private readonly Point staticPoint;
+        public Point StaticPoint
         {
             get
             {
@@ -161,8 +161,8 @@ namespace Registration
             }
         }
 
-        private readonly Vector3 modelPoint;
-        public Vector3 ModelPoint
+        private readonly Point modelPoint;
+        public Point ModelPoint
         {
             get
             {
@@ -179,7 +179,7 @@ namespace Registration
             }
         }
 
-        public DistanceNode(Vector3 staticPoint, Vector3 modelPoint, float distance)
+        public DistanceNode(Point staticPoint, Point modelPoint, float distance)
         {
             this.staticPoint = staticPoint;
             this.modelPoint = modelPoint;
