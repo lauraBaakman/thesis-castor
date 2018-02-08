@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Registration
@@ -12,13 +11,13 @@ namespace Registration
         }
         private readonly Transform transform;
 
-        public List<Vector3> Points
+        public List<Point> Points
         {
             get { return points; }
         }
-        private readonly List<Vector3> points;
+        private readonly List<Point> points;
 
-        public ICPPointsSelectedMessage(List<Vector3> points, Transform transform)
+        public ICPPointsSelectedMessage(List<Point> points, Transform transform)
         {
             this.transform = transform;
             this.points = points;
