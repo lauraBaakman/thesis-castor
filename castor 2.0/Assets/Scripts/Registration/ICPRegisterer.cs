@@ -18,8 +18,8 @@ namespace Registration
 
         private Action FinishedCallBack;
 
-        List<Vector3> StaticPoints;
-        List<Vector3> ModelPoints;
+        List<Point> StaticPoints;
+        List<Point> ModelPoints;
         List<Correspondence> Correspondences;
 
         public bool HasTerminated
@@ -105,10 +105,10 @@ namespace Registration
         /// </summary>
         /// <returns>The points.</returns>
         /// <param name="fragment">Fragment.</param>
-        private List<Vector3> SelectPoints(GameObject fragment)
+        private List<Point> SelectPoints(GameObject fragment)
         {
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
-            List<Vector3> points = Settings.PointSelector.Select(fragment.transform, mesh);
+            List<Point> points = Settings.PointSelector.Select(fragment.transform, mesh);
 
             //Notify the fragment
             fragment.SendMessage(

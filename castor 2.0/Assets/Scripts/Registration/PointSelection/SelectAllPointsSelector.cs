@@ -19,26 +19,27 @@ namespace Registration
             ReferenceTransform = referenceTransform;
         }
 
-        public List<Vector3> Select(Transform fragmentTransform, Mesh fragment)
+        public List<Point> Select(Transform fragmentTransform, Mesh fragment)
         {
             ///Use a set to avoid duplicate points when the mesh has duplicate vertices
             HashSet<Vector3> points = new HashSet<Vector3>();
 
-            foreach(Vector3 vertex in fragment.vertices){
+            foreach (Vector3 vertex in fragment.vertices)
+            {
                 points.Add(vertex);
             }
             return ToReferenceTransfrom(new List<Vector3>(points), fragmentTransform);
         }
 
-        private List<Vector3> ToReferenceTransfrom(List<Vector3> pointsLocalTransform, Transform localTransform)
+        private List<Point> ToReferenceTransfrom(List<Vector3> pointsLocalTransform, Transform localTransform)
         {
-            List<Vector3> pointsReferenceTransform = new List<Vector3>(pointsLocalTransform.Count);
+            List<Point> pointsReferenceTransform = new List<Point>(pointsLocalTransform.Count);
             foreach (Vector3 localPoint in pointsLocalTransform)
             {
                 Vector3 worldTransformPoint = localTransform.TransformPoint(localPoint);
                 Vector3 referenceTransformPoint = ReferenceTransform.InverseTransformPoint(worldTransformPoint);
 
-                pointsReferenceTransform.Add(referenceTransformPoint);
+                pointsReferenceTransform.Add(new Point(referenceTransformPoint));
             }
             return pointsReferenceTransform;
         }
