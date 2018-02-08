@@ -38,12 +38,12 @@ namespace Fragment
             particleConfiguration.customSimulationSpace = newTransform;
         }
 
-        private void VisualizePoints(List<Vector3> points)
+        private void VisualizePoints(List<Point> points)
         {
             ParticleSystem.Particle[] particles = new ParticleSystem.Particle[points.Count];
             for (int i = 0; i < points.Count; i++)
             {
-                particles[i].position = points[i];
+                particles[i].position = points[i].Position;
                 particles[i].startColor = ParticleColor;
                 particles[i].startSize = ParticleSize;
 
