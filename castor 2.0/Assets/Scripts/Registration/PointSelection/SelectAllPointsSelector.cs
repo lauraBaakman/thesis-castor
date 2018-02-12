@@ -59,12 +59,17 @@ namespace Registration
             List<Point> pointsReferenceTransform = new List<Point>(pointsLocalTransform.Count);
             foreach (Vector3 localPoint in pointsLocalTransform)
             {
-                Vector3 worldTransformPoint = localTransform.TransformPoint(localPoint);
-                Vector3 referenceTransformPoint = ReferenceTransform.InverseTransformPoint(worldTransformPoint);
-
-                pointsReferenceTransform.Add(new Point(referenceTransformPoint));
+                pointsReferenceTransform.Add(new Point(PositionToReferenceTransform(localPoint, localTransform)));
             }
             return pointsReferenceTransform;
+        }
+
+        private Vector3 PositionToReferenceTransform(Vector3 pointLocalTransform, Transform localTransform)
+        {
+            Vector3 worldTransformPoint = localTransform.TransformPoint(pointLocalTransform);
+            Vector3 referenceTransformPoint = ReferenceTransform.InverseTransformPoint(worldTransformPoint);
+
+            return referenceTransformPoint;
         }
     }
 }
