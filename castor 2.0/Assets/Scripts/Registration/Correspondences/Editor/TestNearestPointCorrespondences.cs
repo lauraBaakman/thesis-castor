@@ -261,8 +261,8 @@ public class DistanceNodeTests
             distance
         );
         DistanceNode otherNode = new DistanceNode(
-            new Point(new Vector3(1.0f, 2.0f, 3.0f)), 
-            new Point(new Vector3(4.0f, 2.0f, 5.0f)), 
+            new Point(new Vector3(1.0f, 2.0f, 3.0f)),
+            new Point(new Vector3(4.0f, 2.0f, 5.0f)),
             distance
         );
 
