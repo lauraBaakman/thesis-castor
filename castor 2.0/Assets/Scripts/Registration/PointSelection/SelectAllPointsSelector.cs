@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,17 +10,32 @@ namespace Registration
     public class SelectAllPointsSelector : IPointSelector
     {
 
+        private delegate List<Point> SelectionFunction(Transform fragmentTransform, Mesh fragment);
+
         /// <summary>
         /// The transform that the points should be sampled in.
         /// </summary>
         private readonly Transform ReferenceTransform;
 
-        public SelectAllPointsSelector(Transform referenceTransform)
+        /// <summary>
+        /// The function used to select the points, chosen based on the paramters 
+        /// passed to the constructor.
+        /// </summary>
+        private SelectionFunction selectionFunction;
+
+        public SelectAllPointsSelector(Transform referenceTransform, bool includeNormals = false)
         {
             ReferenceTransform = referenceTransform;
+            if (includeNormals) selectionFunction = SelectWithNormals;
+            else selectionFunction = SelectNoNormals;
         }
 
-        public List<Point> Select(Transform fragmentTransform, Mesh fragment, bool includeNormals = false)
+        public List<Point> Select(Transform fragmentTransform, Mesh fragment)
+        {
+            return selectionFunction(fragmentTransform, fragment);
+        }
+
+        private List<Point> SelectNoNormals(Transform fragmentTransform, Mesh fragment)
         {
             ///Use a set to avoid duplicate points when the mesh has duplicate vertices
             HashSet<Vector3> points = new HashSet<Vector3>();
@@ -29,6 +45,13 @@ namespace Registration
                 points.Add(vertex);
             }
             return ToReferenceTransfrom(new List<Vector3>(points), fragmentTransform);
+        }
+
+        private List<Point> SelectWithNormals(Transform fragmentTransform, Mesh fragment)
+        {
+            List<Point> points = new List<Point>();
+
+            return points;
         }
 
         private List<Point> ToReferenceTransfrom(List<Vector3> pointsLocalTransform, Transform localTransform)

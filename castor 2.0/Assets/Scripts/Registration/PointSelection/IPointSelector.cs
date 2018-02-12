@@ -5,6 +5,6 @@ namespace Registration
 {
     public interface IPointSelector
     {
-        List<Point> Select(Transform fragmentTransform, Mesh fragment, bool includeNormals = false);
+        List<Point> Select(Transform fragmentTransform, Mesh fragment);
     }
 }
