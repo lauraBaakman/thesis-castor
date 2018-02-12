@@ -11,12 +11,12 @@ public class CorrespondenceTests
     public void TestEquals_Equals()
     {
         Correspondence thisCorrespondence = new Correspondence(
-            new Vector3(1.0f, 2.0f, 2.0f),
-            new Vector3(3.0f, 4.0f, 5.0f)
+            new Point(new Vector3(1.0f, 2.0f, 2.0f)),
+            new Point(new Vector3(3.0f, 4.0f, 5.0f))
         );
         Correspondence otherCorrespondence = new Correspondence(
-            new Vector3(1.0f, 2.0f, 2.0f),
-            new Vector3(3.0f, 4.0f, 5.0f)
+            new Point(new Vector3(1.0f, 2.0f, 2.0f)),
+            new Point(new Vector3(3.0f, 4.0f, 5.0f))
         );
 
         bool expected = true;
@@ -29,12 +29,12 @@ public class CorrespondenceTests
     public void TestEquals_StaticPointNotEqual()
     {
         Correspondence thisCorrespondence = new Correspondence(
-            new Vector3(1.0f, 2.0f, 2.0f),
-            new Vector3(3.0f, 4.0f, 5.0f)
+            new Point(new Vector3(1.0f, 2.0f, 2.0f)),
+            new Point(new Vector3(3.0f, 4.0f, 5.0f))
         );
         Correspondence otherCorrespondence = new Correspondence(
-            new Vector3(1.0f, 3.0f, 2.0f),
-            new Vector3(3.0f, 4.0f, 5.0f)
+            new Point(new Vector3(1.0f, 3.0f, 2.0f)),
+            new Point(new Vector3(3.0f, 4.0f, 5.0f))
         );
 
         bool expected = false;
@@ -47,12 +47,12 @@ public class CorrespondenceTests
     public void TestEquals_ModelPointNotEqual()
     {
         Correspondence thisCorrespondence = new Correspondence(
-            new Vector3(1.0f, 2.0f, 2.0f),
-            new Vector3(3.0f, 4.0f, 5.0f)
+            new Point(new Vector3(1.0f, 2.0f, 2.0f)),
+            new Point(new Vector3(3.0f, 4.0f, 5.0f))
         );
         Correspondence otherCorrespondence = new Correspondence(
-            new Vector3(1.0f, 2.0f, 2.0f),
-            new Vector3(3.0f, 7.0f, 5.0f)
+            new Point(new Vector3(1.0f, 2.0f, 2.0f)),
+            new Point(new Vector3(3.0f, 7.0f, 5.0f))
         );
 
         bool expected = false;

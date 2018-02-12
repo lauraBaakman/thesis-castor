@@ -62,14 +62,14 @@ namespace Fragments
             GL.Color(correspondence.Color);
 
             GL.Vertex3(
-                correspondence.StaticPoint.x,
-                correspondence.StaticPoint.y,
-                correspondence.StaticPoint.z
+                correspondence.StaticPoint.Position.x,
+                correspondence.StaticPoint.Position.y,
+                correspondence.StaticPoint.Position.z
             );
             GL.Vertex3(
-                correspondence.ModelPoint.x,
-                correspondence.ModelPoint.y,
-                correspondence.ModelPoint.z
+                correspondence.ModelPoint.Position.x,
+                correspondence.ModelPoint.Position.y,
+                correspondence.ModelPoint.Position.z
             );
         }
 

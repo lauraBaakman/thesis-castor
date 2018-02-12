@@ -43,8 +43,8 @@ namespace Registration
         {
             foreach (Correspondence correspondence in correspondences)
             {
-                modelPoints.Add(new Vector3d(correspondence.ModelPoint));
-                staticPoints.Add(new Vector3d(correspondence.StaticPoint));
+                modelPoints.Add(new Vector3d(correspondence.ModelPoint.Position));
+                staticPoints.Add(new Vector3d(correspondence.StaticPoint.Position));
             }
         }
 

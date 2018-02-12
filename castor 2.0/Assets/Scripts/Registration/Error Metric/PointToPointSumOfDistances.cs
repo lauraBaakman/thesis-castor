@@ -15,7 +15,7 @@ namespace Registration
             float sumOfErrors = 0;
             foreach (Correspondence correspondence in correspondences)
             {
-                sumOfErrors += DistanceMetric(correspondence.StaticPoint, correspondence.ModelPoint);
+                sumOfErrors += DistanceMetric(correspondence.StaticPoint.Position, correspondence.ModelPoint.Position);
             }
             return sumOfErrors;
         }

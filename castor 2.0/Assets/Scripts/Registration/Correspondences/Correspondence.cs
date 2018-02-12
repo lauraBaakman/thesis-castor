@@ -10,21 +10,21 @@ namespace Registration
     /// </summary>
     public class Correspondence : IEquatable<Correspondence>
     {
-        private readonly Vector3 modelPoint;
-        private readonly Vector3 staticPoint;
+        private readonly Point modelPoint;
+        private readonly Point staticPoint;
 
         public readonly Color Color;
 
-        public Vector3 ModelPoint { get { return modelPoint; } }
+        public Point ModelPoint { get { return modelPoint; } }
 
-        public Vector3 StaticPoint { get { return staticPoint; } }
+        public Point StaticPoint { get { return staticPoint; } }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Correspondence"/> class. 
         /// </summary>
         /// <param name="modelPoint">The point of the correspondence from the model mesh..</param>
         /// <param name="staticPoint">The point of the correspondence from the static mesh.</param>
-        public Correspondence(Vector3 staticPoint, Vector3 modelPoint)
+        public Correspondence(Point staticPoint, Point modelPoint)
         {
             this.modelPoint = modelPoint;
             this.staticPoint = staticPoint;

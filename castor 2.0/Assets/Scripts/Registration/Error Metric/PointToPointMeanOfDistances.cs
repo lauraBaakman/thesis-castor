@@ -14,7 +14,7 @@ namespace Registration
             float error = 0;
             foreach (Correspondence correspondence in correspondences)
             {
-                error += DistanceMetric(correspondence.StaticPoint, correspondence.ModelPoint);
+                error += DistanceMetric(correspondence.StaticPoint.Position, correspondence.ModelPoint.Position);
             }
             error /= correspondences.Count;
             return error;

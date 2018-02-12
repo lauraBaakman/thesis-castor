@@ -55,10 +55,10 @@ public class PointTests
     public void TestCompareTo_ThisSmaller()
     {
         Point thisPoint = new Point(
-            new Vector3(2.0, 3.0, 4.0)
+            new Vector3(2.0f, 3.0f, 4.0f)
         );
         Point otherPoint = new Point(
-            new Vector3(4.0, 5.0, 6.0)
+            new Vector3(4.0f, 5.0f, 6.0f)
         );
 
         int actual = thisPoint.CompareTo(otherPoint);
@@ -87,10 +87,10 @@ public class PointTests
     public void TestCompareTo_ThisGreater()
     {
         Point thisPoint = new Point(
-            new Vector3(4.0, 5.0, 6.0)
+            new Vector3(4.0f, 5.0f, 6.0f)
         );
         Point otherPoint = new Point(
-            new Vector3(2.0, 3.0, 4.0)
+            new Vector3(2.0f, 3.0f, 4.0f)
         );
 
         int actual = thisPoint.CompareTo(otherPoint);
