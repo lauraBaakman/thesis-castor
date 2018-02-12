@@ -5,18 +5,15 @@ namespace Registration
 {
     public class Point : IEquatable<Point>, IComparable<Point>
     {
-
-        private Vector3 position;
-
-        public Point(Vector3 position)
-        {
-            this.Position = position;
-        }
-
         public Vector3 Position
         {
             get { return position; }
-            set { position = value; }
+        }
+        protected Vector3 position;
+
+        public Point(Vector3 position)
+        {
+            this.position = position;
         }
 
         public int CompareTo(Point other)
