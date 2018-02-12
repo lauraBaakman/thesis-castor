@@ -19,7 +19,7 @@ namespace Registration
             ReferenceTransform = referenceTransform;
         }
 
-        public List<Point> Select(Transform fragmentTransform, Mesh fragment)
+        public List<Point> Select(Transform fragmentTransform, Mesh fragment, bool includeNormals = false)
         {
             ///Use a set to avoid duplicate points when the mesh has duplicate vertices
             HashSet<Vector3> points = new HashSet<Vector3>();
