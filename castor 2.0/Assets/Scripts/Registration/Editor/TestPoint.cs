@@ -20,7 +20,7 @@ public class PointTests
         Point otherPoint = new Point(position);
 
         Assert.IsTrue(thisPoint.Equals(otherPoint));
-        Assert.Equals(thisPoint.GetHashCode(), otherPoint.GetHashCode());
+        Assert.AreEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
     }
 
     [Test]
@@ -68,22 +68,6 @@ public class PointTests
     }
 
     [Test]
-    public void TestCompareTo_LengthEqualsThisOtherwiseSmaller()
-    {
-        Point thisPoint = new Point(
-            new Vector3(Mathf.Sqrt(60), Mathf.Sqrt(15), Mathf.Sqrt(25))
-        );
-        Point otherPoint = new Point(
-            new Vector3(Mathf.Sqrt(50), 5, 5)
-        );
-
-        int actual = thisPoint.CompareTo(otherPoint);
-        int expected = -1;
-
-        Assert.AreEqual(actual, expected);
-    }
-
-    [Test]
     public void TestCompareTo_ThisGreater()
     {
         Point thisPoint = new Point(
@@ -91,22 +75,6 @@ public class PointTests
         );
         Point otherPoint = new Point(
             new Vector3(2.0f, 3.0f, 4.0f)
-        );
-
-        int actual = thisPoint.CompareTo(otherPoint);
-        int expected = +1;
-
-        Assert.AreEqual(actual, expected);
-    }
-
-    [Test]
-    public void TestCompareTo_LengthEqualsThisOtherwiseGreater()
-    {
-        Point thisPoint = new Point(
-            new Vector3(Mathf.Sqrt(50), 5, 5)
-        );
-        Point otherPoint = new Point(
-            new Vector3(Mathf.Sqrt(60), Mathf.Sqrt(15), Mathf.Sqrt(25))
         );
 
         int actual = thisPoint.CompareTo(otherPoint);
