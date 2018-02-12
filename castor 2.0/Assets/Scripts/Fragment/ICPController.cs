@@ -46,7 +46,6 @@ namespace Fragment
                 particles[i].position = points[i].Position;
                 particles[i].startColor = ParticleColor;
                 particles[i].startSize = ParticleSize;
-
             }
             ParticleSystem.SetParticles(particles, particles.Length);
         }
