@@ -44,7 +44,7 @@ namespace Registration
             {
                 points.Add(vertex);
             }
-            return ToReferenceTransfrom(new List<Vector3>(points), fragmentTransform);
+            return PositionsToReferenceTransfrom(new List<Vector3>(points), fragmentTransform);
         }
 
         private List<Point> SelectWithNormals(Transform fragmentTransform, Mesh fragment)
@@ -54,12 +54,12 @@ namespace Registration
             return points;
         }
 
-        private List<Point> ToReferenceTransfrom(List<Vector3> pointsLocalTransform, Transform localTransform)
+        private List<Point> PositionsToReferenceTransfrom(List<Vector3> pointsLocalTransform, Transform localTransform)
         {
             List<Point> pointsReferenceTransform = new List<Point>(pointsLocalTransform.Count);
-            foreach (Vector3 localPoint in pointsLocalTransform)
+            foreach (Vector3 pointLocalTransform in pointsLocalTransform)
             {
-                pointsReferenceTransform.Add(new Point(PositionToReferenceTransform(localPoint, localTransform)));
+                pointsReferenceTransform.Add(new Point(PositionToReferenceTransform(pointLocalTransform, localTransform)));
             }
             return pointsReferenceTransform;
         }
