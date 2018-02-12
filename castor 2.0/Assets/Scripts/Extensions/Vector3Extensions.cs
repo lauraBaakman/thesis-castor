@@ -10,6 +10,12 @@ public static class Vector3Extensions
     /// <param name="other">A vector4 to compare with this instance.</param>
     public static int CompareTo(this Vector3 vector, Vector3 other)
     {
-        return vector.sqrMagnitude.CompareTo(other.sqrMagnitude);
+        int compareX = vector.x.CompareTo(other.x);
+        if (compareX != 0) return compareX;
+
+        int compareY = vector.y.CompareTo(other.y);
+        if (compareY != 0) return compareY;
+
+        return vector.z.CompareTo(other.z);
     }
 }
