@@ -21,7 +21,19 @@ namespace Registration
 
         public int CompareTo(Point other)
         {
-            throw new NotImplementedException();
+            if (other == null) return 1;
+
+            int positionMagnitudeComparison = this.position.CompareTo(other.position);
+            if (positionMagnitudeComparison != 0) return positionMagnitudeComparison;
+
+            int xComparison = this.position.x.CompareTo(other.position.x);
+            if (xComparison != 0) return xComparison;
+
+            int yComparison = this.position.y.CompareTo(other.position.y);
+            if (yComparison != 0) return yComparison;
+
+            int zComparison = this.position.z.CompareTo(other.position.z);
+            return zComparison;
         }
 
         public override bool Equals(object obj)
