@@ -51,6 +51,21 @@ namespace Registration
         {
             List<Point> points = new List<Point>();
 
+            for (int i = 0; i < fragment.vertices.Length; i++)
+            {
+                points.Add(
+                    new PointWithNormal(
+                        position: PositionToReferenceTransform(
+                            fragment.vertices[i],
+                            fragmentTransform
+                        ),
+                        normal: NormalToReferenceTransform(
+                            fragment.normals[i],
+                            fragmentTransform
+                        )
+                    )
+                );
+            }
             return points;
         }
 
@@ -70,6 +85,14 @@ namespace Registration
             Vector3 referenceTransformPoint = ReferenceTransform.InverseTransformPoint(worldTransformPoint);
 
             return referenceTransformPoint;
+        }
+
+        private Vector3 NormalToReferenceTransform(Vector3 normalLocalTransform, Transform localTransform)
+        {
+            Vector3 worldTransformNormal = localTransform.TransformDirection(normalLocalTransform);
+            Vector3 referenceTransformNormal = ReferenceTransform.InverseTransformDirection(worldTransformNormal);
+
+            return referenceTransformNormal;
         }
     }
 }
