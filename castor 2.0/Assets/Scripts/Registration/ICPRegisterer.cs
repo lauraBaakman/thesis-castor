@@ -73,6 +73,8 @@ namespace Registration
             Correspondences = FilterCorrespondences(Correspondences);
 
             SendMessageToAllListeners("OnPreparetionStepCompleted");
+
+            TerminateIfNeeded();
         }
 
         public void Step()
