@@ -11,18 +11,25 @@ namespace Registration
         }
         protected Vector3 position;
 
+        public Color Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+        protected Color color;
+
         public Point(Vector3 position)
         {
             this.position = position;
+            this.Color = Color.white;
         }
 
         public int CompareTo(Point other)
         {
             if (other == null) return 1;
-         
+
             return this.position.CompareTo(other.position);
         }
-
 
         public override bool Equals(object obj)
         {
