@@ -32,13 +32,12 @@ namespace Registration
             Color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         }
 
-        public Correspondence(DistanceNode node) 
-        {
-            this.modelPoint = node.ModelPoint;
-            this.staticPoint = node.StaticPoint;
-
-            Color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        }
+        public Correspondence(DistanceNode node)
+            : this(
+                staticPoint: node.StaticPoint,
+                modelPoint: node.ModelPoint
+            )
+        { }
 
         public override bool Equals(object obj)
         {
