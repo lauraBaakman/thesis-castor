@@ -29,7 +29,10 @@ namespace Registration
             this.modelPoint = modelPoint;
             this.staticPoint = staticPoint;
 
-            Color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            this.Color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+
+            this.modelPoint.Color = this.Color;
+            this.staticPoint.Color = this.Color;
         }
 
         public Correspondence(DistanceNode node)
