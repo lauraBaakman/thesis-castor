@@ -81,7 +81,7 @@ namespace Registration
             iterationCounter.Increase();
 
             Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(Correspondences);
-            ApplyTransform(transformationMatrix, ModelFragment);
+            TransformModelFragment(transformationMatrix);
 
             SendMessageToAllListeners("OnStepCompleted");
 
@@ -170,24 +170,28 @@ namespace Registration
             return correspondences;
         }
 
-        private void ApplyTransform(Matrix4x4 transform, GameObject modelFragment)
+        private void TransformModelFragment(Matrix4x4 transform)
         {
-            modelFragment.transform.Translate(
-                translation: transform.ExtractTranslation(),
-                relativeTo: Settings.ReferenceTransform
-            );
-            ApplyRotation(transform.ExtratRotation(), modelFragment);
+            TranslateModelFragment(transform.ExtractTranslation());
+            RotateModelFragment(transform.ExtratRotation());
         }
 
-        private void ApplyRotation(Quaternion rotationInReferenceTransform, GameObject modelFragment)
+        private void TranslateModelFragment(Vector3 translation){
+            ModelFragment.transform.Translate(
+                translation: translation,
+                relativeTo: Settings.ReferenceTransform
+            );            
+        }
+
+        private void RotateModelFragment(Quaternion rotationInReferenceTransform)
         {
-            Transform worldTransform = modelFragment.transform.root;
+            Transform worldTransform = ModelFragment.transform.root;
 
             ///Source: https://answers.unity.com/questions/25305/rotation-relative-to-a-transform.html
             Quaternion fromReferenceToWorld = Quaternion.FromToRotation(Settings.ReferenceTransform.forward, worldTransform.forward);
             Quaternion rotationInWorld = rotationInReferenceTransform * fromReferenceToWorld;
 
-            modelFragment.transform.Rotate(
+            ModelFragment.transform.Rotate(
                 eulerAngles: rotationInWorld.eulerAngles,
                 relativeTo: Space.World
             );
