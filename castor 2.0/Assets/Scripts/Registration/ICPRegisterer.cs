@@ -39,6 +39,9 @@ namespace Registration
             Settings = settings;
             FinishedCallBack = callBack;
 
+            //The static fragment does not change, consequently its points need only be sampled once.
+            StaticPoints = SelectPoints(StaticFragment);
+
             AddListener(StaticFragment);
             AddListener(ModelFragment);
 
@@ -56,8 +59,15 @@ namespace Registration
         {
             if (HasTerminated) return;
 
-            StaticPoints = SelectPoints(StaticFragment);
             ModelPoints = SelectPoints(ModelFragment);
+            StaticFragment.SendMessage(
+                methodName: "OnICPPointsSelected",
+                value: new ICPPointsSelectedMessage(
+                    points: StaticPoints,
+                    transform: Settings.ReferenceTransform
+                ),
+                options: SendMessageOptions.DontRequireReceiver
+            );
 
             Correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
             Correspondences = FilterCorrespondences(Correspondences);
