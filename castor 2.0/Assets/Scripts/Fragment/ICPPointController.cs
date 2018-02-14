@@ -187,6 +187,9 @@ namespace Fragment
 
     internal class Normal
     {
+        private static float MagnitudeFactor = 0.05f;
+        private static Color DefaultColor = Color.white;
+
         public readonly Vector3 Start;
         public readonly Vector3 End;
         public readonly Color Color;
@@ -194,21 +197,22 @@ namespace Fragment
         public Normal(Point point) :
         this(
                 position: point.Position,
-                direction: point.Normal,
-                color: point.Color
+                direction: point.Normal
             )
         { }
 
-        public Normal(Vector3 position, Vector3 direction, Color color)
+        public Normal(Vector3 position, Vector3 direction)
         {
+            Debug.Log("Magnitude Factor: " + MagnitudeFactor);
+
             Start = position;
             End = ComputeEnd(position, direction);
-            Color = color;
+            Color = DefaultColor;
         }
 
         private Vector3 ComputeEnd(Vector3 position, Vector3 direction)
         {
-            return position + direction * 50 * direction.magnitude;
+            return position + direction * MagnitudeFactor * direction.magnitude;
         }
     }
 }
