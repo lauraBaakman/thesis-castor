@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParticleSize: 0.01
+  ShowNormals: 1
 --- !u!114 &114141192575457048
 MonoBehaviour:
   m_ObjectHideFlags: 1
