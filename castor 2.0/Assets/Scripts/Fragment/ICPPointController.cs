@@ -6,7 +6,8 @@ using System;
 
 namespace Fragment
 {
-    public class ICPController : MonoBehaviour, IICPListener
+    [RequireComponent(typeof(ParticleSystem))]
+    public class ICPPointController : MonoBehaviour, IICPListener
     {
 
         public float ParticleSize = 0.01f;
