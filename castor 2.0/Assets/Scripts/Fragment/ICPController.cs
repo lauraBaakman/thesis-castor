@@ -32,9 +32,9 @@ namespace Fragment
 
         private void SetParticleSystemTransform(Transform newTransform)
         {
-            ParticleSystem.MainModule particleConfiguration = ParticleSystem.main;
-            particleConfiguration.simulationSpace = ParticleSystemSimulationSpace.Custom;
-            particleConfiguration.customSimulationSpace = newTransform;
+            ParticleSystem.MainModule main = ParticleSystem.main;
+            main.simulationSpace = ParticleSystemSimulationSpace.Custom;
+            main.customSimulationSpace = newTransform;
         }
 
         private void VisualizePoints(List<Point> points)
