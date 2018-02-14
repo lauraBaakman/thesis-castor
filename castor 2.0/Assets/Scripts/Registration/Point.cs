@@ -6,6 +6,7 @@ namespace Registration
     public class Point : IEquatable<Point>, IComparable<Point>
     {
         private static Color DefaultColor = Color.white;
+        private static Vector3 NoNormal = new Vector3();
 
         public Vector3 Position
         {
@@ -38,12 +39,12 @@ namespace Registration
         }
 
         public Point(Vector3 position)
-            : this(position, normal: new Vector3())
+            : this(position, normal: NoNormal)
         { }
 
         public bool HasNormal()
         {
-            return this.normal != new Vector3();
+            return this.normal != NoNormal;
         }
 
         /// <summary>
