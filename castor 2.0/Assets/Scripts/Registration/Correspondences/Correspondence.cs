@@ -31,8 +31,7 @@ namespace Registration
 
             this.Color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
-            this.modelPoint.Color = this.Color;
-            this.staticPoint.Color = this.Color;
+            Activate();
         }
 
         public Correspondence(DistanceNode node)
@@ -48,6 +47,14 @@ namespace Registration
         public void Deactivate(){
             this.modelPoint.ResetColor();
             this.staticPoint.ResetColor();
+        }
+
+        /// <summary>
+        /// Activate this correspondence, i.e. indicate that it will not be used for ICP.
+        /// </summary>
+        public void Activate(){
+            this.modelPoint.Color = this.Color;
+            this.staticPoint.Color = this.Color;
         }
 
         public override bool Equals(object obj)
