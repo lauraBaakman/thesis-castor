@@ -6,6 +6,8 @@ using RTEditor;
 namespace Buttons
 {
     /// Class to manage the transform space toggle, if the toggle is on we use worldspace.
+    [RequireComponent(typeof(Toggle))]
+    [RequireComponent(typeof(Image))]
     public class TransformSpaceToggle : MonoBehaviour, Fragments.ISelectionControllerListener
     {
         public Sprite LocalSpaceSprite;

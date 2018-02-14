@@ -4,6 +4,7 @@ using Utils;
 
 namespace Fragment
 {
+    [RequireComponent(typeof(MeshRenderer))]
     public class MaterialController : MonoBehaviour, IFragmentStateChanged
     {
 

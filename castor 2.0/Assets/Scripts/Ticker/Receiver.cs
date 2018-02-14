@@ -8,6 +8,7 @@ namespace Ticker
     /// <summary>
     /// Receiver of messages that displays them.
     /// </summary>
+    [RequireComponent(typeof(Text))]
     public class Receiver : MonoBehaviour
     {
         private Text TickerText;
