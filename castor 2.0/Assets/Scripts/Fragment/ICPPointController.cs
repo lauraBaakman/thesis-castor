@@ -203,8 +203,6 @@ namespace Fragment
 
         public Normal(Vector3 position, Vector3 direction)
         {
-            Debug.Log("Magnitude Factor: " + MagnitudeFactor);
-
             Start = position;
             End = ComputeEnd(position, direction);
             Color = DefaultColor;
