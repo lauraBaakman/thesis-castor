@@ -5,6 +5,8 @@ namespace Registration
 {
     public class Point : IEquatable<Point>, IComparable<Point>
     {
+        private static Color DefaultColor = Color.white;
+
         public Vector3 Position
         {
             get { return position; }
@@ -22,6 +24,14 @@ namespace Registration
         {
             this.position = position;
             this.Color = Color.white;
+        }
+
+        /// <summary>
+        /// Resets the color of the point to the default color.
+        /// </summary>
+        public void ResetColor()
+        {
+            this.Color = DefaultColor;
         }
 
         public int CompareTo(Point other)
