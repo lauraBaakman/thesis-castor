@@ -10,6 +10,7 @@ namespace Fragment
         static Material normalMaterial;
 
         public float ParticleSize = 0.01f;
+        public bool ShowNormals = true;
 
         private ParticleSystem ParticleSystem;
 
@@ -24,7 +25,7 @@ namespace Fragment
 
         public void OnRenderObject()
         {
-            RenderNormals();
+            if(ShowNormals) RenderNormals();
         }
 
         #region Points
@@ -37,7 +38,8 @@ namespace Fragment
             VisualizePoints(message.Points);
 
             ReferenceTransform = message.Transform;
-            StoreNormals(message.Points);
+
+            if (ShowNormals) StoreNormals(message.Points);
         }
 
         private void SetParticleSystemTransform(Transform newTransform)
