@@ -42,6 +42,14 @@ namespace Registration
             )
         { }
 
+        /// <summary>
+        /// Deactivate this correspondence, i.e. indicate that it will not be used for ICP.
+        /// </summary>
+        public void Deactivate(){
+            this.modelPoint.ResetColor();
+            this.staticPoint.ResetColor();
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
