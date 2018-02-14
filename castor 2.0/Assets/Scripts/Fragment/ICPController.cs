@@ -10,7 +10,6 @@ namespace Fragment
     {
 
         public float ParticleSize = 0.01f;
-        public Color ParticleColor = Color.white;
 
         private ParticleSystem ParticleSystem;
 
@@ -44,7 +43,7 @@ namespace Fragment
             for (int i = 0; i < points.Count; i++)
             {
                 particles[i].position = points[i].Position;
-                particles[i].startColor = ParticleColor;
+                particles[i].startColor = points[i].Color;
                 particles[i].startSize = ParticleSize;
             }
             ParticleSystem.SetParticles(particles, particles.Length);
