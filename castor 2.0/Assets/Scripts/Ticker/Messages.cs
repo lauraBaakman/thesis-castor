@@ -32,7 +32,8 @@ namespace Ticker
             Color = color;
         }
 
-        protected Message(string text, Color color, float decayInS){
+        protected Message(string text, Color color, float decayInS)
+        {
             Text = text;
             Color = color;
             DecayInS = decayInS;
@@ -50,7 +51,7 @@ namespace Ticker
         public class InfoMessage : Message
         {
             private static readonly Color DefaultColor = new Color(
-                0.6352941176f, 0.9019607843f, 0.3843137255f
+                19f / 256.0f, 36f / 256.0f, 21f / 256.0f
             );
 
             /// <summary>
@@ -66,7 +67,7 @@ namespace Ticker
         public class HelpMessage : Message
         {
             private static readonly Color DefaultColor = new Color(
-                0.3098039216f, 0.3647058824f, 0.8470588235f
+                6.0f / 256.0f, 31.0f / 256.0f, 49.0f / 256.0f
             );
 
             /// <summary>
@@ -85,7 +86,7 @@ namespace Ticker
 
             private string BuildMessageText(string text, string keyboard)
             {
-                if(keyboard.Length == 0) return text;
+                if (keyboard.Length == 0) return text;
                 return string.Format("({0}) {1}", keyboard, text);
             }
         }
@@ -96,7 +97,7 @@ namespace Ticker
         public class WarningMessage : Message
         {
             private static readonly Color DefaultColor = new Color(
-                0.9882352941f, 0.8862745098f, 0.2392156863f
+                208.0f / 256.0f, 103f / 256.0f, 29.0f / 256.0f
             );
 
             public WarningMessage(string text) : base(text, DefaultColor) { }
@@ -109,7 +110,7 @@ namespace Ticker
         {
 
             private static readonly Color DefaultColor = new Color(
-                0.9607843137f, 0.4156862745f, 0.5058823529f
+                179.0f / 256.0f, 28.0f / 256.0f, 30f / 256.0f
             );
 
             /// <summary>
