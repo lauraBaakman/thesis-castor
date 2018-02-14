@@ -118,6 +118,7 @@ namespace Fragments
             RenderCorrespondences();
         }
 
+        #region ICPProgress
         public void OnPreparetionStepCompleted()
         {
             //Do nothing
@@ -132,5 +133,6 @@ namespace Fragments
         {
             ClearCorrespondences();
         }
+        #endregion
     }
 }
