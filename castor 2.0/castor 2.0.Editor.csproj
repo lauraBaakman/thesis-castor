@@ -207,7 +207,6 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
     <Compile Include="Assets\Scripts\Registration\Editor\TestPoint.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestVector3Extensions.cs" />
-    <Compile Include="Assets\Scripts\Registration\Editor\TestPointWithNormal.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />

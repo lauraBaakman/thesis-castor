@@ -54,7 +54,7 @@ namespace Registration
             for (int i = 0; i < fragment.vertices.Length; i++)
             {
                 points.Add(
-                    new PointWithNormal(
+                    new Point(
                         position: PositionToReferenceTransform(
                             fragment.vertices[i],
                             fragmentTransform

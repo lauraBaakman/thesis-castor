@@ -11,19 +11,39 @@ namespace Registration
         {
             get { return position; }
         }
-        protected Vector3 position;
+        private Vector3 position;
 
         public Color Color
         {
             get { return color; }
             set { color = value; }
         }
-        protected Color color;
+        private Color color;
 
-        public Point(Vector3 position)
+        public Vector3 Normal
+        {
+            get
+            {
+                if (HasNormal()) return normal;
+                throw new Exception("The normal of this Point has not been set.");
+            }
+        }
+        private Vector3 normal;
+
+        public Point(Vector3 position, Vector3 normal)
         {
             this.position = position;
-            this.Color = Color.white;
+            this.Color = DefaultColor;
+            this.normal = normal;
+        }
+
+        public Point(Vector3 position)
+            : this(position, normal: new Vector3())
+        { }
+
+        public bool HasNormal()
+        {
+            return this.normal != new Vector3();
         }
 
         /// <summary>
@@ -38,7 +58,10 @@ namespace Registration
         {
             if (other == null) return 1;
 
-            return this.position.CompareTo(other.position);
+            int positionComparison = this.position.CompareTo(other.position);
+            if (positionComparison != 0) return positionComparison;
+
+            return this.normal.CompareTo(other.normal);
         }
 
         public override bool Equals(object obj)
@@ -53,7 +76,8 @@ namespace Registration
             if (other == null) return false;
 
             return (
-                this.position.Equals(other.position)
+                this.position.Equals(other.position) &&
+                this.normal.Equals(other.normal)
             );
         }
 
@@ -62,76 +86,21 @@ namespace Registration
             int hashCode = 67;
 
             hashCode = hashCode * 71 + position.GetHashCode();
+            if (HasNormal()) hashCode = hashCode * 71 + normal.GetHashCode();
 
             return hashCode;
         }
 
         public override string ToString()
         {
-            return string.Format(
-                "[Point: Position={0}]",
-                Position
-            );
+            if (HasNormal())
+            {
+                return string.Format(
+                     "[Point: Position={0}, Normal={1}]", Position, Normal
+                 );
+            }
+            return string.Format("[Point: Position={0}, no normal]", Position);
         }
     }
 
-    public class PointWithNormal
-        : Point, IEquatable<PointWithNormal>, IComparable<PointWithNormal>, IEquatable<Point>, IComparable<Point>
-    {
-        public Vector3 Normal
-        {
-            get { return normal; }
-        }
-        private Vector3 normal;
-
-        public PointWithNormal(Vector3 position, Vector3 normal)
-            : base(position)
-        {
-            this.normal = normal;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-                return false;
-            return this.Equals(obj as PointWithNormal);
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCode = base.GetHashCode();
-
-            hashCode = hashCode * 71 + normal.GetHashCode();
-
-            return hashCode;
-        }
-
-        public override string ToString()
-        {
-            return string.Format(
-                "[PointWithNormal: Position={0}, Normal={1}]",
-                Position, Normal
-            );
-        }
-
-        public bool Equals(PointWithNormal other)
-        {
-            if (other == null) return false;
-
-            return (
-                this.position.Equals(other.position) &&
-                this.normal.Equals(other.normal)
-            );
-        }
-
-        public int CompareTo(PointWithNormal other)
-        {
-            if (other == null) return 1;
-
-            int positonComparison = this.position.CompareTo(other.position);
-            if (positonComparison != 0) return positonComparison;
-
-            return this.normal.CompareTo(other.normal);
-        }
-    }
 }
