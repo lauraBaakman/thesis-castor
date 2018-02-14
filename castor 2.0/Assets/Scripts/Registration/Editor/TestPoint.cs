@@ -214,7 +214,7 @@ public class PointTests
 
         Point point = new Point(position);
 
-        Assert.IsFalse(point.HasNormal());
+        Assert.IsFalse(point.HasNormal);
     }
 
     [Test]
@@ -225,7 +225,7 @@ public class PointTests
 
         Point point = new Point(position, normal);
 
-        Assert.IsTrue(point.HasNormal());
+        Assert.IsTrue(point.HasNormal);
     }
 
     [Test]

@@ -14,6 +14,11 @@ namespace Registration
         }
         private Vector3 position;
 
+        public bool HasNormal
+        {
+            get { return hasNormal(); }
+        }
+
         public Color Color
         {
             get { return color; }
@@ -25,7 +30,7 @@ namespace Registration
         {
             get
             {
-                if (HasNormal()) return normal;
+                if (hasNormal()) return normal;
                 throw new Exception("The normal of this Point has not been set.");
             }
         }
@@ -42,7 +47,7 @@ namespace Registration
             : this(position, normal: NoNormal)
         { }
 
-        public bool HasNormal()
+        private bool hasNormal()
         {
             return this.normal != NoNormal;
         }
@@ -87,14 +92,14 @@ namespace Registration
             int hashCode = 67;
 
             hashCode = hashCode * 71 + position.GetHashCode();
-            if (HasNormal()) hashCode = hashCode * 71 + normal.GetHashCode();
+            if (hasNormal()) hashCode = hashCode * 71 + normal.GetHashCode();
 
             return hashCode;
         }
 
         public override string ToString()
         {
-            if (HasNormal())
+            if (hasNormal())
             {
                 return string.Format(
                      "[Point: Position={0}, Normal={1}]", Position, Normal
