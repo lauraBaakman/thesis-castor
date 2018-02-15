@@ -325,7 +325,7 @@
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Matrix4x4Extensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
-    <Compile Include="Assets\Scripts\Fragment\FragmentPivotPointController.cs" />
+    <Compile Include="Assets\Scripts\Fragment\PivotController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPPointController.cs" />
     <Compile Include="Assets\Scripts\Fragment\Interfaces.cs" />
     <Compile Include="Assets\Scripts\Fragment\MaterialController.cs" />

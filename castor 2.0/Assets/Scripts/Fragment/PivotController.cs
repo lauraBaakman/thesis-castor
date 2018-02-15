@@ -9,7 +9,7 @@ namespace Fragment
     /// 
     /// Source: https://forum.unity.com/threads/change-an-objects-pivot-point.22885/#post-199538
     /// </summary>
-    public class FragmentPivotPointController : MonoBehaviour
+    public class PivotController : MonoBehaviour
     {
 
         void Start()

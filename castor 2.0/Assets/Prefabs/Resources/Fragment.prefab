@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4465373977589206}
-  - component: {fileID: 114608148855469664}
+  - component: {fileID: 114787466125254434}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ac6b5f81fe245ad9b182df9e1a2070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114608148855469664
+--- !u!114 &114787466125254434
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1145679030197738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd2bcfaf9ccd4dfead7c5f043b312f1, type: 3}
+  m_Script: {fileID: 11500000, guid: aa3342b989ccd40b4a78b442fc219e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114919068063448290
