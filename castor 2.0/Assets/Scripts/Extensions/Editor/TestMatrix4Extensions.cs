@@ -91,4 +91,73 @@ public class Matrix4ExtensionTests
         float angle = Quaternion.Angle(actual, expected);
         Assert.AreEqual(expected: 0.0f, actual: angle);
     }
+
+    [Test]
+    public void TestExtractXRotation_TRSSet()
+    {
+        float expected = Random.value;
+
+        Vector3 translation = new Vector3(Random.value, Random.value, Random.value);
+        Quaternion rotation = Quaternion.identity;
+        rotation.eulerAngles = new Vector3(expected, Random.value, Random.value);
+
+        Vector3 scale = new Vector3(Random.value, Random.value, Random.value);
+
+        Matrix4x4 matrix = new Matrix4x4();
+        matrix.SetTRS(
+            pos: translation,
+            q: rotation,
+            s: scale
+        );
+
+        float actual = matrix.ExtractRotationAroundXAxis();
+
+        Assert.That(actual, Is.EqualTo(expected).Within(0.0001));
+    }
+
+    [Test]
+    public void TestExtractYRotation_TRSSet()
+    {
+        float expected = Random.value;
+
+        Vector3 translation = new Vector3(Random.value, Random.value, Random.value);
+        Quaternion rotation = Quaternion.identity;
+        rotation.eulerAngles = new Vector3(Random.value, expected, Random.value);
+
+        Vector3 scale = new Vector3(Random.value, Random.value, Random.value);
+
+        Matrix4x4 matrix = new Matrix4x4();
+        matrix.SetTRS(
+            pos: translation,
+            q: rotation,
+            s: scale
+        );
+
+        float actual = matrix.ExtractRotationAroundYAxis();
+
+        Assert.That(actual, Is.EqualTo(expected).Within(0.0001));
+    }
+
+    [Test]
+    public void TestExtractZRotation_TRSSet()
+    {
+        float expected = Random.value;
+
+        Vector3 translation = new Vector3(Random.value, Random.value, Random.value);
+        Quaternion rotation = Quaternion.identity;
+        rotation.eulerAngles = new Vector3(Random.value, Random.value, expected);
+
+        Vector3 scale = new Vector3(Random.value, Random.value, Random.value);
+
+        Matrix4x4 matrix = new Matrix4x4();
+        matrix.SetTRS(
+            pos: translation,
+            q: rotation,
+            s: scale
+        );
+
+        float actual = matrix.ExtractRotationAroundZAxis();
+
+        Assert.That(actual, Is.EqualTo(expected).Within(0.0001));
+    }
 }
