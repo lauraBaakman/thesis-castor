@@ -325,6 +325,7 @@
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Matrix4x4Extensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
+    <Compile Include="Assets\Scripts\Fragment\FragmentPivotPointController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPPointController.cs" />
     <Compile Include="Assets\Scripts\Fragment\Interfaces.cs" />
     <Compile Include="Assets\Scripts\Fragment\MaterialController.cs" />
@@ -345,9 +346,9 @@
     <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointErrorMetric.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointMeanOfDistances.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointSumOfDistances.cs" />
+    <Compile Include="Assets\Scripts\Registration\ICPInterfaces.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />
-    <Compile Include="Assets\Scripts\Registration\ICPInterfaces.cs" />
     <Compile Include="Assets\Scripts\Registration\Point.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSelector.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\SelectAllPointsSelector.cs" />
@@ -499,8 +500,8 @@
     <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
-    <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Utils\Pair.cs" />
+    <Compile Include="Assets\Scripts\Utils\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
