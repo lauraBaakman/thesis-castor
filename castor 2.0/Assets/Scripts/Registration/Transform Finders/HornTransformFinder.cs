@@ -53,7 +53,7 @@ namespace Registration
             if (correspondences == null) throw new System.NullReferenceException();
             if (correspondences.Count == 0)
             {
-                throw new System.NotSupportedException("Cannot compute the transform if not correspondences are given.");
+                throw new System.NotSupportedException("Cannot compute the transform if no correspondences are given.");
             }
         }
     }
