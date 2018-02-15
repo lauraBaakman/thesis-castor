@@ -174,29 +174,8 @@ namespace Registration
 
         private void TransformModelFragment(Matrix4x4 transform)
         {
-            TranslateModelFragment(transform.ExtractTranslation());
-            RotateModelFragment(transform.ExtratRotation());
-        }
-
-        private void TranslateModelFragment(Vector3 translation){
-            ModelFragment.transform.Translate(
-                translation: translation,
-                relativeTo: Settings.ReferenceTransform
-            );            
-        }
-
-        private void RotateModelFragment(Quaternion rotationInReferenceTransform)
-        {
-            Transform worldTransform = ModelFragment.transform.root;
-
-            ///Source: https://answers.unity.com/questions/25305/rotation-relative-to-a-transform.html
-            Quaternion fromReferenceToWorld = Quaternion.FromToRotation(Settings.ReferenceTransform.forward, worldTransform.forward);
-            Quaternion rotationInWorld = rotationInReferenceTransform * fromReferenceToWorld;
-
-            ModelFragment.transform.Rotate(
-                eulerAngles: rotationInWorld.eulerAngles,
-                relativeTo: Space.World
-            );
+            Fragment.TransformController transformcontroller = ModelFragment.GetComponent<Fragment.TransformController>();
+            transformcontroller.TransformFragment(transform, Settings.ReferenceTransform);
         }
 
         private void SendMessageToAllListeners(string methodName, System.Object message = null)
