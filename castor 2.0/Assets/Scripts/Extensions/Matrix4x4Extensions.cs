@@ -31,36 +31,4 @@ public static class Matrix4x4Extensions
         );
         return rotation;
     }
-
-    /// <summary>
-    /// Extracts the rotation around X-Axis from the matrix.
-    /// </summary>
-    /// <returns>The rotation around X-Axis.</returns>
-    public static float ExtractRotationAroundXAxis(this Matrix4x4 matrix){
-        Quaternion rotation = matrix.ExtratRotation();
-        Vector3 angles = rotation.eulerAngles;
-        return angles.x;
-    }
-
-    /// <summary>
-    /// Extracts the rotation around Y-Axis from the matrix.
-    /// </summary>
-    /// <returns>The rotation around Y-Axis.</returns>
-    public static float ExtractRotationAroundYAxis(this Matrix4x4 matrix)
-    {
-        Quaternion rotation = matrix.ExtratRotation();
-        Vector3 angles = rotation.eulerAngles;
-        return angles.y;
-    }
-
-    /// <summary>
-    /// Extracts the rotation around Z-Axis from the matrix.
-    /// </summary>
-    /// <returns>The rotation around Z-Axis.</returns>
-    public static float ExtractRotationAroundZAxis(this Matrix4x4 matrix)
-    {
-        Quaternion rotation = matrix.ExtratRotation();
-        Vector3 angles = rotation.eulerAngles;
-        return angles.z;
-    }
 }
