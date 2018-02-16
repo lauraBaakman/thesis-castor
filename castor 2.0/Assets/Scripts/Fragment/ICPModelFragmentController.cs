@@ -12,11 +12,6 @@ namespace Fragment
     {
         public List<GameObject> listeners = new List<GameObject>();
 
-        public void Update()
-        {
-            Debug.Log("ICPModelFragmentController");
-        }
-
         #region ICPListener
         public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
         {

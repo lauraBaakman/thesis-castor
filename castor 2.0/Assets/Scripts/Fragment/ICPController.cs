@@ -35,7 +35,6 @@ namespace Fragment
 
         public void OnToggleIsICPFragment(ICPFragmentType type)
         {
-            Debug.Log("OnToggleISICPFragment");
             ToggleIsStaticFragment((type == ICPFragmentType.Static));
             ToggleIsModelFragment((type == ICPFragmentType.Model));
         }
@@ -51,7 +50,6 @@ namespace Fragment
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
-            Debug.Log("ICPController: OnICPTerminated");
             ToggleIsModelFragment(false);
             ToggleIsStaticFragment(false);
         }
