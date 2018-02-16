@@ -26,6 +26,8 @@ namespace Fragment
         #region Points
         public void OnICPPointsSelected(ICPPointsSelectedMessage message)
         {
+            Debug.Log(transform.parent.gameObject.name + " OnICPPointsSelected");
+
             transform.SetParent(message.Transform);
 
             AddICPPoints(message.Points);
@@ -59,6 +61,8 @@ namespace Fragment
 
         private void ClearPoints()
         {
+            Debug.Log(transform.parent.gameObject.name + " ClearPoints");
+
             foreach (Transform child in transform)
             {
                 if (child.gameObject.activeSelf) ClearPoint(child.gameObject);
@@ -70,7 +74,7 @@ namespace Fragment
             ICPPointController controller = point.GetComponent<ICPPointController>();
             controller.Reset();
 
-            unusedPoints.Push(point);     
+            unusedPoints.Push(point);
         }
         #endregion
 

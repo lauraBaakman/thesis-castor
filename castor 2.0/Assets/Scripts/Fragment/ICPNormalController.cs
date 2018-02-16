@@ -17,7 +17,6 @@ namespace Fragment
             if (ShowNormals) RenderNormals();
         }
 
-
         #region Correspondences
         public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
         #endregion

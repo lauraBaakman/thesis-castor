@@ -35,7 +35,19 @@ namespace Registration
         )
         {
             StaticFragment = staticFragment;
+            staticFragment.SendMessage(
+                "OnToggleIsICPFragment",
+                Fragment.ICPFragmentType.Static,
+                SendMessageOptions.RequireReceiver
+            );
+
             ModelFragment = modelFragment;
+            modelFragment.SendMessage(
+                "OnToggleIsICPFragment",
+                Fragment.ICPFragmentType.Model,
+                SendMessageOptions.RequireReceiver
+            );
+
             Settings = settings;
             FinishedCallBack = callBack;
 

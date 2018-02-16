@@ -56,10 +56,7 @@ namespace Fragment
             DeselectFragment();
         }
 
-        public void OnAlteredByTransformGizmo(Gizmo gizmo)
-        {
-            //Not relevant
-        }
+        public void OnAlteredByTransformGizmo(Gizmo gizmo) { }
     }
 
 }
