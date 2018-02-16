@@ -17,6 +17,7 @@ namespace Fragment
         private void Awake()
         {
             originalParentTransform = transform.parent;
+            name = originalParentTransform.name + " " + gameObject.name;
         }
 
         #region Correspondences
@@ -29,8 +30,6 @@ namespace Fragment
             transform.SetParent(message.Transform);
 
             AddICPPoints(message.Points);
-
-            transform.SetParent(originalParentTransform, worldPositionStays: true);
         }
 
         private void AddICPPoints(List<Point> points)
@@ -63,6 +62,7 @@ namespace Fragment
             {
                 if (child.gameObject.activeSelf) ClearPoint(child.gameObject);
             }
+            transform.SetParent(originalParentTransform);
         }
 
         private void ClearPoint(GameObject point)
