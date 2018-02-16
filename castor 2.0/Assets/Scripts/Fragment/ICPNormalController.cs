@@ -8,73 +8,29 @@ namespace Fragment
     public class ICPNormalController : MonoBehaviour, IICPListener
     {
         static Material normalMaterial;
-
-        public float ParticleSize = 0.01f;
         public bool ShowNormals = true;
-
-        private ParticleSystem ParticleSystem;
 
         private List<Normal> Normals = new List<Normal>();
         private Transform ReferenceTransform;
 
-        private void Awake()
-        {
-            ParticleSystem = GetComponent<ParticleSystem>();
-            Debug.Assert(ParticleSystem, "Could not get the ParticleSystem component.");
-        }
-
         public void OnRenderObject()
         {
-            if(ShowNormals) RenderNormals();
+            if (ShowNormals) RenderNormals();
         }
 
-        #region Points
-        /// <summary>
-        /// If the points to be used for ICP are selected this function visualizes them.
-        /// </summary>
+
+        #region Correspondences
+        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
+        #endregion
+
+        #region Normals
         public void OnICPPointsSelected(ICPPointsSelectedMessage message)
         {
-            SetParticleSystemTransform(message.Transform);
-            VisualizePoints(message.Points);
-
             ReferenceTransform = message.Transform;
 
             if (ShowNormals) StoreNormals(message.Points);
         }
 
-        private void SetParticleSystemTransform(Transform newTransform)
-        {
-            ParticleSystem.MainModule main = ParticleSystem.main;
-            main.simulationSpace = ParticleSystemSimulationSpace.Custom;
-            main.customSimulationSpace = newTransform;
-        }
-
-        private void VisualizePoints(List<Point> points)
-        {
-            ParticleSystem.Particle[] particles = new ParticleSystem.Particle[points.Count];
-            for (int i = 0; i < points.Count; i++)
-            {
-                particles[i].position = points[i].Position;
-                particles[i].startColor = points[i].Color;
-                particles[i].startSize = ParticleSize;
-            }
-            ParticleSystem.SetParticles(particles, particles.Length);
-        }
-
-        private void ClearPoints()
-        {
-            ParticleSystem.Clear();
-        }
-        #endregion
-
-        #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
-        {
-            //Do nothing, correspondences are handled by Fragments.ICPController.
-        }
-        #endregion
-
-        #region Normals
         private void StoreNormals(List<Point> points)
         {
             foreach (Point point in points)
@@ -106,10 +62,7 @@ namespace Fragment
 
         private void DrawNormals()
         {
-            foreach (Normal normal in Normals)
-            {
-                DrawNormal((normal));
-            }
+            foreach (Normal normal in Normals) DrawNormal((normal));
         }
 
         private void DrawNormal(Normal normal)
@@ -133,7 +86,7 @@ namespace Fragment
             return Normals.Count > 0;
         }
 
-        private void ClearNormals()
+        private void Clear()
         {
             Normals.Clear();
         }
@@ -164,10 +117,7 @@ namespace Fragment
         #endregion
 
         #region progress
-        public void OnPreparetionStepCompleted()
-        {
-            //Do nothing
-        }
+        public void OnPreparetionStepCompleted() { }
 
         public void OnStepCompleted()
         {
@@ -179,12 +129,6 @@ namespace Fragment
             Clear();
         }
         #endregion
-
-        private void Clear()
-        {
-            ClearPoints();
-            ClearNormals();
-        }
     }
 
     internal class Normal
