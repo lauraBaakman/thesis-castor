@@ -1,25 +1,30 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Buttons {
-    public class AddFragmentButton : AbstractButton {
+namespace Buttons
+{
+    public class AddFragmentButton : AbstractButton
+    {
         public GameObject FragmentsRoot;
 
         protected override void Awake()
         {
             base.Awake();
 
-            if (Application.isEditor) {
-                IO.FragmentsImporter importer = new IO.FragmentsImporter(
-                    fragmentParent: FragmentsRoot,
-                    callBack: NotifyUserOfAddedFragment
-                );
-                importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/FracturedCubeXTranslationPart1.obj", randomizeTransform:false);
-                importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/FracturedCubeXTranslationPart2.obj", randomizeTransform:false);
-            }
+            if (Application.isEditor) LoadTestFragments();
         }
 
-        private void NotifyUserOfAddedFragment( string path, GameObject fragment )
+        private void LoadTestFragments()
+        {
+            IO.FragmentsImporter importer = new IO.FragmentsImporter(
+                fragmentParent: FragmentsRoot,
+                callBack: NotifyUserOfAddedFragment
+            );
+            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/FracturedCubeXTranslationPart1.obj", randomizeTransform: false);
+            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/FracturedCubeXTranslationPart2.obj", randomizeTransform: false);
+        }
+
+        private void NotifyUserOfAddedFragment(string path, GameObject fragment)
         {
             Ticker.Message.InfoMessage message = new Ticker.Message.InfoMessage(
                 string.Format(
