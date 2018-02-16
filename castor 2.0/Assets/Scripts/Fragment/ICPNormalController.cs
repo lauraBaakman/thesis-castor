@@ -5,7 +5,7 @@ using Registration;
 namespace Fragment
 {
     [RequireComponent(typeof(ParticleSystem))]
-    public class ICPPointController : MonoBehaviour, IICPListener
+    public class ICPNormalController : MonoBehaviour, IICPListener
     {
         static Material normalMaterial;
 
