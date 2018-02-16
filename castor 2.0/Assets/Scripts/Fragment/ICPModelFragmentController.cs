@@ -45,8 +45,6 @@ namespace Fragment
             //only notify the listeners if the controller is active
             if (!Active) return;
 
-            Debug.Log("ICPModelFragmentController sending message to  listener");
-
             foreach (GameObject listener in Listeners)
             {
                 listener.SendMessage(methodName, message, option);
