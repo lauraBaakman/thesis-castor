@@ -10,14 +10,20 @@ namespace Registration
     /// </summary>
     public class Correspondence : IEquatable<Correspondence>
     {
+        private static Color DefaultColor = Color.white;
+
         private readonly Point modelPoint;
         private readonly Point staticPoint;
-
-        public readonly Color Color;
 
         public Point ModelPoint { get { return modelPoint; } }
 
         public Point StaticPoint { get { return staticPoint; } }
+
+        public Color Color
+        {
+            get { return color; }
+        }
+        private Color color;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Correspondence"/> class. 
@@ -29,7 +35,7 @@ namespace Registration
             this.modelPoint = modelPoint;
             this.staticPoint = staticPoint;
 
-            this.Color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            this.color = staticPoint.Color;
 
             Activate();
         }
@@ -44,17 +50,24 @@ namespace Registration
         /// <summary>
         /// Deactivate this correspondence, i.e. indicate that it will not be used for ICP.
         /// </summary>
-        public void Deactivate(){
-            this.modelPoint.ResetColor();
-            this.staticPoint.ResetColor();
+        public void Deactivate()
+        {
+            modelPoint.ResetColor();
+            ResetColor();
         }
 
         /// <summary>
         /// Activate this correspondence, i.e. indicate that it will not be used for ICP.
         /// </summary>
-        public void Activate(){
-            this.modelPoint.Color = this.Color;
-            this.staticPoint.Color = this.Color;
+        public void Activate()
+        {
+            modelPoint.Color = staticPoint.Color;
+            color = staticPoint.Color;
+        }
+
+        private void ResetColor()
+        {
+            this.color = DefaultColor;
         }
 
         public override bool Equals(object obj)
