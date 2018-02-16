@@ -9,14 +9,14 @@ namespace Fragment
 {
     public class ICPPointsController : MonoBehaviour, IICPListener
     {
-        private static float pointScale = 0.001f;
+        private static string pointPrefabPath = "ICPPoint";
 
         private Transform originalParentTransform;
         private Stack<GameObject> unusedPoints = new Stack<GameObject>();
 
         private void Awake()
         {
-            originalParentTransform = transform;
+            originalParentTransform = transform.parent;
         }
 
         #region Correspondences
@@ -40,26 +40,53 @@ namespace Fragment
 
         private void AddICPPoint(Point point)
         {
-            GameObject pointGO = GetPoint();
-            //throw new NotImplementedException();
+            GameObject pointGO = GetPointGO();
+            ICPPointController pointController = pointGO.GetComponent<ICPPointController>();
+            pointController.RepresentPoint(point);
         }
 
-        private GameObject GetPoint()
+        private GameObject GetPointGO()
         {
             if (unusedPoints.Count != 0) return unusedPoints.Pop();
 
-            return new GameObject();
+            GameObject point = UnityEngine.Object.Instantiate(
+                original: Resources.Load(pointPrefabPath),
+                parent: transform
+            ) as GameObject;
+
+            return point;
         }
 
+        private void ClearPoints()
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.activeSelf) ClearPoint(child.gameObject);
+            }
+        }
+
+        private void ClearPoint(GameObject point)
+        {
+            ICPPointController controller = point.GetComponent<ICPPointController>();
+            controller.Reset();
+
+            unusedPoints.Push(point);     
+        }
         #endregion
 
 
         #region Progress
-        public void OnICPTerminated(ICPTerminatedMessage message) { }
+        public void OnICPTerminated(ICPTerminatedMessage message)
+        {
+            ClearPoints();
+        }
 
         public void OnPreparetionStepCompleted() { }
 
-        public void OnStepCompleted() { }
+        public void OnStepCompleted()
+        {
+            ClearPoints();
+        }
         #endregion
     }
 
