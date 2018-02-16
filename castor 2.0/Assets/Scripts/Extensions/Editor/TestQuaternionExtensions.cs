@@ -25,7 +25,7 @@ public class QuaternionExtensionTests
         Quaternion rotation = Quaternion.identity;
         rotation.eulerAngles = new Vector3(Random.value, expected, Random.value);
 
-        float actual = rotation.ExtractEulerYangle();
+        float actual = rotation.ExtractEulerYAngle();
 
         Assert.That(actual, Is.EqualTo(expected).Within(0.0001));
     }
@@ -38,7 +38,7 @@ public class QuaternionExtensionTests
         Quaternion rotation = Quaternion.identity;
         rotation.eulerAngles = new Vector3(Random.value, Random.value, expected);
 
-        float actual = rotation.ExtractEulerZangle();
+        float actual = rotation.ExtractEulerZAngle();
 
         Assert.That(actual, Is.EqualTo(expected).Within(0.0001));
     }

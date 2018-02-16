@@ -36,9 +36,9 @@ namespace Fragment
             Quaternion rotationInWorld = rotationInReferenceTransform * fromReferenceToWorld;
 
             //Note the order of the rotations: https://docs.unity3d.com/ScriptReference/Quaternion-eulerAngles.html
-            transform.RotateAround(pivotPoint.position, worldTransform.forward, rotationInWorld.ExtractEulerZangle());
+            transform.RotateAround(pivotPoint.position, worldTransform.forward, rotationInWorld.ExtractEulerZAngle());
             transform.RotateAround(pivotPoint.position, worldTransform.right, rotationInWorld.ExtractEulerXAngle());
-            transform.RotateAround(pivotPoint.position, worldTransform.up, rotationInWorld.ExtractEulerYangle());
+            transform.RotateAround(pivotPoint.position, worldTransform.up, rotationInWorld.ExtractEulerYAngle());
         }
     }
 

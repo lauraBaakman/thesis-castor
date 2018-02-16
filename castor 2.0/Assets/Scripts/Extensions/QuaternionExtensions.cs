@@ -9,13 +9,13 @@ public static class QuaternionExtensions
         return eulerAngles.x;
     }
 
-    public static float ExtractEulerYangle(this Quaternion quaternion)
+    public static float ExtractEulerYAngle(this Quaternion quaternion)
     {
         Vector3 eulerAngles = quaternion.eulerAngles;
         return eulerAngles.y;
     }
 
-    public static float ExtractEulerZangle(this Quaternion quaternion)
+    public static float ExtractEulerZAngle(this Quaternion quaternion)
     {
         Vector3 eulerAngles = quaternion.eulerAngles;
         return eulerAngles.z;
