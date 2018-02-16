@@ -181,7 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da57770fdfef44e6bc003938ed8887d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listeners:
+  Active: 0
+  Listeners:
   - {fileID: 1754553316579294}
 --- !u!114 &114226153730387940
 MonoBehaviour:
@@ -228,7 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d280c0bfa02da4699bbf85d0c02ec552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listeners:
+  Active: 0
+  Listeners:
   - {fileID: 1754553316579294}
 --- !u!114 &114787466125254434
 MonoBehaviour:
