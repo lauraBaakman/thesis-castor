@@ -507,6 +507,7 @@
     <Compile Include="Assets\Scripts\Fragment\ICPPointsController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPPointController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPMessagePasser.cs" />
+    <Compile Include="Assets\Scripts\Extensions\TransformExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
