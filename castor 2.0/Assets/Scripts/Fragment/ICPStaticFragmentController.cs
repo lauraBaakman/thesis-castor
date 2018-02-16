@@ -23,7 +23,7 @@ namespace Fragment
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
-            Debug.Log(gameObject.transform.parent.name + " ICPStaticFragmentController:OnICPTerminated");
+            SendMessageToListeners("OnICPTerminated", message, SendMessageOptions.RequireReceiver);
         }
 
         public void OnPreparetionStepCompleted() { }
