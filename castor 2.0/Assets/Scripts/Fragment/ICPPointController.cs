@@ -63,7 +63,7 @@ namespace Fragment
             gameObject.name = "point: " + point.ToString();
         }
 
-        private void SetColor(Color color)
+        public void SetColor(Color color)
         {
             meshRenderer.material.color = color;
         }
