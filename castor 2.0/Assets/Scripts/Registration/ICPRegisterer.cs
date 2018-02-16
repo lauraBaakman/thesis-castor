@@ -72,14 +72,6 @@ namespace Registration
             if (HasTerminated) return;
 
             ModelPoints = SelectPoints(ModelFragment);
-            StaticFragment.SendMessage(
-                methodName: "OnICPPointsSelected",
-                value: new ICPPointsSelectedMessage(
-                    points: StaticPoints,
-                    transform: Settings.ReferenceTransform
-                ),
-                options: SendMessageOptions.DontRequireReceiver
-            );
 
             Correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
             Correspondences = FilterCorrespondences(Correspondences);
