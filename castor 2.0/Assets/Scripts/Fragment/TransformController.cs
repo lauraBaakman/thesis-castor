@@ -27,19 +27,18 @@ namespace Fragment
             );
         }
 
-        private void RotateFragment(Quaternion rotation, Transform referenceTransform)
+        private void RotateFragment(Quaternion rotationInReferenceTransform, Transform referenceTransform)
         {
-            Debug.Log("Ignoring the input rotation for now, let's first make sure we can a fragment around its own center.");
-            //Transform worldTransform = transform.root;
+            Transform worldTransform = transform.root;
 
             /////Source: https://answers.unity.com/questions/25305/rotation-relative-to-a-transform.html
-            //Quaternion fromReferenceToWorld = Quaternion.FromToRotation(ReferenceTransform.forward, worldTransform.forward);
-            //Quaternion rotationInWorld = rotationInReferenceTransform * fromReferenceToWorld;
+            Quaternion fromReferenceToWorld = Quaternion.FromToRotation(referenceTransform.forward, worldTransform.forward);
+            Quaternion rotationInWorld = rotationInReferenceTransform * fromReferenceToWorld;
 
-            transform.Rotate(
-                eulerAngles: new Vector3(0, 0, 0),
-                relativeTo: Space.Self
-            );
+            //Note the order of the rotations: https://docs.unity3d.com/ScriptReference/Quaternion-eulerAngles.html
+            transform.RotateAround(pivotPoint.position, worldTransform.forward, rotationInWorld.ExtractEulerZangle());
+            transform.RotateAround(pivotPoint.position, worldTransform.right, rotationInWorld.ExtractEulerXAngle());
+            transform.RotateAround(pivotPoint.position, worldTransform.up, rotationInWorld.ExtractEulerYangle());
         }
     }
 
