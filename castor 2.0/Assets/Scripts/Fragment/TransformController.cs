@@ -5,6 +5,14 @@ namespace Fragment
 {
     public class TransformController : MonoBehaviour
     {
+        Transform pivotPoint;
+
+        public void Awake()
+        {
+            pivotPoint = transform.Find("Pivot");
+            Debug.Assert(pivotPoint, "Could not find the pivot point child object.");
+        }
+
         public void TransformFragment(Matrix4x4 transformMatrix, Transform referenceTransform)
         {
             TranslateFragment(transformMatrix.ExtractTranslation(), referenceTransform);
