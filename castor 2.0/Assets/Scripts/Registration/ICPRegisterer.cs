@@ -51,15 +51,15 @@ namespace Registration
             Settings = settings;
             FinishedCallBack = callBack;
 
-            //The static fragment does not change, consequently its points need only be sampled once.
-            StaticPoints = SelectPoints(StaticFragment);
-
             AddListener(StaticFragment);
             AddListener(ModelFragment);
 
             iterationCounter = new Counter(Settings.MaxNumIterations);
 
             hasTerminated = false;
+
+            //The static fragment does not change, consequently its points need only be sampled once.
+            StaticPoints = SelectPoints(StaticFragment);
         }
 
         public void AddListener(GameObject listener)
