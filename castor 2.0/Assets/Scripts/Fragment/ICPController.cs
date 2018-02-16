@@ -31,9 +31,8 @@ namespace Fragment
 
         private void ToggleIsModelFragment(bool toggle)
         {
-            Debug.Log("Temporarily always disable the model fragment stuff!");
-            modelFragmentController.enabled = false;
-            modelFragmentController.Active = false;
+            modelFragmentController.enabled = toggle;
+            modelFragmentController.Active = toggle;
         }
 
         public void OnToggleIsICPFragment(ICPFragmentType type)
