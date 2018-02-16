@@ -10,8 +10,8 @@ public static class TransformExtensions
     /// <param name="transform">Transform.</param>
     public static void Reset(this Transform transform)
     {
-        transform.position = new Vector3();
-        transform.rotation = Quaternion.identity;
+        transform.localPosition = new Vector3();
+        transform.localRotation = Quaternion.identity;
         transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 }
