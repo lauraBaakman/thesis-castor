@@ -17,20 +17,23 @@ namespace Fragment
         void Start()
         {
             modelFragmentController = GetComponent<ICPModelFragmentController>();
-            modelFragmentController.enabled = false;
-
             staticFragmentController = GetComponent<ICPStaticFragmentController>();
-            staticFragmentController.enabled = false;
+
+            ToggleIsStaticFragment(false);
+            ToggleIsModelFragment(false);
         }
 
         private void ToggleIsStaticFragment(bool toggle)
         {
             staticFragmentController.enabled = toggle;
+            staticFragmentController.Active = toggle;
         }
 
         private void ToggleIsModelFragment(bool toggle)
         {
-            modelFragmentController.enabled = toggle;
+            Debug.Log("Temporarily always disable the model fragment stuff!");
+            modelFragmentController.enabled = false;
+            modelFragmentController.Active = false;
         }
 
         public void OnToggleIsICPFragment(ICPFragmentType type)

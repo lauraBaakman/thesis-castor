@@ -10,7 +10,8 @@ namespace Fragment
     /// </summary>
     public class ICPModelFragmentController : MonoBehaviour, IICPListener
     {
-        public List<GameObject> listeners = new List<GameObject>();
+        public bool Active = false;
+        public List<GameObject> Listeners = new List<GameObject>();
 
         #region ICPListener
         public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
@@ -41,7 +42,12 @@ namespace Fragment
 
         private void SendMessageToListeners(string methodName, object message, SendMessageOptions option)
         {
-            foreach (GameObject listener in listeners)
+            //only notify the listeners if the controller is active
+            if (!Active) return;
+
+            Debug.Log("ICPModelFragmentController sending message to  listener");
+
+            foreach (GameObject listener in Listeners)
             {
                 listener.SendMessage(methodName, message, option);
             }
