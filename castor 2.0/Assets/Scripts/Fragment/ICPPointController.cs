@@ -1,31 +1,23 @@
 using UnityEngine;
 using System.Collections;
-using Registration;
+using RTEditor;
 
 namespace Fragment
 {
-    public class ICPPointController : MonoBehaviour, IICPListener
+    public class ICPPointController : MonoBehaviour, RTEditor.IRTEditorEventListener
     {
-        #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
-        #endregion
+        #region RTEditorEventListener
+        public void OnAlteredByTransformGizmo(Gizmo gizmo) { }
 
-        #region Points
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message)
+        public bool OnCanBeSelected(ObjectSelectEventArgs selectEventArgs)
         {
-            Debug.Log("Received Points!");
+            return false;
         }
-        #endregion
 
+        public void OnDeselected(ObjectDeselectEventArgs deselectEventArgs) { }
 
-        #region Progress
-        public void OnICPTerminated(ICPTerminatedMessage message) { }
-
-        public void OnPreparetionStepCompleted() { }
-
-        public void OnStepCompleted() { }
+        public void OnSelected(ObjectSelectEventArgs selectEventArgs) { }
         #endregion
     }
-
 }
 
