@@ -75,15 +75,15 @@ public class TestHalfEdge
         ca.Twin = ac;
         cb.Twin = bc;
 
-        //abThis.Next = bc;
-        //abOther.Next = bc;
-        //ac.Next = cb;
+        abThis.Next = bc;
+        abOther.Next = bc;
+        ac.Next = cb;
 
-        //ba.Next = ac;
-        //bc.Next = ca;
+        ba.Next = ac;
+        bc.Next = ca;
 
-        //ca.Next = abThis;
-        //cb.Next = ba;
+        ca.Next = abThis;
+        cb.Next = ba;
 
         abThis.Previous = ca;
         abOther.Previous = ca;
@@ -168,13 +168,13 @@ public class TestHalfEdge
 
         HalfEdge thisEdge = new HalfEdge(origin);
         thisEdge.Twin = new HalfEdge(destination);
-        //thisEdge.Next = new HalfEdge(destination);
-        //thisEdge.Next.Twin = new HalfEdge(thisNextDestination);
+        thisEdge.Next = new HalfEdge(destination);
+        thisEdge.Next.Twin = new HalfEdge(thisNextDestination);
 
         HalfEdge otherEdge = new HalfEdge(origin);
         otherEdge.Twin = new HalfEdge(destination);
-        //otherEdge.Next = new HalfEdge(destination);
-        //otherEdge.Next.Twin = new HalfEdge(otherNextDestination);
+        otherEdge.Next = new HalfEdge(destination);
+        otherEdge.Next.Twin = new HalfEdge(otherNextDestination);
 
         Assert.IsFalse(thisEdge.Equals(otherEdge));
         Assert.IsFalse(otherEdge.Equals(thisEdge));
@@ -230,15 +230,15 @@ public class TestHalfEdge
         ca.Twin = ac;
         cb.Twin = bc;
 
-        //abThis.Next = bc;
-        //abOther.Next = bc;
-        //ac.Next = cb;
+        abThis.Next = bc;
+        abOther.Next = bc;
+        ac.Next = cb;
 
-        //ba.Next = ac;
-        //bc.Next = ca;
+        ba.Next = ac;
+        bc.Next = ca;
 
-        //ca.Next = abThis;
-        //cb.Next = ba;
+        ca.Next = abThis;
+        cb.Next = ba;
 
         abThis.Previous = ca;
         abOther.Previous = ca;
@@ -280,15 +280,15 @@ public class TestHalfEdge
         ca.Twin = ac;
         cb.Twin = bc;
 
-        //abThis.Next = bc;
-        //abOther.Next = bc;
-        //ac.Next = cb;
+        abThis.Next = bc;
+        abOther.Next = bc;
+        ac.Next = cb;
 
-        //ba.Next = ac;
-        //bc.Next = ca;
+        ba.Next = ac;
+        bc.Next = ca;
 
-        //ca.Next = abThis;
-        //cb.Next = ba;
+        ca.Next = abThis;
+        cb.Next = ba;
 
         abThis.Previous = ca;
         abOther.Previous = ca;
@@ -332,15 +332,15 @@ public class TestHalfEdge
         ca.Twin = ac;
         cb.Twin = bc;
 
-        //abThis.Next = bc;
-        //abOther.Next = bc;
-        //ac.Next = cb;
+        abThis.Next = bc;
+        abOther.Next = bc;
+        ac.Next = cb;
 
-        //ba.Next = ac;
-        //bc.Next = ca;
+        ba.Next = ac;
+        bc.Next = ca;
 
-        //ca.Next = abThis;
-        //cb.Next = ba;
+        ca.Next = abThis;
+        cb.Next = ba;
 
         abThis.Previous = ca;
         ac.Previous = ba;
@@ -383,15 +383,15 @@ public class TestHalfEdge
         ca.Twin = ac;
         cb.Twin = bc;
 
-        //abThis.Next = bc;
-        //abOther.Next = bc;
-        //ac.Next = cb;
+        abThis.Next = bc;
+        abOther.Next = bc;
+        ac.Next = cb;
 
-        //ba.Next = ac;
-        //bc.Next = ca;
+        ba.Next = ac;
+        bc.Next = ca;
 
-        //ca.Next = abThis;
-        //cb.Next = ba;
+        ca.Next = abThis;
+        cb.Next = ba;
 
         ac.Previous = ba;
 
@@ -433,14 +433,14 @@ public class TestHalfEdge
         ca.Twin = ac;
         cb.Twin = bc;
 
-        //abThis.Next = bc;
-        //ac.Next = cb;
+        abThis.Next = bc;
+        ac.Next = cb;
 
-        //ba.Next = ac;
-        //bc.Next = ca;
+        ba.Next = ac;
+        bc.Next = ca;
 
-        //ca.Next = abThis;
-        //cb.Next = ba;
+        ca.Next = abThis;
+        cb.Next = ba;
 
         abThis.Previous = ca;
         abOther.Previous = ca;
@@ -484,13 +484,13 @@ public class TestHalfEdge
         ca.Twin = ac;
         cb.Twin = bc;
 
-        //ac.Next = cb;
+        ac.Next = cb;
 
-        //ba.Next = ac;
-        //bc.Next = ca;
+        ba.Next = ac;
+        bc.Next = ca;
 
-        //ca.Next = abThis;
-        //cb.Next = ba;
+        ca.Next = abThis;
+        cb.Next = ba;
 
         abThis.Previous = ca;
         abOther.Previous = ca;
@@ -542,15 +542,15 @@ public class TestHalfEdge
         ca.Twin = ac;
         cb.Twin = bc;
 
-        //abThis.Next = bc;
-        //abOther.Next = bc;
-        //ac.Next = cb;
+        abThis.Next = bc;
+        abOther.Next = bc;
+        ac.Next = cb;
 
-        //ba.Next = ac;
-        //bc.Next = ca;
+        ba.Next = ac;
+        bc.Next = ca;
 
-        //ca.Next = abThis;
-        //cb.Next = ba;
+        ca.Next = abThis;
+        cb.Next = ba;
 
         abThis.Previous = ca;
         abOther.Previous = ca;
@@ -606,15 +606,15 @@ public class TestHalfEdge
         ca.Twin = ac;
         cb.Twin = bc;
 
-        //abThis.Next = bc;
-        //abOther.Next = bc;
-        //ac.Next = cb;
+        abThis.Next = bc;
+        abOther.Next = bc;
+        ac.Next = cb;
 
-        //ba.Next = ac;
-        //bc.Next = ca;
+        ba.Next = ac;
+        bc.Next = ca;
 
-        //ca.Next = abThis;
-        //cb.Next = ba;
+        ca.Next = abThis;
+        cb.Next = ba;
 
         abThis.Previous = ca;
         abOther.Previous = ca;

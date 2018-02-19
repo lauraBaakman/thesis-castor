@@ -21,20 +21,20 @@ namespace DoubleConnectedEdgeList
         }
         private HalfEdge previous = null;
 
-        public Vertex Destination
+        public HalfEdge Next
         {
-            get { return HasTwin ? Twin.Origin : null; }
+            get { return next; }
+            set { next = value; }
         }
+        private HalfEdge next = null;
 
-        public bool HasTwin
-        {
-            get { return this.twin != null; }
-        }
+        public Vertex Destination { get { return HasTwin ? Twin.Origin : null; } }
 
-        public bool HasPrevious
-        {
-            get { return this.previous != null; }
-        }
+        public bool HasTwin { get { return this.twin != null; } }
+
+        public bool HasPrevious { get { return this.previous != null; } }
+
+        public bool HasNext { get { return this.next != null; } }
 
         public HalfEdge(Vertex origin)
         {
@@ -47,6 +47,7 @@ namespace DoubleConnectedEdgeList
             hash *= (31 + Origin.NonRecursiveGetHashCode());
             if (HasTwin) hash *= (31 + Twin.NonRecursiveGetHashCode());
             if (HasPrevious) hash *= (31 + Previous.NonRecursiveGetHashCode());
+            if (HasNext) hash *= (31 + Next.NonRecursiveGetHashCode());
             return hash;
         }
 
@@ -77,7 +78,8 @@ namespace DoubleConnectedEdgeList
             return (
                 this.Origin.NonRecursiveEquals(other.Origin) &&
                 NonRecursiveEqualsAuxilary(this.Twin, other.Twin) &&
-                NonRecursiveEqualsAuxilary(this.Previous, other.Previous)
+                NonRecursiveEqualsAuxilary(this.Previous, other.Previous) &&
+                NonRecursiveEqualsAuxilary(this.Next, other.Next)
             );
         }
 
@@ -88,7 +90,8 @@ namespace DoubleConnectedEdgeList
             return (
                 this.Origin.Position.Equals(other.Origin.Position) &&
                 NonRecursiveEqualsAuxilary(this.Twin, other.Twin) &&
-                NonRecursiveEqualsAuxilary(this.Previous, other.Previous)
+                NonRecursiveEqualsAuxilary(this.Previous, other.Previous) &&
+                NonRecursiveEqualsAuxilary(this.Next, other.Next)
             );
         }
 
