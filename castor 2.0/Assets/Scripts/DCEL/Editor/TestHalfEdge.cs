@@ -690,4 +690,42 @@ public class TestHalfEdge
 
         Assert.IsFalse(edge.HasPrevious);
     }
+
+    [Test, MaxTime(2000)]
+    public void TestHasNext_HasNext()
+    {
+        HalfEdge edge = TestAux.RandomHalfEdge();
+        HalfEdge next = TestAux.RandomHalfEdge();
+
+        edge.Next = next;
+
+        Assert.IsTrue(edge.HasNext);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestHasNext_HasNoNext()
+    {
+        HalfEdge edge = TestAux.RandomHalfEdge();
+
+        Assert.IsFalse(edge.HasNext);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestHasDestination_HasDestination()
+    {
+        HalfEdge edge = TestAux.RandomHalfEdge();
+        HalfEdge twin = TestAux.RandomHalfEdge();
+
+        edge.Twin = twin;
+
+        Assert.IsTrue(edge.HasDestination);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestHasDestination_HasNoDestination()
+    {
+        HalfEdge edge = TestAux.RandomHalfEdge();
+
+        Assert.IsFalse(edge.HasDestination);
+    }
 }

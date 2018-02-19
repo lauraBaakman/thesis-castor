@@ -30,6 +30,8 @@ namespace DoubleConnectedEdgeList
 
         public Vertex Destination { get { return HasTwin ? Twin.Origin : null; } }
 
+        public bool HasDestination { get { return HasTwin; } }
+
         public bool HasTwin { get { return this.twin != null; } }
 
         public bool HasPrevious { get { return this.previous != null; } }
@@ -55,7 +57,7 @@ namespace DoubleConnectedEdgeList
         {
             int hash = 17;
             hash *= (31 + Origin.Position.GetHashCode());
-            if (HasTwin) hash *= (31 + Twin.Origin.Position.GetHashCode());
+            if (HasDestination) hash *= (31 + Destination.Position.GetHashCode());
             return hash;
         }
 
