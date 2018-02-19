@@ -62,16 +62,16 @@ namespace DoubleConnectedEdgeList
         public bool Equals(DCEL other)
         {
             return (
-                EqualsList(this.vertices, other.vertices) &&
-                EqualsList(this.faces, other.faces) &&
-                EqualsList(this.halfEdges, other.halfEdges)
+                EqualsList(this.vertices, other.vertices, new Vertex.SimpleComparer()) &&
+                EqualsList(this.faces, other.faces, new Face.SimpleComparer()) &&
+                EqualsList(this.halfEdges, other.halfEdges, new HalfEdge.SimpleComparer())
             );
         }
 
-        private bool EqualsList<T>(List<T> thisList, List<T> otherList)
+        private bool EqualsList<T>(List<T> thisList, List<T> otherList, IEqualityComparer<T> comparer)
         {
-            IEnumerable<T> inThisButNotInOther = thisList.Except(otherList);
-            IEnumerable<T> inOtherButNotInThis = otherList.Except(thisList);
+            IEnumerable<T> inThisButNotInOther = thisList.Except(otherList, comparer);
+            IEnumerable<T> inOtherButNotInThis = otherList.Except(thisList, comparer);
 
             return (
                 !inThisButNotInOther.Any() &&
@@ -200,8 +200,8 @@ namespace DoubleConnectedEdgeList
             originDestination.Twin = destinationOrigin;
             destinationOrigin.Twin = originDestination;
 
-            //origin.AddIncidentEdge(originDestination);
-            //destination.AddIncidentEdge(destinationOrigin);
+            origin.AddIncidentEdge(originDestination);
+            destination.AddIncidentEdge(destinationOrigin);
 
             return originDestination;
         }

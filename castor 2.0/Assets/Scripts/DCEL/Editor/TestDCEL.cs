@@ -70,14 +70,14 @@ public class DCELTests
 
         faces.Add(f2);
 
-        //v1.AddIncidentEdge(e11);
-        //v1.AddIncidentEdge(e32);
+        v1.AddIncidentEdge(e11);
+        v1.AddIncidentEdge(e32);
 
-        //v2.AddIncidentEdge(e42);
-        //v2.AddIncidentEdge(e12);
+        v2.AddIncidentEdge(e42);
+        v2.AddIncidentEdge(e12);
 
-        //v3.AddIncidentEdge(e31);
-        //v3.AddIncidentEdge(e41);
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e41);
 
         List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
 
@@ -192,20 +192,19 @@ public class DCELTests
         e13.IncidentFace = f2;
         faces.Add(f2);
 
+        v1.AddIncidentEdge(e12);
+        v1.AddIncidentEdge(e13);
+        v1.AddIncidentEdge(e14);
 
-        //v1.AddIncidentEdge(e12);
-        //v1.AddIncidentEdge(e13);
-        //v1.AddIncidentEdge(e14);
+        v2.AddIncidentEdge(e21);
+        v2.AddIncidentEdge(e23);
 
-        //v2.AddIncidentEdge(e21);
-        //v2.AddIncidentEdge(e23);
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e32);
+        v3.AddIncidentEdge(e34);
 
-        //v3.AddIncidentEdge(e31);
-        //v3.AddIncidentEdge(e32);
-        //v3.AddIncidentEdge(e34);
-
-        //v4.AddIncidentEdge(e41);
-        //v4.AddIncidentEdge(e43);
+        v4.AddIncidentEdge(e41);
+        v4.AddIncidentEdge(e43);
 
         List<Vertex> dcelVertices = new List<Vertex> {
             v1, v2, v3, v4
@@ -373,21 +372,21 @@ public class DCELTests
         e31.IncidentFace = f4;
         faces.Add(f4);
 
-        //v0.AddIncidentEdge(e01);
-        //v0.AddIncidentEdge(e02);
-        //v0.AddIncidentEdge(e03);
+        v0.AddIncidentEdge(e01);
+        v0.AddIncidentEdge(e02);
+        v0.AddIncidentEdge(e03);
 
-        //v1.AddIncidentEdge(e10);
-        //v1.AddIncidentEdge(e12);
-        //v1.AddIncidentEdge(e13);
+        v1.AddIncidentEdge(e10);
+        v1.AddIncidentEdge(e12);
+        v1.AddIncidentEdge(e13);
 
-        //v2.AddIncidentEdge(e20);
-        //v2.AddIncidentEdge(e21);
-        //v2.AddIncidentEdge(e23);
+        v2.AddIncidentEdge(e20);
+        v2.AddIncidentEdge(e21);
+        v2.AddIncidentEdge(e23);
 
-        //v3.AddIncidentEdge(e30);
-        //v3.AddIncidentEdge(e31);
-        //v3.AddIncidentEdge(e32);
+        v3.AddIncidentEdge(e30);
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e32);
 
         List<Vertex> dcelVertices = new List<Vertex> {
             v0, v1, v2, v3
@@ -632,5 +631,84 @@ public class DCELTests
         Assert.IsFalse(otherDcel.Equals(thisDcel));
 
         Assert.AreNotEqual(thisDcel.GetHashCode(), otherDcel.GetHashCode());
+    }
+
+    [Test, MaxTime(1000)]
+    public void Equals_EqualWithFullDCEL()
+    {
+        Vertex v1 = TestAux.RandomVertex();
+        Vertex v2 = TestAux.RandomVertex();
+        Vertex v3 = TestAux.RandomVertex();
+
+        HalfEdge e11 = new HalfEdge(v1);
+        HalfEdge e12 = new HalfEdge(v2);
+        HalfEdge e31 = new HalfEdge(v3);
+        HalfEdge e32 = new HalfEdge(v1);
+        HalfEdge e41 = new HalfEdge(v3);
+        HalfEdge e42 = new HalfEdge(v2);
+
+        e11.Twin = e12;
+        e12.Twin = e11;
+        e31.Twin = e32;
+        e32.Twin = e31;
+        e41.Twin = e42;
+        e42.Twin = e41;
+
+        e12.Next = e32;
+        e32.Next = e41;
+        e41.Next = e12;
+
+        e12.Previous = e41;
+        e32.Previous = e12;
+        e41.Previous = e32;
+
+        Face f2 = new Face();
+        f2.AddOuterComponent(e32);
+        f2.AddOuterComponent(e41);
+        f2.AddOuterComponent(e12);
+
+        e32.IncidentFace = f2;
+        e41.IncidentFace = f2;
+        e12.IncidentFace = f2;
+
+        v1.AddIncidentEdge(e11);
+        v1.AddIncidentEdge(e32);
+
+        v2.AddIncidentEdge(e42);
+        v2.AddIncidentEdge(e12);
+
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e41);
+
+        List<HalfEdge> halfEdges = new List<HalfEdge>
+        {
+            e11, e12,
+            e31, e32,
+            e41, e42
+        };
+
+        List<Face> faces = new List<Face>
+        {
+            f2
+        };
+
+        List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
+
+        DCEL thisDCEL = new DCEL(
+            dcelVertices.AsReadOnly(),
+            halfEdges.AsReadOnly(),
+            faces.AsReadOnly()
+        );
+
+        DCEL otherDCEL = new DCEL(
+            dcelVertices.AsReadOnly(),
+            halfEdges.AsReadOnly(),
+            faces.AsReadOnly()
+        );
+
+        Assert.IsTrue(thisDCEL.Equals(otherDCEL));
+        Assert.IsTrue(otherDCEL.Equals(thisDCEL));
+
+        Assert.AreEqual(thisDCEL.GetHashCode(), otherDCEL.GetHashCode());
     }
 }

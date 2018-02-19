@@ -38,7 +38,9 @@ namespace DoubleConnectedEdgeList
         /// <param name="edge">An incident edge.</param>
         public void AddIncidentEdge(HalfEdge edge)
         {
-            if (!IncidentEdges.Contains(edge)) incidentEdges.Add(edge);
+            if(!incidentEdges.Contains(edge)){
+                incidentEdges.Add(edge);
+            }
         }
 
         /// <summary>
@@ -121,13 +123,27 @@ namespace DoubleConnectedEdgeList
 
         private bool NonRecursiveEqualsAuxilary(ReadOnlyCollection<HalfEdge> thisEdges, ReadOnlyCollection<HalfEdge> otherEdges)
         {
-            IEnumerable<HalfEdge> inThisButNotInOther = thisEdges.Except(otherEdges);
-            IEnumerable<HalfEdge> inOtherButNotInThis = otherEdges.Except(thisEdges);
+            IEnumerable<HalfEdge> inThisButNotInOther = thisEdges.Except(otherEdges, new HalfEdge.SimpleComparer());
+            IEnumerable<HalfEdge> inOtherButNotInThis = otherEdges.Except(thisEdges, new HalfEdge.SimpleComparer());
 
             return (
                 !inThisButNotInOther.Any() &&
                 !inOtherButNotInThis.Any()
             );
         }
+
+        public class SimpleComparer : IEqualityComparer<Vertex>
+        {
+            public bool Equals(Vertex x, Vertex y)
+            {
+                return x.NonRecursiveEquals(y);
+            }
+
+            public int GetHashCode(Vertex obj)
+            {
+                return obj.NonRecursiveGetHashCode();
+            }
+        }
+
     }
 }

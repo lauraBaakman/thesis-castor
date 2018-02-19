@@ -109,8 +109,8 @@ namespace DoubleConnectedEdgeList
         /// <see cref="T:DoubleConnectedEdgeList.Face"/>; otherwise, <c>false</c>.</returns>
         public bool NonRecursiveEquals(Face other)
         {
-            IEnumerable<HalfEdge> inThisButNotInOther = this.OuterComponents.Except(other.OuterComponents, new SimpleHalfEdgeComparer());
-            IEnumerable<HalfEdge> inOtherButNotInThis = other.OuterComponents.Except(this.OuterComponents, new SimpleHalfEdgeComparer());
+            IEnumerable<HalfEdge> inThisButNotInOther = this.OuterComponents.Except(other.OuterComponents, new HalfEdge.SimpleComparer());
+            IEnumerable<HalfEdge> inOtherButNotInThis = other.OuterComponents.Except(this.OuterComponents, new HalfEdge.SimpleComparer());
 
             return (
                 !inThisButNotInOther.Any() &&
@@ -118,30 +118,17 @@ namespace DoubleConnectedEdgeList
             );
         }
 
-        internal class SimpleHalfEdgeComparer : IEqualityComparer<HalfEdge>
+        public class SimpleComparer : IEqualityComparer<Face>
         {
-            public bool Equals(HalfEdge x, HalfEdge y)
+            public bool Equals(Face x, Face y)
             {
-                if (x == null && y == null) return true;
-                if (x == null || y == null) return false;
-                bool originEqual = x.Origin.Position.Equals(y.Origin.Position);
-                bool destinationEqual = CompareVertex(x.Destination, y.Destination);
-
-                return originEqual && destinationEqual;
+                return x.NonRecursiveEquals(y);
             }
 
-            private bool CompareVertex(Vertex thisVertex, Vertex otherVertex)
-            {
-                if (thisVertex == null && otherVertex == null) return true;
-                if (thisVertex == null || otherVertex == null) return false;
-                return thisVertex.Position.Equals(otherVertex.Position);
-            }
-
-            public int GetHashCode(HalfEdge obj)
+            public int GetHashCode(Face obj)
             {
                 return obj.NonRecursiveGetHashCode();
             }
         }
-
     }
 }
