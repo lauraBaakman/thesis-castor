@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 using DoubleConnectedEdgeList;
 using System.Collections.Generic;
+using System;
 
 [TestFixture]
 public class DCELTests
