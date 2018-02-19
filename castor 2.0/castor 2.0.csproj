@@ -322,11 +322,18 @@
     <Compile Include="Assets\Scripts\Buttons\TransformButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\TransformSpaceToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\UndoButton.cs" />
+    <Compile Include="Assets\Scripts\DCEL\Vertex.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Matrix4x4Extensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\QuaternionExtensions.cs" />
+    <Compile Include="Assets\Scripts\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
+    <Compile Include="Assets\Scripts\Fragment\ICPController.cs" />
+    <Compile Include="Assets\Scripts\Fragment\ICPModelFragmentController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPNormalController.cs" />
+    <Compile Include="Assets\Scripts\Fragment\ICPPointController.cs" />
+    <Compile Include="Assets\Scripts\Fragment\ICPPointsController.cs" />
+    <Compile Include="Assets\Scripts\Fragment\ICPStaticFragmentController.cs" />
     <Compile Include="Assets\Scripts\Fragment\Interfaces.cs" />
     <Compile Include="Assets\Scripts\Fragment\MaterialController.cs" />
     <Compile Include="Assets\Scripts\Fragment\PivotController.cs" />
@@ -504,12 +511,6 @@
     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
     <Compile Include="Assets\Scripts\Utils\Pair.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Fragment\ICPPointsController.cs" />
-    <Compile Include="Assets\Scripts\Fragment\ICPPointController.cs" />
-    <Compile Include="Assets\Scripts\Fragment\ICPModelFragmentController.cs" />
-    <Compile Include="Assets\Scripts\Extensions\TransformExtensions.cs" />
-    <Compile Include="Assets\Scripts\Fragment\ICPStaticFragmentController.cs" />
-    <Compile Include="Assets\Scripts\Fragment\ICPController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
