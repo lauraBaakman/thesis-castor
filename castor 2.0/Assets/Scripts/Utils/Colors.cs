@@ -26,16 +26,13 @@ namespace Utils
                 new Color(0.98f, 0.62f, 0.31f), //orange
                 new Color(0.88f, 0.96f, 0.53f), //pale green
                 new Color(0.99f, 0.85f, 0.47f), //light orange
-                new Color(0.34f, 0.72f, 0.58f) //blueish-green
+                new Color(0.34f, 0.72f, 0.58f)  //blueish-green
             };
         }
 
         public static ColorGenerator Instance
         {
-            get
-            {
-                return instance;
-            }
+            get { return instance; }
         }
 
         private void UpdateCircularIdx()
@@ -65,7 +62,8 @@ namespace Utils
             Locked = GenerateLockedColor(normal);
         }
 
-        public ColorSet(Color normal, Color selected, Color locked){
+        public ColorSet(Color normal, Color selected, Color locked)
+        {
             Normal = normal;
             Selected = selected;
             Locked = locked;
@@ -85,7 +83,7 @@ namespace Utils
             float HueScalingFactor = 0.25f;
 
             HSVColor hsvColor = new HSVColor(baseColor);
-            hsvColor.Saturation = hsvColor.Saturation* HueScalingFactor;
+            hsvColor.Saturation = hsvColor.Saturation * HueScalingFactor;
             return hsvColor.ToRGBColor();
         }
     }
@@ -95,43 +93,23 @@ namespace Utils
         private float hue;
         public float Hue
         {
-            get
-            {
-                return hue;
-            }
-
-            set
-            {
-                hue = Mathf.Clamp01(value);
-            }
+            get { return hue; }
+            set { hue = Mathf.Clamp01(value); }
         }
 
         private float saturation;
         public float Saturation
         {
-            get
-            {
-                return saturation;
-            }
+            get { return saturation; }
 
-            set
-            {
-                saturation = Mathf.Clamp01(value);
-            }
+            set { saturation = Mathf.Clamp01(value); }
         }
 
         private float value;
         public float Value
         {
-            get
-            {
-                return value;
-            }
-
-            set
-            {
-                this.value = Mathf.Clamp01(value);
-            }
+            get { return value; }
+            set { this.value = Mathf.Clamp01(value); }
         }
 
         public HSVColor(Color RGBColor)
@@ -139,7 +117,8 @@ namespace Utils
             Color.RGBToHSV(RGBColor, out hue, out saturation, out value);
         }
 
-        public HSVColor(float hue, float saturation, float value){
+        public HSVColor(float hue, float saturation, float value)
+        {
             this.hue = hue;
             this.saturation = saturation;
             this.value = value;
