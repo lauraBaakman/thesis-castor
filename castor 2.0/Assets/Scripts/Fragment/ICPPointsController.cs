@@ -95,7 +95,6 @@ namespace Fragment
         }
         #endregion
 
-
         #region Progress
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
