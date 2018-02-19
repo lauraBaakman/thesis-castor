@@ -322,6 +322,7 @@
     <Compile Include="Assets\Scripts\Buttons\TransformButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\TransformSpaceToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\UndoButton.cs" />
+    <Compile Include="Assets\Scripts\DCEL\HalfEdge.cs" />
     <Compile Include="Assets\Scripts\DCEL\Vertex.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Matrix4x4Extensions.cs" />
