@@ -707,9 +707,608 @@ public class DCELTests
             faces.AsReadOnly()
         );
 
-        Assert.IsTrue(thisDCEL.Equals(otherDCEL));
-        Assert.IsTrue(otherDCEL.Equals(thisDCEL));
+        Assert.IsTrue(BaseDCEL().Equals(BaseDCEL()));
+        Assert.IsTrue(BaseDCEL().Equals(BaseDCEL()));
 
-        Assert.AreEqual(thisDCEL.GetHashCode(), otherDCEL.GetHashCode());
+        Assert.AreEqual(BaseDCEL().GetHashCode(), BaseDCEL().GetHashCode());
+    }
+
+    [Test, MaxTime(1000)]
+    public void Equals_EqualWithFullDCEL_differentVertexPositionsDCEL()
+    {
+
+        Assert.IsFalse(BaseDCEL().Equals(DifferentVertexPositionsDCEL()));
+        Assert.IsFalse(BaseDCEL().Equals(DifferentVertexPositionsDCEL()));
+
+        Assert.AreNotEqual(BaseDCEL().GetHashCode(), DifferentVertexPositionsDCEL().GetHashCode());
+    }
+
+    [Test, MaxTime(1000)]
+    public void Equals_EqualWithFullDCEL_differentVertexIncidentEdgesDCEL()
+    {
+
+        Assert.IsFalse(DifferentIncidentEdgesForVerticesDCEL().Equals(BaseDCEL()));
+        Assert.IsFalse(BaseDCEL().Equals(DifferentIncidentEdgesForVerticesDCEL()));
+
+        Assert.AreNotEqual(BaseDCEL().GetHashCode(), DifferentIncidentEdgesForVerticesDCEL().GetHashCode());
+    }
+
+    [Test, MaxTime(1000)]
+    public void Equals_EqualWithFullDCEL_DifferentEdgesExtraPairDCEL()
+    {
+
+        Assert.IsFalse(DifferentIncidentEdgesForVerticesDCEL().Equals(DifferentEdgesExtraEdge13DCEL()));
+        Assert.IsFalse(BaseDCEL().Equals(DifferentEdgesExtraEdge13DCEL()));
+
+        Assert.AreNotEqual(BaseDCEL().GetHashCode(), DifferentEdgesExtraEdge13DCEL().GetHashCode());
+    }
+
+    private DCEL DifferentVertexPositionsDCEL()
+    {
+        Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+        Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+        Vertex v3 = new Vertex(new Vector3(6, 5, 9));
+
+        HalfEdge e11 = new HalfEdge(v1);
+        HalfEdge e12 = new HalfEdge(v2);
+        HalfEdge e31 = new HalfEdge(v3);
+        HalfEdge e32 = new HalfEdge(v1);
+        HalfEdge e41 = new HalfEdge(v3);
+        HalfEdge e42 = new HalfEdge(v2);
+
+        e11.Twin = e12;
+        e12.Twin = e11;
+        e31.Twin = e32;
+        e32.Twin = e31;
+        e41.Twin = e42;
+        e42.Twin = e41;
+
+        e12.Next = e32;
+        e32.Next = e41;
+        e41.Next = e12;
+
+        e12.Previous = e41;
+        e32.Previous = e12;
+        e41.Previous = e32;
+
+        Face f2 = new Face();
+        f2.AddOuterComponent(e32);
+        f2.AddOuterComponent(e41);
+        f2.AddOuterComponent(e12);
+
+        e32.IncidentFace = f2;
+        e41.IncidentFace = f2;
+        e12.IncidentFace = f2;
+
+        v1.AddIncidentEdge(e11);
+        v1.AddIncidentEdge(e32);
+
+        v2.AddIncidentEdge(e42);
+        v2.AddIncidentEdge(e12);
+
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e41);
+
+        List<HalfEdge> halfEdges = new List<HalfEdge>
+        {
+            e11, e12,
+            e31, e32,
+            e41, e42
+        };
+
+        List<Face> faces = new List<Face>
+        {
+            f2
+        };
+
+        List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
+
+        DCEL dcel = new DCEL(
+            dcelVertices.AsReadOnly(),
+            halfEdges.AsReadOnly(),
+            faces.AsReadOnly()
+        );
+
+        return dcel;
+    }
+
+    private DCEL DifferentIncidentEdgesForVerticesDCEL()
+    {
+        Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+        Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+        Vertex v3 = new Vertex(new Vector3(6, 4, 9));
+
+        HalfEdge e11 = new HalfEdge(v1);
+        HalfEdge e12 = new HalfEdge(v2);
+        HalfEdge e31 = new HalfEdge(v3);
+        HalfEdge e32 = new HalfEdge(v1);
+        HalfEdge e41 = new HalfEdge(v3);
+        HalfEdge e42 = new HalfEdge(v2);
+
+        e11.Twin = e12;
+        e12.Twin = e11;
+        e31.Twin = e32;
+        e32.Twin = e31;
+        e41.Twin = e42;
+        e42.Twin = e41;
+
+        e12.Next = e32;
+        e32.Next = e41;
+        e41.Next = e12;
+
+        e12.Previous = e41;
+        e32.Previous = e12;
+        e41.Previous = e32;
+
+        Face f2 = new Face();
+        f2.AddOuterComponent(e32);
+        f2.AddOuterComponent(e41);
+        f2.AddOuterComponent(e12);
+
+        e32.IncidentFace = f2;
+        e41.IncidentFace = f2;
+        e12.IncidentFace = f2;
+
+        v1.AddIncidentEdge(e11);
+        v1.AddIncidentEdge(e32);
+
+        v2.AddIncidentEdge(e42);
+        v2.AddIncidentEdge(e12);
+
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e41);
+
+        List<HalfEdge> halfEdges = new List<HalfEdge>
+        {
+            e11, e12,
+            e31, e32,
+            e41, e42
+        };
+
+        List<Face> faces = new List<Face>
+        {
+            f2
+        };
+
+        List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
+
+        DCEL dcel = new DCEL(
+            dcelVertices.AsReadOnly(),
+            halfEdges.AsReadOnly(),
+            faces.AsReadOnly()
+        );
+
+        return dcel;
+    }
+
+    private DCEL DifferentEdgesExtraEdge13DCEL()
+    {
+        Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+        Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+        Vertex v3 = new Vertex(new Vector3(6, 4, 9));
+
+        HalfEdge e11 = new HalfEdge(v1);
+        HalfEdge e12 = new HalfEdge(v2);
+        HalfEdge e31 = new HalfEdge(v3);
+        HalfEdge e32 = new HalfEdge(v1);
+        HalfEdge e41 = new HalfEdge(v3);
+        HalfEdge e42 = new HalfEdge(v2);
+        HalfEdge e13 = new HalfEdge(v1);
+
+        e11.Twin = e12;
+        e12.Twin = e11;
+        e31.Twin = e32;
+        e32.Twin = e31;
+        e41.Twin = e42;
+        e42.Twin = e41;
+        e13.Twin = e31;
+
+        e12.Next = e32;
+        e32.Next = e41;
+        e41.Next = e12;
+        e13.Next = e11;
+
+        e12.Previous = e41;
+        e32.Previous = e12;
+        e41.Previous = e32;
+        e13.Previous = e41;
+
+        Face f2 = new Face();
+        f2.AddOuterComponent(e32);
+        f2.AddOuterComponent(e41);
+        f2.AddOuterComponent(e12);
+
+        e32.IncidentFace = f2;
+        e41.IncidentFace = f2;
+        e12.IncidentFace = f2;
+        e13.IncidentFace = f2;
+
+        v1.AddIncidentEdge(e11);
+        v1.AddIncidentEdge(e32);
+        v1.AddIncidentEdge(e13);
+
+        v2.AddIncidentEdge(e42);
+        v2.AddIncidentEdge(e12);
+
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e41);
+
+        List<HalfEdge> halfEdges = new List<HalfEdge>
+        {
+            e11, e12, e13,
+            e31, e32,
+            e41, e42
+        };
+
+        List<Face> faces = new List<Face>
+        {
+            f2
+        };
+
+        List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
+
+        DCEL dcel = new DCEL(
+            dcelVertices.AsReadOnly(),
+            halfEdges.AsReadOnly(),
+            faces.AsReadOnly()
+        );
+
+        return dcel;
+    }
+
+    private DCEL DifferentEdgesExtraEdge13NothingSetDCEL()
+    {
+        Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+        Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+        Vertex v3 = new Vertex(new Vector3(6, 4, 9));
+
+        HalfEdge e11 = new HalfEdge(v1);
+        HalfEdge e12 = new HalfEdge(v2);
+        HalfEdge e31 = new HalfEdge(v3);
+        HalfEdge e32 = new HalfEdge(v1);
+        HalfEdge e41 = new HalfEdge(v3);
+        HalfEdge e42 = new HalfEdge(v2);
+        HalfEdge e13 = new HalfEdge(v1);
+
+        e11.Twin = e12;
+        e12.Twin = e11;
+        e31.Twin = e32;
+        e32.Twin = e31;
+        e41.Twin = e42;
+        e42.Twin = e41;
+
+        e12.Next = e32;
+        e32.Next = e41;
+        e41.Next = e12;
+
+        e12.Previous = e41;
+        e32.Previous = e12;
+        e41.Previous = e32;
+
+        Face f2 = new Face();
+        f2.AddOuterComponent(e32);
+        f2.AddOuterComponent(e41);
+        f2.AddOuterComponent(e12);
+
+        e32.IncidentFace = f2;
+        e41.IncidentFace = f2;
+        e12.IncidentFace = f2;
+
+        v1.AddIncidentEdge(e11);
+        v1.AddIncidentEdge(e32);
+
+        v2.AddIncidentEdge(e42);
+        v2.AddIncidentEdge(e12);
+
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e41);
+
+        List<HalfEdge> halfEdges = new List<HalfEdge>
+        {
+            e11, e12, e13,
+            e31, e32,
+            e41, e42
+        };
+
+        List<Face> faces = new List<Face>
+        {
+            f2
+        };
+
+        List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
+
+        DCEL dcel = new DCEL(
+            dcelVertices.AsReadOnly(),
+            halfEdges.AsReadOnly(),
+            faces.AsReadOnly()
+        );
+
+        return dcel;
+    }
+
+    private DCEL DifferentEdgesExtraEdge13OnlyTwinSetDCEL()
+    {
+        Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+        Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+        Vertex v3 = new Vertex(new Vector3(6, 4, 9));
+
+        HalfEdge e11 = new HalfEdge(v1);
+        HalfEdge e12 = new HalfEdge(v2);
+        HalfEdge e31 = new HalfEdge(v3);
+        HalfEdge e32 = new HalfEdge(v1);
+        HalfEdge e41 = new HalfEdge(v3);
+        HalfEdge e42 = new HalfEdge(v2);
+        HalfEdge e13 = new HalfEdge(v1);
+
+        e11.Twin = e12;
+        e12.Twin = e11;
+        e31.Twin = e32;
+        e32.Twin = e31;
+        e41.Twin = e42;
+        e42.Twin = e41;
+        e13.Twin = e31;
+
+        e12.Next = e32;
+        e32.Next = e41;
+        e41.Next = e12;
+
+        e12.Previous = e41;
+        e32.Previous = e12;
+        e41.Previous = e32;
+
+        Face f2 = new Face();
+        f2.AddOuterComponent(e32);
+        f2.AddOuterComponent(e41);
+        f2.AddOuterComponent(e12);
+
+        e32.IncidentFace = f2;
+        e41.IncidentFace = f2;
+        e12.IncidentFace = f2;
+
+        v1.AddIncidentEdge(e11);
+        v1.AddIncidentEdge(e32);
+
+        v2.AddIncidentEdge(e42);
+        v2.AddIncidentEdge(e12);
+
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e41);
+
+        List<HalfEdge> halfEdges = new List<HalfEdge>
+        {
+            e11, e12, e13,
+            e31, e32,
+            e41, e42
+        };
+
+        List<Face> faces = new List<Face>
+        {
+            f2
+        };
+
+        List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
+
+        DCEL dcel = new DCEL(
+            dcelVertices.AsReadOnly(),
+            halfEdges.AsReadOnly(),
+            faces.AsReadOnly()
+        );
+
+        return dcel;
+    }
+
+    private DCEL DifferentEdgesExtraEdge13OnlyTwinNextSetDCEL()
+    {
+        Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+        Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+        Vertex v3 = new Vertex(new Vector3(6, 4, 9));
+
+        HalfEdge e11 = new HalfEdge(v1);
+        HalfEdge e12 = new HalfEdge(v2);
+        HalfEdge e31 = new HalfEdge(v3);
+        HalfEdge e32 = new HalfEdge(v1);
+        HalfEdge e41 = new HalfEdge(v3);
+        HalfEdge e42 = new HalfEdge(v2);
+        HalfEdge e13 = new HalfEdge(v1);
+
+        e11.Twin = e12;
+        e12.Twin = e11;
+        e31.Twin = e32;
+        e32.Twin = e31;
+        e41.Twin = e42;
+        e42.Twin = e41;
+        e13.Twin = e31;
+
+        e12.Next = e32;
+        e32.Next = e41;
+        e41.Next = e12;
+        e13.Next = e11;
+
+        e12.Previous = e41;
+        e32.Previous = e12;
+        e41.Previous = e32;
+
+        Face f2 = new Face();
+        f2.AddOuterComponent(e32);
+        f2.AddOuterComponent(e41);
+        f2.AddOuterComponent(e12);
+
+        e32.IncidentFace = f2;
+        e41.IncidentFace = f2;
+        e12.IncidentFace = f2;
+
+        v1.AddIncidentEdge(e11);
+        v1.AddIncidentEdge(e32);
+
+        v2.AddIncidentEdge(e42);
+        v2.AddIncidentEdge(e12);
+
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e41);
+
+        List<HalfEdge> halfEdges = new List<HalfEdge>
+        {
+            e11, e12, e13,
+            e31, e32,
+            e41, e42
+        };
+
+        List<Face> faces = new List<Face>
+        {
+            f2
+        };
+
+        List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
+
+        DCEL dcel = new DCEL(
+            dcelVertices.AsReadOnly(),
+            halfEdges.AsReadOnly(),
+            faces.AsReadOnly()
+        );
+
+        return dcel;
+    }
+
+
+    private DCEL DifferentEdgesExtraEdge13OnlyTwinNextPreviousSetDCEL()
+    {
+        Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+        Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+        Vertex v3 = new Vertex(new Vector3(6, 4, 9));
+
+        HalfEdge e11 = new HalfEdge(v1);
+        HalfEdge e12 = new HalfEdge(v2);
+        HalfEdge e31 = new HalfEdge(v3);
+        HalfEdge e32 = new HalfEdge(v1);
+        HalfEdge e41 = new HalfEdge(v3);
+        HalfEdge e42 = new HalfEdge(v2);
+        HalfEdge e13 = new HalfEdge(v1);
+
+        e11.Twin = e12;
+        e12.Twin = e11;
+        e31.Twin = e32;
+        e32.Twin = e31;
+        e41.Twin = e42;
+        e42.Twin = e41;
+        e13.Twin = e31;
+
+        e12.Next = e32;
+        e32.Next = e41;
+        e41.Next = e12;
+        e13.Next = e11;
+
+        e12.Previous = e41;
+        e32.Previous = e12;
+        e41.Previous = e32;
+        e13.Previous = e41;
+
+        Face f2 = new Face();
+        f2.AddOuterComponent(e32);
+        f2.AddOuterComponent(e41);
+        f2.AddOuterComponent(e12);
+
+        e32.IncidentFace = f2;
+        e41.IncidentFace = f2;
+        e12.IncidentFace = f2;
+
+        v1.AddIncidentEdge(e11);
+        v1.AddIncidentEdge(e32);
+
+        v2.AddIncidentEdge(e42);
+        v2.AddIncidentEdge(e12);
+
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e41);
+
+        List<HalfEdge> halfEdges = new List<HalfEdge>
+        {
+            e11, e12, e13,
+            e31, e32,
+            e41, e42
+        };
+
+        List<Face> faces = new List<Face>
+        {
+            f2
+        };
+
+        List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
+
+        DCEL dcel = new DCEL(
+            dcelVertices.AsReadOnly(),
+            halfEdges.AsReadOnly(),
+            faces.AsReadOnly()
+        );
+
+        return dcel;
+    }
+
+    private DCEL BaseDCEL()
+    {
+        Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+        Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+        Vertex v3 = new Vertex(new Vector3(6, 4, 9));
+
+        HalfEdge e11 = new HalfEdge(v1);
+        HalfEdge e12 = new HalfEdge(v2);
+        HalfEdge e31 = new HalfEdge(v3);
+        HalfEdge e32 = new HalfEdge(v1);
+        HalfEdge e41 = new HalfEdge(v3);
+        HalfEdge e42 = new HalfEdge(v2);
+
+        e11.Twin = e12;
+        e12.Twin = e11;
+        e31.Twin = e32;
+        e32.Twin = e31;
+        e41.Twin = e42;
+        e42.Twin = e41;
+
+        e12.Next = e32;
+        e32.Next = e41;
+        e41.Next = e12;
+
+        e12.Previous = e41;
+        e32.Previous = e12;
+        e41.Previous = e32;
+
+        Face f2 = new Face();
+        f2.AddOuterComponent(e32);
+        f2.AddOuterComponent(e41);
+        f2.AddOuterComponent(e12);
+
+        e32.IncidentFace = f2;
+        e41.IncidentFace = f2;
+        e12.IncidentFace = f2;
+
+        v1.AddIncidentEdge(e11);
+        v1.AddIncidentEdge(e32);
+
+        v2.AddIncidentEdge(e42);
+        v2.AddIncidentEdge(e12);
+
+        v3.AddIncidentEdge(e31);
+        v3.AddIncidentEdge(e41);
+
+        List<HalfEdge> halfEdges = new List<HalfEdge>
+        {
+            e11, e12,
+            e31, e32,
+            e41, e42
+        };
+
+        List<Face> faces = new List<Face>
+        {
+            f2
+        };
+
+        List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
+
+        DCEL dcel = new DCEL(
+            dcelVertices.AsReadOnly(),
+            halfEdges.AsReadOnly(),
+            faces.AsReadOnly()
+        );
+
+        return dcel;
     }
 }
