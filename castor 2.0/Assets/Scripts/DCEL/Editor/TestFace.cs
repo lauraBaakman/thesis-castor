@@ -7,7 +7,7 @@ using System;
 [TestFixture]
 public class FaceTest
 {
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestEquals_EqualsSameOrder()
     {
         HalfEdge a = TestAux.RandomHalfEdge();
@@ -32,7 +32,7 @@ public class FaceTest
         Assert.AreEqual(thisFace.GetHashCode(), otherFace.GetHashCode());
     }
 
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestEquals_EqualsDifferentOrder()
     {
         HalfEdge a = TestAux.RandomHalfEdge();
@@ -57,7 +57,7 @@ public class FaceTest
         Assert.AreEqual(thisFace.GetHashCode(), otherFace.GetHashCode());
     }
 
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestEquals_EqualsAddSameEdgeTwice()
     {
         HalfEdge a = TestAux.RandomHalfEdge();
@@ -84,7 +84,7 @@ public class FaceTest
         Assert.AreEqual(thisFace.GetHashCode(), otherFace.GetHashCode());
     }
 
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestEquals_NotEqualThisGreater()
     {
         HalfEdge a = TestAux.RandomHalfEdge();
@@ -108,7 +108,7 @@ public class FaceTest
         Assert.AreNotEqual(thisFace.GetHashCode(), otherFace.GetHashCode());
     }
 
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestEquals_NotEqualThisSmaller()
     {
         HalfEdge a = TestAux.RandomHalfEdge();
@@ -132,7 +132,7 @@ public class FaceTest
         Assert.AreNotEqual(thisFace.GetHashCode(), otherFace.GetHashCode());
     }
 
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestEquals_NotEqualSameSizeDifferentEdges()
     {
         HalfEdge a = TestAux.RandomHalfEdge();
