@@ -196,6 +196,8 @@
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\Renderer\RenderingOptions.cs" />
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\TestComponentEditor.cs" />
     <Compile Include="Assets\Scripts\DCEL\Editor\TestAuxilaries.cs" />
+    <Compile Include="Assets\Scripts\DCEL\Editor\TestDCEL.cs" />
+    <Compile Include="Assets\Scripts\DCEL\Editor\TestFace.cs" />
     <Compile Include="Assets\Scripts\DCEL\Editor\TestHalfEdge.cs" />
     <Compile Include="Assets\Scripts\DCEL\Editor\TestVertex.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestMatrix4Extensions.cs" />

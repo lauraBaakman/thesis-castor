@@ -12,10 +12,9 @@ public class VertexTest
         Random.InitState(42);
     }
 
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestEquals_Equals()
     {
-
         Vector3 position = TestAux.RandomPosition();
 
         Vertex thisVertex = new Vertex(position);
@@ -35,7 +34,7 @@ public class VertexTest
         Assert.AreEqual(thisVertex.GetHashCode(), otherVertex.GetHashCode());
     }
 
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestEquals_PositionNotEqual()
     {
         Vertex thisVertex = TestAux.RandomVertex();
@@ -46,7 +45,7 @@ public class VertexTest
         Assert.AreNotEqual(thisVertex, otherVertex);
     }
 
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestEquals_IncidentEdgesNotEqual()
     {
         Vector3 position = TestAux.RandomPosition();
@@ -68,7 +67,7 @@ public class VertexTest
         Assert.AreNotEqual(thisVertex.GetHashCode(), otherVertex.GetHashCode());
     }
 
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestNonRecursiveEquals_Equals()
     {
 
@@ -90,7 +89,7 @@ public class VertexTest
         Assert.IsTrue(otherVertex.NonRecursiveEquals(thisVertex));
     }
 
-    [Test]
+    [Test, MaxTime(2000)]
     public void TestNonRecursiveEquals_PositionNotEqual()
     {
         Vertex thisVertex = TestAux.RandomVertex();
