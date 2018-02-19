@@ -14,5 +14,12 @@ namespace Registration
 
         void OnICPTerminated(ICPTerminatedMessage message);
     }
+
+    public interface IICPStartEndListener
+    {
+        void OnICPStarted();
+
+        void OnICPTerminated(ICPTerminatedMessage message);
+    }
 }
 

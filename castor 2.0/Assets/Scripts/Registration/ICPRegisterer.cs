@@ -60,6 +60,8 @@ namespace Registration
 
             //The static fragment does not change, consequently its points need only be sampled once.
             StaticPoints = SelectPoints(StaticFragment);
+
+            SendMessageToAllListeners("OnICPStarted");
         }
 
         public void AddListener(GameObject listener)

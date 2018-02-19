@@ -4,16 +4,31 @@ using UnityEngine;
 
 namespace Fragment
 {
-    public class SelectionController : MonoBehaviour, IFragmentStateElementToggled, RTEditor.IRTEditorEventListener
+    public class SelectionController : MonoBehaviour, IFragmentStateElementToggled, RTEditor.IRTEditorEventListener, Registration.IICPStartEndListener
     {
 
         private GameObject SelectedFragments;
         private GameObject DeselectedFragments;
 
+
+
+        public bool Selectable
+        {
+            get { return selectable; }
+            set
+            {
+                selectable = value;
+                if (!selectable) DeselectFragment();
+            }
+        }
+        private bool selectable;
+
         private void Start()
         {
             DeselectedFragments = transform.root.gameObject;
             SelectedFragments = DeselectedFragments.FindChildByName("Selected Fragments");
+
+            Selectable = true;
         }
 
         private void SelectFragment()
@@ -35,17 +50,19 @@ namespace Fragment
             );
         }
 
+        #region IFragmentStateElementToggled
         public void OnToggledLockedState(bool locked) { }
 
         public void OnToggleSelectionState(bool selected)
         {
             gameObject.transform.parent = selected ? SelectedFragments.transform : DeselectedFragments.transform;
         }
+        #endregion
 
         #region IRTEditorEventListener
         public bool OnCanBeSelected(ObjectSelectEventArgs selectEventArgs)
         {
-            return true;
+            return Selectable;
         }
 
         public void OnSelected(ObjectSelectEventArgs selectEventArgs)
@@ -59,6 +76,18 @@ namespace Fragment
         }
 
         public void OnAlteredByTransformGizmo(Gizmo gizmo) { }
+        #endregion
+
+        #region IICPStartEndListener
+        public void OnICPStarted()
+        {
+            Selectable = false;
+        }
+
+        public void OnICPTerminated(ICPTerminatedMessage message)
+        {
+            Selectable = true;
+        }
         #endregion
     }
 
