@@ -74,13 +74,39 @@ namespace DoubleConnectedEdgeList
         public bool NonRecursiveEquals(Face other)
         {
             Debug.Log("Face:NonRecursiveEquals");
-            IEnumerable<HalfEdge> inThisButNotInOther = this.OuterComponents.Except(other.OuterComponents);
-            IEnumerable<HalfEdge> inOtherButNotInThis = other.OuterComponents.Except(this.OuterComponents);
+            IEnumerable<HalfEdge> inThisButNotInOther = this.OuterComponents.Except(other.OuterComponents, new SimpleHalfEdgeComparer());
+            IEnumerable<HalfEdge> inOtherButNotInThis = other.OuterComponents.Except(this.OuterComponents, new SimpleHalfEdgeComparer());
 
             return (
                 !inThisButNotInOther.Any() &&
                 !inOtherButNotInThis.Any()
             );
         }
+
+        internal class SimpleHalfEdgeComparer : IEqualityComparer<HalfEdge>
+        {
+            public bool Equals(HalfEdge x, HalfEdge y)
+            {
+                if (x == null && y == null) return true;
+                if (x == null || y == null) return false;
+                bool originEqual = x.Origin.Position.Equals(y.Origin.Position);
+                bool destinationEqual = CompareVertex(x.Destination, y.Destination);
+
+                return originEqual && destinationEqual;
+            }
+
+            private bool CompareVertex(Vertex thisVertex, Vertex otherVertex)
+            {
+                if (thisVertex == null && otherVertex == null) return true;
+                if (thisVertex == null || otherVertex == null) return false;
+                return thisVertex.Position.Equals(otherVertex.Position);
+            }
+
+            public int GetHashCode(HalfEdge obj)
+            {
+                return obj.NonRecursiveGetHashCode();
+            }
+        }
+
     }
 }

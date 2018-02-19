@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
+using DoubleConnectedEdgeList;
 
 namespace DoubleConnectedEdgeList
 {
@@ -28,6 +32,13 @@ namespace DoubleConnectedEdgeList
         }
         private HalfEdge next = null;
 
+        public Face IncidentFace
+        {
+            get { return incidentFace; }
+            set { incidentFace = value; }
+        }
+        private Face incidentFace = null;
+
         public Vertex Destination { get { return HasTwin ? Twin.Origin : null; } }
 
         public bool HasDestination { get { return HasTwin; } }
@@ -37,6 +48,8 @@ namespace DoubleConnectedEdgeList
         public bool HasPrevious { get { return this.previous != null; } }
 
         public bool HasNext { get { return this.next != null; } }
+
+        public bool HasIncidentFace { get { return this.incidentFace != null; } }
 
         public HalfEdge(Vertex origin)
         {
@@ -50,6 +63,7 @@ namespace DoubleConnectedEdgeList
             if (HasTwin) hash *= (31 + Twin.NonRecursiveGetHashCode());
             if (HasPrevious) hash *= (31 + Previous.NonRecursiveGetHashCode());
             if (HasNext) hash *= (31 + Next.NonRecursiveGetHashCode());
+            if (HasIncidentFace) hash *= (31 + IncidentFace.NonRecursiveGetHashCode());
             return hash;
         }
 
@@ -81,7 +95,8 @@ namespace DoubleConnectedEdgeList
                 this.Origin.NonRecursiveEquals(other.Origin) &&
                 NonRecursiveEqualsAuxilary(this.Twin, other.Twin) &&
                 NonRecursiveEqualsAuxilary(this.Previous, other.Previous) &&
-                NonRecursiveEqualsAuxilary(this.Next, other.Next)
+                NonRecursiveEqualsAuxilary(this.Next, other.Next) &&
+                NonRecursiveEqualsAuxilary(this.IncidentFace, other.IncidentFace)
             );
         }
 
@@ -112,5 +127,13 @@ namespace DoubleConnectedEdgeList
             if (thisVertex == null || otherVertex == null) return false;
             return thisVertex.Position.Equals(otherVertex.Position);
         }
+
+        private bool NonRecursiveEqualsAuxilary(Face thisFace, Face otherFace)
+        {
+            if (thisFace == null && otherFace == null) return true;
+            if (thisFace == null || otherFace == null) return false;
+            return thisFace.NonRecursiveEquals(otherFace);
+        }
     }
 }
+

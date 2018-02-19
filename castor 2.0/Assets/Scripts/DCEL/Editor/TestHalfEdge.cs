@@ -524,13 +524,13 @@ public class TestHalfEdge
         HalfEdge ca = new HalfEdge(c);
         HalfEdge cb = new HalfEdge(c);
 
-        //Face face = new Face();
-        //face.AddOuterComponent(abThis);
-        //face.AddOuterComponent(bc);
-        //face.AddOuterComponent(ca);
+        Face face = new Face();
+        face.AddOuterComponent(abThis);
+        face.AddOuterComponent(bc);
+        face.AddOuterComponent(ca);
 
-        //abThis.IncidentFace = face;
-        //abOther.IncidentFace = face;
+        abThis.IncidentFace = face;
+        abOther.IncidentFace = face;
 
         abThis.Twin = ba;
         abOther.Twin = ba;
@@ -585,16 +585,16 @@ public class TestHalfEdge
         HalfEdge ca = new HalfEdge(c);
         HalfEdge cb = new HalfEdge(c);
 
-        //Face thisFace = new Face();
-        //thisFace.AddOuterComponent(abThis);
-        //thisFace.AddOuterComponent(bc);
-        //thisFace.AddOuterComponent(ca);
+        Face thisFace = new Face();
+        thisFace.AddOuterComponent(abThis);
+        thisFace.AddOuterComponent(bc);
+        thisFace.AddOuterComponent(ca);
 
-        //Face otherFace = new Face();
-        //otherFace.AddOuterComponent(abOther);
+        Face otherFace = new Face();
+        otherFace.AddOuterComponent(abOther);
 
-        //abThis.IncidentFace = thisFace;
-        //abOther.IncidentFace = otherFace;
+        abThis.IncidentFace = thisFace;
+        abOther.IncidentFace = otherFace;
 
         abThis.Twin = ba;
         abOther.Twin = ba;
@@ -655,7 +655,8 @@ public class TestHalfEdge
     }
 
     [Test, MaxTime(2000)]
-    public void TestHasTwin_HasTwin(){
+    public void TestHasTwin_HasTwin()
+    {
         HalfEdge edge = TestAux.RandomHalfEdge();
         HalfEdge twin = TestAux.RandomHalfEdge();
 
@@ -678,7 +679,7 @@ public class TestHalfEdge
         HalfEdge edge = TestAux.RandomHalfEdge();
         HalfEdge previous = TestAux.RandomHalfEdge();
 
-        edge.Previous= previous;
+        edge.Previous = previous;
 
         Assert.IsTrue(edge.HasPrevious);
     }
@@ -723,6 +724,24 @@ public class TestHalfEdge
 
     [Test, MaxTime(2000)]
     public void TestHasDestination_HasNoDestination()
+    {
+        HalfEdge edge = TestAux.RandomHalfEdge();
+
+        Assert.IsFalse(edge.HasDestination);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestHasIncidentFace_HasIncidentFace()
+    {
+        HalfEdge edge = TestAux.RandomHalfEdge();
+
+        edge.IncidentFace = new Face();
+
+        Assert.IsTrue(edge.HasIncidentFace);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestHasIncidentFace_HasNoIncidentFace()
     {
         HalfEdge edge = TestAux.RandomHalfEdge();
 
