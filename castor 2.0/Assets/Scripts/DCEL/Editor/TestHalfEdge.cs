@@ -85,15 +85,15 @@ public class TestHalfEdge
         //ca.Next = abThis;
         //cb.Next = ba;
 
-        //abThis.Previous = ca;
-        //abOther.Previous = ca;
-        //ac.Previous = ba;
+        abThis.Previous = ca;
+        abOther.Previous = ca;
+        ac.Previous = ba;
 
-        //ba.Previous = cb;
-        //bc.Previous = abThis;
+        ba.Previous = cb;
+        bc.Previous = abThis;
 
-        //ca.Previous = bc;
-        //cb.Previous = ac;
+        ca.Previous = bc;
+        cb.Previous = ac;
 
         Assert.IsTrue(abThis.Equals(abOther));
         Assert.IsTrue(abOther.Equals(abThis));
@@ -191,13 +191,13 @@ public class TestHalfEdge
 
         HalfEdge thisEdge = new HalfEdge(origin);
         thisEdge.Twin = new HalfEdge(destination);
-        //thisEdge.Previous = new HalfEdge(thisPreviousOrigin);
-        //thisEdge.Previous.Twin = new HalfEdge(origin);
+        thisEdge.Previous = new HalfEdge(thisPreviousOrigin);
+        thisEdge.Previous.Twin = new HalfEdge(origin);
 
         HalfEdge otherEdge = new HalfEdge(origin);
         otherEdge.Twin = new HalfEdge(destination);
-        //otherEdge.Previous = new HalfEdge(otherPreviousOrigin);
-        //otherEdge.Previous.Twin = new HalfEdge(origin);
+        otherEdge.Previous = new HalfEdge(otherPreviousOrigin);
+        otherEdge.Previous.Twin = new HalfEdge(origin);
 
         Assert.IsFalse(thisEdge.Equals(otherEdge));
         Assert.IsFalse(otherEdge.Equals(thisEdge));
@@ -240,15 +240,15 @@ public class TestHalfEdge
         //ca.Next = abThis;
         //cb.Next = ba;
 
-        //abThis.Previous = ca;
-        //abOther.Previous = ca;
-        //ac.Previous = ba;
+        abThis.Previous = ca;
+        abOther.Previous = ca;
+        ac.Previous = ba;
 
-        //ba.Previous = cb;
-        //bc.Previous = abThis;
+        ba.Previous = cb;
+        bc.Previous = abThis;
 
-        //ca.Previous = bc;
-        //cb.Previous = ac;
+        ca.Previous = bc;
+        cb.Previous = ac;
 
         Assert.IsFalse(abThis.Equals(abOther));
         Assert.IsFalse(abOther.Equals(abThis));
@@ -290,15 +290,15 @@ public class TestHalfEdge
         //ca.Next = abThis;
         //cb.Next = ba;
 
-        //abThis.Previous = ca;
-        //abOther.Previous = ca;
-        //ac.Previous = ba;
+        abThis.Previous = ca;
+        abOther.Previous = ca;
+        ac.Previous = ba;
 
-        //ba.Previous = cb;
-        //bc.Previous = abThis;
+        ba.Previous = cb;
+        bc.Previous = abThis;
 
-        //ca.Previous = bc;
-        //cb.Previous = ac;
+        ca.Previous = bc;
+        cb.Previous = ac;
 
         Assert.IsTrue(abThis.Equals(abOther));
         Assert.IsTrue(abOther.Equals(abThis));
@@ -342,14 +342,14 @@ public class TestHalfEdge
         //ca.Next = abThis;
         //cb.Next = ba;
 
-        //abThis.Previous = ca;
-        //ac.Previous = ba;
+        abThis.Previous = ca;
+        ac.Previous = ba;
 
-        //ba.Previous = cb;
-        //bc.Previous = abThis;
+        ba.Previous = cb;
+        bc.Previous = abThis;
 
-        //ca.Previous = bc;
-        //cb.Previous = ac;
+        ca.Previous = bc;
+        cb.Previous = ac;
 
         Assert.IsFalse(abThis.Equals(abOther));
         Assert.IsFalse(abOther.Equals(abThis));
@@ -393,13 +393,13 @@ public class TestHalfEdge
         //ca.Next = abThis;
         //cb.Next = ba;
 
-        //ac.Previous = ba;
+        ac.Previous = ba;
 
-        //ba.Previous = cb;
-        //bc.Previous = abThis;
+        ba.Previous = cb;
+        bc.Previous = abThis;
 
-        //ca.Previous = bc;
-        //cb.Previous = ac;
+        ca.Previous = bc;
+        cb.Previous = ac;
 
         Assert.IsTrue(abThis.Equals(abOther));
         Assert.IsTrue(abOther.Equals(abThis));
@@ -442,15 +442,15 @@ public class TestHalfEdge
         //ca.Next = abThis;
         //cb.Next = ba;
 
-        //abThis.Previous = ca;
-        //abOther.Previous = ca;
-        //ac.Previous = ba;
+        abThis.Previous = ca;
+        abOther.Previous = ca;
+        ac.Previous = ba;
 
-        //ba.Previous = cb;
-        //bc.Previous = abThis;
+        ba.Previous = cb;
+        bc.Previous = abThis;
 
-        //ca.Previous = bc;
-        //cb.Previous = ac;
+        ca.Previous = bc;
+        cb.Previous = ac;
 
         Assert.IsFalse(abThis.Equals(abOther));
         Assert.IsFalse(abOther.Equals(abThis));
@@ -492,15 +492,15 @@ public class TestHalfEdge
         //ca.Next = abThis;
         //cb.Next = ba;
 
-        //abThis.Previous = ca;
-        //abOther.Previous = ca;
-        //ac.Previous = ba;
+        abThis.Previous = ca;
+        abOther.Previous = ca;
+        ac.Previous = ba;
 
-        //ba.Previous = cb;
-        //bc.Previous = abThis;
+        ba.Previous = cb;
+        bc.Previous = abThis;
 
-        //ca.Previous = bc;
-        //cb.Previous = ac;
+        ca.Previous = bc;
+        cb.Previous = ac;
 
         Assert.IsTrue(abThis.Equals(abOther));
         Assert.IsTrue(abOther.Equals(abThis));
@@ -552,15 +552,15 @@ public class TestHalfEdge
         //ca.Next = abThis;
         //cb.Next = ba;
 
-        //abThis.Previous = ca;
-        //abOther.Previous = ca;
-        //ac.Previous = ba;
+        abThis.Previous = ca;
+        abOther.Previous = ca;
+        ac.Previous = ba;
 
-        //ba.Previous = cb;
-        //bc.Previous = abThis;
+        ba.Previous = cb;
+        bc.Previous = abThis;
 
-        //ca.Previous = bc;
-        //cb.Previous = ac;
+        ca.Previous = bc;
+        cb.Previous = ac;
 
         Assert.AreEqual(abThis.GetHashCode(), abOther.GetHashCode());
 
@@ -616,15 +616,15 @@ public class TestHalfEdge
         //ca.Next = abThis;
         //cb.Next = ba;
 
-        //abThis.Previous = ca;
-        //abOther.Previous = ca;
-        //ac.Previous = ba;
+        abThis.Previous = ca;
+        abOther.Previous = ca;
+        ac.Previous = ba;
 
-        //ba.Previous = cb;
-        //bc.Previous = abThis;
+        ba.Previous = cb;
+        bc.Previous = abThis;
 
-        //ca.Previous = bc;
-        //cb.Previous = ac;
+        ca.Previous = bc;
+        cb.Previous = ac;
 
         Assert.AreNotEqual(abThis.GetHashCode(), abOther.GetHashCode());
 
@@ -668,8 +668,26 @@ public class TestHalfEdge
     public void TestHasTwin_HasNoTwin()
     {
         HalfEdge edge = TestAux.RandomHalfEdge();
-        HalfEdge twin = TestAux.RandomHalfEdge();
 
         Assert.IsFalse(edge.HasTwin);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestHasPrevious_HasPrevious()
+    {
+        HalfEdge edge = TestAux.RandomHalfEdge();
+        HalfEdge previous = TestAux.RandomHalfEdge();
+
+        edge.Previous= previous;
+
+        Assert.IsTrue(edge.HasPrevious);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestHasPrevious_HasNoPrevious()
+    {
+        HalfEdge edge = TestAux.RandomHalfEdge();
+
+        Assert.IsFalse(edge.HasPrevious);
     }
 }

@@ -14,14 +14,26 @@ namespace DoubleConnectedEdgeList
         }
         private HalfEdge twin = null;
 
+        public HalfEdge Previous
+        {
+            get { return previous; }
+            set { previous = value; }
+        }
+        private HalfEdge previous = null;
+
+        public Vertex Destination
+        {
+            get { return HasTwin ? Twin.Origin : null; }
+        }
+
         public bool HasTwin
         {
             get { return this.twin != null; }
         }
 
-        public Vertex Destination
+        public bool HasPrevious
         {
-            get { return HasTwin ? Twin.Origin : null; }
+            get { return this.previous != null; }
         }
 
         public HalfEdge(Vertex origin)
@@ -34,6 +46,7 @@ namespace DoubleConnectedEdgeList
             int hash = 17;
             hash *= (31 + Origin.NonRecursiveGetHashCode());
             if (HasTwin) hash *= (31 + Twin.NonRecursiveGetHashCode());
+            if (HasPrevious) hash *= (31 + Previous.NonRecursiveGetHashCode());
             return hash;
         }
 
@@ -63,7 +76,8 @@ namespace DoubleConnectedEdgeList
             Debug.Log("HalfEdge:Equals");
             return (
                 this.Origin.NonRecursiveEquals(other.Origin) &&
-                NonRecursiveEqualsAuxilary(this.Twin, other.Twin)
+                NonRecursiveEqualsAuxilary(this.Twin, other.Twin) &&
+                NonRecursiveEqualsAuxilary(this.Previous, other.Previous)
             );
         }
 
@@ -73,7 +87,8 @@ namespace DoubleConnectedEdgeList
             Debug.Log("HalfEdge:NonRecursiveEquals");
             return (
                 this.Origin.Position.Equals(other.Origin.Position) &&
-                NonRecursiveEqualsAuxilary(this.Twin, other.Twin)
+                NonRecursiveEqualsAuxilary(this.Twin, other.Twin) &&
+                NonRecursiveEqualsAuxilary(this.Previous, other.Previous)
             );
         }
 
