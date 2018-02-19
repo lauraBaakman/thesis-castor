@@ -1,3 +1,4 @@
+using Registration;
 using RTEditor;
 using UnityEngine;
 
@@ -41,6 +42,7 @@ namespace Fragment
             gameObject.transform.parent = selected ? SelectedFragments.transform : DeselectedFragments.transform;
         }
 
+        #region IRTEditorEventListener
         public bool OnCanBeSelected(ObjectSelectEventArgs selectEventArgs)
         {
             return true;
@@ -57,6 +59,7 @@ namespace Fragment
         }
 
         public void OnAlteredByTransformGizmo(Gizmo gizmo) { }
+        #endregion
     }
 
 }
