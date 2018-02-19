@@ -119,7 +119,7 @@ namespace DoubleConnectedEdgeList
         private DCEL DCEL;
 
         private Dictionary<int, Vertex> Vertices;
-        private Dictionary<Pair<Vertex, Vertex>, HalfEdge> HalfEdges;
+        private Dictionary<VertexPair, HalfEdge> HalfEdges;
 
         internal DCELMeshBuilder(Mesh simpleMesh)
         {
@@ -127,7 +127,7 @@ namespace DoubleConnectedEdgeList
 
             DCEL = new DCEL();
             Vertices = new Dictionary<int, Vertex>();
-            HalfEdges = new Dictionary<Pair<Vertex, Vertex>, HalfEdge>();
+            HalfEdges = new Dictionary<VertexPair, HalfEdge>();
         }
 
         internal DCEL Build()
@@ -209,11 +209,9 @@ namespace DoubleConnectedEdgeList
         private HalfEdge CreateOrGetEdge(Vertex origin, Vertex destination)
         {
             HalfEdge edge;
-            //Does edge exists?
-            if (!HalfEdges.TryGetValue(new Pair<Vertex, Vertex>(origin, destination), out edge))
+            //Does the edge already exists?
+            if (!HalfEdges.TryGetValue(new VertexPair(origin, destination), out edge))
             {
-                if (edge != null) Debug.Log("Found an Edge in the HalfEdges List!");
-
                 edge = CreateEdge(origin, destination);
             }
             return edge;
@@ -225,7 +223,7 @@ namespace DoubleConnectedEdgeList
             HalfEdge edge = new HalfEdge(origin);
 
             //Add to auxilary structure
-            HalfEdges.Add(new Pair<Vertex, Vertex>(origin, destination), edge);
+            HalfEdges.Add(new VertexPair(origin, destination), edge);
 
             //Add to DCEl
             DCEL.AddEdge(edge);
@@ -239,5 +237,33 @@ namespace DoubleConnectedEdgeList
             edge.IncidentFace = face;
         }
 
+    }
+
+    internal class VertexPair : Pair<Vertex, Vertex>, IEquatable<VertexPair>
+    {
+        public VertexPair(Vertex first, Vertex second)
+            : base(first, second)
+        { }
+
+        public override int GetHashCode()
+        {
+            return First.Position.GetHashCode() + Second.Position.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            return this.Equals(obj as VertexPair);
+        }
+
+        public bool Equals(VertexPair other)
+        {
+            return (
+                this.First.Position.Equals(other.First.Position) &
+                this.Second.Position.Equals(other.Second.Position)
+            );
+        }
     }
 }
