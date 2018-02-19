@@ -24,10 +24,7 @@ namespace DoubleConnectedEdgeList
 
         public void AddIncidentEdge(HalfEdge edge)
         {
-            if (!this.incidentEdges.Contains(edge))
-            {
-                this.incidentEdges.Add(edge);
-            }
+            if (!IncidentEdges.Contains(edge)) incidentEdges.Add(edge);
         }
 
         public override int GetHashCode()
