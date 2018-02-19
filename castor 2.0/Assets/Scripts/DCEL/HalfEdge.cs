@@ -1,16 +1,22 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System.Linq;
-using DoubleConnectedEdgeList;
 
 namespace DoubleConnectedEdgeList
 {
+    /// <summary>
+    /// Represents a HalfEdge in a double connected Edge List.
+    /// </summary>
     public class HalfEdge : IEquatable<HalfEdge>
     {
+        /// <summary>
+        /// The origin of the half edge.
+        /// </summary>
         public readonly Vertex Origin;
 
+        /// <summary>
+        /// Gets or sets the twin of the half edge, i.e. the edge that runs parallel to this edge, but in the other direction.
+        /// </summary>
+        /// <value>The twin.</value>
         public HalfEdge Twin
         {
             get { return twin; }
@@ -18,6 +24,10 @@ namespace DoubleConnectedEdgeList
         }
         private HalfEdge twin = null;
 
+        /// <summary>
+        /// Gets or sets the previous half edge that one encounteres in CCW traversal of the incident face.
+        /// </summary>
+        /// <value>The previous half edge</value>
         public HalfEdge Previous
         {
             get { return previous; }
@@ -25,6 +35,10 @@ namespace DoubleConnectedEdgeList
         }
         private HalfEdge previous = null;
 
+        /// <summary>
+        /// Gets or sets the next half edge that one encounteres in CCW traversal of the incident face.
+        /// </summary>
+        /// <value>The next half edge</value>
         public HalfEdge Next
         {
             get { return next; }
@@ -32,6 +46,10 @@ namespace DoubleConnectedEdgeList
         }
         private HalfEdge next = null;
 
+        /// <summary>
+        /// The face that lies to the left when traversing this half edge from origin to destination.
+        /// </summary>
+        /// <value>The incident face.</value>
         public Face IncidentFace
         {
             get { return incidentFace; }
@@ -39,6 +57,10 @@ namespace DoubleConnectedEdgeList
         }
         private Face incidentFace = null;
 
+        /// <summary>
+        /// The destination of this half edge.
+        /// </summary>
+        /// <value>The destination.</value>
         public Vertex Destination { get { return HasTwin ? Twin.Origin : null; } }
 
         public bool HasDestination { get { return HasTwin; } }
@@ -56,6 +78,11 @@ namespace DoubleConnectedEdgeList
             this.Origin = origin;
         }
 
+        /// <summary>
+        /// Serves as a hash function for a <see cref="T:DoubleConnectedEdgeList.HalfEdge"/> object.
+        /// </summary>
+        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.</returns>
         public override int GetHashCode()
         {
             int hash = 17;
@@ -67,6 +94,11 @@ namespace DoubleConnectedEdgeList
             return hash;
         }
 
+        /// <summary>
+        /// Serves as a hash function for a <see cref="T:DoubleConnectedEdgeList.HalfEdge"/> object.
+        /// </summary>
+        /// <returns>A hash code for this instance that is suitable for computing the hashcode of <see cref="T:DoubleConnectedEdgeList.Vertex"/> or <see cref="T:DoubleConnectedEdgeList.Face"/>
+        /// hash table.</returns>
         public int NonRecursiveGetHashCode()
         {
             int hash = 17;
@@ -80,6 +112,12 @@ namespace DoubleConnectedEdgeList
             return string.Format("[HalfEdge: origin={0}, destination={1}]", Origin, Destination);
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
+        /// <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
@@ -88,9 +126,14 @@ namespace DoubleConnectedEdgeList
             return this.Equals(obj as HalfEdge);
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="DoubleConnectedEdgeList.HalfEdge"/> is equal to the current <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>.
+        /// </summary>
+        /// <param name="other">The <see cref="DoubleConnectedEdgeList.HalfEdge"/> to compare with the current <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="DoubleConnectedEdgeList.HalfEdge"/> is equal to the current
+        /// <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>; otherwise, <c>false</c>.</returns>
         public bool Equals(HalfEdge other)
         {
-            Debug.Log("HalfEdge:Equals");
             return (
                 this.Origin.NonRecursiveEquals(other.Origin) &&
                 NonRecursiveEqualsAuxilary(this.Twin, other.Twin) &&
@@ -100,10 +143,16 @@ namespace DoubleConnectedEdgeList
             );
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="DoubleConnectedEdgeList.HalfEdge"/> is equal to the current <see cref="T:DoubleConnectedEdgeList.HalfEdge"/> without invoking the Equals methods of <see cref="T:DoubleConnectedEdgeList.Vertex"/> without invoking Equals methods of <see cref="T:DoubleConnectedEdgeList.Vertex"/>, <see cref="T:DoubleConnectedEdgeList.HalfEdge"/> or <see cref="T:DoubleConnectedEdgeList.Face"/>.
+        /// Note that this function does not consider the IncidentFace in its comparison.
+        /// </summary>
+        /// <param name="other">The <see cref="DoubleConnectedEdgeList.HalfEdge"/> to compare with the current <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="DoubleConnectedEdgeList.HalfEdge"/> is equal to the current
+        /// <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>; otherwise, <c>false</c>.</returns>
         public bool NonRecursiveEquals(HalfEdge other)
         {
             if (other == null) return false;
-            Debug.Log("HalfEdge:NonRecursiveEquals");
             return (
                 this.Origin.Position.Equals(other.Origin.Position) &&
                 NonRecursiveEqualsAuxilary(this.Twin, other.Twin) &&
