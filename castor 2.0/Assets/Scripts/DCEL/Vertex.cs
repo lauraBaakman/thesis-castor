@@ -5,34 +5,30 @@ namespace DoubleConnectedEdgeList
 {
     public class Vertex : IEquatable<Vertex>
     {
-        public Vector3 Position
-        {
-            get { return position; }
-        }
-        private Vector3 position;
+        public readonly Vector3 Position;
 
         public Vertex(Vector3 position)
         {
-            this.position = position;
+            this.Position = position;
         }
 
         public override int GetHashCode()
         {
             int hash = 17;
-            hash = hash * 31 + position.GetHashCode();
+            hash = hash * 31 + Position.GetHashCode();
             return hash;
         }
 
         public int NonRecursiveGetHashCode()
         {
             int hash = 17;
-            hash = hash * 31 + position.GetHashCode();
+            hash = hash * 31 + Position.GetHashCode();
             return hash;
         }
 
         public override string ToString()
         {
-            return string.Format("[Vertex: position={0}]", position);
+            return string.Format("[Vertex: position={0}]", Position);
         }
 
         public override bool Equals(object obj)
@@ -46,13 +42,13 @@ namespace DoubleConnectedEdgeList
         public bool Equals(Vertex other)
         {
             Debug.Log("Vertex:Equals");
-            return this.position.Equals(other.position);
+            return this.Position.Equals(other.Position);
         }
 
         public bool NonRecursiveEquals(Vertex other)
         {
             Debug.Log("Vertex:NonRecursiveEquals");
-            return this.position.Equals(other.position);
+            return this.Position.Equals(other.Position);
         }
     }
 }
