@@ -46,6 +46,7 @@ namespace DoubleConnectedEdgeList
         public override int GetHashCode()
         {
             int hash = 17;
+            hash *= (31 + MeshIdx.GetHashCode());
             foreach (HalfEdge edge in OuterComponents)
             {
                 hash *= (31 + edge.NonRecursiveGetHashCode());
@@ -60,6 +61,7 @@ namespace DoubleConnectedEdgeList
         public int NonRecursiveGetHashCode()
         {
             int hash = 17;
+            hash *= (31 + MeshIdx.GetHashCode());
             foreach (HalfEdge edge in OuterComponents)
             {
                 hash *= (31 + edge.Origin.Position.GetHashCode());
@@ -99,6 +101,7 @@ namespace DoubleConnectedEdgeList
             IEnumerable<HalfEdge> inOtherButNotInThis = other.OuterComponents.Except(this.OuterComponents);
 
             return (
+                this.MeshIdx.Equals(other.MeshIdx) &&
                 !inThisButNotInOther.Any() &&
                 !inOtherButNotInThis.Any()
             );
@@ -116,6 +119,7 @@ namespace DoubleConnectedEdgeList
             IEnumerable<HalfEdge> inOtherButNotInThis = other.OuterComponents.Except(this.OuterComponents, new HalfEdge.SimpleComparer());
 
             return (
+                this.MeshIdx.Equals(other.MeshIdx) &&
                 !inThisButNotInOther.Any() &&
                 !inOtherButNotInThis.Any()
             );
@@ -125,12 +129,12 @@ namespace DoubleConnectedEdgeList
         {
             public bool Equals(Face x, Face y)
             {
-                return x.NonRecursiveEquals(y);
+                return x.MeshIdx.Equals(y.MeshIdx);
             }
 
             public int GetHashCode(Face obj)
             {
-                return obj.NonRecursiveGetHashCode();
+                return obj.MeshIdx.GetHashCode();
             }
         }
     }

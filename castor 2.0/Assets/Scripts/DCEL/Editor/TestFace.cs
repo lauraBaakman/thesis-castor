@@ -8,6 +8,31 @@ using System;
 public class FaceTest
 {
     [Test, MaxTime(2000)]
+    public void TestEquals_NotEqualFaceIdxNotEqual()
+    {
+        HalfEdge a = TestAux.RandomHalfEdge();
+        HalfEdge b = TestAux.RandomHalfEdge();
+        HalfEdge c = TestAux.RandomHalfEdge();
+        HalfEdge d = TestAux.RandomHalfEdge();
+
+        Face thisFace = new Face(0);
+        thisFace.AddOuterComponent(a);
+        thisFace.AddOuterComponent(b);
+        thisFace.AddOuterComponent(c);
+        thisFace.AddOuterComponent(d);
+
+        Face otherFace = new Face(1);
+        otherFace.AddOuterComponent(a);
+        otherFace.AddOuterComponent(b);
+        otherFace.AddOuterComponent(c);
+        otherFace.AddOuterComponent(d);
+
+        Assert.IsFalse(thisFace.Equals(otherFace));
+        Assert.IsFalse(otherFace.Equals(thisFace));
+        Assert.AreNotEqual(thisFace.GetHashCode(), otherFace.GetHashCode());
+    }
+
+    [Test, MaxTime(2000)]
     public void TestEquals_EqualsSameOrder()
     {
         HalfEdge a = TestAux.RandomHalfEdge();
@@ -85,7 +110,7 @@ public class FaceTest
     }
 
     [Test, MaxTime(2000)]
-    public void TestEquals_NotEqualThisGreater()
+    public void TestEquals_IdxEqualNotEqualThisGreater()
     {
         HalfEdge a = TestAux.RandomHalfEdge();
         HalfEdge b = TestAux.RandomHalfEdge();
@@ -109,7 +134,7 @@ public class FaceTest
     }
 
     [Test, MaxTime(2000)]
-    public void TestEquals_NotEqualThisSmaller()
+    public void TestEquals_IdxEqualNotEqualThisSmaller()
     {
         HalfEdge a = TestAux.RandomHalfEdge();
         HalfEdge b = TestAux.RandomHalfEdge();
@@ -133,7 +158,7 @@ public class FaceTest
     }
 
     [Test, MaxTime(2000)]
-    public void TestEquals_NotEqualSameSizeDifferentEdges()
+    public void TestEquals_IdxEqualNotEqualSameSizeDifferentEdges()
     {
         HalfEdge a = TestAux.RandomHalfEdge();
         HalfEdge b = TestAux.RandomHalfEdge();
