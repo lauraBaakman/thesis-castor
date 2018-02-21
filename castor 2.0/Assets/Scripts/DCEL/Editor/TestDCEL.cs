@@ -96,15 +96,13 @@ public class DCELTests
     [Test, MaxTime(5000)]
     public void Build_Rectangle()
     {
+        Vector3 p1 = new Vector3(5, 7, 2);
+        Vector3 p2 = new Vector3(5, 3, 3);
+        Vector3 p3 = new Vector3(2, 3, 2.5f);
+        Vector3 p4 = new Vector3(2, 5, 3f);
+
         Mesh mesh = new Mesh();
-        Vector3[] meshVertices = {
-            new Vector3(5, 7, 2),
-            new Vector3(5, 3, 3),
-            new Vector3(2, 3, 2.5f),
-            new Vector3(2, 3, 2.5f),
-            new Vector3(2, 5, 3f),
-            new Vector3(5, 7, 2),
-        };
+        Vector3[] meshVertices = { p1, p2, p3, p3, p4, p1 };
 
         int[] triangles = {
             0, 2, 1,
@@ -114,12 +112,11 @@ public class DCELTests
         mesh.vertices = meshVertices;
         mesh.triangles = triangles;
 
-        Vertex v1 = new Vertex(meshVertices[0]);
-        Vertex v2 = new Vertex(meshVertices[1]);
-        Vertex v3 = new Vertex(meshVertices[2]);
-        Vertex v4 = new Vertex(meshVertices[4]);
+        Vertex v1 = new Vertex(p1);
+        Vertex v2 = new Vertex(p2);
+        Vertex v3 = new Vertex(p3);
+        Vertex v4 = new Vertex(p4);
 
-        List<HalfEdge> halfEdges = new List<HalfEdge>();
         HalfEdge e12 = new HalfEdge(v1);
         HalfEdge e13 = new HalfEdge(v1);
         HalfEdge e14 = new HalfEdge(v1);
@@ -159,39 +156,31 @@ public class DCELTests
         e32.Previous = e13;
         e43.Previous = e14;
 
-        halfEdges.Add(e12);
-        halfEdges.Add(e13);
-        halfEdges.Add(e14);
+        List<HalfEdge> halfEdges = new List<HalfEdge>
+        {
+            e12, e13, e14,
+            e21, e23,
+            e31, e32, e34,
+            e41, e43
+        };
 
-        halfEdges.Add(e21);
-        halfEdges.Add(e23);
-
-        halfEdges.Add(e31);
-        halfEdges.Add(e32);
-        halfEdges.Add(e34);
-
-        halfEdges.Add(e41);
-        halfEdges.Add(e43);
-
-        List<Face> faces = new List<Face>();
-
-        Face f1 = new Face(0);
-        f1.AddOuterComponent(e31);
-        f1.AddOuterComponent(e43);
-        f1.AddOuterComponent(e14);
-        e31.IncidentFace = f1;
-        e43.IncidentFace = f1;
-        e14.IncidentFace = f1;
-        faces.Add(f1);
-
-        Face f2 = new Face(1);
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e21);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e13);
         e21.IncidentFace = f2;
         e32.IncidentFace = f2;
         e13.IncidentFace = f2;
-        faces.Add(f2);
+
+        Face f1 = new Face(1);
+        f1.AddOuterComponent(e31);
+        f1.AddOuterComponent(e43);
+        f1.AddOuterComponent(e14);
+        e31.IncidentFace = f1;
+        e43.IncidentFace = f1;
+        e14.IncidentFace = f1;
+
+        List<Face> faces = new List<Face> { f1, f2 };
 
         v1.AddIncidentEdge(e12);
         v1.AddIncidentEdge(e13);
