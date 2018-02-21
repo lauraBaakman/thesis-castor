@@ -909,7 +909,8 @@ public class DCELTests
         v2.AddIncidentEdge(e42);
         v2.AddIncidentEdge(e12);
 
-        v3.AddIncidentEdge(e31);
+        //The different incident edge
+        v3.AddIncidentEdge(e11);
         v3.AddIncidentEdge(e41);
 
         List<HalfEdge> halfEdges = new List<HalfEdge>
