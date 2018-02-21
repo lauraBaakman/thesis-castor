@@ -797,7 +797,7 @@ public class HalfEdgeTest
     }
 
     [Test, MaxTime(2000)]
-    public void TestCompareTo_ObjEqualInPosition()
+    public void TestCompareTo_ObjEqualInPositionEverythingElseNull()
     {
         Vertex vertex = TestAux.RandomVertex();
 
@@ -868,6 +868,50 @@ public class HalfEdgeTest
 
         HalfEdge thisEdge = new HalfEdge(vertex);
         HalfEdge otherEdge = new HalfEdge(vertex);
+
+        thisEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+        otherEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+
+        int expected = +1;
+        int actual = thisEdge.CompareTo(otherEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqualInPositionSmallerInNextTwinSet()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        HalfEdge thisEdge = new HalfEdge(vertex);
+        HalfEdge otherEdge = new HalfEdge(vertex);
+
+        HalfEdge twin = TestAux.RandomHalfEdge();
+
+        thisEdge.Twin = twin;
+        otherEdge.Twin = twin;
+
+        thisEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+        otherEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+
+        int expected = -1;
+        int actual = thisEdge.CompareTo(otherEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqualInPositionLargerInNextTwinSet()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        HalfEdge thisEdge = new HalfEdge(vertex);
+        HalfEdge otherEdge = new HalfEdge(vertex);
+
+        HalfEdge twin = TestAux.RandomHalfEdge();
+
+        thisEdge.Twin = twin;
+        otherEdge.Twin = twin;
 
         thisEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
         otherEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
