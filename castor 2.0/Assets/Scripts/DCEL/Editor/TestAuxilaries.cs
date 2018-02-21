@@ -3,6 +3,8 @@ using UnityEngine;
 
 public static class TestAux
 {
+    static System.Random random = new System.Random();
+
     public static Vector3 RandomPosition()
     {
         return new Vector3(Random.value, Random.value, Random.value);
@@ -20,7 +22,7 @@ public static class TestAux
 
     public static Face RandomFace()
     {
-        return new Face(new System.Random().Next());
+        return new Face(random.Next());
     }
 }
 
