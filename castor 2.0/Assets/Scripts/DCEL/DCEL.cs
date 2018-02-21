@@ -177,7 +177,7 @@ namespace DoubleConnectedEdgeList
             for (int i = 0; i <= maxIdx; i += 3)
             {
                 AddFaceAndItsEdges(
-                    i / 3, 
+                    i / 3,
                     Vertices[mesh.triangles[i + 0]],
                     Vertices[mesh.triangles[i + 1]],
                     Vertices[mesh.triangles[i + 2]]
