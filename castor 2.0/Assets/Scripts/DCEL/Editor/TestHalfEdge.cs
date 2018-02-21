@@ -633,28 +633,6 @@ public class HalfEdgeTest
     }
 
     [Test, MaxTime(2000)]
-    public void TestNonRecursiveEquals_EqualsNoTwins()
-    {
-        Vertex origin = TestAux.RandomVertex();
-
-        HalfEdge thisEdge = new HalfEdge(origin);
-        HalfEdge otherEdge = new HalfEdge(origin);
-
-        Assert.IsTrue(thisEdge.NonRecursiveEquals(otherEdge));
-        Assert.IsTrue(otherEdge.NonRecursiveEquals(thisEdge));
-    }
-
-    [Test, MaxTime(2000)]
-    public void TestNonRecursiveEquals_NotEqualNoTwins()
-    {
-        HalfEdge thisEdge = TestAux.RandomHalfEdge();
-        HalfEdge otherEdge = TestAux.RandomHalfEdge();
-
-        Assert.IsFalse(thisEdge.NonRecursiveEquals(otherEdge));
-        Assert.IsFalse(otherEdge.NonRecursiveEquals(thisEdge));
-    }
-
-    [Test, MaxTime(2000)]
     public void TestHasTwin_HasTwin()
     {
         HalfEdge edge = TestAux.RandomHalfEdge();

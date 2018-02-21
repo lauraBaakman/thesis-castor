@@ -135,50 +135,17 @@ namespace DoubleConnectedEdgeList
         /// <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>; otherwise, <c>false</c>.</returns>
         public bool Equals(HalfEdge other)
         {
+            SimpleComparer edgeComparer = new SimpleComparer();
+            Vertex.SimpleComparer vertexComparer = new Vertex.SimpleComparer();
+            Face.SimpleComparer faceComparer = new Face.SimpleComparer();
+
             return (
-                this.Origin.NonRecursiveEquals(other.Origin) &&
-                NonRecursiveEqualsAuxilary(this.Twin, other.Twin) &&
-                NonRecursiveEqualsAuxilary(this.Previous, other.Previous) &&
-                NonRecursiveEqualsAuxilary(this.Next, other.Next) &&
-                NonRecursiveEqualsAuxilary(this.IncidentFace, other.IncidentFace)
+                vertexComparer.Equals(this.Origin, other.Origin) &&
+                edgeComparer.Equals(this.Twin, other.Twin) &&
+                edgeComparer.Equals(this.Previous, other.Previous) &&
+                edgeComparer.Equals(this.Next, other.Next) &&
+                faceComparer.Equals(this.IncidentFace, other.IncidentFace)
             );
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="DoubleConnectedEdgeList.HalfEdge"/> is equal to the current <see cref="T:DoubleConnectedEdgeList.HalfEdge"/> without invoking the Equals methods of <see cref="T:DoubleConnectedEdgeList.Vertex"/> without invoking Equals methods of <see cref="T:DoubleConnectedEdgeList.Vertex"/>, <see cref="T:DoubleConnectedEdgeList.HalfEdge"/> or <see cref="T:DoubleConnectedEdgeList.Face"/>.
-        /// Note that this function does not consider the IncidentFace in its comparison.
-        /// </summary>
-        /// <param name="other">The <see cref="DoubleConnectedEdgeList.HalfEdge"/> to compare with the current <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="DoubleConnectedEdgeList.HalfEdge"/> is equal to the current
-        /// <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>; otherwise, <c>false</c>.</returns>
-        public bool NonRecursiveEquals(HalfEdge other)
-        {
-            if (other == null) return false;
-            return (
-                this.Origin.Position.Equals(other.Origin.Position) &&
-                NonRecursiveEqualsAuxilary(this.Twin, other.Twin) &&
-                NonRecursiveEqualsAuxilary(this.Previous, other.Previous) &&
-                NonRecursiveEqualsAuxilary(this.Next, other.Next)
-            );
-        }
-
-        private bool NonRecursiveEqualsAuxilary(HalfEdge thisEdge, HalfEdge otherEdge)
-        {
-            return new SimpleComparer().Equals(thisEdge, otherEdge);
-        }
-
-        private bool NonRecursiveEqualsAuxilary(Vertex thisVertex, Vertex otherVertex)
-        {
-            if (thisVertex == null && otherVertex == null) return true;
-            if (thisVertex == null || otherVertex == null) return false;
-            return thisVertex.Position.Equals(otherVertex.Position);
-        }
-
-        private bool NonRecursiveEqualsAuxilary(Face thisFace, Face otherFace)
-        {
-            if (thisFace == null && otherFace == null) return true;
-            if (thisFace == null || otherFace == null) return false;
-            return thisFace.NonRecursiveEquals(otherFace);
         }
 
         public int CompareTo(object obj)
@@ -217,17 +184,13 @@ namespace DoubleConnectedEdgeList
             {
                 if (x == null && y == null) return true;
                 if (x == null || y == null) return false;
-                bool originEqual = x.Origin.Position.Equals(y.Origin.Position);
-                bool destinationEqual = CompareVertex(x.Destination, y.Destination);
 
-                return originEqual && destinationEqual;
-            }
+                Vertex.SimpleComparer vertexComparer = new Vertex.SimpleComparer();
 
-            private bool CompareVertex(Vertex thisVertex, Vertex otherVertex)
-            {
-                if (thisVertex == null && otherVertex == null) return true;
-                if (thisVertex == null || otherVertex == null) return false;
-                return thisVertex.Position.Equals(otherVertex.Position);
+                return (
+                    vertexComparer.Equals(x.Origin, y.Origin) &&
+                    vertexComparer.Equals(x.Destination, y.Destination)
+                );
             }
 
             public int GetHashCode(HalfEdge obj)
