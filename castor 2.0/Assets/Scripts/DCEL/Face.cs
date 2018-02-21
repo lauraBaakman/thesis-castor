@@ -84,13 +84,9 @@ namespace DoubleConnectedEdgeList
         /// <see cref="T:DoubleConnectedEdgeList.Face"/>; otherwise, <c>false</c>.</returns>
         public bool Equals(Face other)
         {
-            IEnumerable<HalfEdge> inThisButNotInOther = this.OuterComponents.Except(other.OuterComponents, new HalfEdge.SimpleComparer());
-            IEnumerable<HalfEdge> inOtherButNotInThis = other.OuterComponents.Except(this.OuterComponents, new HalfEdge.SimpleComparer());
-
             return (
                 this.MeshIdx.Equals(other.MeshIdx) &&
-                !inThisButNotInOther.Any() &&
-                !inOtherButNotInThis.Any()
+                this.OuterComponents.UnorderedElementsAreEqual(other.OuterComponents)
             );
         }
 
