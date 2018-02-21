@@ -86,25 +86,16 @@ namespace DoubleConnectedEdgeList
         /// hash table.</returns>
         public override int GetHashCode()
         {
-            int hash = 17;
-            hash *= (31 + Origin.NonRecursiveGetHashCode());
-            if (HasTwin) hash *= (31 + Twin.NonRecursiveGetHashCode());
-            if (HasPrevious) hash *= (31 + Previous.NonRecursiveGetHashCode());
-            if (HasNext) hash *= (31 + Next.NonRecursiveGetHashCode());
-            if (HasIncidentFace) hash *= (31 + IncidentFace.NonRecursiveGetHashCode());
-            return hash;
-        }
+            SimpleComparer edge = new SimpleComparer();
+            Vertex.SimpleComparer vertex = new Vertex.SimpleComparer();
+            Face.SimpleComparer face = new Face.SimpleComparer();
 
-        /// <summary>
-        /// Serves as a hash function for a <see cref="T:DoubleConnectedEdgeList.HalfEdge"/> object.
-        /// </summary>
-        /// <returns>A hash code for this instance that is suitable for computing the hashcode of <see cref="T:DoubleConnectedEdgeList.Vertex"/> or <see cref="T:DoubleConnectedEdgeList.Face"/>
-        /// hash table.</returns>
-        public int NonRecursiveGetHashCode()
-        {
             int hash = 17;
-            hash *= (31 + Origin.Position.GetHashCode());
-            if (HasDestination) hash *= (31 + Destination.Position.GetHashCode());
+            hash *= (31 + vertex.GetHashCode(Origin));
+            hash *= (31 + edge.GetHashCode(Twin));
+            hash *= (31 + edge.GetHashCode(Previous));
+            hash *= (31 + edge.GetHashCode(Next));
+            hash *= (31 + face.GetHashCode(IncidentFace));
             return hash;
         }
 

@@ -10,7 +10,6 @@ public class VertexTest
     public void Init()
     {
         Random.InitState(42);
-        Debug.Log("Handled -1 case for meshidx comparison");
     }
 
     [Test, MaxTime(2000)]

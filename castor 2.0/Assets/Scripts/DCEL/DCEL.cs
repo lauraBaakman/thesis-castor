@@ -78,25 +78,6 @@ namespace DoubleConnectedEdgeList
             return !inThisButNotInOther.Any() && !inOtherButNotInThis.Any();
         }
 
-        private bool ExtensiveEqualsList<T>(ReadOnlyCollection<T> thisListReadOnly, ReadOnlyCollection<T> otherListReadOnly)
-        {
-            List<T> thisList = new List<T>(thisListReadOnly);
-            thisList.Sort();
-
-            List<T> otherList = new List<T>(otherListReadOnly);
-            otherList.Sort();
-
-            int listLength = thisList.Count();
-
-            bool equal = false;
-
-            for (int i = 0; i < listLength; i++)
-            {
-                equal = thisList[i].Equals(otherList[i]);
-            }
-            return equal;
-        }
-
         private int GetHashCodeList<T>(List<T> list)
         {
             int hash = 17;

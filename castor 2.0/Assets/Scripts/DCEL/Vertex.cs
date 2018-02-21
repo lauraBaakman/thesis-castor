@@ -75,27 +75,13 @@ namespace DoubleConnectedEdgeList
         /// hash table.</returns>
         public override int GetHashCode()
         {
-            int hash = 17;
-            hash *= (31 + Position.GetHashCode());
-            foreach (HalfEdge edge in IncidentEdges)
-            {
-                hash *= (31 + edge.NonRecursiveGetHashCode());
-            }
-            return hash;
-        }
+            HalfEdge.SimpleComparer edgeComparer = new HalfEdge.SimpleComparer();
 
-        /// <summary>
-        /// Computes the hashcode of the Vertx without invoking GetHashCode methods of <see cref="T:DoubleConnectedEdgeList.Vertex"/>, <see cref="T:DoubleConnectedEdgeList.HalfEdge"/> or <see cref="T:DoubleConnectedEdgeList.Face"/>.
-        /// </summary>
-        /// <returns>The recursive get hash code.</returns>
-        public int NonRecursiveGetHashCode()
-        {
             int hash = 17;
             hash *= (31 + Position.GetHashCode());
             foreach (HalfEdge edge in IncidentEdges)
             {
-                hash *= (31 + edge.Origin.Position.GetHashCode());
-                if (edge.HasDestination) hash *= (31 + edge.Destination.Position.GetHashCode());
+                hash *= (31 + edgeComparer.GetHashCode(edge));
             }
             return hash;
         }
