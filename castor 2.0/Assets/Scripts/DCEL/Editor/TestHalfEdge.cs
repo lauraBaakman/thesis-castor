@@ -4,7 +4,7 @@ using NUnit.Framework;
 using DoubleConnectedEdgeList;
 
 [TestFixture]
-public class TestHalfEdge
+public class HalfEdgeTest
 {
     [Test, MaxTime(2000)]
     public void TestDestination_TwinIsNull()
@@ -747,4 +747,195 @@ public class TestHalfEdge
 
         Assert.IsFalse(edge.HasDestination);
     }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjNull()
+    {
+        HalfEdge edge = TestAux.RandomHalfEdge();
+
+        int expected = 1;
+        int actual = edge.CompareTo(null);
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjNotHalfEdge()
+    {
+        Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestCompareTo_ObjNotHalfedge_Helper));
+    }
+
+    void TestCompareTo_ObjNotHalfedge_Helper()
+    {
+        HalfEdge edge = TestAux.RandomHalfEdge();
+        Vertex vertex = TestAux.RandomVertex();
+
+        edge.CompareTo(vertex);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjSmallerInPosition()
+    {
+        HalfEdge thisHalfEdge = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+        HalfEdge otherHalfEdge = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+
+        int expected = -1;
+        int actual = thisHalfEdge.CompareTo(otherHalfEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjLargerInPosition()
+    {
+        HalfEdge thisHalfEdge = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+        HalfEdge otherHalfEdge = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+
+        int expected = 1;
+        int actual = thisHalfEdge.CompareTo(otherHalfEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqualInPosition()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        HalfEdge thisHalfEdge = new HalfEdge(vertex);
+        HalfEdge otherHalfEdge = new HalfEdge(vertex);
+
+        int expected = 0;
+        int actual = thisHalfEdge.CompareTo(otherHalfEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqualInPositionSmallerInTwin()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        HalfEdge thisEdge = new HalfEdge(vertex);
+        HalfEdge otherEdge = new HalfEdge(vertex);
+
+        thisEdge.Twin = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+        otherEdge.Twin = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+
+        int expected = -1;
+        int actual = thisEdge.CompareTo(otherEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqualInPositionLargerInTwin()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        HalfEdge thisEdge = new HalfEdge(vertex);
+        HalfEdge otherEdge = new HalfEdge(vertex);
+
+        thisEdge.Twin = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+        otherEdge.Twin = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+
+        int expected = +1;
+        int actual = thisEdge.CompareTo(otherEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqualInPositionSmallerInNext()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        HalfEdge thisEdge = new HalfEdge(vertex);
+        HalfEdge otherEdge = new HalfEdge(vertex);
+
+        thisEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+        otherEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+
+        int expected = -1;
+        int actual = thisEdge.CompareTo(otherEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqualInPositionLargerInNext()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        HalfEdge thisEdge = new HalfEdge(vertex);
+        HalfEdge otherEdge = new HalfEdge(vertex);
+
+        thisEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+        otherEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+
+        int expected = +1;
+        int actual = thisEdge.CompareTo(otherEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqualInPositionSmallerInPrevious()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        HalfEdge thisEdge = new HalfEdge(vertex);
+        HalfEdge otherEdge = new HalfEdge(vertex);
+
+        thisEdge.Previous = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+        otherEdge.Previous = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+
+        int expected = -1;
+        int actual = thisEdge.CompareTo(otherEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqualInPositionLargerInPrevious()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        HalfEdge thisEdge = new HalfEdge(vertex);
+        HalfEdge otherEdge = new HalfEdge(vertex);
+
+        thisEdge.Previous = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+        otherEdge.Previous = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+
+        int expected = +1;
+        int actual = thisEdge.CompareTo(otherEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqualInEverything()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        HalfEdge thisEdge = new HalfEdge(vertex);
+        HalfEdge otherEdge = new HalfEdge(vertex);
+
+        HalfEdge twin = TestAux.RandomHalfEdge();
+        thisEdge.Twin = twin;
+        otherEdge.Twin = twin;
+
+        HalfEdge next = TestAux.RandomHalfEdge();
+        thisEdge.Next = next;
+        otherEdge.Next = next;
+
+        HalfEdge previous = TestAux.RandomHalfEdge();
+        thisEdge.Previous = previous;
+        otherEdge.Previous = previous;
+
+        int expected = 0;
+        int actual = thisEdge.CompareTo(otherEdge);
+
+        Assert.AreEqual(expected, actual);
+    }
+
 }
