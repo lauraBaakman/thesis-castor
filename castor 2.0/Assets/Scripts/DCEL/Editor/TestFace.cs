@@ -182,4 +182,64 @@ public class FaceTest
         Assert.IsFalse(otherFace.Equals(thisFace));
         Assert.AreNotEqual(thisFace.GetHashCode(), otherFace.GetHashCode());
     }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjNull()
+    {
+        Face face = TestAux.RandomFace();
+
+        int expected = 1;
+        int actual = face.CompareTo(null);
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjNotFace()
+    {
+        Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestCompareTo_ObjNotFace_Helper));
+    }
+
+    void TestCompareTo_ObjNotFace_Helper()
+    {
+        Face face = TestAux.RandomFace();
+        HalfEdge edge = TestAux.RandomHalfEdge();
+
+        face.CompareTo(edge);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_MeshIdxSmaller()
+    {
+        Face thisFace = new Face(0);
+        Face otherFace = new Face(1);
+
+        int expected = -1;
+        int actual = thisFace.CompareTo(otherFace);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_MeshIdxEqual()
+    {
+        Face thisFace = new Face(1);
+        Face otherFace = new Face(1);
+
+        int expected = 0;
+        int actual = thisFace.CompareTo(otherFace);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_MeshIdxLarger()
+    {
+        Face thisFace = new Face(5);
+        Face otherFace = new Face(1);
+
+        int expected = 1;
+        int actual = thisFace.CompareTo(otherFace);
+
+        Assert.AreEqual(expected, actual);
+    }
 }

@@ -10,7 +10,7 @@ namespace DoubleConnectedEdgeList
     /// <summary>
     /// Represents a Face in double connected edge list.
     /// </summary>
-    public class Face : IEquatable<Face>
+    public class Face : IEquatable<Face>, IComparable
     {
         /// <summary>
         /// The half edges on the boundary of this face in arbitrary order. 
@@ -124,6 +124,16 @@ namespace DoubleConnectedEdgeList
                 !inThisButNotInOther.Any() &&
                 !inOtherButNotInThis.Any()
             );
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+            if (GetType() != obj.GetType()) throw new ArgumentException("Object is not a Face.");
+
+            Face face = obj as Face;
+
+            return this.MeshIdx.CompareTo(face.MeshIdx);
         }
 
         public class SimpleComparer : IEqualityComparer<Face>
