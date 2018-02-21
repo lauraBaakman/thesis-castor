@@ -158,6 +158,7 @@ namespace DoubleConnectedEdgeList
             for (int i = 0; i <= maxIdx; i += 3)
             {
                 AddFaceAndItsEdges(
+                    i / 3, 
                     Vertices[mesh.triangles[i + 0]],
                     Vertices[mesh.triangles[i + 1]],
                     Vertices[mesh.triangles[i + 2]]
@@ -165,9 +166,9 @@ namespace DoubleConnectedEdgeList
             }
         }
 
-        private void AddFaceAndItsEdges(Vertex a, Vertex b, Vertex c)
+        private void AddFaceAndItsEdges(int faceIdx, Vertex a, Vertex b, Vertex c)
         {
-            Face face = new Face();
+            Face face = new Face(faceIdx);
 
             HalfEdge ab = AddEdgeWithTwin(a, b);
             HalfEdge bc = AddEdgeWithTwin(b, c);

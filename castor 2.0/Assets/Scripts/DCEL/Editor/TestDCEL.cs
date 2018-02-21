@@ -60,7 +60,7 @@ public class DCELTests
 
         List<Face> faces = new List<Face>();
 
-        Face f2 = new Face();
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -175,7 +175,7 @@ public class DCELTests
 
         List<Face> faces = new List<Face>();
 
-        Face f1 = new Face();
+        Face f1 = new Face(0);
         f1.AddOuterComponent(e31);
         f1.AddOuterComponent(e43);
         f1.AddOuterComponent(e14);
@@ -184,7 +184,7 @@ public class DCELTests
         e14.IncidentFace = f1;
         faces.Add(f1);
 
-        Face f2 = new Face();
+        Face f2 = new Face(1);
         f2.AddOuterComponent(e21);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e13);
@@ -337,7 +337,7 @@ public class DCELTests
 
         List<Face> faces = new List<Face>();
 
-        Face f1 = new Face();
+        Face f1 = new Face(0);
         f1.AddOuterComponent(e01);
         f1.AddOuterComponent(e13);
         f1.AddOuterComponent(e30);
@@ -346,7 +346,7 @@ public class DCELTests
         e30.IncidentFace = f1;
         faces.Add(f1);
 
-        Face f2 = new Face();
+        Face f2 = new Face(1);
         f2.AddOuterComponent(e21);
         f2.AddOuterComponent(e02);
         f2.AddOuterComponent(e10);
@@ -355,7 +355,7 @@ public class DCELTests
         e10.IncidentFace = f2;
         faces.Add(f2);
 
-        Face f3 = new Face();
+        Face f3 = new Face(2);
         f3.AddOuterComponent(e32);
         f3.AddOuterComponent(e03);
         f3.AddOuterComponent(e20);
@@ -364,7 +364,7 @@ public class DCELTests
         e20.IncidentFace = f3;
         faces.Add(f3);
 
-        Face f4 = new Face();
+        Face f4 = new Face(3);
         f4.AddOuterComponent(e12);
         f4.AddOuterComponent(e23);
         f4.AddOuterComponent(e31);
@@ -663,7 +663,7 @@ public class DCELTests
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -825,7 +825,7 @@ public class DCELTests
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -894,7 +894,7 @@ public class DCELTests
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -967,7 +967,7 @@ public class DCELTests
         e41.Previous = e32;
         e13.Previous = e41;
 
-        Face f2 = new Face();
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -1039,7 +1039,7 @@ public class DCELTests
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -1110,7 +1110,7 @@ public class DCELTests
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -1182,7 +1182,7 @@ public class DCELTests
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -1255,7 +1255,7 @@ public class DCELTests
         e41.Previous = e32;
         e13.Previous = e41;
 
-        Face f2 = new Face();
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -1324,7 +1324,7 @@ public class DCELTests
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(0);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);

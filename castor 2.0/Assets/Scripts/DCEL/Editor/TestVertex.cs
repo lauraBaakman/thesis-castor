@@ -276,7 +276,7 @@ public class VertexTest
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(2);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -315,7 +315,7 @@ public class VertexTest
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(2);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -358,7 +358,7 @@ public class VertexTest
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(2);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -401,7 +401,7 @@ public class VertexTest
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(2);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -450,7 +450,7 @@ public class VertexTest
         e32.Previous = e12;
         e41.Previous = e32;
 
-        Face f2 = new Face();
+        Face f2 = new Face(2);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);
@@ -494,7 +494,7 @@ public class VertexTest
         e32.Previous = e12;
         e41.Previous = e32;        
 
-        Face f2 = new Face();
+        Face f2 = new Face(2);
         f2.AddOuterComponent(e32);
         f2.AddOuterComponent(e41);
         f2.AddOuterComponent(e12);

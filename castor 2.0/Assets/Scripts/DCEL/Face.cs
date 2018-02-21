@@ -21,8 +21,11 @@ namespace DoubleConnectedEdgeList
         }
         private List<HalfEdge> outerComponents;
 
-        public Face()
+        public readonly int MeshIdx;
+
+        public Face(int meshIdx)
         {
+            this.MeshIdx = meshIdx;
             this.outerComponents = new List<HalfEdge>();
         }
 

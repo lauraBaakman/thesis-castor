@@ -524,7 +524,7 @@ public class HalfEdgeTest
         HalfEdge ca = new HalfEdge(c);
         HalfEdge cb = new HalfEdge(c);
 
-        Face face = new Face();
+        Face face = new Face(2);
         face.AddOuterComponent(abThis);
         face.AddOuterComponent(bc);
         face.AddOuterComponent(ca);
@@ -585,12 +585,12 @@ public class HalfEdgeTest
         HalfEdge ca = new HalfEdge(c);
         HalfEdge cb = new HalfEdge(c);
 
-        Face thisFace = new Face();
+        Face thisFace = new Face(0);
         thisFace.AddOuterComponent(abThis);
         thisFace.AddOuterComponent(bc);
         thisFace.AddOuterComponent(ca);
 
-        Face otherFace = new Face();
+        Face otherFace = new Face(0);
         otherFace.AddOuterComponent(abOther);
 
         abThis.IncidentFace = thisFace;
@@ -735,7 +735,7 @@ public class HalfEdgeTest
     {
         HalfEdge edge = TestAux.RandomHalfEdge();
 
-        edge.IncidentFace = new Face();
+        edge.IncidentFace = new Face(0);
 
         Assert.IsTrue(edge.HasIncidentFace);
     }

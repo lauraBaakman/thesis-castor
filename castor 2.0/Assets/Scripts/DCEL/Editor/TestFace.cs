@@ -15,13 +15,13 @@ public class FaceTest
         HalfEdge c = TestAux.RandomHalfEdge();
         HalfEdge d = TestAux.RandomHalfEdge();
 
-        Face thisFace = new Face();
+        Face thisFace = new Face(0);
         thisFace.AddOuterComponent(a);
         thisFace.AddOuterComponent(b);
         thisFace.AddOuterComponent(c);
         thisFace.AddOuterComponent(d);
 
-        Face otherFace = new Face();
+        Face otherFace = new Face(0);
         otherFace.AddOuterComponent(a);
         otherFace.AddOuterComponent(b);
         otherFace.AddOuterComponent(c);
@@ -40,13 +40,13 @@ public class FaceTest
         HalfEdge c = TestAux.RandomHalfEdge();
         HalfEdge d = TestAux.RandomHalfEdge();
 
-        Face thisFace = new Face();
+        Face thisFace = new Face(0);
         thisFace.AddOuterComponent(a);
         thisFace.AddOuterComponent(b);
         thisFace.AddOuterComponent(c);
         thisFace.AddOuterComponent(d);
 
-        Face otherFace = new Face();
+        Face otherFace = new Face(0);
         otherFace.AddOuterComponent(b);
         otherFace.AddOuterComponent(a);
         otherFace.AddOuterComponent(d);
@@ -65,7 +65,7 @@ public class FaceTest
         HalfEdge c = TestAux.RandomHalfEdge();
         HalfEdge d = TestAux.RandomHalfEdge();
 
-        Face thisFace = new Face();
+        Face thisFace = new Face(0);
         thisFace.AddOuterComponent(a);
         thisFace.AddOuterComponent(b);
         thisFace.AddOuterComponent(c);
@@ -73,7 +73,7 @@ public class FaceTest
         thisFace.AddOuterComponent(d);
         thisFace.AddOuterComponent(d);
 
-        Face otherFace = new Face();
+        Face otherFace = new Face(0);
         otherFace.AddOuterComponent(b);
         otherFace.AddOuterComponent(a);
         otherFace.AddOuterComponent(d);
@@ -92,13 +92,13 @@ public class FaceTest
         HalfEdge c = TestAux.RandomHalfEdge();
         HalfEdge d = TestAux.RandomHalfEdge();
 
-        Face thisFace = new Face();
+        Face thisFace = new Face(0);
         thisFace.AddOuterComponent(a);
         thisFace.AddOuterComponent(b);
         thisFace.AddOuterComponent(c);
         thisFace.AddOuterComponent(d);
 
-        Face otherFace = new Face();
+        Face otherFace = new Face(0);
         otherFace.AddOuterComponent(a);
         otherFace.AddOuterComponent(b);
         otherFace.AddOuterComponent(d);
@@ -116,12 +116,12 @@ public class FaceTest
         HalfEdge c = TestAux.RandomHalfEdge();
         HalfEdge d = TestAux.RandomHalfEdge();
 
-        Face thisFace = new Face();
+        Face thisFace = new Face(0);
         thisFace.AddOuterComponent(a);
         thisFace.AddOuterComponent(c);
         thisFace.AddOuterComponent(d);
 
-        Face otherFace = new Face();
+        Face otherFace = new Face(0);
         otherFace.AddOuterComponent(a);
         otherFace.AddOuterComponent(b);
         otherFace.AddOuterComponent(c);
@@ -141,13 +141,13 @@ public class FaceTest
         HalfEdge d = TestAux.RandomHalfEdge();
         HalfEdge e = TestAux.RandomHalfEdge();
 
-        Face thisFace = new Face();
+        Face thisFace = new Face(0);
         thisFace.AddOuterComponent(a);
         thisFace.AddOuterComponent(b);
         thisFace.AddOuterComponent(c);
         thisFace.AddOuterComponent(d);
 
-        Face otherFace = new Face();
+        Face otherFace = new Face(0);
         otherFace.AddOuterComponent(a);
         otherFace.AddOuterComponent(b);
         otherFace.AddOuterComponent(e);
