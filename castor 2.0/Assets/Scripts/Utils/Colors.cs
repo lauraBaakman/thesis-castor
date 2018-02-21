@@ -75,7 +75,7 @@ namespace Utils
 
             HSVColor hsvColor = new HSVColor(baseColor);
             hsvColor.Value = hsvColor.Value * ValueScalingFactor;
-            return hsvColor.ToRGBColor();
+            return hsvColor.ToColor();
         }
 
         private Color GenerateLockedColor(Color baseColor)
@@ -84,7 +84,7 @@ namespace Utils
 
             HSVColor hsvColor = new HSVColor(baseColor);
             hsvColor.Saturation = hsvColor.Saturation * HueScalingFactor;
-            return hsvColor.ToRGBColor();
+            return hsvColor.ToColor();
         }
     }
 
@@ -124,10 +124,9 @@ namespace Utils
             this.value = value;
         }
 
-        public Color ToRGBColor()
+        public Color ToColor()
         {
             return Color.HSVToRGB(hue, saturation, value);
         }
     }
-
 }
