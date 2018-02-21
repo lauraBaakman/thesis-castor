@@ -70,6 +70,8 @@ namespace DoubleConnectedEdgeList
 
         private bool EqualsList<T>(ReadOnlyCollection<T> thisList, ReadOnlyCollection<T> otherList, IEqualityComparer<T> comparer)
         {
+            if (thisList.Count != otherList.Count) return false;
+
             IEnumerable<T> inThisButNotInOther = thisList.Except(otherList, comparer);
             IEnumerable<T> inOtherButNotInThis = otherList.Except(thisList, comparer);
 
@@ -82,8 +84,6 @@ namespace DoubleConnectedEdgeList
 
         private bool ExtensiveEqualsList<T>(ReadOnlyCollection<T> thisListReadOnly, ReadOnlyCollection<T> otherListReadOnly)
         {
-            if (thisListReadOnly.Count != otherListReadOnly.Count) return false;
-
             List<T> thisList = new List<T>(thisListReadOnly);
             thisList.Sort();
 
