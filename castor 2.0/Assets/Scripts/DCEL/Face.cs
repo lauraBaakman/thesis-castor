@@ -59,7 +59,7 @@ namespace DoubleConnectedEdgeList
 
         public override string ToString()
         {
-            return string.Format("[Face]");
+            return string.Format("[Face [{0}]]", MeshIdx);
         }
 
         /// <summary>
