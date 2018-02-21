@@ -62,13 +62,13 @@ namespace DoubleConnectedEdgeList
         public bool Equals(DCEL other)
         {
             return (
-                EqualsList(this.vertices.AsReadOnly(), other.vertices.AsReadOnly(), new Vertex.SimpleComparer(), false) &&
-                EqualsList(this.faces.AsReadOnly(), other.faces.AsReadOnly(), new Face.SimpleComparer(), false) &&
-                EqualsList(this.halfEdges.AsReadOnly(), other.halfEdges.AsReadOnly(), new HalfEdge.SimpleComparer(), false)
+                EqualsList(this.vertices.AsReadOnly(), other.vertices.AsReadOnly(), new Vertex.SimpleComparer()) &&
+                EqualsList(this.faces.AsReadOnly(), other.faces.AsReadOnly(), new Face.SimpleComparer()) &&
+                EqualsList(this.halfEdges.AsReadOnly(), other.halfEdges.AsReadOnly(), new HalfEdge.SimpleComparer())
             );
         }
 
-        private bool EqualsList<T>(ReadOnlyCollection<T> thisList, ReadOnlyCollection<T> otherList, IEqualityComparer<T> comparer, bool extensive = true)
+        private bool EqualsList<T>(ReadOnlyCollection<T> thisList, ReadOnlyCollection<T> otherList, IEqualityComparer<T> comparer)
         {
             IEnumerable<T> inThisButNotInOther = thisList.Except(otherList, comparer);
             IEnumerable<T> inOtherButNotInThis = otherList.Except(thisList, comparer);
@@ -77,8 +77,7 @@ namespace DoubleConnectedEdgeList
 
             if (!simpleCheckEqual) return false;
 
-            if (extensive) return ExtensiveEqualsList(thisList, otherList);
-            else return simpleCheckEqual;
+            return ExtensiveEqualsList(thisList, otherList);
         }
 
         private bool ExtensiveEqualsList<T>(ReadOnlyCollection<T> thisListReadOnly, ReadOnlyCollection<T> otherListReadOnly)
