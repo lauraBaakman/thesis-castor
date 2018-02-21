@@ -99,7 +99,7 @@ namespace DoubleConnectedEdgeList
 
         public override string ToString()
         {
-            return string.Format("[Vertex: position={0}]", Position);
+            return string.Format("[Vertex [{0}]: position={1}]", meshIdx, Position);
         }
 
         /// <summary>
