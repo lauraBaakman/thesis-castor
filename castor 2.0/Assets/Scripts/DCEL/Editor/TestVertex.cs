@@ -521,4 +521,63 @@ public class VertexTest
         Assert.Contains(e31, v3.IncidentEdges);
         Assert.Contains(e41, v3.IncidentEdges);
     }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjNull()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+
+        int expected = 1;
+        int actual = vertex.CompareTo(null);
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjNotVertex()
+    {
+        Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestCompareTo_ObjNotVertex_Helper));
+    }
+
+    void TestCompareTo_ObjNotVertex_Helper(){
+        Vertex vertex = TestAux.RandomVertex();
+        HalfEdge edge = TestAux.RandomHalfEdge();
+
+        vertex.CompareTo(edge);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjSmaller()
+    {
+        Vertex thisVertex = new Vertex(new Vector3(0, 1, 2));
+        Vertex otherVertex = new Vertex(new Vector3(3, 4, 5));
+
+        int expected = -1;
+        int actual = thisVertex.CompareTo(otherVertex);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjEqual()
+    {
+        Vertex thisVertex = new Vertex(new Vector3(1, 2, 3));
+        Vertex otherVertex = new Vertex(new Vector3(1, 2, 3));
+
+        int expected = 0;
+        int actual = thisVertex.CompareTo(otherVertex);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjLarger()
+    {
+        Vertex thisVertex = new Vertex(new Vector3(3, 4, 5));
+        Vertex otherVertex = new Vertex(new Vector3(0, 1, 2));
+
+        int expected = 1;
+        int actual = thisVertex.CompareTo(otherVertex);
+
+        Assert.AreEqual(expected, actual);
+    }
 }

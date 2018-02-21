@@ -9,7 +9,7 @@ namespace DoubleConnectedEdgeList
     /// <summary>
     /// Represents a vertex in a double connected edge list.
     /// </summary>
-    public class Vertex : IEquatable<Vertex>
+    public class Vertex : IEquatable<Vertex>, IComparable
     {
         /// <summary>
         /// The postion of the vertex.
@@ -130,6 +130,16 @@ namespace DoubleConnectedEdgeList
                 !inThisButNotInOther.Any() &&
                 !inOtherButNotInThis.Any()
             );
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+            if (GetType() != obj.GetType()) throw new ArgumentException("Object is not a Vertex.");
+
+            Vertex vertex = obj as Vertex;
+
+            return this.Position.CompareTo(vertex.Position);
         }
 
         public class SimpleComparer : IEqualityComparer<Vertex>
