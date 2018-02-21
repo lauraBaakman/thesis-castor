@@ -961,3 +961,139 @@ public class HalfEdgeTest
     }
 
 }
+
+
+[TestFixture]
+public class HalfEdgeSimpleComparerTest
+{
+    private HalfEdge.SimpleComparer comparer;
+
+    [SetUp]
+    public void Init()
+    {
+        comparer = new HalfEdge.SimpleComparer();
+    }
+
+    [Test, MaxTime(50)]
+    public void XIsNull()
+    {
+        HalfEdge x = null;
+        HalfEdge y = TestAux.RandomHalfEdge();
+
+        Assert.IsFalse(comparer.Equals(x, y));
+        Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void YIsNull()
+    {
+        HalfEdge x = TestAux.RandomHalfEdge();
+        HalfEdge y = null;
+
+        Assert.IsFalse(comparer.Equals(x, y));
+        Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreNull()
+    {
+        HalfEdge x = null;
+        HalfEdge y = null;
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreEqual()
+    {
+        Vertex positon = TestAux.RandomVertex();
+        HalfEdge x = new HalfEdge(positon);
+        HalfEdge y = new HalfEdge(positon);
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreNotEqual_OriginDifferent()
+    {
+        HalfEdge x = TestAux.RandomHalfEdge();
+        HalfEdge y = TestAux.RandomHalfEdge();
+
+        Assert.IsFalse(comparer.Equals(x, y));
+        Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreNotEqual_DestinationDifferent()
+    {
+        Vertex origin = TestAux.RandomVertex();
+
+        HalfEdge x = new HalfEdge(origin);
+        HalfEdge y = new HalfEdge(origin);
+
+        x.Twin = TestAux.RandomHalfEdge();
+        y.Twin = TestAux.RandomHalfEdge();
+
+        Assert.IsFalse(comparer.Equals(x, y));
+        Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreEqual_NextDifferent()
+    {
+        Vertex origin = TestAux.RandomVertex();
+        Vertex destination = TestAux.RandomVertex();
+
+        HalfEdge x = new HalfEdge(origin);
+        HalfEdge y = new HalfEdge(origin);
+
+        x.Twin = new HalfEdge(destination);
+        y.Twin = new HalfEdge(destination);
+
+        x.Next = TestAux.RandomHalfEdge();
+        y.Next = TestAux.RandomHalfEdge();
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreEqual_PreviousDifferent()
+    {
+        Vertex origin = TestAux.RandomVertex();
+        Vertex destination = TestAux.RandomVertex();
+
+        HalfEdge x = new HalfEdge(origin);
+        HalfEdge y = new HalfEdge(origin);
+
+        x.Twin = new HalfEdge(destination);
+        y.Twin = new HalfEdge(destination);
+
+        x.Previous = TestAux.RandomHalfEdge();
+        y.Previous = TestAux.RandomHalfEdge();
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreEqual_IncidentFaceDifferent()
+    {
+        Vertex origin = TestAux.RandomVertex();
+        Vertex destination = TestAux.RandomVertex();
+
+        HalfEdge x = new HalfEdge(origin);
+        HalfEdge y = new HalfEdge(origin);
+
+        x.Twin = new HalfEdge(destination);
+        y.Twin = new HalfEdge(destination);
+
+        x.IncidentFace= TestAux.RandomFace();
+        y.IncidentFace= TestAux.RandomFace();
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+}
