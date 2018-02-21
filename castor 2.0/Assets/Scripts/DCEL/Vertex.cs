@@ -70,6 +70,7 @@ namespace DoubleConnectedEdgeList
         public override int GetHashCode()
         {
             int hash = 17;
+            hash *= (31 + meshIdx.GetHashCode());
             hash *= (31 + Position.GetHashCode());
             foreach (HalfEdge edge in IncidentEdges)
             {
@@ -85,6 +86,7 @@ namespace DoubleConnectedEdgeList
         public int NonRecursiveGetHashCode()
         {
             int hash = 17;
+            hash *= (31 + meshIdx.GetHashCode());
             hash *= (31 + Position.GetHashCode());
             foreach (HalfEdge edge in IncidentEdges)
             {
@@ -122,11 +124,11 @@ namespace DoubleConnectedEdgeList
         public bool Equals(Vertex other)
         {
             return (
+                this.meshIdx.Equals(other.meshIdx) &&
                 this.Position.Equals(other.Position) &&
                 NonRecursiveEqualsAuxilary(this.IncidentEdges, other.IncidentEdges)
             );
         }
-
 
         /// <summary>
         /// Determines whether the specified <see cref="DoubleConnectedEdgeList.Vertex"/> is equal to the current <see cref="T:DoubleConnectedEdgeList.Vertex"/> without invoking Equals methods of <see cref="T:DoubleConnectedEdgeList.Vertex"/>, <see cref="T:DoubleConnectedEdgeList.HalfEdge"/> or <see cref="T:DoubleConnectedEdgeList.Face"/>.
@@ -135,6 +137,7 @@ namespace DoubleConnectedEdgeList
         public bool NonRecursiveEquals(Vertex other)
         {
             return (
+                this.meshIdx.Equals(other.meshIdx) &&
                 this.Position.Equals(other.Position) &&
                 NonRecursiveEqualsAuxilary(this.IncidentEdges, other.IncidentEdges)
             );

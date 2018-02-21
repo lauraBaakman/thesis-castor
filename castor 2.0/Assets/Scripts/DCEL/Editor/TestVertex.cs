@@ -17,8 +17,8 @@ public class VertexTest
     {
         Vector3 position = TestAux.RandomPosition();
 
-        Vertex thisVertex = new Vertex(position);
-        Vertex otherVertex = new Vertex(position);
+        Vertex thisVertex = new Vertex(position, 1);
+        Vertex otherVertex = new Vertex(position, 1);
 
         HalfEdge edge1 = TestAux.RandomHalfEdge();
         HalfEdge edge2 = TestAux.RandomHalfEdge();
@@ -32,6 +32,19 @@ public class VertexTest
         Assert.IsTrue(thisVertex.Equals(otherVertex));
         Assert.IsTrue(otherVertex.Equals(thisVertex));
         Assert.AreEqual(thisVertex.GetHashCode(), otherVertex.GetHashCode());
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestEquals_MeshIdxNotEqual()
+    {
+        Vector3 position = TestAux.RandomPosition();
+
+        Vertex thisVertex = new Vertex(position, 0);
+        Vertex otherVertex = new Vertex(position, 1);
+
+        Assert.IsFalse(thisVertex.Equals(otherVertex));
+        Assert.IsFalse(otherVertex.Equals(thisVertex));
+        Assert.AreNotEqual(thisVertex, otherVertex);
     }
 
     [Test, MaxTime(2000)]
