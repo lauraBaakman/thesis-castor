@@ -243,3 +243,81 @@ public class FaceTest
         Assert.AreEqual(expected, actual);
     }
 }
+
+[TestFixture]
+public class FaceSimpleComparerTest
+{
+    private Face.SimpleComparer comparer;
+
+    [SetUp]
+    public void Init()
+    {
+        comparer = new Face.SimpleComparer();
+    }
+
+    [Test, MaxTime(50)]
+    public void XIsNull()
+    {
+        Face x = null;
+        Face y = TestAux.RandomFace();
+
+        Assert.IsFalse(comparer.Equals(x, y));
+        Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void YIsNull()
+    {
+        Face x = TestAux.RandomFace();
+        Face y = null;
+
+        Assert.IsFalse(comparer.Equals(x, y));
+        Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreNull()
+    {
+        Face x = null;
+        Face y = null;
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreEqual()
+    {
+        int idx = 3;
+        Face x = new Face(idx);
+        Face y = new Face(idx);
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreNotEqual_IdxDifferent()
+    {
+        Face x = TestAux.RandomFace();
+        Face y = TestAux.RandomFace();
+
+        Assert.IsFalse(comparer.Equals(x, y));
+        Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+
+    [Test, MaxTime(50)]
+    public void XAndyAreEqual_OuterComponentsDifferent()
+    {
+        int idx = 3;
+        Face x = new Face(idx);
+        Face y = new Face(idx);
+
+        x.AddOuterComponent(TestAux.RandomHalfEdge());
+        y.AddOuterComponent(TestAux.RandomHalfEdge());
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+}
