@@ -17,6 +17,22 @@ namespace DoubleConnectedEdgeList
         public readonly Vector3 Position;
 
         /// <summary>
+        /// The index of the this vertex in the mesh it was defined from.
+        /// </summary>
+        public int MeshIdx
+        {
+            get
+            {
+                if (this.meshIdx == -1)
+                {
+                    throw new System.ArgumentException("The vertex idx of this vertex was not set");
+                }
+                return this.meshIdx;
+            }
+        }
+        private int meshIdx;
+
+        /// <summary>
         /// The edges that have their origin at this vertex.
         /// </summary>
         /// <value>The incident edges.</value>
@@ -24,11 +40,13 @@ namespace DoubleConnectedEdgeList
         {
             get { return incidentEdges.AsReadOnly(); }
         }
+
         private List<HalfEdge> incidentEdges;
 
-        public Vertex(Vector3 position)
+        public Vertex(Vector3 position, int meshIdx = -1)
         {
             this.Position = position;
+            this.meshIdx = meshIdx;
             this.incidentEdges = new List<HalfEdge>();
         }
 

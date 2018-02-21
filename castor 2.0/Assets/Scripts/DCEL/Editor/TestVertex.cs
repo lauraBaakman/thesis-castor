@@ -580,4 +580,26 @@ public class VertexTest
 
         Assert.AreEqual(expected, actual);
     }
+
+    [Test, MaxTime(2000)]
+    public void TestGetMeshIdx_NotSet(){
+        Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestGetMeshIdx_NotSet_Helper));
+    }
+
+    public void TestGetMeshIdx_NotSet_Helper()
+    {
+        Vertex vertex = TestAux.RandomVertex();
+        int meshIdx = vertex.MeshIdx;
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestGetMeshIdx_Set()
+    {
+        Vertex vertex = new Vertex(TestAux.RandomPosition(), 1);
+
+        int expected = 1;
+        int actual = vertex.MeshIdx;
+
+        Assert.AreEqual(expected, actual);
+    }
 }
