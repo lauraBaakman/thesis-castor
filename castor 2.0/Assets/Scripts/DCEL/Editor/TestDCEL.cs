@@ -594,80 +594,14 @@ public class DCELTests
     [Test, MaxTime(1000)]
     public void Equals_EqualWithFullDCEL()
     {
-        Vertex v1 = TestAux.RandomVertex();
-        Vertex v2 = TestAux.RandomVertex();
-        Vertex v3 = TestAux.RandomVertex();
+        DCEL thisDCEL = BaseDCEL();
 
-        HalfEdge e11 = new HalfEdge(v1);
-        HalfEdge e12 = new HalfEdge(v2);
-        HalfEdge e31 = new HalfEdge(v3);
-        HalfEdge e32 = new HalfEdge(v1);
-        HalfEdge e41 = new HalfEdge(v3);
-        HalfEdge e42 = new HalfEdge(v2);
+        DCEL otherDCEL = BaseDCEL();
 
-        e11.Twin = e12;
-        e12.Twin = e11;
-        e31.Twin = e32;
-        e32.Twin = e31;
-        e41.Twin = e42;
-        e42.Twin = e41;
+        Assert.IsTrue(thisDCEL.Equals(otherDCEL));
+        Assert.IsTrue(otherDCEL.Equals(thisDCEL));
 
-        e12.Next = e32;
-        e32.Next = e41;
-        e41.Next = e12;
-
-        e12.Previous = e41;
-        e32.Previous = e12;
-        e41.Previous = e32;
-
-        Face f2 = new Face(0);
-        f2.AddOuterComponent(e32);
-        f2.AddOuterComponent(e41);
-        f2.AddOuterComponent(e12);
-
-        e32.IncidentFace = f2;
-        e41.IncidentFace = f2;
-        e12.IncidentFace = f2;
-
-        v1.AddIncidentEdge(e11);
-        v1.AddIncidentEdge(e32);
-
-        v2.AddIncidentEdge(e42);
-        v2.AddIncidentEdge(e12);
-
-        v3.AddIncidentEdge(e31);
-        v3.AddIncidentEdge(e41);
-
-        List<HalfEdge> halfEdges = new List<HalfEdge>
-        {
-            e11, e12,
-            e31, e32,
-            e41, e42
-        };
-
-        List<Face> faces = new List<Face>
-        {
-            f2
-        };
-
-        List<Vertex> dcelVertices = new List<Vertex> { v1, v2, v3 };
-
-        DCEL thisDCEL = new DCEL(
-            dcelVertices.AsReadOnly(),
-            halfEdges.AsReadOnly(),
-            faces.AsReadOnly()
-        );
-
-        DCEL otherDCEL = new DCEL(
-            dcelVertices.AsReadOnly(),
-            halfEdges.AsReadOnly(),
-            faces.AsReadOnly()
-        );
-
-        Assert.IsTrue(BaseDCEL().Equals(BaseDCEL()));
-        Assert.IsTrue(BaseDCEL().Equals(BaseDCEL()));
-
-        Assert.AreEqual(BaseDCEL().GetHashCode(), BaseDCEL().GetHashCode());
+        Assert.AreEqual(thisDCEL.GetHashCode(), otherDCEL.GetHashCode());
     }
 
     [Test, MaxTime(1000)]

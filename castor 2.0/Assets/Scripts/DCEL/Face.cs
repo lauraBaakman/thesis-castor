@@ -143,13 +143,8 @@ namespace DoubleConnectedEdgeList
                 if (x == null && y == null) return true;
                 if (x == null || y == null) return false;
 
-                IEnumerable<HalfEdge> inThisButNotInOther = x.OuterComponents.Except(y.OuterComponents, new HalfEdge.SimpleComparer());
-                IEnumerable<HalfEdge> inOtherButNotInThis = y.OuterComponents.Except(x.OuterComponents, new HalfEdge.SimpleComparer());
-
                 return (
-                    x.MeshIdx.Equals(y.MeshIdx) &&
-                    !inThisButNotInOther.Any() &&
-                    !inOtherButNotInThis.Any()
+                    x.MeshIdx.Equals(y.MeshIdx)
                 );
             }
 

@@ -62,24 +62,20 @@ namespace DoubleConnectedEdgeList
         public bool Equals(DCEL other)
         {
             return (
-                EqualsList(this.vertices.AsReadOnly(), other.vertices.AsReadOnly(), new Vertex.SimpleComparer()) &&
-                EqualsList(this.faces.AsReadOnly(), other.faces.AsReadOnly(), new Face.SimpleComparer()) &&
-                EqualsList(this.halfEdges.AsReadOnly(), other.halfEdges.AsReadOnly(), new HalfEdge.SimpleComparer())
+                EqualsList(this.vertices.AsReadOnly(), other.vertices.AsReadOnly()) &&
+                EqualsList(this.faces.AsReadOnly(), other.faces.AsReadOnly()) &&
+                EqualsList(this.halfEdges.AsReadOnly(), other.halfEdges.AsReadOnly())
             );
         }
 
-        private bool EqualsList<T>(ReadOnlyCollection<T> thisList, ReadOnlyCollection<T> otherList, IEqualityComparer<T> comparer)
+        private bool EqualsList<T>(ReadOnlyCollection<T> thisList, ReadOnlyCollection<T> otherList)
         {
             if (thisList.Count != otherList.Count) return false;
 
-            IEnumerable<T> inThisButNotInOther = thisList.Except(otherList, comparer);
-            IEnumerable<T> inOtherButNotInThis = otherList.Except(thisList, comparer);
+            IEnumerable<T> inThisButNotInOther = thisList.Except(otherList);
+            IEnumerable<T> inOtherButNotInThis = otherList.Except(thisList);
 
-            bool simpleCheckEqual = !inThisButNotInOther.Any() && !inOtherButNotInThis.Any();
-
-            if (!simpleCheckEqual) return false;
-
-            return ExtensiveEqualsList(thisList, otherList);
+            return !inThisButNotInOther.Any() && !inOtherButNotInThis.Any();
         }
 
         private bool ExtensiveEqualsList<T>(ReadOnlyCollection<T> thisListReadOnly, ReadOnlyCollection<T> otherListReadOnly)
@@ -90,11 +86,11 @@ namespace DoubleConnectedEdgeList
             List<T> otherList = new List<T>(otherListReadOnly);
             otherList.Sort();
 
-            int listLenght = thisList.Count();
+            int listLength = thisList.Count();
 
             bool equal = false;
 
-            for (int i = 0; i < listLenght; i++)
+            for (int i = 0; i < listLength; i++)
             {
                 equal = thisList[i].Equals(otherList[i]);
             }

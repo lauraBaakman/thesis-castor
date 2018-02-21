@@ -180,12 +180,17 @@ namespace DoubleConnectedEdgeList
 
         public class SimpleComparer : IEqualityComparer<HalfEdge>
         {
+            private Vertex.SimpleComparer vertexComparer;
+
+            public SimpleComparer()
+            {
+                vertexComparer = new Vertex.SimpleComparer();
+            }
+
             public bool Equals(HalfEdge x, HalfEdge y)
             {
                 if (x == null && y == null) return true;
                 if (x == null || y == null) return false;
-
-                Vertex.SimpleComparer vertexComparer = new Vertex.SimpleComparer();
 
                 return (
                     vertexComparer.Equals(x.Origin, y.Origin) &&
@@ -195,7 +200,12 @@ namespace DoubleConnectedEdgeList
 
             public int GetHashCode(HalfEdge obj)
             {
-                return obj.NonRecursiveGetHashCode();
+                if (obj == null) return 0;
+
+                int hash = 17;
+                hash *= (31 + vertexComparer.GetHashCode(obj.Origin));
+                hash *= (31 + vertexComparer.GetHashCode(obj.Destination));
+                return hash;
             }
         }
     }

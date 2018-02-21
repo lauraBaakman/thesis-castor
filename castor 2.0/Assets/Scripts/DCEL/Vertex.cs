@@ -33,6 +33,11 @@ namespace DoubleConnectedEdgeList
         }
         private int meshIdx;
 
+        internal bool HasMeshIdx
+        {
+            get { return this.meshIdx != -1; }
+        }
+
         /// <summary>
         /// The edges that have their origin at this vertex.
         /// </summary>
@@ -122,30 +127,11 @@ namespace DoubleConnectedEdgeList
         /// <see cref="T:DoubleConnectedEdgeList.Vertex"/>; otherwise, <c>false</c>.</returns>
         public bool Equals(Vertex other)
         {
+            IEnumerable<HalfEdge> inThisButNotInOther = this.IncidentEdges.Except(other.IncidentEdges, new HalfEdge.SimpleComparer());
+            IEnumerable<HalfEdge> inOtherButNotInThis = other.IncidentEdges.Except(this.IncidentEdges, new HalfEdge.SimpleComparer());
+
             return (
                 this.Position.Equals(other.Position) &&
-                NonRecursiveEqualsAuxilary(this.IncidentEdges, other.IncidentEdges)
-            );
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="DoubleConnectedEdgeList.Vertex"/> is equal to the current <see cref="T:DoubleConnectedEdgeList.Vertex"/> without invoking Equals methods of <see cref="T:DoubleConnectedEdgeList.Vertex"/>, <see cref="T:DoubleConnectedEdgeList.HalfEdge"/> or <see cref="T:DoubleConnectedEdgeList.Face"/>.
-        /// </summary>
-        /// <returns>The recursive get hash code.</returns>
-        public bool NonRecursiveEquals(Vertex other)
-        {
-            return (
-                this.Position.Equals(other.Position) &&
-                NonRecursiveEqualsAuxilary(this.IncidentEdges, other.IncidentEdges)
-            );
-        }
-
-        private bool NonRecursiveEqualsAuxilary(ReadOnlyCollection<HalfEdge> thisEdges, ReadOnlyCollection<HalfEdge> otherEdges)
-        {
-            IEnumerable<HalfEdge> inThisButNotInOther = thisEdges.Except(otherEdges, new HalfEdge.SimpleComparer());
-            IEnumerable<HalfEdge> inOtherButNotInThis = otherEdges.Except(thisEdges, new HalfEdge.SimpleComparer());
-
-            return (
                 !inThisButNotInOther.Any() &&
                 !inOtherButNotInThis.Any()
             );
@@ -166,19 +152,21 @@ namespace DoubleConnectedEdgeList
             return comparison;
         }
 
-        /// <summary>
-        /// Compares two vertices based on their meshIdx, and position.
-        /// </summary>
         public class SimpleComparer : IEqualityComparer<Vertex>
         {
             public bool Equals(Vertex x, Vertex y)
             {
-                return x.NonRecursiveEquals(y);
+                if (x == null && y == null) return true;
+                if (x == null || y == null) return false;
+
+                return x.Position.Equals(y.Position);
             }
 
             public int GetHashCode(Vertex obj)
             {
-                return obj.NonRecursiveGetHashCode();
+                if (obj == null) return 0;
+
+                return obj.Position.GetHashCode();
             }
         }
 

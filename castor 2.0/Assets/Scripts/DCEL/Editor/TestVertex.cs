@@ -10,6 +10,7 @@ public class VertexTest
     public void Init()
     {
         Random.InitState(42);
+        Debug.Log("Handled -1 case for meshidx comparison");
     }
 
     [Test, MaxTime(2000)]
@@ -124,37 +125,6 @@ public class VertexTest
         Assert.IsTrue(thisVertex.Equals(otherVertex));
         Assert.IsTrue(otherVertex.Equals(thisVertex));
         Assert.AreEqual(thisVertex.GetHashCode(), otherVertex.GetHashCode());
-    }
-
-    [Test, MaxTime(2000)]
-    public void TestNonRecursiveEquals_Equals()
-    {
-        Vector3 position = TestAux.RandomPosition();
-
-        Vertex thisVertex = new Vertex(position);
-        Vertex otherVertex = new Vertex(position);
-
-        //HalfEdge edge1 = new HalfEdge(new Vertex(new Vector3().FillRandomly()));
-        //HalfEdge edge2 = new HalfEdge(new Vertex(new Vector3().FillRandomly()));
-
-        //thisVertex.AddIncidentEdge(edge1);
-        //thisVertex.AddIncidentEdge(edge2);
-
-        //otherVertex.AddIncidentEdge(edge1);
-        //otherVertex.AddIncidentEdge(edge2);
-
-        Assert.IsTrue(thisVertex.NonRecursiveEquals(otherVertex));
-        Assert.IsTrue(otherVertex.NonRecursiveEquals(thisVertex));
-    }
-
-    [Test, MaxTime(2000)]
-    public void TestNonRecursiveEquals_PositionNotEqual()
-    {
-        Vertex thisVertex = TestAux.RandomVertex();
-        Vertex otherVertex = TestAux.RandomVertex();
-
-        Assert.IsFalse(thisVertex.NonRecursiveEquals(otherVertex));
-        Assert.IsFalse(otherVertex.NonRecursiveEquals(thisVertex));
     }
 
     [Test, MaxTime(2000)]
@@ -480,7 +450,8 @@ public class VertexTest
     }
 
     [Test, MaxTime(2000)]
-    public void TestAddIncidentEdges_ReplicateSegmentationFault(){
+    public void TestAddIncidentEdges_ReplicateSegmentationFault()
+    {
         Vertex v1 = TestAux.RandomVertex();
         Vertex v2 = TestAux.RandomVertex();
         Vertex v3 = TestAux.RandomVertex();
@@ -505,7 +476,7 @@ public class VertexTest
 
         e12.Previous = e41;
         e32.Previous = e12;
-        e41.Previous = e32;        
+        e41.Previous = e32;
 
         Face f2 = new Face(2);
         f2.AddOuterComponent(e32);
@@ -551,7 +522,8 @@ public class VertexTest
         Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestCompareTo_ObjNotVertex_Helper));
     }
 
-    void TestCompareTo_ObjNotVertex_Helper(){
+    void TestCompareTo_ObjNotVertex_Helper()
+    {
         Vertex vertex = TestAux.RandomVertex();
         HalfEdge edge = TestAux.RandomHalfEdge();
 
@@ -623,7 +595,8 @@ public class VertexTest
     }
 
     [Test, MaxTime(2000)]
-    public void TestGetMeshIdx_NotSet(){
+    public void TestGetMeshIdx_NotSet()
+    {
         Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestGetMeshIdx_NotSet_Helper));
     }
 

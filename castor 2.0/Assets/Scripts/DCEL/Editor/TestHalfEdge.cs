@@ -590,7 +590,7 @@ public class HalfEdgeTest
         thisFace.AddOuterComponent(bc);
         thisFace.AddOuterComponent(ca);
 
-        Face otherFace = new Face(0);
+        Face otherFace = new Face(1);
         otherFace.AddOuterComponent(abOther);
 
         abThis.IncidentFace = thisFace;
