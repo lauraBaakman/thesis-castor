@@ -38,7 +38,8 @@ namespace DoubleConnectedEdgeList
         /// <param name="edge">An incident edge.</param>
         public void AddIncidentEdge(HalfEdge edge)
         {
-            if(!incidentEdges.Contains(edge)){
+            if (!incidentEdges.Contains(edge))
+            {
                 incidentEdges.Add(edge);
             }
         }
