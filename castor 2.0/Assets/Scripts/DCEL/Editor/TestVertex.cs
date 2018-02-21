@@ -616,3 +616,85 @@ public class VertexTest
         Assert.AreEqual(expected, actual);
     }
 }
+
+[TestFixture]
+public class VertexSimpleComparerTest
+{
+    private Vertex.SimpleComparer comparer;
+
+    [SetUp]
+    public void Init()
+    {
+        comparer = new Vertex.SimpleComparer();
+    }
+
+    [Test, MaxTime(50)]
+    public void XIsNull()
+    {
+        Vertex x = null;
+        Vertex y = TestAux.RandomVertex();
+
+        Assert.IsFalse(comparer.Equals(x, y));
+        Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void YIsNull()
+    {
+        Vertex x = TestAux.RandomVertex();
+        Vertex y = null;
+
+        Assert.IsFalse(comparer.Equals(x, y));
+        Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreNull()
+    {
+        Vertex x = null;
+        Vertex y = null;
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreEqual()
+    {
+        Vector3 positon = TestAux.RandomPosition();
+        Vertex x = new Vertex(positon);
+        Vertex y = new Vertex(positon);
+
+        HalfEdge edge = TestAux.RandomHalfEdge();
+
+        x.AddIncidentEdge(edge);
+        y.AddIncidentEdge(edge);
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreNotEqual_PositionDifferent()
+    {
+        Vertex x = TestAux.RandomVertex();
+        Vertex y = TestAux.RandomVertex();
+
+        Assert.IsFalse(comparer.Equals(x, y));
+        Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+
+    [Test, MaxTime(50)]
+    public void XAndyAreEqual_IncidentEdgesDifferent()
+    {
+        Vector3 positon = TestAux.RandomPosition();
+        Vertex x = new Vertex(positon);
+        Vertex y = new Vertex(positon);
+
+        x.AddIncidentEdge(TestAux.RandomHalfEdge());
+        y.AddIncidentEdge(TestAux.RandomHalfEdge());
+
+        Assert.IsTrue(comparer.Equals(x, y));
+        Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+    }
+}
