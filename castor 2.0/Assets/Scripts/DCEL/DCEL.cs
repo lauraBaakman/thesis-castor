@@ -118,7 +118,7 @@ namespace DoubleConnectedEdgeList
         /// </summary>
         /// <param name="vertex">The vertex to be added. </param>
         /// <returns>The vertex in the mesh at the position of the passed vertex.</returns>
-        internal Vertex AddVertex(Vertex vertex)
+        internal Vertex AddVertexIfNew(Vertex vertex)
         {
             if (!this.vertices.Contains(vertex)) this.vertices.Add(vertex);
             return vertices.Find(x => x.Equals(vertex));
@@ -169,8 +169,8 @@ namespace DoubleConnectedEdgeList
 
         private void AddVertex(int idx, Vector3 position)
         {
-            Vertex vertex = new Vertex(position);
-            vertex = DCEL.AddVertex(vertex);
+            Vertex vertex = new Vertex(position, idx);
+            vertex = DCEL.AddVertexIfNew(vertex);
             Vertices.Add(idx, vertex);
         }
 
