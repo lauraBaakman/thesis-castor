@@ -81,7 +81,8 @@ namespace DoubleConnectedEdgeList
             else return simpleCheckEqual;
         }
 
-        private bool ExtensiveEqualsList<T>(ReadOnlyCollection<T> thisListReadOnly, ReadOnlyCollection<T> otherListReadOnly){
+        private bool ExtensiveEqualsList<T>(ReadOnlyCollection<T> thisListReadOnly, ReadOnlyCollection<T> otherListReadOnly)
+        {
             List<T> thisList = new List<T>(thisListReadOnly);
             thisList.Sort();
 
@@ -92,7 +93,8 @@ namespace DoubleConnectedEdgeList
 
             bool equal = false;
 
-            for (int i = 0; i < listLenght; i++){
+            for (int i = 0; i < listLenght; i++)
+            {
                 equal = thisList[i].Equals(otherList[i]);
             }
             return equal;

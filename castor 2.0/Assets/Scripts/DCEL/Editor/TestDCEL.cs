@@ -753,7 +753,7 @@ public class DCELTests
     public void Equals_NotEqualWithFullDCEL_DifferentEdgesExtraEdge13NothingSetDCEL()
     {
         DCEL baseDCEl = BaseDCEL();
-        DCEL otherDCEL = DifferentEdgesExtraEdge13NothingSetDCEL(); 
+        DCEL otherDCEL = DifferentEdgesExtraEdge13NothingSetDCEL();
 
         Assert.IsFalse(baseDCEl.Equals(otherDCEL));
         Assert.IsFalse(otherDCEL.Equals(baseDCEl));
