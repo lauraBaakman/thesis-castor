@@ -164,11 +164,7 @@ namespace DoubleConnectedEdgeList
 
         private bool NonRecursiveEqualsAuxilary(HalfEdge thisEdge, HalfEdge otherEdge)
         {
-            if (thisEdge == null && otherEdge == null) return true;
-            if (thisEdge == null || otherEdge == null) return false;
-            bool originEqual = thisEdge.Origin.Position.Equals(otherEdge.Origin.Position);
-            bool destinationEqual = NonRecursiveEqualsAuxilary(thisEdge.Destination, otherEdge.Destination);
-            return originEqual && destinationEqual;
+            return new SimpleComparer().Equals(thisEdge, otherEdge);
         }
 
         private bool NonRecursiveEqualsAuxilary(Vertex thisVertex, Vertex otherVertex)
