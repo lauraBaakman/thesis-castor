@@ -7,7 +7,7 @@ namespace DoubleConnectedEdgeList
     /// <summary>
     /// Represents a HalfEdge in a double connected Edge List.
     /// </summary>
-    public class HalfEdge : IEquatable<HalfEdge>
+    public class HalfEdge : IEquatable<HalfEdge>, IComparable
     {
         /// <summary>
         /// The origin of the half edge.
@@ -183,6 +183,36 @@ namespace DoubleConnectedEdgeList
             if (thisFace == null && otherFace == null) return true;
             if (thisFace == null || otherFace == null) return false;
             return thisFace.NonRecursiveEquals(otherFace);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+            if (GetType() != obj.GetType()) throw new ArgumentException("Object is not an HalfEdge.");
+
+            HalfEdge other = obj as HalfEdge;
+
+            int comparison;
+
+            comparison = this.Origin.CompareTo(other.Origin);
+            if (comparison != 0) return comparison;
+
+            comparison = CompareToHelper(this.Twin, other.Twin);
+            if (comparison != 0) return comparison;
+
+            comparison = CompareToHelper(this.Next, other.Next);
+            if (comparison != 0) return comparison;
+
+            comparison = CompareToHelper(this.Previous, other.Previous);
+            if (comparison != 0) return comparison;
+
+            return comparison;
+        }
+
+        private int CompareToHelper(HalfEdge thisEdge, HalfEdge otherEdge)
+        {
+            if (thisEdge == null) return 0;
+            return thisEdge.Origin.CompareTo(otherEdge.Origin);
         }
 
         public class SimpleComparer : IEqualityComparer<HalfEdge>
