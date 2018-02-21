@@ -5,7 +5,7 @@ using Utils;
 using NUnit.Framework;
 
 [TestFixture]
-public class TestCounter
+public class CounterTests
 {
 
     [Test]

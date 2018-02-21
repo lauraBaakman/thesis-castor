@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Registration;
 
 [TestFixture]
-public class TestPointToPointMeanOfDistances
+public class PointToPointMeanOfDistancesTest
 {
     [Test]
     public void TestComputeError_NoConstructor()

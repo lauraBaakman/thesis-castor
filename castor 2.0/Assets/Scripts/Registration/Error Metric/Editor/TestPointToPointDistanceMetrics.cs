@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Registration;
 
 [TestFixture]
-public class TestPointToPointDistanceMetrics{
+public class PointToPointDistanceMetricsTests{
 
     private static double tolerance = 0.01;
 
