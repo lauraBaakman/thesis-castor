@@ -408,45 +408,13 @@ public class DCELTests
     [Test, MaxTime(5000)]
     public void Equals_Equal()
     {
-        List<Vertex> thisVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4, 3)),
-            new Vertex(new Vector3(2, 4, 4)),
-            new Vertex(new Vector3(2, 2, 5))
-        };
-        List<Vertex> otherVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4, 3)),
-            new Vertex(new Vector3(2, 4, 4)),
-            new Vertex(new Vector3(2, 2, 5))
-        };
+        DCEL thisDCEL = BaseDCEL();
+        DCEL otherDCEL = BaseDCEL();
 
-        List<HalfEdge> thisEdges = new List<HalfEdge>{
-            new HalfEdge(new Vertex(new Vector3(0, 4, 3))),
-            new HalfEdge(new Vertex(new Vector3(2, 4, 4))),
-            new HalfEdge(new Vertex(new Vector3(2, 2, 5)))
-        };
-        List<HalfEdge> otherEdges = new List<HalfEdge>{
-            new HalfEdge(new Vertex(new Vector3(0, 4, 3))),
-            new HalfEdge(new Vertex(new Vector3(2, 4, 4))),
-            new HalfEdge(new Vertex(new Vector3(2, 2, 5)))
-        };
+        Assert.IsTrue(thisDCEL.Equals(otherDCEL));
+        Assert.IsTrue(otherDCEL.Equals(thisDCEL));
 
-        List<Face> faces = new List<Face>();
-
-        DCEL thisDcel = new DCEL(
-            thisVertices.AsReadOnly(),
-            thisEdges.AsReadOnly(),
-            faces.AsReadOnly()
-        );
-        DCEL otherDcel = new DCEL(
-            otherVertices.AsReadOnly(),
-            otherEdges.AsReadOnly(),
-            faces.AsReadOnly()
-        );
-
-        Assert.IsTrue(thisDcel.Equals(otherDcel));
-        Assert.IsTrue(otherDcel.Equals(thisDcel));
-
-        Assert.AreEqual(thisDcel.GetHashCode(), otherDcel.GetHashCode());
+        Assert.AreEqual(thisDCEL.GetHashCode(), otherDCEL.GetHashCode());
     }
 
     [Test, MaxTime(5000)]
