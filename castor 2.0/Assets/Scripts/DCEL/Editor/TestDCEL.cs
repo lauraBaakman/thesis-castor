@@ -24,9 +24,9 @@ public class DCELTests
         mesh.vertices = meshVertices;
         mesh.triangles = triangles;
 
-        Vertex v1 = new Vertex(meshVertices[0]);
-        Vertex v2 = new Vertex(meshVertices[1]);
-        Vertex v3 = new Vertex(meshVertices[2]);
+        Vertex v1 = new Vertex(meshVertices[0], 0);
+        Vertex v2 = new Vertex(meshVertices[1], 1);
+        Vertex v3 = new Vertex(meshVertices[2], 2);
 
         List<HalfEdge> halfEdges = new List<HalfEdge>();
         HalfEdge e11 = new HalfEdge(v1);
@@ -112,10 +112,10 @@ public class DCELTests
         mesh.vertices = meshVertices;
         mesh.triangles = triangles;
 
-        Vertex v1 = new Vertex(p1);
-        Vertex v2 = new Vertex(p2);
-        Vertex v3 = new Vertex(p3);
-        Vertex v4 = new Vertex(p4);
+        Vertex v1 = new Vertex(p1, 0);
+        Vertex v2 = new Vertex(p2, 1);
+        Vertex v3 = new Vertex(p3, 2);
+        Vertex v4 = new Vertex(p4, 4);
 
         HalfEdge e12 = new HalfEdge(v1);
         HalfEdge e13 = new HalfEdge(v1);
@@ -238,10 +238,10 @@ public class DCELTests
         mesh.vertices = meshVertices;
         mesh.triangles = triangles;
 
-        Vertex v0 = new Vertex(p0);
-        Vertex v1 = new Vertex(p1);
-        Vertex v2 = new Vertex(p2);
-        Vertex v3 = new Vertex(p3);
+        Vertex v0 = new Vertex(p0, 0);
+        Vertex v1 = new Vertex(p1, 1);
+        Vertex v2 = new Vertex(p2, 4);
+        Vertex v3 = new Vertex(p3, 2);
 
         List<HalfEdge> halfEdges = new List<HalfEdge>();
         HalfEdge e01 = new HalfEdge(v0);

@@ -71,7 +71,6 @@ namespace DoubleConnectedEdgeList
         public override int GetHashCode()
         {
             int hash = 17;
-            hash *= (31 + meshIdx.GetHashCode());
             hash *= (31 + Position.GetHashCode());
             foreach (HalfEdge edge in IncidentEdges)
             {
@@ -87,7 +86,6 @@ namespace DoubleConnectedEdgeList
         public int NonRecursiveGetHashCode()
         {
             int hash = 17;
-            hash *= (31 + meshIdx.GetHashCode());
             hash *= (31 + Position.GetHashCode());
             foreach (HalfEdge edge in IncidentEdges)
             {
@@ -125,7 +123,6 @@ namespace DoubleConnectedEdgeList
         public bool Equals(Vertex other)
         {
             return (
-                this.meshIdx.Equals(other.meshIdx) &&
                 this.Position.Equals(other.Position) &&
                 NonRecursiveEqualsAuxilary(this.IncidentEdges, other.IncidentEdges)
             );
@@ -138,7 +135,6 @@ namespace DoubleConnectedEdgeList
         public bool NonRecursiveEquals(Vertex other)
         {
             return (
-                this.meshIdx.Equals(other.meshIdx) &&
                 this.Position.Equals(other.Position) &&
                 NonRecursiveEqualsAuxilary(this.IncidentEdges, other.IncidentEdges)
             );
@@ -170,6 +166,9 @@ namespace DoubleConnectedEdgeList
             return comparison;
         }
 
+        /// <summary>
+        /// Compares two vertices based on their meshIdx, and position.
+        /// </summary>
         public class SimpleComparer : IEqualityComparer<Vertex>
         {
             public bool Equals(Vertex x, Vertex y)
