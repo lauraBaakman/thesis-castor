@@ -62,20 +62,10 @@ namespace DoubleConnectedEdgeList
         public bool Equals(DCEL other)
         {
             return (
-                EqualsList(this.vertices.AsReadOnly(), other.vertices.AsReadOnly()) &&
-                EqualsList(this.faces.AsReadOnly(), other.faces.AsReadOnly()) &&
-                EqualsList(this.halfEdges.AsReadOnly(), other.halfEdges.AsReadOnly())
+                this.vertices.UnorderedElementsAreEqual(other.vertices) &&
+                this.faces.UnorderedElementsAreEqual(other.faces) &&
+                this.halfEdges.UnorderedElementsAreEqual(other.halfEdges)
             );
-        }
-
-        private bool EqualsList<T>(ReadOnlyCollection<T> thisList, ReadOnlyCollection<T> otherList)
-        {
-            if (thisList.Count != otherList.Count) return false;
-
-            IEnumerable<T> inThisButNotInOther = thisList.Except(otherList);
-            IEnumerable<T> inOtherButNotInThis = otherList.Except(thisList);
-
-            return !inThisButNotInOther.Any() && !inOtherButNotInThis.Any();
         }
 
         private int GetHashCodeList<T>(List<T> list)
