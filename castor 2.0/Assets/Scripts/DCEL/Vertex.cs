@@ -113,13 +113,9 @@ namespace DoubleConnectedEdgeList
         /// <see cref="T:DoubleConnectedEdgeList.Vertex"/>; otherwise, <c>false</c>.</returns>
         public bool Equals(Vertex other)
         {
-            IEnumerable<HalfEdge> inThisButNotInOther = this.IncidentEdges.Except(other.IncidentEdges, new HalfEdge.SimpleComparer());
-            IEnumerable<HalfEdge> inOtherButNotInThis = other.IncidentEdges.Except(this.IncidentEdges, new HalfEdge.SimpleComparer());
-
             return (
                 this.Position.Equals(other.Position) &&
-                !inThisButNotInOther.Any() &&
-                !inOtherButNotInThis.Any()
+                this.IncidentEdges.UnorderedElementsAreEqual(other.IncidentEdges)
             );
         }
 
