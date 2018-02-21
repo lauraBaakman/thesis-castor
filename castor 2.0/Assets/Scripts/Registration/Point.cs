@@ -39,7 +39,7 @@ namespace Registration
         public Point(Vector3 position, Vector3 normal)
         {
             this.position = position;
-            this.Color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            this.Color = new Color().Random(0f, 1f, 1f, 1f, 0.5f, 1f);
             this.normal = normal;
         }
 
