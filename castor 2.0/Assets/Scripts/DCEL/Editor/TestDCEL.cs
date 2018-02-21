@@ -714,33 +714,87 @@ public class DCELTests
     }
 
     [Test, MaxTime(1000)]
-    public void Equals_EqualWithFullDCEL_differentVertexPositionsDCEL()
+    public void Equals_NotEqualWithFullDCEL_differentVertexPositionsDCEL()
     {
+        DCEL baseDCEl = BaseDCEL();
+        DCEL otherDCEL = DifferentVertexPositionsDCEL();
 
-        Assert.IsFalse(BaseDCEL().Equals(DifferentVertexPositionsDCEL()));
-        Assert.IsFalse(BaseDCEL().Equals(DifferentVertexPositionsDCEL()));
+        Assert.IsFalse(baseDCEl.Equals(otherDCEL));
+        Assert.IsFalse(otherDCEL.Equals(baseDCEl));
 
-        Assert.AreNotEqual(BaseDCEL().GetHashCode(), DifferentVertexPositionsDCEL().GetHashCode());
+        Assert.AreNotEqual(baseDCEl.GetHashCode(), otherDCEL.GetHashCode());
     }
 
     [Test, MaxTime(1000)]
-    public void Equals_EqualWithFullDCEL_differentVertexIncidentEdgesDCEL()
+    public void Equals_NotEqualWithFullDCEL_differentVertexIncidentEdgesDCEL()
     {
+        DCEL baseDCEl = BaseDCEL();
+        DCEL otherDCEL = DifferentIncidentEdgesForVerticesDCEL();
 
-        Assert.IsFalse(DifferentIncidentEdgesForVerticesDCEL().Equals(BaseDCEL()));
-        Assert.IsFalse(BaseDCEL().Equals(DifferentIncidentEdgesForVerticesDCEL()));
+        Assert.IsFalse(baseDCEl.Equals(otherDCEL));
+        Assert.IsFalse(otherDCEL.Equals(baseDCEl));
 
-        Assert.AreNotEqual(BaseDCEL().GetHashCode(), DifferentIncidentEdgesForVerticesDCEL().GetHashCode());
+        Assert.AreNotEqual(baseDCEl.GetHashCode(), otherDCEL.GetHashCode());
     }
 
     [Test, MaxTime(1000)]
-    public void Equals_EqualWithFullDCEL_DifferentEdgesExtraPairDCEL()
+    public void Equals_NotEqualWithFullDCEL_DifferentEdgesExtraPairDCEL()
     {
+        DCEL baseDCEl = BaseDCEL();
+        DCEL otherDCEL = DifferentEdgesExtraEdge13DCEL();
 
-        Assert.IsFalse(DifferentIncidentEdgesForVerticesDCEL().Equals(DifferentEdgesExtraEdge13DCEL()));
-        Assert.IsFalse(BaseDCEL().Equals(DifferentEdgesExtraEdge13DCEL()));
+        Assert.IsFalse(baseDCEl.Equals(otherDCEL));
+        Assert.IsFalse(otherDCEL.Equals(baseDCEl));
 
-        Assert.AreNotEqual(BaseDCEL().GetHashCode(), DifferentEdgesExtraEdge13DCEL().GetHashCode());
+        Assert.AreNotEqual(baseDCEl.GetHashCode(), otherDCEL.GetHashCode());
+    }
+
+    [Test, MaxTime(1000)]
+    public void Equals_NotEqualWithFullDCEL_DifferentEdgesExtraEdge13NothingSetDCEL()
+    {
+        DCEL baseDCEl = BaseDCEL();
+        DCEL otherDCEL = DifferentEdgesExtraEdge13NothingSetDCEL(); 
+
+        Assert.IsFalse(baseDCEl.Equals(otherDCEL));
+        Assert.IsFalse(otherDCEL.Equals(baseDCEl));
+
+        Assert.AreNotEqual(baseDCEl.GetHashCode(), otherDCEL.GetHashCode());
+    }
+
+    [Test, MaxTime(1000)]
+    public void Equals_NotEqualWithFullDCEL_DifferentEdgesExtraEdge13OnlyTwinSet()
+    {
+        DCEL baseDCEl = BaseDCEL();
+        DCEL otherDCEL = DifferentEdgesExtraEdge13OnlyTwinSetDCEL();
+
+        Assert.IsFalse(baseDCEl.Equals(otherDCEL));
+        Assert.IsFalse(otherDCEL.Equals(baseDCEl));
+
+        Assert.AreNotEqual(baseDCEl.GetHashCode(), otherDCEL.GetHashCode());
+    }
+
+    [Test, MaxTime(1000)]
+    public void Equals_NotEqualWithFullDCEL_DifferentEdgesExtraEdge13OnlyTwinNextSet()
+    {
+        DCEL baseDCEl = BaseDCEL();
+        DCEL otherDCEL = DifferentEdgesExtraEdge13OnlyTwinNextSetDCEL();
+
+        Assert.IsFalse(baseDCEl.Equals(otherDCEL));
+        Assert.IsFalse(otherDCEL.Equals(baseDCEl));
+
+        Assert.AreNotEqual(baseDCEl.GetHashCode(), otherDCEL.GetHashCode());
+    }
+
+    [Test, MaxTime(1000)]
+    public void Equals_NotEqualWithFullDCEL_DifferentEdgesExtraEdge13OnlyTwinNextPreviousSet()
+    {
+        DCEL baseDCEl = BaseDCEL();
+        DCEL otherDCEL = DifferentEdgesExtraEdge13OnlyTwinNextPreviousSetDCEL();
+
+        Assert.IsFalse(baseDCEl.Equals(otherDCEL));
+        Assert.IsFalse(otherDCEL.Equals(baseDCEl));
+
+        Assert.AreNotEqual(baseDCEl.GetHashCode(), otherDCEL.GetHashCode());
     }
 
     private DCEL DifferentVertexPositionsDCEL()
@@ -1168,7 +1222,6 @@ public class DCELTests
 
         return dcel;
     }
-
 
     private DCEL DifferentEdgesExtraEdge13OnlyTwinNextPreviousSetDCEL()
     {
