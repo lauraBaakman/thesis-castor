@@ -62,21 +62,40 @@ namespace DoubleConnectedEdgeList
         public bool Equals(DCEL other)
         {
             return (
-                EqualsList(this.vertices, other.vertices, new Vertex.SimpleComparer()) &&
-                EqualsList(this.faces, other.faces, new Face.SimpleComparer()) &&
-                EqualsList(this.halfEdges, other.halfEdges, new HalfEdge.SimpleComparer())
+                EqualsList(this.vertices.AsReadOnly(), other.vertices.AsReadOnly(), new Vertex.SimpleComparer(), false) &&
+                EqualsList(this.faces.AsReadOnly(), other.faces.AsReadOnly(), new Face.SimpleComparer(), false) &&
+                EqualsList(this.halfEdges.AsReadOnly(), other.halfEdges.AsReadOnly(), new HalfEdge.SimpleComparer(), false)
             );
         }
 
-        private bool EqualsList<T>(List<T> thisList, List<T> otherList, IEqualityComparer<T> comparer)
+        private bool EqualsList<T>(ReadOnlyCollection<T> thisList, ReadOnlyCollection<T> otherList, IEqualityComparer<T> comparer, bool extensive = true)
         {
             IEnumerable<T> inThisButNotInOther = thisList.Except(otherList, comparer);
             IEnumerable<T> inOtherButNotInThis = otherList.Except(thisList, comparer);
 
-            return (
-                !inThisButNotInOther.Any() &&
-                !inOtherButNotInThis.Any()
-            );
+            bool simpleCheckEqual = !inThisButNotInOther.Any() && !inOtherButNotInThis.Any();
+
+            if (!simpleCheckEqual) return false;
+
+            if (extensive) return ExtensiveEqualsList(thisList, otherList);
+            else return simpleCheckEqual;
+        }
+
+        private bool ExtensiveEqualsList<T>(ReadOnlyCollection<T> thisListReadOnly, ReadOnlyCollection<T> otherListReadOnly){
+            List<T> thisList = new List<T>(thisListReadOnly);
+            thisList.Sort();
+
+            List<T> otherList = new List<T>(otherListReadOnly);
+            otherList.Sort();
+
+            int listLenght = thisList.Count();
+
+            bool equal = false;
+
+            for (int i = 0; i < listLenght; i++){
+                equal = thisList[i].Equals(otherList[i]);
+            }
+            return equal;
         }
 
         private int GetHashCodeList<T>(List<T> list)
