@@ -17,7 +17,8 @@ namespace DoubleConnectedEdgeList
         public readonly Vector3 Position;
 
         /// <summary>
-        /// The index of the this vertex in the mesh it was defined from.
+        /// The index of the this vertex in the mesh, if the vertex occured multiple time in the mesh,
+        /// the index of the first occurence is used.
         /// </summary>
         public int MeshIdx
         {
