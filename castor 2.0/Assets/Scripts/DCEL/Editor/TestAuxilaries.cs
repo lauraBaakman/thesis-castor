@@ -17,5 +17,10 @@ public static class TestAux
     {
         return new HalfEdge(RandomVertex());
     }
+
+    public static Face RandomFace()
+    {
+        return new Face(new System.Random().Next());
+    }
 }
 
