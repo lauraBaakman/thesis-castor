@@ -82,6 +82,8 @@ namespace DoubleConnectedEdgeList
 
         private bool ExtensiveEqualsList<T>(ReadOnlyCollection<T> thisListReadOnly, ReadOnlyCollection<T> otherListReadOnly)
         {
+            if (thisListReadOnly.Count != otherListReadOnly.Count) return false;
+
             List<T> thisList = new List<T>(thisListReadOnly);
             thisList.Sort();
 
