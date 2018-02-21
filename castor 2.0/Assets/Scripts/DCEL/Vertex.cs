@@ -161,7 +161,12 @@ namespace DoubleConnectedEdgeList
 
             Vertex vertex = obj as Vertex;
 
-            return this.Position.CompareTo(vertex.Position);
+            int comparison = this.meshIdx.CompareTo(vertex.meshIdx);
+            if (comparison != 0) return comparison;
+
+            comparison = this.Position.CompareTo(vertex.Position);
+
+            return comparison;
         }
 
         public class SimpleComparer : IEqualityComparer<Vertex>

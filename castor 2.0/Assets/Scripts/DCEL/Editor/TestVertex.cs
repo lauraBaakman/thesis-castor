@@ -559,7 +559,35 @@ public class VertexTest
     }
 
     [Test, MaxTime(2000)]
-    public void TestCompareTo_ObjSmaller()
+    public void TestCompareTo_MeshIdxSmaller()
+    {
+        Vector3 position = TestAux.RandomPosition();
+
+        Vertex thisVertex = new Vertex(position, 0);
+        Vertex otherVertex = new Vertex(position, 1);
+
+        int expected = -1;
+        int actual = thisVertex.CompareTo(otherVertex);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_MeshIdxLarger()
+    {
+        Vector3 position = TestAux.RandomPosition();
+
+        Vertex thisVertex = new Vertex(position, 1);
+        Vertex otherVertex = new Vertex(position, 0);
+
+        int expected = 1;
+        int actual = thisVertex.CompareTo(otherVertex);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test, MaxTime(2000)]
+    public void TestCompareTo_ObjSmallerMeshIdxEqual()
     {
         Vertex thisVertex = new Vertex(new Vector3(0, 1, 2));
         Vertex otherVertex = new Vertex(new Vector3(3, 4, 5));
@@ -571,7 +599,7 @@ public class VertexTest
     }
 
     [Test, MaxTime(2000)]
-    public void TestCompareTo_ObjEqual()
+    public void TestCompareTo_ObjEqualMeshIdxEqual()
     {
         Vertex thisVertex = new Vertex(new Vector3(1, 2, 3));
         Vertex otherVertex = new Vertex(new Vector3(1, 2, 3));
@@ -583,7 +611,7 @@ public class VertexTest
     }
 
     [Test, MaxTime(2000)]
-    public void TestCompareTo_ObjLarger()
+    public void TestCompareTo_ObjLargerMeshIdxEqual()
     {
         Vertex thisVertex = new Vertex(new Vector3(3, 4, 5));
         Vertex otherVertex = new Vertex(new Vector3(0, 1, 2));
