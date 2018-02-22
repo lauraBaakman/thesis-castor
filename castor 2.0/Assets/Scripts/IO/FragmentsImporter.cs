@@ -10,7 +10,7 @@ namespace IO
     {
         public GameObject FragmentsRoot;
 
-        private CallBack CallBack;
+        private readonly CallBack CallBack;
 
         public FragmentsImporter(GameObject fragmentParent, CallBack callBack)
         {
