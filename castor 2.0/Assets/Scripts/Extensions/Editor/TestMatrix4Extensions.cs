@@ -53,7 +53,6 @@ public class Matrix4ExtensionTests
     {
         Vector3 translation = new Vector3(Random.value, Random.value, Random.value);
         Quaternion rotation = Random.rotation;
-        Vector3 scale = new Vector3(Random.value, Random.value, Random.value);
 
         Matrix4x4 matrix = new Matrix4x4();
         matrix.SetTRS(

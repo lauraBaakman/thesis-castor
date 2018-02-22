@@ -23,6 +23,6 @@ public class SystemRandomExtensionTests
 
     public void TestNextInRange_ExceptionIsThrown_Helper(){
         System.Random random = new System.Random();
-        float a = random.NextInRange(0.5f, 0.3f);        
+        random.NextInRange(0.5f, 0.3f);        
     }
 }
