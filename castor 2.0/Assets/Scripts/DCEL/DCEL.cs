@@ -42,6 +42,7 @@ namespace DoubleConnectedEdgeList
             return new DCELMeshBuilder(mesh).Build();
         }
 
+        #region IEquatable
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
@@ -61,22 +62,15 @@ namespace DoubleConnectedEdgeList
 
         public override int GetHashCode()
         {
-            int hash = 17;
-            hash = hash * 31 + GetHashCodeList(vertices);
-            hash = hash * 31 + GetHashCodeList(halfEdges);
-            hash = hash * 31 + GetHashCodeList(faces);
-            return hash;
-        }
+            Debug.Log("New function!");
 
-        private int GetHashCodeList<T>(List<T> list)
-        {
             int hash = 17;
-            foreach (T element in list)
-            {
-                hash *= (31 + element.GetHashCode());
-            }
+            hash *= (31 + vertices.UnorderedElementsGetHashCode());
+            hash *= (31 + halfEdges.UnorderedElementsGetHashCode());
+            hash *= (31 + faces.UnorderedElementsGetHashCode());
             return hash;
         }
+        #endregion
 
         #region internal
         /// <summary>
