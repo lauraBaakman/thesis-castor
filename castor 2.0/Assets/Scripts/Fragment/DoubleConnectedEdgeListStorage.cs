@@ -1,19 +1,17 @@
 using UnityEngine;
-using System.Collections;
+using DoubleConnectedEdgeList;
 
 namespace Fragment
 {
     public class DoubleConnectedEdgeListStorage : MonoBehaviour
     {
-        void Start()
+        public DCEL DCEL
         {
-            Debug.Log("DoubleConnectedEdgeListStorage: Start");
-        }
+            get { return doubleConnectedEdgeList; }
 
-        void Update()
-        {
-            Debug.Log("DoubleConnectedEdgeListStorage: Update");
+            set { doubleConnectedEdgeList = value; }
         }
+        private DCEL doubleConnectedEdgeList;
     }
 }
 
