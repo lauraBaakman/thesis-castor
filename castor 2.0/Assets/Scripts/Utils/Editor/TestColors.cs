@@ -6,7 +6,7 @@ using Utils;
 [TestFixture]
 public class ColorGeneratorTests
 {
-    [Test]
+    [Test, Retry(5)]
     public void TestGetNextColor()
     {
         TestNextColor(new Color(0.55f, 0.00f, 0.20f));
