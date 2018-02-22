@@ -45,4 +45,18 @@ public static class IEnumerable
         }
         return hash;
     }
+
+    public static string ElementsToString<T>(this IEnumerable<T> thisList, string prefix = "", string suffix = ", ")
+    {
+        string returnValue = "";
+        int listLength = thisList.Count<T>();
+
+        for (int i = 0; i < listLength - 1; i++)
+        {
+            returnValue += (prefix + thisList.ElementAt<T>(i) + suffix);
+        }
+        returnValue += (prefix + thisList.ElementAt<T>(listLength - 1));
+
+        return returnValue;
+    }
 }

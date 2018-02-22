@@ -42,9 +42,10 @@ namespace IO
             ProcessFragmentFile(path, false);
         }
 
-        private void ProcessFragmentFile(string path, bool randomizeTransform){
+        private void ProcessFragmentFile(string path, bool randomizeTransform)
+        {
             FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot, CallBack, randomizeTransform);
-            fragmentImporter.Import(path);            
+            fragmentImporter.Import(path);
         }
     }
 
@@ -88,19 +89,36 @@ namespace IO
 
             fragment.name = name;
 
-            MeshFilter filter = fragment.GetComponent<MeshFilter>();
-            filter.mesh = mesh;
+            SetDoubleConnectedEdgeList(fragment, mesh);
+            SetMesh(fragment, mesh);
+            SetMaterial(fragment);
 
+
+            if (RandomizeTransform) RandomizeTheTransform(fragment);
+
+            return fragment;
+        }
+
+        private void SetDoubleConnectedEdgeList(GameObject fragment, Mesh mesh){
+            Fragment.DoubleConnectedEdgeListStorage DCELStorage = fragment.GetComponent<Fragment.DoubleConnectedEdgeListStorage>();
+            DCELStorage.DCEL = DoubleConnectedEdgeList.DCEL.FromMesh(mesh);
+        }
+
+        private void SetMesh(GameObject fragment, Mesh mesh){
+            MeshFilter filter = fragment.GetComponent<MeshFilter>();
+            filter.mesh = mesh;            
+        }
+
+        private void RandomizeTheTransform(GameObject fragment){
+            fragment.AddComponent<Fragment.RandomTransformer>();
+        }
+
+        private void SetMaterial(GameObject fragment)
+        {
             MeshRenderer renderer = fragment.GetComponent<MeshRenderer>();
             Material material = renderer.material;
             material.color = ColorGenerator.Instance.GetNextColor();
             renderer.material = material;
-
-            if(RandomizeTransform){
-                fragment.AddComponent<Fragment.RandomTransformer>();
-            }
-
-            return fragment;
         }
     }
 

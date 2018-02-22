@@ -42,6 +42,14 @@ namespace DoubleConnectedEdgeList
             return new DCELMeshBuilder(mesh).Build();
         }
 
+        public override string ToString()
+        {
+            return string.Format(
+                "[DCEL:\nvertices\n{0}\nhalfEdges\n{1}\nfaces\n{2}\n]",
+                vertices.ElementsToString("\t", "\n"), halfEdges.ElementsToString("\t", "\n"), faces.ElementsToString("\t", "\n")
+            );
+        }
+
         #region IEquatable
         public override bool Equals(object obj)
         {
