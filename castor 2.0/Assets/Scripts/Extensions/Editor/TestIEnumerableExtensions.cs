@@ -13,6 +13,7 @@ public class IEnumerableExtensionTests
         IEnumerable<DummyObject> otherList = new List<DummyObject>();
 
         Assert.IsTrue(thisList.UnorderedElementsAreEqual(otherList));
+        Assert.AreEqual(thisList.UnorderedElementsGetHashCode(), otherList.UnorderedElementsGetHashCode());
     }
 
     [Test]
@@ -26,6 +27,7 @@ public class IEnumerableExtensionTests
         IEnumerable<DummyObject> otherList = new List<DummyObject> { a, b, c };
 
         Assert.IsTrue(thisList.UnorderedElementsAreEqual(otherList));
+        Assert.AreEqual(thisList.UnorderedElementsGetHashCode(), otherList.UnorderedElementsGetHashCode());
     }
 
     [Test]
@@ -39,6 +41,7 @@ public class IEnumerableExtensionTests
         IEnumerable<DummyObject> otherList = new List<DummyObject> { c, a, b };
 
         Assert.IsTrue(thisList.UnorderedElementsAreEqual(otherList));
+        Assert.AreEqual(thisList.UnorderedElementsGetHashCode(), otherList.UnorderedElementsGetHashCode());
     }
 
     [Test]
@@ -51,6 +54,7 @@ public class IEnumerableExtensionTests
         IEnumerable<DummyObject> otherList = new List<DummyObject> { a, b, DummyObject.Random() };
 
         Assert.IsFalse(thisList.UnorderedElementsAreEqual(otherList));
+        Assert.AreNotEqual(thisList.UnorderedElementsGetHashCode(), otherList.UnorderedElementsGetHashCode());
     }
 
     [Test]
@@ -64,6 +68,7 @@ public class IEnumerableExtensionTests
         IEnumerable<DummyObject> otherList = new List<DummyObject> { a, b, c };
 
         Assert.IsFalse(thisList.UnorderedElementsAreEqual(otherList, new DummyObject.Comparer()));
+        Assert.AreNotEqual(thisList.UnorderedElementsGetHashCode(), otherList.UnorderedElementsGetHashCode());
     }
 
     [Test]
@@ -73,6 +78,10 @@ public class IEnumerableExtensionTests
         IEnumerable<DummyObject> otherList = new List<DummyObject>();
 
         Assert.IsTrue(thisList.UnorderedElementsAreEqual(otherList, new DummyObject.Comparer()));
+        Assert.AreEqual(
+            thisList.UnorderedElementsGetHashCode(new DummyObject.Comparer()),
+            otherList.UnorderedElementsGetHashCode(new DummyObject.Comparer())
+        );
     }
 
     [Test]
@@ -86,6 +95,10 @@ public class IEnumerableExtensionTests
         IEnumerable<DummyObject> otherList = new List<DummyObject> { a, b, c };
 
         Assert.IsTrue(thisList.UnorderedElementsAreEqual(otherList, new DummyObject.Comparer()));
+        Assert.AreEqual(
+            thisList.UnorderedElementsGetHashCode(new DummyObject.Comparer()),
+            otherList.UnorderedElementsGetHashCode(new DummyObject.Comparer())
+        );
     }
 
     [Test]
@@ -99,6 +112,10 @@ public class IEnumerableExtensionTests
         IEnumerable<DummyObject> otherList = new List<DummyObject> { c, a, b };
 
         Assert.IsTrue(thisList.UnorderedElementsAreEqual(otherList, new DummyObject.Comparer()));
+        Assert.AreEqual(
+            thisList.UnorderedElementsGetHashCode(new DummyObject.Comparer()),
+            otherList.UnorderedElementsGetHashCode(new DummyObject.Comparer())
+        );
     }
 
     [Test]
@@ -111,6 +128,10 @@ public class IEnumerableExtensionTests
         IEnumerable<DummyObject> otherList = new List<DummyObject> { a, b, DummyObject.Random() };
 
         Assert.IsFalse(thisList.UnorderedElementsAreEqual(otherList, new DummyObject.Comparer()));
+        Assert.AreNotEqual(
+            thisList.UnorderedElementsGetHashCode(new DummyObject.Comparer()),
+            otherList.UnorderedElementsGetHashCode(new DummyObject.Comparer())
+        );
     }
 
     [Test]
@@ -124,6 +145,10 @@ public class IEnumerableExtensionTests
         IEnumerable<DummyObject> otherList = new List<DummyObject> { a, b, c };
 
         Assert.IsFalse(thisList.UnorderedElementsAreEqual(otherList, new DummyObject.Comparer()));
+        Assert.AreNotEqual(
+            thisList.UnorderedElementsGetHashCode(new DummyObject.Comparer()),
+            otherList.UnorderedElementsGetHashCode(new DummyObject.Comparer())
+        );
     }
 }
 

@@ -25,4 +25,24 @@ public static class IEnumerable
             !inOtherButNotInThis.Any()
         );
     }
+
+    public static int UnorderedElementsGetHashCode<T>(this IEnumerable<T> thisList) where T : IEquatable<T>
+    {
+        int hash = 17;
+        foreach (T element in thisList)
+        {
+            hash *= (31 + element.GetHashCode());
+        }
+        return hash;
+    }
+
+    public static int UnorderedElementsGetHashCode<T>(this IEnumerable<T> thisList, IEqualityComparer<T> comparer)
+    {
+        int hash = 17;
+        foreach (T element in thisList)
+        {
+            hash *= (31 + comparer.GetHashCode(element));
+        }
+        return hash;
+    }
 }
