@@ -88,7 +88,7 @@ public class DCELTests
             faces.AsReadOnly()
         );
 
-        DCEL actual = DCEL.Build(mesh);
+        DCEL actual = DCEL.FromMesh(mesh);
 
         Assert.That(actual, Is.EqualTo(expected));
     }
@@ -206,7 +206,7 @@ public class DCELTests
             faces.AsReadOnly()
         );
 
-        DCEL actual = DCEL.Build(mesh);
+        DCEL actual = DCEL.FromMesh(mesh);
 
         Assert.That(actual, Is.EqualTo(expected));
     }
@@ -388,7 +388,7 @@ public class DCELTests
             faces.AsReadOnly()
         );
 
-        DCEL actual = DCEL.Build(mesh);
+        DCEL actual = DCEL.FromMesh(mesh);
 
         Assert.AreEqual(actual, expected);
         Assert.AreEqual(actual.GetHashCode(), expected.GetHashCode());

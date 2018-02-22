@@ -37,7 +37,7 @@ namespace DoubleConnectedEdgeList
         /// </summary>
         /// <returns>The build DCEL.</returns>
         /// <param name="mesh">Mesh.</param>
-        public static DCEL Build(Mesh mesh)
+        public static DCEL FromMesh(Mesh mesh)
         {
             return new DCELMeshBuilder(mesh).Build();
         }
