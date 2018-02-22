@@ -50,15 +50,6 @@ namespace DoubleConnectedEdgeList
             return this.Equals(obj as DCEL);
         }
 
-        public override int GetHashCode()
-        {
-            int hash = 17;
-            hash = hash * 31 + GetHashCodeList(vertices);
-            hash = hash * 31 + GetHashCodeList(halfEdges);
-            hash = hash * 31 + GetHashCodeList(faces);
-            return hash;
-        }
-
         public bool Equals(DCEL other)
         {
             return (
@@ -66,6 +57,15 @@ namespace DoubleConnectedEdgeList
                 this.faces.UnorderedElementsAreEqual(other.faces) &&
                 this.halfEdges.UnorderedElementsAreEqual(other.halfEdges)
             );
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 17;
+            hash = hash * 31 + GetHashCodeList(vertices);
+            hash = hash * 31 + GetHashCodeList(halfEdges);
+            hash = hash * 31 + GetHashCodeList(faces);
+            return hash;
         }
 
         private int GetHashCodeList<T>(List<T> list)
@@ -78,6 +78,7 @@ namespace DoubleConnectedEdgeList
             return hash;
         }
 
+        #region internal
         /// <summary>
         /// Add the vertex to the mesh, if another vertex at this position does 
         /// not already exists at this location. If the latter is the case, the 
@@ -100,6 +101,7 @@ namespace DoubleConnectedEdgeList
         {
             this.faces.Add(face);
         }
+        #endregion
     }
 
     internal class DCELMeshBuilder
