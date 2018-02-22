@@ -2,7 +2,7 @@ using UnityEngine;
 using NUnit.Framework;
 
 [TestFixture]
-public class TestOpenTKVector4d
+public class OpenTKVector4dTests
 {
     [Test]
     public void Test_ToUnityVector()

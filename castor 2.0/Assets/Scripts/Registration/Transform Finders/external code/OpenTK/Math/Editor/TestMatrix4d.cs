@@ -2,7 +2,7 @@ using UnityEngine;
 using NUnit.Framework;
 
 [TestFixture]
-public class TestOpenTKMatrix4d
+public class OpenTKMatrix4dTests
 {
 
     [Test]
