@@ -53,7 +53,7 @@ namespace Fragment
             ToggleIsStaticFragment(false);
         }
 
-        public void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message) { }
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message) { }
         #endregion
     }
 }

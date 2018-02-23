@@ -28,7 +28,7 @@ namespace Fragment
             SendMessageToListeners("OnICPTerminated", message, SendMessageOptions.RequireReceiver);
         }
 
-        public void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message)
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
             SendMessageToListeners("OnPreparetionStepCompleted", message, SendMessageOptions.RequireReceiver);
         }

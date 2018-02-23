@@ -77,7 +77,7 @@ namespace GraphicalUI
             ToggleICPModeInGUI(false);
         }
 
-        public void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message)
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
             StepButton.Button.interactable = true;
         }

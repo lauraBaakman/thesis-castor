@@ -8,7 +8,7 @@ namespace Registration
 
         void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message);
 
-        void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message);
+        void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message);
 
         void OnStepCompleted();
 

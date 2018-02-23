@@ -125,7 +125,7 @@ namespace Fragment
             Clear();
         }
 
-        public void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message) { }
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message) { }
         #endregion
     }
 

@@ -105,7 +105,7 @@ namespace Fragment
             ClearPoints();
         }
 
-        public void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message) { }
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message) { }
         #endregion
     }
 
