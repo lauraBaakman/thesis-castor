@@ -135,17 +135,6 @@ namespace Registration
         {
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
             List<Point> points = Settings.PointSelector.Select(fragment.transform, mesh);
-
-            //Notify the fragment
-            fragment.SendMessage(
-                methodName: "OnICPPointsSelected",
-                value: new ICPPointsSelectedMessage(
-                    points: points,
-                    transform: Settings.ReferenceTransform
-                ),
-                options: SendMessageOptions.DontRequireReceiver
-            );
-
             return points;
         }
 
@@ -158,14 +147,6 @@ namespace Registration
         private List<Correspondence> ComputeCorrespondences(List<Point> staticPoints, List<Point> modelPoints)
         {
             List<Correspondence> correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
-
-            SendMessageToAllListeners(
-                methodName: "OnICPCorrespondencesChanged",
-                message: new ICPCorrespondencesChanged(
-                    correspondences,
-                    Settings.ReferenceTransform
-                )
-            );
             return correspondences;
         }
 
@@ -175,14 +156,6 @@ namespace Registration
             {
                 correspondences = filter.Filter(correspondences);
             }
-
-            SendMessageToAllListeners(
-                methodName: "OnICPCorrespondencesChanged",
-                message: new ICPCorrespondencesChanged(
-                    correspondences,
-                    Settings.ReferenceTransform
-                )
-            );
             return correspondences;
         }
 

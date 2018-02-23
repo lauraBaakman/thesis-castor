@@ -11,13 +11,7 @@ namespace Fragments
 
         static Material CorrespondenceMaterial;
 
-        #region Points
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message) { }
-        #endregion
-
         #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
-
         private void RenderCorrespondences()
         {
             if (CorrespondencesPresent())

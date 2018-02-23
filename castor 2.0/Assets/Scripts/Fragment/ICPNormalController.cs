@@ -26,13 +26,7 @@ namespace Fragment
             if (ShowNormals) RenderNormals();
         }
 
-        #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
-        #endregion
-
         #region Normals
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message) { }
-
         private void StoreNormals(IEnumerable<Point> points)
         {
             foreach (Point point in points)

@@ -9,16 +9,6 @@ namespace Fragment
         public bool Active = false;
         public List<GameObject> Listeners = new List<GameObject>();
 
-        public virtual void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
-        {
-            SendMessageToListeners("OnICPCorrespondencesChanged", message);
-        }
-
-        public virtual void OnICPPointsSelected(ICPPointsSelectedMessage message)
-        {
-            SendMessageToListeners("OnICPPointsSelected", message);
-        }
-
         public virtual void OnICPTerminated(ICPTerminatedMessage message)
         {
             SendMessageToListeners("OnICPTerminated", message);

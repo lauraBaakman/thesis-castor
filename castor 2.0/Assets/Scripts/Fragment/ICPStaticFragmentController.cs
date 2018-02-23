@@ -11,8 +11,6 @@ namespace Fragment
     {
         private static int firstIteration = 1;
 
-        public override void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
-
         public override void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
             if (IsFirstPreparationStep(message)) SendMessageToListeners("OnPreparationStepCompleted", message);

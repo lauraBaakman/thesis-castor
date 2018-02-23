@@ -68,10 +68,6 @@ namespace Fragment
         }
 
         #region ICPListener
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message) { }
-
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
-
         public void OnStepCompleted() { }
 
         public void OnICPTerminated(ICPTerminatedMessage message)

@@ -28,14 +28,7 @@ namespace Fragment
             name = transform.parent.gameObject.name + " " + gameObject.name;
         }
 
-        #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
-        { }
-        #endregion
-
         #region Points
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message) { }
-
         private ICPPointController AddICPPoint(Point point)
         {
             GameObject pointGO = GetPointGO();

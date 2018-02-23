@@ -43,10 +43,6 @@ namespace GraphicalUI
             ToggleICPModeInGUI(true);
         }
 
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
-
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message) { }
-
         private void ToggleICPModeInGUI(bool toggle)
         {
             StepButton.Button.interactable = toggle;
