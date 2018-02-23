@@ -22,7 +22,6 @@ namespace Fragment
         #region Correspondences
         public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
         {
-
             ICPPointController controller;
             foreach (Correspondence correspondence in message.Correspondences)
             {
