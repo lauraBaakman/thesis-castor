@@ -45,8 +45,6 @@ namespace Fragment
 
         public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
 
-        public void OnPreparetionStepCompleted() { }
-
         public void OnStepCompleted() { }
 
         public void OnICPTerminated(ICPTerminatedMessage message)
@@ -54,6 +52,8 @@ namespace Fragment
             ToggleIsModelFragment(false);
             ToggleIsStaticFragment(false);
         }
+
+        public void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message) { }
         #endregion
     }
 }

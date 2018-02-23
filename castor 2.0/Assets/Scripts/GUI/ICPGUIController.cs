@@ -55,11 +55,6 @@ namespace GraphicalUI
             RegistrationButton.Button.interactable = !toggle;
         }
 
-        public void OnPreparetionStepCompleted()
-        {
-            StepButton.Button.interactable = true;
-        }
-
         public void OnStepCompleted()
         {
             StepButton.Button.interactable = true;
@@ -80,6 +75,11 @@ namespace GraphicalUI
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
             ToggleICPModeInGUI(false);
+        }
+
+        public void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message)
+        {
+            StepButton.Button.interactable = true;
         }
     }
 

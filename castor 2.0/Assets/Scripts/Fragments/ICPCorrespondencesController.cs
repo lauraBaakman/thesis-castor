@@ -128,6 +128,8 @@ namespace Fragments
         {
             ClearCorrespondences();
         }
+
+        public void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message) { }
         #endregion
     }
 }

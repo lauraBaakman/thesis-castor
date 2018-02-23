@@ -3,6 +3,27 @@ using System.Collections.Generic;
 
 namespace Registration
 {
+    public class ICPPreparationStepCompletedMessage
+    {
+        public Transform Transform
+        {
+            get { return transform; }
+        }
+        private readonly Transform transform;
+
+        public List<Correspondence> Correspondences
+        {
+            get { return correspondences; }
+        }
+        private readonly List<Correspondence> correspondences;
+
+        public ICPPreparationStepCompletedMessage(List<Correspondence> correspondences, Transform transform)
+        {
+            this.correspondences = correspondences;
+            this.transform = transform;
+        }
+    }
+
     public class ICPPointsSelectedMessage
     {
         public Transform Transform
