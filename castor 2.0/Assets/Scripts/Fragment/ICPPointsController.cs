@@ -99,8 +99,6 @@ namespace Fragment
 
         private void UpdatePoints(IEnumerable<Point> points)
         {
-            Debug.Log(name + "UpdatePoints");
-
             ICPPointController controller;
             foreach (Point point in points)
             {
