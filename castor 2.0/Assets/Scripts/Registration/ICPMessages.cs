@@ -8,11 +8,12 @@ namespace Registration
     {
         public readonly Transform Transform;
 
+        public readonly int IterationIndex;
         public readonly ReadOnlyCollection<Correspondence> Correspondences;
         public readonly ReadOnlyCollection<Point> ModelPoints;
         public readonly ReadOnlyCollection<Point> StaticPoints;
 
-        public ICPPreparationStepCompletedMessage(List<Correspondence> correspondences, Transform transform)
+        public ICPPreparationStepCompletedMessage(List<Correspondence> correspondences, Transform transform, int iterationIndex)
         {
             this.Correspondences = correspondences.AsReadOnly();
             this.Transform = transform;
@@ -21,6 +22,8 @@ namespace Registration
             List<Point> staticPoints = new List<Point>(correspondences.Count);
 
             ExtractPoints(correspondences, ref modelPoints, ref staticPoints);
+
+            this.IterationIndex = iterationIndex;
 
             this.ModelPoints = modelPoints.AsReadOnly();
             this.StaticPoints = staticPoints.AsReadOnly();

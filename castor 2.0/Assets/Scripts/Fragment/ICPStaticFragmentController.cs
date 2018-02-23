@@ -12,28 +12,33 @@ namespace Fragment
         public bool Active = false;
         public List<GameObject> Listeners = new List<GameObject>();
 
+        private static int firstIteration = 1;
+
         #region ICPListener
         public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
 
         public void OnICPPointsSelected(ICPPointsSelectedMessage message)
         {
-            SendMessageToListeners("OnICPPointsSelected", message, SendMessageOptions.RequireReceiver);
+            SendMessageToListeners("OnICPPointsSelected", message);
         }
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
-            SendMessageToListeners("OnICPTerminated", message, SendMessageOptions.RequireReceiver);
+            SendMessageToListeners("OnICPTerminated", message);
         }
 
         public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
-            //The static fragment does not care about the completion of the prepartion step.
+            if (message.IterationIndex == firstIteration)
+            {
+                SendMessageToListeners("OnPreparationStepCompleted", message);
+            }
         }
 
         public void OnStepCompleted() { }
         #endregion ICPListener
 
-        private void SendMessageToListeners(string methodName, object message, SendMessageOptions option)
+        private void SendMessageToListeners(string methodName, object message, SendMessageOptions option = SendMessageOptions.RequireReceiver)
         {
             //only notify the listeners if the controller is active
             if (!Active) return;

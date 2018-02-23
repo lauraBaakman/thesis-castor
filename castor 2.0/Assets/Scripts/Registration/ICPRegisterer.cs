@@ -82,7 +82,9 @@ namespace Registration
                 "OnPreparationStepCompleted",
                 new ICPPreparationStepCompletedMessage(
                     Correspondences,
-                    Settings.ReferenceTransform
+                    Settings.ReferenceTransform,
+                    //The counter is only updated after the step has been set
+                    iterationCounter.CurrentCount + 1
                 )
             );
 

@@ -15,31 +15,31 @@ namespace Fragment
         #region ICPListener
         public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
         {
-            SendMessageToListeners("OnICPCorrespondencesChanged", message, SendMessageOptions.RequireReceiver);
+            SendMessageToListeners("OnICPCorrespondencesChanged", message);
         }
 
         public void OnICPPointsSelected(ICPPointsSelectedMessage message)
         {
-            SendMessageToListeners("OnICPPointsSelected", message, SendMessageOptions.RequireReceiver);
+            SendMessageToListeners("OnICPPointsSelected", message);
         }
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
-            SendMessageToListeners("OnICPTerminated", message, SendMessageOptions.RequireReceiver);
+            SendMessageToListeners("OnICPTerminated", message);
         }
 
         public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
-            SendMessageToListeners("OnPreparationStepCompleted", message, SendMessageOptions.RequireReceiver);
+            SendMessageToListeners("OnPreparationStepCompleted", message);
         }
 
         public void OnStepCompleted()
         {
-            SendMessageToListeners("OnStepCompleted", null, SendMessageOptions.RequireReceiver);
+            SendMessageToListeners("OnStepCompleted", null);
         }
         #endregion ICPListener
 
-        private void SendMessageToListeners(string methodName, object message, SendMessageOptions option)
+        private void SendMessageToListeners(string methodName, object message, SendMessageOptions option = SendMessageOptions.RequireReceiver)
         {
             //only notify the listeners if the controller is active
             if (!Active) return;
