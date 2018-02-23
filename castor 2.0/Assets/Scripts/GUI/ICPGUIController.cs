@@ -1,12 +1,11 @@
 using UnityEngine;
-using System.Collections;
 using Registration;
 
 using Buttons.RegistrationButtons;
 
 namespace GraphicalUI
 {
-    public class ICPGUIController : MonoBehaviour, Registration.IICPListener
+    public class ICPGUIController : MonoBehaviour, IICPListener
     {
         public RegistrationButton RegistrationButton;
         public AbstractRegistrationButton StepButton;
@@ -44,21 +43,12 @@ namespace GraphicalUI
             ToggleICPModeInGUI(true);
         }
 
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
-
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message) { }
-
         private void ToggleICPModeInGUI(bool toggle)
         {
             StepButton.Button.interactable = toggle;
             PlayButton.Button.interactable = toggle;
             StopButton.Button.interactable = toggle;
             RegistrationButton.Button.interactable = !toggle;
-        }
-
-        public void OnPreparetionStepCompleted()
-        {
-            StepButton.Button.interactable = true;
         }
 
         public void OnStepCompleted()
@@ -81,6 +71,11 @@ namespace GraphicalUI
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
             ToggleICPModeInGUI(false);
+        }
+
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
+        {
+            StepButton.Button.interactable = true;
         }
     }
 

@@ -12,24 +12,22 @@ namespace Fragment
         private List<Normal> Normals = new List<Normal>();
         private Transform ReferenceTransform;
 
+        private ICPController parentICPController;
+
+        private void Awake()
+        {
+            GameObject parent = this.transform.parent.gameObject;
+            parentICPController = parent.GetComponent<ICPController>();
+            Debug.Assert(parentICPController != null, "The parent gameobject of the object that has the " + this.name + " is expected to have an ICPController.");
+        }
+
         public void OnRenderObject()
         {
             if (ShowNormals) RenderNormals();
         }
 
-        #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
-        #endregion
-
         #region Normals
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message)
-        {
-            ReferenceTransform = message.Transform;
-
-            if (ShowNormals) StoreNormals(message.Points);
-        }
-
-        private void StoreNormals(List<Point> points)
+        private void StoreNormals(IEnumerable<Point> points)
         {
             foreach (Point point in points)
             {
@@ -115,8 +113,6 @@ namespace Fragment
         #endregion
 
         #region progress
-        public void OnPreparetionStepCompleted() { }
-
         public void OnStepCompleted()
         {
             Clear();
@@ -125,6 +121,14 @@ namespace Fragment
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
             Clear();
+        }
+
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
+        {
+            ReferenceTransform = message.Transform;
+            Fragment.ICPFragmentType type = parentICPController.FragmentType;
+
+            if (ShowNormals) StoreNormals(message.GetPointsByType(type));
         }
         #endregion
     }

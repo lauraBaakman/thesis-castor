@@ -1,9 +1,6 @@
 using UnityEngine;
-using System.Collections;
 using Registration;
-using System;
 using System.Collections.Generic;
-using RTEditor;
 
 namespace Fragment
 {
@@ -13,55 +10,34 @@ namespace Fragment
 
         private Transform originalParentTransform;
         private Stack<GameObject> unusedPoints = new Stack<GameObject>();
+        private ICPController parentICPController;
 
         private Dictionary<Point, ICPPointController> pointGOMapping = new Dictionary<Point, ICPPointController>();
 
         private void Awake()
         {
             originalParentTransform = transform.parent;
-            name = originalParentTransform.name + " " + gameObject.name;
+
+            GameObject parent = this.transform.parent.gameObject;
+            parentICPController = parent.GetComponent<ICPController>();
+            Debug.Assert(parentICPController != null, "The parent gameobject of the object that has the " + this.name + " is expected to have an ICPController.");
         }
 
-        #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
+        public void Start()
         {
-
-            ICPPointController controller;
-            foreach (Correspondence correspondence in message.Correspondences)
-            {
-                bool succes = pointGOMapping.TryGetValue(correspondence.ModelPoint, out controller);
-
-                if (!succes)
-                {
-                    Debug.Log("Could not find the gameobject associated with " + correspondence.ModelPoint);
-                    continue;
-                }
-
-                controller.SetColor(correspondence.Color);
-            }
+            name = transform.parent.gameObject.name + " " + gameObject.name;
         }
-        #endregion
 
         #region Points
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message)
-        {
-            transform.SetParent(message.Transform);
-
-            AddICPPoints(message.Points);
-        }
-
-        private void AddICPPoints(List<Point> points)
-        {
-            foreach (Point point in points) AddICPPoint(point);
-        }
-
-        private void AddICPPoint(Point point)
+        private ICPPointController AddICPPoint(Point point)
         {
             GameObject pointGO = GetPointGO();
             ICPPointController pointController = pointGO.GetComponent<ICPPointController>();
             pointController.RepresentPoint(point);
 
             pointGOMapping.Add(point, pointController);
+
+            return pointController;
         }
 
         private GameObject GetPointGO()
@@ -101,11 +77,28 @@ namespace Fragment
             ClearPoints();
         }
 
-        public void OnPreparetionStepCompleted() { }
-
         public void OnStepCompleted()
         {
             ClearPoints();
+        }
+
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
+        {
+            transform.SetParent(message.Transform);
+
+            Fragment.ICPFragmentType type = parentICPController.FragmentType;
+            UpdatePoints(message.GetPointsByType(type));
+        }
+
+        private void UpdatePoints(IEnumerable<Point> points)
+        {
+            ICPPointController controller;
+            foreach (Point point in points)
+            {
+                bool succes = pointGOMapping.TryGetValue(point, out controller);
+                if (!succes) controller = AddICPPoint(point);
+                controller.SetColor(point.Color);
+            }
         }
         #endregion
     }

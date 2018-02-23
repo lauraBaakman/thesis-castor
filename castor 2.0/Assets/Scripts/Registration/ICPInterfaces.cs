@@ -4,11 +4,7 @@ namespace Registration
 {
     public interface IICPListener
     {
-        void OnICPPointsSelected(ICPPointsSelectedMessage message);
-
-        void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message);
-
-        void OnPreparetionStepCompleted();
+        void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message);
 
         void OnStepCompleted();
 

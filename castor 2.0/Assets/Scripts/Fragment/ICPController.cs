@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using Registration;
 
 namespace Fragment
@@ -8,11 +7,38 @@ namespace Fragment
 
     [RequireComponent(typeof(ICPModelFragmentController))]
     [RequireComponent(typeof(ICPStaticFragmentController))]
-    public class ICPController : MonoBehaviour, Registration.IICPListener
+    public class ICPController : MonoBehaviour, IICPListener
     {
 
         private ICPModelFragmentController modelFragmentController;
         private ICPStaticFragmentController staticFragmentController;
+
+        public bool IsStaticFragment
+        {
+            get
+            {
+                return staticFragmentController.enabled && staticFragmentController.Active;
+            }
+        }
+
+        public bool IsModelFragment
+        {
+            get
+            {
+                return modelFragmentController.enabled && modelFragmentController.Active;
+            }
+        }
+
+        public ICPFragmentType FragmentType
+        {
+            get
+            {
+                if (IsStaticFragment) return ICPFragmentType.Static;
+                if (IsModelFragment) return ICPFragmentType.Model;
+
+                throw new System.Exception("The fragment is not involved in ICP, do not request its type.");
+            }
+        }
 
         void Start()
         {
@@ -42,12 +68,6 @@ namespace Fragment
         }
 
         #region ICPListener
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message) { }
-
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
-
-        public void OnPreparetionStepCompleted() { }
-
         public void OnStepCompleted() { }
 
         public void OnICPTerminated(ICPTerminatedMessage message)
@@ -55,6 +75,8 @@ namespace Fragment
             ToggleIsModelFragment(false);
             ToggleIsStaticFragment(false);
         }
+
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message) { }
         #endregion
     }
 }

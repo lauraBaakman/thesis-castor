@@ -65,6 +65,19 @@ namespace Registration
             color = staticPoint.Color;
         }
 
+        public Point GetPoint(Fragment.ICPFragmentType type)
+        {
+            switch (type)
+            {
+                case Fragment.ICPFragmentType.Model:
+                    return ModelPoint;
+                case Fragment.ICPFragmentType.Static:
+                    return StaticPoint;
+                default:
+                    throw new ArgumentException("Invalid enum type.");
+            }
+        }
+
         private void ResetColor()
         {
             this.color = DefaultColor;

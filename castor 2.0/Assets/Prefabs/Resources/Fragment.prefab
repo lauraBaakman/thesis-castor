@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114763692925140676}
   - component: {fileID: 114172959141423284}
   - component: {fileID: 114068042924075692}
+  - component: {fileID: 114627018207738400}
   m_Layer: 0
   m_Name: Fragment
   m_TagString: Untagged
@@ -218,6 +219,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowNormals: 0
+--- !u!114 &114627018207738400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398172610948532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e534a7d6b306e46b3bbb7692d4fd9f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114763692925140676
 MonoBehaviour:
   m_ObjectHideFlags: 1

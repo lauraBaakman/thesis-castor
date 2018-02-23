@@ -70,8 +70,6 @@ namespace DoubleConnectedEdgeList
 
         public override int GetHashCode()
         {
-            Debug.Log("New function!");
-
             int hash = 17;
             hash *= (31 + vertices.UnorderedElementsGetHashCode());
             hash *= (31 + halfEdges.UnorderedElementsGetHashCode());

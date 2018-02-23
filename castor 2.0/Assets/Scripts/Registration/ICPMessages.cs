@@ -1,47 +1,54 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Registration
 {
-    public class ICPPointsSelectedMessage
+    public class ICPPreparationStepCompletedMessage
     {
-        public Transform Transform
-        {
-            get { return transform; }
-        }
-        private readonly Transform transform;
+        public readonly Transform Transform;
 
-        public List<Point> Points
-        {
-            get { return points; }
-        }
-        private readonly List<Point> points;
+        public readonly int IterationIndex;
+        public readonly ReadOnlyCollection<Correspondence> Correspondences;
+        public readonly ReadOnlyCollection<Point> ModelPoints;
+        public readonly ReadOnlyCollection<Point> StaticPoints;
 
-        public ICPPointsSelectedMessage(List<Point> points, Transform transform)
+        public ICPPreparationStepCompletedMessage(List<Correspondence> correspondences, Transform transform, int iterationIndex)
         {
-            this.transform = transform;
-            this.points = points;
-        }
-    }
+            this.Correspondences = correspondences.AsReadOnly();
+            this.Transform = transform;
 
-    public class ICPCorrespondencesChanged
-    {
-        public List<Correspondence> Correspondences
-        {
-            get { return correspondences; }
-        }
-        private readonly List<Correspondence> correspondences;
+            List<Point> modelPoints = new List<Point>(correspondences.Count);
+            List<Point> staticPoints = new List<Point>(correspondences.Count);
 
-        public Transform Transform
-        {
-            get { return transform; }
-        }
-        private readonly Transform transform;
+            ExtractPoints(correspondences, ref modelPoints, ref staticPoints);
 
-        public ICPCorrespondencesChanged(List<Correspondence> correspondences, Transform transform)
+            this.IterationIndex = iterationIndex;
+
+            this.ModelPoints = modelPoints.AsReadOnly();
+            this.StaticPoints = staticPoints.AsReadOnly();
+        }
+
+        public ReadOnlyCollection<Point> GetPointsByType(Fragment.ICPFragmentType type)
         {
-            this.correspondences = correspondences;
-            this.transform = transform;
+            switch (type)
+            {
+                case Fragment.ICPFragmentType.Model:
+                    return ModelPoints;
+                case Fragment.ICPFragmentType.Static:
+                    return StaticPoints;
+                default:
+                    throw new System.ArgumentException("Invalid enum type.");
+            }
+        }
+
+        private void ExtractPoints(List<Correspondence> correspondenceList, ref List<Point> modelPoints, ref List<Point> staticPoints)
+        {
+            foreach (Correspondence correspondence in correspondenceList)
+            {
+                modelPoints.Add(correspondence.ModelPoint);
+                staticPoints.Add(correspondence.StaticPoint);
+            }
         }
     }
 

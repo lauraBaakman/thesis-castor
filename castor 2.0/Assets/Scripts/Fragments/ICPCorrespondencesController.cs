@@ -4,29 +4,14 @@ using System.Collections.Generic;
 
 namespace Fragments
 {
-    public class ICPCorrespondencesController : MonoBehaviour, Registration.IICPListener
+    public class ICPCorrespondencesController : MonoBehaviour, IICPListener
     {
         private List<Correspondence> Correspondences = new List<Correspondence>();
         private Transform ReferenceTransform;
 
         static Material CorrespondenceMaterial;
 
-        #region Points
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message)
-        {
-            //no need to do anything, the fragments handle the rendering of points.
-        }
-        #endregion
-
         #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
-        {
-            Correspondences.Clear();
-            Correspondences.AddRange(message.Correspondences);
-
-            ReferenceTransform = message.Transform;
-        }
-
         private void RenderCorrespondences()
         {
             if (CorrespondencesPresent())
@@ -119,11 +104,6 @@ namespace Fragments
         }
 
         #region ICPProgress
-        public void OnPreparetionStepCompleted()
-        {
-            //Do nothing
-        }
-
         public void OnStepCompleted()
         {
             ClearCorrespondences();
@@ -132,6 +112,13 @@ namespace Fragments
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
             ClearCorrespondences();
+        }
+
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
+        {
+            Correspondences.AddRange(message.Correspondences);
+
+            ReferenceTransform = message.Transform;
         }
         #endregion
     }
