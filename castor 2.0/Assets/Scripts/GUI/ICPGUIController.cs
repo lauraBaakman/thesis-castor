@@ -1,12 +1,11 @@
 using UnityEngine;
-using System.Collections;
 using Registration;
 
 using Buttons.RegistrationButtons;
 
 namespace GraphicalUI
 {
-    public class ICPGUIController : MonoBehaviour, Registration.IICPListener
+    public class ICPGUIController : MonoBehaviour, IICPListener
     {
         public RegistrationButton RegistrationButton;
         public AbstractRegistrationButton StepButton;
