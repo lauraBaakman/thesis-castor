@@ -60,4 +60,61 @@ public class CorrespondenceTests
 
         Assert.That(actual, Is.EqualTo(expected));
     }
+
+    [Test]
+    public void TestGetPoint_ModelPoint()
+    {
+        Point staticPoint = TestAux.RandomPoint();
+        Point modelPoint = TestAux.RandomPoint();
+
+        Correspondence correspondence = new Correspondence(
+            staticPoint: staticPoint,
+            modelPoint: modelPoint
+        );
+
+        Fragment.ICPFragmentType type = Fragment.ICPFragmentType.Model;
+
+        Point actual = correspondence.GetPoint(type);
+
+        Assert.AreEqual(modelPoint, actual);
+    }
+
+    [Test]
+    public void TestGetPoint_StaticPoint()
+    {
+        Point staticPoint = TestAux.RandomPoint();
+        Point modelPoint = TestAux.RandomPoint();
+
+        Correspondence correspondence = new Correspondence(
+            staticPoint: staticPoint,
+            modelPoint: modelPoint
+        );
+
+        Fragment.ICPFragmentType type = Fragment.ICPFragmentType.Static;
+
+        Point actual = correspondence.GetPoint(type);
+
+        Assert.AreEqual(staticPoint, actual);
+    }
+
+    [Test]
+    public void TestGetPoint_InvalidEnum()
+    {
+        Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestGetPoint_InvalidEnum_Helper));
+    }
+
+    private void TestGetPoint_InvalidEnum_Helper()
+    {
+        Point staticPoint = TestAux.RandomPoint();
+        Point modelPoint = TestAux.RandomPoint();
+
+        Correspondence correspondence = new Correspondence(
+            staticPoint: staticPoint,
+            modelPoint: modelPoint
+        );
+
+        Fragment.ICPFragmentType type = (Fragment.ICPFragmentType)99;
+
+        correspondence.GetPoint(type);
+    }
 }

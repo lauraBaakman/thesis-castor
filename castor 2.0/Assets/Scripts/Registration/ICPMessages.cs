@@ -26,6 +26,19 @@ namespace Registration
             this.StaticPoints = staticPoints.AsReadOnly();
         }
 
+        public ReadOnlyCollection<Point> GetPointsByType(Fragment.ICPFragmentType type)
+        {
+            switch (type)
+            {
+                case Fragment.ICPFragmentType.Model:
+                    return ModelPoints;
+                case Fragment.ICPFragmentType.Static:
+                    return StaticPoints;
+                default:
+                    throw new System.ArgumentException("Invalid enum type.");
+            }
+        }
+
         private void ExtractPoints(List<Correspondence> correspondenceList, ref List<Point> modelPoints, ref List<Point> staticPoints)
         {
             foreach (Correspondence correspondence in correspondenceList)
