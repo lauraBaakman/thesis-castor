@@ -335,6 +335,7 @@
     <Compile Include="Assets\Scripts\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
     <Compile Include="Assets\Scripts\Fragment\DoubleConnectedEdgeListStorage.cs" />
+    <Compile Include="Assets\Scripts\Fragment\ICPAbstractFragmentController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPModelFragmentController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPNormalController.cs" />
