@@ -29,6 +29,17 @@ namespace Fragment
             }
         }
 
+        public ICPFragmentType FragmentType
+        {
+            get
+            {
+                if (IsStaticFragment) return ICPFragmentType.Static;
+                if (IsModelFragment) return ICPFragmentType.Model;
+
+                throw new System.Exception("The fragment is not involved in ICP, do not request its type.");
+            }
+        }
+
         void Start()
         {
             modelFragmentController = GetComponent<ICPModelFragmentController>();
