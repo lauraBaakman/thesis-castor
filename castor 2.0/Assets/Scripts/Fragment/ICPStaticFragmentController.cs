@@ -27,7 +27,7 @@ namespace Fragment
 
         public void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message)
         {
-            SendMessageToListeners("OnPreparetionStepCompleted", message, SendMessageOptions.RequireReceiver);
+            //The static fragment does not care about the completion of the prepartion step.
         }
 
         public void OnStepCompleted() { }
