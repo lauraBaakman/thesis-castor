@@ -115,8 +115,6 @@ namespace Fragment
         #endregion
 
         #region progress
-        public void OnPreparetionStepCompleted() { }
-
         public void OnStepCompleted()
         {
             Clear();
@@ -126,6 +124,8 @@ namespace Fragment
         {
             Clear();
         }
+
+        public void OnPreparetionStepCompleted(ICPPreparationStepCompletedMessage message) { }
         #endregion
     }
 
