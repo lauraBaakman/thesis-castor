@@ -24,5 +24,17 @@ public static class TestAux
     {
         return new Face(random.Next());
     }
+
+    public static Registration.Point RandomPoint()
+    {
+        return new Registration.Point(RandomPosition(), RandomNormal());
+    }
+
+    public static Vector3 RandomNormal()
+    {
+        Vector3 normal = RandomPosition();
+        normal.Normalize();
+        return normal;
+    }
 }
 

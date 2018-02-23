@@ -334,6 +334,7 @@
     <Compile Include="Assets\Scripts\Extensions\SystemRandomExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
+    <Compile Include="Assets\Scripts\Fragment\DoubleConnectedEdgeListStorage.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPModelFragmentController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPNormalController.cs" />
@@ -510,6 +511,7 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\TransformPointsUtils.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\HornTransformFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\ITransformFinder.cs" />
+    <Compile Include="Assets\Scripts\TestAuxilaries.cs" />
     <Compile Include="Assets\Scripts\Ticker\Messages.cs" />
     <Compile Include="Assets\Scripts\Ticker\Receiver.cs" />
     <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
@@ -517,7 +519,6 @@
     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
     <Compile Include="Assets\Scripts\Utils\Pair.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Fragment\DoubleConnectedEdgeListStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
