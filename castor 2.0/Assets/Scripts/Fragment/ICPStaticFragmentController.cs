@@ -39,6 +39,11 @@ namespace Fragment
             if (!Active) return;
             foreach (GameObject listener in Listeners)
             {
+                Debug.Assert(
+                    listener.GetComponent<IICPListener>() != null,
+                    "listeners of ICPModelFragmentController need to implement the IICPListener interface."
+                );
+
                 listener.SendMessage(methodName, message, option);
             }
         }

@@ -30,7 +30,7 @@ namespace Fragment
 
         public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
-            SendMessageToListeners("OnPreparetionStepCompleted", message, SendMessageOptions.RequireReceiver);
+            SendMessageToListeners("OnPreparationStepCompleted", message, SendMessageOptions.RequireReceiver);
         }
 
         public void OnStepCompleted()
@@ -46,6 +46,11 @@ namespace Fragment
 
             foreach (GameObject listener in Listeners)
             {
+                Debug.Assert(
+                    listener.GetComponent<IICPListener>() != null,
+                    "listeners of ICPModelFragmentController need to implement the IICPListener interface."
+                );
+
                 listener.SendMessage(methodName, message, option);
             }
         }

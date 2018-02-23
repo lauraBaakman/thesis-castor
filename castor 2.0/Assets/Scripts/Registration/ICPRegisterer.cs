@@ -79,7 +79,7 @@ namespace Registration
             Correspondences = FilterCorrespondences(Correspondences);
 
             SendMessageToAllListeners(
-                "OnPreparetionStepCompleted",
+                "OnPreparationStepCompleted",
                 new ICPPreparationStepCompletedMessage(
                     Correspondences,
                     Settings.ReferenceTransform
