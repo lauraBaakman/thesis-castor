@@ -78,7 +78,13 @@ namespace Registration
             Correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
             Correspondences = FilterCorrespondences(Correspondences);
 
-            SendMessageToAllListeners("OnPreparetionStepCompleted");
+            SendMessageToAllListeners(
+                "OnPreparetionStepCompleted",
+                new ICPPreparationStepCompletedMessage(
+                    Correspondences,
+                    Settings.ReferenceTransform
+                )
+            );
 
             TerminateIfNeeded();
         }
