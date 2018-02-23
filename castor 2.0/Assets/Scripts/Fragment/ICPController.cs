@@ -13,6 +13,22 @@ namespace Fragment
         private ICPModelFragmentController modelFragmentController;
         private ICPStaticFragmentController staticFragmentController;
 
+        public bool IsStaticFragment
+        {
+            get
+            {
+                return staticFragmentController.enabled && staticFragmentController.Active;
+            }
+        }
+
+        public bool IsModelFragment
+        {
+            get
+            {
+                return modelFragmentController.enabled && modelFragmentController.Active;
+            }
+        }
+
         void Start()
         {
             modelFragmentController = GetComponent<ICPModelFragmentController>();
