@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Fragments
 {
-    public class ICPCorrespondencesController : MonoBehaviour, Registration.IICPListener
+    public class ICPCorrespondencesController : MonoBehaviour, IICPListener
     {
         private List<Correspondence> Correspondences = new List<Correspondence>();
         private Transform ReferenceTransform;
@@ -119,11 +119,6 @@ namespace Fragments
         }
 
         #region ICPProgress
-        public void OnPreparetionStepCompleted()
-        {
-            //Do nothing
-        }
-
         public void OnStepCompleted()
         {
             ClearCorrespondences();
