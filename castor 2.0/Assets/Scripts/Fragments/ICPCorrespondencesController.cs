@@ -12,20 +12,11 @@ namespace Fragments
         static Material CorrespondenceMaterial;
 
         #region Points
-        public void OnICPPointsSelected(ICPPointsSelectedMessage message)
-        {
-            //no need to do anything, the fragments handle the rendering of points.
-        }
+        public void OnICPPointsSelected(ICPPointsSelectedMessage message) { }
         #endregion
 
         #region Correspondences
-        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message)
-        {
-            Correspondences.Clear();
-            Correspondences.AddRange(message.Correspondences);
-
-            ReferenceTransform = message.Transform;
-        }
+        public void OnICPCorrespondencesChanged(ICPCorrespondencesChanged message) { }
 
         private void RenderCorrespondences()
         {
@@ -129,7 +120,12 @@ namespace Fragments
             ClearCorrespondences();
         }
 
-        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message) { }
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
+        {
+            Correspondences.AddRange(message.Correspondences);
+
+            ReferenceTransform = message.Transform;
+        }
         #endregion
     }
 }
