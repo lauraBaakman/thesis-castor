@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using Registration;
 
 namespace Fragment
@@ -8,7 +7,7 @@ namespace Fragment
 
     [RequireComponent(typeof(ICPModelFragmentController))]
     [RequireComponent(typeof(ICPStaticFragmentController))]
-    public class ICPController : MonoBehaviour, Registration.IICPListener
+    public class ICPController : MonoBehaviour, IICPListener
     {
 
         private ICPModelFragmentController modelFragmentController;
