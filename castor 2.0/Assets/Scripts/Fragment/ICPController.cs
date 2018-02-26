@@ -63,6 +63,8 @@ namespace Fragment
 
         public void OnToggleIsICPFragment(ICPFragmentType type)
         {
+            Debug.Log("OnToggleIsICPFragment: " + type);
+
             ToggleIsStaticFragment((type == ICPFragmentType.Static));
             ToggleIsModelFragment((type == ICPFragmentType.Model));
         }

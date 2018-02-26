@@ -108,12 +108,13 @@ namespace Registration
             if (Correspondences.Count >= FinalCorrespondenceCount) return true;
 
             // Reviewed all distance nodes
-            if (DistanceNodes.Count <= 0){
+            if (DistanceNodes.Count <= 0)
+            {
                 Debug.LogError(
                     "Stopped creating correspondences because we ran out of " +
                     "posible pairs, not because all correspondences were found."
                 );
-                return true;  
+                return true;
             }
 
             // Continue with finding correspondences
