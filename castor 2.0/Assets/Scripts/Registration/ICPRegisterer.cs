@@ -9,9 +9,6 @@ namespace Registration
     {
         private List<GameObject> Listeners = new List<GameObject>();
 
-        private GameObject StaticFragment;
-        private GameObject ModelFragment;
-
         private Settings Settings;
 
         private Counter iterationCounter;
@@ -26,6 +23,43 @@ namespace Registration
         {
             get { return hasTerminated; }
         }
+
+        #region staticfragment
+        private GameObject StaticFragment
+        {
+            get { return staticFragment; }
+            set
+            {
+                staticFragment = value;
+                staticFragment.SendMessage(
+                    "OnToggleIsICPFragment",
+                    Fragment.ICPFragmentType.Static,
+                    SendMessageOptions.RequireReceiver
+                );
+                AddListener(staticFragment);
+            }
+        }
+        private GameObject staticFragment;
+        #endregion
+
+        #region modelfragment
+        public GameObject ModelFragment
+        {
+            get { return modelFragment; }
+            set
+            {
+                modelFragment = value;
+                modelFragment.SendMessage(
+                    "OnToggleIsICPFragment",
+                    Fragment.ICPFragmentType.Model,
+                    SendMessageOptions.RequireReceiver
+                );
+                AddListener(modelFragment);
+            }
+        }
+        private GameObject modelFragment;
+        #endregion
+
         private bool hasTerminated;
 
         public ICPRegisterer(
@@ -35,24 +69,10 @@ namespace Registration
         )
         {
             StaticFragment = staticFragment;
-            staticFragment.SendMessage(
-                "OnToggleIsICPFragment",
-                Fragment.ICPFragmentType.Static,
-                SendMessageOptions.RequireReceiver
-            );
-
             ModelFragment = modelFragment;
-            modelFragment.SendMessage(
-                "OnToggleIsICPFragment",
-                Fragment.ICPFragmentType.Model,
-                SendMessageOptions.RequireReceiver
-            );
 
             Settings = settings;
             FinishedCallBack = callBack;
-
-            AddListener(StaticFragment);
-            AddListener(ModelFragment);
 
             iterationCounter = new Counter(Settings.MaxNumIterations);
 
