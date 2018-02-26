@@ -6,7 +6,7 @@ using Utils;
 [TestFixture]
 public class ColorGeneratorTests
 {
-    [Test, Retry(5)]
+    [Test, Retry(10)]
     public void TestGetNextColor()
     {
         TestNextColor(new Color(0.55f, 0.00f, 0.20f));
@@ -23,9 +23,10 @@ public class ColorGeneratorTests
         TestNextColor(new Color(0.55f, 0.00f, 0.20f));
     }
 
-    private void TestNextColor(Color expected){
+    private void TestNextColor(Color expected)
+    {
         Color actual = ColorGenerator.Instance.GetNextColor();
-        Assert.That(actual, Is.EqualTo(expected));        
+        Assert.That(actual, Is.EqualTo(expected));
     }
 }
 
@@ -50,7 +51,8 @@ public class ColorSetTests
 
     }
 
-    private void AssertThatColorsAreEqual(Color actual, Color expected){
+    private void AssertThatColorsAreEqual(Color actual, Color expected)
+    {
         Assert.That(actual.r, Is.EqualTo(expected.r).Within(0.2));
         Assert.That(actual.g, Is.EqualTo(expected.g).Within(0.2));
         Assert.That(actual.b, Is.EqualTo(expected.b).Within(0.2));
@@ -84,7 +86,7 @@ public class HSVColorTests
 
         Assert.That(actual.Hue, Is.EqualTo(expected.Hue));
         Assert.That(actual.Saturation, Is.EqualTo(expected.Saturation));
-        Assert.That(actual.Value, Is.EqualTo(expected.Value));      
+        Assert.That(actual.Value, Is.EqualTo(expected.Value));
     }
 
     [Test]
@@ -104,7 +106,7 @@ public class HSVColorTests
     public void TestSClamping_validValue()
     {
         HSVColor actual = new HSVColor(0.5f, 0.5f, 0.5f);
-        actual.Saturation= 0.7f;
+        actual.Saturation = 0.7f;
 
         HSVColor expected = new HSVColor(0.5f, 0.7f, 0.5f);
 
