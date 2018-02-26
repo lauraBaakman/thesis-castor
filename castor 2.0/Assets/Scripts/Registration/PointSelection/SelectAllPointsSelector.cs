@@ -32,7 +32,7 @@ namespace Registration
 
         public List<Point> Select(SamplingInformation samplingInfo)
         {
-            return selectionFunction(samplingInfo.transform, samplingInfo.mesh);
+            return selectionFunction(samplingInfo.Transform, samplingInfo.Mesh);
         }
 
         private List<Point> SelectNoNormals(Transform fragmentTransform, Mesh fragment)
