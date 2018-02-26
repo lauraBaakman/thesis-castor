@@ -196,7 +196,13 @@ namespace Registration
                     value: message,
                     options: SendMessageOptions.RequireReceiver
                 );
+                if (message is Ticker.IToTickerMessage) SendMessageToTicker(message as Ticker.IToTickerMessage);
             }
+        }
+
+        private void SendMessageToTicker(Ticker.IToTickerMessage message)
+        {
+            Ticker.Receiver.Instance.SendMessage("OnMessage", message.ToTickerMessage());
         }
     }
 }

@@ -2,6 +2,11 @@
 
 namespace Ticker
 {
+    public interface IToTickerMessage
+    {
+        Message ToTickerMessage();
+    }
+
     /// <summary>
     /// Message, a message send to the ticker.
     /// </summary>

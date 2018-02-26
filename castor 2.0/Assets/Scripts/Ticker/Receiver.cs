@@ -9,7 +9,7 @@ namespace Ticker
     /// Receiver of messages that displays them.
     /// </summary>
     [RequireComponent(typeof(Text))]
-    public class Receiver : MonoBehaviour
+    public class Receiver : RTEditor.MonoSingletonBase<Receiver>
     {
         private Text TickerText;
         private Timer Timer;

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Ticker;
 
 namespace Registration
 {
@@ -52,9 +53,12 @@ namespace Registration
         }
     }
 
-    public class ICPTerminatedMessage
+    public class ICPTerminatedMessage : IToTickerMessage
     {
-        public enum TerminationReason { UserTerminated, ExceededNumberOfIterations, ErrorBelowThreshold }
+        public enum TerminationReason
+        {
+            UserTerminated, ExceededNumberOfIterations, ErrorBelowThreshold
+        }
 
         private TerminationReason reason;
         public TerminationReason Reason
@@ -65,6 +69,25 @@ namespace Registration
         public ICPTerminatedMessage(TerminationReason reason)
         {
             this.reason = reason;
+        }
+
+        public Message ToTickerMessage()
+        {
+            return new Message.InfoMessage("Terminated ICP: " + ReasonToString());
+        }
+
+        private string ReasonToString()
+        {
+            switch (reason)
+            {
+                case TerminationReason.UserTerminated:
+                    return "The user terminated the registration process.";
+                case TerminationReason.ExceededNumberOfIterations:
+                    return "The number of iterations exceed the maximum number of iterations";
+                case TerminationReason.ErrorBelowThreshold:
+                    return "The error of the current iteration was below the threshold.";
+            }
+            return "";
         }
     }
 }
