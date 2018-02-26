@@ -8,24 +8,24 @@ namespace Registration
         private static Color DefaultColor = Color.white;
         private static Vector3 NoNormal = new Vector3();
 
+        #region position
         public Vector3 Position
         {
             get { return position; }
         }
         private Vector3 position;
+        #endregion
 
-        public bool HasNormal
-        {
-            get { return hasNormal(); }
-        }
-
+        #region color
         public Color Color
         {
             get { return color; }
             set { color = value; }
         }
         private Color color;
+        #endregion
 
+        #region normal
         public Vector3 Normal
         {
             get
@@ -35,6 +35,12 @@ namespace Registration
             }
         }
         private Vector3 normal;
+
+        public bool HasNormal
+        {
+            get { return hasNormal(); }
+        }
+        #endregion
 
         public Point(Vector3 position, Vector3 normal)
         {
