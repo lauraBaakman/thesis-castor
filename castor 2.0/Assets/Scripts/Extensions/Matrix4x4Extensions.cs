@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public static class Matrix4x4Extensions
 {
@@ -9,7 +8,8 @@ public static class Matrix4x4Extensions
     /// </summary>
     /// <returns>The translation.</returns>
     /// <param name="matrix">Matrix.</param>
-    public static Vector3 ExtractTranslation(this Matrix4x4 matrix){
+    public static Vector3 ExtractTranslation(this Matrix4x4 matrix)
+    {
         Vector3 position = matrix.GetColumn(3);
         return position;
     }
@@ -24,10 +24,10 @@ public static class Matrix4x4Extensions
     {
         Vector3 forward = matrix.GetColumn(2);
         Vector3 upwards = matrix.GetColumn(1);
-                                
+
         Quaternion rotation = Quaternion.LookRotation(
-            forward:forward, 
-            upwards:upwards
+            forward: forward,
+            upwards: upwards
         );
         return rotation;
     }
