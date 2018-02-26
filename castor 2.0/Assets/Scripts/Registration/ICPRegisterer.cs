@@ -82,10 +82,7 @@ namespace Registration
             //The static fragment does not change, consequently its points need only be sampled once.
             StaticPoints = SelectPoints(StaticFragment);
 
-            ModelSamplingInformation = new SamplingInformation(
-                modelFragment.transform,
-                modelFragment.GetComponent<MeshFilter>().mesh
-            );
+            ModelSamplingInformation = new SamplingInformation(ModelFragment);
 
             SendMessageToAllListeners("OnICPStarted");
         }

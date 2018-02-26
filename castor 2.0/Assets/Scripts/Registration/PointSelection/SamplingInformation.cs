@@ -12,5 +12,12 @@ namespace Registration
             this.transform = transform;
             this.mesh = mesh;
         }
+
+        public SamplingInformation(GameObject gameObject)
+            : this(
+                gameObject.transform,
+                gameObject.GetComponent<MeshFilter>().mesh
+            )
+        { }
     }
 }
