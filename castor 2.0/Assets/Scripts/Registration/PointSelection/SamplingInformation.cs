@@ -4,19 +4,25 @@ namespace Registration
 {
     public class SamplingInformation
     {
-        public readonly Transform transform;
-        public readonly Mesh mesh;
+        public readonly Transform Transform;
+        public readonly Mesh Mesh;
+        public readonly Collider Collider;
 
-        public SamplingInformation(Transform transform, Mesh mesh)
+        public SamplingInformation(Transform transform, Mesh mesh, Collider collider)
         {
-            this.transform = transform;
-            this.mesh = mesh;
+            if (mesh == null) throw new System.ArgumentNullException("mesh");
+            if (collider == null) throw new System.ArgumentNullException("collider");
+
+            this.Transform = transform;
+            this.Mesh = mesh;
+            this.Collider = collider;
         }
 
         public SamplingInformation(GameObject gameObject)
             : this(
                 gameObject.transform,
-                gameObject.GetComponent<MeshFilter>().mesh
+                gameObject.GetComponent<MeshFilter>().mesh,
+                gameObject.GetComponent<Collider>()
             )
         { }
     }
