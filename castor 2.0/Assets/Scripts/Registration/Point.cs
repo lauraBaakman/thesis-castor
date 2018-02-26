@@ -119,7 +119,7 @@ namespace Registration
         /// </summary>
         /// <returns>The ray starting at thhe position of this point in the direction of its normal.</returns>
         /// <param name="localTransform">The local transform of the point.</param>
-        public Ray ToRay(Transform localTransform)
+        public Ray ToWorldSpaceRay(Transform localTransform)
         {
             Vector3 worldSpacePosition = localTransform.TransformPoint(Position);
             Vector3 worldSpaceDirection = localTransform.TransformDirection(Normal);
