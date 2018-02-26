@@ -24,14 +24,10 @@ public class ColorExtensionsTests
         float valueMax, valueMin;
         GenerateRandomRange(out valueMin, out valueMax);
 
-        float alphaMax, alphaMin;
-        GenerateRandomRange(out alphaMin, out alphaMax);
-
         Color color = new Color().Random(
             hueMin, hueMax,
             saturationMin, saturationMax,
-            valueMin, valueMax,
-            alphaMin, alphaMax
+            valueMin, valueMax
         );
 
         float hue, saturation, val, alpha;
@@ -47,8 +43,7 @@ public class ColorExtensionsTests
         Assert.That(val, Is.GreaterThanOrEqualTo(valueMin));
         Assert.That(val, Is.LessThan(valueMax));
 
-        Assert.That(alpha, Is.GreaterThanOrEqualTo(alphaMin));
-        Assert.That(alpha, Is.LessThan(alphaMax));
+        Assert.That(alpha, Is.EqualTo(1.0f));
     }
 
     private void GenerateRandomRange(out float min, out float max)
