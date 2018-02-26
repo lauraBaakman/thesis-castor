@@ -127,8 +127,11 @@ namespace Registration
 
         private void TerminateIfNeeded()
         {
+            string message;
+
             if (iterationCounter.IsCompleted()) Terminate(ICPTerminatedMessage.TerminationReason.ExceededNumberOfIterations);
             if (ErrorBelowThreshold()) Terminate(ICPTerminatedMessage.TerminationReason.ErrorBelowThreshold);
+            if (InvalidCorrespondences(out message)) Terminate(ICPTerminatedMessage.TerminationReason.Error, message);
         }
 
         private bool ErrorBelowThreshold()
