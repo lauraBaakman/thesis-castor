@@ -18,6 +18,8 @@ namespace Registration
         private List<Point> StaticPoints;
         private List<Correspondence> Correspondences;
 
+        private SamplingInformation ModelSamplingInformation;
+
         public bool HasTerminated
         {
             get { return hasTerminated; }
@@ -79,6 +81,11 @@ namespace Registration
 
             //The static fragment does not change, consequently its points need only be sampled once.
             StaticPoints = SelectPoints(StaticFragment);
+
+            ModelSamplingInformation = new SamplingInformation(
+                modelFragment.transform,
+                modelFragment.GetComponent<MeshFilter>().mesh
+            );
 
             SendMessageToAllListeners("OnICPStarted");
         }
@@ -164,7 +171,7 @@ namespace Registration
         private List<Correspondence> ComputeCorrespondences(List<Point> staticPoints)
         {
             Mesh modelMesh = modelFragment.GetComponent<MeshFilter>().mesh;
-            List<Correspondence> correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), new SamplingInformation(modelFragment.transform, modelMesh));
+            List<Correspondence> correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), ModelSamplingInformation);
             return correspondences;
         }
 
