@@ -82,6 +82,7 @@ namespace Fragment
         public void OnICPStarted()
         {
             Selectable = false;
+            EditorObjectSelection.Instance.RemoveObjectFromSelection(gameObject, allowUndoRedo: false);
         }
 
         public void OnICPTerminated(ICPTerminatedMessage message)
