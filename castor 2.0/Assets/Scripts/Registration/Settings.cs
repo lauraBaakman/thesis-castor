@@ -25,6 +25,8 @@ namespace Registration
         /// <value>The max number iterations.</value>
         public int MaxNumIterations { get; set; }
 
+        public float MaxWithinCorrespondenceDistance { get; set; }
+
         /// <summary>
         /// The method used to select points from a mesh, that can be used in a 
         /// correspondence.
@@ -68,12 +70,15 @@ namespace Registration
 
         public Settings(
             Transform referenceTransform,
-            float errorThreshold = 0.001f, int maxNumIterations = 50
+            float errorThreshold = 0.001f, int maxNumIterations = 50,
+            float maxWithinCorrespondenceDistance = 10.0f
         )
         {
             ReferenceTransform = referenceTransform;
 
             ErrorThreshold = errorThreshold;
+
+            MaxWithinCorrespondenceDistance = maxWithinCorrespondenceDistance;
 
             MaxNumIterations = maxNumIterations;
 
@@ -81,13 +86,13 @@ namespace Registration
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
-            CorrespondenceFinder = new NormalShootingCorrespondenceFinder();
-
             DistanceMetric = PointToPointDistanceMetrics.SquaredEuclidean;
 
             ErrorMetric = new PointToPointSumOfDistances(DistanceMetric);
 
             TransFormFinder = new HornTransformFinder();
+
+            CorrespondenceFinder = new NormalShootingCorrespondenceFinder(this);
         }
     }
 }
