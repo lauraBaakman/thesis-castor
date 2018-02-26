@@ -7,6 +7,6 @@ namespace Registration
     {
         List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints);
 
-        List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, IPointSelector sampler, SamplingInformation modelSamplingInformation);
+        List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation);
     }
 }

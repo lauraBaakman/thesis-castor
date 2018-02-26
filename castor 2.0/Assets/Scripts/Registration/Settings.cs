@@ -81,7 +81,7 @@ namespace Registration
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
-            CorrespondenceFinder = new NearstPointCorrespondenceFinder();
+            CorrespondenceFinder = new NearstPointCorrespondenceFinder(PointSelector);
 
             DistanceMetric = PointToPointDistanceMetrics.SquaredEuclidean;
 

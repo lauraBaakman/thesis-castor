@@ -81,7 +81,7 @@ public class NearstPointCorrespondenceFinderTests
                 cubeLeft[7]
             )
         };
-        List<Correspondence> actual = new NearstPointCorrespondenceFinder().Find(staticPoints, modelPoints);
+        List<Correspondence> actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
         Assert.That(actual, Is.EquivalentTo(expected));
     }
 
@@ -126,7 +126,7 @@ public class NearstPointCorrespondenceFinderTests
                 cubeRight[4]
             )
         };
-        List<Correspondence> actual = new NearstPointCorrespondenceFinder().Find(staticPoints, modelPoints);
+        List<Correspondence> actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
         Assert.That(actual, Is.EquivalentTo(expected));
     }
 
@@ -158,7 +158,7 @@ public class NearstPointCorrespondenceFinderTests
                 pyramid[4]
             )
         };
-        List<Correspondence> actual = new NearstPointCorrespondenceFinder().Find(staticPoints, modelPoints);
+        List<Correspondence> actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
         Assert.That(actual, Is.EquivalentTo(expected));
     }
 
@@ -190,25 +190,25 @@ public class NearstPointCorrespondenceFinderTests
                 cubeRight[5]
             )
         };
-        List<Correspondence> actual = new NearstPointCorrespondenceFinder().Find(staticPoints, modelPoints);
+        List<Correspondence> actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
         Assert.That(actual, Is.EquivalentTo(expected));
     }
 
     [Test]
     public void TestCreateDistanceNodeList()
     {
-        ReadOnlyCollection<Point> staticPoints = new List<Point> { 
+        ReadOnlyCollection<Point> staticPoints = new List<Point> {
             new Point(new Vector3(8.10e-01f, 6.30e-01f, 9.60e-01f)),
             new Point(new Vector3(9.10e-01f, 1.00e-01f, 9.60e-01f)),
             new Point(new Vector3(1.30e-01f, 2.80e-01f, 1.60e-01f)),
             new Point(new Vector3(9.10e-01f, 5.50e-01f, 9.70e-01f)),
         }.AsReadOnly();
-        ReadOnlyCollection<Point> modelPoints = new List<Point> { 
+        ReadOnlyCollection<Point> modelPoints = new List<Point> {
             new Point(new Vector3(9.60e-01f, 8.00e-01f, 4.20e-01f)),
             new Point(new Vector3(4.90e-01f, 1.40e-01f, 9.20e-01f)),
         }.AsReadOnly();
 
-        List<DistanceNode> actual = new NearstPointCorrespondenceFinder().CreateDistanceNodeList(staticPoints, modelPoints);
+        List<DistanceNode> actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).CreateDistanceNodeList(staticPoints, modelPoints);
         List<DistanceNode> expected = new List<DistanceNode> {
             new DistanceNode(staticPoints[1], modelPoints[1], 1.7960e-01f),
             new DistanceNode(staticPoints[0], modelPoints[0], 3.4300e-01f),
@@ -256,8 +256,8 @@ public class DistanceNodeTests
     {
         float distance = Random.value;
         DistanceNode thisNode = new DistanceNode(
-            new Point(new Vector3(1.0f, 2.0f, 3.0f)), 
-            new Point(new Vector3(4.0f, 2.0f, 5.0f)), 
+            new Point(new Vector3(1.0f, 2.0f, 3.0f)),
+            new Point(new Vector3(4.0f, 2.0f, 5.0f)),
             distance
         );
         DistanceNode otherNode = new DistanceNode(
@@ -279,13 +279,13 @@ public class DistanceNodeTests
     {
         float distance = Random.value;
         DistanceNode thisNode = new DistanceNode(
-            new Point(new Vector3(1.0f, 2.0f, 3.0f)), 
-            new Point(RandomVector()), 
+            new Point(new Vector3(1.0f, 2.0f, 3.0f)),
+            new Point(RandomVector()),
             distance
         );
         DistanceNode otherNode = new DistanceNode(
-            new Point(new Vector3(100.0f, 200.0f, 300.0f)), 
-            new Point(RandomVector()), 
+            new Point(new Vector3(100.0f, 200.0f, 300.0f)),
+            new Point(RandomVector()),
             distance
         );
 
@@ -317,7 +317,8 @@ public class DistanceNodeTests
     }
 
     [Test]
-    public void TestEquals_Equal(){
+    public void TestEquals_Equal()
+    {
         float distance = Random.value;
         DistanceNode thisNode = new DistanceNode(
             new Point(new Vector3(1.0f, 2.0f, 3.0f)),
