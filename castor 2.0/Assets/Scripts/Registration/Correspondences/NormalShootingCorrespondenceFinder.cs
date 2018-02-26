@@ -17,7 +17,7 @@ namespace Registration
     {
         public List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
         {
-            throw new System.ArgumentException("This method cannot find correspondences between two sets of points.");
+            throw new System.ArgumentException("The NormalShootingCorrespondenceFinder cannot find correspondences between two sets of points.");
         }
 
         public List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation)
@@ -30,17 +30,25 @@ namespace Registration
             foreach (Point staticPoint in staticPoints)
             {
                 correspondence = FindCorrespondence(staticPoint, modelSamplingInformation);
-                if (correspondence != null) correspondences.Add(correspondence);
+                if (correspondence == null) continue;
+
+                correspondences.Add(correspondence);
             }
             return correspondences;
         }
 
         private Correspondence FindCorrespondence(Point staticPoint, SamplingInformation modelSamplingInformation)
         {
-            return null;
+            Point intersection = FindIntersection(staticPoint, modelSamplingInformation);
+            if (intersection == null) return null;
+
+            //TODO convert intersection to model point;
+            Point modelPoint = null;
+
+            return new Correspondence(staticPoint: staticPoint, modelPoint: modelPoint);
         }
 
-        private Point FindIntersection(Point staticPoint, Mesh modelMesh)
+        private Point FindIntersection(Point staticPoint, SamplingInformation modelSamplingInformation)
         {
             return null;
         }
