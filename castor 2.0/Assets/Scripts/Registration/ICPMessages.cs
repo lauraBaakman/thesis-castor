@@ -57,18 +57,19 @@ namespace Registration
     {
         public enum TerminationReason
         {
-            UserTerminated, ExceededNumberOfIterations, ErrorBelowThreshold
+            UserTerminated,
+            ExceededNumberOfIterations,
+            ErrorBelowThreshold,
+            Error
         }
 
-        private TerminationReason reason;
-        public TerminationReason Reason
-        {
-            get { return reason; }
-        }
+        public readonly TerminationReason Reason;
+        private readonly string message;
 
-        public ICPTerminatedMessage(TerminationReason reason)
+        public ICPTerminatedMessage(TerminationReason reason, string message = "")
         {
-            this.reason = reason;
+            this.Reason = reason;
+            this.message = message;
         }
 
         public Message ToTickerMessage()

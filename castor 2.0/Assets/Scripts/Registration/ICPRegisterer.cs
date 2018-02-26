@@ -137,13 +137,19 @@ namespace Registration
             return error < Settings.ErrorThreshold;
         }
 
-        public void Terminate(ICPTerminatedMessage.TerminationReason reason)
+        private bool InvalidCorrespondences(out string message)
+        {
+            message = "Found zero correspondences, cannot register without correspondenes.";
+            return Correspondences.Count <= 0;
+        }
+
+        public void Terminate(ICPTerminatedMessage.TerminationReason reason, string message = "")
         {
             hasTerminated = true;
             if (FinishedCallBack != null) FinishedCallBack();
             SendMessageToAllListeners(
                 methodName: "OnICPTerminated",
-                message: new ICPTerminatedMessage(reason)
+                message: new ICPTerminatedMessage(reason, message)
             );
         }
 
