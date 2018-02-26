@@ -113,6 +113,23 @@ namespace Registration
             }
             return string.Format("[Point: Position={0}, no normal]", Position);
         }
-    }
 
+        /// <summary>
+        /// Convert the point to a ray in world space
+        /// </summary>
+        /// <returns>The ray starting at thhe position of this point in the direction of its normal.</returns>
+        /// <param name="localTransform">The local transform of the point.</param>
+        public Ray ToRay(Transform localTransform)
+        {
+            Vector3 worldSpacePosition = localTransform.TransformPoint(Position);
+            Vector3 worldSpaceDirection = localTransform.TransformDirection(Normal);
+
+            worldSpaceDirection.Normalize();
+
+            return new Ray(
+                origin: worldSpacePosition,
+                direction: worldSpaceDirection
+            );
+        }
+    }
 }
