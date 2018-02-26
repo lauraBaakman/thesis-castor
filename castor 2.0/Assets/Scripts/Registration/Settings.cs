@@ -77,7 +77,7 @@ namespace Registration
 
             MaxNumIterations = maxNumIterations;
 
-            PointSelector = new SelectAllPointsSelector(ReferenceTransform, false);
+            PointSelector = new SelectAllPointsSelector(ReferenceTransform, includeNormals: true);
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
