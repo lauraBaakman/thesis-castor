@@ -79,7 +79,7 @@ namespace Registration
 
         private string ReasonToString()
         {
-            switch (reason)
+            switch (Reason)
             {
                 case TerminationReason.UserTerminated:
                     return "The user terminated the registration process.";
@@ -87,6 +87,8 @@ namespace Registration
                     return "The number of iterations exceed the maximum number of iterations";
                 case TerminationReason.ErrorBelowThreshold:
                     return "The error of the current iteration was below the threshold.";
+                case TerminationReason.Error:
+                    return message;
             }
             return "";
         }
