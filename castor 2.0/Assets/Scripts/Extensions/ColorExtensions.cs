@@ -9,7 +9,7 @@ public static class ColorExtensions
         float hueMin = 0, float hueMax = 1,
         float saturationMin = 0, float saturationMax = 1,
         float valueMin = 0, float valueMax = 1,
-        float alphaMin = 0, float alphaMax = 1
+        float alpha = 1
     )
     {
         Color rgbColor = RandomRGBColor(
@@ -21,7 +21,6 @@ public static class ColorExtensions
         color.g = rgbColor.g;
         color.b = rgbColor.b;
 
-        float alpha = random.NextInRange(alphaMin, alphaMax);
         color.a = alpha;
 
         return color;

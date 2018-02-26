@@ -60,7 +60,7 @@ namespace Fragment
 
         private void SetName(Registration.Point point)
         {
-            gameObject.name = "point: " + point.ToString();
+            gameObject.name = "point: " + point;
         }
 
         public void SetColor(Color color)

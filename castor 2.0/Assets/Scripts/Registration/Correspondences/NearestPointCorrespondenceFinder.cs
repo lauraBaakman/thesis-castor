@@ -14,6 +14,13 @@ namespace Registration
     /// </summary>
     public class NearstPointCorrespondenceFinder : ICorrespondenceFinder
     {
+        private readonly IPointSelector sampler;
+
+        public NearstPointCorrespondenceFinder(IPointSelector sampler)
+        {
+            this.sampler = sampler;
+        }
+
         public List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
         {
 
@@ -21,6 +28,12 @@ namespace Registration
             List<Correspondence> correspondences = CreateCorrespondenceList(distanceNodes, Mathf.Min(staticPoints.Count, modelPoints.Count));
 
             return correspondences;
+        }
+
+        public List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation)
+        {
+            List<Point> modelPoints = sampler.Select(modelSamplingInformation);
+            return Find(staticPoints, modelPoints.AsReadOnly());
         }
 
         /// <summary>
@@ -108,12 +121,13 @@ namespace Registration
             if (Correspondences.Count >= FinalCorrespondenceCount) return true;
 
             // Reviewed all distance nodes
-            if (DistanceNodes.Count <= 0){
+            if (DistanceNodes.Count <= 0)
+            {
                 Debug.LogError(
                     "Stopped creating correspondences because we ran out of " +
                     "posible pairs, not because all correspondences were found."
                 );
-                return true;  
+                return true;
             }
 
             // Continue with finding correspondences

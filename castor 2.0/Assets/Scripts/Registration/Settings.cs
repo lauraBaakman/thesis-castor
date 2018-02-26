@@ -77,11 +77,11 @@ namespace Registration
 
             MaxNumIterations = maxNumIterations;
 
-            PointSelector = new SelectAllPointsSelector(ReferenceTransform, true);
+            PointSelector = new SelectAllPointsSelector(ReferenceTransform, false);
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
-            CorrespondenceFinder = new NearstPointCorrespondenceFinder();
+            CorrespondenceFinder = new NearstPointCorrespondenceFinder(PointSelector);
 
             DistanceMetric = PointToPointDistanceMetrics.SquaredEuclidean;
 

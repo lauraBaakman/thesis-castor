@@ -9,23 +9,58 @@ namespace Registration
     {
         private List<GameObject> Listeners = new List<GameObject>();
 
-        private GameObject StaticFragment;
-        private GameObject ModelFragment;
-
         private Settings Settings;
 
         private Counter iterationCounter;
 
         private Action FinishedCallBack;
 
-        List<Point> StaticPoints;
-        List<Point> ModelPoints;
-        List<Correspondence> Correspondences;
+        private List<Point> StaticPoints;
+        private List<Correspondence> Correspondences;
+
+        private SamplingInformation ModelSamplingInformation;
 
         public bool HasTerminated
         {
             get { return hasTerminated; }
         }
+
+        #region staticfragment
+        private GameObject StaticFragment
+        {
+            get { return staticFragment; }
+            set
+            {
+                staticFragment = value;
+                staticFragment.SendMessage(
+                    "OnToggleIsICPFragment",
+                    Fragment.ICPFragmentType.Static,
+                    SendMessageOptions.RequireReceiver
+                );
+                AddListener(staticFragment);
+            }
+        }
+        private GameObject staticFragment;
+        #endregion
+
+        #region modelfragment
+        public GameObject ModelFragment
+        {
+            get { return modelFragment; }
+            set
+            {
+                modelFragment = value;
+                modelFragment.SendMessage(
+                    "OnToggleIsICPFragment",
+                    Fragment.ICPFragmentType.Model,
+                    SendMessageOptions.RequireReceiver
+                );
+                AddListener(modelFragment);
+            }
+        }
+        private GameObject modelFragment;
+        #endregion
+
         private bool hasTerminated;
 
         public ICPRegisterer(
@@ -35,24 +70,10 @@ namespace Registration
         )
         {
             StaticFragment = staticFragment;
-            staticFragment.SendMessage(
-                "OnToggleIsICPFragment",
-                Fragment.ICPFragmentType.Static,
-                SendMessageOptions.RequireReceiver
-            );
-
             ModelFragment = modelFragment;
-            modelFragment.SendMessage(
-                "OnToggleIsICPFragment",
-                Fragment.ICPFragmentType.Model,
-                SendMessageOptions.RequireReceiver
-            );
 
             Settings = settings;
             FinishedCallBack = callBack;
-
-            AddListener(StaticFragment);
-            AddListener(ModelFragment);
 
             iterationCounter = new Counter(Settings.MaxNumIterations);
 
@@ -60,6 +81,8 @@ namespace Registration
 
             //The static fragment does not change, consequently its points need only be sampled once.
             StaticPoints = SelectPoints(StaticFragment);
+
+            ModelSamplingInformation = new SamplingInformation(ModelFragment);
 
             SendMessageToAllListeners("OnICPStarted");
         }
@@ -73,9 +96,7 @@ namespace Registration
         {
             if (HasTerminated) return;
 
-            ModelPoints = SelectPoints(ModelFragment);
-
-            Correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
+            Correspondences = ComputeCorrespondences(StaticPoints);
             Correspondences = FilterCorrespondences(Correspondences);
 
             SendMessageToAllListeners(
@@ -134,7 +155,7 @@ namespace Registration
         private List<Point> SelectPoints(GameObject fragment)
         {
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
-            List<Point> points = Settings.PointSelector.Select(fragment.transform, mesh);
+            List<Point> points = Settings.PointSelector.Select(new SamplingInformation(fragment.transform, mesh));
             return points;
         }
 
@@ -144,9 +165,10 @@ namespace Registration
         /// <returns>The found correspondences.</returns>
         /// <param name="staticPoints">Points of the static fragment.</param>
         /// <param name="modelPoints">Points of the model fragment.</param>
-        private List<Correspondence> ComputeCorrespondences(List<Point> staticPoints, List<Point> modelPoints)
+        private List<Correspondence> ComputeCorrespondences(List<Point> staticPoints)
         {
-            List<Correspondence> correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
+            Mesh modelMesh = modelFragment.GetComponent<MeshFilter>().mesh;
+            List<Correspondence> correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), ModelSamplingInformation);
             return correspondences;
         }
 
