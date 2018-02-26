@@ -15,9 +15,8 @@ namespace Registration
 
         private Action FinishedCallBack;
 
-        List<Point> StaticPoints;
-        List<Point> ModelPoints;
-        List<Correspondence> Correspondences;
+        private List<Point> StaticPoints;
+        private List<Correspondence> Correspondences;
 
         public bool HasTerminated
         {
@@ -93,9 +92,7 @@ namespace Registration
         {
             if (HasTerminated) return;
 
-            ModelPoints = SelectPoints(ModelFragment);
-
-            Correspondences = ComputeCorrespondences(StaticPoints, ModelPoints);
+            Correspondences = ComputeCorrespondences(StaticPoints);
             Correspondences = FilterCorrespondences(Correspondences);
 
             SendMessageToAllListeners(
@@ -154,7 +151,7 @@ namespace Registration
         private List<Point> SelectPoints(GameObject fragment)
         {
             Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
-            List<Point> points = Settings.PointSelector.Select(fragment.transform, mesh);
+            List<Point> points = Settings.PointSelector.Select(new SamplingInformation(fragment.transform, mesh));
             return points;
         }
 
@@ -164,9 +161,10 @@ namespace Registration
         /// <returns>The found correspondences.</returns>
         /// <param name="staticPoints">Points of the static fragment.</param>
         /// <param name="modelPoints">Points of the model fragment.</param>
-        private List<Correspondence> ComputeCorrespondences(List<Point> staticPoints, List<Point> modelPoints)
+        private List<Correspondence> ComputeCorrespondences(List<Point> staticPoints)
         {
-            List<Correspondence> correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), modelPoints.AsReadOnly());
+            Mesh modelMesh = modelFragment.GetComponent<MeshFilter>().mesh;
+            List<Correspondence> correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), Settings.PointSelector, new SamplingInformation(modelFragment.transform, modelMesh));
             return correspondences;
         }
 

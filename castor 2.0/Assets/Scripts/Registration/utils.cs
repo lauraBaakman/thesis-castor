@@ -1,17 +1,16 @@
 using UnityEngine;
-using System.Collections;
 
-public class NewMonoBehaviour : MonoBehaviour
+namespace Registration
 {
-	// Use this for initialization
-	void Start()
-	{
+    public class SamplingInformation
+    {
+        public readonly Transform transform;
+        public readonly Mesh mesh;
 
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-			
-	}
+        public SamplingInformation(Transform transform, Mesh mesh)
+        {
+            this.transform = transform;
+            this.mesh = mesh;
+        }
+    }
 }

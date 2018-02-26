@@ -30,9 +30,9 @@ namespace Registration
             else selectionFunction = SelectNoNormals;
         }
 
-        public List<Point> Select(Transform fragmentTransform, Mesh fragment)
+        public List<Point> Select(SamplingInformation samplingInfo)
         {
-            return selectionFunction(fragmentTransform, fragment);
+            return selectionFunction(samplingInfo.transform, samplingInfo.mesh);
         }
 
         private List<Point> SelectNoNormals(Transform fragmentTransform, Mesh fragment)

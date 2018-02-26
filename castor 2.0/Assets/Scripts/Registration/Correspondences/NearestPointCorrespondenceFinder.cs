@@ -23,6 +23,12 @@ namespace Registration
             return correspondences;
         }
 
+        public List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, IPointSelector sampler, SamplingInformation modelSamplingInformation)
+        {
+            List<Point> modelPoints = sampler.Select(modelSamplingInformation);
+            return Find(staticPoints, modelPoints.AsReadOnly());
+        }
+
         /// <summary>
         /// Create the list of elements, where each element contains the distance
         /// between two points of the each of the meshes.
