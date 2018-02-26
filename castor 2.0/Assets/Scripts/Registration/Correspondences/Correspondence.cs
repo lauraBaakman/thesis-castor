@@ -21,9 +21,8 @@ namespace Registration
 
         public Color Color
         {
-            get { return color; }
+            get { return this.staticPoint.Color; }
         }
-        private Color color;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Correspondence"/> class. 
@@ -34,8 +33,6 @@ namespace Registration
         {
             this.modelPoint = modelPoint;
             this.staticPoint = staticPoint;
-
-            this.color = staticPoint.Color;
 
             Activate();
         }
@@ -48,21 +45,11 @@ namespace Registration
         { }
 
         /// <summary>
-        /// Deactivate this correspondence, i.e. indicate that it will not be used for ICP.
-        /// </summary>
-        public void Deactivate()
-        {
-            modelPoint.ResetColor();
-            ResetColor();
-        }
-
-        /// <summary>
         /// Activate this correspondence, i.e. indicate that it will not be used for ICP.
         /// </summary>
         public void Activate()
         {
             modelPoint.Color = staticPoint.Color;
-            color = staticPoint.Color;
         }
 
         public Point GetPoint(Fragment.ICPFragmentType type)
@@ -76,11 +63,6 @@ namespace Registration
                 default:
                     throw new ArgumentException("Invalid enum type.");
             }
-        }
-
-        private void ResetColor()
-        {
-            this.color = DefaultColor;
         }
 
         public override bool Equals(object obj)
