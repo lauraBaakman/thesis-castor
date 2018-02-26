@@ -99,17 +99,23 @@ namespace IO
             return fragment;
         }
 
-        private void SetDoubleConnectedEdgeList(GameObject fragment, Mesh mesh){
+        private void SetDoubleConnectedEdgeList(GameObject fragment, Mesh mesh)
+        {
             Fragment.DoubleConnectedEdgeListStorage DCELStorage = fragment.GetComponent<Fragment.DoubleConnectedEdgeListStorage>();
             DCELStorage.DCEL = DoubleConnectedEdgeList.DCEL.FromMesh(mesh);
         }
 
-        private void SetMesh(GameObject fragment, Mesh mesh){
+        private void SetMesh(GameObject fragment, Mesh mesh)
+        {
             MeshFilter filter = fragment.GetComponent<MeshFilter>();
-            filter.mesh = mesh;            
+            filter.mesh = mesh;
+
+            MeshCollider collider = fragment.GetComponent<MeshCollider>();
+            collider.sharedMesh = mesh;
         }
 
-        private void RandomizeTheTransform(GameObject fragment){
+        private void RandomizeTheTransform(GameObject fragment)
+        {
             fragment.AddComponent<Fragment.RandomTransformer>();
         }
 
