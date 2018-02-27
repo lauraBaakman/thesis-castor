@@ -21,6 +21,8 @@ namespace Registration
 
         private SamplingInformation ModelSamplingInformation;
 
+        private float error = float.MaxValue;
+
         public bool HasTerminated
         {
             get { return hasTerminated; }
@@ -121,7 +123,7 @@ namespace Registration
             Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(Correspondences);
             TransformModelFragment(transformationMatrix);
 
-            SendMessageToAllListeners("OnStepCompleted");
+            error = Settings.ErrorMetric.ComputeError(Correspondences);
 
             TerminateIfNeeded();
         }
@@ -137,7 +139,6 @@ namespace Registration
 
         private bool ErrorBelowThreshold()
         {
-            float error = Settings.ErrorMetric.ComputeError(Correspondences);
             return error < Settings.ErrorThreshold;
         }
 
