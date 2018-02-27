@@ -19,7 +19,7 @@ namespace Fragment
             return message.IterationIndex == firstIteration;
         }
 
-        public override void OnStepCompleted() { }
+        public override void OnStepCompleted(ICPStepCompletedMessage message) { }
     }
 }
 

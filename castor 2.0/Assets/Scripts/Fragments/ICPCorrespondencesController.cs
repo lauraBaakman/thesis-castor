@@ -105,7 +105,7 @@ namespace Fragments
         }
 
         #region ICPProgress
-        public void OnStepCompleted()
+        public void OnStepCompleted(ICPStepCompletedMessage message)
         {
             ClearCorrespondences();
         }

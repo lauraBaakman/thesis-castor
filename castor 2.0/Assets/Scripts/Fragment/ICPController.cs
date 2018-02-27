@@ -68,7 +68,7 @@ namespace Fragment
         }
 
         #region ICPListener
-        public void OnStepCompleted() { }
+        public void OnStepCompleted(ICPStepCompletedMessage message) { }
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {

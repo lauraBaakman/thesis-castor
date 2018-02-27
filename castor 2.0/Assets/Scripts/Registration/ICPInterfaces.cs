@@ -6,7 +6,7 @@ namespace Registration
         {
             void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message);
 
-            void OnStepCompleted();
+            void OnStepCompleted(ICPStepCompletedMessage message);
 
             void OnICPTerminated(ICPTerminatedMessage message);
         }

@@ -78,7 +78,7 @@ namespace Fragment
             ClearPoints();
         }
 
-        public void OnStepCompleted()
+        public void OnStepCompleted(ICPStepCompletedMessage message)
         {
             ClearPoints();
         }

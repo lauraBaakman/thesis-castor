@@ -19,9 +19,9 @@ namespace Fragment
             SendMessageToListeners("OnPreparationStepCompleted", message);
         }
 
-        public virtual void OnStepCompleted()
+        public virtual void OnStepCompleted(ICPStepCompletedMessage message)
         {
-            SendMessageToListeners("OnStepCompleted", null);
+            SendMessageToListeners("OnStepCompleted", message);
         }
 
         protected void SendMessageToListeners(string methodName, object message, SendMessageOptions option = SendMessageOptions.RequireReceiver)

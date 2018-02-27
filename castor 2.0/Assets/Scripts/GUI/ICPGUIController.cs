@@ -52,7 +52,7 @@ namespace GraphicalUI
             RegistrationButton.Button.interactable = !toggle;
         }
 
-        public void OnStepCompleted()
+        public void OnStepCompleted(ICPStepCompletedMessage message)
         {
             StepButton.Button.interactable = true;
         }
