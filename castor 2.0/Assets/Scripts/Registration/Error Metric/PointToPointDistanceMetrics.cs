@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 namespace Registration
 {
@@ -13,5 +12,3 @@ namespace Registration
         }
     }
 }
-
-
