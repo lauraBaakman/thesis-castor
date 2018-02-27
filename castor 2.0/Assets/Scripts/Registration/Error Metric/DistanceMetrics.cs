@@ -12,6 +12,22 @@ namespace Registration
             {
                 return Vector3.SqrMagnitude(staticPoint.Position - modelPoint.Position);
             }
+
+            /// <summary>
+            /// Distance between the static point and the plane tangential to the
+            ///  model point. As defined by
+            /// 
+            /// Low, Kok-Lim. "Linear least-squares optimization for 
+            /// point-to-plane icp surface registration." Chapel Hill, 
+            /// University of North Carolina 4 (2004).
+            /// </summary>
+            /// <returns>Distance between the static point and the plane tangential to the model point.</returns>
+            /// <param name="staticPoint">Static point.</param>
+            /// <param name="modelPoint">Model point.</param>
+            public static float PointToPlane(Point staticPoint, Point modelPoint)
+            {
+                throw new System.NotImplementedException();
+            }
         }
     }
 }

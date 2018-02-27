@@ -61,5 +61,52 @@ namespace Tests
             Assert.AreEqual(expected, actual, tolerance);
         }
     }
+
+    [TestFixture]
+    public class PointToPlaneDistanceMetricTests
+    {
+
+        private static double tolerance = 0.01;
+        private Point plane;
+
+        [SetUp]
+        public void Init()
+        {
+            plane = new Point(new Vector3(1, 2, 3), new Vector3(0, 1, 0));
+        }
+
+        [Test]
+        public void TestPointToPlane_PointInFrontOfPlane()
+        {
+            Point point = new Point(new Vector3(3, 5, 7));
+
+            float expected = -3;
+            float actual = DistanceMetrics.PointToPlane(point, plane);
+
+            Assert.AreEqual(expected, actual, tolerance);
+        }
+
+        [Test]
+        public void TestPointToPlane_PointToBackOfPlane()
+        {
+            Point point = new Point(new Vector3(-5, -3, 6));
+
+            float expected = +5;
+            float actual = DistanceMetrics.PointToPlane(point, plane);
+
+            Assert.AreEqual(expected, actual, tolerance);
+        }
+
+        [Test]
+        public void TestPointToPlane_PointInPlane()
+        {
+            Point point = new Point(new Vector3(7, 2, 5));
+
+            float expected = +0;
+            float actual = DistanceMetrics.PointToPlane(point, plane);
+
+            Assert.AreEqual(expected, actual, tolerance);
+        }
+    }
 }
 
