@@ -9,7 +9,7 @@ using Registration.Error;
 public class PointToPointMeanOfDistancesTest
 {
     [Test]
-    public void TestComputeError_NoConstructor()
+    public void TestComputeError_NoConstructorNeutralTransform()
     {
         List<Correspondence> correspondences = new List<Correspondence>
         {
@@ -28,13 +28,13 @@ public class PointToPointMeanOfDistancesTest
         };
 
         float expected = 26.203333333333333f;
-        float actual = new PointToPointMeanOfDistances().ComputeError(correspondences);
+        float actual = new PointToPointMeanOfDistances().ComputeError(correspondences, Matrix4x4.identity);
 
         Assert.AreEqual(expected, actual);
     }
 
     [Test]
-    public void TestComputeError_WithConstructor()
+    public void TestComputeError_WithConstructorNeutralTransform()
     {
         List<Correspondence> correspondences = new List<Correspondence>
         {
@@ -57,7 +57,7 @@ public class PointToPointMeanOfDistancesTest
             new PointToPointMeanOfDistances(
                 PointToPointDistanceMetrics.SquaredEuclidean
             ).ComputeError(
-                correspondences
+                correspondences, Matrix4x4.identity
             );
         Assert.AreEqual(expected, actual);
     }

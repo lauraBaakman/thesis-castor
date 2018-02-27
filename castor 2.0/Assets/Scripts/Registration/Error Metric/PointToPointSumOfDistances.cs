@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Registration
 {
@@ -10,7 +11,7 @@ namespace Registration
                 PointToPointDistanceMetrics.DistanceMetric distanceMetric = null
             ) : base(distanceMetric) { }
 
-            public override float ComputeError(List<Correspondence> correspondences)
+            public override float ComputeError(List<Correspondence> correspondences, Matrix4x4 transform)
             {
                 float sumOfErrors = 0;
                 foreach (Correspondence correspondence in correspondences)
