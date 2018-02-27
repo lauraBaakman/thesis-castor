@@ -38,13 +38,17 @@ namespace Registration
         private List<Point> SelectNoNormals(Transform fragmentTransform, Mesh fragment)
         {
             ///Use a set to avoid duplicate points when the mesh has duplicate vertices
-            HashSet<Vector3> points = new HashSet<Vector3>();
+            HashSet<Point> points = new HashSet<Point>();
 
             foreach (Vector3 vertex in fragment.vertices)
             {
-                points.Add(vertex);
+                points.Add(
+                    new Point(
+                        vertex.ChangePositionTransform(fragmentTransform, ReferenceTransform)
+                    )
+                );
             }
-            return PositionsToReferenceTransfrom(new List<Vector3>(points), fragmentTransform);
+            return new List<Point>(points);
         }
 
         private List<Point> SelectWithNormals(Transform fragmentTransform, Mesh fragment)
@@ -55,44 +59,14 @@ namespace Registration
             {
                 points.Add(
                     new Point(
-                        position: PositionToReferenceTransform(
-                            fragment.vertices[i],
-                            fragmentTransform
-                        ),
-                        normal: NormalToReferenceTransform(
-                            fragment.normals[i],
-                            fragmentTransform
-                        )
+                        position: fragment.vertices[i].ChangePositionTransform(
+                            fragmentTransform, ReferenceTransform),
+                        normal: fragment.normals[i].ChangeDirectionTransform(
+                            fragmentTransform, ReferenceTransform)
                     )
                 );
             }
             return points;
-        }
-
-        private List<Point> PositionsToReferenceTransfrom(List<Vector3> pointsLocalTransform, Transform localTransform)
-        {
-            List<Point> pointsReferenceTransform = new List<Point>(pointsLocalTransform.Count);
-            foreach (Vector3 pointLocalTransform in pointsLocalTransform)
-            {
-                pointsReferenceTransform.Add(new Point(PositionToReferenceTransform(pointLocalTransform, localTransform)));
-            }
-            return pointsReferenceTransform;
-        }
-
-        private Vector3 PositionToReferenceTransform(Vector3 pointLocalTransform, Transform localTransform)
-        {
-            Vector3 worldTransformPoint = localTransform.TransformPoint(pointLocalTransform);
-            Vector3 referenceTransformPoint = ReferenceTransform.InverseTransformPoint(worldTransformPoint);
-
-            return referenceTransformPoint;
-        }
-
-        private Vector3 NormalToReferenceTransform(Vector3 normalLocalTransform, Transform localTransform)
-        {
-            Vector3 worldTransformNormal = localTransform.TransformDirection(normalLocalTransform);
-            Vector3 referenceTransformNormal = ReferenceTransform.InverseTransformDirection(worldTransformNormal);
-
-            return referenceTransformNormal;
         }
     }
 }

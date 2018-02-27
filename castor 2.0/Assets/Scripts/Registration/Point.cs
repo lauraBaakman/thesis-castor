@@ -136,5 +136,19 @@ namespace Registration
         {
             return new Vector4(Position.x, Position.y, Position.z, 1.0f);
         }
+
+        /// <summary>
+        /// Transform this point from sourceTransform to destinationTransform.
+        /// </summary>
+        /// <returns>The other transform.</returns>
+        /// <param name="sourceTransform">The current transform of the point.</param>
+        /// <param name="destinationTransform">The destination transform.</param>
+        public Point ToOtherTransform(Transform sourceTransform, Transform destinationTransform)
+        {
+            return new Point(
+                position: Position.ChangePositionTransform(sourceTransform, destinationTransform),
+                normal: HasNormal ? Normal.ChangePositionTransform(sourceTransform, destinationTransform) : NoNormal
+            );
+        }
     }
 }

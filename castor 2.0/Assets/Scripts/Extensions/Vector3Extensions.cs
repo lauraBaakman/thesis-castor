@@ -18,4 +18,34 @@ public static class Vector3Extensions
 
         return vector.z.CompareTo(other.z);
     }
+
+    /// <summary>
+    /// Changes the transform of the vector representing a position from the source transform to the destination transform.
+    /// </summary>
+    /// <returns>A new vector in the destination transform.</returns>
+    /// <param name="vector">Vector.</param>
+    /// <param name="sourceTransform">The current transform of the vector.</param>
+    /// <param name="destinationTransform">Destination transform.</param>
+    public static Vector3 ChangePositionTransform(this Vector3 vector, Transform sourceTransform, Transform destinationTransform)
+    {
+        Vector3 worldTransformPosition = sourceTransform.TransformPoint(vector);
+        Vector3 destinationTransformPosition = destinationTransform.TransformPoint(worldTransformPosition);
+
+        return destinationTransformPosition;
+    }
+
+    /// <summary>
+    /// Changes the transform of the vector representing a vector from the source transform to the destination transform.
+    /// </summary>
+    /// <returns>A new vector in the destination transform.</returns>
+    /// <param name="vector">Vector.</param>
+    /// <param name="sourceTransform">The current transform of the vector.</param>
+    /// <param name="destinationTransform">Destination transform.</param>
+    public static Vector3 ChangeDirectionTransform(this Vector3 vector, Transform sourceTransform, Transform destinationTransform)
+    {
+        Vector3 worldTransformVector = sourceTransform.TransformDirection(vector);
+        Vector3 destinationTransformVector = destinationTransform.InverseTransformDirection(worldTransformVector);
+
+        return destinationTransformVector;
+    }
 }
