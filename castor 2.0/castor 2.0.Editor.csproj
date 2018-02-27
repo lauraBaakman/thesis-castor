@@ -216,6 +216,7 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Editor\TestVector4d.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestColors.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestSumOfSquaredDistances.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />

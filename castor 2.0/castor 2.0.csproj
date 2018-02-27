@@ -523,6 +523,7 @@
     <Compile Include="Assets\Scripts\Registration\PointSelection\SamplingInformation.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\NormalShootingCorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Extensions\RayCastHitExtensions.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\SumOfSquaredDistances.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
