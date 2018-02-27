@@ -248,4 +248,16 @@ public class PointTests
 
         Assert.AreEqual(normal, actual);
     }
+
+    [Test]
+    public void ToHomogeneousVector4()
+    {
+        Vector3 position = new Vector3(1, 2, 3);
+        Point point = new Point(position);
+
+        Vector4 expected = new Vector4(1, 2, 3, 1);
+        Vector4 actual = point.ToHomogeneousVector4();
+
+        Assert.AreEqual(expected, actual);
+    }
 }

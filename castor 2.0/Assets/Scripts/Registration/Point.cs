@@ -131,5 +131,10 @@ namespace Registration
                 direction: worldSpaceDirection
             );
         }
+
+        public Vector4 ToHomogeneousVector4()
+        {
+            return new Vector4(Position.x, Position.y, Position.z, 1.0f);
+        }
     }
 }
