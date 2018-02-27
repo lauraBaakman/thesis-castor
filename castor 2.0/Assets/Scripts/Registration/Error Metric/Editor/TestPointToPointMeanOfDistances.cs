@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 
 using Registration;
+using Registration.Error;
 
 [TestFixture]
 public class PointToPointMeanOfDistancesTest

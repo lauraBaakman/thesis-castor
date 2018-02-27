@@ -1,10 +1,11 @@
 using UnityEngine;
 using NUnit.Framework;
 
-using Registration;
+using Registration.Error;
 
 [TestFixture]
-public class PointToPointDistanceMetricsTests{
+public class PointToPointDistanceMetricsTests
+{
 
     private static double tolerance = 0.01;
 
