@@ -361,8 +361,8 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\NearestPointCorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\DistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\AbstractErrorMetric.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointMeanOfDistances.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointSumOfDistances.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\MeanOfDistances.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\SumOfDistances.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPInterfaces.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />

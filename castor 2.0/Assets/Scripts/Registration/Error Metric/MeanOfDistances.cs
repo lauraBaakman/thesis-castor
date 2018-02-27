@@ -5,9 +5,9 @@ namespace Registration
 {
     namespace Error
     {
-        public class PointToPointMeanOfDistances : AbstractErrorMetric
+        public class MeanOfDistances : AbstractErrorMetric
         {
-            public PointToPointMeanOfDistances(
+            public MeanOfDistances(
                 DistanceMetrics.Metric distanceMetric = null
             ) : base(distanceMetric) { }
 

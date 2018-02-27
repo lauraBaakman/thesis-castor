@@ -7,7 +7,7 @@ using Registration;
 namespace Tests
 {
     [TestFixture]
-    public class PointToPointDistanceMetricsTests
+    public class SquaredEuclideanDistanceMetricTests
     {
 
         private static double tolerance = 0.01;

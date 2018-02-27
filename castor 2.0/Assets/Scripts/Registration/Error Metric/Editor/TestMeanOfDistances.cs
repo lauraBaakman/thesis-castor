@@ -8,7 +8,7 @@ using Registration.Error;
 namespace Tests
 {
     [TestFixture]
-    public class PointToPointSumOfDistancesTest
+    public class MeanOfDistancesTest
     {
         [Test]
         public void TestComputeError_NoConstructorNeutralTransform()
@@ -29,8 +29,8 @@ namespace Tests
             )
         };
 
-            float expected = 78.610000f;
-            float actual = new PointToPointSumOfDistances().ComputeError(correspondences, null, null);
+            float expected = 26.203333333333333f;
+            float actual = new MeanOfDistances().ComputeError(correspondences, null, null);
 
             Assert.AreEqual(expected, actual);
         }
@@ -54,9 +54,9 @@ namespace Tests
             )
         };
 
-            float expected = 78.610000f;
+            float expected = 26.203333333333333f;
             float actual =
-                new PointToPointSumOfDistances(
+                new MeanOfDistances(
                     DistanceMetrics.SquaredEuclidean
                 ).ComputeError(
                     correspondences, null, null
@@ -64,5 +64,4 @@ namespace Tests
             Assert.AreEqual(expected, actual);
         }
     }
-
 }

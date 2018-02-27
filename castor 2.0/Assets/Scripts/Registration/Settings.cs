@@ -89,7 +89,7 @@ namespace Registration
 
             DistanceMetric = DistanceMetrics.SquaredEuclidean;
 
-            ErrorMetric = new PointToPointSumOfDistances(DistanceMetric);
+            ErrorMetric = new SumOfDistances(DistanceMetric);
 
             TransFormFinder = new HornTransformFinder();
 
