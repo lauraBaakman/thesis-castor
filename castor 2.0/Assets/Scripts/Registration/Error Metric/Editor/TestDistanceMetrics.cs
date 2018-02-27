@@ -80,7 +80,7 @@ namespace Tests
         {
             Point staticPoint = new Point(new Vector3(3, 5, 7));
 
-            float expected = -3;
+            float expected = 3;
             float actual = DistanceMetrics.PointToPlane(staticPoint, modelPoint);
 
             Assert.AreEqual(expected, actual, tolerance);
@@ -91,7 +91,7 @@ namespace Tests
         {
             Point staticPoint = new Point(new Vector3(-5, -3, 6));
 
-            float expected = +5;
+            float expected = -5;
             float actual = DistanceMetrics.PointToPlane(staticPoint, modelPoint);
 
             Assert.AreEqual(expected, actual, tolerance);
