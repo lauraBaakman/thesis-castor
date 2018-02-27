@@ -269,7 +269,7 @@ namespace Tests
             Point point = Auxilaries.RandomPoint();
 
             Point expected = point;
-            Point actual = point.ToOtherTransform(null, null);
+            Point actual = point.ChangeTransform(null, null);
 
             Assert.AreEqual(expected, actual);
             Assert.AreNotSame(expected, actual);

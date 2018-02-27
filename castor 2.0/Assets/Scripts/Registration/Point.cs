@@ -143,7 +143,7 @@ namespace Registration
         /// <returns>The other transform.</returns>
         /// <param name="sourceTransform">The current transform of the point.</param>
         /// <param name="destinationTransform">The destination transform.</param>
-        public Point ToOtherTransform(Transform sourceTransform, Transform destinationTransform)
+        public Point ChangeTransform(Transform sourceTransform, Transform destinationTransform)
         {
             return new Point(
                 position: Position.ChangeTransformOfPosition(sourceTransform, destinationTransform),
