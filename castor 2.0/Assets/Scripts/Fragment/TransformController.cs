@@ -41,6 +41,4 @@ namespace Fragment
             transform.RotateAround(pivotPoint.position, worldTransform.up, rotationInWorld.ExtractEulerYAngle());
         }
     }
-
 }
-
