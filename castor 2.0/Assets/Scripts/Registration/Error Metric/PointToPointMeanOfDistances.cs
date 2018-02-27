@@ -2,21 +2,24 @@ using System.Collections.Generic;
 
 namespace Registration
 {
-    public class PointToPointMeanOfDistances : PointToPointErrorMetric
+    namespace Error
     {
-        public PointToPointMeanOfDistances(
-            PointToPointDistanceMetrics.DistanceMetric distanceMetric = null
-        ) : base(distanceMetric) { }
-
-        public override float ComputeError(List<Correspondence> correspondences)
+        public class PointToPointMeanOfDistances : AbstractErrorMetric
         {
-            float error = 0;
-            foreach (Correspondence correspondence in correspondences)
+            public PointToPointMeanOfDistances(
+                PointToPointDistanceMetrics.DistanceMetric distanceMetric = null
+            ) : base(distanceMetric) { }
+
+            public override float ComputeError(List<Correspondence> correspondences)
             {
-                error += DistanceMetric(correspondence.StaticPoint.Position, correspondence.ModelPoint.Position);
+                float error = 0;
+                foreach (Correspondence correspondence in correspondences)
+                {
+                    error += DistanceMetric(correspondence.StaticPoint.Position, correspondence.ModelPoint.Position);
+                }
+                error /= correspondences.Count;
+                return error;
             }
-            error /= correspondences.Count;
-            return error;
         }
     }
 }

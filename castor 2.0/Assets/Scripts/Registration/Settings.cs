@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using Registration.Error;
 
 namespace Registration
 {
@@ -60,7 +61,7 @@ namespace Registration
         /// The error metric used to compute the error of a registration.
         /// </summary>
         /// <value>The error metric.</value>
-        public PointToPointErrorMetric ErrorMetric { get; set; }
+        public AbstractErrorMetric ErrorMetric { get; set; }
 
         /// <summary>
         /// The method used to find the transform between the static points and the model points.
