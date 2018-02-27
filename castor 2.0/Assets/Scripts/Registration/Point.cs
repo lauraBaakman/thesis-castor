@@ -6,7 +6,7 @@ namespace Registration
     public class Point : IEquatable<Point>, IComparable<Point>
     {
         private static Color DefaultColor = Color.white;
-        private static Vector3 NoNormal = new Vector3();
+        private static readonly Vector3 NoNormal = new Vector3();
 
         #region position
         public Vector3 Position

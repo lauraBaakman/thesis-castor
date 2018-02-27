@@ -262,5 +262,16 @@ namespace Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void ToOtherTransform()
+        {
+            Point point = Auxilaries.RandomPoint();
+
+            Point expected = point;
+            Point actual = point.ToOtherTransform(null, null);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
