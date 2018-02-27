@@ -1,11 +1,6 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
 using NUnit.Framework;
-
 using Registration;
-
 
 [TestFixture]
 public class PointTests
@@ -136,7 +131,6 @@ public class PointTests
         Assert.IsFalse(thisPoint.Equals(otherPoint));
         Assert.AreNotEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
     }
-
 
     [Test]
     public void TestCompareTo_EqualWithNormal()
