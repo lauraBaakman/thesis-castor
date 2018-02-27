@@ -26,7 +26,10 @@ namespace Registration
             /// <param name="modelPoint">Model point.</param>
             public static float PointToPlane(Point staticPoint, Point modelPoint)
             {
-                throw new System.NotImplementedException();
+                return Vector3.Dot(
+                    (staticPoint.Position - modelPoint.Position),
+                    modelPoint.Normal
+                );
             }
         }
     }
