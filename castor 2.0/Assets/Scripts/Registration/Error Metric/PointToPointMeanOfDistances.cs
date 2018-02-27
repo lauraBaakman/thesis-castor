@@ -13,10 +13,16 @@ namespace Registration
 
             public override float ComputeError(List<Correspondence> correspondences, Transform orignalTransform, Transform newTransform)
             {
+                Point newModelPoint;
                 float error = 0;
                 foreach (Correspondence correspondence in correspondences)
                 {
-                    error += DistanceMetric(correspondence.StaticPoint.Position, correspondence.ModelPoint.Position);
+                    newModelPoint = correspondence.ModelPoint.ChangeTransform(orignalTransform, newTransform);
+
+                    error += DistanceMetric(
+                        staticPoint: correspondence.StaticPoint.Position,
+                        modelPoint: newModelPoint.Position
+                    );
                 }
                 error /= correspondences.Count;
                 return error;
