@@ -11,7 +11,7 @@ namespace Registration
                 DistanceMetrics.Metric distanceMetric = null
             ) : base(distanceMetric) { }
 
-            public override float ComputeError(List<Correspondence> correspondences, Transform modelTransform)
+            public override float ComputeError(List<Correspondence> correspondences, Transform orignalTransform, Transform newTransform)
             {
                 float sumOfErrors = 0;
                 foreach (Correspondence correspondence in correspondences)

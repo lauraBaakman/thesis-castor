@@ -30,7 +30,7 @@ namespace Tests
         };
 
             float expected = 26.203333333333333f;
-            float actual = new PointToPointMeanOfDistances().ComputeError(correspondences, null);
+            float actual = new PointToPointMeanOfDistances().ComputeError(correspondences, null, null);
 
             Assert.AreEqual(expected, actual);
         }
@@ -59,7 +59,7 @@ namespace Tests
                 new PointToPointMeanOfDistances(
                     DistanceMetrics.SquaredEuclidean
                 ).ComputeError(
-                    correspondences, null
+                    correspondences, null, null
                 );
             Assert.AreEqual(expected, actual);
         }

@@ -20,7 +20,7 @@ namespace Registration
             /// <returns>The error if the modelTransform is applied to the model points of the correspondences.</returns>
             /// <param name="correspondences">the correspondences</param>
             /// <param name="modelTransform">Model transform to be applied to the model points of the correspondenes.</param>
-            public abstract float ComputeError(List<Correspondence> correspondences, Transform modelTransform);
+            public abstract float ComputeError(List<Correspondence> correspondences, Transform orignalTransform, Transform newTransform);
         }
     }
 }
