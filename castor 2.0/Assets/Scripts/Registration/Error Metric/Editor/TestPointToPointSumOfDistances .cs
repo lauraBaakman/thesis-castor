@@ -5,13 +5,15 @@ using NUnit.Framework;
 using Registration;
 using Registration.Error;
 
-[TestFixture]
-public class PointToPointSumOfDistancesTest
+namespace Tests
 {
-    [Test]
-    public void TestComputeError_NoConstructorNeutralTransform()
+    [TestFixture]
+    public class PointToPointSumOfDistancesTest
     {
-        List<Correspondence> correspondences = new List<Correspondence>
+        [Test]
+        public void TestComputeError_NoConstructorNeutralTransform()
+        {
+            List<Correspondence> correspondences = new List<Correspondence>
         {
             new Correspondence(
                 new Point(new Vector3(1.0f, 2.0f, 3.0f)),
@@ -27,16 +29,16 @@ public class PointToPointSumOfDistancesTest
             )
         };
 
-        float expected = 78.610000f;
-        float actual = new PointToPointSumOfDistances().ComputeError(correspondences, null);
+            float expected = 78.610000f;
+            float actual = new PointToPointSumOfDistances().ComputeError(correspondences, null);
 
-        Assert.AreEqual(expected, actual);
-    }
+            Assert.AreEqual(expected, actual);
+        }
 
-    [Test]
-    public void TestComputeError_WithConstructorNeutralTransform()
-    {
-        List<Correspondence> correspondences = new List<Correspondence>
+        [Test]
+        public void TestComputeError_WithConstructorNeutralTransform()
+        {
+            List<Correspondence> correspondences = new List<Correspondence>
         {
             new Correspondence(
                 new Point(new Vector3(1.0f, 2.0f, 3.0f)),
@@ -52,13 +54,15 @@ public class PointToPointSumOfDistancesTest
             )
         };
 
-        float expected = 78.610000f;
-        float actual =
-            new PointToPointSumOfDistances(
-                DistanceMetrics.SquaredEuclidean
-            ).ComputeError(
-                correspondences, null
-            );
-        Assert.AreEqual(expected, actual);
+            float expected = 78.610000f;
+            float actual =
+                new PointToPointSumOfDistances(
+                    DistanceMetrics.SquaredEuclidean
+                ).ComputeError(
+                    correspondences, null
+                );
+            Assert.AreEqual(expected, actual);
+        }
     }
+
 }

@@ -2,262 +2,265 @@ using UnityEngine;
 using NUnit.Framework;
 using Registration;
 
-[TestFixture]
-public class PointTests
+namespace Tests
 {
-
-    [Test]
-    public void TestEquals_FullyEqualWithoutNormal()
+    [TestFixture]
+    public class PointTests
     {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
 
-        Point thisPoint = new Point(position);
-        Point otherPoint = new Point(position, normal);
+        [Test]
+        public void TestEquals_FullyEqualWithoutNormal()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
 
-        Assert.IsFalse(thisPoint.Equals(otherPoint));
-        Assert.AreNotEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
-    }
+            Point thisPoint = new Point(position);
+            Point otherPoint = new Point(position, normal);
 
-    [Test]
-    public void TestEquals_PositionEqualOneWithOneWithoutNormal()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Assert.IsFalse(thisPoint.Equals(otherPoint));
+            Assert.AreNotEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
+        }
 
-        Point thisPoint = new Point(position);
-        Point otherPoint = new Point(position);
+        [Test]
+        public void TestEquals_PositionEqualOneWithOneWithoutNormal()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
 
-        Assert.IsTrue(thisPoint.Equals(otherPoint));
-        Assert.AreEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
-    }
+            Point thisPoint = new Point(position);
+            Point otherPoint = new Point(position);
 
-    [Test]
-    public void TestEquals_PositionNotEqualWithnoutNormal()
-    {
-        Point thisPoint = new Point(
-            new Vector3(Random.value, Random.value, Random.value)
-        );
-        Point otherPoint = new Point(
-            new Vector3(Random.value, Random.value, Random.value)
-        );
+            Assert.IsTrue(thisPoint.Equals(otherPoint));
+            Assert.AreEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
+        }
 
-        Assert.IsFalse(thisPoint.Equals(otherPoint));
-        Assert.AreNotEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
-    }
+        [Test]
+        public void TestEquals_PositionNotEqualWithnoutNormal()
+        {
+            Point thisPoint = new Point(
+                new Vector3(Random.value, Random.value, Random.value)
+            );
+            Point otherPoint = new Point(
+                new Vector3(Random.value, Random.value, Random.value)
+            );
 
-    [Test]
-    public void TestCompareTo_EqualWithoutNormal()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Assert.IsFalse(thisPoint.Equals(otherPoint));
+            Assert.AreNotEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
+        }
 
-        Point thisPoint = new Point(position);
-        Point otherPoint = new Point(position);
+        [Test]
+        public void TestCompareTo_EqualWithoutNormal()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
 
-        int actual = thisPoint.CompareTo(otherPoint);
-        int expected = 0;
+            Point thisPoint = new Point(position);
+            Point otherPoint = new Point(position);
 
-        Assert.AreEqual(actual, expected);
-    }
+            int actual = thisPoint.CompareTo(otherPoint);
+            int expected = 0;
 
-    [Test]
-    public void TestCompareTo_ThisSmallerWithoutNormal()
-    {
-        Point thisPoint = new Point(
-            new Vector3(2.0f, 3.0f, 4.0f)
-        );
-        Point otherPoint = new Point(
-            new Vector3(4.0f, 5.0f, 6.0f)
-        );
+            Assert.AreEqual(actual, expected);
+        }
 
-        int actual = thisPoint.CompareTo(otherPoint);
-        int expected = -1;
+        [Test]
+        public void TestCompareTo_ThisSmallerWithoutNormal()
+        {
+            Point thisPoint = new Point(
+                new Vector3(2.0f, 3.0f, 4.0f)
+            );
+            Point otherPoint = new Point(
+                new Vector3(4.0f, 5.0f, 6.0f)
+            );
 
-        Assert.AreEqual(actual, expected);
-    }
+            int actual = thisPoint.CompareTo(otherPoint);
+            int expected = -1;
 
-    [Test]
-    public void TestCompareTo_ThisGreaterWithoutNormal()
-    {
-        Point thisPoint = new Point(
-            new Vector3(4.0f, 5.0f, 6.0f)
-        );
-        Point otherPoint = new Point(
-            new Vector3(2.0f, 3.0f, 4.0f)
-        );
+            Assert.AreEqual(actual, expected);
+        }
 
-        int actual = thisPoint.CompareTo(otherPoint);
-        int expected = +1;
+        [Test]
+        public void TestCompareTo_ThisGreaterWithoutNormal()
+        {
+            Point thisPoint = new Point(
+                new Vector3(4.0f, 5.0f, 6.0f)
+            );
+            Point otherPoint = new Point(
+                new Vector3(2.0f, 3.0f, 4.0f)
+            );
 
-        Assert.AreEqual(actual, expected);
-    }
+            int actual = thisPoint.CompareTo(otherPoint);
+            int expected = +1;
 
-    [Test]
-    public void TestEquals_FullyEqualWithNormal()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
+            Assert.AreEqual(actual, expected);
+        }
 
-        Point thisPoint = new Point(position, normal);
-        Point otherPoint = new Point(position, normal);
+        [Test]
+        public void TestEquals_FullyEqualWithNormal()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
 
-        Assert.IsTrue(thisPoint.Equals(otherPoint));
-        Assert.AreEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
-    }
+            Point thisPoint = new Point(position, normal);
+            Point otherPoint = new Point(position, normal);
 
-    [Test]
-    public void TestEquals_PositionNotEqualWithNormal()
-    {
-        Vector3 position1 = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 position2 = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
+            Assert.IsTrue(thisPoint.Equals(otherPoint));
+            Assert.AreEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
+        }
 
-        Point thisPoint = new Point(position1, normal);
-        Point otherPoint = new Point(position2, normal);
+        [Test]
+        public void TestEquals_PositionNotEqualWithNormal()
+        {
+            Vector3 position1 = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 position2 = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
 
-        Assert.IsFalse(thisPoint.Equals(otherPoint));
-        Assert.AreNotEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
-    }
+            Point thisPoint = new Point(position1, normal);
+            Point otherPoint = new Point(position2, normal);
 
-    [Test]
-    public void TestEquals_NormalNotEqual()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 normal1 = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 normal2 = new Vector3(Random.value, Random.value, Random.value);
+            Assert.IsFalse(thisPoint.Equals(otherPoint));
+            Assert.AreNotEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
+        }
 
-        Point thisPoint = new Point(position, normal1);
-        Point otherPoint = new Point(position, normal2);
+        [Test]
+        public void TestEquals_NormalNotEqual()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal1 = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal2 = new Vector3(Random.value, Random.value, Random.value);
 
-        Assert.IsFalse(thisPoint.Equals(otherPoint));
-        Assert.AreNotEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
-    }
+            Point thisPoint = new Point(position, normal1);
+            Point otherPoint = new Point(position, normal2);
 
-    [Test]
-    public void TestCompareTo_EqualWithNormal()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
+            Assert.IsFalse(thisPoint.Equals(otherPoint));
+            Assert.AreNotEqual(thisPoint.GetHashCode(), otherPoint.GetHashCode());
+        }
 
-        Point thisPoint = new Point(position, normal);
-        Point otherPoint = new Point(position, normal);
+        [Test]
+        public void TestCompareTo_EqualWithNormal()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
 
-        Assert.AreEqual(0, thisPoint.CompareTo(otherPoint));
-        Assert.AreEqual(0, otherPoint.CompareTo(thisPoint));
-    }
+            Point thisPoint = new Point(position, normal);
+            Point otherPoint = new Point(position, normal);
 
-    [Test]
-    public void TestCompareTo_ThisSmallerPositionWithNormal()
-    {
-        Vector3 position1 = new Vector3(1.0f, 2.0f, 3.0f);
-        Vector3 position2 = new Vector3(5.0f, 6.0f, 7.0f);
-        Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
+            Assert.AreEqual(0, thisPoint.CompareTo(otherPoint));
+            Assert.AreEqual(0, otherPoint.CompareTo(thisPoint));
+        }
 
-        Point thisPoint = new Point(position1, normal);
-        Point otherPoint = new Point(position2, normal);
+        [Test]
+        public void TestCompareTo_ThisSmallerPositionWithNormal()
+        {
+            Vector3 position1 = new Vector3(1.0f, 2.0f, 3.0f);
+            Vector3 position2 = new Vector3(5.0f, 6.0f, 7.0f);
+            Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
 
-        Assert.AreEqual(-1, thisPoint.CompareTo(otherPoint));
-        Assert.AreEqual(+1, otherPoint.CompareTo(thisPoint));
-    }
+            Point thisPoint = new Point(position1, normal);
+            Point otherPoint = new Point(position2, normal);
 
-    [Test]
-    public void TestCompareTo_ThisSmallerPositionEqualWithNormal()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 normal1 = new Vector3(1.0f, 2.0f, 3.0f);
-        Vector3 normal2 = new Vector3(5.0f, 6.0f, 7.0f);
+            Assert.AreEqual(-1, thisPoint.CompareTo(otherPoint));
+            Assert.AreEqual(+1, otherPoint.CompareTo(thisPoint));
+        }
 
-        Point thisPoint = new Point(position, normal1);
-        Point otherPoint = new Point(position, normal2);
+        [Test]
+        public void TestCompareTo_ThisSmallerPositionEqualWithNormal()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal1 = new Vector3(1.0f, 2.0f, 3.0f);
+            Vector3 normal2 = new Vector3(5.0f, 6.0f, 7.0f);
 
-        Assert.AreEqual(-1, thisPoint.CompareTo(otherPoint));
-        Assert.AreEqual(+1, otherPoint.CompareTo(thisPoint));
-    }
+            Point thisPoint = new Point(position, normal1);
+            Point otherPoint = new Point(position, normal2);
 
-    [Test]
-    public void TestCompareTo_ThisGreaterWithNormal()
-    {
-        Vector3 position1 = new Vector3(5.0f, 2.0f, 3.0f);
-        Vector3 position2 = new Vector3(1.0f, 6.0f, 7.0f);
-        Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
+            Assert.AreEqual(-1, thisPoint.CompareTo(otherPoint));
+            Assert.AreEqual(+1, otherPoint.CompareTo(thisPoint));
+        }
 
-        Point thisPoint = new Point(position1, normal);
-        Point otherPoint = new Point(position2, normal);
+        [Test]
+        public void TestCompareTo_ThisGreaterWithNormal()
+        {
+            Vector3 position1 = new Vector3(5.0f, 2.0f, 3.0f);
+            Vector3 position2 = new Vector3(1.0f, 6.0f, 7.0f);
+            Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
 
-        Assert.AreEqual(+1, thisPoint.CompareTo(otherPoint));
-        Assert.AreEqual(-1, otherPoint.CompareTo(thisPoint));
-    }
+            Point thisPoint = new Point(position1, normal);
+            Point otherPoint = new Point(position2, normal);
 
-    [Test]
-    public void TestCompareTo_ThisGreaterPositionEqual()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 normal1 = new Vector3(5.0f, 2.0f, 3.0f);
-        Vector3 normal2 = new Vector3(1.0f, 6.0f, 7.0f);
+            Assert.AreEqual(+1, thisPoint.CompareTo(otherPoint));
+            Assert.AreEqual(-1, otherPoint.CompareTo(thisPoint));
+        }
 
-        Point thisPoint = new Point(position, normal1);
-        Point otherPoint = new Point(position, normal2);
+        [Test]
+        public void TestCompareTo_ThisGreaterPositionEqual()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal1 = new Vector3(5.0f, 2.0f, 3.0f);
+            Vector3 normal2 = new Vector3(1.0f, 6.0f, 7.0f);
 
-        Assert.AreEqual(+1, thisPoint.CompareTo(otherPoint));
-        Assert.AreEqual(-1, otherPoint.CompareTo(thisPoint));
-    }
+            Point thisPoint = new Point(position, normal1);
+            Point otherPoint = new Point(position, normal2);
 
-    [Test]
-    public void TestHasNormal_NoNormal()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Assert.AreEqual(+1, thisPoint.CompareTo(otherPoint));
+            Assert.AreEqual(-1, otherPoint.CompareTo(thisPoint));
+        }
 
-        Point point = new Point(position);
+        [Test]
+        public void TestHasNormal_NoNormal()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
 
-        Assert.IsFalse(point.HasNormal);
-    }
+            Point point = new Point(position);
 
-    [Test]
-    public void TestHasNormal_WithNormal()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
+            Assert.IsFalse(point.HasNormal);
+        }
 
-        Point point = new Point(position, normal);
+        [Test]
+        public void TestHasNormal_WithNormal()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
 
-        Assert.IsTrue(point.HasNormal);
-    }
+            Point point = new Point(position, normal);
 
-    [Test]
-    public void TestGetNormal_NoNormal()
-    {
-        Assert.Throws(typeof(System.Exception), new TestDelegate(TestGetNormal_NoNormal_helper));
-    }
+            Assert.IsTrue(point.HasNormal);
+        }
 
-    void TestGetNormal_NoNormal_helper()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+        [Test]
+        public void TestGetNormal_NoNormal()
+        {
+            Assert.Throws(typeof(System.Exception), new TestDelegate(TestGetNormal_NoNormal_helper));
+        }
 
-        Point point = new Point(position);
-        Vector3 actual = point.Normal;
-    }
+        void TestGetNormal_NoNormal_helper()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
 
-    [Test]
-    public void TestGetNormal_WithNormal()
-    {
-        Vector3 position = new Vector3(Random.value, Random.value, Random.value);
-        Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
+            Point point = new Point(position);
+            Vector3 actual = point.Normal;
+        }
 
-        Point point = new Point(position, normal);
+        [Test]
+        public void TestGetNormal_WithNormal()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal = new Vector3(Random.value, Random.value, Random.value);
 
-        Vector3 actual = point.Normal;
+            Point point = new Point(position, normal);
 
-        Assert.AreEqual(normal, actual);
-    }
+            Vector3 actual = point.Normal;
 
-    [Test]
-    public void ToHomogeneousVector4()
-    {
-        Vector3 position = new Vector3(1, 2, 3);
-        Point point = new Point(position);
+            Assert.AreEqual(normal, actual);
+        }
 
-        Vector4 expected = new Vector4(1, 2, 3, 1);
-        Vector4 actual = point.ToHomogeneousVector4();
+        [Test]
+        public void ToHomogeneousVector4()
+        {
+            Vector3 position = new Vector3(1, 2, 3);
+            Point point = new Point(position);
 
-        Assert.AreEqual(expected, actual);
+            Vector4 expected = new Vector4(1, 2, 3, 1);
+            Vector4 actual = point.ToHomogeneousVector4();
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

@@ -7,98 +7,101 @@ using NUnit.Framework;
 using Registration;
 using Registration.Messages;
 
-
-[TestFixture]
-public class ICPPreparationStepCompletedMessageTests
+namespace Tests
 {
-    private Transform transform = null;
-    private List<Point> staticPoints = new List<Point>();
-    private List<Point> modelPoints = new List<Point>();
-    private List<Correspondence> correspondences = new List<Correspondence>();
-    private int iterationIndex = 3;
 
-    private ICPPreparationStepCompletedMessage message;
-
-    [SetUp]
-    public void SetUp()
+    [TestFixture]
+    public class ICPPreparationStepCompletedMessageTests
     {
-        int numCorrespondences = 5;
+        private Transform transform = null;
+        private List<Point> staticPoints = new List<Point>();
+        private List<Point> modelPoints = new List<Point>();
+        private List<Correspondence> correspondences = new List<Correspondence>();
+        private int iterationIndex = 3;
 
-        Point staticPoint, modelPoint;
+        private ICPPreparationStepCompletedMessage message;
 
-        for (int i = 0; i < numCorrespondences; i++)
+        [SetUp]
+        public void SetUp()
         {
-            staticPoint = TestAux.RandomPoint();
-            modelPoint = TestAux.RandomPoint();
+            int numCorrespondences = 5;
 
-            staticPoints.Add(staticPoint);
-            modelPoints.Add(modelPoint);
+            Point staticPoint, modelPoint;
 
-            correspondences.Add(
-                new Correspondence(
-                    staticPoint: staticPoint,
-                    modelPoint: modelPoint
-                )
+            for (int i = 0; i < numCorrespondences; i++)
+            {
+                staticPoint = TestAux.RandomPoint();
+                modelPoint = TestAux.RandomPoint();
+
+                staticPoints.Add(staticPoint);
+                modelPoints.Add(modelPoint);
+
+                correspondences.Add(
+                    new Correspondence(
+                        staticPoint: staticPoint,
+                        modelPoint: modelPoint
+                    )
+                );
+            }
+
+            message = new ICPPreparationStepCompletedMessage(
+                correspondences, transform, iterationIndex
             );
         }
 
-        message = new ICPPreparationStepCompletedMessage(
-            correspondences, transform, iterationIndex
-        );
-    }
+        [TestCase]
+        public void Test_GetPointsByType_ModelPoints()
+        {
+            Fragment.ICPFragmentType type = Fragment.ICPFragmentType.Model;
 
-    [TestCase]
-    public void Test_GetPointsByType_ModelPoints()
-    {
-        Fragment.ICPFragmentType type = Fragment.ICPFragmentType.Model;
+            List<Point> expected = modelPoints;
+            ReadOnlyCollection<Point> actual = message.GetPointsByType(type);
 
-        List<Point> expected = modelPoints;
-        ReadOnlyCollection<Point> actual = message.GetPointsByType(type);
+            Assert.That(expected, Is.EquivalentTo(actual));
+        }
 
-        Assert.That(expected, Is.EquivalentTo(actual));
-    }
+        [TestCase]
+        public void Test_GetPointsByType_StaticPoints()
+        {
+            Fragment.ICPFragmentType type = Fragment.ICPFragmentType.Static;
 
-    [TestCase]
-    public void Test_GetPointsByType_StaticPoints()
-    {
-        Fragment.ICPFragmentType type = Fragment.ICPFragmentType.Static;
+            List<Point> expected = staticPoints;
+            ReadOnlyCollection<Point> actual = message.GetPointsByType(type);
 
-        List<Point> expected = staticPoints;
-        ReadOnlyCollection<Point> actual = message.GetPointsByType(type);
+            Assert.That(expected, Is.EquivalentTo(actual));
+        }
 
-        Assert.That(expected, Is.EquivalentTo(actual));
-    }
+        [TestCase]
+        public void Test_GetPointsByType_UnknownType()
+        {
+            Assert.Throws(
+                typeof(System.ArgumentException),
+                new TestDelegate(Test_GetPointsByType_UnknownType_Helper)
+            );
+        }
 
-    [TestCase]
-    public void Test_GetPointsByType_UnknownType()
-    {
-        Assert.Throws(
-            typeof(System.ArgumentException),
-            new TestDelegate(Test_GetPointsByType_UnknownType_Helper)
-        );
-    }
+        public void Test_GetPointsByType_UnknownType_Helper()
+        {
+            Fragment.ICPFragmentType type = (Fragment.ICPFragmentType)99;
+            message.GetPointsByType(type);
+        }
 
-    public void Test_GetPointsByType_UnknownType_Helper()
-    {
-        Fragment.ICPFragmentType type = (Fragment.ICPFragmentType)99;
-        message.GetPointsByType(type);
-    }
+        [TestCase]
+        public void Test_GetStaticPoints()
+        {
+            List<Point> expected = staticPoints;
+            ReadOnlyCollection<Point> actual = message.StaticPoints;
 
-    [TestCase]
-    public void Test_GetStaticPoints()
-    {
-        List<Point> expected = staticPoints;
-        ReadOnlyCollection<Point> actual = message.StaticPoints;
+            Assert.That(expected, Is.EquivalentTo(actual));
+        }
 
-        Assert.That(expected, Is.EquivalentTo(actual));
-    }
+        [TestCase]
+        public void Test_GetModelPoints()
+        {
+            List<Point> expected = modelPoints;
+            ReadOnlyCollection<Point> actual = message.ModelPoints;
 
-    [TestCase]
-    public void Test_GetModelPoints()
-    {
-        List<Point> expected = modelPoints;
-        ReadOnlyCollection<Point> actual = message.ModelPoints;
-
-        Assert.That(expected, Is.EquivalentTo(actual));
+            Assert.That(expected, Is.EquivalentTo(actual));
+        }
     }
 }
