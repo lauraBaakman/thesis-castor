@@ -11,7 +11,7 @@ namespace Registration
                 PointToPointDistanceMetrics.DistanceMetric distanceMetric = null
             ) : base(distanceMetric) { }
 
-            public override float ComputeError(List<Correspondence> correspondences, Matrix4x4 transform)
+            public override float ComputeError(List<Correspondence> correspondences, Transform modelTransform)
             {
                 float sumOfErrors = 0;
                 foreach (Correspondence correspondence in correspondences)

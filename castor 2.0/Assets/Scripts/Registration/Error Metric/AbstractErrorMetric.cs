@@ -15,12 +15,12 @@ namespace Registration
             }
 
             /// <summary>
-            /// Compute the error of the correspondences given the transform that should be applied to the model points.
+            /// Computes the error of the correspondences, given that the passed transform is applied to the model points.
             /// </summary>
-            /// <returns>The error of the correspondences if the transform is applied to the model fragments.</returns>
-            /// <param name="correspondences">The correspondences before the transform is applied.</param>
-            /// <param name="transform">The transform that should be applid to the model points of the correspondences</param>
-            public abstract float ComputeError(List<Correspondence> correspondences, Matrix4x4 transform);
+            /// <returns>The error if the modelTransform is applied to the model points of the correspondences.</returns>
+            /// <param name="correspondences">the correspondences</param>
+            /// <param name="modelTransform">Model transform to be applied to the model points of the correspondenes.</param>
+            public abstract float ComputeError(List<Correspondence> correspondences, Transform modelTransform);
         }
     }
 }

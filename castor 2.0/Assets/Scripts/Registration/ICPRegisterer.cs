@@ -123,7 +123,7 @@ namespace Registration
             Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(Correspondences);
             TransformModelFragment(transformationMatrix);
 
-            error = Settings.ErrorMetric.ComputeError(Correspondences, transformationMatrix);
+            error = Settings.ErrorMetric.ComputeError(Correspondences, modelFragment.transform);
 
             SendMessageToAllListeners(
                 "OnStepCompleted",

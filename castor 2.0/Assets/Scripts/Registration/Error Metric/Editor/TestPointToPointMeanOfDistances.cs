@@ -28,7 +28,7 @@ public class PointToPointMeanOfDistancesTest
         };
 
         float expected = 26.203333333333333f;
-        float actual = new PointToPointMeanOfDistances().ComputeError(correspondences, Matrix4x4.identity);
+        float actual = new PointToPointMeanOfDistances().ComputeError(correspondences, null);
 
         Assert.AreEqual(expected, actual);
     }
@@ -57,7 +57,7 @@ public class PointToPointMeanOfDistancesTest
             new PointToPointMeanOfDistances(
                 PointToPointDistanceMetrics.SquaredEuclidean
             ).ComputeError(
-                correspondences, Matrix4x4.identity
+                correspondences, null
             );
         Assert.AreEqual(expected, actual);
     }
