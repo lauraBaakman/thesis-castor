@@ -47,5 +47,29 @@ namespace Tests
             Assert.AreEqual(thisVector.CompareTo(otherVector), -1);
             Assert.AreEqual(otherVector.CompareTo(thisVector), +1);
         }
+
+        [Test]
+        public void ChangeTransformOfDirection_TransformsAreNull()
+        {
+            Vector3 vector = Auxilaries.RandomPosition();
+
+            Vector3 actual = vector.ChangeTransformOfDirection(null, null);
+            Vector3 expected = vector;
+
+            Assert.AreEqual(expected, actual);
+            Assert.AreNotSame(vector, actual);
+        }
+
+        [Test]
+        public void ChangeTransformOfPosition_TransformsAreNull()
+        {
+            Vector3 vector = Auxilaries.RandomPosition();
+
+            Vector3 actual = vector.ChangeTransformOfPosition(null, null);
+            Vector3 expected = vector;
+
+            Assert.AreEqual(expected, actual);
+            Assert.AreNotSame(vector, actual);
+        }
     }
 }

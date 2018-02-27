@@ -272,6 +272,7 @@ namespace Tests
             Point actual = point.ToOtherTransform(null, null);
 
             Assert.AreEqual(expected, actual);
+            Assert.AreNotSame(expected, actual);
         }
     }
 }

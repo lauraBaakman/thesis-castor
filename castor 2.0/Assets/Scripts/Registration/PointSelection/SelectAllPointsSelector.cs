@@ -44,7 +44,7 @@ namespace Registration
             {
                 points.Add(
                     new Point(
-                        vertex.ChangePositionTransform(fragmentTransform, ReferenceTransform)
+                        vertex.ChangeTransformOfPosition(fragmentTransform, ReferenceTransform)
                     )
                 );
             }
@@ -59,9 +59,9 @@ namespace Registration
             {
                 points.Add(
                     new Point(
-                        position: fragment.vertices[i].ChangePositionTransform(
+                        position: fragment.vertices[i].ChangeTransformOfPosition(
                             fragmentTransform, ReferenceTransform),
-                        normal: fragment.normals[i].ChangeDirectionTransform(
+                        normal: fragment.normals[i].ChangeTransformOfDirection(
                             fragmentTransform, ReferenceTransform)
                     )
                 );

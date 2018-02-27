@@ -26,8 +26,10 @@ public static class Vector3Extensions
     /// <param name="vector">Vector.</param>
     /// <param name="sourceTransform">The current transform of the vector.</param>
     /// <param name="destinationTransform">Destination transform.</param>
-    public static Vector3 ChangePositionTransform(this Vector3 vector, Transform sourceTransform, Transform destinationTransform)
+    public static Vector3 ChangeTransformOfPosition(this Vector3 vector, Transform sourceTransform, Transform destinationTransform)
     {
+        if (EitherOfTheTransformsIsNull(sourceTransform, destinationTransform)) return CopyVector(vector);
+
         Vector3 worldTransformPosition = sourceTransform.TransformPoint(vector);
         Vector3 destinationTransformPosition = destinationTransform.TransformPoint(worldTransformPosition);
 
@@ -41,11 +43,23 @@ public static class Vector3Extensions
     /// <param name="vector">Vector.</param>
     /// <param name="sourceTransform">The current transform of the vector.</param>
     /// <param name="destinationTransform">Destination transform.</param>
-    public static Vector3 ChangeDirectionTransform(this Vector3 vector, Transform sourceTransform, Transform destinationTransform)
+    public static Vector3 ChangeTransformOfDirection(this Vector3 vector, Transform sourceTransform, Transform destinationTransform)
     {
+        if (EitherOfTheTransformsIsNull(sourceTransform, destinationTransform)) return CopyVector(vector);
+
         Vector3 worldTransformVector = sourceTransform.TransformDirection(vector);
         Vector3 destinationTransformVector = destinationTransform.InverseTransformDirection(worldTransformVector);
 
         return destinationTransformVector;
+    }
+
+    private static bool EitherOfTheTransformsIsNull(Transform sourceTransform, Transform destinationTransform)
+    {
+        return sourceTransform == null || destinationTransform == null;
+    }
+
+    private static Vector3 CopyVector(Vector3 vector)
+    {
+        return new Vector3(vector.x, vector.y, vector.z);
     }
 }

@@ -146,8 +146,8 @@ namespace Registration
         public Point ToOtherTransform(Transform sourceTransform, Transform destinationTransform)
         {
             return new Point(
-                position: Position.ChangePositionTransform(sourceTransform, destinationTransform),
-                normal: HasNormal ? Normal.ChangePositionTransform(sourceTransform, destinationTransform) : NoNormal
+                position: Position.ChangeTransformOfPosition(sourceTransform, destinationTransform),
+                normal: HasNormal ? Normal.ChangeTransformOfDirection(sourceTransform, destinationTransform) : NoNormal
             );
         }
     }
