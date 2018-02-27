@@ -98,13 +98,11 @@ namespace Registration
 
         public class ICPStepCompletedMessage : IToTickerMessage
         {
-            public readonly Transform Transform;
             public readonly int IterationIndx;
             public readonly float Error;
 
-            public ICPStepCompletedMessage(Transform transform, int iterationIndx, float error)
+            public ICPStepCompletedMessage(int iterationIndx, float error)
             {
-                this.Transform = transform;
                 this.IterationIndx = iterationIndx;
                 this.Error = error;
             }
