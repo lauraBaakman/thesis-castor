@@ -95,5 +95,29 @@ namespace Registration
                 return "";
             }
         }
+
+        public class ICPStepCompletedMessage : IToTickerMessage
+        {
+            public readonly Transform Transform;
+            public readonly int IterationIndx;
+            public readonly float Error;
+
+            public ICPStepCompletedMessage(Transform transform, int iterationIndx, float error)
+            {
+                this.Transform = transform;
+                this.IterationIndx = iterationIndx;
+                this.Error = error;
+            }
+
+            public Message ToTickerMessage()
+            {
+                return new Message.InfoMessage(
+                    string.Format(
+                        "Finished iteration {0}, the current error is {1}",
+                        IterationIndx, Error
+                    )
+                );
+            }
+        }
     }
 }
