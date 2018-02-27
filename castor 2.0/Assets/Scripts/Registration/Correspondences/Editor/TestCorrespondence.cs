@@ -65,8 +65,8 @@ namespace Tests
         [Test]
         public void TestGetPoint_ModelPoint()
         {
-            Point staticPoint = TestAux.RandomPoint();
-            Point modelPoint = TestAux.RandomPoint();
+            Point staticPoint = Auxilaries.RandomPoint();
+            Point modelPoint = Auxilaries.RandomPoint();
 
             Correspondence correspondence = new Correspondence(
                 staticPoint: staticPoint,
@@ -83,8 +83,8 @@ namespace Tests
         [Test]
         public void TestGetPoint_StaticPoint()
         {
-            Point staticPoint = TestAux.RandomPoint();
-            Point modelPoint = TestAux.RandomPoint();
+            Point staticPoint = Auxilaries.RandomPoint();
+            Point modelPoint = Auxilaries.RandomPoint();
 
             Correspondence correspondence = new Correspondence(
                 staticPoint: staticPoint,
@@ -106,8 +106,8 @@ namespace Tests
 
         private void TestGetPoint_InvalidEnum_Helper()
         {
-            Point staticPoint = TestAux.RandomPoint();
-            Point modelPoint = TestAux.RandomPoint();
+            Point staticPoint = Auxilaries.RandomPoint();
+            Point modelPoint = Auxilaries.RandomPoint();
 
             Correspondence correspondence = new Correspondence(
                 staticPoint: staticPoint,

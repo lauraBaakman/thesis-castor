@@ -30,8 +30,8 @@ namespace Tests
 
             for (int i = 0; i < numCorrespondences; i++)
             {
-                staticPoint = TestAux.RandomPoint();
-                modelPoint = TestAux.RandomPoint();
+                staticPoint = Auxilaries.RandomPoint();
+                modelPoint = Auxilaries.RandomPoint();
 
                 staticPoints.Add(staticPoint);
                 modelPoints.Add(modelPoint);

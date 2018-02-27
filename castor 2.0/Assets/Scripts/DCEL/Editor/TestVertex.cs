@@ -17,13 +17,13 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_Equals()
         {
-            Vector3 position = TestAux.RandomPosition();
+            Vector3 position = Auxilaries.RandomPosition();
 
             Vertex thisVertex = new Vertex(position, 1);
             Vertex otherVertex = new Vertex(position, 1);
 
-            HalfEdge edge1 = TestAux.RandomHalfEdge();
-            HalfEdge edge2 = TestAux.RandomHalfEdge();
+            HalfEdge edge1 = Auxilaries.RandomHalfEdge();
+            HalfEdge edge2 = Auxilaries.RandomHalfEdge();
 
             thisVertex.AddIncidentEdge(edge1);
             thisVertex.AddIncidentEdge(edge2);
@@ -39,7 +39,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_MeshIdxNotEqual()
         {
-            Vector3 position = TestAux.RandomPosition();
+            Vector3 position = Auxilaries.RandomPosition();
 
             Vertex thisVertex = new Vertex(position, 0);
             Vertex otherVertex = new Vertex(position, 1);
@@ -52,8 +52,8 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_PositionNotEqual()
         {
-            Vertex thisVertex = TestAux.RandomVertex();
-            Vertex otherVertex = TestAux.RandomVertex();
+            Vertex thisVertex = Auxilaries.RandomVertex();
+            Vertex otherVertex = Auxilaries.RandomVertex();
 
             Assert.IsFalse(thisVertex.Equals(otherVertex));
             Assert.IsFalse(otherVertex.Equals(thisVertex));
@@ -63,14 +63,14 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_IncidentEdgesNotEqual()
         {
-            Vector3 position = TestAux.RandomPosition();
+            Vector3 position = Auxilaries.RandomPosition();
 
             Vertex thisVertex = new Vertex(position);
             Vertex otherVertex = new Vertex(position);
 
-            HalfEdge edge1 = TestAux.RandomHalfEdge();
-            HalfEdge edge2 = TestAux.RandomHalfEdge();
-            HalfEdge edge3 = TestAux.RandomHalfEdge();
+            HalfEdge edge1 = Auxilaries.RandomHalfEdge();
+            HalfEdge edge2 = Auxilaries.RandomHalfEdge();
+            HalfEdge edge3 = Auxilaries.RandomHalfEdge();
 
             thisVertex.AddIncidentEdge(edge1);
             thisVertex.AddIncidentEdge(edge2);
@@ -85,14 +85,14 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_IncidentEdgesSuperSet()
         {
-            Vector3 position = TestAux.RandomPosition();
+            Vector3 position = Auxilaries.RandomPosition();
 
             Vertex thisVertex = new Vertex(position);
             Vertex otherVertex = new Vertex(position);
 
-            HalfEdge edge1 = TestAux.RandomHalfEdge();
-            HalfEdge edge2 = TestAux.RandomHalfEdge();
-            HalfEdge edge3 = TestAux.RandomHalfEdge();
+            HalfEdge edge1 = Auxilaries.RandomHalfEdge();
+            HalfEdge edge2 = Auxilaries.RandomHalfEdge();
+            HalfEdge edge3 = Auxilaries.RandomHalfEdge();
 
             thisVertex.AddIncidentEdge(edge1);
             thisVertex.AddIncidentEdge(edge2);
@@ -108,13 +108,13 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_IncidentEdgesAddedTwice()
         {
-            Vector3 position = TestAux.RandomPosition();
+            Vector3 position = Auxilaries.RandomPosition();
 
             Vertex thisVertex = new Vertex(position);
             Vertex otherVertex = new Vertex(position);
 
-            HalfEdge edge1 = TestAux.RandomHalfEdge();
-            HalfEdge edge2 = TestAux.RandomHalfEdge();
+            HalfEdge edge1 = Auxilaries.RandomHalfEdge();
+            HalfEdge edge2 = Auxilaries.RandomHalfEdge();
 
             thisVertex.AddIncidentEdge(edge1);
             thisVertex.AddIncidentEdge(edge2);
@@ -131,7 +131,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestAddIncidentEdges_NoOtherPropertiesSet()
         {
-            Vertex v1 = TestAux.RandomVertex();
+            Vertex v1 = Auxilaries.RandomVertex();
             HalfEdge e11 = new HalfEdge(v1);
             v1.AddIncidentEdge(e11);
 
@@ -141,9 +141,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestAddIncidentEdges_TwinsSet()
         {
-            Vertex v1 = TestAux.RandomVertex();
-            Vertex v2 = TestAux.RandomVertex();
-            Vertex v3 = TestAux.RandomVertex();
+            Vertex v1 = Auxilaries.RandomVertex();
+            Vertex v2 = Auxilaries.RandomVertex();
+            Vertex v3 = Auxilaries.RandomVertex();
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -167,9 +167,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestAddIncidentEdges_TwinsAndNextSet()
         {
-            Vertex v1 = TestAux.RandomVertex();
-            Vertex v2 = TestAux.RandomVertex();
-            Vertex v3 = TestAux.RandomVertex();
+            Vertex v1 = Auxilaries.RandomVertex();
+            Vertex v2 = Auxilaries.RandomVertex();
+            Vertex v3 = Auxilaries.RandomVertex();
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -198,9 +198,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestAddIncidentEdges_TwinsAndNextAndPreviousSet()
         {
-            Vertex v1 = TestAux.RandomVertex();
-            Vertex v2 = TestAux.RandomVertex();
-            Vertex v3 = TestAux.RandomVertex();
+            Vertex v1 = Auxilaries.RandomVertex();
+            Vertex v2 = Auxilaries.RandomVertex();
+            Vertex v3 = Auxilaries.RandomVertex();
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -233,9 +233,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestAddIncidentEdges_TwinsAndNextAndPreviousOuterComponentSet()
         {
-            Vertex v1 = TestAux.RandomVertex();
-            Vertex v2 = TestAux.RandomVertex();
-            Vertex v3 = TestAux.RandomVertex();
+            Vertex v1 = Auxilaries.RandomVertex();
+            Vertex v2 = Auxilaries.RandomVertex();
+            Vertex v3 = Auxilaries.RandomVertex();
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -273,9 +273,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestAddIncidentEdges_AddSingleEdge()
         {
-            Vertex v1 = TestAux.RandomVertex();
-            Vertex v2 = TestAux.RandomVertex();
-            Vertex v3 = TestAux.RandomVertex();
+            Vertex v1 = Auxilaries.RandomVertex();
+            Vertex v2 = Auxilaries.RandomVertex();
+            Vertex v3 = Auxilaries.RandomVertex();
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -316,9 +316,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestAddIncidentEdges_AddOtherSingleEdge()
         {
-            Vertex v1 = TestAux.RandomVertex();
-            Vertex v2 = TestAux.RandomVertex();
-            Vertex v3 = TestAux.RandomVertex();
+            Vertex v1 = Auxilaries.RandomVertex();
+            Vertex v2 = Auxilaries.RandomVertex();
+            Vertex v3 = Auxilaries.RandomVertex();
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -359,9 +359,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestAddIncidentEdges_AddSingleEdgePerVertex()
         {
-            Vertex v1 = TestAux.RandomVertex();
-            Vertex v2 = TestAux.RandomVertex();
-            Vertex v3 = TestAux.RandomVertex();
+            Vertex v1 = Auxilaries.RandomVertex();
+            Vertex v2 = Auxilaries.RandomVertex();
+            Vertex v3 = Auxilaries.RandomVertex();
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -408,9 +408,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestAddIncidentEdges_AddTwoEdgesToSingleVertex()
         {
-            Vertex v1 = TestAux.RandomVertex();
-            Vertex v2 = TestAux.RandomVertex();
-            Vertex v3 = TestAux.RandomVertex();
+            Vertex v1 = Auxilaries.RandomVertex();
+            Vertex v2 = Auxilaries.RandomVertex();
+            Vertex v3 = Auxilaries.RandomVertex();
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -453,9 +453,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestAddIncidentEdges_ReplicateSegmentationFault()
         {
-            Vertex v1 = TestAux.RandomVertex();
-            Vertex v2 = TestAux.RandomVertex();
-            Vertex v3 = TestAux.RandomVertex();
+            Vertex v1 = Auxilaries.RandomVertex();
+            Vertex v2 = Auxilaries.RandomVertex();
+            Vertex v3 = Auxilaries.RandomVertex();
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -510,7 +510,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjNull()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             int expected = 1;
             int actual = vertex.CompareTo(null);
@@ -525,8 +525,8 @@ namespace Tests
 
         void TestCompareTo_ObjNotVertex_Helper()
         {
-            Vertex vertex = TestAux.RandomVertex();
-            HalfEdge edge = TestAux.RandomHalfEdge();
+            Vertex vertex = Auxilaries.RandomVertex();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
 
             vertex.CompareTo(edge);
         }
@@ -534,7 +534,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_MeshIdxSmaller()
         {
-            Vector3 position = TestAux.RandomPosition();
+            Vector3 position = Auxilaries.RandomPosition();
 
             Vertex thisVertex = new Vertex(position, 0);
             Vertex otherVertex = new Vertex(position, 1);
@@ -548,7 +548,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_MeshIdxLarger()
         {
-            Vector3 position = TestAux.RandomPosition();
+            Vector3 position = Auxilaries.RandomPosition();
 
             Vertex thisVertex = new Vertex(position, 1);
             Vertex otherVertex = new Vertex(position, 0);
@@ -603,14 +603,14 @@ namespace Tests
 
         public void TestGetMeshIdx_NotSet_Helper()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
             int meshIdx = vertex.MeshIdx;
         }
 
         [Test, MaxTime(2000)]
         public void TestGetMeshIdx_Set()
         {
-            Vertex vertex = new Vertex(TestAux.RandomPosition(), 1);
+            Vertex vertex = new Vertex(Auxilaries.RandomPosition(), 1);
 
             int expected = 1;
             int actual = vertex.MeshIdx;
@@ -634,7 +634,7 @@ namespace Tests
         public void XIsNull()
         {
             Vertex x = null;
-            Vertex y = TestAux.RandomVertex();
+            Vertex y = Auxilaries.RandomVertex();
 
             Assert.IsFalse(comparer.Equals(x, y));
             Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
@@ -643,7 +643,7 @@ namespace Tests
         [Test, MaxTime(50)]
         public void YIsNull()
         {
-            Vertex x = TestAux.RandomVertex();
+            Vertex x = Auxilaries.RandomVertex();
             Vertex y = null;
 
             Assert.IsFalse(comparer.Equals(x, y));
@@ -663,11 +663,11 @@ namespace Tests
         [Test, MaxTime(50)]
         public void XAndyAreEqual()
         {
-            Vector3 positon = TestAux.RandomPosition();
+            Vector3 positon = Auxilaries.RandomPosition();
             Vertex x = new Vertex(positon);
             Vertex y = new Vertex(positon);
 
-            HalfEdge edge = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
 
             x.AddIncidentEdge(edge);
             y.AddIncidentEdge(edge);
@@ -679,8 +679,8 @@ namespace Tests
         [Test, MaxTime(50)]
         public void XAndyAreNotEqual_PositionDifferent()
         {
-            Vertex x = TestAux.RandomVertex();
-            Vertex y = TestAux.RandomVertex();
+            Vertex x = Auxilaries.RandomVertex();
+            Vertex y = Auxilaries.RandomVertex();
 
             Assert.IsFalse(comparer.Equals(x, y));
             Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
@@ -689,12 +689,12 @@ namespace Tests
         [Test, MaxTime(50)]
         public void XAndyAreEqual_IncidentEdgesDifferent()
         {
-            Vector3 positon = TestAux.RandomPosition();
+            Vector3 positon = Auxilaries.RandomPosition();
             Vertex x = new Vertex(positon);
             Vertex y = new Vertex(positon);
 
-            x.AddIncidentEdge(TestAux.RandomHalfEdge());
-            y.AddIncidentEdge(TestAux.RandomHalfEdge());
+            x.AddIncidentEdge(Auxilaries.RandomHalfEdge());
+            y.AddIncidentEdge(Auxilaries.RandomHalfEdge());
 
             Assert.IsTrue(comparer.Equals(x, y));
             Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));

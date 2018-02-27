@@ -12,10 +12,10 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_NotEqualFaceIdxNotEqual()
         {
-            HalfEdge a = TestAux.RandomHalfEdge();
-            HalfEdge b = TestAux.RandomHalfEdge();
-            HalfEdge c = TestAux.RandomHalfEdge();
-            HalfEdge d = TestAux.RandomHalfEdge();
+            HalfEdge a = Auxilaries.RandomHalfEdge();
+            HalfEdge b = Auxilaries.RandomHalfEdge();
+            HalfEdge c = Auxilaries.RandomHalfEdge();
+            HalfEdge d = Auxilaries.RandomHalfEdge();
 
             Face thisFace = new Face(0);
             thisFace.AddOuterComponent(a);
@@ -37,10 +37,10 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_EqualsSameOrder()
         {
-            HalfEdge a = TestAux.RandomHalfEdge();
-            HalfEdge b = TestAux.RandomHalfEdge();
-            HalfEdge c = TestAux.RandomHalfEdge();
-            HalfEdge d = TestAux.RandomHalfEdge();
+            HalfEdge a = Auxilaries.RandomHalfEdge();
+            HalfEdge b = Auxilaries.RandomHalfEdge();
+            HalfEdge c = Auxilaries.RandomHalfEdge();
+            HalfEdge d = Auxilaries.RandomHalfEdge();
 
             Face thisFace = new Face(0);
             thisFace.AddOuterComponent(a);
@@ -62,10 +62,10 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_EqualsDifferentOrder()
         {
-            HalfEdge a = TestAux.RandomHalfEdge();
-            HalfEdge b = TestAux.RandomHalfEdge();
-            HalfEdge c = TestAux.RandomHalfEdge();
-            HalfEdge d = TestAux.RandomHalfEdge();
+            HalfEdge a = Auxilaries.RandomHalfEdge();
+            HalfEdge b = Auxilaries.RandomHalfEdge();
+            HalfEdge c = Auxilaries.RandomHalfEdge();
+            HalfEdge d = Auxilaries.RandomHalfEdge();
 
             Face thisFace = new Face(0);
             thisFace.AddOuterComponent(a);
@@ -87,10 +87,10 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_EqualsAddSameEdgeTwice()
         {
-            HalfEdge a = TestAux.RandomHalfEdge();
-            HalfEdge b = TestAux.RandomHalfEdge();
-            HalfEdge c = TestAux.RandomHalfEdge();
-            HalfEdge d = TestAux.RandomHalfEdge();
+            HalfEdge a = Auxilaries.RandomHalfEdge();
+            HalfEdge b = Auxilaries.RandomHalfEdge();
+            HalfEdge c = Auxilaries.RandomHalfEdge();
+            HalfEdge d = Auxilaries.RandomHalfEdge();
 
             Face thisFace = new Face(0);
             thisFace.AddOuterComponent(a);
@@ -114,10 +114,10 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_IdxEqualNotEqualThisGreater()
         {
-            HalfEdge a = TestAux.RandomHalfEdge();
-            HalfEdge b = TestAux.RandomHalfEdge();
-            HalfEdge c = TestAux.RandomHalfEdge();
-            HalfEdge d = TestAux.RandomHalfEdge();
+            HalfEdge a = Auxilaries.RandomHalfEdge();
+            HalfEdge b = Auxilaries.RandomHalfEdge();
+            HalfEdge c = Auxilaries.RandomHalfEdge();
+            HalfEdge d = Auxilaries.RandomHalfEdge();
 
             Face thisFace = new Face(0);
             thisFace.AddOuterComponent(a);
@@ -138,10 +138,10 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_IdxEqualNotEqualThisSmaller()
         {
-            HalfEdge a = TestAux.RandomHalfEdge();
-            HalfEdge b = TestAux.RandomHalfEdge();
-            HalfEdge c = TestAux.RandomHalfEdge();
-            HalfEdge d = TestAux.RandomHalfEdge();
+            HalfEdge a = Auxilaries.RandomHalfEdge();
+            HalfEdge b = Auxilaries.RandomHalfEdge();
+            HalfEdge c = Auxilaries.RandomHalfEdge();
+            HalfEdge d = Auxilaries.RandomHalfEdge();
 
             Face thisFace = new Face(0);
             thisFace.AddOuterComponent(a);
@@ -162,11 +162,11 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_IdxEqualNotEqualSameSizeDifferentEdges()
         {
-            HalfEdge a = TestAux.RandomHalfEdge();
-            HalfEdge b = TestAux.RandomHalfEdge();
-            HalfEdge c = TestAux.RandomHalfEdge();
-            HalfEdge d = TestAux.RandomHalfEdge();
-            HalfEdge e = TestAux.RandomHalfEdge();
+            HalfEdge a = Auxilaries.RandomHalfEdge();
+            HalfEdge b = Auxilaries.RandomHalfEdge();
+            HalfEdge c = Auxilaries.RandomHalfEdge();
+            HalfEdge d = Auxilaries.RandomHalfEdge();
+            HalfEdge e = Auxilaries.RandomHalfEdge();
 
             Face thisFace = new Face(0);
             thisFace.AddOuterComponent(a);
@@ -188,7 +188,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjNull()
         {
-            Face face = TestAux.RandomFace();
+            Face face = Auxilaries.RandomFace();
 
             int expected = 1;
             int actual = face.CompareTo(null);
@@ -203,8 +203,8 @@ namespace Tests
 
         void TestCompareTo_ObjNotFace_Helper()
         {
-            Face face = TestAux.RandomFace();
-            HalfEdge edge = TestAux.RandomHalfEdge();
+            Face face = Auxilaries.RandomFace();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
 
             face.CompareTo(edge);
         }
@@ -261,7 +261,7 @@ namespace Tests
         public void XIsNull()
         {
             Face x = null;
-            Face y = TestAux.RandomFace();
+            Face y = Auxilaries.RandomFace();
 
             Assert.IsFalse(comparer.Equals(x, y));
             Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
@@ -270,7 +270,7 @@ namespace Tests
         [Test, MaxTime(50)]
         public void YIsNull()
         {
-            Face x = TestAux.RandomFace();
+            Face x = Auxilaries.RandomFace();
             Face y = null;
 
             Assert.IsFalse(comparer.Equals(x, y));
@@ -301,8 +301,8 @@ namespace Tests
         [Test, MaxTime(50)]
         public void XAndyAreNotEqual_IdxDifferent()
         {
-            Face x = TestAux.RandomFace();
-            Face y = TestAux.RandomFace();
+            Face x = Auxilaries.RandomFace();
+            Face y = Auxilaries.RandomFace();
 
             Assert.IsFalse(comparer.Equals(x, y));
             Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
@@ -316,8 +316,8 @@ namespace Tests
             Face x = new Face(idx);
             Face y = new Face(idx);
 
-            x.AddOuterComponent(TestAux.RandomHalfEdge());
-            y.AddOuterComponent(TestAux.RandomHalfEdge());
+            x.AddOuterComponent(Auxilaries.RandomHalfEdge());
+            y.AddOuterComponent(Auxilaries.RandomHalfEdge());
 
             Assert.IsTrue(comparer.Equals(x, y));
             Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));

@@ -512,7 +512,7 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\TransformPointsUtils.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\HornTransformFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\ITransformFinder.cs" />
-    <Compile Include="Assets\Scripts\TestAuxilaries.cs" />
+    <Compile Include="Assets\Scripts\Tests\Auxilaries.cs" />
     <Compile Include="Assets\Scripts\Ticker\Messages.cs" />
     <Compile Include="Assets\Scripts\Ticker\Receiver.cs" />
     <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
@@ -523,6 +523,7 @@
     <Compile Include="Assets\Scripts\Registration\PointSelection\SamplingInformation.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\NormalShootingCorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Extensions\RayCastHitExtensions.cs" />
+    <Compile Include="Assets\Scripts\Tests\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />

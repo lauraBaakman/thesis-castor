@@ -564,14 +564,14 @@ namespace Tests
         };
 
             List<HalfEdge> thisEdges = new List<HalfEdge>{
-            TestAux.RandomHalfEdge(),
-            TestAux.RandomHalfEdge(),
-            TestAux.RandomHalfEdge()
+            Auxilaries.RandomHalfEdge(),
+            Auxilaries.RandomHalfEdge(),
+            Auxilaries.RandomHalfEdge()
         };
             List<HalfEdge> otherEdges = new List<HalfEdge>{
-            TestAux.RandomHalfEdge(),
-            TestAux.RandomHalfEdge(),
-            TestAux.RandomHalfEdge()
+            Auxilaries.RandomHalfEdge(),
+            Auxilaries.RandomHalfEdge(),
+            Auxilaries.RandomHalfEdge()
         };
 
             List<Face> faces = new List<Face>();

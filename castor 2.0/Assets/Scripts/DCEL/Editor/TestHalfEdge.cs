@@ -11,8 +11,8 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestDestination_TwinIsNull()
         {
-            Vertex origin = TestAux.RandomVertex();
-            Vertex destination = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
+            Vertex destination = Auxilaries.RandomVertex();
 
             HalfEdge edge = new HalfEdge(origin);
 
@@ -25,8 +25,8 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestDestination_TwinIsNotNull()
         {
-            Vertex origin = TestAux.RandomVertex();
-            Vertex destination = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
+            Vertex destination = Auxilaries.RandomVertex();
 
             HalfEdge edge = new HalfEdge(origin);
             edge.Twin = new HalfEdge(destination);
@@ -40,7 +40,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_EqualsNoTwins()
         {
-            Vertex origin = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(origin);
             HalfEdge otherEdge = new HalfEdge(origin);
@@ -53,9 +53,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_EqualsAllPropertiesSet()
         {
-            Vertex a = TestAux.RandomVertex();
-            Vertex b = TestAux.RandomVertex();
-            Vertex c = TestAux.RandomVertex();
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
 
             HalfEdge abOther = new HalfEdge(a);
             HalfEdge abThis = new HalfEdge(a);
@@ -106,8 +106,8 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_EqualsWithTwins()
         {
-            Vertex origin = TestAux.RandomVertex();
-            Vertex destination = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
+            Vertex destination = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(origin);
             HalfEdge otherEdge = new HalfEdge(origin);
@@ -127,8 +127,8 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_NotEqualOriginDifferent()
         {
-            HalfEdge thisEdge = TestAux.RandomHalfEdge();
-            HalfEdge otherEdge = TestAux.RandomHalfEdge();
+            HalfEdge thisEdge = Auxilaries.RandomHalfEdge();
+            HalfEdge otherEdge = Auxilaries.RandomHalfEdge();
 
             Assert.IsFalse(thisEdge.Equals(otherEdge));
             Assert.IsFalse(otherEdge.Equals(thisEdge));
@@ -139,9 +139,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_NotEqualTwinDifferent()
         {
-            Vertex origin = TestAux.RandomVertex();
-            Vertex thisDestination = TestAux.RandomVertex();
-            Vertex otherDestination = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
+            Vertex thisDestination = Auxilaries.RandomVertex();
+            Vertex otherDestination = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(origin);
             HalfEdge otherEdge = new HalfEdge(origin);
@@ -163,10 +163,10 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_NotEqualNextDifferent()
         {
-            Vertex origin = TestAux.RandomVertex();
-            Vertex destination = TestAux.RandomVertex();
-            Vertex thisNextDestination = TestAux.RandomVertex();
-            Vertex otherNextDestination = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
+            Vertex destination = Auxilaries.RandomVertex();
+            Vertex thisNextDestination = Auxilaries.RandomVertex();
+            Vertex otherNextDestination = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(origin);
             thisEdge.Twin = new HalfEdge(destination);
@@ -186,10 +186,10 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_NotEqualPreviousDifferent()
         {
-            Vertex origin = TestAux.RandomVertex();
-            Vertex destination = TestAux.RandomVertex();
-            Vertex thisPreviousOrigin = TestAux.RandomVertex();
-            Vertex otherPreviousOrigin = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
+            Vertex destination = Auxilaries.RandomVertex();
+            Vertex thisPreviousOrigin = Auxilaries.RandomVertex();
+            Vertex otherPreviousOrigin = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(origin);
             thisEdge.Twin = new HalfEdge(destination);
@@ -209,9 +209,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_NotEqualOneTwinNotSet()
         {
-            Vertex a = TestAux.RandomVertex();
-            Vertex b = TestAux.RandomVertex();
-            Vertex c = TestAux.RandomVertex();
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
 
             HalfEdge abOther = new HalfEdge(a);
             HalfEdge abThis = new HalfEdge(a);
@@ -260,9 +260,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_EqualBothTwinsNotSet()
         {
-            Vertex a = TestAux.RandomVertex();
-            Vertex b = TestAux.RandomVertex();
-            Vertex c = TestAux.RandomVertex();
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
 
             HalfEdge abOther = new HalfEdge(a);
             HalfEdge abThis = new HalfEdge(a);
@@ -310,9 +310,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_NotEqualOnePreviousNotSet()
         {
-            Vertex a = TestAux.RandomVertex();
-            Vertex b = TestAux.RandomVertex();
-            Vertex c = TestAux.RandomVertex();
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
 
             HalfEdge abOther = new HalfEdge(a);
             HalfEdge abThis = new HalfEdge(a);
@@ -361,9 +361,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_EqualBothPreviousNotSet()
         {
-            Vertex a = TestAux.RandomVertex();
-            Vertex b = TestAux.RandomVertex();
-            Vertex c = TestAux.RandomVertex();
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
 
             HalfEdge abOther = new HalfEdge(a);
             HalfEdge abThis = new HalfEdge(a);
@@ -411,9 +411,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_NotEqualOneNextNotSet()
         {
-            Vertex a = TestAux.RandomVertex();
-            Vertex b = TestAux.RandomVertex();
-            Vertex c = TestAux.RandomVertex();
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
 
             HalfEdge abOther = new HalfEdge(a);
             HalfEdge abThis = new HalfEdge(a);
@@ -462,9 +462,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_EqualBothNextNotSet()
         {
-            Vertex a = TestAux.RandomVertex();
-            Vertex b = TestAux.RandomVertex();
-            Vertex c = TestAux.RandomVertex();
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
 
             HalfEdge abOther = new HalfEdge(a);
             HalfEdge abThis = new HalfEdge(a);
@@ -512,9 +512,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_EqualBothIncidentFacesSet()
         {
-            Vertex a = TestAux.RandomVertex();
-            Vertex b = TestAux.RandomVertex();
-            Vertex c = TestAux.RandomVertex();
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
 
             HalfEdge abOther = new HalfEdge(a);
             HalfEdge abThis = new HalfEdge(a);
@@ -573,9 +573,9 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestEquals_NotEqualsDifferentIncidentFaces()
         {
-            Vertex a = TestAux.RandomVertex();
-            Vertex b = TestAux.RandomVertex();
-            Vertex c = TestAux.RandomVertex();
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
 
             HalfEdge abOther = new HalfEdge(a);
             HalfEdge abThis = new HalfEdge(a);
@@ -637,8 +637,8 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestHasTwin_HasTwin()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
-            HalfEdge twin = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
+            HalfEdge twin = Auxilaries.RandomHalfEdge();
 
             edge.Twin = twin;
 
@@ -648,7 +648,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestHasTwin_HasNoTwin()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
 
             Assert.IsFalse(edge.HasTwin);
         }
@@ -656,8 +656,8 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestHasPrevious_HasPrevious()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
-            HalfEdge previous = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
+            HalfEdge previous = Auxilaries.RandomHalfEdge();
 
             edge.Previous = previous;
 
@@ -667,7 +667,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestHasPrevious_HasNoPrevious()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
 
             Assert.IsFalse(edge.HasPrevious);
         }
@@ -675,8 +675,8 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestHasNext_HasNext()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
-            HalfEdge next = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
+            HalfEdge next = Auxilaries.RandomHalfEdge();
 
             edge.Next = next;
 
@@ -686,7 +686,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestHasNext_HasNoNext()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
 
             Assert.IsFalse(edge.HasNext);
         }
@@ -694,8 +694,8 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestHasDestination_HasDestination()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
-            HalfEdge twin = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
+            HalfEdge twin = Auxilaries.RandomHalfEdge();
 
             edge.Twin = twin;
 
@@ -705,7 +705,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestHasDestination_HasNoDestination()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
 
             Assert.IsFalse(edge.HasDestination);
         }
@@ -713,7 +713,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestHasIncidentFace_HasIncidentFace()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
 
             edge.IncidentFace = new Face(0);
 
@@ -723,7 +723,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestHasIncidentFace_HasNoIncidentFace()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
 
             Assert.IsFalse(edge.HasDestination);
         }
@@ -731,7 +731,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjNull()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
 
             int expected = 1;
             int actual = edge.CompareTo(null);
@@ -746,8 +746,8 @@ namespace Tests
 
         void TestCompareTo_ObjNotHalfedge_Helper()
         {
-            HalfEdge edge = TestAux.RandomHalfEdge();
-            Vertex vertex = TestAux.RandomVertex();
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             edge.CompareTo(vertex);
         }
@@ -779,7 +779,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualInPositionEverythingElseNull()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             HalfEdge thisHalfEdge = new HalfEdge(vertex);
             HalfEdge otherHalfEdge = new HalfEdge(vertex);
@@ -793,7 +793,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualInPositionSmallerInTwin()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
@@ -810,7 +810,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualInPositionLargerInTwin()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
@@ -827,7 +827,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualInPositionSmallerInNext()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
@@ -844,7 +844,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualInPositionLargerInNext()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
@@ -861,12 +861,12 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualInPositionSmallerInNextTwinSet()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
 
-            HalfEdge twin = TestAux.RandomHalfEdge();
+            HalfEdge twin = Auxilaries.RandomHalfEdge();
 
             thisEdge.Twin = twin;
             otherEdge.Twin = twin;
@@ -883,12 +883,12 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualInPositionLargerInNextTwinSet()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
 
-            HalfEdge twin = TestAux.RandomHalfEdge();
+            HalfEdge twin = Auxilaries.RandomHalfEdge();
 
             thisEdge.Twin = twin;
             otherEdge.Twin = twin;
@@ -905,7 +905,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualInPositionSmallerInPrevious()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
@@ -922,7 +922,7 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualInPositionLargerInPrevious()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
@@ -939,20 +939,20 @@ namespace Tests
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualInEverything()
         {
-            Vertex vertex = TestAux.RandomVertex();
+            Vertex vertex = Auxilaries.RandomVertex();
 
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
 
-            HalfEdge twin = TestAux.RandomHalfEdge();
+            HalfEdge twin = Auxilaries.RandomHalfEdge();
             thisEdge.Twin = twin;
             otherEdge.Twin = twin;
 
-            HalfEdge next = TestAux.RandomHalfEdge();
+            HalfEdge next = Auxilaries.RandomHalfEdge();
             thisEdge.Next = next;
             otherEdge.Next = next;
 
-            HalfEdge previous = TestAux.RandomHalfEdge();
+            HalfEdge previous = Auxilaries.RandomHalfEdge();
             thisEdge.Previous = previous;
             otherEdge.Previous = previous;
 
@@ -980,7 +980,7 @@ namespace Tests
         public void XIsNull()
         {
             HalfEdge x = null;
-            HalfEdge y = TestAux.RandomHalfEdge();
+            HalfEdge y = Auxilaries.RandomHalfEdge();
 
             Assert.IsFalse(comparer.Equals(x, y));
             Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
@@ -989,7 +989,7 @@ namespace Tests
         [Test, MaxTime(50)]
         public void YIsNull()
         {
-            HalfEdge x = TestAux.RandomHalfEdge();
+            HalfEdge x = Auxilaries.RandomHalfEdge();
             HalfEdge y = null;
 
             Assert.IsFalse(comparer.Equals(x, y));
@@ -1009,7 +1009,7 @@ namespace Tests
         [Test, MaxTime(50)]
         public void XAndyAreEqual()
         {
-            Vertex positon = TestAux.RandomVertex();
+            Vertex positon = Auxilaries.RandomVertex();
             HalfEdge x = new HalfEdge(positon);
             HalfEdge y = new HalfEdge(positon);
 
@@ -1020,8 +1020,8 @@ namespace Tests
         [Test, MaxTime(50)]
         public void XAndyAreNotEqual_OriginDifferent()
         {
-            HalfEdge x = TestAux.RandomHalfEdge();
-            HalfEdge y = TestAux.RandomHalfEdge();
+            HalfEdge x = Auxilaries.RandomHalfEdge();
+            HalfEdge y = Auxilaries.RandomHalfEdge();
 
             Assert.IsFalse(comparer.Equals(x, y));
             Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
@@ -1030,13 +1030,13 @@ namespace Tests
         [Test, MaxTime(50)]
         public void XAndyAreNotEqual_DestinationDifferent()
         {
-            Vertex origin = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
 
             HalfEdge x = new HalfEdge(origin);
             HalfEdge y = new HalfEdge(origin);
 
-            x.Twin = TestAux.RandomHalfEdge();
-            y.Twin = TestAux.RandomHalfEdge();
+            x.Twin = Auxilaries.RandomHalfEdge();
+            y.Twin = Auxilaries.RandomHalfEdge();
 
             Assert.IsFalse(comparer.Equals(x, y));
             Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
@@ -1045,8 +1045,8 @@ namespace Tests
         [Test, MaxTime(50)]
         public void XAndyAreEqual_NextDifferent()
         {
-            Vertex origin = TestAux.RandomVertex();
-            Vertex destination = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
+            Vertex destination = Auxilaries.RandomVertex();
 
             HalfEdge x = new HalfEdge(origin);
             HalfEdge y = new HalfEdge(origin);
@@ -1054,8 +1054,8 @@ namespace Tests
             x.Twin = new HalfEdge(destination);
             y.Twin = new HalfEdge(destination);
 
-            x.Next = TestAux.RandomHalfEdge();
-            y.Next = TestAux.RandomHalfEdge();
+            x.Next = Auxilaries.RandomHalfEdge();
+            y.Next = Auxilaries.RandomHalfEdge();
 
             Assert.IsTrue(comparer.Equals(x, y));
             Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
@@ -1064,8 +1064,8 @@ namespace Tests
         [Test, MaxTime(50)]
         public void XAndyAreEqual_PreviousDifferent()
         {
-            Vertex origin = TestAux.RandomVertex();
-            Vertex destination = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
+            Vertex destination = Auxilaries.RandomVertex();
 
             HalfEdge x = new HalfEdge(origin);
             HalfEdge y = new HalfEdge(origin);
@@ -1073,8 +1073,8 @@ namespace Tests
             x.Twin = new HalfEdge(destination);
             y.Twin = new HalfEdge(destination);
 
-            x.Previous = TestAux.RandomHalfEdge();
-            y.Previous = TestAux.RandomHalfEdge();
+            x.Previous = Auxilaries.RandomHalfEdge();
+            y.Previous = Auxilaries.RandomHalfEdge();
 
             Assert.IsTrue(comparer.Equals(x, y));
             Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
@@ -1083,8 +1083,8 @@ namespace Tests
         [Test, MaxTime(50)]
         public void XAndyAreEqual_IncidentFaceDifferent()
         {
-            Vertex origin = TestAux.RandomVertex();
-            Vertex destination = TestAux.RandomVertex();
+            Vertex origin = Auxilaries.RandomVertex();
+            Vertex destination = Auxilaries.RandomVertex();
 
             HalfEdge x = new HalfEdge(origin);
             HalfEdge y = new HalfEdge(origin);
@@ -1092,8 +1092,8 @@ namespace Tests
             x.Twin = new HalfEdge(destination);
             y.Twin = new HalfEdge(destination);
 
-            x.IncidentFace = TestAux.RandomFace();
-            y.IncidentFace = TestAux.RandomFace();
+            x.IncidentFace = Auxilaries.RandomFace();
+            y.IncidentFace = Auxilaries.RandomFace();
 
             Assert.IsTrue(comparer.Equals(x, y));
             Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
