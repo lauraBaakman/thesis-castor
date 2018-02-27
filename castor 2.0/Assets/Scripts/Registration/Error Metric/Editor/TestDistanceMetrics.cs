@@ -67,21 +67,21 @@ namespace Tests
     {
 
         private static double tolerance = 0.01;
-        private Point plane;
+        private Point modelPoint;
 
         [SetUp]
         public void Init()
         {
-            plane = new Point(new Vector3(1, 2, 3), new Vector3(0, 1, 0));
+            modelPoint = new Point(new Vector3(1, 2, 3), new Vector3(0, 1, 0));
         }
 
         [Test]
         public void TestPointToPlane_PointInFrontOfPlane()
         {
-            Point point = new Point(new Vector3(3, 5, 7));
+            Point staticPoint = new Point(new Vector3(3, 5, 7));
 
             float expected = -3;
-            float actual = DistanceMetrics.PointToPlane(point, plane);
+            float actual = DistanceMetrics.PointToPlane(staticPoint, modelPoint);
 
             Assert.AreEqual(expected, actual, tolerance);
         }
@@ -89,10 +89,10 @@ namespace Tests
         [Test]
         public void TestPointToPlane_PointToBackOfPlane()
         {
-            Point point = new Point(new Vector3(-5, -3, 6));
+            Point staticPoint = new Point(new Vector3(-5, -3, 6));
 
             float expected = +5;
-            float actual = DistanceMetrics.PointToPlane(point, plane);
+            float actual = DistanceMetrics.PointToPlane(staticPoint, modelPoint);
 
             Assert.AreEqual(expected, actual, tolerance);
         }
@@ -100,10 +100,10 @@ namespace Tests
         [Test]
         public void TestPointToPlane_PointInPlane()
         {
-            Point point = new Point(new Vector3(7, 2, 5));
+            Point staticPoint = new Point(new Vector3(7, 2, 5));
 
             float expected = +0;
-            float actual = DistanceMetrics.PointToPlane(point, plane);
+            float actual = DistanceMetrics.PointToPlane(staticPoint, modelPoint);
 
             Assert.AreEqual(expected, actual, tolerance);
         }
