@@ -125,6 +125,11 @@ namespace Registration
 
             error = Settings.ErrorMetric.ComputeError(Correspondences);
 
+            SendMessageToAllListeners(
+                "OnStepCompleted",
+                new ICPStepCompletedMessage(iterationCounter.CurrentCount, error)
+            );
+
             TerminateIfNeeded();
         }
 
