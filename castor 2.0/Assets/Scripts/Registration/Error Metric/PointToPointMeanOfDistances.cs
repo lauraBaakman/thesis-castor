@@ -20,8 +20,8 @@ namespace Registration
                     newModelPoint = correspondence.ModelPoint.ChangeTransform(orignalTransform, newTransform);
 
                     error += DistanceMetric(
-                        staticPoint: correspondence.StaticPoint.Position,
-                        modelPoint: newModelPoint.Position
+                        staticPoint: correspondence.StaticPoint,
+                        modelPoint: newModelPoint
                     );
                 }
                 error /= correspondences.Count;
