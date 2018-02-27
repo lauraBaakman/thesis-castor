@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +25,7 @@ namespace Registration
         public SelectAllPointsSelector(Transform referenceTransform, bool includeNormals = false)
         {
             ReferenceTransform = referenceTransform;
+
             if (includeNormals) selectionFunction = SelectWithNormals;
             else selectionFunction = SelectNoNormals;
         }
