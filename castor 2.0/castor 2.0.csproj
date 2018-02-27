@@ -359,7 +359,7 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\Filters\ICorrespondenceFilter.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\ICorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\NearestPointCorrespondenceFinder.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointDistanceMetrics.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\DistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\AbstractErrorMetric.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointMeanOfDistances.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\PointToPointSumOfDistances.cs" />

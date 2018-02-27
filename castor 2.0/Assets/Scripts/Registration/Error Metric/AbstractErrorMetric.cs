@@ -7,11 +7,11 @@ namespace Registration
     {
         public abstract class AbstractErrorMetric
         {
-            protected readonly PointToPointDistanceMetrics.DistanceMetric DistanceMetric;
+            protected readonly DistanceMetrics.Metric DistanceMetric;
 
-            protected AbstractErrorMetric(PointToPointDistanceMetrics.DistanceMetric distanceMetric = null)
+            protected AbstractErrorMetric(DistanceMetrics.Metric distanceMetric = null)
             {
-                DistanceMetric = distanceMetric ?? PointToPointDistanceMetrics.SquaredEuclidean;
+                DistanceMetric = distanceMetric ?? DistanceMetrics.SquaredEuclidean;
             }
 
             /// <summary>

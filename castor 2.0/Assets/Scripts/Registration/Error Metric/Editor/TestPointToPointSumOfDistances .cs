@@ -55,7 +55,7 @@ public class PointToPointSumOfDistancesTest
         float expected = 78.610000f;
         float actual =
             new PointToPointSumOfDistances(
-                PointToPointDistanceMetrics.SquaredEuclidean
+                DistanceMetrics.SquaredEuclidean
             ).ComputeError(
                 correspondences, null
             );

@@ -55,7 +55,7 @@ public class PointToPointMeanOfDistancesTest
         float expected = 26.203333333333333f;
         float actual =
             new PointToPointMeanOfDistances(
-                PointToPointDistanceMetrics.SquaredEuclidean
+                DistanceMetrics.SquaredEuclidean
             ).ComputeError(
                 correspondences, null
             );

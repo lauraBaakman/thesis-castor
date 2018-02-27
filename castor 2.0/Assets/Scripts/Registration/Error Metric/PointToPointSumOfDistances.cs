@@ -8,7 +8,7 @@ namespace Registration
         public class PointToPointSumOfDistances : AbstractErrorMetric
         {
             public PointToPointSumOfDistances(
-                PointToPointDistanceMetrics.DistanceMetric distanceMetric = null
+                DistanceMetrics.Metric distanceMetric = null
             ) : base(distanceMetric) { }
 
             public override float ComputeError(List<Correspondence> correspondences, Transform modelTransform)

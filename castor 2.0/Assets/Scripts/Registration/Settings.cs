@@ -55,7 +55,7 @@ namespace Registration
         /// The method used to compute the distances between points.
         /// </summary>
         /// <value>The point to point distance metric.</value>
-        public PointToPointDistanceMetrics.DistanceMetric DistanceMetric { get; set; }
+        public DistanceMetrics.Metric DistanceMetric { get; set; }
 
         /// <summary>
         /// The error metric used to compute the error of a registration.
@@ -87,7 +87,7 @@ namespace Registration
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
-            DistanceMetric = PointToPointDistanceMetrics.SquaredEuclidean;
+            DistanceMetric = DistanceMetrics.SquaredEuclidean;
 
             ErrorMetric = new PointToPointSumOfDistances(DistanceMetric);
 

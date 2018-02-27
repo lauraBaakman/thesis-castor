@@ -16,7 +16,7 @@ public class PointToPointDistanceMetricsTests
         Vector3 b = new Vector3(2.0f, 3.0f, 4.0f);
 
         float expected = 3.000000000000000f;
-        float actual = PointToPointDistanceMetrics.SquaredEuclidean(a, b);
+        float actual = DistanceMetrics.SquaredEuclidean(a, b);
 
         Assert.AreEqual(expected, actual, tolerance);
     }
@@ -28,7 +28,7 @@ public class PointToPointDistanceMetricsTests
         Vector3 b = new Vector3(6.7f, 7.8f, 8.9f);
 
         float expected = 32.670000000000002f;
-        float actual = PointToPointDistanceMetrics.SquaredEuclidean(a, b);
+        float actual = DistanceMetrics.SquaredEuclidean(a, b);
 
         Assert.AreEqual(expected, actual, tolerance);
     }
@@ -40,7 +40,7 @@ public class PointToPointDistanceMetricsTests
         Vector3 b = new Vector3(4.5f, 5.6f, 6.7f);
 
         float expected = 42.939999999999998f;
-        float actual = PointToPointDistanceMetrics.SquaredEuclidean(a, b);
+        float actual = DistanceMetrics.SquaredEuclidean(a, b);
 
         Assert.AreEqual(expected, actual, tolerance);
     }
@@ -53,7 +53,7 @@ public class PointToPointDistanceMetricsTests
         Vector3 b = new Vector3(-4.5f, +5.6f, -6.7f);
 
         float expected = 349.3800000000000f;
-        float actual = PointToPointDistanceMetrics.SquaredEuclidean(a, b);
+        float actual = DistanceMetrics.SquaredEuclidean(a, b);
 
         Assert.AreEqual(expected, actual, tolerance);
     }
