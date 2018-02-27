@@ -1,4 +1,5 @@
 using UnityEngine;
+using Registration.Messages;
 using Registration;
 using System.Collections.Generic;
 
@@ -104,7 +105,7 @@ namespace Fragments
         }
 
         #region ICPProgress
-        public void OnStepCompleted()
+        public void OnStepCompleted(ICPStepCompletedMessage message)
         {
             ClearCorrespondences();
         }

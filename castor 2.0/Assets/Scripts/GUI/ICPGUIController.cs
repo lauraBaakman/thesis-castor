@@ -1,5 +1,6 @@
 using UnityEngine;
 using Registration;
+using Registration.Messages;
 
 using Buttons.RegistrationButtons;
 
@@ -51,7 +52,7 @@ namespace GraphicalUI
             RegistrationButton.Button.interactable = !toggle;
         }
 
-        public void OnStepCompleted()
+        public void OnStepCompleted(ICPStepCompletedMessage message)
         {
             StepButton.Button.interactable = true;
         }

@@ -1,10 +1,10 @@
-using Registration;
+using Registration.Messages;
 using RTEditor;
 using UnityEngine;
 
 namespace Fragment
 {
-    public class SelectionController : MonoBehaviour, IFragmentStateElementToggled, RTEditor.IRTEditorEventListener, Registration.IICPStartEndListener
+    public class SelectionController : MonoBehaviour, IFragmentStateElementToggled, RTEditor.IRTEditorEventListener, IICPStartEndListener
     {
 
         private GameObject SelectedFragments;

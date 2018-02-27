@@ -1,5 +1,5 @@
 using UnityEngine;
-using Registration;
+using Registration.Messages;
 
 namespace Fragment
 {
@@ -68,7 +68,7 @@ namespace Fragment
         }
 
         #region ICPListener
-        public void OnStepCompleted() { }
+        public void OnStepCompleted(ICPStepCompletedMessage message) { }
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {

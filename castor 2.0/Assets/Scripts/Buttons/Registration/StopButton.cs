@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Registration.Messages;
 
 namespace Buttons
 {
@@ -20,7 +18,7 @@ namespace Buttons
                 if (registerer == null) return;
 
                 if (!registerer.HasTerminated) registerer.Terminate(
-                    Registration.ICPTerminatedMessage.TerminationReason.UserTerminated);
+                    ICPTerminatedMessage.TerminationReason.UserTerminated);
             }
 
             protected override bool HasDetectedKeyBoardShortCut()

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using Utils;
+using Registration.Messages;
 
 namespace Registration
 {
@@ -19,6 +20,8 @@ namespace Registration
         private List<Correspondence> Correspondences;
 
         private SamplingInformation ModelSamplingInformation;
+
+        private float error = float.MaxValue;
 
         public bool HasTerminated
         {
@@ -120,7 +123,12 @@ namespace Registration
             Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(Correspondences);
             TransformModelFragment(transformationMatrix);
 
-            SendMessageToAllListeners("OnStepCompleted");
+            error = Settings.ErrorMetric.ComputeError(Correspondences);
+
+            SendMessageToAllListeners(
+                "OnStepCompleted",
+                new ICPStepCompletedMessage(iterationCounter.CurrentCount, error)
+            );
 
             TerminateIfNeeded();
         }
@@ -136,7 +144,6 @@ namespace Registration
 
         private bool ErrorBelowThreshold()
         {
-            float error = Settings.ErrorMetric.ComputeError(Correspondences);
             return error < Settings.ErrorThreshold;
         }
 

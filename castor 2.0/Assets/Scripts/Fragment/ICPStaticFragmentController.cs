@@ -1,6 +1,4 @@
-using UnityEngine;
-using Registration;
-using System.Collections.Generic;
+using Registration.Messages;
 
 namespace Fragment
 {
@@ -21,7 +19,7 @@ namespace Fragment
             return message.IterationIndex == firstIteration;
         }
 
-        public override void OnStepCompleted() { }
+        public override void OnStepCompleted(ICPStepCompletedMessage message) { }
     }
 }
 

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using NUnit.Framework;
 
 using Registration;
+using Registration.Messages;
 
 
 [TestFixture]

@@ -5,92 +5,117 @@ using Ticker;
 
 namespace Registration
 {
-    public class ICPPreparationStepCompletedMessage
+    namespace Messages
     {
-        public readonly Transform Transform;
-
-        public readonly int IterationIndex;
-        public readonly ReadOnlyCollection<Correspondence> Correspondences;
-        public readonly ReadOnlyCollection<Point> ModelPoints;
-        public readonly ReadOnlyCollection<Point> StaticPoints;
-
-        public ICPPreparationStepCompletedMessage(List<Correspondence> correspondences, Transform transform, int iterationIndex)
+        public class ICPPreparationStepCompletedMessage
         {
-            this.Correspondences = correspondences.AsReadOnly();
-            this.Transform = transform;
+            public readonly Transform Transform;
 
-            List<Point> modelPoints = new List<Point>(correspondences.Count);
-            List<Point> staticPoints = new List<Point>(correspondences.Count);
+            public readonly int IterationIndex;
+            public readonly ReadOnlyCollection<Correspondence> Correspondences;
+            public readonly ReadOnlyCollection<Point> ModelPoints;
+            public readonly ReadOnlyCollection<Point> StaticPoints;
 
-            ExtractPoints(correspondences, ref modelPoints, ref staticPoints);
-
-            this.IterationIndex = iterationIndex;
-
-            this.ModelPoints = modelPoints.AsReadOnly();
-            this.StaticPoints = staticPoints.AsReadOnly();
-        }
-
-        public ReadOnlyCollection<Point> GetPointsByType(Fragment.ICPFragmentType type)
-        {
-            switch (type)
+            public ICPPreparationStepCompletedMessage(List<Correspondence> correspondences, Transform transform, int iterationIndex)
             {
-                case Fragment.ICPFragmentType.Model:
-                    return ModelPoints;
-                case Fragment.ICPFragmentType.Static:
-                    return StaticPoints;
-                default:
-                    throw new System.ArgumentException("Invalid enum type.");
+                this.Correspondences = correspondences.AsReadOnly();
+                this.Transform = transform;
+
+                List<Point> modelPoints = new List<Point>(correspondences.Count);
+                List<Point> staticPoints = new List<Point>(correspondences.Count);
+
+                ExtractPoints(correspondences, ref modelPoints, ref staticPoints);
+
+                this.IterationIndex = iterationIndex;
+
+                this.ModelPoints = modelPoints.AsReadOnly();
+                this.StaticPoints = staticPoints.AsReadOnly();
+            }
+
+            public ReadOnlyCollection<Point> GetPointsByType(Fragment.ICPFragmentType type)
+            {
+                switch (type)
+                {
+                    case Fragment.ICPFragmentType.Model:
+                        return ModelPoints;
+                    case Fragment.ICPFragmentType.Static:
+                        return StaticPoints;
+                    default:
+                        throw new System.ArgumentException("Invalid enum type.");
+                }
+            }
+
+            private void ExtractPoints(List<Correspondence> correspondenceList, ref List<Point> modelPoints, ref List<Point> staticPoints)
+            {
+                foreach (Correspondence correspondence in correspondenceList)
+                {
+                    modelPoints.Add(correspondence.ModelPoint);
+                    staticPoints.Add(correspondence.StaticPoint);
+                }
             }
         }
 
-        private void ExtractPoints(List<Correspondence> correspondenceList, ref List<Point> modelPoints, ref List<Point> staticPoints)
+        public class ICPTerminatedMessage : IToTickerMessage
         {
-            foreach (Correspondence correspondence in correspondenceList)
+            public enum TerminationReason
             {
-                modelPoints.Add(correspondence.ModelPoint);
-                staticPoints.Add(correspondence.StaticPoint);
+                UserTerminated,
+                ExceededNumberOfIterations,
+                ErrorBelowThreshold,
+                Error
+            }
+
+            public readonly TerminationReason Reason;
+            private readonly string message;
+
+            public ICPTerminatedMessage(TerminationReason reason, string message = "")
+            {
+                this.Reason = reason;
+                this.message = message;
+            }
+
+            public Message ToTickerMessage()
+            {
+                return new Message.InfoMessage("Terminated ICP: " + ReasonToString());
+            }
+
+            private string ReasonToString()
+            {
+                switch (Reason)
+                {
+                    case TerminationReason.UserTerminated:
+                        return "The user terminated the registration process.";
+                    case TerminationReason.ExceededNumberOfIterations:
+                        return "The number of iterations exceed the maximum number of iterations";
+                    case TerminationReason.ErrorBelowThreshold:
+                        return "The error of the current iteration was below the threshold.";
+                    case TerminationReason.Error:
+                        return message;
+                }
+                return "";
             }
         }
-    }
 
-    public class ICPTerminatedMessage : IToTickerMessage
-    {
-        public enum TerminationReason
+        public class ICPStepCompletedMessage : IToTickerMessage
         {
-            UserTerminated,
-            ExceededNumberOfIterations,
-            ErrorBelowThreshold,
-            Error
-        }
+            public readonly int IterationIndx;
+            public readonly float Error;
 
-        public readonly TerminationReason Reason;
-        private readonly string message;
-
-        public ICPTerminatedMessage(TerminationReason reason, string message = "")
-        {
-            this.Reason = reason;
-            this.message = message;
-        }
-
-        public Message ToTickerMessage()
-        {
-            return new Message.InfoMessage("Terminated ICP: " + ReasonToString());
-        }
-
-        private string ReasonToString()
-        {
-            switch (Reason)
+            public ICPStepCompletedMessage(int iterationIndx, float error)
             {
-                case TerminationReason.UserTerminated:
-                    return "The user terminated the registration process.";
-                case TerminationReason.ExceededNumberOfIterations:
-                    return "The number of iterations exceed the maximum number of iterations";
-                case TerminationReason.ErrorBelowThreshold:
-                    return "The error of the current iteration was below the threshold.";
-                case TerminationReason.Error:
-                    return message;
+                this.IterationIndx = iterationIndx;
+                this.Error = error;
             }
-            return "";
+
+            public Message ToTickerMessage()
+            {
+                return new Message.InfoMessage(
+                    string.Format(
+                        "Finished iteration {0}, the current error is {1}",
+                        IterationIndx, Error
+                    )
+                );
+            }
         }
     }
 }

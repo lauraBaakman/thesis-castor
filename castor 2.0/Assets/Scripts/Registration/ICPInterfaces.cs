@@ -1,21 +1,23 @@
-using System.Collections;
-
 namespace Registration
 {
-    public interface IICPListener
+    namespace Messages
     {
-        void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message);
+        public interface IICPListener
+        {
+            void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message);
 
-        void OnStepCompleted();
+            void OnStepCompleted(ICPStepCompletedMessage message);
 
-        void OnICPTerminated(ICPTerminatedMessage message);
+            void OnICPTerminated(ICPTerminatedMessage message);
+        }
+
+        public interface IICPStartEndListener
+        {
+            void OnICPStarted();
+
+            void OnICPTerminated(ICPTerminatedMessage message);
+        }
     }
 
-    public interface IICPStartEndListener
-    {
-        void OnICPStarted();
-
-        void OnICPTerminated(ICPTerminatedMessage message);
-    }
 }
 
