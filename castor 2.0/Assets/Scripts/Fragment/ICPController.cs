@@ -1,5 +1,5 @@
 using UnityEngine;
-using Registration;
+using Registration.Messages;
 
 namespace Fragment
 {

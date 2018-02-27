@@ -5,7 +5,7 @@ using Ticker;
 
 namespace Registration
 {
-    public class ICPPreparationStepCompletedMessage
+    namespace Messages
     {
         public readonly Transform Transform;
 

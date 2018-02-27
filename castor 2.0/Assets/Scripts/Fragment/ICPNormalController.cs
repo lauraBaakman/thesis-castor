@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Registration.Messages;
 using Registration;
 
 namespace Fragment

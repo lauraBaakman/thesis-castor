@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using Utils;
+using Registration.Messages;
 
 namespace Registration
 {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Registration.Messages;
 using Registration;
 using System.Collections.Generic;
 

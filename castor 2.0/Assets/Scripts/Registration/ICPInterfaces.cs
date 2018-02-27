@@ -2,7 +2,7 @@ using System.Collections;
 
 namespace Registration
 {
-    public interface IICPListener
+    namespace Messages
     {
         void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message);
 
