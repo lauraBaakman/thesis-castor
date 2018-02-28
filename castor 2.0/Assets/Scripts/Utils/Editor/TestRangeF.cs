@@ -143,6 +143,50 @@ namespace Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void UpdateMin_SmallerThan()
+        {
+            RangeF actual = new RangeF(-5, -3);
+            actual.UpdateMin(-7);
+
+            RangeF expected = new RangeF(-7, -3);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void UpdateMin_GreaterThan()
+        {
+            RangeF actual = new RangeF(-5, -3);
+            actual.UpdateMin(+7);
+
+            RangeF expected = new RangeF(-5, -3);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void UpdateMax_SmallerThan()
+        {
+            RangeF actual = new RangeF(-5, -3);
+            actual.UpdateMax(-4);
+
+            RangeF expected = new RangeF(-5, -3);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void UpdateMax_GreaterThan()
+        {
+            RangeF actual = new RangeF(-5, -3);
+            actual.UpdateMax(+7);
+
+            RangeF expected = new RangeF(-5, 7);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
 

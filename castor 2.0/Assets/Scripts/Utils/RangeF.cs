@@ -24,10 +24,28 @@ public class RangeF : IEquatable<RangeF>
         }
     }
 
-    public RangeF(float min, float max)
+    public RangeF(float min = float.MaxValue, float max = float.MinValue)
     {
         Min = min;
         Max = max;
+    }
+
+    /// <summary>
+    /// Updates the minimum, if the passed minimum is smaller than the current minimum.
+    /// </summary>
+    /// <param name="newMin">New minimum.</param>
+    public void UpdateMin(float newMin)
+    {
+        this.Min = Math.Min(this.Min, newMin);
+    }
+
+    /// <summary>
+    /// Updates the maximum, if the passed maximum is smaller than the current maximum.
+    /// </summary>
+    /// <param name="newMin">New maximum.</param>
+    public void UpdateMax(float newMax)
+    {
+        this.Max = Math.Max(this.Max, newMax);
     }
 
     public bool Equals(RangeF other)
