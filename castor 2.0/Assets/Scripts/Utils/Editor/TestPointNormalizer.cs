@@ -14,6 +14,8 @@ namespace Tests
         private List<Point> basePoints;
         private PointNormalizer normalizer;
 
+        private float sensitivity = float.Epsilon * 2;
+
         [SetUp]
         public void Init()
         {
@@ -50,7 +52,7 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(basePoints);
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.That(actual, Is.EqualTo(expected).Within(sensitivity));
         }
 
         [Test]
@@ -66,7 +68,7 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(basePoints);
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.That(actual, Is.EqualTo(expected).Within(sensitivity));
         }
 
         [Test]
@@ -86,7 +88,7 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.That(actual, Is.EqualTo(expected).Within(sensitivity));
         }
 
         [Test]
@@ -106,7 +108,7 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.That(actual, Is.EqualTo(expected).Within(sensitivity));
         }
 
         [Test]
@@ -126,7 +128,7 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.That(actual, Is.EqualTo(expected).Within(sensitivity));
         }
 
         [Test]
@@ -146,7 +148,7 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.That(actual, Is.EqualTo(expected).Within(sensitivity));
         }
 
         [Test]
