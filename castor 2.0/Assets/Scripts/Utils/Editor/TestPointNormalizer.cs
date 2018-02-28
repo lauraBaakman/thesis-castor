@@ -10,28 +10,26 @@ namespace Tests
     [TestFixture]
     public class PointNormalizerTests
     {
-
-        private int numBasePoints = 5;
         private List<Point> basePoints;
         private PointNormalizer normalizer;
 
         [SetUp]
         public void Init()
         {
-            Random.InitState(42);
-            basePoints = new List<Point>();
-            for (int i = 0; i < numBasePoints; i++)
+            basePoints = new List<Point>
             {
-                basePoints.Add(new Point(Random.insideUnitSphere));
-            }
+                new Point(new Vector3(+0.0f, +0.0f, +0.9f)),
+                new Point(new Vector3(-0.2f, -0.8f, +0.1f)),
+                new Point(new Vector3(-0.3f, -0.1f, +0.0f)),
+                new Point(new Vector3(+0.9f, +0.4f, -0.1f)),
+                new Point(new Vector3(-0.3f, -0.4f, -0.3f)),
+            };
             normalizer = new PointNormalizer();
         }
 
         [Test]
         public void TestComputeNormalizationMatrix_AllInUnitSphere()
         {
-            basePoints.Add(new Point(new Vector3(0, 0, 1)));
-
             Matrix4x4 expected = new Matrix4x4();
             expected.SetTRS(
                 pos: new Vector3(),
