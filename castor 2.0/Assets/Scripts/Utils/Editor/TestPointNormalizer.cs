@@ -4,6 +4,7 @@ using Registration;
 using System.Collections.Generic;
 using NUnit.Framework.Constraints;
 using System.Collections.ObjectModel;
+using Utils;
 
 namespace Tests
 {
