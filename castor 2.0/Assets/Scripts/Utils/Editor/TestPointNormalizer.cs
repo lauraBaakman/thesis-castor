@@ -28,21 +28,7 @@ namespace Tests
             normalizer = new PointNormalizer();
         }
 
-        [Test]
-        public void TestComputeNormalizationMatrix_AllInUnitSphere()
-        {
-            Matrix4x4 expected = new Matrix4x4();
-            expected.SetTRS(
-                pos: new Vector3(),
-                q: Quaternion.identity,
-                s: new Vector3(1, 1, 1)
-            );
-
-            Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(basePoints);
-        }
-
-        [Test]
-        public void TestComputeNormalizationMatrix_AllInUnitSphereAndOneOn()
+        private void AddPointsOnUnitSphereToBasePoints()
         {
             basePoints.Add(new Point(new Vector3(0, 0, +1)));
             basePoints.Add(new Point(new Vector3(0, 0, -1)));
@@ -50,6 +36,27 @@ namespace Tests
             basePoints.Add(new Point(new Vector3(0, -1, 0)));
             basePoints.Add(new Point(new Vector3(+1, 0, 0)));
             basePoints.Add(new Point(new Vector3(-1, 0, 0)));
+        }
+
+        [Test]
+        public void TestComputeNormalizationMatrix_AllInUnitSphere()
+        {
+            Assert.Fail("Compute expected");
+            Matrix4x4 expected = new Matrix4x4();
+            expected.SetTRS(
+                pos: new Vector3(),
+                q: Quaternion.identity,
+                s: new Vector3(1, 1, 1)
+            );
+
+            Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(basePoints);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TestComputeNormalizationMatrix_AllInUnitSphereAndOneOn()
+        {
+            AddPointsOnUnitSphereToBasePoints();
 
             Matrix4x4 expected = new Matrix4x4();
             expected.SetTRS(
@@ -59,11 +66,14 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(basePoints);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void TestComputeNormalizationMatrix_OnlyNeedsScaling()
         {
+            AddPointsOnUnitSphereToBasePoints();
+
             Vector3 translation = new Vector3();
             Vector3 scale = new Vector3(2, 3, 5);
             List<Point> points = ScaleAndTranslate(translation, scale, basePoints.AsReadOnly());
@@ -76,11 +86,14 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void TestComputeNormalizationMatrix_OnlyNeedsTranslation()
         {
+            AddPointsOnUnitSphereToBasePoints();
+
             Vector3 translation = new Vector3(2, 3, 4);
             Vector3 scale = new Vector3(1, 1, 1);
             List<Point> points = ScaleAndTranslate(translation, scale, basePoints.AsReadOnly());
@@ -93,11 +106,14 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void TestComputeNormalizationMatrix_NeedsScalingAndTranslation()
         {
+            AddPointsOnUnitSphereToBasePoints();
+
             Vector3 translation = new Vector3(2, 3, 4);
             Vector3 scale = new Vector3(5, 6, 7);
             List<Point> points = ScaleAndTranslate(translation, scale, basePoints.AsReadOnly());
@@ -110,11 +126,34 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TestComputeNormalizationMatrix_NeedsScalingAndTranslation_NoPointsOnSphere()
+        {
+            Assert.Fail("Computed expected");
+
+            Vector3 translation = new Vector3(2, 3, 4);
+            Vector3 scale = new Vector3(5, 6, 7);
+            List<Point> points = ScaleAndTranslate(translation, scale, basePoints.AsReadOnly());
+
+            Matrix4x4 expected = new Matrix4x4();
+            expected.SetTRS(
+                pos: translation,
+                q: Quaternion.identity,
+                s: scale
+            );
+
+            Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void TestNormalize_AllInUnitSphere()
         {
+            AddPointsOnUnitSphereToBasePoints();
+
             List<Point> points = basePoints;
             IEnumerable<Point> normalizedPoints = normalizer.Normalize(basePoints);
             foreach (Point point in normalizedPoints)
@@ -127,6 +166,8 @@ namespace Tests
         [Test]
         public void TestNormalize_NeedsScalingAndTranslation()
         {
+            Assert.Fail("Computed expected");
+
             List<Point> points = ScaleAndTranslate(new Vector3(1, 2, 3), new Vector3(3, 4, 5), basePoints.AsReadOnly());
             IEnumerable<Point> normalizedPoints = normalizer.Normalize(basePoints);
             foreach (Point point in normalizedPoints)
