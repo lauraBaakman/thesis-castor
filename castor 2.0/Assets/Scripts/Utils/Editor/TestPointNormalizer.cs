@@ -43,7 +43,12 @@ namespace Tests
         [Test]
         public void TestComputeNormalizationMatrix_AllInUnitSphereAndOneOn()
         {
-            basePoints.Add(new Point(new Vector3(0, 0, 1)));
+            basePoints.Add(new Point(new Vector3(0, 0, +1)));
+            basePoints.Add(new Point(new Vector3(0, 0, -1)));
+            basePoints.Add(new Point(new Vector3(0, +1, 0)));
+            basePoints.Add(new Point(new Vector3(0, -1, 0)));
+            basePoints.Add(new Point(new Vector3(+1, 0, 0)));
+            basePoints.Add(new Point(new Vector3(-1, 0, 0)));
 
             Matrix4x4 expected = new Matrix4x4();
             expected.SetTRS(
