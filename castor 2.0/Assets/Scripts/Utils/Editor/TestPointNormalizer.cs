@@ -153,7 +153,7 @@ namespace Tests
                 new Point(new Vector3(1.0000f, 2.0000f, 3.9000f)),
                 new Point(new Vector3(0.4000f, 0.4000f, 3.1000f)),
                 new Point(new Vector3(0.1000f, 1.8000f, 3.0000f)),
-                new Point(new Vector3(3.7000f, 2.8000f, 2.8000f)),
+                new Point(new Vector3(3.7000f, 2.8000f, 2.9000f)),
                 new Point(new Vector3(0.1000f, 1.2000f, 2.7000f))
             };
 
