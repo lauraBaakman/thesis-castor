@@ -87,10 +87,10 @@ namespace Registration
         {
             if (other == null) return false;
 
-            return (
-                this.position.Equals(other.position) &&
-                this.normal.Equals(other.normal)
-            );
+            bool positionEqual = (this.Position == other.Position);
+            bool normalEqual = (this.normal == other.normal);
+
+            return (positionEqual && normalEqual);
         }
 
         public override int GetHashCode()
