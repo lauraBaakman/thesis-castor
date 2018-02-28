@@ -331,6 +331,7 @@
     <Compile Include="Assets\Scripts\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Matrix4x4Extensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\QuaternionExtensions.cs" />
+    <Compile Include="Assets\Scripts\Extensions\RayCastHitExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\SystemRandomExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
@@ -359,15 +360,18 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\Filters\ICorrespondenceFilter.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\ICorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\NearestPointCorrespondenceFinder.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\DistanceMetrics.cs" />
+    <Compile Include="Assets\Scripts\Registration\Correspondences\NormalShootingCorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\AbstractErrorMetric.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\DistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\MeanOfDistances.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\SumOfDistances.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\SumOfSquaredDistances.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPInterfaces.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />
     <Compile Include="Assets\Scripts\Registration\Point.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSelector.cs" />
+    <Compile Include="Assets\Scripts\Registration\PointSelection\SamplingInformation.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\SelectAllPointsSelector.cs" />
     <Compile Include="Assets\Scripts\Registration\Settings.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\LandmarkTransform.cs" />
@@ -519,11 +523,8 @@
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
     <Compile Include="Assets\Scripts\Utils\Pair.cs" />
+    <Compile Include="Assets\Scripts\Utils\PointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Registration\PointSelection\SamplingInformation.cs" />
-    <Compile Include="Assets\Scripts\Registration\Correspondences\NormalShootingCorrespondenceFinder.cs" />
-    <Compile Include="Assets\Scripts\Extensions\RayCastHitExtensions.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\SumOfSquaredDistances.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
