@@ -180,9 +180,23 @@ namespace Tests
             Vector3 translation = new Vector3(1, 2, 3);
             Vector3 scale = new Vector3(3, 2, 1);
 
-            Point point = new Point(new Vector3(0.0f, 0.0f, 0.9f));
+            Point point = new Point(new Vector3(-0.2f, -0.8f, +0.1f));
 
-            Point expected = new Point(new Vector3(1.0000f, 2.0000f, 3.9000f));
+            Point expected = new Point(new Vector3(0.4000f, 0.4000f, 3.1000f));
+            Point actual = ScaleAndTranslate(translation, scale, point);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TestScaleAndTranslate_NonUnitTransform_2()
+        {
+            Vector3 translation = new Vector3(1, 2, 3);
+            Vector3 scale = new Vector3(3, 2, 1);
+
+            Point point = new Point(new Vector3(-0.3f, -0.4f, -0.3f));
+
+            Point expected = new Point(new Vector3(0.1000f, 1.2000f, 2.7000f));
             Point actual = ScaleAndTranslate(translation, scale, point);
 
             Assert.That(actual, Is.EqualTo(expected));
