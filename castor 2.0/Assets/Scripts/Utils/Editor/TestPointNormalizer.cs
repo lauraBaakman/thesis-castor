@@ -43,12 +43,11 @@ namespace Tests
         [Test]
         public void TestComputeNormalizationMatrix_AllInUnitSphere()
         {
-            Assert.Fail("Compute expected");
             Matrix4x4 expected = new Matrix4x4();
             expected.SetTRS(
-                pos: new Vector3(),
+                pos: new Vector3(-0.3f, +0.2f, -0.3f),
                 q: Quaternion.identity,
-                s: new Vector3(1, 1, 1)
+                s: new Vector3(1 + 2f / 3f, 1 + 2f / 3f, 1 + 2f / 3f)
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(basePoints);
@@ -77,14 +76,14 @@ namespace Tests
             AddPointsOnUnitSphereToBasePoints();
 
             Vector3 translation = new Vector3();
-            Vector3 scale = new Vector3(2, 3, 5);
+            Vector3 scale = new Vector3(5, 3, 2);
             List<Point> points = ScaleAndTranslate(translation, scale, basePoints.AsReadOnly());
 
             Matrix4x4 expected = new Matrix4x4();
             expected.SetTRS(
                 pos: translation,
                 q: Quaternion.identity,
-                s: scale
+                s: new Vector3(1f / 5, 1f / 3, 1f / 2)
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
@@ -96,13 +95,13 @@ namespace Tests
         {
             AddPointsOnUnitSphereToBasePoints();
 
-            Vector3 translation = new Vector3(2, 3, 4);
+            Vector3 translation = new Vector3(2, 3, -4);
             Vector3 scale = new Vector3(1, 1, 1);
             List<Point> points = ScaleAndTranslate(translation, scale, basePoints.AsReadOnly());
 
             Matrix4x4 expected = new Matrix4x4();
             expected.SetTRS(
-                pos: translation,
+                pos: -1f * translation,
                 q: Quaternion.identity,
                 s: scale
             );
@@ -117,14 +116,14 @@ namespace Tests
             AddPointsOnUnitSphereToBasePoints();
 
             Vector3 translation = new Vector3(2, 3, 4);
-            Vector3 scale = new Vector3(5, 6, 7);
+            Vector3 scale = new Vector3(5, 3, 2);
             List<Point> points = ScaleAndTranslate(translation, scale, basePoints.AsReadOnly());
 
             Matrix4x4 expected = new Matrix4x4();
             expected.SetTRS(
-                pos: translation,
+                pos: -1 * translation,
                 q: Quaternion.identity,
-                s: scale
+                s: new Vector3(1f / 5, 1f / 3, 1f / 2)
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
@@ -134,17 +133,15 @@ namespace Tests
         [Test]
         public void TestComputeNormalizationMatrix_NeedsScalingAndTranslation_NoPointsOnSphere()
         {
-            Assert.Fail("Computed expected");
-
             Vector3 translation = new Vector3(2, 3, 4);
-            Vector3 scale = new Vector3(5, 6, 7);
+            Vector3 scale = new Vector3(5, 3, 2);
             List<Point> points = ScaleAndTranslate(translation, scale, basePoints.AsReadOnly());
 
             Matrix4x4 expected = new Matrix4x4();
             expected.SetTRS(
-                pos: translation,
+                pos: new Vector3(-3.75f, -2.40f, -4.60f),
                 q: Quaternion.identity,
-                s: scale
+                s: new Vector3(2f / 5.5f, 2f / 3.6f, 2f / 24f)
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
@@ -155,7 +152,6 @@ namespace Tests
         public void TestNormalize_AllInUnitSphere()
         {
             AddPointsOnUnitSphereToBasePoints();
-
             List<Point> points = basePoints;
             IEnumerable<Point> normalizedPoints = normalizer.Normalize(basePoints);
             foreach (Point point in normalizedPoints)
@@ -168,14 +164,22 @@ namespace Tests
         [Test]
         public void TestNormalize_NeedsScalingAndTranslation()
         {
-            Assert.Fail("Computed expected");
+            IEnumerable<Point> expected = new List<Point>
+            {
+                new Point(new Vector3(-0.6363636364f, +0.3333333333f, +1.0000000000f)),
+                new Point(new Vector3(-1.0000000000f, -1.0000000000f, -0.3333333333f)),
+                new Point(new Vector3(-1.1818181818f, +0.1666666667f, -0.5000000000f)),
+                new Point(new Vector3(+1.0000000000f, +1.0000000000f, -0.6666666667f)),
+                new Point(new Vector3(-1.1818181818f, -0.3333333333f, -1.0000000000f))
+            };
 
-            List<Point> points = ScaleAndTranslate(new Vector3(1, 2, 3), new Vector3(3, 4, 5), basePoints.AsReadOnly());
-            IEnumerable<Point> normalizedPoints = normalizer.Normalize(basePoints);
-            foreach (Point point in normalizedPoints)
+            List<Point> input = ScaleAndTranslate(new Vector3(2, 3, 4), new Vector3(5, 3, 2), basePoints.AsReadOnly());
+            IEnumerable<Point> actual = normalizer.Normalize(basePoints);
+            foreach (Point point in actual)
             {
                 Assert.That(point, new IsInUnitCircleInclusiveConstraint());
             }
+            Assert.That(actual, Is.EquivalentTo(expected));
         }
 
         [Test]
