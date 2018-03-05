@@ -14,7 +14,7 @@ namespace Tests
         private List<Point> basePoints;
         private PointNormalizer normalizer;
 
-        private float sensitivity = 0.0000001f;
+        private float sensitivity = 0.000001f;
 
         [SetUp]
         public void Init()
