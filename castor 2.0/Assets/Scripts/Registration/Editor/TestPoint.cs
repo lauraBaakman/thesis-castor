@@ -274,5 +274,51 @@ namespace Tests
             Assert.AreEqual(expected, actual);
             Assert.AreNotSame(expected, actual);
         }
+
+        [Test]
+        public void TestApplyTransform_NeutralTransform()
+        {
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Point point = new Point(new Vector3(2.0f, 3.0f, 4.0f), normal);
+            Matrix4x4 transformation = new Matrix4x4();
+            transformation.SetTRS(
+                pos: new Vector3(0, 0, 0),
+                q: Quaternion.identity,
+                s: new Vector3(1, 1, 1)
+            );
+
+            Point expected = new Point(new Vector3(), normal);
+            Point actual = point.ApplyTransform(transformation);
+
+            Assert.That(actual.Position, Is.EqualTo(expected.Position));
+            Assert.That(actual.Normal, Is.EqualTo(expected.Normal));
+            Assert.That(actual.Color, Is.EqualTo(point.Color));
+
+            Assert.That(actual, Is.Not.SameAs(point));
+        }
+
+        [Test]
+        public void TestApplyTransform_NonNeutralTransform()
+        {
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Point point = new Point(new Vector3(2.0f, 3.0f, 4.0f), normal);
+            Matrix4x4 transformation = new Matrix4x4();
+            transformation.SetTRS(
+                pos: new Vector3(0.5f, 2, 4),
+                q: Quaternion.identity,
+                s: new Vector3(2, 0.5f, 2)
+            );
+
+            Point expected = new Point(new Vector3(5.0f, 2.5f, 16.0f), normal);
+            Point actual = point.ApplyTransform(transformation);
+
+            Assert.That(actual.Position, Is.EqualTo(expected.Position));
+            Assert.That(actual.Normal, Is.EqualTo(expected.Normal));
+            Assert.That(actual.Color, Is.EqualTo(point.Color));
+
+            Assert.That(actual, Is.Not.SameAs(point));
+        }
     }
 }

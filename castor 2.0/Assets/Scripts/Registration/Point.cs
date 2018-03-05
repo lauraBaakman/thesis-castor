@@ -53,6 +53,18 @@ namespace Registration
             : this(position, normal: NoNormal)
         { }
 
+        private Point(Vector3 position, Vector3 normal, Color color)
+        {
+            this.position = position;
+            this.normal = normal;
+            this.color = color;
+        }
+
+        private Point(Vector4 newPosition, Point oldPoint)
+            : this(new Vector3(newPosition.x, newPosition.y, newPosition.z),
+                   oldPoint.normal, oldPoint.Color)
+        { }
+
         private bool hasNormal()
         {
             return this.normal != NoNormal;
@@ -149,6 +161,13 @@ namespace Registration
                 position: Position.ChangeTransformOfPosition(sourceTransform, destinationTransform),
                 normal: HasNormal ? Normal.ChangeTransformOfDirection(sourceTransform, destinationTransform) : NoNormal
             );
+        }
+
+        public Point ApplyTransform(Matrix4x4 transformationMatrix)
+        {
+            Vector4 homogenousPosition = this.ToHomogeneousVector4();
+            Vector4 transformedPosition = transformationMatrix * homogenousPosition;
+            return new Point(transformedPosition, this);
         }
     }
 }
