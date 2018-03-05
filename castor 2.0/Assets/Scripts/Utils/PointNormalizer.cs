@@ -25,6 +25,7 @@ namespace Utils
     internal class _PointNormalizer
     {
         private static Vector3 origin = new Vector3(0, 0, 0);
+        private static Vector3 unitSphereAxes = new Vector3(2, 2, 2);
 
         IEnumerable<Point> Points;
 
@@ -74,7 +75,16 @@ namespace Utils
 
         private Vector3 ComputeScale()
         {
-            return new Vector3(1, 1, 1);
+            return new Vector3(
+                x: ComputeScale(unitSphereAxes.x, xRange),
+                y: ComputeScale(unitSphereAxes.y, yRange),
+                z: ComputeScale(unitSphereAxes.z, zRange)
+            );
+        }
+
+        private float ComputeScale(float requestedWidth, RangeF range)
+        {
+            return requestedWidth / range.Length;
         }
     }
 }
