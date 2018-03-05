@@ -14,7 +14,7 @@ namespace Tests
         private List<Point> basePoints;
         private PointNormalizer normalizer;
 
-        private float sensitivity = float.Epsilon * 2;
+        private float sensitivity = 0.0000001f;
 
         [SetUp]
         public void Init()
