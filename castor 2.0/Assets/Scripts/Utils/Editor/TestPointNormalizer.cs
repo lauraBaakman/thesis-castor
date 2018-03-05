@@ -172,7 +172,7 @@ namespace Tests
         [Test]
         public void TestNormalize_NeedsScalingAndTranslation()
         {
-            IEnumerable<Point> expected = new List<Point>
+            List<Point> expected = new List<Point>
             {
                 new Point(new Vector3(-0.5000000000f, +0.3333333333f, +1.0000000000f)),
                 new Point(new Vector3(-0.8333333333f, -1.0000000000f, -0.3333333333f)),
@@ -182,12 +182,17 @@ namespace Tests
             };
 
             List<Point> input = ScaleAndTranslate(new Vector3(2, 3, 4), new Vector3(5, 3, 2), basePoints.AsReadOnly());
-            IEnumerable<Point> actual = normalizer.Normalize(basePoints);
-            foreach (Point point in actual)
+            List<Point> actual = new List<Point>();
+            actual.AddRange(normalizer.Normalize(input));
+            Point actualPoint, expectedPoint;
+            for (int i = 0; i < expected.Count; i++)
             {
-                Assert.That(point, new IsInUnitCircleInclusiveConstraint());
+                actualPoint = actual[i];
+                expectedPoint = expected[i];
+
+                Assert.That(actualPoint, new IsInUnitCircleInclusiveConstraint());
+                Assert.AreEqual(expectedPoint, actualPoint);
             }
-            Assert.That(actual, Is.EquivalentTo(expected));
         }
 
         [Test]
