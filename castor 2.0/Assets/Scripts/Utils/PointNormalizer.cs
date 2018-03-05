@@ -47,12 +47,17 @@ namespace Utils
         {
             this.Points = points;
 
-            NormalizationMatrix = new Matrix4x4();
-            NormalizationMatrix.SetTRS(
-                pos: ComputeTranslation(),
-                q: Quaternion.identity,
-                s: ComputeScale()
-            );
+            //The translation matrix needs to be compute before the scale matrix
+            Matrix4x4 translation = ComputeTranslationMatrix();
+            Matrix4x4 scale = ComputeScaleMatrix();
+
+            //First apply the translation, then the scaling, not the other way around as the result of SetTRS does
+            NormalizationMatrix = scale * translation;
+        }
+
+        private Matrix4x4 ComputeTranslationMatrix()
+        {
+            return new Matrix4x4().SetTranslation(ComputeTranslation());
         }
 
         private Vector3 ComputeTranslation()
@@ -79,6 +84,11 @@ namespace Utils
                 range.UpdateMin(point.Position[idx]);
                 range.UpdateMax(point.Position[idx]);
             }
+        }
+
+        private Matrix4x4 ComputeScaleMatrix()
+        {
+            return new Matrix4x4().SetScale(ComputeScale()); ;
         }
 
         private Vector3 ComputeScale()
