@@ -20,7 +20,7 @@ public static class Matrix4x4Extensions
     /// </summary>
     /// <returns>The rotation.</returns>
     /// <param name="matrix">Matrix.</param>
-    public static Quaternion ExtratRotation(this Matrix4x4 matrix)
+    public static Quaternion ExtractRotation(this Matrix4x4 matrix)
     {
         Vector3 forward = matrix.GetColumn(2);
         Vector3 upwards = matrix.GetColumn(1);

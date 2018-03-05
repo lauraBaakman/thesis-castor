@@ -64,7 +64,7 @@ namespace Tests
             );
 
             Quaternion expected = rotation;
-            Quaternion actual = matrix.ExtratRotation();
+            Quaternion actual = matrix.ExtractRotation();
 
             //source https://answers.unity.com/answers/288354/view.html
             float angle = Quaternion.Angle(actual, expected);
@@ -86,7 +86,7 @@ namespace Tests
             );
 
             Quaternion expected = rotation;
-            Quaternion actual = matrix.ExtratRotation();
+            Quaternion actual = matrix.ExtractRotation();
 
             //source https://answers.unity.com/answers/288354/view.html
             float angle = Quaternion.Angle(actual, expected);
