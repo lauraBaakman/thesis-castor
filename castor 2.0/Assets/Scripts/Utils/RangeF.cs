@@ -10,7 +10,7 @@ public class RangeF : IEquatable<RangeF>
     {
         get
         {
-            validateRange();
+            ValidateRange();
             return (this.Max - this.Min);
         }
     }
@@ -19,7 +19,7 @@ public class RangeF : IEquatable<RangeF>
     {
         get
         {
-            validateRange();
+            ValidateRange();
             return this.Min + (this.Length / 2.0f);
         }
     }
@@ -76,7 +76,7 @@ public class RangeF : IEquatable<RangeF>
         return hash;
     }
 
-    private void validateRange()
+    private void ValidateRange()
     {
         if (Max < Min) throw new ArgumentException("The maximum is smaller than the minimum");
     }
