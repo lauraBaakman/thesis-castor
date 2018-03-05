@@ -152,7 +152,7 @@ namespace Tests
         }
 
         [Test]
-        public void TestSet_Scale()
+        public void TestSet_Scale_VectorInput()
         {
             Vector3 scale = new Vector3(1, 2, 3);
             Matrix4x4 matrix = new Matrix4x4().SetScale(scale);
@@ -161,6 +161,20 @@ namespace Tests
             expected.SetTRS(new Vector3(), Quaternion.identity, scale);
 
             Assert.AreEqual(scale, matrix.ExtractScale());
+            Assert.AreEqual(expected, matrix);
+        }
+
+        [Test]
+        public void TestSet_Scale_ScalarInput()
+        {
+            float scale = 5;
+            Vector3 scaleVector = new Vector3(scale, scale, scale);
+            Matrix4x4 matrix = new Matrix4x4().SetScale(scale);
+
+            Matrix4x4 expected = new Matrix4x4();
+            expected.SetTRS(new Vector3(), Quaternion.identity, scaleVector);
+
+            Assert.AreEqual(scaleVector, matrix.ExtractScale());
             Assert.AreEqual(expected, matrix);
         }
     }

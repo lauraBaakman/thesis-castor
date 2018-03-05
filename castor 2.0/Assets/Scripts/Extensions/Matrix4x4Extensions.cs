@@ -72,4 +72,15 @@ public static class Matrix4x4Extensions
         matrix.SetTRS(new Vector3(), Quaternion.identity, scale);
         return matrix;
     }
+
+    /// <summary>
+    /// Sets the uniform scale of the matrix.
+    /// </summary>
+    /// <returns>The scale.</returns>
+    /// <param name="matrix">Matrix.</param>
+    /// <param name="scale">Scale.</param>
+    public static Matrix4x4 SetScale(this Matrix4x4 matrix, float scale)
+    {
+        return matrix.SetScale(new Vector3(scale, scale, scale));
+    }
 }
