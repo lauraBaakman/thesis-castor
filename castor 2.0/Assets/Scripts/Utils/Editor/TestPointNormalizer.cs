@@ -52,6 +52,7 @@ namespace Tests
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(basePoints);
 
+            /// Matrix Asserts ignore the within
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)
                     Assert.That(expected[i, j], Is.EqualTo(actual[i, j]).Within(sensitivity));
@@ -142,13 +143,17 @@ namespace Tests
 
             Matrix4x4 expected = new Matrix4x4();
             expected.SetTRS(
-                pos: new Vector3(-3.75f, -2.40f, -4.60f),
+                pos: new Vector3(-3.5f, -2.40f, -4.60f),
                 q: Quaternion.identity,
-                s: new Vector3(2f / 5.5f, 2f / 3.6f, 2f / 24f)
+                s: new Vector3(2f / 6.0f, 2f / 3.6f, 2f / 2.4f)
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points);
-            Assert.That(actual, Is.EqualTo(expected).Within(sensitivity));
+
+            /// Matrix Asserts ignore the within
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 4; j++)
+                    Assert.That(expected[i, j], Is.EqualTo(actual[i, j]).Within(sensitivity));
         }
 
         [Test]
@@ -169,11 +174,11 @@ namespace Tests
         {
             IEnumerable<Point> expected = new List<Point>
             {
-                new Point(new Vector3(-0.6363636364f, +0.3333333333f, +1.0000000000f)),
-                new Point(new Vector3(-1.0000000000f, -1.0000000000f, -0.3333333333f)),
-                new Point(new Vector3(-1.1818181818f, +0.1666666667f, -0.5000000000f)),
+                new Point(new Vector3(-0.5000000000f, +0.3333333333f, +1.0000000000f)),
+                new Point(new Vector3(-0.8333333333f, -1.0000000000f, -0.3333333333f)),
+                new Point(new Vector3(-1.0000000000f, +0.1666666667f, -0.5000000000f)),
                 new Point(new Vector3(+1.0000000000f, +1.0000000000f, -0.6666666667f)),
-                new Point(new Vector3(-1.1818181818f, -0.3333333333f, -1.0000000000f))
+                new Point(new Vector3(-1.0000000000f, -0.3333333333f, -1.0000000000f))
             };
 
             List<Point> input = ScaleAndTranslate(new Vector3(2, 3, 4), new Vector3(5, 3, 2), basePoints.AsReadOnly());
