@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Utils
 {
     /// <summary>
-    /// Normalize points to ensure that they all fall within the unit sphere. This
+    /// Normalize points to ensure that they all fall within the unit cube. This
     /// ensures that the magnitude of the angles and the distances are comparable.
     /// </summary>
     public class PointNormalizer
@@ -88,21 +88,18 @@ namespace Utils
 
         private Matrix4x4 ComputeScaleMatrix()
         {
-            return new Matrix4x4().SetScale(ComputeScale()); ;
+            float xScale = ComputeScaleForDimension(xRange);
+            float yScale = ComputeScaleForDimension(yRange);
+            float zScale = ComputeScaleForDimension(zRange);
+
+            float scale = Mathf.Min(xScale, yScale, zScale);
+
+            return new Matrix4x4().SetScale(scale); ;
         }
 
-        private Vector3 ComputeScale()
+        private float ComputeScaleForDimension(RangeF range)
         {
-            return new Vector3(
-                x: ComputeScale(unitSphereAxes.x, xRange),
-                y: ComputeScale(unitSphereAxes.y, yRange),
-                z: ComputeScale(unitSphereAxes.z, zRange)
-            );
-        }
-
-        private float ComputeScale(float requestedWidth, RangeF range)
-        {
-            return requestedWidth / range.Length;
+            return 1.0f / range.Length;
         }
     }
 }
