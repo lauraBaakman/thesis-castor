@@ -51,4 +51,25 @@ public static class Matrix4x4Extensions
         return scale;
     }
 
+    /// <summary>
+    /// Sets the translation of the matrix.
+    /// </summary>
+    /// <param name="matrix">Matrix.</param>
+    /// <param name="translation">Translation.</param>
+    public static Matrix4x4 SetTranslation(this Matrix4x4 matrix, Vector3 translation)
+    {
+        matrix.SetTRS(translation, Quaternion.identity, new Vector3(1, 1, 1));
+        return matrix;
+    }
+
+    /// <summary>
+    /// Sets the scale of the matrix.
+    /// </summary>
+    /// <param name="matrix">Matrix.</param>
+    /// <param name="scale">Scale.</param>
+    public static Matrix4x4 SetScale(this Matrix4x4 matrix, Vector3 scale)
+    {
+        matrix.SetTRS(new Vector3(), Quaternion.identity, scale);
+        return matrix;
+    }
 }

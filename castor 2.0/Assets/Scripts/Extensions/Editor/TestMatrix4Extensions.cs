@@ -137,5 +137,31 @@ namespace Tests
             float angle = Quaternion.Angle(actual, expected);
             Assert.AreEqual(expected: 0.0f, actual: angle);
         }
+
+        [Test]
+        public void TestSet_Translation()
+        {
+            Vector3 translation = new Vector3(1, 2, 3);
+            Matrix4x4 matrix = new Matrix4x4().SetTranslation(translation);
+
+            Matrix4x4 expected = new Matrix4x4();
+            expected.SetTRS(translation, Quaternion.identity, new Vector3(1, 1, 1));
+
+            Assert.AreEqual(translation, matrix.ExtractTranslation());
+            Assert.AreEqual(expected, matrix);
+        }
+
+        [Test]
+        public void TestSet_Scale()
+        {
+            Vector3 scale = new Vector3(1, 2, 3);
+            Matrix4x4 matrix = new Matrix4x4().SetScale(scale);
+
+            Matrix4x4 expected = new Matrix4x4();
+            expected.SetTRS(new Vector3(), Quaternion.identity, scale);
+
+            Assert.AreEqual(scale, matrix.ExtractScale());
+            Assert.AreEqual(expected, matrix);
+        }
     }
 }
