@@ -51,6 +51,52 @@ namespace Tests
         }
 
         [Test]
+        public void TestExtractScale_OnlyScaleSet()
+        {
+            Vector3 translation = new Vector3();
+            Quaternion rotation = Quaternion.identity;
+            Vector3 scale = new Vector3(2, 3, 4);
+
+            Matrix4x4 matrix = new Matrix4x4();
+            matrix.SetTRS(
+                pos: translation,
+                q: rotation,
+                s: scale
+            );
+
+            Vector3 expected = scale;
+            Vector3 actual = matrix.ExtractScale();
+
+            Assert.AreEqual(
+                actual: actual,
+                expected: expected
+            );
+        }
+
+        [Test]
+        public void TestExtractScale_TRSSet()
+        {
+            Vector3 translation = new Vector3(Random.value, Random.value, Random.value);
+            Quaternion rotation = Random.rotation;
+            Vector3 scale = new Vector3(2, 3, 4);
+
+            Matrix4x4 matrix = new Matrix4x4();
+            matrix.SetTRS(
+                pos: translation,
+                q: rotation,
+                s: scale
+            );
+
+            Vector3 expected = scale;
+            Vector3 actual = matrix.ExtractScale();
+
+            Assert.AreEqual(
+                actual: actual,
+                expected: expected
+            );
+        }
+
+        [Test]
         public void TestExtractRotation_OnlyRotationSet()
         {
             Vector3 translation = new Vector3(Random.value, Random.value, Random.value);

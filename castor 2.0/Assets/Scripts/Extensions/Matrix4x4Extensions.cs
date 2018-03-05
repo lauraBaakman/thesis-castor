@@ -31,4 +31,24 @@ public static class Matrix4x4Extensions
         );
         return rotation;
     }
+
+    /// <summary>
+    /// Extracts the scale from the matrix. 
+    /// 
+    /// Note that this function cannot handle negative scales.
+    /// 
+    /// Source: https://answers.unity.com/questions/402280/how-to-decompose-a-trs-matrix.html?childToView=402281#answer-402281
+    /// </summary>
+    /// <returns>The rotation.</returns>
+    /// <param name="matrix">Matrix.</param>
+    public static Vector3 ExtractScale(this Matrix4x4 matrix)
+    {
+        Vector3 scale = new Vector3(
+            x: matrix.GetColumn(0).magnitude,
+            y: matrix.GetColumn(1).magnitude,
+            z: matrix.GetColumn(2).magnitude
+        );
+        return scale;
+    }
+
 }
