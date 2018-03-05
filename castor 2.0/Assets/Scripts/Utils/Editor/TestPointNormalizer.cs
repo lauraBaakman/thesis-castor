@@ -51,7 +51,10 @@ namespace Tests
             );
 
             Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(basePoints);
-            Assert.That(actual, Is.EqualTo(expected).Within(sensitivity));
+
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 4; j++)
+                    Assert.That(expected[i, j], Is.EqualTo(actual[i, j]).Within(sensitivity));
         }
 
         [Test]
