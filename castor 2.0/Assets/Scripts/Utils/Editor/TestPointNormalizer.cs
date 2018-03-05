@@ -288,6 +288,9 @@ namespace Tests
     {
         public override ConstraintResult ApplyTo(object actual)
         {
+            if ((actual is Point)) return ApplyTo(actual as Point);
+            if ((actual is Vector3)) return ApplyTo((Vector3)actual);
+
             throw new System.ArgumentException("Objects of type object are not supported");
         }
 
