@@ -90,10 +90,9 @@ namespace Tests
             Vector3 expected = scale;
             Vector3 actual = matrix.ExtractScale();
 
-            Assert.AreEqual(
-                actual: actual,
-                expected: expected
-            );
+            Assert.That(expected.x, Is.EqualTo(actual.x).Within(0.001f));
+            Assert.That(expected.y, Is.EqualTo(actual.y).Within(0.001f));
+            Assert.That(expected.z, Is.EqualTo(actual.z).Within(0.001f));
         }
 
         [Test]
