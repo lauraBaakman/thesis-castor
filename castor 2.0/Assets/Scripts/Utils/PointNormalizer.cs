@@ -17,7 +17,16 @@ namespace Utils
 
         public IEnumerable<Point> Normalize(IEnumerable<Point> points)
         {
-            throw new System.NotImplementedException();
+            Matrix4x4 normalizationmatrix = ComputeNormalizationMatrix(points);
+            List<Point> normalizedPoints = new List<Point>();
+
+            foreach (Point point in points)
+            {
+                normalizedPoints.Add(
+                    point.ApplyTransform(normalizationmatrix)
+                );
+            }
+            return normalizedPoints;
         }
     }
 
