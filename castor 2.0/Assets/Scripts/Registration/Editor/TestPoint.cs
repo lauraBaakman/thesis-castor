@@ -279,8 +279,9 @@ namespace Tests
         public void TestApplyTransform_NeutralTransform()
         {
             Vector3 normal = Auxilaries.RandomNormal();
+            Vector3 position = new Vector3(2.0f, 3.0f, 4.0f);
 
-            Point point = new Point(new Vector3(2.0f, 3.0f, 4.0f), normal);
+            Point point = new Point(position, normal);
             Matrix4x4 transformation = new Matrix4x4();
             transformation.SetTRS(
                 pos: new Vector3(0, 0, 0),
@@ -288,7 +289,7 @@ namespace Tests
                 s: new Vector3(1, 1, 1)
             );
 
-            Point expected = new Point(new Vector3(), normal);
+            Point expected = new Point(position, normal);
             Point actual = point.ApplyTransform(transformation);
 
             Assert.That(actual.Position, Is.EqualTo(expected.Position));
@@ -311,7 +312,8 @@ namespace Tests
                 s: new Vector3(2, 0.5f, 2)
             );
 
-            Point expected = new Point(new Vector3(5.0f, 2.5f, 16.0f), normal);
+            // The object is frist scaled, then rotated, then translated
+            Point expected = new Point(new Vector3(4.5f, 3.5f, 12.0f), normal);
             Point actual = point.ApplyTransform(transformation);
 
             Assert.That(actual.Position, Is.EqualTo(expected.Position));
