@@ -25,11 +25,24 @@ namespace Registration
 
             public class Configuration
             {
+                /// <summary>
+                /// The distance metric used to compute the error.
+                /// </summary>
                 public readonly DistanceMetrics.Metric DistanceMetric;
 
-                public Configuration(DistanceMetrics.Metric distanceMetric = null)
+                /// <summary>
+                /// Should the points be normalize, i.e. scaled and translated 
+                /// to fit within the unit cube, before computing the error?
+                /// </summary>
+                public readonly bool NormalizePoints;
+
+                public Configuration(
+                    DistanceMetrics.Metric distanceMetric = null,
+                    bool normalizePoints = true
+                )
                 {
                     DistanceMetric = distanceMetric ?? DistanceMetrics.SquaredEuclidean;
+                    NormalizePoints = normalizePoints;
                 }
             }
         }

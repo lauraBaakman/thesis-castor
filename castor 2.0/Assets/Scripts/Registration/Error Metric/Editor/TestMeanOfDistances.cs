@@ -15,7 +15,10 @@ namespace Tests
         [SetUp]
         public void Init()
         {
-            configuration = new ErrorMetric.Configuration(distanceMetric: DistanceMetrics.SquaredEuclidean);
+            configuration = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.SquaredEuclidean,
+                normalizePoints: false
+            );
         }
 
         [Test]
