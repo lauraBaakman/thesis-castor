@@ -31,7 +31,7 @@ namespace Registration
 
                 //Normalize the points if required
                 Matrix4x4 normalizationMatrix = Matrix4x4.identity;
-                if (configuration.NormalizePoints) normalizationMatrix = ComputeNormalizationMatrix(modelPoints, correspondences.StaticPoints);
+                if (configuration.NormalizePoints) normalizationMatrix = new PointNormalizer().ComputeNormalizationMatrix(modelPoints, correspondences.StaticPoints);
 
                 //Compute the correspondence errors
                 List<float> errors = ComputeCorrespondenceErrors(
@@ -42,15 +42,6 @@ namespace Registration
 
                 //Aggregate the errors
                 return configuration.AggregationMethod(errors);
-            }
-
-            private Matrix4x4 ComputeNormalizationMatrix(List<Point> modelPoints, List<Point> staticPoints)
-            {
-                List<Point> points = new List<Point>();
-                points.AddRange(modelPoints);
-                points.AddRange(staticPoints);
-
-                return new PointNormalizer().ComputeNormalizationMatrix(points);
             }
 
             private List<Point> TransformPoints(List<Point> points, Transform orignalTransform, Transform newTransform)
