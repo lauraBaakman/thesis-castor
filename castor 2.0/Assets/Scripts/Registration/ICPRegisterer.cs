@@ -125,7 +125,7 @@ namespace Registration
 
             error = Settings.ErrorMetric.ComputeError(
                 correspondences: Correspondences,
-                orignalTransform: Settings.ReferenceTransform,
+                originalTransform: Settings.ReferenceTransform,
                 newTransform: ModelFragment.transform
             );
 

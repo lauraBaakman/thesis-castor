@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.ObjectModel;
+using Utils;
 
 namespace Registration
 {
@@ -20,11 +23,74 @@ namespace Registration
             /// <returns>The error if the modelTransform is applied to the model points of the correspondences.</returns>
             /// <param name="correspondences">the correspondences</param>
             /// <param name="newTransform">the new transform of the correspondences.</param>
-            /// <param name="orignalTransform">the original transform of the correspondences.</param>
-            public float ComputeError(CorrespondenceCollection correspondences, Transform orignalTransform, Transform newTransform)
+            /// <param name="originalTransform">the original transform of the correspondences.</param>
+            public float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
             {
-                List<float> errors = new _ErrorsComputer(configuration, orignalTransform, newTransform).ComputeErrors(correspondences);
+                //Apply the newTransform to the model points
+                List<Point> modelPoints = TransformPoints(correspondences.ModelPoints, originalTransform, newTransform);
+
+                //Normalize the points if required
+                Matrix4x4 normalizationMatrix = Matrix4x4.identity;
+                if (configuration.NormalizePoints) normalizationMatrix = ComputeNormalizationMatrix(modelPoints, correspondences.StaticPoints);
+
+                //Compute the correspondence errors
+                List<float> errors = ComputeCorrespondenceErrors(
+                    normalizationMatrix,
+                    modelPoints: modelPoints,
+                    staticPoints: correspondences.StaticPoints
+                );
+
+                //Aggregate the errors
                 return configuration.AggregationMethod(errors);
+            }
+
+            private Matrix4x4 ComputeNormalizationMatrix(List<Point> modelPoints, List<Point> staticPoints)
+            {
+                List<Point> points = new List<Point>();
+                points.AddRange(modelPoints);
+                points.AddRange(staticPoints);
+
+                return new PointNormalizer().ComputeNormalizationMatrix(points);
+            }
+
+            private List<Point> TransformPoints(List<Point> points, Transform orignalTransform, Transform newTransform)
+            {
+                List<Point> transformedPoints = new List<Point>(points.Count);
+                foreach (Point point in points)
+                {
+                    transformedPoints.Add(
+                        point.ChangeTransform(
+                            sourceTransform: orignalTransform,
+                            destinationTransform: newTransform
+                        )
+                    );
+                }
+                return transformedPoints;
+            }
+
+            private List<float> ComputeCorrespondenceErrors(Matrix4x4 normalizationMatrix, List<Point> modelPoints, List<Point> staticPoints)
+            {
+                List<float> errors = new List<float>(modelPoints.Count);
+
+                for (int i = 0; i < modelPoints.Count; i++)
+                {
+                    errors.Add(
+                        ComputeCorrespondenceError(
+                            normalizationMatrix,
+                            modelPoint: modelPoints[i],
+                            staticPoint: staticPoints[i]
+                        )
+                    );
+                }
+                return errors;
+            }
+
+            private float ComputeCorrespondenceError(Matrix4x4 normalizationMatrix, Point modelPoint, Point staticPoint)
+            {
+                return configuration.DistanceMetric(
+                       staticPoint: staticPoint.ApplyTransform(normalizationMatrix),
+                       modelPoint: modelPoint.ApplyTransform(normalizationMatrix)
+                   );
             }
 
             #region inner classes
@@ -58,42 +124,7 @@ namespace Registration
                     AggregationMethod = aggregationMethod ?? AggregationMethods.Sum;
                 }
             }
-
-            private class _ErrorsComputer
-            {
-                private Transform originalTransform;
-                private Transform newTransform;
-                private DistanceMetrics.Metric distanceMetric;
-
-                public _ErrorsComputer(Configuration configuration, Transform originalTransform, Transform newTransform)
-                {
-                    this.originalTransform = originalTransform;
-                    this.newTransform = newTransform;
-                    this.distanceMetric = configuration.DistanceMetric;
-                }
-
-                public List<float> ComputeErrors(CorrespondenceCollection correspondences)
-                {
-                    List<float> errors = new List<float>(correspondences.Count);
-                    foreach (Correspondence corresponence in correspondences)
-                    {
-                        errors.Add(ComputeError(corresponence));
-                    }
-                    return errors;
-                }
-
-                private float ComputeError(Correspondence correspondence)
-                {
-                    Point transformedModelPoint = correspondence.ModelPoint.ChangeTransform(originalTransform, newTransform);
-
-                    return distanceMetric(
-                        staticPoint: correspondence.StaticPoint,
-                        modelPoint: transformedModelPoint
-                    );
-                }
-            }
             #endregion
         }
     }
 }
-
