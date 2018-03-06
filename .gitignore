@@ -76,3 +76,6 @@ $RECYCLE.BIN/
 
 #Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+#Visual Studio
+castor 2.0/.vs/castor 2.0/xs/UserPrefs.xml
