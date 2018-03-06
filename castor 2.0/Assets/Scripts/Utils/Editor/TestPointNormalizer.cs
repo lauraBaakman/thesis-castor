@@ -101,6 +101,35 @@ namespace Tests
         }
 
         [Test]
+        public void TestComputeNormalizationMatrix_multiple_lists_TranslationAndScaling()
+        {
+            //Scaling applied on unit cube: [3, 5, 7]
+            //Translation applied on scaled unit cube: [+2, +1, -5]
+            List<Point> points_a = new List<Point> {
+                new Point(new Vector3(+0.5f, -1.5f, -1.5f)),
+                new Point(new Vector3(+0.5f, +3.5f, -1.5f)),
+
+            };
+            List<Point> points_b = new List<Point>
+            {
+                new Point(new Vector3(+3.5f, -1.5f, -1.5f)),
+                new Point(new Vector3(+3.5f, +3.5f, -1.5f))
+            };
+            List<Point> points_c = new List<Point>
+            {
+                new Point(new Vector3(+0.5f, -1.5f, -8.5f)),
+                new Point(new Vector3(+3.5f, -1.5f, -8.5f)),
+                new Point(new Vector3(+3.5f, +3.5f, -8.5f)),
+                new Point(new Vector3(+0.5f, +3.5f, -8.5f)),
+            };
+
+            Matrix4x4 actual = normalizer.ComputeNormalizationMatrix(points_a, points_b, points_c);
+            Matrix4x4 expected = new Matrix4x4().SetScale(1f / 7f) * new Matrix4x4().SetTranslation(new Vector3(-2, -1, +5));
+
+            Assert.IsTrue(actual.Equals(expected));
+        }
+
+        [Test]
         public void Normalize_NeutralTransformationMatrix()
         {
             List<Point> points = new List<Point>{

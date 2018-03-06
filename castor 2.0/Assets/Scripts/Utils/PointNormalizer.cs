@@ -15,6 +15,16 @@ namespace Utils
             return new _PointNormalizer(points).NormalizationMatrix;
         }
 
+        public Matrix4x4 ComputeNormalizationMatrix(params IEnumerable<Point>[] args)
+        {
+            List<Point> points = new List<Point>();
+            for (int i = 0; i < args.Length; i++)
+            {
+                points.AddRange(args[i]);
+            }
+            return ComputeNormalizationMatrix(points);
+        }
+
         public IEnumerable<Point> Normalize(IEnumerable<Point> points)
         {
             Matrix4x4 normalizationmatrix = ComputeNormalizationMatrix(points);
