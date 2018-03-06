@@ -42,7 +42,7 @@ namespace Tests
         {
             List<float> errors = new List<float> { 1, 2, 3, 4, 5.5f };
 
-            float expected = 2.5833333333f;
+            float expected = 3.1f;
             float actual = AggregationMethods.Mean(errors);
 
             Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
