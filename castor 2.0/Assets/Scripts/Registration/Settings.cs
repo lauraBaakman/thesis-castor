@@ -87,9 +87,13 @@ namespace Registration
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
-            ErrorMetric.Configuration errorConfiguration = new ErrorMetric.Configuration(DistanceMetrics.SquaredEuclidean);
+            ErrorMetric.Configuration errorConfiguration = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.SquaredEuclidean,
+                aggregationMethod: AggregationMethods.Sum,
+                normalizePoints: true
+            );
 
-            ErrorMetric = new SumOfDistances(errorConfiguration);
+            ErrorMetric = new ErrorMetric(errorConfiguration);
 
             TransFormFinder = new HornTransformFinder();
 

@@ -1,28 +1,31 @@
-using UnityEngine;
 using System.Collections.Generic;
 using NUnit.Framework;
-
 using Registration;
 using Registration.Error;
+using UnityEngine;
 
 namespace Tests
 {
     [TestFixture]
-    public class MeanOfDistancesTest
+    public class ErrorMetricTests
     {
-        ErrorMetric.Configuration configuration;
+        private static double tolerance = 0.0001;
+        private ErrorMetric errorMetric;
 
         [SetUp]
         public void Init()
         {
-            configuration = new ErrorMetric.Configuration(
+            ErrorMetric.Configuration configuration = new ErrorMetric.Configuration(
                 distanceMetric: DistanceMetrics.SquaredEuclidean,
+                aggregationMethod: AggregationMethods.Sum,
                 normalizePoints: false
             );
+
+            errorMetric = new ErrorMetric(configuration);
         }
 
         [Test]
-        public void TestComputeError_NeutralTransform()
+        public void Test_ComputeError_NormalCorrespondences()
         {
             CorrespondenceCollection correspondences = new CorrespondenceCollection(
                 new List<Correspondence>{
@@ -41,12 +44,21 @@ namespace Tests
                 }
             );
 
-            float expected = 26.203333333333333f;
-            float actual =
-                new MeanOfDistances(configuration).ComputeError(
-                    correspondences, null, null
-                );
-            Assert.AreEqual(expected, actual);
+            float expected = 78.610000f;
+            float actual = errorMetric.ComputeError(correspondences, null, null);
+            Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
         }
+
+        [Test]
+        public void Test_ComputeError_EmptyCorrespondences()
+        {
+            CorrespondenceCollection correspondences = new CorrespondenceCollection();
+
+            float expected = 0.0f;
+            float actual = errorMetric.ComputeError(correspondences, null, null);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
+        }
+
     }
 }
