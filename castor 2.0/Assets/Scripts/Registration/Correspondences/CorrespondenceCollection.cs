@@ -9,21 +9,21 @@ namespace Registration
     public class CorrespondenceCollection : IEnumerable<Correspondence>, IEquatable<CorrespondenceCollection>
     {
         #region members
-        public ReadOnlyCollection<Point> ModelPoints
+        public List<Point> ModelPoints
         {
-            get { return modelpoints.AsReadOnly(); }
+            get { return modelpoints; }
         }
         private List<Point> modelpoints;
 
-        public ReadOnlyCollection<Point> StaticPoints
+        public List<Point> StaticPoints
         {
-            get { return staticpoints.AsReadOnly(); }
+            get { return staticpoints; }
         }
         private List<Point> staticpoints;
 
-        public ReadOnlyCollection<Correspondence> Correspondences
+        public List<Correspondence> Correspondences
         {
-            get { return correspondences.AsReadOnly(); }
+            get { return correspondences; }
         }
         private List<Correspondence> correspondences;
         #endregion
@@ -131,7 +131,7 @@ namespace Registration
         }
         #endregion
 
-        public ReadOnlyCollection<Point> GetPointsByType(Fragment.ICPFragmentType type)
+        public List<Point> GetPointsByType(Fragment.ICPFragmentType type)
         {
             switch (type)
             {
