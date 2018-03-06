@@ -30,6 +30,7 @@ namespace Registration
             /// <param name="errors">The errors</param>
             public static float Mean(IEnumerable<float> errors)
             {
+                if (errors.Count() == 0) return 0.0f;
                 return errors.Average();
             }
         }
