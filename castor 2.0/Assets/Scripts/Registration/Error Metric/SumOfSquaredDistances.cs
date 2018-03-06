@@ -8,9 +8,8 @@ namespace Registration
     {
         public class SumOfSquaredDistances : AbstractErrorMetric
         {
-            public SumOfSquaredDistances(
-                DistanceMetrics.Metric distanceMetric = null
-            ) : base(distanceMetric ?? DistanceMetrics.PointToPlane) { }
+            public SumOfSquaredDistances(Configuration configuration)
+                : base(configuration) { }
 
             public override float ComputeError(CorrespondenceCollection correspondences, Transform orignalTransform, Transform newTransform)
             {

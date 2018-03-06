@@ -7,9 +7,8 @@ namespace Registration
     {
         public class SumOfDistances : AbstractErrorMetric
         {
-            public SumOfDistances(
-                DistanceMetrics.Metric distanceMetric = null
-            ) : base(distanceMetric) { }
+            public SumOfDistances(Configuration configuration)
+                : base(configuration) { }
 
             public override float ComputeError(CorrespondenceCollection correspondences, Transform orignalTransform, Transform newTransform)
             {

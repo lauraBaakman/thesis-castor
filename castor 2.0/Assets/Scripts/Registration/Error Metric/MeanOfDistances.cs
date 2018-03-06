@@ -7,9 +7,8 @@ namespace Registration
     {
         public class MeanOfDistances : AbstractErrorMetric
         {
-            public MeanOfDistances(
-                DistanceMetrics.Metric distanceMetric = null
-            ) : base(distanceMetric) { }
+            public MeanOfDistances(Configuration configuration)
+                : base(configuration) { }
 
             public override float ComputeError(CorrespondenceCollection correspondences, Transform orignalTransform, Transform newTransform)
             {

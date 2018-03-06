@@ -9,9 +9,9 @@ namespace Registration
         {
             protected readonly DistanceMetrics.Metric DistanceMetric;
 
-            protected AbstractErrorMetric(DistanceMetrics.Metric distanceMetric = null)
+            protected AbstractErrorMetric(Configuration configuration)
             {
-                DistanceMetric = distanceMetric ?? DistanceMetrics.SquaredEuclidean;
+                this.DistanceMetric = configuration.DistanceMetric;
             }
 
             /// <summary>
@@ -21,6 +21,17 @@ namespace Registration
             /// <param name="correspondences">the correspondences</param>
             /// <param name="modelTransform">Model transform to be applied to the model points of the correspondenes.</param>
             public abstract float ComputeError(CorrespondenceCollection correspondences, Transform orignalTransform, Transform newTransform);
+
+
+            public class Configuration
+            {
+                public readonly DistanceMetrics.Metric DistanceMetric;
+
+                public Configuration(DistanceMetrics.Metric distanceMetric = null)
+                {
+                    DistanceMetric = distanceMetric ?? DistanceMetrics.SquaredEuclidean;
+                }
+            }
         }
     }
 }
