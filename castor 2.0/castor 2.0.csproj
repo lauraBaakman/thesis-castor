@@ -357,6 +357,7 @@
     <Compile Include="Assets\Scripts\IO\FragmentsImporter.cs" />
     <Compile Include="Assets\Scripts\IO\ObjFileReader.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Correspondence.cs" />
+    <Compile Include="Assets\Scripts\Registration\Correspondences\CorrespondenceCollection.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Filters\ICorrespondenceFilter.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\ICorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\NearestPointCorrespondenceFinder.cs" />
@@ -526,8 +527,6 @@
     <Compile Include="Assets\Scripts\Utils\PointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\RangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Registration\Correspondences\CorrespondenceCollection.cs" />
-    <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondences.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />

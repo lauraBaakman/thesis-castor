@@ -28,6 +28,30 @@ namespace Registration
         private List<Correspondence> correspondences;
         #endregion
 
+        #region properties
+        public int Count
+        {
+            get { return correspondences.Count; }
+        }
+
+        public IEnumerable<Point> StaticPointsEnumerator
+        {
+            get { return new _PointEnumerator(this.staticpoints); }
+        }
+
+        public IEnumerable<Point> ModelPointsEnumerator
+        {
+            get { return new _PointEnumerator(this.modelpoints); }
+        }
+        #endregion
+
+        public CorrespondenceCollection(List<Point> modelpoints, List<Point> staticpoints, List<Correspondence> correspondences)
+        {
+            this.modelpoints = modelpoints;
+            this.staticpoints = staticpoints;
+            this.correspondences = correspondences;
+        }
+
         public CorrespondenceCollection()
         {
             this.modelpoints = new List<Point>();
@@ -38,46 +62,39 @@ namespace Registration
         #region forwarding methods and properties
         public void Add(DistanceNode node)
         {
-            throw new System.NotImplementedException();
+            modelpoints.Add(node.ModelPoint);
+            staticpoints.Add(node.StaticPoint);
+            correspondences.Add(new Correspondence(node));
         }
 
         public void Add(Correspondence correspondence)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public int Count
-        {
-            get { throw new System.NotImplementedException(); }
+            modelpoints.Add(correspondence.ModelPoint);
+            staticpoints.Add(correspondence.StaticPoint);
+            correspondences.Add(correspondence);
         }
 
         public void Clear()
         {
-            throw new System.NotImplementedException();
+            correspondences.Clear();
+            modelpoints.Clear();
+            staticpoints.Clear();
         }
         #endregion
 
-        #region enumerators
-        public IEnumerator<Point> GetStaticPointEnumerator()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IEnumerator<Point> GetModelPointEnumerator()
-        {
-            throw new System.NotImplementedException();
-        }
-
+        #region Enumerators
         public IEnumerator<Correspondence> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return correspondences.GetEnumerator();
         }
 
         IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return GetEnumerator();
         }
+        #endregion
 
+        #region IEquatable
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
@@ -98,11 +115,6 @@ namespace Registration
             return hash;
         }
 
-        public override string ToString()
-        {
-            return string.Format("[CorrespondenceCollection: \n{}", this.correspondences.ElementsToString());
-        }
-
         public bool Equals(CorrespondenceCollection other)
         {
             return (
@@ -112,5 +124,30 @@ namespace Registration
             );
         }
         #endregion
+
+        public override string ToString()
+        {
+            return string.Format("[CorrespondenceCollection: \n{}", this.correspondences.ElementsToString());
+        }
+    }
+
+    internal class _PointEnumerator : IEnumerable<Point>
+    {
+        private IEnumerable<Point> points;
+
+        public _PointEnumerator(IEnumerable<Point> points)
+        {
+            this.points = points;
+        }
+
+        public IEnumerator<Point> GetEnumerator()
+        {
+            return this.points.GetEnumerator();
+        }
+
+        IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }
