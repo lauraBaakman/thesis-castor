@@ -12,46 +12,14 @@ namespace Registration
             public readonly Transform Transform;
 
             public readonly int IterationIndex;
-            public readonly ReadOnlyCollection<Correspondence> Correspondences;
-            public readonly ReadOnlyCollection<Point> ModelPoints;
-            public readonly ReadOnlyCollection<Point> StaticPoints;
+            public readonly CorrespondenceCollection Correspondences;
 
-            public ICPPreparationStepCompletedMessage(List<Correspondence> correspondences, Transform transform, int iterationIndex)
+            public ICPPreparationStepCompletedMessage(CorrespondenceCollection correspondences, Transform transform, int iterationIndex)
             {
-                this.Correspondences = correspondences.AsReadOnly();
+                this.Correspondences = correspondences;
                 this.Transform = transform;
 
-                List<Point> modelPoints = new List<Point>(correspondences.Count);
-                List<Point> staticPoints = new List<Point>(correspondences.Count);
-
-                ExtractPoints(correspondences, ref modelPoints, ref staticPoints);
-
                 this.IterationIndex = iterationIndex;
-
-                this.ModelPoints = modelPoints.AsReadOnly();
-                this.StaticPoints = staticPoints.AsReadOnly();
-            }
-
-            public ReadOnlyCollection<Point> GetPointsByType(Fragment.ICPFragmentType type)
-            {
-                switch (type)
-                {
-                    case Fragment.ICPFragmentType.Model:
-                        return ModelPoints;
-                    case Fragment.ICPFragmentType.Static:
-                        return StaticPoints;
-                    default:
-                        throw new System.ArgumentException("Invalid enum type.");
-                }
-            }
-
-            private void ExtractPoints(List<Correspondence> correspondenceList, ref List<Point> modelPoints, ref List<Point> staticPoints)
-            {
-                foreach (Correspondence correspondence in correspondenceList)
-                {
-                    modelPoints.Add(correspondence.ModelPoint);
-                    staticPoints.Add(correspondence.StaticPoint);
-                }
             }
         }
 

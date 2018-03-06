@@ -20,16 +20,16 @@ namespace Registration
             this.sampler = sampler;
         }
 
-        public List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
+        public CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
         {
 
             List<DistanceNode> distanceNodes = CreateDistanceNodeList(staticPoints, modelPoints);
-            List<Correspondence> correspondences = CreateCorrespondenceList(distanceNodes, Mathf.Min(staticPoints.Count, modelPoints.Count));
+            CorrespondenceCollection correspondences = CreateCorrespondenceCollection(distanceNodes, Mathf.Min(staticPoints.Count, modelPoints.Count));
 
             return correspondences;
         }
 
-        public List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation)
+        public CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation)
         {
             List<Point> modelPoints = sampler.Select(modelSamplingInformation);
             return Find(staticPoints, modelPoints.AsReadOnly());
@@ -72,21 +72,21 @@ namespace Registration
             return (staticPoint.Position - modelPoint.Position).sqrMagnitude;
         }
 
-        public List<Correspondence> CreateCorrespondenceList(List<DistanceNode> distanceNodes, int numPointsSmallestFragment)
+        public CorrespondenceCollection CreateCorrespondenceCollection(List<DistanceNode> distanceNodes, int numPointsSmallestFragment)
         {
-            return new CorrespondenceListBuilder(distanceNodes, numPointsSmallestFragment).Build();
+            return new CorrespondenceCollectionBuilder(distanceNodes, numPointsSmallestFragment).Build();
         }
     }
 
-    internal class CorrespondenceListBuilder
+    internal class CorrespondenceCollectionBuilder
     {
         private Stack<DistanceNode> DistanceNodes;
         private HashSet<Point> StaticPointsInACorrespondence;
         private HashSet<Point> ModelPointsInACorrespondence;
-        private List<Correspondence> Correspondences;
+        private CorrespondenceCollection Correspondences;
         private int FinalCorrespondenceCount;
 
-        internal CorrespondenceListBuilder(List<DistanceNode> distanceNodes, int numPointsSmallestFragment)
+        internal CorrespondenceCollectionBuilder(List<DistanceNode> distanceNodes, int numPointsSmallestFragment)
         {
             distanceNodes.Sort(DistanceNode.SortDescendingOnDistance());
             DistanceNodes = new Stack<DistanceNode>(distanceNodes);
@@ -96,10 +96,10 @@ namespace Registration
 
             FinalCorrespondenceCount = numPointsSmallestFragment;
 
-            Correspondences = new List<Correspondence>();
+            Correspondences = new CorrespondenceCollection();
         }
 
-        internal List<Correspondence> Build()
+        internal CorrespondenceCollection Build()
         {
             DistanceNode currentNode;
             while (!FinishedCreatingCorrespondences())

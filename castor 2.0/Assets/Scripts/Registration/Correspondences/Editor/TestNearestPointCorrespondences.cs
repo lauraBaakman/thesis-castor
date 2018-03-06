@@ -48,41 +48,43 @@ namespace Tests
 
             ReadOnlyCollection<Point> modelPoints = cubeLeft.AsReadOnly();
 
-            List<Correspondence> expected = new List<Correspondence> {
-            new Correspondence(
-                cubeLeft[0],
-                cubeLeft[0]
-            ),
-            new Correspondence(
-                cubeLeft[1],
-                cubeLeft[1]
-            ),
-            new Correspondence(
-                cubeLeft[2],
-                cubeLeft[2]
-            ),
-            new Correspondence(
-                cubeLeft[3],
-                cubeLeft[3]
-            ),
-            new Correspondence(
-                cubeLeft[4],
-                cubeLeft[4]
-            ),
-            new Correspondence(
-                cubeLeft[5],
-                cubeLeft[5]
-            ),
-            new Correspondence(
-                cubeLeft[6],
-                cubeLeft[6]
-            ),
-            new Correspondence(
-                cubeLeft[7],
-                cubeLeft[7]
-            )
-        };
-            List<Correspondence> actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection expected = new CorrespondenceCollection(
+                new List<Correspondence>{
+                    new Correspondence(
+                        cubeLeft[0],
+                        cubeLeft[0]
+                    ),
+                    new Correspondence(
+                        cubeLeft[1],
+                        cubeLeft[1]
+                    ),
+                    new Correspondence(
+                        cubeLeft[2],
+                        cubeLeft[2]
+                    ),
+                    new Correspondence(
+                        cubeLeft[3],
+                        cubeLeft[3]
+                    ),
+                    new Correspondence(
+                        cubeLeft[4],
+                        cubeLeft[4]
+                    ),
+                    new Correspondence(
+                        cubeLeft[5],
+                        cubeLeft[5]
+                    ),
+                    new Correspondence(
+                        cubeLeft[6],
+                        cubeLeft[6]
+                    ),
+                    new Correspondence(
+                        cubeLeft[7],
+                        cubeLeft[7]
+                    )
+                }
+            );
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -127,7 +129,7 @@ namespace Tests
                 cubeRight[4]
             )
         };
-            List<Correspondence> actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -159,7 +161,7 @@ namespace Tests
                 pyramid[4]
             )
         };
-            List<Correspondence> actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -191,7 +193,7 @@ namespace Tests
                 cubeRight[5]
             )
         };
-            List<Correspondence> actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 

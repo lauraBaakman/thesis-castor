@@ -5,6 +5,6 @@ namespace Registration
 {
     public interface ICorrespondenceFilter
     {
-        List<Correspondence> Filter(IList<Correspondence> correspondences);
+        CorrespondenceCollection Filter(CorrespondenceCollection correspondences);
     }
 }

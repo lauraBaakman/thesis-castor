@@ -88,7 +88,7 @@ namespace Fragment
             transform.SetParent(message.Transform);
 
             Fragment.ICPFragmentType type = parentICPController.FragmentType;
-            UpdatePoints(message.GetPointsByType(type));
+            UpdatePoints(message.Correspondences.GetPointsByType(type));
         }
 
         private void UpdatePoints(IEnumerable<Point> points)

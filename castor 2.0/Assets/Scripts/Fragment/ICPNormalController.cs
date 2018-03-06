@@ -129,7 +129,7 @@ namespace Fragment
             ReferenceTransform = message.Transform;
             Fragment.ICPFragmentType type = parentICPController.FragmentType;
 
-            if (ShowNormals) StoreNormals(message.GetPointsByType(type));
+            if (ShowNormals) StoreNormals(message.Correspondences.GetPointsByType(type));
         }
         #endregion
     }

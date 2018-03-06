@@ -17,7 +17,7 @@ namespace Registration
         private Action FinishedCallBack;
 
         private List<Point> StaticPoints;
-        private List<Correspondence> Correspondences;
+        private CorrespondenceCollection Correspondences;
 
         private SamplingInformation ModelSamplingInformation;
 
@@ -185,14 +185,14 @@ namespace Registration
         /// <returns>The found correspondences.</returns>
         /// <param name="staticPoints">Points of the static fragment.</param>
         /// <param name="modelPoints">Points of the model fragment.</param>
-        private List<Correspondence> ComputeCorrespondences(List<Point> staticPoints)
+        private CorrespondenceCollection ComputeCorrespondences(List<Point> staticPoints)
         {
             Mesh modelMesh = modelFragment.GetComponent<MeshFilter>().mesh;
-            List<Correspondence> correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), ModelSamplingInformation);
+            CorrespondenceCollection correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), ModelSamplingInformation);
             return correspondences;
         }
 
-        private List<Correspondence> FilterCorrespondences(List<Correspondence> correspondences)
+        private CorrespondenceCollection FilterCorrespondences(CorrespondenceCollection correspondences)
         {
             foreach (ICorrespondenceFilter filter in Settings.CorrespondenceFilters)
             {

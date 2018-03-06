@@ -32,15 +32,15 @@ namespace Registration
             ReferenceTransform = settings.ReferenceTransform;
         }
 
-        public List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
+        public CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
         {
             throw new System.ArgumentException("The NormalShootingCorrespondenceFinder cannot find correspondences between two sets of points.");
         }
 
-        public List<Correspondence> Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation)
+        public CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation)
         {
             Correspondence correspondence;
-            List<Correspondence> correspondences = new List<Correspondence>();
+            CorrespondenceCollection correspondences = new CorrespondenceCollection();
             foreach (Point staticPoint in staticPoints)
             {
                 correspondence = FindCorrespondence(staticPoint, modelSamplingInformation);

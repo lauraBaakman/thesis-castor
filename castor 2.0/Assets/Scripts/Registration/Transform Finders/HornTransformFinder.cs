@@ -14,7 +14,7 @@ namespace Registration
         /// </summary>
         /// <returns>The transform.</returns>
         /// <param name="correspondences">Correspondences.</param>
-        public Matrix4x4 FindTransform(List<Correspondence> correspondences)
+        public Matrix4x4 FindTransform(CorrespondenceCollection correspondences)
         {
             ValidateCorrespondences(correspondences);
 
@@ -38,7 +38,7 @@ namespace Registration
         }
 
         private void CorrespondecesToVector3dLists(
-            List<Correspondence> correspondences,
+            CorrespondenceCollection correspondences,
             ref List<Vector3d> modelPoints, ref List<Vector3d> staticPoints)
         {
             foreach (Correspondence correspondence in correspondences)
@@ -48,10 +48,10 @@ namespace Registration
             }
         }
 
-        private void ValidateCorrespondences(List<Correspondence> correspondences)
+        private void ValidateCorrespondences(CorrespondenceCollection correspondences)
         {
             if (correspondences == null) throw new System.NullReferenceException();
-            if (correspondences.Count == 0)
+            if (correspondences.IsEmpty())
             {
                 throw new System.NotSupportedException("Cannot compute the transform if no correspondences are given.");
             }

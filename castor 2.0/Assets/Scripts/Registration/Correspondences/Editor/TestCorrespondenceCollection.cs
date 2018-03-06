@@ -188,5 +188,47 @@ namespace Tests
             Assert.IsFalse(other.Equals(actual));
             Assert.AreNotEqual(actual.GetHashCode(), other.GetHashCode());
         }
+
+        [Test]
+        public void Test_GetPointsByType_Modelpoints()
+        {
+            IEnumerable<Point> expected = modelPointList;
+            Fragment.ICPFragmentType type = Fragment.ICPFragmentType.Model;
+            IEnumerable<Point> actual = correspondences.GetPointsByType(type);
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+
+        [Test]
+        public void Test_GetPointsByType_Staticpoints()
+        {
+            IEnumerable<Point> expected = staticPointList;
+            Fragment.ICPFragmentType type = Fragment.ICPFragmentType.Static;
+            IEnumerable<Point> actual = correspondences.GetPointsByType(type);
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+
+        [Test]
+        public void Test_IsEmpty_NotEmpty()
+        {
+            Assert.IsFalse(correspondences.IsEmpty());
+        }
+
+        [Test]
+        public void Test_IsEmpty_Empty()
+        {
+            CorrespondenceCollection emptyCollection = new CorrespondenceCollection();
+            Assert.IsTrue(emptyCollection.IsEmpty());
+        }
+
+        [Test]
+        public void Test_CorrespondenceList_Constructor()
+        {
+            CorrespondenceCollection actual = new CorrespondenceCollection(correspondenceList);
+            CorrespondenceCollection expected = correspondences;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

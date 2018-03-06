@@ -12,7 +12,7 @@ namespace Registration
                 DistanceMetrics.Metric distanceMetric = null
             ) : base(distanceMetric ?? DistanceMetrics.PointToPlane) { }
 
-            public override float ComputeError(List<Correspondence> correspondences, Transform orignalTransform, Transform newTransform)
+            public override float ComputeError(CorrespondenceCollection correspondences, Transform orignalTransform, Transform newTransform)
             {
                 throw new System.NotImplementedException();
             }

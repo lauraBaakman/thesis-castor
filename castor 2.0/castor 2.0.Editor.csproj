@@ -207,7 +207,6 @@
     <Compile Include="Assets\Scripts\Extensions\Editor\TestVector3Extensions.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondence.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestNearestPointCorrespondences.cs" />
-    <Compile Include="Assets\Scripts\Registration\Editor\TestICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\Editor\TestPoint.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestDistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestMeanOfDistances.cs" />
@@ -219,7 +218,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
-    <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondences.cs" />
+    <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondenceCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />

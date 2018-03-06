@@ -52,6 +52,12 @@ namespace Registration
             this.correspondences = correspondences;
         }
 
+        public CorrespondenceCollection(List<Correspondence> correspondences)
+            : this()
+        {
+            foreach (Correspondence correspondence in correspondences) Add(correspondence);
+        }
+
         public CorrespondenceCollection()
         {
             this.modelpoints = new List<Point>();
@@ -124,6 +130,24 @@ namespace Registration
             );
         }
         #endregion
+
+        public ReadOnlyCollection<Point> GetPointsByType(Fragment.ICPFragmentType type)
+        {
+            switch (type)
+            {
+                case Fragment.ICPFragmentType.Model:
+                    return this.ModelPoints;
+                case Fragment.ICPFragmentType.Static:
+                    return this.StaticPoints;
+                default:
+                    throw new System.ArgumentException("Invalid enum type.");
+            }
+        }
+
+        public bool IsEmpty()
+        {
+            return Count <= 0;
+        }
 
         public override string ToString()
         {
