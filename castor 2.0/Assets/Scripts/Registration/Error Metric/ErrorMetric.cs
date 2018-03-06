@@ -1,15 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Registration
 {
     namespace Error
     {
-        public abstract class AbstractErrorMetric
+        public abstract class ErrorMetric
         {
             protected readonly DistanceMetrics.Metric DistanceMetric;
 
-            protected AbstractErrorMetric(Configuration configuration)
+            protected ErrorMetric(Configuration configuration)
             {
                 this.DistanceMetric = configuration.DistanceMetric;
             }

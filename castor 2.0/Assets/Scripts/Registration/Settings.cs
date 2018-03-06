@@ -61,7 +61,7 @@ namespace Registration
         /// The error metric used to compute the error of a registration.
         /// </summary>
         /// <value>The error metric.</value>
-        public AbstractErrorMetric ErrorMetric { get; set; }
+        public ErrorMetric ErrorMetric { get; set; }
 
         /// <summary>
         /// The method used to find the transform between the static points and the model points.
@@ -87,7 +87,7 @@ namespace Registration
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
-            AbstractErrorMetric.Configuration errorConfiguration = new AbstractErrorMetric.Configuration(DistanceMetrics.SquaredEuclidean);
+            ErrorMetric.Configuration errorConfiguration = new ErrorMetric.Configuration(DistanceMetrics.SquaredEuclidean);
 
             ErrorMetric = new SumOfDistances(errorConfiguration);
 

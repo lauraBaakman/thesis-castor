@@ -10,12 +10,12 @@ namespace Tests
     [TestFixture]
     public class MeanOfDistancesTest
     {
-        AbstractErrorMetric.Configuration configuration;
+        ErrorMetric.Configuration configuration;
 
         [SetUp]
         public void Init()
         {
-            configuration = new AbstractErrorMetric.Configuration(distanceMetric: DistanceMetrics.SquaredEuclidean);
+            configuration = new ErrorMetric.Configuration(distanceMetric: DistanceMetrics.SquaredEuclidean);
         }
 
         [Test]

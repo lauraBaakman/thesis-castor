@@ -362,7 +362,7 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\ICorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\NearestPointCorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\NormalShootingCorrespondenceFinder.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\AbstractErrorMetric.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\ErrorMetric.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\DistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\MeanOfDistances.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\SumOfDistances.cs" />

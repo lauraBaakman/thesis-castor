@@ -4,7 +4,7 @@ namespace Registration
 {
     namespace Error
     {
-        public class SumOfDistances : AbstractErrorMetric
+        public class SumOfDistances : ErrorMetric
         {
             public SumOfDistances(Configuration configuration)
                 : base(configuration) { }
