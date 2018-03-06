@@ -1,17 +1,35 @@
+
 using UnityEngine;
-using System.Collections;
+using NUnit.Framework;
 
-public class NewMonoBehaviour : MonoBehaviour
+using Registration;
+using System.Collections.Generic;
+
+namespace Tests
 {
-	// Use this for initialization
-	void Start()
-	{
+    [TestFixture]
+    public class CorrespondencesTests
+    {
+        private List<Correspondence> correspondenceList;
+        private CorrespondenceCollection correspondences;
 
-	}
+        [SetUp]
+        public void Init()
+        {
+            correspondenceList = new List<Correspondence>
+            {
+                Auxilaries.RandomCorrespondence(),
+                Auxilaries.RandomCorrespondence(),
+                Auxilaries.RandomCorrespondence(),
+                Auxilaries.RandomCorrespondence()
+            };
 
-	// Update is called once per frame
-	void Update()
-	{
-			
-	}
+            correspondences = new CorrespondenceCollection();
+            foreach (Correspondence correspondence in correspondenceList)
+            {
+                correspondences.Add(correspondence);
+            }
+        }
+
+    }
 }

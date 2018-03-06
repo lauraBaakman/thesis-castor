@@ -219,6 +219,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
+    <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondences.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />

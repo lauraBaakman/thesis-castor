@@ -1,4 +1,5 @@
 using DoubleConnectedEdgeList;
+using Registration;
 using UnityEngine;
 
 namespace Tests
@@ -37,6 +38,14 @@ namespace Tests
             Vector3 normal = RandomPosition();
             normal.Normalize();
             return normal;
+        }
+
+        public static Correspondence RandomCorrespondence()
+        {
+            return new Correspondence(
+                staticPoint: RandomPoint(),
+                modelPoint: RandomPoint()
+            );
         }
     }
 }
