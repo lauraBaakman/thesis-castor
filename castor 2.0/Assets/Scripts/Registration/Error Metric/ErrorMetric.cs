@@ -8,7 +8,7 @@ namespace Registration
 {
     namespace Error
     {
-        public class ErrorMetric
+        public class ErrorMetric : IEquatable<ErrorMetric>
         {
             #region the class
             protected readonly Configuration configuration;
@@ -84,6 +84,28 @@ namespace Registration
                     modelPoint: modelPoint.ApplyTransform(normalizationMatrix)
                 );
             }
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null || GetType() != obj.GetType())
+                    return false;
+                return this.Equals(obj as ErrorMetric);
+            }
+
+            public override int GetHashCode()
+            {
+                int hashCode = 67;
+
+                hashCode *= (31 + configuration.GetHashCode());
+
+                return hashCode;
+            }
+
+            public bool Equals(ErrorMetric other)
+            {
+                return this.configuration.Equals(other.configuration);
+            }
+
             #endregion
 
             #region inner classes

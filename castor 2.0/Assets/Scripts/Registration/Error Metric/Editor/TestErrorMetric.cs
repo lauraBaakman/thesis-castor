@@ -95,6 +95,56 @@ namespace Tests
                 [Test]
                 public void Test_Equals_Equal()
                 {
+                    ErrorMetric thisMetric = new ErrorMetric(
+                        new ErrorMetric.Configuration(
+                            distanceMetric: DistanceMetrics.PointToPlane,
+                            normalizePoints: true,
+                            aggregationMethod: AggregationMethods.Sum
+                        )
+                    );
+                    ErrorMetric otherMetric = new ErrorMetric(
+                        new ErrorMetric.Configuration(
+                            distanceMetric: DistanceMetrics.PointToPlane,
+                            normalizePoints: true,
+                            aggregationMethod: AggregationMethods.Sum
+                        )
+                    );
+
+                    Assert.IsTrue(thisMetric.Equals(otherMetric));
+                    Assert.IsTrue(otherMetric.Equals(thisMetric));
+                    Assert.AreEqual(thisMetric.GetHashCode(), otherMetric.GetHashCode());
+                }
+
+                [Test]
+                public void Test_Equals_NotEqual()
+                {
+                    ErrorMetric thisMetric = new ErrorMetric(
+                        new ErrorMetric.Configuration(
+                            distanceMetric: DistanceMetrics.PointToPlane,
+                            normalizePoints: true,
+                            aggregationMethod: AggregationMethods.Sum
+                        )
+                    );
+                    ErrorMetric otherMetric = new ErrorMetric(
+                        new ErrorMetric.Configuration(
+                            distanceMetric: DistanceMetrics.PointToPlane,
+                            normalizePoints: false,
+                            aggregationMethod: AggregationMethods.Sum
+                        )
+                    );
+
+                    Assert.IsFalse(thisMetric.Equals(otherMetric));
+                    Assert.IsFalse(otherMetric.Equals(thisMetric));
+                    Assert.AreNotEqual(thisMetric.GetHashCode(), otherMetric.GetHashCode());
+                }
+            }
+
+            [TestFixture]
+            public class ErrorMetricConfigurationTests
+            {
+                [Test]
+                public void Test_Equals_Equal()
+                {
                     ErrorMetric.Configuration thisConfig = new ErrorMetric.Configuration(
                         distanceMetric: DistanceMetrics.PointToPlane,
                         normalizePoints: true,
