@@ -106,6 +106,29 @@ namespace Registration
                 return this.configuration.Equals(other.configuration);
             }
 
+            /// <summary>
+            /// The error metric as minimized by the <see cref="HornTransformFinder"/> .
+            /// 
+            /// Horn, Berthold KP. "Closed-form solution of absolute orientation using unit quaternions." JOSA A 4.4 (1987): 629-642.
+            /// </summary>
+            /// <returns>The error used by the horn transform finder.</returns>
+            public static ErrorMetric Horn()
+            {
+                return new ErrorMetric(Configuration.Horn());
+            }
+
+            /// <summary>
+            /// The error metric as minimized by the <see cref="LowTransformFinder"/>
+            /// 
+            /// Low, Kok-Lim. "Linear least-squares optimization for 
+            /// point-to-plane icp surface registration." Chapel Hill, 
+            /// University of North Carolina 4 (2004).
+            /// </summary>
+            /// <returns>The low.</returns>
+            public static ErrorMetric Low()
+            {
+                return new ErrorMetric(Configuration.Low());
+            }
             #endregion
 
             #region inner classes
@@ -167,7 +190,7 @@ namespace Registration
                 }
 
                 /// <summary>
-                /// The error metric as minimized by the horn transform finder.
+                /// The error metric as minimized by the <see cref="HornTransformFinder"/> .
                 /// 
                 /// Horn, Berthold KP. "Closed-form solution of absolute orientation using unit quaternions." JOSA A 4.4 (1987): 629-642.
                 /// </summary>
@@ -176,6 +199,23 @@ namespace Registration
                 {
                     return new Configuration(
                         distanceMetric: DistanceMetrics.SquaredEuclidean,
+                        aggregationMethod: AggregationMethods.Sum,
+                        normalizePoints: true
+                    );
+                }
+
+                /// <summary>
+                /// The error metric as minimized by the <see cref="LowTransformFinder"/>
+                /// 
+                /// Low, Kok-Lim. "Linear least-squares optimization for 
+                /// point-to-plane icp surface registration." Chapel Hill, 
+                /// University of North Carolina 4 (2004).
+                /// </summary>
+                /// <returns>The low.</returns>
+                public static Configuration Low()
+                {
+                    return new Configuration(
+                        distanceMetric: DistanceMetrics.SquaredPointToPlane,
                         aggregationMethod: AggregationMethods.Sum,
                         normalizePoints: true
                     );
