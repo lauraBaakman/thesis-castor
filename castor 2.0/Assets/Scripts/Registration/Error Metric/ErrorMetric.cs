@@ -114,6 +114,21 @@ namespace Registration
                     NormalizePoints = normalizePoints;
                     AggregationMethod = aggregationMethod ?? AggregationMethods.Sum;
                 }
+
+                /// <summary>
+                /// The error metric as minimized by the horn transform finder.
+                /// 
+                /// Horn, Berthold KP. "Closed-form solution of absolute orientation using unit quaternions." JOSA A 4.4 (1987): 629-642.
+                /// </summary>
+                /// <returns>The error used by the horn transform finder.</returns>
+                public static Configuration Horn()
+                {
+                    return new Configuration(
+                        distanceMetric: DistanceMetrics.SquaredEuclidean,
+                        aggregationMethod: AggregationMethods.Sum,
+                        normalizePoints: true
+                    );
+                }
             }
             #endregion
         }
