@@ -10,6 +10,7 @@ namespace Registration
     {
         public class ErrorMetric
         {
+            #region the class
             protected readonly Configuration configuration;
 
             public ErrorMetric(Configuration configuration)
@@ -83,6 +84,7 @@ namespace Registration
                     modelPoint: modelPoint.ApplyTransform(normalizationMatrix)
                 );
             }
+            #endregion
 
             #region inner classes
             public class Configuration

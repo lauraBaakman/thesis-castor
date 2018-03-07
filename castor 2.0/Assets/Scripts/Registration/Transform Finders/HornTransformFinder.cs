@@ -6,6 +6,11 @@ using OpenTK;
 
 namespace Registration
 {
+    /// <summary>
+    /// Finds the transform that minimizes the sum of squares of residual error.
+    /// 
+    /// Horn, Berthold KP. "Closed-form solution of absolute orientation using unit quaternions." JOSA A 4.4 (1987): 629-642.
+    /// </summary>
     public class HornTransformFinder : ITransformFinder
     {
         /// <summary>
