@@ -60,5 +60,32 @@ namespace Tests
             Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
         }
 
+
+        [Test]
+        public void Test_ComputeError_WithNormalization()
+        {
+            CorrespondenceCollection correspondences = new CorrespondenceCollection();
+            correspondences.Add(new Correspondence(
+                staticPoint: new Point(new Vector3(1, 2, 3)),
+                modelPoint: new Point(new Vector3(2, 4, 4))
+            ));
+            correspondences.Add(new Correspondence(
+                staticPoint: new Point(new Vector3(2, 3, 4)),
+                modelPoint: new Point(new Vector3(4, 4, 3))
+            ));
+
+            errorMetric = new ErrorMetric(
+                new ErrorMetric.Configuration(
+                    distanceMetric: DistanceMetrics.SquaredEuclidean,
+                    aggregationMethod: AggregationMethods.Sum,
+                    normalizePoints: true
+                )
+            );
+
+            float expected = 1.3333333333f;
+            float actual = errorMetric.ComputeError(correspondences, null, null);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
+        }
     }
 }

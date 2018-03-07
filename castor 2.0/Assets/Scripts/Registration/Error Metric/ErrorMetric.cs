@@ -79,9 +79,9 @@ namespace Registration
             private float ComputeCorrespondenceError(Matrix4x4 normalizationMatrix, Point modelPoint, Point staticPoint)
             {
                 return configuration.DistanceMetric(
-                       staticPoint: staticPoint.ApplyTransform(normalizationMatrix),
-                       modelPoint: modelPoint.ApplyTransform(normalizationMatrix)
-                   );
+                    staticPoint: staticPoint.ApplyTransform(normalizationMatrix),
+                    modelPoint: modelPoint.ApplyTransform(normalizationMatrix)
+                );
             }
 
             #region inner classes
