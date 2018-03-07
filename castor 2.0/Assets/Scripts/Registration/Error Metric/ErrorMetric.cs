@@ -87,7 +87,7 @@ namespace Registration
             #endregion
 
             #region inner classes
-            public class Configuration
+            public class Configuration : IEquatable<Configuration>
             {
                 /// <summary>
                 /// The distance metric used to compute the error.
@@ -115,6 +115,33 @@ namespace Registration
                     DistanceMetric = distanceMetric ?? DistanceMetrics.SquaredEuclidean;
                     NormalizePoints = normalizePoints;
                     AggregationMethod = aggregationMethod ?? AggregationMethods.Sum;
+                }
+
+                public override bool Equals(object obj)
+                {
+                    if (obj == null || GetType() != obj.GetType())
+                        return false;
+                    return this.Equals(obj as Configuration);
+                }
+
+                public override int GetHashCode()
+                {
+                    int hashCode = 67;
+
+                    hashCode *= (31 + DistanceMetric.GetHashCode());
+                    hashCode *= (31 + AggregationMethod.GetHashCode());
+                    hashCode *= (31 + NormalizePoints.GetHashCode());
+
+                    return hashCode;
+                }
+
+                public bool Equals(Configuration other)
+                {
+                    return (
+                        this.DistanceMetric.Equals(other.DistanceMetric) &&
+                        this.AggregationMethod.Equals(other.AggregationMethod) &&
+                        this.NormalizePoints.Equals(other.NormalizePoints)
+                    );
                 }
 
                 /// <summary>
