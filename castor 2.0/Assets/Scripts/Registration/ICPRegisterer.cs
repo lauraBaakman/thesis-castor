@@ -82,7 +82,7 @@ namespace Registration
 
             hasTerminated = false;
 
-            //The static fragment does not change, consequently its points need only be sampled once.
+            //The static fragment does not change during ICP, consequently its points need only be sampled once.
             StaticPoints = SelectPoints(StaticFragment);
 
             ModelSamplingInformation = new SamplingInformation(ModelFragment);
