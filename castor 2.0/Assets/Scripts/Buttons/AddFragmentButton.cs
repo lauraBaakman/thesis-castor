@@ -20,8 +20,8 @@ namespace Buttons
                 fragmentParent: FragmentsRoot,
                 callBack: NotifyUserOfAddedFragment
             );
-            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/RoughFracturedCubeXYZRotationTranslationPart1.obj", randomizeTransform: false);
-            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/RoughFracturedCubeXYZRotationTranslationPart2.obj", randomizeTransform: false);
+            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/FracturedCube/FracturedCubeXTranslationPart1.obj", randomizeTransform: false);
+            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/FracturedCube/FracturedCubeXTranslationPart2.obj", randomizeTransform: false);
         }
 
         private void NotifyUserOfAddedFragment(string path, GameObject fragment)
