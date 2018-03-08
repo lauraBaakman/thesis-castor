@@ -97,7 +97,7 @@ namespace Registration
 
             TransFormFinder = new HornTransformFinder();
 
-            CorrespondenceFinder = new NearstPointCorrespondenceFinder(this);
+            CorrespondenceFinder = new NormalShootingCorrespondenceFinder(this);
         }
     }
 }
