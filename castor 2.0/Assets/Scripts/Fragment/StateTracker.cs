@@ -51,19 +51,23 @@ namespace Fragment
         internal bool locked = false;
         public bool Locked
         {
-            get
-            {
-                return locked;
-            }
+            get { return locked; }
         }
 
         internal bool selected = false;
         public bool Selected
         {
-            get
-            {
-                return selected;
-            }
+            get { return selected; }
+        }
+
+        public bool Deselected
+        {
+            get { return !Selected; }
+        }
+
+        public bool UnLocked
+        {
+            get { return !Locked; }
         }
 
         public FragmentState(bool locked, bool selected)
