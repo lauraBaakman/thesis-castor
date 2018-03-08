@@ -11,12 +11,7 @@ namespace Fragment
 
         public override void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
-            if (IsFirstPreparationStep(message)) SendMessageToListeners("OnPreparationStepCompleted", message);
-        }
-
-        private bool IsFirstPreparationStep(ICPPreparationStepCompletedMessage message)
-        {
-            return message.IterationIndex == firstIteration;
+            if (message.IsFirstPreparationStep()) SendMessageToListeners("OnPreparationStepCompleted", message);
         }
 
         public override void OnStepCompleted(ICPStepCompletedMessage message) { }
