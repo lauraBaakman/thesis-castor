@@ -174,7 +174,6 @@ namespace Registration
         /// <param name="fragment">Fragment.</param>
         private List<Point> SelectPoints(GameObject fragment)
         {
-            Mesh mesh = fragment.GetComponent<MeshFilter>().mesh;
             List<Point> points = Settings.PointSelector.Select(new SamplingInformation(fragment));
             return points;
         }
