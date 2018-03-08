@@ -139,6 +139,9 @@
     <Reference Include="NSubstitute">
       <HintPath>Assets/Libraries/UnityTestTools/UnitTesting/Editor/NSubstitute/NSubstitute.dll</HintPath>
     </Reference>
+    <Reference Include="alglibnet2">
+      <HintPath>Assets/Libraries/AlgLib/alglibnet2.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="castor 2.0.csproj">

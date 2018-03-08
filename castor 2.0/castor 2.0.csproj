@@ -97,6 +97,9 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="alglibnet2">
+      <HintPath>Assets/Libraries/AlgLib/alglibnet2.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Libraries\DebugDrawingExtension\DebugExtension.cs" />
