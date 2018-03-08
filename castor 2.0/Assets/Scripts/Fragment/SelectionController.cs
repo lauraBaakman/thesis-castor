@@ -8,9 +8,7 @@ namespace Fragment
     {
 
         private GameObject SelectedFragments;
-        private GameObject DeselectedFragments;
-
-
+        private GameObject Fragments;
 
         public bool Selectable
         {
@@ -25,8 +23,8 @@ namespace Fragment
 
         private void Start()
         {
-            DeselectedFragments = transform.root.gameObject;
-            SelectedFragments = DeselectedFragments.FindChildByName("Selected Fragments");
+            Fragments = transform.root.gameObject;
+            SelectedFragments = Fragments.FindChildByName("Selected Fragments");
 
             Selectable = true;
         }
@@ -55,7 +53,7 @@ namespace Fragment
 
         public void OnToggleSelectionState(bool selected)
         {
-            gameObject.transform.parent = selected ? SelectedFragments.transform : DeselectedFragments.transform;
+            gameObject.transform.parent = selected ? SelectedFragments.transform : Fragments.transform;
         }
         #endregion
 
