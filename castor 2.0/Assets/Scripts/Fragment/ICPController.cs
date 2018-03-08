@@ -13,6 +13,22 @@ namespace Fragment
         private ICPModelFragmentController modelFragmentController;
         private ICPStaticFragmentController staticFragmentController;
 
+        private Transform ICPFragments;
+        private Transform Fragments;
+
+        private static string ICPFragmentsName = "ICP Fragments";
+
+        public void Awake()
+        {
+            GameObject FragmentsGO = transform.parent.gameObject;
+            Debug.Assert(FragmentsGO, "Could not find the parent gameobject of this gameobject");
+            Fragments = FragmentsGO.transform;
+
+            GameObject ICPFragmentsGO = FragmentsGO.FindChildByName(ICPFragmentsName);
+            Debug.Assert(ICPFragmentsGO, "Could not find the gameobject with the name " + ICPFragmentsName);
+            ICPFragments = ICPFragmentsGO.transform;
+        }
+
         public bool IsStaticFragment
         {
             get
@@ -74,9 +90,19 @@ namespace Fragment
         {
             ToggleIsModelFragment(false);
             ToggleIsStaticFragment(false);
+
+            transform.parent = Fragments;
         }
 
-        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message) { }
+        /// <summary>
+        /// If the first step is completed set the parent of this gameobject 
+        /// to the "ICP Fragments" gameobject. 
+        /// </summary>
+        /// <param name="message">Message.</param>
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
+        {
+            if (message.IsFirstPreparationStep()) transform.parent = ICPFragments;
+        }
         #endregion
     }
 }
