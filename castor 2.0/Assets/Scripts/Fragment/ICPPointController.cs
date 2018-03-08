@@ -67,9 +67,8 @@ namespace Fragment
 
         private void SetPosition(Vector3 position)
         {
-            position.ChangeTransformOfPosition(referenceTransform, transform.parent);
-
-            gameObject.transform.position = position;
+            Vector3 transformedPosition = position.ChangeTransformOfPosition(referenceTransform, transform.parent);
+            gameObject.transform.localPosition = transformedPosition;
         }
 
         private void SetName(Registration.Point point)
