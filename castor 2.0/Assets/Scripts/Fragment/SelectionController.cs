@@ -85,11 +85,6 @@ namespace Fragment
         public void OnAlteredByTransformGizmo(Gizmo gizmo) { }
         #endregion
 
-        public void OnDeselect(bool allowUndoRedo = false)
-        {
-            DeselectFragment(allowUndoRedo);
-        }
-
         #region IICPStartEndListener
         public void OnICPStarted()
         {
