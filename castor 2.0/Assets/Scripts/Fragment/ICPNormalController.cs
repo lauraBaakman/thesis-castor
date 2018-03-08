@@ -127,7 +127,7 @@ namespace Fragment
         public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
             ReferenceTransform = message.Transform;
-            Fragment.ICPFragmentType type = parentICPController.FragmentType;
+            ICPFragmentType type = ICPControllerOfParent.FragmentType;
 
             if (ShowNormals) StoreNormals(message.Correspondences.GetPointsByType(type));
         }
