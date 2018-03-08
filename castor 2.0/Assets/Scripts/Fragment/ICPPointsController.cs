@@ -37,8 +37,7 @@ namespace Fragment
             GameObject pointGO = GetPointGO();
             ICPPointController pointController = pointGO.GetComponent<ICPPointController>();
 
-            pointController.ReferenceTransform = referenceTransform;
-            pointController.RepresentPoint(point);
+            pointController.RepresentPoint(point, referenceTransform);
 
             pointGOMapping.Add(point, pointController);
 
