@@ -42,20 +42,18 @@ namespace Registration
                 );
 
                 //Aggregate the errors
-                return configuration.AggregationMethod(errors);
+                float error = configuration.AggregationMethod(errors);
+                return error;
             }
 
             private List<Point> TransformPoints(List<Point> points, Transform orignalTransform, Transform newTransform)
             {
                 List<Point> transformedPoints = new List<Point>(points.Count);
+                Matrix4x4 transformation = orignalTransform.LocalToOther(newTransform);
+
                 foreach (Point point in points)
                 {
-                    transformedPoints.Add(
-                        point.ChangeTransform(
-                            sourceTransform: orignalTransform,
-                            destinationTransform: newTransform
-                        )
-                    );
+                    transformedPoints.Add(point.ChangeTransform(transformation));
                 }
                 return transformedPoints;
             }
