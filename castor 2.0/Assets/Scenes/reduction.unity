@@ -163,7 +163,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -285,6 +285,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 33415125}
+  - component: {fileID: 33415126}
   m_Layer: 0
   m_Name: ICP Fragments
   m_TagString: Untagged
@@ -305,6 +306,17 @@ Transform:
   m_Father: {fileID: 1276394743}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &33415126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 33415124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beefb4bec9da4415db98706d68e42ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &37977596 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1135060811400328, guid: f2474aba1b01746338cfb3d40f0d8cea,
@@ -379,7 +391,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -1096,7 +1108,7 @@ MonoBehaviour:
   StepButton: {fileID: 508592876}
   PlayButton: {fileID: 1458673334}
   StopButton: {fileID: 1638273560}
-  SelectedFragments: {fileID: 1584437542}
+  ICPFragments: {fileID: 33415124}
 --- !u!114 &218469454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2626,7 +2638,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -4000,7 +4012,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -4328,7 +4340,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1584437543}
   - component: {fileID: 1584437544}
-  - component: {fileID: 1584437545}
   m_Layer: 0
   m_Name: Selected Fragments
   m_TagString: Untagged
@@ -4366,17 +4377,6 @@ MonoBehaviour:
   - {fileID: 270521288}
   - {fileID: 1429508301}
   - {fileID: 1404554085}
---- !u!114 &1584437545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1584437542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beefb4bec9da4415db98706d68e42ee4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1586261602
 GameObject:
   m_ObjectHideFlags: 0
