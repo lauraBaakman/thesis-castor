@@ -20,6 +20,16 @@ public static class Vector3Extensions
     }
 
     /// <summary>
+    /// Duplicate the specified vector.
+    /// </summary>
+    /// <returns>The duplicate of the input vector.</returns>
+    /// <param name="vector">Vector.</param>
+    public static Vector3 Duplicate(this Vector3 vector)
+    {
+        return new Vector3(vector.x, vector.y, vector.z);
+    }
+
+    /// <summary>
     /// Changes the transform of the vector representing a position from the source transform to the destination transform.
     /// </summary>
     /// <returns>A new vector in the destination transform.</returns>
@@ -28,10 +38,10 @@ public static class Vector3Extensions
     /// <param name="destinationTransform">Destination transform.</param>
     public static Vector3 ChangeTransformOfPosition(this Vector3 vector, Transform sourceTransform, Transform destinationTransform)
     {
-        if (EitherOfTheTransformsIsNull(sourceTransform, destinationTransform)) return CopyVector(vector);
+        if (EitherOfTheTransformsIsNull(sourceTransform, destinationTransform)) return vector.Duplicate();
 
         Vector3 worldTransformPosition = sourceTransform.TransformPoint(vector);
-        Vector3 destinationTransformPosition = destinationTransform.TransformPoint(worldTransformPosition);
+        Vector3 destinationTransformPosition = destinationTransform.InverseTransformPoint(worldTransformPosition);
 
         return destinationTransformPosition;
     }
@@ -45,7 +55,7 @@ public static class Vector3Extensions
     /// <param name="destinationTransform">Destination transform.</param>
     public static Vector3 ChangeTransformOfDirection(this Vector3 vector, Transform sourceTransform, Transform destinationTransform)
     {
-        if (EitherOfTheTransformsIsNull(sourceTransform, destinationTransform)) return CopyVector(vector);
+        if (EitherOfTheTransformsIsNull(sourceTransform, destinationTransform)) return vector.Duplicate();
 
         Vector3 worldTransformVector = sourceTransform.TransformDirection(vector);
         Vector3 destinationTransformVector = destinationTransform.InverseTransformDirection(worldTransformVector);
@@ -56,10 +66,5 @@ public static class Vector3Extensions
     private static bool EitherOfTheTransformsIsNull(Transform sourceTransform, Transform destinationTransform)
     {
         return sourceTransform == null || destinationTransform == null;
-    }
-
-    private static Vector3 CopyVector(Vector3 vector)
-    {
-        return new Vector3(vector.x, vector.y, vector.z);
     }
 }

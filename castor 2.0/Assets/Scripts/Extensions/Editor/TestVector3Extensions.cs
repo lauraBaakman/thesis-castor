@@ -71,5 +71,16 @@ namespace Tests
             Assert.AreEqual(expected, actual);
             Assert.AreNotSame(vector, actual);
         }
+
+        [Test]
+        public void DuplicateVector()
+        {
+            Vector3 vector = Auxilaries.RandomPosition();
+
+            Vector3 actual = vector.Duplicate();
+
+            Assert.AreEqual(vector, actual);
+            Assert.AreNotSame(vector, actual);
+        }
     }
 }
