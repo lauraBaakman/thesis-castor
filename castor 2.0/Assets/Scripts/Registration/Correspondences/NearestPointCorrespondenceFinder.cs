@@ -20,6 +20,10 @@ namespace Registration
             this.sampler = sampler;
         }
 
+        public NearstPointCorrespondenceFinder(Settings settings)
+            : this(settings.PointSelector)
+        { }
+
         public CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
         {
 
