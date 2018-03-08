@@ -11,23 +11,27 @@ namespace Fragment
     /// </summary>
     public class StateTracker : MonoBehaviour, IFragmentStateElementToggled
     {
-        FragmentState State;
+        public FragmentState State
+        {
+            get { return state; }
+        }
+        private FragmentState state;
 
         void Start()
         {
-            State = new FragmentState(locked: false, selected: false);
+            state = new FragmentState(locked: false, selected: false);
         }
 
         public void OnToggledLockedState(bool locked)
         {
-            State.locked = locked;
+            state.locked = locked;
 
             NotifyOtherComponentsOfStateChange();
         }
 
         public void OnToggleSelectionState(bool selected)
         {
-            State.selected = selected;
+            state.selected = selected;
 
             NotifyOtherComponentsOfStateChange();
         }
@@ -36,7 +40,7 @@ namespace Fragment
         {
             SendMessage(
                 methodName: "OnStateChanged",
-                value: State,
+                value: state,
                 options: SendMessageOptions.RequireReceiver
             );
         }
