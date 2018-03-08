@@ -178,12 +178,6 @@ namespace Registration
             return points;
         }
 
-        /// <summary>
-        /// Computes the correspondences based on the list of static and model points.
-        /// </summary>
-        /// <returns>The found correspondences.</returns>
-        /// <param name="staticPoints">Points of the static fragment.</param>
-        /// <param name="modelPoints">Points of the model fragment.</param>
         private CorrespondenceCollection ComputeCorrespondences(List<Point> staticPoints)
         {
             Mesh modelMesh = modelFragment.GetComponent<MeshFilter>().mesh;
