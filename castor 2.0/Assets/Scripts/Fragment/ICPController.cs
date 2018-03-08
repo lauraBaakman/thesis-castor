@@ -1,5 +1,6 @@
 using UnityEngine;
 using Registration.Messages;
+using System.Collections;
 
 namespace Fragment
 {
@@ -7,11 +8,27 @@ namespace Fragment
 
     [RequireComponent(typeof(ICPModelFragmentController))]
     [RequireComponent(typeof(ICPStaticFragmentController))]
-    public class ICPController : MonoBehaviour, IICPListener
+    public class ICPController : MonoBehaviour, IICPListener, IICPStartEndListener
     {
 
         private ICPModelFragmentController modelFragmentController;
         private ICPStaticFragmentController staticFragmentController;
+
+        private Transform ICPFragments;
+        private Transform Fragments;
+
+        private static string ICPFragmentsName = "ICP Fragments";
+
+        public void Awake()
+        {
+            GameObject FragmentsGO = transform.parent.gameObject;
+            Debug.Assert(FragmentsGO, "Could not find the parent gameobject of this gameobject");
+            Fragments = FragmentsGO.transform;
+
+            GameObject ICPFragmentsGO = FragmentsGO.FindChildByName(ICPFragmentsName);
+            Debug.Assert(ICPFragmentsGO, "Could not find the gameobject with the name " + ICPFragmentsName);
+            ICPFragments = ICPFragmentsGO.transform;
+        }
 
         public bool IsStaticFragment
         {
@@ -74,10 +91,28 @@ namespace Fragment
         {
             ToggleIsModelFragment(false);
             ToggleIsStaticFragment(false);
+
+            transform.parent = Fragments;
         }
 
         public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message) { }
         #endregion
+
+        #region ICPStartEndListener
+        public void OnICPStarted()
+        {
+            StartCoroutine(ChangeTransformOnObjectDeselection());
+        }
+        #endregion
+
+        private IEnumerator ChangeTransformOnObjectDeselection()
+        {
+            StateTracker stateTracker = GetComponent<StateTracker>();
+
+            yield return new WaitUntil(() => stateTracker.State.Deselected);
+
+            transform.parent = ICPFragments;
+        }
     }
 }
 

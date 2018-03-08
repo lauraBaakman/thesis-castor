@@ -9,6 +9,8 @@ namespace Registration
     {
         public class ICPPreparationStepCompletedMessage
         {
+            static int firstIterationIdx = 1;
+
             public readonly Transform Transform;
 
             public readonly int IterationIndex;
@@ -20,6 +22,11 @@ namespace Registration
                 this.Transform = transform;
 
                 this.IterationIndex = iterationIndex;
+            }
+
+            public bool IsFirstPreparationStep()
+            {
+                return this.IterationIndex == firstIterationIdx;
             }
         }
 

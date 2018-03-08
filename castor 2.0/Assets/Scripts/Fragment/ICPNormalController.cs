@@ -13,13 +13,13 @@ namespace Fragment
         private List<Normal> Normals = new List<Normal>();
         private Transform ReferenceTransform;
 
-        private ICPController parentICPController;
+        private ICPController ICPControllerOfParent;
 
         private void Awake()
         {
             GameObject parent = this.transform.parent.gameObject;
-            parentICPController = parent.GetComponent<ICPController>();
-            Debug.Assert(parentICPController != null, "The parent gameobject of the object that has the " + this.name + " is expected to have an ICPController.");
+            ICPControllerOfParent = parent.GetComponent<ICPController>();
+            Debug.Assert(ICPControllerOfParent != null, "The parent gameobject of the object that has the " + this.name + " is expected to have an ICPController.");
         }
 
         public void OnRenderObject()
@@ -127,7 +127,7 @@ namespace Fragment
         public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
             ReferenceTransform = message.Transform;
-            Fragment.ICPFragmentType type = parentICPController.FragmentType;
+            ICPFragmentType type = ICPControllerOfParent.FragmentType;
 
             if (ShowNormals) StoreNormals(message.Correspondences.GetPointsByType(type));
         }

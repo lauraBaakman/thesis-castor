@@ -8,9 +8,9 @@ namespace Fragment
     {
 
         private GameObject SelectedFragments;
-        private GameObject DeselectedFragments;
+        private GameObject Fragments;
 
-
+        private static string SelectedFragmentsGOName = "Selected Fragments";
 
         public bool Selectable
         {
@@ -18,20 +18,27 @@ namespace Fragment
             set
             {
                 selectable = value;
-                if (!selectable) DeselectFragment();
+                if (!selectable) DeselectFragment(allowUndoRedo: false);
             }
         }
         private bool selectable;
 
         private void Start()
         {
-            DeselectedFragments = transform.root.gameObject;
-            SelectedFragments = DeselectedFragments.FindChildByName("Selected Fragments");
+            Fragments = transform.root.gameObject;
+
+            SelectedFragments = Fragments.FindChildByName(SelectedFragmentsGOName);
+            Debug.Assert(SelectedFragments, "Could not find the gameobject with name " + SelectedFragmentsGOName);
 
             Selectable = true;
         }
 
-        private void SelectFragment()
+        private void DeselectFragment(bool allowUndoRedo)
+        {
+            EditorObjectSelection.Instance.RemoveObjectFromSelection(gameObject, allowUndoRedo);
+        }
+
+        private void ObjectHasBeenSelected()
         {
             SendMessage(
                 methodName: "OnToggleSelectionState",
@@ -40,7 +47,7 @@ namespace Fragment
             );
         }
 
-        private void DeselectFragment()
+        private void ObjectHasBeenDeselected()
         {
             SendMessage(
                 methodName: "OnToggleSelectionState",
@@ -55,7 +62,7 @@ namespace Fragment
 
         public void OnToggleSelectionState(bool selected)
         {
-            gameObject.transform.parent = selected ? SelectedFragments.transform : DeselectedFragments.transform;
+            gameObject.transform.parent = selected ? SelectedFragments.transform : Fragments.transform;
         }
         #endregion
 
@@ -67,12 +74,12 @@ namespace Fragment
 
         public void OnSelected(ObjectSelectEventArgs selectEventArgs)
         {
-            SelectFragment();
+            ObjectHasBeenSelected();
         }
 
         public void OnDeselected(ObjectDeselectEventArgs deselectEventArgs)
         {
-            DeselectFragment();
+            ObjectHasBeenDeselected();
         }
 
         public void OnAlteredByTransformGizmo(Gizmo gizmo) { }
@@ -82,7 +89,6 @@ namespace Fragment
         public void OnICPStarted()
         {
             Selectable = false;
-            EditorObjectSelection.Instance.RemoveObjectFromSelection(gameObject, allowUndoRedo: false);
         }
 
         public void OnICPTerminated(ICPTerminatedMessage message)

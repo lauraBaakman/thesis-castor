@@ -9,19 +9,16 @@ namespace Fragment
     {
         private static string pointPrefabPath = "ICPPoint";
 
-        private Transform originalParentTransform;
         private Stack<GameObject> unusedPoints = new Stack<GameObject>();
-        private ICPController parentICPController;
+        private ICPController parentsICPController;
 
         private Dictionary<Point, ICPPointController> pointGOMapping = new Dictionary<Point, ICPPointController>();
 
         private void Awake()
         {
-            originalParentTransform = transform.parent;
-
             GameObject parent = this.transform.parent.gameObject;
-            parentICPController = parent.GetComponent<ICPController>();
-            Debug.Assert(parentICPController != null, "The parent gameobject of the object that has the " + this.name + " is expected to have an ICPController.");
+            parentsICPController = parent.GetComponent<ICPController>();
+            Debug.Assert(parentsICPController != null, "The parent gameobject of the object that has the " + this.name + " is expected to have an ICPController.");
         }
 
         public void Start()
@@ -59,7 +56,6 @@ namespace Fragment
             {
                 if (child.gameObject.activeSelf) ClearPoint(child.gameObject);
             }
-            transform.SetParent(originalParentTransform);
             pointGOMapping.Clear();
         }
 
@@ -85,9 +81,7 @@ namespace Fragment
 
         public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
-            transform.SetParent(message.Transform);
-
-            Fragment.ICPFragmentType type = parentICPController.FragmentType;
+            ICPFragmentType type = parentsICPController.FragmentType;
             UpdatePoints(message.Correspondences.GetPointsByType(type));
         }
 
