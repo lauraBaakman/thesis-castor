@@ -10,13 +10,15 @@ namespace Fragment
         private GameObject SelectedFragments;
         private GameObject Fragments;
 
+        private static string SelectedFragmentsGOName = "Selected Fragments";
+
         public bool Selectable
         {
             get { return selectable; }
             set
             {
                 selectable = value;
-                if (!selectable) DeselectFragment();
+                if (!selectable) DeselectFragment(allowUndoRedo: false);
             }
         }
         private bool selectable;
@@ -24,12 +26,19 @@ namespace Fragment
         private void Start()
         {
             Fragments = transform.root.gameObject;
-            SelectedFragments = Fragments.FindChildByName("Selected Fragments");
+
+            SelectedFragments = Fragments.FindChildByName(SelectedFragmentsGOName);
+            Debug.Assert(SelectedFragments, "Could not find the gameobject with name " + SelectedFragmentsGOName);
 
             Selectable = true;
         }
 
-        private void SelectFragment()
+        private void DeselectFragment(bool allowUndoRedo)
+        {
+            EditorObjectSelection.Instance.RemoveObjectFromSelection(gameObject, allowUndoRedo);
+        }
+
+        private void ObjectHasBeenSelected()
         {
             SendMessage(
                 methodName: "OnToggleSelectionState",
@@ -38,7 +47,7 @@ namespace Fragment
             );
         }
 
-        private void DeselectFragment()
+        private void ObjectHasBeenDeselected()
         {
             SendMessage(
                 methodName: "OnToggleSelectionState",
@@ -65,22 +74,26 @@ namespace Fragment
 
         public void OnSelected(ObjectSelectEventArgs selectEventArgs)
         {
-            SelectFragment();
+            ObjectHasBeenSelected();
         }
 
         public void OnDeselected(ObjectDeselectEventArgs deselectEventArgs)
         {
-            DeselectFragment();
+            ObjectHasBeenDeselected();
         }
 
         public void OnAlteredByTransformGizmo(Gizmo gizmo) { }
         #endregion
 
+        public void OnDeselect(bool allowUndoRedo = false)
+        {
+            DeselectFragment(allowUndoRedo);
+        }
+
         #region IICPStartEndListener
         public void OnICPStarted()
         {
             Selectable = false;
-            EditorObjectSelection.Instance.RemoveObjectFromSelection(gameObject, allowUndoRedo: false);
         }
 
         public void OnICPTerminated(ICPTerminatedMessage message)
