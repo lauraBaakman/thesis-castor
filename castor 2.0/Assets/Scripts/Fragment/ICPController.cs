@@ -1,5 +1,6 @@
 using UnityEngine;
 using Registration.Messages;
+using System.Collections;
 
 namespace Fragment
 {
@@ -7,7 +8,7 @@ namespace Fragment
 
     [RequireComponent(typeof(ICPModelFragmentController))]
     [RequireComponent(typeof(ICPStaticFragmentController))]
-    public class ICPController : MonoBehaviour, IICPListener
+    public class ICPController : MonoBehaviour, IICPListener, IICPStartEndListener
     {
 
         private ICPModelFragmentController modelFragmentController;
@@ -94,16 +95,28 @@ namespace Fragment
             transform.parent = Fragments;
         }
 
-        /// <summary>
-        /// If the first step is completed set the parent of this gameobject 
-        /// to the "ICP Fragments" gameobject. 
-        /// </summary>
-        /// <param name="message">Message.</param>
         public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
-            if (message.IsFirstPreparationStep()) transform.parent = ICPFragments;
+            throw new System.NotImplementedException();
         }
         #endregion
+
+        #region ICPStartEndListener
+        public void OnICPStarted()
+        {
+            StartCoroutine(WaitForObjectDeselection());
+        }
+        #endregion
+
+        private IEnumerator WaitForObjectDeselection()
+        {
+            Debug.Log("Get StateTracker");
+            StateTracker stateTracker = GetComponent<StateTracker>();
+
+            yield return new WaitUntil(() => stateTracker.State.Deselected);
+
+            transform.parent = ICPFragments;
+        }
     }
 }
 
