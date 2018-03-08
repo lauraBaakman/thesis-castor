@@ -1,10 +1,9 @@
 using UnityEngine;
-using System.Collections;
 using RTEditor;
 
 namespace Fragment
 {
-    public class ICPPointController : MonoBehaviour, RTEditor.IRTEditorEventListener
+    public class ICPPointController : MonoBehaviour, IRTEditorEventListener
     {
         public static float defaultScale = 0.01f;
         private Color defaultColor;
