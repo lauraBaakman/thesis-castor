@@ -95,22 +95,18 @@ namespace Fragment
             transform.parent = Fragments;
         }
 
-        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message) { }
         #endregion
 
         #region ICPStartEndListener
         public void OnICPStarted()
         {
-            StartCoroutine(WaitForObjectDeselection());
+            StartCoroutine(ChangeTransformOnObjectDeselection());
         }
         #endregion
 
-        private IEnumerator WaitForObjectDeselection()
+        private IEnumerator ChangeTransformOnObjectDeselection()
         {
-            Debug.Log("Get StateTracker");
             StateTracker stateTracker = GetComponent<StateTracker>();
 
             yield return new WaitUntil(() => stateTracker.State.Deselected);
