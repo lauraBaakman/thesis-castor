@@ -14,4 +14,17 @@ public static class TransformExtensions
         transform.localRotation = Quaternion.identity;
         transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
+
+    /// <summary>
+    /// Matrix that transforms a point from local space into other space.
+    /// </summary>
+    /// <returns>The transformation matrix</returns>
+    /// <param name="other">The transform to transform to.</param>
+    public static Matrix4x4 LocalToOther(this Transform transform, Transform other)
+    {
+        Matrix4x4 toWorld = transform.localToWorldMatrix;
+        Matrix4x4 toOther = other.worldToLocalMatrix;
+
+        return toWorld * toOther;
+    }
 }
