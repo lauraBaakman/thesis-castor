@@ -11,9 +11,20 @@ namespace Registration
         {
             static int firstIterationIdx = 1;
 
+            /// <summary>
+            /// The transform of the corespondences
+            /// </summary>
             public readonly Transform Transform;
 
+            /// <summary>
+            /// The iteration of the ICP algorithm for which the preparation 
+            /// step was completed.
+            /// </summary>
             public readonly int IterationIndex;
+
+            /// <summary>
+            /// The correspondences determined in the preparation step.
+            /// </summary>
             public readonly CorrespondenceCollection Correspondences;
 
             public ICPPreparationStepCompletedMessage(CorrespondenceCollection correspondences, Transform transform, int iterationIndex)
