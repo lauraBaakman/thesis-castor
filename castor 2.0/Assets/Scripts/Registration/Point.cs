@@ -158,6 +158,14 @@ namespace Registration
             );
         }
 
+        public Point ChangeTransform(Matrix4x4 transformation)
+        {
+            return new Point(
+                position: transformation.MultiplyPoint3x4(Position),
+                normal: HasNormal ? transformation.MultiplyVector(Normal) : NoNormal
+            );
+        }
+
         public Point ApplyTransform(Matrix4x4 transformationMatrix)
         {
             Vector3 transformedPosition = transformationMatrix.MultiplyPoint(this.Position);
