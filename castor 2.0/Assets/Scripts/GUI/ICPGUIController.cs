@@ -13,7 +13,7 @@ namespace GraphicalUI
         public AbstractRegistrationButton PlayButton;
         public AbstractRegistrationButton StopButton;
 
-        public GameObject SelectedFragments;
+        public GameObject ICPFragments;
 
         private ICPRegisterer registerer;
 
@@ -31,10 +31,10 @@ namespace GraphicalUI
                 modelFragment: modelFragment,
                 staticFragment: staticFragment,
                 settings: new Settings(
-                    referenceTransform: SelectedFragments.transform
+                    referenceTransform: ICPFragments.transform
                 )
             );
-            registerer.AddListener(SelectedFragments);
+            registerer.AddListener(ICPFragments);
             registerer.AddListener(this.gameObject);
 
             StepButton.Registerer = registerer;
@@ -60,7 +60,7 @@ namespace GraphicalUI
         private void GetModelAndStaticFragment(out GameObject modelFragment, out GameObject staticFragment)
         {
             //We are interested in all children of SelectedFragmetns that have meshrenderes, i.e. the meshes.
-            MeshRenderer[] childMeshes = SelectedFragments.GetComponentsInChildren<MeshRenderer>();
+            MeshRenderer[] childMeshes = ICPFragments.GetComponentsInChildren<MeshRenderer>();
             Debug.Assert(
                 childMeshes.Length == 2,
                 "Expected SelectedFragments to have exactly two children with MeshRenders, not " + childMeshes.Length
