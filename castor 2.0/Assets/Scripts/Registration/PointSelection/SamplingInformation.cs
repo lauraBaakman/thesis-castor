@@ -20,9 +20,9 @@ namespace Registration
 
         public SamplingInformation(GameObject gameObject)
             : this(
-                gameObject.transform,
-                gameObject.GetComponent<MeshFilter>().mesh,
-                gameObject.GetComponent<Collider>()
+                transform: gameObject.transform,
+                mesh: gameObject.GetComponent<MeshFilter>().mesh,
+                collider: gameObject.GetComponent<Collider>()
             )
         { }
     }
