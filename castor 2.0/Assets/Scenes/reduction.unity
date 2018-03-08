@@ -1109,6 +1109,7 @@ MonoBehaviour:
   PlayButton: {fileID: 1458673334}
   StopButton: {fileID: 1638273560}
   ICPFragments: {fileID: 33415124}
+  SelectedFragments: {fileID: 1584437542}
 --- !u!114 &218469454
 MonoBehaviour:
   m_ObjectHideFlags: 0
