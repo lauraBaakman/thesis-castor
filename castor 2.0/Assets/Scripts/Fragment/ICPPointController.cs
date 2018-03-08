@@ -37,10 +37,10 @@ namespace Fragment
             gameObject.SetActive(false);
         }
 
-        public void RepresentPoint(Registration.Point point, Transform referenceTransfrom)
+        public void RepresentPoint(Registration.Point point, Matrix4x4 referenceToLocal)
         {
             SetName(point);
-            SetPosition(point.Position, referenceTransfrom);
+            SetPosition(point.Position, referenceToLocal);
             SetColor(point.Color);
             SetScale(defaultScale);
 
@@ -52,9 +52,9 @@ namespace Fragment
             gameObject.transform.localScale = new Vector3(scale, scale, scale);
         }
 
-        private void SetPosition(Vector3 position, Transform referenceTransform)
+        private void SetPosition(Vector3 position, Matrix4x4 referenceToLocal)
         {
-            Vector3 localPosition = position.ChangeTransformOfPosition(referenceTransform, transform.parent);
+            Vector3 localPosition = referenceToLocal.MultiplyPoint3x4(position);
             gameObject.transform.localPosition = localPosition;
         }
 

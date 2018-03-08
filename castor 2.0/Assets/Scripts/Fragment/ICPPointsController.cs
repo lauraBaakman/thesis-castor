@@ -9,8 +9,6 @@ namespace Fragment
     {
         private static string pointPrefabPath = "ICPPoint";
 
-        private Transform referenceTransform;
-
         private Stack<GameObject> unusedPoints = new Stack<GameObject>();
         private ICPController parentsICPController;
 
@@ -18,6 +16,8 @@ namespace Fragment
         /// Mapping between points, in the reference transform, and the gameobjects used to represent those points.
         /// </summary>
         private Dictionary<Point, ICPPointController> pointGOMapping = new Dictionary<Point, ICPPointController>();
+
+        Matrix4x4 referenceToLocalTransform;
 
         private void Awake()
         {
@@ -37,7 +37,7 @@ namespace Fragment
             GameObject pointGO = GetPointGO();
             ICPPointController pointController = pointGO.GetComponent<ICPPointController>();
 
-            pointController.RepresentPoint(point, referenceTransform);
+            pointController.RepresentPoint(point, referenceToLocalTransform);
 
             pointGOMapping.Add(point, pointController);
 
@@ -87,7 +87,7 @@ namespace Fragment
 
         public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
-            referenceTransform = message.Transform;
+            referenceToLocalTransform = message.Transform.LocalToOther(this.transform);
 
             ICPFragmentType type = parentsICPController.FragmentType;
             UpdatePoints(message.Correspondences.GetPointsByType(type));
