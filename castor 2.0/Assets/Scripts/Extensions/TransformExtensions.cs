@@ -25,6 +25,6 @@ public static class TransformExtensions
         Matrix4x4 toWorld = transform.localToWorldMatrix;
         Matrix4x4 toOther = other.worldToLocalMatrix;
 
-        return toWorld * toOther;
+        return toOther * toWorld;
     }
 }
