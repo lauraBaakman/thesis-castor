@@ -5,11 +5,19 @@ namespace Fragment
 {
     public class ICPPointController : MonoBehaviour, IRTEditorEventListener
     {
-        public Transform ReferenceTransform;
+        private Transform referenceTransform;
 
         public static float defaultScale = 0.01f;
         private Color defaultColor;
         private MeshRenderer meshRenderer;
+
+        public Transform ReferenceTransform
+        {
+            set
+            {
+                referenceTransform = value;
+            }
+        }
 
         public void Awake()
         {
@@ -35,14 +43,14 @@ namespace Fragment
             transform.Reset();
             name = "unused ICP point";
             meshRenderer.material.color = defaultColor;
-            ReferenceTransform = null;
+            referenceTransform = null;
 
             gameObject.SetActive(false);
         }
 
         public void RepresentPoint(Registration.Point point)
         {
-            Debug.Assert(ReferenceTransform, "The referencetransform should be set.");
+            Debug.Assert(referenceTransform, "The referencetransform should be set.");
 
             SetName(point);
             SetPosition(point.Position);
@@ -59,7 +67,7 @@ namespace Fragment
 
         private void SetPosition(Vector3 position)
         {
-            position.ChangeTransformOfPosition(ReferenceTransform, transform.parent);
+            position.ChangeTransformOfPosition(referenceTransform, transform.parent);
 
             gameObject.transform.position = position;
         }
