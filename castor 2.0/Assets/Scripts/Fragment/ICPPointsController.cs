@@ -9,6 +9,8 @@ namespace Fragment
     {
         private static string pointPrefabPath = "ICPPoint";
 
+        private Transform referenceTransform;
+
         private Stack<GameObject> unusedPoints = new Stack<GameObject>();
         private ICPController parentsICPController;
 
@@ -34,6 +36,8 @@ namespace Fragment
         {
             GameObject pointGO = GetPointGO();
             ICPPointController pointController = pointGO.GetComponent<ICPPointController>();
+
+            pointController.ReferenceTransform = referenceTransform;
             pointController.RepresentPoint(point);
 
             pointGOMapping.Add(point, pointController);
@@ -84,6 +88,8 @@ namespace Fragment
 
         public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
+            referenceTransform = message.Transform;
+
             ICPFragmentType type = parentsICPController.FragmentType;
             UpdatePoints(message.Correspondences.GetPointsByType(type));
         }
@@ -95,6 +101,7 @@ namespace Fragment
             {
                 bool succes = pointGOMapping.TryGetValue(point, out controller);
                 if (!succes) controller = AddICPPoint(point);
+
                 controller.SetColor(point.Color);
             }
         }
