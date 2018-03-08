@@ -220,6 +220,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Readme.txt" />
     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Version History.txt" />
