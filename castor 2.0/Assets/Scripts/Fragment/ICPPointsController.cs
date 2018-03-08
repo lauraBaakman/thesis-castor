@@ -12,6 +12,9 @@ namespace Fragment
         private Stack<GameObject> unusedPoints = new Stack<GameObject>();
         private ICPController parentsICPController;
 
+        /// <summary>
+        /// Mapping between points, in the reference transform, and the gameobjects used to represent those points.
+        /// </summary>
         private Dictionary<Point, ICPPointController> pointGOMapping = new Dictionary<Point, ICPPointController>();
 
         private void Awake()
