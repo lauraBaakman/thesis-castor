@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections.ObjectModel;
 using Utils;
 
 namespace Registration
