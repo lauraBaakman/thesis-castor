@@ -65,12 +65,22 @@ namespace Registration
             this.correspondences = new List<Correspondence>();
         }
 
+        public CorrespondenceCollection(List<Point> modelpoints, List<Point> staticpoints)
+            : this()
+        {
+            for (int i = 0; i < modelpoints.Count; i++)
+            {
+                Add(
+                    modelPoint: modelpoints[i],
+                    staticPoint: staticpoints[i]
+                );
+            }
+        }
+
         #region forwarding methods and properties
         public void Add(DistanceNode node)
         {
-            modelpoints.Add(node.ModelPoint);
-            staticpoints.Add(node.StaticPoint);
-            correspondences.Add(new Correspondence(node));
+            Add(new Correspondence(node));
         }
 
         public void Add(Correspondence correspondence)
@@ -78,6 +88,16 @@ namespace Registration
             modelpoints.Add(correspondence.ModelPoint);
             staticpoints.Add(correspondence.StaticPoint);
             correspondences.Add(correspondence);
+        }
+
+        private void Add(Point modelPoint, Point staticPoint)
+        {
+            Add(
+                new Correspondence(
+                    modelPoint: modelPoint,
+                    staticPoint: staticPoint
+                )
+            );
         }
 
         public void Clear()

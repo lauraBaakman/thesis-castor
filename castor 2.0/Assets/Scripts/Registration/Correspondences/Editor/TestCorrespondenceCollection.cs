@@ -230,5 +230,18 @@ namespace Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Test_CorrespondenceModelStaticPoints_Constructor()
+        {
+            CorrespondenceCollection actual = new CorrespondenceCollection(
+                modelpoints: modelPointList,
+                staticpoints: staticPointList
+            );
+            CorrespondenceCollection expected = correspondences;
+
+            Assert.AreEqual(expected, actual);
+        }
+
     }
 }
