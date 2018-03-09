@@ -28,9 +28,9 @@ namespace Tests
             return new Face(random.Next());
         }
 
-        public static Registration.Point RandomPoint()
+        public static Point RandomPoint()
         {
-            return new Registration.Point(RandomPosition(), RandomNormal());
+            return new Point(RandomPosition(), RandomNormal());
         }
 
         public static Vector3 RandomNormal()
