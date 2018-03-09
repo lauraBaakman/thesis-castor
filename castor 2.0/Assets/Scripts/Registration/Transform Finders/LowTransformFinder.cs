@@ -22,6 +22,18 @@ namespace Registration
 
         private double[,] BuildA(CorrespondenceCollection correspondences)
         {
+            double[,] A = new double[correspondences.Count, numUnknowns];
+
+            int rowIdx = 0;
+
+            foreach (Correspondence correspondence in correspondences)
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
+        private void BuildARow(Correspondence correspondence, out double[] row)
+        {
             throw new System.NotImplementedException();
         }
 
@@ -56,7 +68,7 @@ namespace Registration
             //TODO Compute Pseudo Inverse of A
             //TODO Compute xOpt
 
-            return xOptToTransformationMatrix(xOpt);
+            //return xOptToTransformationMatrix(xOpt);
         }
 
         private Matrix4x4 xOptToTransformationMatrix(double[] xOpt)
