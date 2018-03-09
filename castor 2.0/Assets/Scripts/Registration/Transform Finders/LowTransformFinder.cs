@@ -47,6 +47,8 @@ namespace Registration
                 w: out singularValues, vt: out Vt, u: out U
             );
 
+            double[] xOpt = new double[numUnknowns];
+
             throw new NotImplementedException();
 
             //TODO Build sigma
