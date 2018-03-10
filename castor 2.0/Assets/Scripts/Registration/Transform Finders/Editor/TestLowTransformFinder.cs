@@ -142,5 +142,27 @@ namespace Tests.Registration.TransformFinders
 
             Assert.That(actual, Is.EqualTo(expected).Within(precision));
         }
+
+        [Test]
+        public void Test_TranslationMatrixFromXOpt()
+        {
+            double[] xOpt = new double[] {
+                +0.136382526761545f,
+                -0.021447507191874f,
+                +0.018874131198093f,
+                +1.846045394336890f,
+                -1.076449856474986f,
+                +2.943459815683508f,
+            };
+            Matrix4x4 actual = TransformFinder.TranslationMatrixFromXOpt(xOpt);
+
+            Matrix4x4 expected = new Matrix4x4();
+            expected[0, 0] = +1.000000000000000f; expected[0, 1] = +0.000000000000000f; expected[0, 2] = +0.000000000000000f; expected[0, 3] = +1.846045394336890f;
+            expected[1, 0] = +0.000000000000000f; expected[1, 1] = +1.000000000000000f; expected[1, 2] = +0.000000000000000f; expected[1, 3] = -1.076449856474986f;
+            expected[2, 0] = +0.000000000000000f; expected[2, 1] = +0.000000000000000f; expected[2, 2] = +1.000000000000000f; expected[2, 3] = +2.943459815683508f;
+            expected[3, 0] = +0.000000000000000f; expected[3, 1] = +0.000000000000000f; expected[3, 2] = +0.000000000000000f; expected[3, 3] = +1.000000000000000f;
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
     }
 }
