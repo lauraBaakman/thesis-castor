@@ -18,7 +18,7 @@ namespace Registration
             return ComputeTransform(A, b);
         }
 
-        /* Public, for now for testing */
+        /* Public, for testing, should be private */
         public double[,] BuildA(CorrespondenceCollection correspondences)
         {
             double[,] A = new double[correspondences.Count, numUnknowns];
@@ -45,6 +45,7 @@ namespace Registration
             return A;
         }
 
+        /* Public, for testing, should be private */
         public double[] BuildB(CorrespondenceCollection correspondences)
         {
             double[] b = new double[correspondences.Count];
@@ -60,6 +61,7 @@ namespace Registration
             return b;
         }
 
+        /* Public, for testing, should be private */
         private Matrix4x4 ComputeTransform(double[,] A, double[] b)
         {
             // numUnknowns x 1 matrix
