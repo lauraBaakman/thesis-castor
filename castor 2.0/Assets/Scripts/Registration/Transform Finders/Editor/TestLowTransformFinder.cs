@@ -98,5 +98,27 @@ namespace Tests.Registration.TransformFinders
 
             Assert.That(actual, Is.EqualTo(expected).Within(precision));
         }
+
+        [Test]
+        public void Test_BuildB()
+        {
+            CorrespondenceCollection correspondences = new CorrespondenceCollection(
+                modelpoints: modelPoints,
+                staticpoints: staticPoints
+            );
+            double[] actual = TransformFinder.BuildB(correspondences);
+
+            double[] expected = new double[]{
+                +0.538810425414532f,
+                -1.528182923017297f,
+                -0.876810984054252f,
+                -2.533014484619784f,
+                +1.170195550575876f,
+                +1.173828200602824f,
+                -0.085350294944277f
+            };
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
     }
 }
