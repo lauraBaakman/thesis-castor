@@ -64,29 +64,9 @@ namespace Registration
         /* Public, for testing, should be private */
         private Matrix4x4 ComputeTransform(double[,] A, double[] b)
         {
-            // numUnknowns x 1 matrix
-            double[] singularValues = new double[numUnknowns];
+            Matrix4x4 U, S, Vt;
+            SVD(A, out U, out S, out Vt);
 
-            // Correspondences.Count x Correspondences.Count matrix
-            double[,] U = new double[A.GetLength(0), A.GetLength(0)];
-
-            // numUnknowns x numUnknowns matrix
-            double[,] Vt = new double[numUnknowns, numUnknowns];
-
-            bool succes = alglib.rmatrixsvd(
-                A, A.GetLength(0), A.GetLength(1),
-                uneeded: 2, vtneeded: 2, additionalmemory: 2,
-                w: out singularValues, vt: out Vt, u: out U
-            );
-
-            //54.8633734637297
-            //47.8064060537983
-            //22.2739628465301
-            //1.44854195338278
-            //0.683563111635393
-            //0.277824134543067
-
-            //TODO Build sigma
             //TODO Compute Pseudo Inverse of Sigma
             //TODO Compute Pseudo Inverse of A
 
@@ -94,6 +74,32 @@ namespace Registration
             //TODO Compute xOpt
 
             return TransformationMatrixFromXOpt(xOpt);
+        }
+
+        /// <summary>
+        /// The algorithm calculates the singular value decomposition of A: A = U * S * V^T
+        /// </summary>
+        private void SVD(double[,] A,
+                         out Matrix4x4 U, out Matrix4x4 S, out Matrix4x4 Vt)
+        {
+            // numUnknowns x 1 matrix
+            double[] singularValues = new double[numUnknowns];
+
+            // Correspondences.Count x Correspondences.Count matrix
+            double[,] Uarray = new double[A.GetLength(0), A.GetLength(0)];
+
+            // numUnknowns x numUnknowns matrix
+            double[,] VTArray = new double[numUnknowns, numUnknowns];
+
+            bool succes = alglib.rmatrixsvd(
+                A, A.GetLength(0), A.GetLength(1),
+                uneeded: 2, vtneeded: 2, additionalmemory: 2,
+                w: out singularValues, vt: out VTArray, u: out Uarray
+            );
+
+            S = new Matrix4x4().DiagonalFilled(singularValues);
+            U = new Matrix4x4().Filled(Uarray);
+            Vt = new Matrix4x4().Filled(VTArray);
         }
 
         /* Public, for testing, should be private */
