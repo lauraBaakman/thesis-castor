@@ -6,6 +6,8 @@ namespace Tests
     [TestFixture]
     public class Matrix4ExtensionTests
     {
+        float precision = 0.0001f;
+
         [Test]
         public void TestExtractTranslation_OnlyTranslationSet()
         {
@@ -176,6 +178,61 @@ namespace Tests
 
             Assert.AreEqual(scaleVector, matrix.ExtractScale());
             Assert.AreEqual(expected, matrix);
+        }
+
+        [Test]
+        public void TestFill_ValidArray()
+        {
+            double[,] array = {
+                { 1, 2, 3, 4 },
+                { 5, 6, 7, 8 },
+                { 9, 10, 11, 12 },
+                { 13, 14, 15, 16 }
+            };
+
+            Matrix4x4 expected = new Matrix4x4(
+                new Vector4(1, 5, 9, 13),
+                new Vector4(2, 6, 10, 14),
+                new Vector4(3, 7, 11, 15),
+                new Vector4(4, 8, 12, 16)
+            );
+
+            Matrix4x4 actual = new Matrix4x4().Filled(array);
+
+            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
+        }
+
+        [Test]
+        public void TestFill_InvalidRowCountArray()
+        {
+            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestFill_InvalidRowCountArray_Helper));
+        }
+
+        private void TestFill_InvalidRowCountArray_Helper()
+        {
+            double[,] array = {
+                { 1, 2, 3, 4 },
+                { 5, 6, 7, 8 },
+                { 9, 10, 11, 12 }
+            };
+            Matrix4x4 actual = new Matrix4x4().Filled(array);
+        }
+
+        [Test]
+        public void TestFill_InvalidColCountArray()
+        {
+            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestFill_InvalidColCountArray_Helper));
+        }
+
+        private void TestFill_InvalidColCountArray_Helper()
+        {
+            double[,] array = {
+                { 1, 2, 3, 4, 5 },
+                { 5, 6, 7, 8, 6 },
+                { 9, 10, 11, 12, 13},
+                { 13, 14, 15, 16, 17}
+            };
+            Matrix4x4 actual = new Matrix4x4().Filled(array);
         }
     }
 }

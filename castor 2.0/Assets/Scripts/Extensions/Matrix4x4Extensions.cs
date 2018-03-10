@@ -83,4 +83,25 @@ public static class Matrix4x4Extensions
     {
         return matrix.SetScale(new Vector3(scale, scale, scale));
     }
+
+    /// <summary>
+    /// Fill the matrix with the values in the 2D array.
+    /// </summary>
+    /// <returns>The darray.</returns>
+    /// <param name="matrix">Matrix.</param>
+    /// <param name="array">Array.</param>
+    public static Matrix4x4 Filled(this Matrix4x4 matrix, double[,] array)
+    {
+        if (array.GetLength(0) != 4) throw new System.ArgumentException("The input array needs to have 4 rows");
+        if (array.GetLength(1) != 4) throw new System.ArgumentException("The input array needs to have 4 columns");
+
+        for (int row = 0; row < 4; row++)
+        {
+            for (int col = 0; col < 4; col++)
+            {
+                matrix[row, col] = (float)array[row, col];
+            }
+        }
+        return matrix;
+    }
 }
