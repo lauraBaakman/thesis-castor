@@ -38,29 +38,36 @@ namespace Utils
 
         public static double[,] Transpose(double[,] matrix)
         {
+            double[,] transpose = new double[matrix.GetLength(0), matrix.GetLength(1)];
 
+            return transpose;
         }
 
         public static double[,] Multiply(double[,] lhs, double[,] rhs)
         {
+            double[,] result = new double[lhs.GetLength(0), rhs.GetLength(1)];
 
+            return result;
         }
 
         public static double[] Multiply(double[,] lhs, double[] rhs)
         {
+            double[] result = new double[lhs.GetLength(0)];
 
+            return result;
         }
 
         public static double[,] MoorePenroseInverse(double[,] matrix)
         {
+            double[,] inverse = new double[matrix.GetLength(0), matrix.GetLength(1)];
 
+            return inverse;
         }
 
         /// <summary>
         /// Compute the singular value decomposition of A: A = U * S * V^T
         /// </summary>
-        public static void SVD(double[,] A,
-                         out double[,] U, out double[,] S, out double[,] Vt)
+        public static void SVD(double[,] A, out double[,] U, out double[,] S, out double[,] Vt)
         {
             // numUnknowns x 1 matrix
             double[] singularValues = new double[A.GetLength(1)];
