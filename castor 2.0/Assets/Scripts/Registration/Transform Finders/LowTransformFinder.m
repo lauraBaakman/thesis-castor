@@ -51,6 +51,7 @@ Aplus = transpose(Vt) * Splus * transpose(U);
 %% Compute xOpt
 xOpt = Aplus * b;
 
+%% Compute Transformation Matrix
 % Angles in radians
 alfa = xOpt(1);
 beta = xOpt(2);
@@ -59,7 +60,6 @@ gamma = xOpt(3);
 % Translation
 tOpt = xOpt(4:6);
 
-%% Compute Transformation Matrix
 T = eye(4);
 T(1:3, 4) = tOpt';
 
