@@ -35,5 +35,15 @@ namespace Utils
             }
             return pseudoInverse;
         }
+
+        public static double[,] Transpose(double[,] matrix)
+        {
+
+        }
+
+        public static double[,] Multiply(double[,] lhs, double[,] rhs)
+        {
+
+        }
     }
 }

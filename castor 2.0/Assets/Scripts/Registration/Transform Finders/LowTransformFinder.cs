@@ -1,4 +1,4 @@
-using System;
+using Utils;
 using UnityEngine;
 
 namespace Registration
@@ -67,11 +67,15 @@ namespace Registration
             double[,] U, S, Vt;
             SVD(A, out U, out S, out Vt);
 
-            //TODO Compute pseudo inverse of S
+            double[,] Splus = ArrayMatrixUtils.PseudoInverseOfDiagonalMatrix(S);
 
-            //TODO Compute pseudo inverse of A
+            //Compute Aplus
+            double[,] V = ArrayMatrixUtils.Transpose(Vt);
+            double[,] Ut = ArrayMatrixUtils.Transpose(U);
+            double[,] Aplus = ArrayMatrixUtils.Multiply(ArrayMatrixUtils.Multiply(V, Splus), Ut);
 
             //TODO Compute xOpt
+            throw new System.NotImplementedException();
             double[] xOpt = new double[6];
 
             return TransformationMatrixFromXOpt(xOpt);
