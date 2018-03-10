@@ -243,5 +243,13 @@ namespace Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [Test]
+        public void Test_Indexer_Get()
+        {
+            Correspondence actual = correspondences[2];
+            Correspondence expected = correspondenceList[2];
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

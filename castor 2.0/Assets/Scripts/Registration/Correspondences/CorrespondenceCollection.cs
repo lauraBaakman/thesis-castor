@@ -100,6 +100,11 @@ namespace Registration
             );
         }
 
+        public Correspondence this[int index]
+        {
+            get { return correspondences[index]; }
+        }
+
         public void Clear()
         {
             correspondences.Clear();
