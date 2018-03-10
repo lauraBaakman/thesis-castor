@@ -91,7 +91,16 @@ namespace Registration
             //return xOptToTransformationMatrix(xOpt);
         }
 
-        private Matrix4x4 xOptToTransformationMatrix(double[] xOpt)
+        /* Public, for testing, should be private */
+        /// <summary>
+        /// Generate a transformation matrix based on the vector x_Opt =
+        /// [alfa, beta, gamma, t_x, t_y, t_z], where alfa, beta and gamma are 
+        /// the rotations in radians around the x, y, and z-axis, respectively.
+        /// And t_x, t_y, t_z, denote the translation in the x, y and z direction.
+        /// </summary>
+        /// <returns>The opt to transformation matrix.</returns>
+        /// <param name="xOpt">X opt.</param>
+        public Matrix4x4 TransformationMatrixFromXOpt(double[] xOpt)
         {
             throw new NotImplementedException();
         }
