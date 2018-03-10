@@ -45,5 +45,39 @@ namespace Utils
         {
 
         }
+
+        public static double[] Multiply(double[,] lhs, double[] rhs)
+        {
+
+        }
+
+        public static double[,] MoorePenroseInverse(double[,] matrix)
+        {
+
+        }
+
+        /// <summary>
+        /// Compute the singular value decomposition of A: A = U * S * V^T
+        /// </summary>
+        public static void SVD(double[,] A,
+                         out double[,] U, out double[,] S, out double[,] Vt)
+        {
+            // numUnknowns x 1 matrix
+            double[] singularValues = new double[A.GetLength(1)];
+
+            // Correspondences.Count x Correspondences.Count matrix
+            U = new double[A.GetLength(0), A.GetLength(0)];
+
+            // numUnknowns x numUnknowns matrix
+            Vt = new double[A.GetLength(1), A.GetLength(1)];
+
+            bool succes = alglib.rmatrixsvd(
+                A, A.GetLength(0), A.GetLength(1),
+                uneeded: 2, vtneeded: 2, additionalmemory: 2,
+                w: out singularValues, vt: out Vt, u: out U
+            );
+
+            S = ToDiagonalMatrix(singularValues);
+        }
     }
 }

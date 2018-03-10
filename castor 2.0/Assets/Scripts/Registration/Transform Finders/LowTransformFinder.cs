@@ -64,45 +64,10 @@ namespace Registration
         /* Public, for testing, should be private */
         private Matrix4x4 ComputeTransform(double[,] A, double[] b)
         {
-            double[,] U, S, Vt;
-            SVD(A, out U, out S, out Vt);
-
-            double[,] Splus = ArrayMatrixUtils.PseudoInverseOfDiagonalMatrix(S);
-
-            //Compute Aplus
-            double[,] V = ArrayMatrixUtils.Transpose(Vt);
-            double[,] Ut = ArrayMatrixUtils.Transpose(U);
-            double[,] Aplus = ArrayMatrixUtils.Multiply(ArrayMatrixUtils.Multiply(V, Splus), Ut);
-
-            //TODO Compute xOpt
-            throw new System.NotImplementedException();
-            double[] xOpt = new double[6];
+            double[,] Aplus = ArrayMatrixUtils.MoorePenroseInverse(A);
+            double[] xOpt = ArrayMatrixUtils.Multiply(Aplus, b);
 
             return TransformationMatrixFromXOpt(xOpt);
-        }
-
-        /// <summary>
-        /// The algorithm calculates the singular value decomposition of A: A = U * S * V^T
-        /// </summary>
-        private void SVD(double[,] A,
-                         out double[,] U, out double[,] S, out double[,] Vt)
-        {
-            // numUnknowns x 1 matrix
-            double[] singularValues = new double[numUnknowns];
-
-            // Correspondences.Count x Correspondences.Count matrix
-            U = new double[A.GetLength(0), A.GetLength(0)];
-
-            // numUnknowns x numUnknowns matrix
-            Vt = new double[numUnknowns, numUnknowns];
-
-            bool succes = alglib.rmatrixsvd(
-                A, A.GetLength(0), A.GetLength(1),
-                uneeded: 2, vtneeded: 2, additionalmemory: 2,
-                w: out singularValues, vt: out Vt, u: out U
-            );
-
-            S = Utils.ArrayMatrixUtils.ToDiagonalMatrix(singularValues);
         }
 
         /* Public, for testing, should be private */
