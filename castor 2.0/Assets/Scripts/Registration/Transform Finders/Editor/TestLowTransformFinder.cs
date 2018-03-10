@@ -140,7 +140,8 @@ namespace Tests.Registration.TransformFinders
             expected[2, 0] = +0.021445862936662f; expected[2, 1] = +0.135928860223149f; expected[2, 2] = +0.990486456202879f; expected[2, 3] = +2.943459815683508f;
             expected[3, 0] = +0.000000000000000f; expected[3, 1] = +0.000000000000000f; expected[3, 2] = +0.000000000000000f; expected[3, 3] = +1.000000000000000f;
 
-            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+            //Matrix comparison cannot handle precision.....
+            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
 
         [Test]
@@ -162,7 +163,8 @@ namespace Tests.Registration.TransformFinders
             expected[2, 0] = +0.000000000000000f; expected[2, 1] = +0.000000000000000f; expected[2, 2] = +1.000000000000000f; expected[2, 3] = +2.943459815683508f;
             expected[3, 0] = +0.000000000000000f; expected[3, 1] = +0.000000000000000f; expected[3, 2] = +0.000000000000000f; expected[3, 3] = +1.000000000000000f;
 
-            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+            //Matrix comparison cannot handle precision.....
+            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
 
         [Test]
@@ -179,12 +181,14 @@ namespace Tests.Registration.TransformFinders
             Matrix4x4 actual = TransformFinder.RotationMatrixFromXOpt(xOpt);
 
             Matrix4x4 expected = new Matrix4x4();
-            expected[0, 0] = +0.999591940870855f; expected[0, 1] = -0.021613024656252f; expected[0, 2] = -0.018676962045425f; expected[0, 3] = +1.000000000000000f;
-            expected[1, 0] = +0.018868670036331f; expected[1, 1] = +0.990482822730230f; expected[1, 2] = -0.136336903175245f; expected[1, 3] = +1.000000000000000f;
-            expected[2, 0] = +0.021445862936662f; expected[2, 1] = +0.135928860223149f; expected[2, 2] = +0.990486456202879f; expected[2, 3] = +1.000000000000000f;
-            expected[3, 0] = +1.000000000000000f; expected[3, 1] = +1.000000000000000f; expected[3, 2] = +1.000000000000000f; expected[3, 3] = +1.000000000000000f;
+            expected[0, 0] = +0.999591940870855f; expected[0, 1] = -0.021613024656252f; expected[0, 2] = -0.018676962045425f; expected[0, 3] = +0.000000000000000f;
+            expected[1, 0] = +0.018868670036331f; expected[1, 1] = +0.990482822730230f; expected[1, 2] = -0.136336903175245f; expected[1, 3] = +0.000000000000000f;
+            expected[2, 0] = +0.021445862936662f; expected[2, 1] = +0.135928860223149f; expected[2, 2] = +0.990486456202879f; expected[2, 3] = +0.000000000000000f;
+            expected[3, 0] = +0.000000000000000f; expected[3, 1] = +0.000000000000000f; expected[3, 2] = +0.000000000000000f; expected[3, 3] = +1.000000000000000f;
 
-            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+
+            //Matrix comparison cannot handle precision.....
+            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
     }
 }
