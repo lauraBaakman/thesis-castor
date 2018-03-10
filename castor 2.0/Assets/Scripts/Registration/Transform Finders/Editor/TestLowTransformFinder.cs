@@ -122,7 +122,7 @@ namespace Tests.Registration.TransformFinders
         }
 
         [Test]
-        public void Test_xOptToTransformationMatrix()
+        public void Test_TransformationMatrixFromXOpt()
         {
             double[] xOpt = new double[] {
                 +0.136382526761545f,
@@ -132,7 +132,7 @@ namespace Tests.Registration.TransformFinders
                 -1.076449856474986f,
                 +2.943459815683508f,
             };
-            Matrix4x4 actual = TransformFinder.xOptToTransformationMatrix(xOpt);
+            Matrix4x4 actual = TransformFinder.TransformationMatrixFromXOpt(xOpt);
 
             Matrix4x4 expected = new Matrix4x4();
             expected[0, 0] = +0.999591940870855f; expected[0, 1] = -0.021613024656252f; expected[0, 2] = -0.018676962045425f; expected[0, 3] = +1.846045394336890f;
