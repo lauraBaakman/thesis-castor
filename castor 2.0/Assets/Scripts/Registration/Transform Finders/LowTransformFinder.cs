@@ -5,7 +5,6 @@ namespace Registration
 {
     public class LowTransformFinder : ITransformFinder
     {
-        private static int pointDimension = 3;
         private static int numUnknowns = 6;
 
         public Matrix4x4 FindTransform(CorrespondenceCollection correspondences)
@@ -16,25 +15,34 @@ namespace Registration
             // Correspondences.Count x 1 matrix
             double[] b = BuildB(correspondences);
 
-            return ComputeTransform(
-                A: A, numRowsA: correspondences.Count, b: b);
+            return ComputeTransform(A, b);
         }
 
-        private double[,] BuildA(CorrespondenceCollection correspondences)
+        /* Public, but just for testing */
+        public double[,] BuildA(CorrespondenceCollection correspondences)
         {
             double[,] A = new double[correspondences.Count, numUnknowns];
 
-            int rowIdx = 0;
+            Vector3 crossProduct;
+            Correspondence correspondence;
 
-            foreach (Correspondence correspondence in correspondences)
+            for (int row = 0; row < correspondences.Count; row++)
             {
-                throw new System.NotImplementedException();
-            }
-        }
+                correspondence = correspondences[row];
+                crossProduct = Vector3.Cross(
+                    correspondence.StaticPoint.Position,
+                    correspondence.ModelPoint.Normal
+                );
 
-        private void BuildARow(Correspondence correspondence, out double[] row)
-        {
-            throw new System.NotImplementedException();
+                A[row, 0] = crossProduct[0];
+                A[row, 1] = crossProduct[1];
+                A[row, 2] = crossProduct[2];
+
+                A[row, 3] = correspondence.ModelPoint.Normal.normalized[0];
+                A[row, 4] = correspondence.ModelPoint.Normal.normalized[1];
+                A[row, 5] = correspondence.ModelPoint.Normal.normalized[2];
+            }
+            return A;
         }
 
         private double[] BuildB(CorrespondenceCollection correspondences)
@@ -42,19 +50,19 @@ namespace Registration
             throw new System.NotImplementedException();
         }
 
-        private Matrix4x4 ComputeTransform(double[,] A, int numRowsA, double[] b)
+        private Matrix4x4 ComputeTransform(double[,] A, double[] b)
         {
             // numUnknowns x 1 matrix
             double[] singularValues = new double[numUnknowns];
 
             // Correspondences.Count x Correspondences.Count matrix
-            double[,] U = new double[numRowsA, numRowsA];
+            double[,] U = new double[A.GetLength(0), A.GetLength(0)];
 
             // numUnknowns x numUnknowns matrix
             double[,] Vt = new double[numUnknowns, numUnknowns];
 
             bool succes = alglib.rmatrixsvd(
-                A, numRowsA, pointDimension,
+                A, A.GetLength(0), A.GetLength(1),
                 uneeded: 2, vtneeded: 2, additionalmemory: 2,
                 w: out singularValues, vt: out Vt, u: out U
             );
