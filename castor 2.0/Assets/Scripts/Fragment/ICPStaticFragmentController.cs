@@ -7,8 +7,6 @@ namespace Fragment
     /// </summary>
     public class ICPStaticFragmentController : ICPAbstractFragmentController
     {
-        private static int firstIteration = 1;
-
         public override void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
         {
             if (message.IsFirstPreparationStep()) SendMessageToListeners("OnPreparationStepCompleted", message);
