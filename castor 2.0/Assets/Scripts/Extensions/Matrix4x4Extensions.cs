@@ -104,4 +104,13 @@ public static class Matrix4x4Extensions
         }
         return matrix;
     }
+
+    public static Matrix4x4 DiagonalFilled(this Matrix4x4 matrix, double[] diagonal)
+    {
+        if (diagonal.GetLength(0) != 4) throw new System.ArgumentException("The input array needs to have 4 rows");
+
+        for (int i = 0; i < 4; i++) matrix[i, i] = (float)diagonal[i];
+
+        return matrix;
+    }
 }
