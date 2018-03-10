@@ -18,7 +18,7 @@ namespace Registration
             return ComputeTransform(A, b);
         }
 
-        /* Public, but just for testing */
+        /* Public, for now for testing */
         public double[,] BuildA(CorrespondenceCollection correspondences)
         {
             double[,] A = new double[correspondences.Count, numUnknowns];
@@ -45,9 +45,19 @@ namespace Registration
             return A;
         }
 
-        private double[] BuildB(CorrespondenceCollection correspondences)
+        public double[] BuildB(CorrespondenceCollection correspondences)
         {
-            throw new System.NotImplementedException();
+            double[] b = new double[correspondences.Count];
+
+            Correspondence correspondence;
+
+            for (int row = 0; row < correspondences.Count; row++)
+            {
+                correspondence = correspondences[row];
+                b[row] = Vector3.Dot(correspondence.ModelPoint.Normal, correspondence.ModelPoint.Position)
+                               - Vector3.Dot(correspondence.ModelPoint.Normal, correspondence.StaticPoint.Position);
+            }
+            return b;
         }
 
         private Matrix4x4 ComputeTransform(double[,] A, double[] b)
