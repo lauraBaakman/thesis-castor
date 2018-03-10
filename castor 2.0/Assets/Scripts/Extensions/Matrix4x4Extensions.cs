@@ -2,6 +2,8 @@ using UnityEngine;
 
 public static class Matrix4x4Extensions
 {
+    private static readonly float EPSILON = 5 * float.Epsilon;
+
     /// <summary>
     ///Extracts the translation from the matrix.
     /// Source: https://answers.unity.com/answers/402281/view.html

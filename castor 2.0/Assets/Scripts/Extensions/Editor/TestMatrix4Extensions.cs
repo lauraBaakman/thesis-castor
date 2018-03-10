@@ -244,7 +244,7 @@ namespace Tests
         private void Test_DiagonalSet_InvalidArray_Helper()
         {
             double[] array = { 1, 2, 3 };
-            new Matrix4x4().DiagonalSet(array);
+            new Matrix4x4().DiagonalFilled(array);
         }
 
         [Test]
@@ -258,7 +258,7 @@ namespace Tests
             expected[2, 2] = 3;
             expected[3, 3] = 4;
 
-            Matrix4x4 actual = new Matrix4x4().DiagonalSet(array);
+            Matrix4x4 actual = new Matrix4x4().DiagonalFilled(array);
 
             for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }

@@ -64,14 +64,15 @@ namespace Registration
         /* Public, for testing, should be private */
         private Matrix4x4 ComputeTransform(double[,] A, double[] b)
         {
-            Matrix4x4 U, S, Vt;
+            double[,] U, S, Vt;
             SVD(A, out U, out S, out Vt);
 
-            //TODO Compute Pseudo Inverse of Sigma
-            //TODO Compute Pseudo Inverse of A
+            //TODO Compute pseudo inverse of S
 
-            double[] xOpt = new double[numUnknowns];
+            //TODO Compute pseudo inverse of A
+
             //TODO Compute xOpt
+            double[] xOpt = new double[6];
 
             return TransformationMatrixFromXOpt(xOpt);
         }
@@ -80,26 +81,24 @@ namespace Registration
         /// The algorithm calculates the singular value decomposition of A: A = U * S * V^T
         /// </summary>
         private void SVD(double[,] A,
-                         out Matrix4x4 U, out Matrix4x4 S, out Matrix4x4 Vt)
+                         out double[,] U, out double[,] S, out double[,] Vt)
         {
             // numUnknowns x 1 matrix
             double[] singularValues = new double[numUnknowns];
 
             // Correspondences.Count x Correspondences.Count matrix
-            double[,] Uarray = new double[A.GetLength(0), A.GetLength(0)];
+            U = new double[A.GetLength(0), A.GetLength(0)];
 
             // numUnknowns x numUnknowns matrix
-            double[,] VTArray = new double[numUnknowns, numUnknowns];
+            Vt = new double[numUnknowns, numUnknowns];
 
             bool succes = alglib.rmatrixsvd(
                 A, A.GetLength(0), A.GetLength(1),
                 uneeded: 2, vtneeded: 2, additionalmemory: 2,
-                w: out singularValues, vt: out VTArray, u: out Uarray
+                w: out singularValues, vt: out Vt, u: out U
             );
 
-            S = new Matrix4x4().DiagonalFilled(singularValues);
-            U = new Matrix4x4().Filled(Uarray);
-            Vt = new Matrix4x4().Filled(VTArray);
+            S = Utils.ArrayMatrixUtils.ToDiagonalMatrix(singularValues);
         }
 
         /* Public, for testing, should be private */
