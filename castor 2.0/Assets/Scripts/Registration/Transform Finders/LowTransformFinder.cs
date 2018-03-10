@@ -102,7 +102,25 @@ namespace Registration
         /// <param name="xOpt">X opt.</param>
         public Matrix4x4 TransformationMatrixFromXOpt(double[] xOpt)
         {
-            throw new NotImplementedException();
+            Matrix4x4 translation = Matrix4x4.identity;
+            translation[0, 3] = (float)xOpt[3];
+            translation[1, 3] = (float)xOpt[4];
+            translation[2, 3] = (float)xOpt[5];
+
+            Matrix4x4 transformation = new Matrix4x4();
+
+            return transformation;
+        }
+
+        /* Public, for testing, should be private */
+        public Matrix4x4 TranslationMatrixFromXOpt(double[] xOpt)
+        {
+            Matrix4x4 translation = Matrix4x4.identity;
+            translation[0, 3] = (float)xOpt[3];
+            translation[1, 3] = (float)xOpt[4];
+            translation[2, 3] = (float)xOpt[5];
+            translation[3, 3] = 1.0f;
+            return translation;
         }
     }
 }
