@@ -102,14 +102,9 @@ namespace Registration
         /// <param name="xOpt">X opt.</param>
         public Matrix4x4 TransformationMatrixFromXOpt(double[] xOpt)
         {
-            Matrix4x4 translation = Matrix4x4.identity;
-            translation[0, 3] = (float)xOpt[3];
-            translation[1, 3] = (float)xOpt[4];
-            translation[2, 3] = (float)xOpt[5];
-
-            Matrix4x4 transformation = new Matrix4x4();
-
-            return transformation;
+            Matrix4x4 translation = TranslationMatrixFromXOpt(xOpt);
+            Matrix4x4 rotation = RotationMatrixFromXOpt(xOpt);
+            return translation * rotation;
         }
 
         /* Public, for testing, should be private */
@@ -121,6 +116,30 @@ namespace Registration
             translation[2, 3] = (float)xOpt[5];
             translation[3, 3] = 1.0f;
             return translation;
+        }
+
+        /* Public, for testing, should be private */
+        public Matrix4x4 RotationMatrixFromXOpt(double[] xOpt)
+        {
+            float alfa = (float)xOpt[0];
+            float beta = (float)xOpt[1];
+            float gamma = (float)xOpt[2];
+
+            Matrix4x4 rotation = Matrix4x4.identity;
+
+            rotation[0, 0] = +Mathf.Cos(gamma) * Mathf.Cos(beta);
+            rotation[0, 1] = -Mathf.Sin(gamma) * Mathf.Cos(alfa) + Mathf.Cos(gamma) * Mathf.Sin(beta) * Mathf.Sin(alfa);
+            rotation[0, 2] = +Mathf.Sin(gamma) * Mathf.Sin(alfa) + Mathf.Cos(gamma) * Mathf.Sin(beta) * Mathf.Cos(alfa);
+
+            rotation[1, 0] = +Mathf.Sin(gamma) * Mathf.Cos(beta);
+            rotation[1, 1] = +Mathf.Cos(gamma) * Mathf.Cos(alfa) + Mathf.Sin(gamma) * Mathf.Sin(beta) * Mathf.Sin(alfa);
+            rotation[1, 2] = -Mathf.Cos(gamma) * Mathf.Sin(alfa) + Mathf.Sin(gamma) * Mathf.Sin(beta) * Mathf.Cos(alfa);
+
+            rotation[2, 0] = -Mathf.Sin(beta);
+            rotation[2, 1] = Mathf.Cos(beta) * Mathf.Sin(alfa);
+            rotation[2, 2] = Mathf.Cos(beta) * Mathf.Cos(alfa);
+
+            return rotation;
         }
     }
 }
