@@ -79,16 +79,21 @@ namespace Registration
                 w: out singularValues, vt: out Vt, u: out U
             );
 
-            double[] xOpt = new double[numUnknowns];
-
-            throw new NotImplementedException();
+            //54.8633734637297
+            //47.8064060537983
+            //22.2739628465301
+            //1.44854195338278
+            //0.683563111635393
+            //0.277824134543067
 
             //TODO Build sigma
             //TODO Compute Pseudo Inverse of Sigma
             //TODO Compute Pseudo Inverse of A
+
+            double[] xOpt = new double[numUnknowns];
             //TODO Compute xOpt
 
-            //return xOptToTransformationMatrix(xOpt);
+            return TransformationMatrixFromXOpt(xOpt);
         }
 
         /* Public, for testing, should be private */
