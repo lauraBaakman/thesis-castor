@@ -3,12 +3,19 @@ using NUnit.Framework;
 
 using Utils;
 
-namespace Tests
+namespace Tests.Utils
 {
     [TestFixture]
     public class ColorGeneratorTests
     {
-        [Test, Retry(5)]
+
+        [SetUp]
+        public void Init()
+        {
+            ColorGenerator.Instance.Reset();
+        }
+
+        [Test]
         public void TestGetNextColor()
         {
             TestNextColor(new Color(0.55f, 0.00f, 0.20f));
