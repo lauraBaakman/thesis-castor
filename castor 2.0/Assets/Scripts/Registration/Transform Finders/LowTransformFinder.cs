@@ -30,16 +30,16 @@ namespace Registration
                 correspondence = correspondences[row];
                 crossProduct = Vector3.Cross(
                     correspondence.StaticPoint.Position,
-                    correspondence.ModelPoint.Normal
+                    correspondence.ModelPoint.UnitNormal
                 );
 
                 A[row, 0] = crossProduct[0];
                 A[row, 1] = crossProduct[1];
                 A[row, 2] = crossProduct[2];
 
-                A[row, 3] = correspondence.ModelPoint.Normal.normalized[0];
-                A[row, 4] = correspondence.ModelPoint.Normal.normalized[1];
-                A[row, 5] = correspondence.ModelPoint.Normal.normalized[2];
+                A[row, 3] = correspondence.ModelPoint.UnitNormal[0];
+                A[row, 4] = correspondence.ModelPoint.UnitNormal[1];
+                A[row, 5] = correspondence.ModelPoint.UnitNormal[2];
             }
             return A;
         }
@@ -53,8 +53,8 @@ namespace Registration
             for (int row = 0; row < correspondences.Count; row++)
             {
                 correspondence = correspondences[row];
-                b[row] = Vector3.Dot(correspondence.ModelPoint.Normal, correspondence.ModelPoint.Position)
-                               - Vector3.Dot(correspondence.ModelPoint.Normal, correspondence.StaticPoint.Position);
+                b[row] = Vector3.Dot(correspondence.ModelPoint.UnitNormal, correspondence.ModelPoint.Position)
+                                - Vector3.Dot(correspondence.ModelPoint.UnitNormal, correspondence.StaticPoint.Position);
             }
             return b;
         }
