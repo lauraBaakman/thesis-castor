@@ -76,28 +76,40 @@ namespace Tests.Utils
         }
 
         [Test]
-        public void Test_PseudoInverse_ValidArray()
+        public void Test_MoorePenroseInverse_SquareMatrix()
         {
-            double[,] array = { { 2, 0 }, { 0, 2 * float.Epsilon } };
+            double[,] array = {
+                {-6.040000000000000, +4.880000000000000},
+                {-9.390000000000001, +0.000000000000001},
+            };
 
-            double[,] expected = { { 0.5f, 0 }, { 0, 0 } };
+            double[,] expected = {
+                {+0.000000000000000, -0.106496272630458},
+                {+0.204918032786885, -0.131810960386878},
+            };
 
-            double[,] actual = ArrayMatrixUtils.PseudoInverseOfDiagonalMatrix(array);
+            double[,] actual = ArrayMatrixUtils.MoorePenroseInverse(array);
 
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
         }
 
         [Test]
-        public void Test_PseudoInverse_InValidArray()
+        public void Test_MoorePenroseInverse_RectangularMatrix()
         {
-            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(Test_PseudoInverse_InValidArray_Helper));
-        }
+            double[,] array = {
+                {+5.5800, +7.8200},
+                {+4.3000, -3.3200},
+                {+8.0700, +3.9700},
+            };
 
-        private void Test_PseudoInverse_InValidArray_Helper()
-        {
-            double[,] array = { { 2, 0, 0 }, { 0, 0, 0 } };
+            double[,] expected = {
+                {+0.0017, +0.0921, +0.0737},
+                {+0.0878, -0.1020, -0.0063},
+            };
 
-            ArrayMatrixUtils.PseudoInverseOfDiagonalMatrix(array);
+            double[,] actual = ArrayMatrixUtils.MoorePenroseInverse(array);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
         }
 
         [Test]
@@ -313,7 +325,7 @@ namespace Tests.Utils
         }
 
         [Test]
-        public void ColumnVectorToMatrix()
+        public void Test_ColumnVectorToMatrix()
         {
             double[] vector = { 1, 2, 3 };
 
@@ -329,7 +341,7 @@ namespace Tests.Utils
         }
 
         [Test]
-        public void RowVectorToMatrix()
+        public void Test_RowVectorToMatrix()
         {
             double[] vector = { 1, 2, 3 };
 
@@ -343,7 +355,7 @@ namespace Tests.Utils
         }
 
         [Test]
-        public void MatrixToVector_RowMatrix()
+        public void Test_MatrixToVector_RowMatrix()
         {
             double[,] matrix = {
                 {1, 2, 3}
@@ -357,7 +369,7 @@ namespace Tests.Utils
         }
 
         [Test]
-        public void MatrixToVector_ColumnMatrix()
+        public void Test_MatrixToVector_ColumnMatrix()
         {
             double[,] matrix = {
                 {1},
@@ -373,12 +385,12 @@ namespace Tests.Utils
         }
 
         [Test]
-        public void MatrixToVector_InvalidSize()
+        public void Test_MatrixToVector_InvalidSize()
         {
-            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(MatrixToVector_InvalidSize_Helper));
+            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(Test_MatrixToVector_InvalidSize_Helper));
         }
 
-        public void MatrixToVector_InvalidSize_Helper()
+        public void Test_MatrixToVector_InvalidSize_Helper()
         {
             double[,] matrix = {
                 {1, 2, 3},
@@ -386,6 +398,118 @@ namespace Tests.Utils
             };
 
             ArrayMatrixUtils.ToVector(matrix);
+        }
+
+        [Test]
+        public void Test_InfinityNorm_Matrix()
+        {
+            double[,] matrix = {
+                {+1, -7},
+                {-2, -3}
+            };
+
+            double expected = 8;
+
+            double actual = ArrayMatrixUtils.InfinityNorm(matrix);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Test_InfinityNorm_Vector()
+        {
+            double[] vector = { -1, -7 };
+
+            double expected = 7;
+
+            double actual = ArrayMatrixUtils.InfinityNorm(vector);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Test_GetDiagonal_NonSquareMatrix()
+        {
+            double[,] matrix = {
+                {+1, -7},
+                {-2, -3},
+                {-2, -3}
+            };
+
+            double[] expected = { +1, -3 };
+
+            double[] actual = ArrayMatrixUtils.GetDiagonal(matrix);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Test_GetDiagonal_SquareMatrix()
+        {
+            double[,] matrix = {
+                {+1, -7, +0},
+                {-2, -3, -8},
+                {-2, -3, +9}
+            };
+
+            double[] expected = { +1, -3, +9 };
+
+            double[] actual = ArrayMatrixUtils.GetDiagonal(matrix);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Test_PseudoInverseOfDiagonalMatrix_SquareMatrix_WithTolerance()
+        {
+            double[,] matrix = {
+                {1.0, 0.0, 0.0},
+                {0.0, 0.5, 0.0},
+                {0.0, 0.0, 0.1},
+            };
+            double tolerance = 0.2;
+
+            double[,] expected = {
+                {1.0, 0.0, 0.0},
+                {0.0, 2.0, 0.0},
+                {0.0, 0.0, 0.0},
+            };
+
+            double[,] actual = ArrayMatrixUtils.PseudoInverseOfDiagonalMatrix(matrix, tolerance);
+        }
+
+        [Test]
+        public void Test_PseudoInverseOfDiagonalMatrix_RectangularMatrix1_WithTolerance()
+        {
+            double[,] matrix = {
+                {1.0, 0.0, 0.0},
+                {0.0, 0.5, 0.0},
+            };
+            double tolerance = 0.2;
+
+            double[,] expected = {
+                {1.0, 0.0, 0.0},
+                {0.0, 2.0, 0.0},
+            };
+
+            double[,] actual = ArrayMatrixUtils.PseudoInverseOfDiagonalMatrix(matrix, tolerance);
+        }
+
+        [Test]
+        public void Test_PseudoInverseOfDiagonalMatrix_RectangularMatrix2_WithTolerance()
+        {
+            double[,] matrix = {
+                {0.1, 0.0},
+                {0.0, 5.0},
+            };
+            double tolerance = 0.2;
+
+            double[,] expected = {
+                {0.0, 0.0},
+                {0.0, 0.2},
+            };
+
+            double[,] actual = ArrayMatrixUtils.PseudoInverseOfDiagonalMatrix(matrix, tolerance);
         }
     }
 }

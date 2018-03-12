@@ -157,12 +157,64 @@ namespace Utils
         /// Compute the Moore-Penrose inverse of the matrix.
         /// </summary>
         /// <returns>The moore-penrose inverse.</returns>
-        /// <param name="matrix">The matrix to invert.</param>
-        public static double[,] MoorePenroseInverse(double[,] matrix)
+        /// <param name="A">The matrix to invert.</param>
+        public static double[,] MoorePenroseInverse(double[,] A)
         {
-            double[,] inverse = new double[matrix.GetLength(0), matrix.GetLength(1)];
+            /// A = U * S * V'
+            double[,] U, S, Vt;
+            SVD(A, out U, out S, out Vt);
 
+            /// Compute the pseudo inverse of S
+            double[,] Splus = PseudoInverseOfDiagonalMatrix(S);
+
+            /// A+ = V * (S+)' * U'
+            double[,] V = Transpose(Vt);
+            double[,] Ut = Transpose(U);
+            double[,] SplusT = Transpose(Splus);
+
+            double[,] inverse = Multiply(Multiply(V, SplusT), Ut);
             return inverse;
+        }
+
+        /// <summary>
+        /// Compute the infinity norm, the maximum absolute row sum, of the input matrix.
+        /// </summary>
+        /// <returns>The norm.</returns>
+        /// <param name="matrix">Matrix.</param>
+        public static double InfinityNorm(double[,] matrix)
+        {
+            int numRows = matrix.GetLength(0);
+            double max = double.MinValue;
+
+            for (int rowIdx = 0; rowIdx < numRows; rowIdx++)
+                max = Math.Max(max, AbsRowSum(matrix, rowIdx));
+
+            return max;
+        }
+
+        private static double AbsRowSum(double[,] matrix, int rowIdx)
+        {
+            int numCols = matrix.GetLength(1);
+            double sum = 0;
+
+            for (int colIdx = 0; colIdx < numCols; colIdx++)
+                sum += Math.Abs(matrix[rowIdx, colIdx]);
+
+            return sum;
+        }
+
+        /// <summary>
+        /// returns the largest element of the absolute values of the vector.
+        /// </summary>
+        /// <returns>The norm.</returns>
+        /// <param name="vector">Vector.</param>
+        public static double InfinityNorm(double[] vector)
+        {
+            double norm = double.MinValue;
+
+            for (int i = 0; i < vector.Length; i++) norm = Math.Max(Math.Abs(vector[i]), norm);
+
+            return norm;
         }
 
         /// <summary>
@@ -193,20 +245,58 @@ namespace Utils
         /// elements and leaving the zero elements unchanged.
         /// </summary>
         /// <returns>The inverse.</returns>
+        public static double[,] PseudoInverseOfDiagonalMatrix(double[,] a, double tolerance)
+        {
+            int num_rows = a.GetLength(0);
+            int num_cols = a.GetLength(1);
+
+            double[,] inverse = new double[num_rows, num_cols];
+
+            int maxIdx = Math.Min(num_rows, num_cols);
+
+            for (int i = 0; i < maxIdx; i++)
+                inverse[i, i] = (Math.Abs(a[i, i]) > tolerance) ? (1.0 / a[i, i]) : 0.0;
+
+            return inverse;
+        }
+
+        /// <summary>
+        /// Computes the pseudo inverse by taking the inverse of the non-zero 
+        /// elements and leaving the zero elements unchanged.
+        /// </summary>
+        /// <returns>The inverse.</returns>
         public static double[,] PseudoInverseOfDiagonalMatrix(double[,] matrix)
         {
-            if (matrix.GetLength(0) != matrix.GetLength(1)) throw new System.ArgumentException("Input matrix needs to be square.");
+            double tolerance = ComputeTolerance(matrix);
+            return PseudoInverseOfDiagonalMatrix(matrix, tolerance);
+        }
 
-            double[,] pseudoInverse = new double[matrix.GetLength(0), matrix.GetLength(1)];
+        //Temporarily public
+        public static double ComputeTolerance(double[,] matrix)
+        {
+            ///Tolerance used by matlab
+            int maxSize = Math.Max(matrix.GetLength(0), matrix.GetLength(1));
+            double normA = InfinityNorm(GetDiagonal(matrix));
 
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                if (System.Math.Abs(matrix[i, i]) > EPSILON)
-                {
-                    pseudoInverse[i, i] = 1.0f / matrix[i, i];
-                }
-            }
-            return pseudoInverse;
+            return maxSize * normA * double.Epsilon;
+        }
+
+        /// <summary>
+        /// Gets the main diagonal of the input matrix.
+        /// </summary>
+        /// <returns>The diagonal.</returns>
+        /// <param name="matrix">Matrix.</param>
+        public static double[] GetDiagonal(double[,] matrix)
+        {
+            int numRows = matrix.GetLength(0);
+            int numCols = matrix.GetLength(1);
+
+            int maxIdx = Math.Min(numRows, numCols);
+
+            double[] diagonal = new double[maxIdx];
+            for (int i = 0; i < maxIdx; i++) diagonal[i] = matrix[i, i];
+
+            return diagonal;
         }
     }
 }
