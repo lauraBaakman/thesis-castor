@@ -22,9 +22,9 @@ numCorrespondences = length(staticPoints);
 
 modelPoints = staticPoints + repmat(translation, numCorrespondences, 1);
 
-modelNormals = rand(7, 3);
+staticNormals = rand(7, 3);
 for i = 1:numCorrespondences
-   modelNormals(i, :) = modelNormals(i, :) / norm(modelNormals(i, :)); 
+   staticNormals(i, :) = staticNormals(i, :) / norm(staticNormals(i, :)); 
 end
 
 %%  Prepare Matrices and Vectors
@@ -33,9 +33,9 @@ b = NaN(numCorrespondences, 1);
 
 % Equation 8 en 10
 for i = 1:length(modelPoints)  
-    n = modelNormals(i, :);
-    s = staticPoints(i, :);
-    d = modelPoints(i, :);
+    n = staticNormals(i, :);
+    s = modelPoints(i, :);
+    d = staticPoints(i, :);
     
     A(i, :) = [cross(s,n), n];
     b(i) = dot(n, d) - dot(n, s);
