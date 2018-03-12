@@ -38,8 +38,22 @@ namespace Utils
 
         public static double[,] Multiply(double[,] lhs, double[,] rhs)
         {
-            double[,] result = new double[lhs.GetLength(0), rhs.GetLength(1)];
+            int lhs_num_rows = lhs.GetLength(0); int rhs_num_rows = rhs.GetLength(0);
+            int lhs_num_cols = lhs.GetLength(1); int rhs_num_cols = rhs.GetLength(1);
 
+            if (lhs_num_cols != rhs_num_rows) throw new System.ArgumentException("Incompatible matrix dimensions");
+
+            double[,] result = new double[lhs_num_rows, rhs_num_cols];
+
+            //C = alpha * optypea(A) * optypeb(B) + beta * C
+            // A: M X K matrix
+            // B: K X N matrix
+            alglib.rmatrixgemm(
+                m: lhs_num_rows, n: rhs_num_cols, k: lhs_num_cols,
+                alpha: 1.0d, a: lhs, ia: 0, ja: 0, optypea: 0,
+                b: rhs, ib: 0, jb: 0, optypeb: 0,
+                beta: 1.0d, c: ref result, ic: 0, jc: 0
+            );
             return result;
         }
 
