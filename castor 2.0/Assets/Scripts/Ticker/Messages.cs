@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.Assertions.Must;
+using System;
 
 namespace Ticker
 {
@@ -10,7 +12,7 @@ namespace Ticker
     /// <summary>
     /// Message, a message send to the ticker.
     /// </summary>
-    public abstract class Message
+    public abstract class Message : IComparable<Message>
     {
         /// <summary>
         /// The text of the message.
@@ -22,25 +24,38 @@ namespace Ticker
         /// </summary>
         public Color Color;
 
+        public enum PriorityLevel { low = 0, normal = 1, high = 2 }
+
+        /// <summary>
+        ///  Indicates the priority of the message, if the priority of the message that is being displayed is higher than that of the new message, the new message is ignored.
+        /// </summary>
+        public PriorityLevel Priority;
+
         /// <summary>
         /// How long the message should be show in seconds, default is 3s.
         /// </summary>
-        public float DecayInS = DefaultDecayInS;
+        public float DecayInS;
 
         private static float DefaultDecayInS = 3.0f;
 
-        protected Message() { }
-
-        protected Message(string text, Color color)
+        protected Message()
         {
-            Text = text;
-            Color = color;
+            DecayInS = DefaultDecayInS;
+            Priority = PriorityLevel.normal;
         }
 
-        protected Message(string text, Color color, float decayInS)
+        protected Message(string text, Color color, PriorityLevel priority)
         {
             Text = text;
             Color = color;
+            Priority = priority;
+        }
+
+        protected Message(string text, Color color, PriorityLevel priority, float decayInS)
+        {
+            Text = text;
+            Color = color;
+            Priority = priority;
             DecayInS = decayInS;
         }
 
@@ -48,6 +63,11 @@ namespace Ticker
         {
             string baseFormat = "<b>{0}</b>: {1}";
             return string.Format(baseFormat, type, text);
+        }
+
+        public int CompareTo(Message other)
+        {
+            return this.Priority.CompareTo(other.Priority);
         }
 
         /// <summary>
@@ -63,7 +83,11 @@ namespace Ticker
             /// Initializes a new instance of the <see cref="T:Ticker.Message.InfoMessage"/> class.
             /// </summary>
             /// <param name="text">Text of the message.</param>
-            public InfoMessage(string text) : base(text, DefaultColor, 5.0f) { }
+            public InfoMessage(string text)
+                : base(
+                    text: text, color: DefaultColor,
+                    decayInS: 5.0f, priority: PriorityLevel.normal)
+            { }
         }
 
         /// <summary>
@@ -80,13 +104,14 @@ namespace Ticker
             /// </summary>
             /// <param name="text">Text of the message.</param>
             /// <param name="keyboard">Keyboard shortcut of the operation.</param>
-            public HelpMessage(string text, string keyboard)
+            public HelpMessage(string text, string keyboard) : base()
             {
                 Text = BuildMessage(
                     type: "help",
                     text: BuildMessageText(text, keyboard)
                 );
                 Color = DefaultColor;
+                Priority = PriorityLevel.low;
             }
 
             private string BuildMessageText(string text, string keyboard)
@@ -105,7 +130,7 @@ namespace Ticker
                 208.0f / 256.0f, 103f / 256.0f, 29.0f / 256.0f
             );
 
-            public WarningMessage(string text) : base(text, DefaultColor) { }
+            public WarningMessage(string text) : base(text, DefaultColor, PriorityLevel.high) { }
         }
 
         /// <summary>
@@ -122,7 +147,7 @@ namespace Ticker
             /// Initializes a new instance of the <see cref="T:Ticker.Message.ErrorMessage"/> class.
             /// </summary>
             /// <param name="text">Text of the message</param>
-            public ErrorMessage(string text) : base(text, DefaultColor) { }
+            public ErrorMessage(string text) : base(text, DefaultColor, PriorityLevel.high) { }
         }
 
     }
