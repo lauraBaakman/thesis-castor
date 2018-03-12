@@ -40,16 +40,8 @@ for i = 1:length(modelPoints)
     b(i) = dot(n, d) - dot(n, s);
 end
 
-%% Prepare XOpt computation
-% Singular Value Decomposition of A
-[U, S, Vt] = svd(A);
-
-% Pseudo Inverse of A
-Splus = pinv(S);
-Aplus = transpose(Vt) * Splus * transpose(U);
-
 %% Compute xOpt
-xOpt = Aplus * b;
+xOpt = pinv(A) * b;
 
 %% Compute Transformation Matrix
 % Angles in radians
