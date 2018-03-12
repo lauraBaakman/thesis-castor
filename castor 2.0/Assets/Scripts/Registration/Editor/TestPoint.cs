@@ -251,6 +251,34 @@ namespace Tests
             Assert.AreEqual(normal, actual);
         }
 
+        public void TestGetUnitNormal_NoNormal()
+        {
+            Assert.Throws(typeof(System.Exception), new TestDelegate(TestGetUnitNormal_NoNormal_helper));
+        }
+
+        void TestGetUnitNormal_NoNormal_helper()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+
+            Point point = new Point(position);
+            Vector3 actual = point.UnitNormal;
+        }
+
+        [Test]
+        public void TestGetUnitNormal_WithNormal()
+        {
+            Vector3 position = new Vector3(Random.value, Random.value, Random.value);
+            Vector3 normal = new Vector3(5.0f, 0.0f, 0.0f);
+
+            Point point = new Point(position, normal);
+
+            Vector3 expected = new Vector3(1.0f, 0.0f, 0.0f);
+
+            Vector3 actual = point.UnitNormal;
+
+            Assert.AreEqual(expected, actual);
+        }
+
         [Test]
         public void ToHomogeneousVector4()
         {

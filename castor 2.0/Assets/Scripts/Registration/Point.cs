@@ -36,6 +36,14 @@ namespace Registration
         }
         private Vector3 normal;
 
+        public Vector3 UnitNormal
+        {
+            get
+            {
+                return Normal.normalized;
+            }
+        }
+
         public bool HasNormal
         {
             get { return hasNormal(); }
