@@ -1,37 +1,37 @@
 using UnityEngine;
 
 using Utils;
+using Registration.Messages;
 
 namespace Fragment
 {
     [RequireComponent(typeof(MeshRenderer))]
-    public class MaterialController : MonoBehaviour, IFragmentStateChanged
+    [RequireComponent(typeof(StateTracker))]
+    public class MaterialController : MonoBehaviour, IFragmentStateChanged, IICPStartEndListener
     {
-
-        private ColorSet ColorSet;
+        private MaterialSet MaterialSet;
         private MeshRenderer Renderer;
 
         void Start()
         {
             Renderer = GetComponent<MeshRenderer>();
-            ColorSet = new ColorSet(Renderer.material.color);
+            MaterialSet = new MaterialSet(Renderer.material);
         }
 
         public void OnStateChanged(FragmentState newState)
         {
-            SetColor(DetermineNewColor(newState));
+            SetMaterial(DetermineNewMaterial(newState));
         }
 
-        private Color DetermineNewColor(FragmentState state)
+        private Material DetermineNewMaterial(FragmentState state)
         {
-            if (state.selected) return ColorSet.Selected;
-            if (state.locked) return ColorSet.Locked;
-            return ColorSet.Normal;
+            if (state.selected) return MaterialSet.Selected;
+            if (state.locked) return MaterialSet.Locked;
+            return MaterialSet.Normal;
         }
 
-        private void SetColor(Color color){
-            Material material = Renderer.material;
-            material.color = color;
+        private void SetMaterial(Material material)
+        {
             Renderer.material = material;
         }
     }

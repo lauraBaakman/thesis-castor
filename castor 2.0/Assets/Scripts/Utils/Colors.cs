@@ -52,32 +52,24 @@ namespace Utils
         }
     }
 
-    public class ColorSet
+    public class MaterialSet
     {
-        public readonly Color Normal;
-        public readonly Color Selected;
-        public readonly Color Locked;
-        public readonly Color ICPColor;
+        public readonly Material Normal;
+        public readonly Material Selected;
+        public readonly Material Locked;
+        public readonly Material Registration;
 
-        public ColorSet(Color normal)
+        public MaterialSet(Material normal)
         {
             Normal = normal;
 
-            Selected = GenerateSelectedColor(normal);
-            Locked = GenerateLockedColor(normal);
+            Selected = NewOpaqueMaterial(normal, SelectedColor(normal.color));
+            Locked = NewOpaqueMaterial(normal, LockedColor(normal.color));
 
-            ICPColor = GenerateICPColor(normal);
+            Registration = NewTransparentMaterial(normal, ICPColor(normal.color));
         }
 
-        public ColorSet(Color normal, Color selected, Color locked, Color ICPColor)
-        {
-            this.Normal = normal;
-            this.Selected = selected;
-            this.Locked = locked;
-            this.ICPColor = ICPColor;
-        }
-
-        private Color GenerateSelectedColor(Color baseColor)
+        private Color SelectedColor(Color baseColor)
         {
             float ValueScalingFactor = 2.0f;
 
@@ -86,7 +78,7 @@ namespace Utils
             return hsvColor.ToColor();
         }
 
-        private Color GenerateLockedColor(Color baseColor)
+        private Color LockedColor(Color baseColor)
         {
             float HueScalingFactor = 0.25f;
 
@@ -95,11 +87,27 @@ namespace Utils
             return hsvColor.ToColor();
         }
 
-        private Color GenerateICPColor(Color normal)
+        private Color ICPColor(Color baseColor)
         {
             float ICPAlpha = 0.8f;
 
-            return new Color(normal.r, normal.g, normal.b, ICPAlpha);
+            return new Color(baseColor.r, baseColor.g, baseColor.b, ICPAlpha);
+        }
+
+        private Material NewOpaqueMaterial(Material baseMaterial, Color color)
+        {
+            Material newMaterial = new Material(baseMaterial);
+            newMaterial.color = color;
+
+            return newMaterial;
+        }
+
+        private Material NewTransparentMaterial(Material baseMaterial, Color color)
+        {
+            Material newMaterial = new Material(baseMaterial);
+            newMaterial.color = color;
+
+            return newMaterial;
         }
     }
 
