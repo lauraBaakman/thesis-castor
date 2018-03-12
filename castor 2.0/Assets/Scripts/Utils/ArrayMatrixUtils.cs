@@ -23,7 +23,15 @@ namespace Utils
 
         public static double[,] Transpose(double[,] matrix)
         {
-            double[,] transpose = new double[matrix.GetLength(0), matrix.GetLength(1)];
+            int sourceNumRows = matrix.GetLength(0);
+            int sourceNumCols = matrix.GetLength(1);
+
+            double[,] transpose = new double[sourceNumCols, sourceNumRows];
+
+            alglib.rmatrixtranspose(
+                sourceNumRows, sourceNumCols, matrix, 0, 0,
+                ref transpose, 0, 0
+            );
 
             return transpose;
         }
