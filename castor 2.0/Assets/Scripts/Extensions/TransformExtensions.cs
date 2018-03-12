@@ -22,6 +22,12 @@ public static class TransformExtensions
     /// <param name="other">The transform to transform to.</param>
     public static Matrix4x4 LocalToOther(this Transform transform, Transform other)
     {
+        if (transform == null || other == null)
+        {
+            Debug.LogWarning("Returning the identity matrix since at least one of the passed transforms was null. This should only happen in tests!");
+            return Matrix4x4.identity;
+        }
+
         Matrix4x4 toWorld = transform.localToWorldMatrix;
         Matrix4x4 toOther = other.worldToLocalMatrix;
 
