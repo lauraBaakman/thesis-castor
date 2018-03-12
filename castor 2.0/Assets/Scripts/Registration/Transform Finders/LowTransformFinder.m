@@ -2,7 +2,8 @@
 clear variables; rng(42); clc;
 
 %% Expected Result
-expected_translation = [-3.0, +2.0, -0.5];
+translation = [-3.0, +2.0, -0.5];
+expected_translation = [+3, -2.0, +0.5];
 expected_rotation = [0, 0, 0];
 
 %% Transform Finding Variables
@@ -19,7 +20,7 @@ staticPoints = [
 
 numCorrespondences = length(staticPoints);
 
-modelPoints = staticPoints + repmat(expected_translation, numCorrespondences, 1);
+modelPoints = staticPoints + repmat(translation, numCorrespondences, 1);
 
 modelNormals = rand(7, 3);
 for i = 1:numCorrespondences
