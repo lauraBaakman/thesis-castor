@@ -270,5 +270,122 @@ namespace Tests.Utils
 
             ArrayMatrixUtils.Multiply(lhs, rhs);
         }
+
+        [Test]
+        public void Test_Multiply_Matrix_Vector()
+        {
+            double[,] lhs = {
+                {-1.064000000000000, +0.215000000000000},
+                {-3.873000000000000, +6.353000000000000},
+                {+0.170000000000000, +5.897000000000000},
+            };
+            double[] rhs = {
+                +2.886000000000000, -2.428000000000000
+            };
+
+            double[] expected = {
+                -03.592724000000000, -26.602561999999999, -13.827296000000000,
+            };
+
+            double[] actual = ArrayMatrixUtils.Multiply(lhs, rhs);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
+
+        [Test]
+        public void Test_Multiply_Vector_IncompatibleSize()
+        {
+            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(Test_Multiply_Vector_IncompatibleSize_Helper));
+        }
+
+        public void Test_Multiply_Vector_IncompatibleSize_Helper()
+        {
+            double[,] lhs = {
+                {-1.064000000000000, +0.215000000000000},
+                {-3.873000000000000, +6.353000000000000},
+                {+0.170000000000000, +5.897000000000000},
+            };
+            double[] rhs = {
+                +2.886000000000000, -2.428000000000000, -13.827296000000000
+            };
+
+            ArrayMatrixUtils.Multiply(lhs, rhs);
+        }
+
+        [Test]
+        public void ColumnVectorToMatrix()
+        {
+            double[] vector = { 1, 2, 3 };
+
+            double[,] expected = {
+                {1},
+                {2},
+                {3}
+            };
+
+            double[,] actual = ArrayMatrixUtils.ColumnVectorToMatrix(vector);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
+
+        [Test]
+        public void RowVectorToMatrix()
+        {
+            double[] vector = { 1, 2, 3 };
+
+            double[,] expected = {
+                {1, 2, 3}
+            };
+
+            double[,] actual = ArrayMatrixUtils.RowVectorToMatrix(vector);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
+
+        [Test]
+        public void MatrixToVector_RowMatrix()
+        {
+            double[,] matrix = {
+                {1, 2, 3}
+            };
+
+            double[] expected = { 1, 2, 3 };
+
+            double[] actual = ArrayMatrixUtils.ToVector(matrix);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
+
+        [Test]
+        public void MatrixToVector_ColumnMatrix()
+        {
+            double[,] matrix = {
+                {1},
+                {2},
+                {3}
+            };
+
+            double[] expected = { 1, 2, 3 };
+
+            double[] actual = ArrayMatrixUtils.ToVector(matrix);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
+
+        [Test]
+        public void MatrixToVector_InvalidSize()
+        {
+            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(MatrixToVector_InvalidSize_Helper));
+        }
+
+        public void MatrixToVector_InvalidSize_Helper()
+        {
+            double[,] matrix = {
+                {1, 2, 3},
+                {1, 2, 3}
+            };
+
+            ArrayMatrixUtils.ToVector(matrix);
+        }
     }
 }

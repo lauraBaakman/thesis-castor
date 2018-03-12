@@ -1,8 +1,50 @@
+using UnityEngine;
+using System;
 namespace Utils
 {
     public static class ArrayMatrixUtils
     {
         private static readonly double EPSILON = 10 * float.Epsilon;
+
+        public static double[,] ColumnVectorToMatrix(double[] vector)
+        {
+            int numRows = vector.Length;
+
+            double[,] matrix = new double[numRows, 1];
+
+            for (int i = 0; i < numRows; i++) matrix[i, 0] = vector[i];
+
+            return matrix;
+        }
+
+        public static double[,] RowVectorToMatrix(double[] vector)
+        {
+            int numCols = vector.Length;
+
+            double[,] matrix = new double[1, numCols];
+
+            for (int i = 0; i < numCols; i++) matrix[0, i] = vector[i];
+
+            return matrix;
+        }
+
+        public static double[] ToVector(double[,] matrix)
+        {
+            int numRows = matrix.GetLength(0);
+            int numCols = matrix.GetLength(1);
+
+            if ((numRows != 1) && (numCols != 1)) throw new System.ArgumentException("One of the dimension of the matrix needs to be zero.");
+
+            double[] vector = new double[Math.Max(numRows, numCols)];
+
+            int idx = 0;
+            foreach (double value in matrix)
+            {
+                vector[idx++] = value;
+            }
+
+            return vector;
+        }
 
         public static double[,] ToDiagonalMatrix(double[] diagonal)
         {
