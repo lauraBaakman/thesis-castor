@@ -54,13 +54,13 @@ namespace Utils
         /// </summary>
         public static void SVD(double[,] A, out double[,] U, out double[,] S, out double[,] Vt)
         {
-            // numUnknowns x 1 matrix
-            double[] singularValues = new double[A.GetLength(1)];
+            // numRowsA vector
+            double[] singularValues = new double[A.GetLength(0)];
 
-            // Correspondences.Count x Correspondences.Count matrix
+            // numRowsA x numRowsA matrix
             U = new double[A.GetLength(0), A.GetLength(0)];
 
-            // numUnknowns x numUnknowns matrix
+            // numColsA x numColsA matrix
             Vt = new double[A.GetLength(1), A.GetLength(1)];
 
             bool succes = alglib.rmatrixsvd(
