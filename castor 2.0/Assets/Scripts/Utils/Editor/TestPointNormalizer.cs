@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using NUnit.Framework.Constraints;
 using Utils;
 
-namespace Tests
+namespace Tests.Utils
 {
     [TestFixture]
     public class PointNormalizerTests

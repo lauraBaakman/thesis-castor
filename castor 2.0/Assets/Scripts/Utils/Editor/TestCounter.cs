@@ -1,7 +1,7 @@
 using Utils;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.Utils
 {
     [TestFixture]
     public class CounterTests

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.Utils
 {
     [TestFixture]
     public class RangeFTests
