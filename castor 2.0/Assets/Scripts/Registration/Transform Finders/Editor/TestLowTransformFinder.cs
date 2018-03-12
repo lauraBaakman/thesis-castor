@@ -33,13 +33,13 @@ namespace Tests.Registration.TransformFinders
 
             staticPoints = new List<Point>
             {
-                new Point(new Vector3(01.800000000000000f, 32.799999999999997f, 41.200000000000003f)),
-                new Point(new Vector3(42.500000000000000f, 08.600000000000000f, 34.700000000000003f)),
-                new Point(new Vector3(46.700000000000003f, 35.299999999999997f, 15.900000000000000f)),
-                new Point(new Vector3(33.899999999999999f, 01.600000000000000f, 47.500000000000000f)),
-                new Point(new Vector3(37.899999999999999f, 13.800000000000001f, 01.700000000000000f)),
-                new Point(new Vector3(37.200000000000003f, 02.300000000000000f, 21.899999999999999f)),
-                new Point(new Vector3(19.600000000000001f, 04.900000000000000f, 19.100000000000001f))
+                new Point(new Vector3(01.800000000000000f, 32.799999999999997f, 41.200000000000003f), normal: new Vector3(0.389722943438479f, 0.901288540481228f, 0.189195650464976f)),
+                new Point(new Vector3(42.500000000000000f, 08.600000000000000f, 34.700000000000003f), normal: new Vector3(0.834205746984289f, 0.527449302081401f, 0.160928572454451f)),
+                new Point(new Vector3(46.700000000000003f, 35.299999999999997f, 15.900000000000000f), normal: new Vector3(0.688679610190335f, 0.666173746815904f, 0.286239294230103f)),
+                new Point(new Vector3(33.899999999999999f, 01.600000000000000f, 47.500000000000000f), normal: new Vector3(0.751746048334168f, 0.025848313608354f, 0.658945933667980f)),
+                new Point(new Vector3(37.899999999999999f, 13.800000000000001f, 01.700000000000000f), normal: new Vector3(0.145384286927125f, 0.903800032100591f, 0.402503305687869f)),
+                new Point(new Vector3(37.200000000000003f, 02.300000000000000f, 21.899999999999999f), normal: new Vector3(0.174177689724676f, 0.929474546224019f, 0.325175645342373f)),
+                new Point(new Vector3(19.600000000000001f, 04.900000000000000f, 19.100000000000001f), normal: new Vector3(0.089324994078233f, 0.326549763278991f, 0.940949678535127f))
             };
 
         }
@@ -55,7 +55,9 @@ namespace Tests.Registration.TransformFinders
 
             Matrix4x4 actual = TransformFinder.FindTransform(correspondences);
 
-            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 4; j++)
+                    Assert.That(actual[i, j], Is.EqualTo(expected[i, j]).Within(precision));
         }
 
         [Test]
