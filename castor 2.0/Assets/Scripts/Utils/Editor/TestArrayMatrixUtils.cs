@@ -166,5 +166,44 @@ namespace Tests.Utils
             Assert.That(actual_S, Is.EqualTo(expected_S).Within(precision));
             Assert.That(actual_Vt, Is.EqualTo(expected_Vt).Within(precision));
         }
+
+        [Test]
+        public void Test_Transpose_Square_Matrix()
+        {
+            double[,] matrix = {
+                {-90.069000000000003, -01.827000000000000, +80.010999999999996},
+                {+80.543000000000006, -02.149000000000000, -26.151000000000000},
+                {+88.956999999999994, -32.456000000000003, -77.759000000000000},
+            };
+
+            double[,] expected = {
+                {-90.069000000000003, +80.543000000000006, +88.956999999999994},
+                {-01.827000000000000, -02.149000000000000, -32.456000000000003},
+                {+80.010999999999996, -26.151000000000000, -77.759000000000000},
+            };
+
+            double[,] actual = ArrayMatrixUtils.Transpose(matrix);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
+
+        [Test]
+        public void Test_Transpose_Rectangular_Matrix()
+        {
+            double[,] matrix = {
+                {+56.049999999999997, -19.218000000000000},
+                {-22.052000000000000, -80.709000000000003},
+                {-51.661999999999999, -73.605000000000004},
+            };
+
+            double[,] expected = {
+                {+56.049999999999997, -22.052000000000000, -51.661999999999999},
+                {-19.218000000000000, -80.709000000000003, -73.605000000000004},
+            };
+
+            double[,] actual = ArrayMatrixUtils.Transpose(matrix);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
     }
 }
