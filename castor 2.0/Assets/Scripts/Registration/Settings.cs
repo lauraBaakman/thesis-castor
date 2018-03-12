@@ -87,15 +87,9 @@ namespace Registration
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
-            ErrorMetric.Configuration errorConfiguration = new ErrorMetric.Configuration(
-                distanceMetric: DistanceMetrics.SquaredEuclidean,
-                aggregationMethod: AggregationMethods.Sum,
-                normalizePoints: true
-            );
+            ErrorMetric = ErrorMetric.Low();
 
-            ErrorMetric = new ErrorMetric(errorConfiguration);
-
-            TransFormFinder = new HornTransformFinder();
+            TransFormFinder = new LowTransformFinder();
 
             CorrespondenceFinder = new NormalShootingCorrespondenceFinder(this);
         }
