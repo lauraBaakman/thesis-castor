@@ -49,7 +49,8 @@ namespace Tests.Utils
             ColorSet expected = new ColorSet(
                 normal: baseColor,
                 selected: new Color(1.0f, 0.0f, 0.3643f),
-                locked: new Color(0.54898f, 0.4118f, 0.4618f)
+                locked: new Color(0.54898f, 0.4118f, 0.4618f),
+                ICPColor: new Color(0.55f, 0.00f, 0.20f, 0.8f)
             );
 
             ColorSet actual = new ColorSet(baseColor);
@@ -57,6 +58,7 @@ namespace Tests.Utils
             AssertThatColorsAreEqual(actual.Normal, expected.Normal);
             AssertThatColorsAreEqual(actual.Selected, expected.Selected);
             AssertThatColorsAreEqual(actual.Locked, expected.Locked);
+            AssertThatColorsAreEqual(actual.ICPColor, expected.ICPColor);
 
         }
 

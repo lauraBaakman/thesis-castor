@@ -57,6 +57,7 @@ namespace Utils
         public readonly Color Normal;
         public readonly Color Selected;
         public readonly Color Locked;
+        public readonly Color ICPColor;
 
         public ColorSet(Color normal)
         {
@@ -64,13 +65,16 @@ namespace Utils
 
             Selected = GenerateSelectedColor(normal);
             Locked = GenerateLockedColor(normal);
+
+            ICPColor = GenerateICPColor(normal);
         }
 
-        public ColorSet(Color normal, Color selected, Color locked)
+        public ColorSet(Color normal, Color selected, Color locked, Color ICPColor)
         {
-            Normal = normal;
-            Selected = selected;
-            Locked = locked;
+            this.Normal = normal;
+            this.Selected = selected;
+            this.Locked = locked;
+            this.ICPColor = ICPColor;
         }
 
         private Color GenerateSelectedColor(Color baseColor)
@@ -89,6 +93,13 @@ namespace Utils
             HSVColor hsvColor = new HSVColor(baseColor);
             hsvColor.Saturation = hsvColor.Saturation * HueScalingFactor;
             return hsvColor.ToColor();
+        }
+
+        private Color GenerateICPColor(Color normal)
+        {
+            float ICPAlpha = 0.8f;
+
+            return new Color(normal.r, normal.g, normal.b, ICPAlpha);
         }
     }
 
