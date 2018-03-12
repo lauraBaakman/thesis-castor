@@ -584,7 +584,7 @@ namespace RTEditor
         /// <param name="selectActionType">
         /// Describes the type of selection action which is used to select the object.
         /// </param>
-        private bool CanSelectObject(GameObject gameObj, ObjectSelectActionType selectActionType)
+        private bool CanSelectObject(GameObject gameObj, ObjectSelectActionType selectActionType, bool overrideOnCanBeSelected = false)
         {
             // Ignore null and inactive objects. Also check if the selection mechansim can operate.
             if (gameObj == null || gameObj.activeSelf == false || !CanOperate()) return false;
@@ -606,7 +606,7 @@ namespace RTEditor
             // Check if the object has a 'IRTEditorEventListener' component attached and if it does, use its
             // 'OnCanBeSelected' handler to decide if the object can be selected.
             IRTEditorEventListener editorEventListener = gameObj.GetComponent<IRTEditorEventListener>();
-            if (editorEventListener != null)
+            if (editorEventListener != null && !overrideOnCanBeSelected)
             {
                 var selectEventArgs = new ObjectSelectEventArgs(selectActionType);
                 return editorEventListener.OnCanBeSelected(selectEventArgs);
@@ -1091,9 +1091,9 @@ namespace RTEditor
         /// <returns>
         /// True if the selection has changed and false otherwise.
         /// </returns>
-        private bool AddObjectToSelection(GameObject gameObj, ObjectSelectActionType selectActionType)
+        private bool AddObjectToSelection(GameObject gameObj, ObjectSelectActionType selectActionType, bool overrideOnCanBeSelected = false)
         {
-            if (CanSelectObject(gameObj, selectActionType))
+            if (CanSelectObject(gameObj, selectActionType, overrideOnCanBeSelected))
             {
                 _selectedObjects.Add(gameObj);
                 _lastSelectedGameObject = gameObj;
@@ -1251,7 +1251,7 @@ namespace RTEditor
             bool succeededAtLeastOnce = false;
             foreach (Transform child in childTransforms)
             {
-                if (AddObjectToSelection(child.gameObject, ObjectSelectActionType.AddObjectToSelectionCall))
+                if (AddObjectToSelection(child.gameObject, ObjectSelectActionType.AddObjectToSelectionCall, overrideOnCanBeSelected: true))
                 {
                     succeededAtLeastOnce = true;
                     selectedObjects.Add(child.gameObject);
