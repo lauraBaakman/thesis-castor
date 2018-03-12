@@ -89,7 +89,7 @@ namespace Utils
 
         private Color ICPColor(Color baseColor)
         {
-            float ICPAlpha = 0.8f;
+            float ICPAlpha = 0.4f;
 
             return new Color(baseColor.r, baseColor.g, baseColor.b, ICPAlpha);
         }
@@ -99,6 +99,14 @@ namespace Utils
             Material newMaterial = new Material(baseMaterial);
             newMaterial.color = color;
 
+            //Set properties as specified by http://answers.unity.com/answers/1265884/view.html
+            newMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+            newMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+            newMaterial.SetInt("_ZWrite", 1);
+            newMaterial.DisableKeyword("_ALPHATEST_ON");
+            newMaterial.DisableKeyword("_ALPHABLEND_ON");
+            newMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            newMaterial.renderQueue = -1;
             return newMaterial;
         }
 
@@ -106,6 +114,15 @@ namespace Utils
         {
             Material newMaterial = new Material(baseMaterial);
             newMaterial.color = color;
+
+            //Set properties as specified by http://answers.unity.com/answers/1265884/view.html
+            newMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+            newMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            newMaterial.SetInt("_ZWrite", 0);
+            newMaterial.DisableKeyword("_ALPHATEST_ON");
+            newMaterial.DisableKeyword("_ALPHABLEND_ON");
+            newMaterial.EnableKeyword("_ALPHAPREMULTIPLY_ON");
+            newMaterial.renderQueue = 3000;
 
             return newMaterial;
         }
