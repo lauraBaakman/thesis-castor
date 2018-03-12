@@ -205,5 +205,70 @@ namespace Tests.Utils
 
             Assert.That(actual, Is.EqualTo(expected).Within(precision));
         }
+
+        [Test]
+        public void Test_Multiply_Matrix_SquareMatrix()
+        {
+            double[,] lhs = {
+                {-26.303000000000001, +56.045000000000002},
+                {+25.123999999999999, -83.775000000000006},
+            };
+            double[,] rhs = {
+                {85.876999999999995, -02.642000000000000},
+                {55.143000000000001, -12.827999999999999},
+            };
+
+            double[,] expected = {
+                {+0831.666704000000, -0649.452734000000},
+                {-2462.031077000001, +1008.288092000000},
+            };
+
+            double[,] actual = ArrayMatrixUtils.Multiply(lhs, rhs);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
+
+        [Test]
+        public void Test_Multiply_Matrix_RectangularMatrix()
+        {
+            double[,] lhs = {
+                {+88.409999999999997, -88.043999999999997},
+                {+91.227000000000004, -53.043999999999997},
+                {+15.042000000000000, -29.367999999999999},
+            };
+            double[,] rhs = {
+                {+64.239000000000004, -91.394999999999996, +29.823000000000000, +29.548999999999999},
+                {-96.918999999999997, -66.201999999999998, +46.344000000000001, -09.815000000000000},
+            };
+
+            double[,] expected = {
+                {14212.50642600000, -02251.54306200000, -01443.65970600000, +03476.57895000000},
+                {11001.30268900000, -04826.07277700000, +00262.39168500000, +03216.29348300000},
+                {03812.60023000000, +00569.45674600000, -00912.43302600000, +00732.72297800000},
+            };
+
+            double[,] actual = ArrayMatrixUtils.Multiply(lhs, rhs);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
+        }
+
+        [Test]
+        public void Test_Multiply_Matrix_IncompatibleSize()
+        {
+            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(Test_Multiply_Matrix_IncompatibleSize_Helper));
+        }
+
+        public void Test_Multiply_Matrix_IncompatibleSize_Helper()
+        {
+            double[,] lhs = {
+                {-26.303000000000001, +56.045000000000002},
+                {+25.123999999999999, -83.775000000000006},
+            };
+            double[,] rhs = {
+                {85.876999999999995, -02.642000000000000},
+            };
+
+            ArrayMatrixUtils.Multiply(lhs, rhs);
+        }
     }
 }
