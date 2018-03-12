@@ -6,6 +6,11 @@ namespace Utils
     {
         private static readonly double EPSILON = 10 * float.Epsilon;
 
+        /// <summary>
+        /// Represent a column vector with N elements as a N x 1 matrix.
+        /// </summary>
+        /// <returns>The matrix representing the vector.</returns>
+        /// <param name="vector">Vector.</param>
         public static double[,] ColumnVectorToMatrix(double[] vector)
         {
             int numRows = vector.Length;
@@ -17,6 +22,11 @@ namespace Utils
             return matrix;
         }
 
+        /// <summary>
+        /// Represent a row vector with N elements as a 1 x N matrix.
+        /// </summary>
+        /// <returns>The matrix representing the vector.</returns>
+        /// <param name="vector">Vector.</param>
         public static double[,] RowVectorToMatrix(double[] vector)
         {
             int numCols = vector.Length;
@@ -28,6 +38,11 @@ namespace Utils
             return matrix;
         }
 
+        /// <summary>
+        /// Represent a 1 X N or N x 1 matrix as a vector.
+        /// </summary>
+        /// <returns>The vector.</returns>
+        /// <param name="matrix">Matrix.</param>
         public static double[] ToVector(double[,] matrix)
         {
             int numRows = matrix.GetLength(0);
@@ -46,11 +61,23 @@ namespace Utils
             return vector;
         }
 
+        /// <summary>
+        /// Generate a diagonal matrix from a vector with the values for the diagonal.
+        /// </summary>
+        /// <returns>The diagonal matrix.</returns>
+        /// <param name="diagonal">Diagonal.</param>
         public static double[,] ToDiagonalMatrix(double[] diagonal)
         {
             return ToDiagonalMatrix(diagonal, diagonal.Length, diagonal.Length);
         }
 
+        /// <summary>
+        /// Generate a N X M diagonal matrix from a vector with at least MAX(N,M) values for the diagonal.
+        /// </summary>
+        /// <returns>The diagonal matrix.</returns>
+        /// <param name="diagonal">Values to be placed on the diagonal of the matrix</param>
+        /// <param name="numRows">Number rows of the output matrix.</param>
+        /// <param name="numCols">Number cols of the output matrix.</param>
         public static double[,] ToDiagonalMatrix(double[] diagonal, int numRows, int numCols)
         {
             if (diagonal.Length > numRows) throw new System.ArgumentException("Cannot fit " + diagonal.Length + "elements in a matrix with " + numRows + "rows.");
@@ -63,6 +90,11 @@ namespace Utils
             return matrix;
         }
 
+        /// <summary>
+        /// Compute the transpose of the input matrix.
+        /// </summary>
+        /// <returns>The transpose.</returns>
+        /// <param name="matrix">Matrix.</param>
         public static double[,] Transpose(double[,] matrix)
         {
             int sourceNumRows = matrix.GetLength(0);
@@ -78,6 +110,12 @@ namespace Utils
             return transpose;
         }
 
+        /// <summary>
+        /// Multiply the specified lhs and rhs.
+        /// </summary>
+        /// <returns>The result of the multiplication.</returns>
+        /// <param name="lhs">Lhs.</param>
+        /// <param name="rhs">Rhs.</param>
         public static double[,] Multiply(double[,] lhs, double[,] rhs)
         {
             int lhs_num_rows = lhs.GetLength(0); int rhs_num_rows = rhs.GetLength(0);
@@ -99,6 +137,13 @@ namespace Utils
             return result;
         }
 
+
+        /// <summary>
+        /// Multiply the specified lhs and rhs.
+        /// </summary>
+        /// <returns>The result of the multiplication.</returns>
+        /// <param name="lhs">Lhs.</param>
+        /// <param name="rhs">Rhs.</param>
         public static double[] Multiply(double[,] lhs, double[] rhs)
         {
             double[,] rhs_as_matrix = ColumnVectorToMatrix(rhs);
@@ -108,6 +153,11 @@ namespace Utils
             return ToVector(result_as_matrix);
         }
 
+        /// <summary>
+        /// Compute the Moore-Penrose inverse of the matrix.
+        /// </summary>
+        /// <returns>The moore-penrose inverse.</returns>
+        /// <param name="matrix">The matrix to invert.</param>
         public static double[,] MoorePenroseInverse(double[,] matrix)
         {
             double[,] inverse = new double[matrix.GetLength(0), matrix.GetLength(1)];
