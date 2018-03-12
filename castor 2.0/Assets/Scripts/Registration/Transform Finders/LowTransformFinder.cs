@@ -18,8 +18,7 @@ namespace Registration
             return ComputeTransform(A, b);
         }
 
-        /* Public, for testing, should be private */
-        public double[,] BuildA(CorrespondenceCollection correspondences)
+        private double[,] BuildA(CorrespondenceCollection correspondences)
         {
             double[,] A = new double[correspondences.Count, numUnknowns];
 
@@ -45,8 +44,7 @@ namespace Registration
             return A;
         }
 
-        /* Public, for testing, should be private */
-        public double[] BuildB(CorrespondenceCollection correspondences)
+        private double[] BuildB(CorrespondenceCollection correspondences)
         {
             double[] b = new double[correspondences.Count];
 
@@ -61,7 +59,6 @@ namespace Registration
             return b;
         }
 
-        /* Public, for testing, should be private */
         private Matrix4x4 ComputeTransform(double[,] A, double[] b)
         {
             double[,] Aplus = ArrayMatrixUtils.MoorePenroseInverse(A);
@@ -70,7 +67,6 @@ namespace Registration
             return TransformationMatrixFromXOpt(xOpt);
         }
 
-        /* Public, for testing, should be private */
         /// <summary>
         /// Generate a transformation matrix based on the vector x_Opt =
         /// [alfa, beta, gamma, t_x, t_y, t_z], where alfa, beta and gamma are 
@@ -79,15 +75,14 @@ namespace Registration
         /// </summary>
         /// <returns>The opt to transformation matrix.</returns>
         /// <param name="xOpt">X opt.</param>
-        public Matrix4x4 TransformationMatrixFromXOpt(double[] xOpt)
+        private Matrix4x4 TransformationMatrixFromXOpt(double[] xOpt)
         {
             Matrix4x4 translation = TranslationMatrixFromXOpt(xOpt);
             Matrix4x4 rotation = RotationMatrixFromXOpt(xOpt);
             return translation * rotation;
         }
 
-        /* Public, for testing, should be private */
-        public Matrix4x4 TranslationMatrixFromXOpt(double[] xOpt)
+        private Matrix4x4 TranslationMatrixFromXOpt(double[] xOpt)
         {
             Matrix4x4 translation = Matrix4x4.identity;
             translation[0, 3] = (float)xOpt[3];
@@ -97,8 +92,7 @@ namespace Registration
             return translation;
         }
 
-        /* Public, for testing, should be private */
-        public Matrix4x4 RotationMatrixFromXOpt(double[] xOpt)
+        private Matrix4x4 RotationMatrixFromXOpt(double[] xOpt)
         {
             float alfa = (float)xOpt[0];
             float beta = (float)xOpt[1];

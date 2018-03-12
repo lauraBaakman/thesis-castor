@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Registration;
 using UnityEngine;
+using NUnit.Framework.Internal.Commands;
 
 namespace Tests.Registration.TransformFinders
 {
@@ -66,129 +67,16 @@ namespace Tests.Registration.TransformFinders
             );
 
             Matrix4x4 expected = new Matrix4x4();
-            expected[0, 0] = +0.999591940870855f; expected[1, 0] = -0.021613024656252f; expected[2, 0] = -0.018676962045425f; expected[3, 0] = +1.846045394336890f;
-            expected[0, 1] = +0.018868670036331f; expected[1, 1] = +0.990482822730230f; expected[2, 1] = -0.136336903175245f; expected[3, 1] = -1.076449856474986f;
-            expected[0, 2] = +0.021445862936662f; expected[1, 2] = +0.135928860223149f; expected[2, 2] = +0.990486456202879f; expected[3, 2] = +2.943459815683508f;
-            expected[0, 3] = +0.000000000000000f; expected[1, 3] = +0.000000000000000f; expected[2, 3] = +0.000000000000000f; expected[3, 3] = +1.000000000000000f;
+            expected[0, 0] = +1.000000000000000f; expected[0, 1] = -0.000000000000000f; expected[0, 2] = +0.000000000000001f; expected[0, 3] = -3.000000000000021f;
+            expected[1, 0] = +0.000000000000000f; expected[1, 1] = +1.000000000000000f; expected[1, 2] = +0.000000000000000f; expected[1, 3] = +2.000000000000009f;
+            expected[2, 0] = -0.000000000000001f; expected[2, 1] = +0.000000000000000f; expected[2, 2] = +1.000000000000000f; expected[2, 3] = -0.499999999999987f;
+            expected[3, 0] = +0.000000000000000f; expected[3, 1] = +0.000000000000000f; expected[3, 2] = +0.000000000000000f; expected[3, 3] = +1.000000000000000f;
 
             Matrix4x4 actual = TransformFinder.FindTransform(correspondences);
 
-            Assert.That(actual, Is.EqualTo(expected).Within(precision));
-        }
-
-        [Test]
-        public void Test_BuildA()
-        {
-            CorrespondenceCollection correspondences = new CorrespondenceCollection(
-                modelpoints: modelPoints,
-                staticpoints: staticPoints
-            );
-            double[,] actual = TransformFinder.BuildA(correspondences);
-
-            double[,] expected = new double[,]
-            {
-                { -30.927470532575377f, +15.716033098828387f, -11.160593171915908f, +00.389722943438479f, +00.901288540481228f, +00.189195650464976f },
-                { -16.918505059116331f, +22.107475091040680f, +15.242425914394650f, +00.834205746984289f, +00.527449302081401f, +00.160928572454451f},
-                { -00.487915488050234f, -02.417369238519484f, +06.799923736583882f, +00.688679610190335f, +00.666173746815904f, +00.286239294230103f},
-                { -00.173481402528037f, +13.369670144528470f, -00.326535846011476f, +00.751746048334168f, +00.025848313608354f, +00.658945933667980f},
-                { +04.018085563921582f, -15.007721997794109f, +32.247718057018083f, +00.145384286927125f, +00.903800032100591f, +00.402503305687869f},
-                { -19.607588578018557f, -08.282042601765877f, +34.175844433166759f, +00.174177689724676f, +00.929474546224019f, +00.325175645342373f},
-                { -01.626447053806614f, -16.736506312394237f, +05.962682889284890f, +00.089324994078233f, +00.326549763278991f, +00.940949678535127f}
-            };
-
-            Assert.That(actual, Is.EqualTo(expected).Within(precision));
-        }
-
-        [Test]
-        public void Test_BuildB()
-        {
-            CorrespondenceCollection correspondences = new CorrespondenceCollection(
-                modelpoints: modelPoints,
-                staticpoints: staticPoints
-            );
-            double[] actual = TransformFinder.BuildB(correspondences);
-
-            double[] expected = new double[]{
-                +0.538810425414532f,
-                -1.528182923017297f,
-                -0.876810984054252f,
-                -2.533014484619784f,
-                +1.170195550575876f,
-                +1.173828200602824f,
-                -0.085350294944277f
-            };
-
-            Assert.That(actual, Is.EqualTo(expected).Within(precision));
-        }
-
-        [Test]
-        public void Test_TransformationMatrixFromXOpt()
-        {
-            double[] xOpt = new double[] {
-                +0.136382526761545f,
-                -0.021447507191874f,
-                +0.018874131198093f,
-                +1.846045394336890f,
-                -1.076449856474986f,
-                +2.943459815683508f,
-            };
-            Matrix4x4 actual = TransformFinder.TransformationMatrixFromXOpt(xOpt);
-
-            Matrix4x4 expected = new Matrix4x4();
-            expected[0, 0] = +0.999591940870855f; expected[0, 1] = -0.021613024656252f; expected[0, 2] = -0.018676962045425f; expected[0, 3] = +1.846045394336890f;
-            expected[1, 0] = +0.018868670036331f; expected[1, 1] = +0.990482822730230f; expected[1, 2] = -0.136336903175245f; expected[1, 3] = -1.076449856474986f;
-            expected[2, 0] = +0.021445862936662f; expected[2, 1] = +0.135928860223149f; expected[2, 2] = +0.990486456202879f; expected[2, 3] = +2.943459815683508f;
-            expected[3, 0] = +0.000000000000000f; expected[3, 1] = +0.000000000000000f; expected[3, 2] = +0.000000000000000f; expected[3, 3] = +1.000000000000000f;
-
-            //Matrix comparison cannot handle precision.....
-            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
-        }
-
-        [Test]
-        public void Test_TranslationMatrixFromXOpt()
-        {
-            double[] xOpt = new double[] {
-                +0.136382526761545f,
-                -0.021447507191874f,
-                +0.018874131198093f,
-                +1.846045394336890f,
-                -1.076449856474986f,
-                +2.943459815683508f,
-            };
-            Matrix4x4 actual = TransformFinder.TranslationMatrixFromXOpt(xOpt);
-
-            Matrix4x4 expected = new Matrix4x4();
-            expected[0, 0] = +1.000000000000000f; expected[0, 1] = +0.000000000000000f; expected[0, 2] = +0.000000000000000f; expected[0, 3] = +1.846045394336890f;
-            expected[1, 0] = +0.000000000000000f; expected[1, 1] = +1.000000000000000f; expected[1, 2] = +0.000000000000000f; expected[1, 3] = -1.076449856474986f;
-            expected[2, 0] = +0.000000000000000f; expected[2, 1] = +0.000000000000000f; expected[2, 2] = +1.000000000000000f; expected[2, 3] = +2.943459815683508f;
-            expected[3, 0] = +0.000000000000000f; expected[3, 1] = +0.000000000000000f; expected[3, 2] = +0.000000000000000f; expected[3, 3] = +1.000000000000000f;
-
-            //Matrix comparison cannot handle precision.....
-            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
-        }
-
-        [Test]
-        public void Test_RotationMatrixFromXOpt()
-        {
-            double[] xOpt = new double[] {
-                +0.136382526761545f,
-                -0.021447507191874f,
-                +0.018874131198093f,
-                +1.846045394336890f,
-                -1.076449856474986f,
-                +2.943459815683508f,
-            };
-            Matrix4x4 actual = TransformFinder.RotationMatrixFromXOpt(xOpt);
-
-            Matrix4x4 expected = new Matrix4x4();
-            expected[0, 0] = +0.999591940870855f; expected[0, 1] = -0.021613024656252f; expected[0, 2] = -0.018676962045425f; expected[0, 3] = +0.000000000000000f;
-            expected[1, 0] = +0.018868670036331f; expected[1, 1] = +0.990482822730230f; expected[1, 2] = -0.136336903175245f; expected[1, 3] = +0.000000000000000f;
-            expected[2, 0] = +0.021445862936662f; expected[2, 1] = +0.135928860223149f; expected[2, 2] = +0.990486456202879f; expected[2, 3] = +0.000000000000000f;
-            expected[3, 0] = +0.000000000000000f; expected[3, 1] = +0.000000000000000f; expected[3, 2] = +0.000000000000000f; expected[3, 3] = +1.000000000000000f;
-
-
-            //Matrix comparison cannot handle precision.....
-            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 4; j++)
+                    Assert.That(actual[i, j], Is.EqualTo(expected[i, j]).Within(precision));
         }
     }
 }
