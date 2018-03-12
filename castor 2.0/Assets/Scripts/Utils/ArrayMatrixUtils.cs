@@ -101,9 +101,11 @@ namespace Utils
 
         public static double[] Multiply(double[,] lhs, double[] rhs)
         {
-            double[] result = new double[lhs.GetLength(0)];
+            double[,] rhs_as_matrix = ColumnVectorToMatrix(rhs);
 
-            return result;
+            double[,] result_as_matrix = Multiply(lhs, rhs_as_matrix);
+
+            return ToVector(result_as_matrix);
         }
 
         public static double[,] MoorePenroseInverse(double[,] matrix)
