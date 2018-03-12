@@ -67,9 +67,9 @@ namespace Tests.Registration.TransformFinders
             );
 
             Matrix4x4 expected = new Matrix4x4();
-            expected[0, 0] = +1.000000000000000f; expected[0, 1] = -0.000000000000000f; expected[0, 2] = +0.000000000000001f; expected[0, 3] = -3.000000000000021f;
-            expected[1, 0] = +0.000000000000000f; expected[1, 1] = +1.000000000000000f; expected[1, 2] = +0.000000000000000f; expected[1, 3] = +2.000000000000009f;
-            expected[2, 0] = -0.000000000000001f; expected[2, 1] = +0.000000000000000f; expected[2, 2] = +1.000000000000000f; expected[2, 3] = -0.499999999999987f;
+            expected[0, 0] = +1.000000000000000f; expected[0, 1] = -0.000000000000000f; expected[0, 2] = -0.000000000000001f; expected[0, 3] = +3.000000000000021f;
+            expected[1, 0] = +0.000000000000000f; expected[1, 1] = +1.000000000000000f; expected[1, 2] = +0.000000000000000f; expected[1, 3] = -2.000000000000009f;
+            expected[2, 0] = +0.000000000000001f; expected[2, 1] = -0.000000000000000f; expected[2, 2] = +1.000000000000000f; expected[2, 3] = +0.499999999999987f;
             expected[3, 0] = +0.000000000000000f; expected[3, 1] = +0.000000000000000f; expected[3, 2] = +0.000000000000000f; expected[3, 3] = +1.000000000000000f;
 
             Matrix4x4 actual = TransformFinder.FindTransform(correspondences);
