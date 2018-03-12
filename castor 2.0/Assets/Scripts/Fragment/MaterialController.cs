@@ -34,6 +34,16 @@ namespace Fragment
         {
             Renderer.material = material;
         }
+
+        public void OnICPStarted()
+        {
+            SetMaterial(MaterialSet.Registration);
+        }
+
+        public void OnICPTerminated(ICPTerminatedMessage message)
+        {
+            OnStateChanged(GetComponent<StateTracker>().State);
+        }
     }
 }
 
