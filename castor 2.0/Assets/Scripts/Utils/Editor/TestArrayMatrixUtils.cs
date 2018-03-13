@@ -476,6 +476,8 @@ namespace Tests.Utils
             };
 
             double[,] actual = ArrayMatrixUtils.PseudoInverseOfDiagonalMatrix(matrix, tolerance);
+
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
@@ -493,6 +495,8 @@ namespace Tests.Utils
             };
 
             double[,] actual = ArrayMatrixUtils.PseudoInverseOfDiagonalMatrix(matrix, tolerance);
+
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
@@ -510,6 +514,8 @@ namespace Tests.Utils
             };
 
             double[,] actual = ArrayMatrixUtils.PseudoInverseOfDiagonalMatrix(matrix, tolerance);
+
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }
