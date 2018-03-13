@@ -31,11 +31,10 @@ namespace OpenTKLib
     /// </summary>
     public class Cell2D : TriangulationCell<Vertex2D, Cell2D>
     {
-        static Random rnd = new Random();
         OpenTK.Math.Vector2d circumCenter;
         OpenTK.Math.Vector2d centroid;
 
-        
+
         double Det(double[,] m)
         {
             return m[0, 0] * ((m[1, 1] * m[2, 2]) - (m[2, 1] * m[1, 2])) - m[0, 1] * (m[1, 0] * m[2, 2] - m[2, 0] * m[1, 2]) + m[0, 2] * (m[1, 0] * m[2, 1] - m[2, 0] * m[1, 1]);
@@ -110,18 +109,18 @@ namespace OpenTKLib
                 return circumCenter;
             }
         }
-      
+
         public OpenTK.Math.Vector2d Centroid
         {
             get
             {
                 if (centroid == null)
                     centroid = GetCentroid();
-                 
+
                 return centroid;
             }
         }
 
-       
+
     }
 }
