@@ -8,6 +8,7 @@ namespace Buttons
     public class LockToggle : AbstractToggle, Fragments.ISelectionControllerListener
     {
         public GameObject SelectedFragments;
+        private static string inputName = "Toggle Lock";
 
         public void OnNumberOfSelectedObjectsChanged(int currentCount)
         {
@@ -17,7 +18,17 @@ namespace Buttons
             if (currentCount == 1) SetToggleState();
         }
 
-        public override void OnToggleValueChangedAction(bool isOn)
+        protected override bool HasDetectedKeyBoardShortCut()
+        {
+            return Input.GetButtonDown(inputName) && InputHelper.IsNoModifierPressed();
+        }
+
+        protected override void OnEnableAction()
+        {
+            OnNumberOfSelectedObjectsChanged(EditorObjectSelection.Instance.NumberOfSelectedObjects);
+        }
+
+        internal override void ExecuteToggleAction(bool isOn)
         {
             //The toggle is on if the object is locked.
             SelectedFragments.BroadcastMessage(
@@ -25,11 +36,6 @@ namespace Buttons
                 parameter: isOn,
                 options: SendMessageOptions.DontRequireReceiver
             );
-        }
-
-        protected override void OnEnableAction()
-        {
-            OnNumberOfSelectedObjectsChanged(EditorObjectSelection.Instance.NumberOfSelectedObjects);
         }
 
         private void SetToggleState()

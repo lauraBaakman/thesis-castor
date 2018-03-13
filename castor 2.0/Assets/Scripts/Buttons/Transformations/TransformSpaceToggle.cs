@@ -21,18 +21,24 @@ namespace Buttons
             Toggle.interactable = (currentCount >= 1);
         }
 
-        public override void OnToggleValueChangedAction(bool isOn)
+        public void OnToggleButtonInteractability(bool toggle)
+        {
+            Toggle.interactable = toggle;
+        }
+
+        protected override bool HasDetectedKeyBoardShortCut()
+        {
+            //has no keyboard shortcut
+            return false;
+        }
+
+        internal override void ExecuteToggleAction(bool isOn)
         {
             EditorGizmoSystem.Instance.SendMessage(
                 methodName: "OnChangeTransformSpace",
                 value: isOn ? TransformSpace.Global : TransformSpace.Local,
                 options: SendMessageOptions.RequireReceiver
             );
-        }
-
-        public void OnToggleButtonInteractability(bool toggle)
-        {
-            Toggle.interactable = toggle;
         }
     }
 }

@@ -36,6 +36,18 @@ namespace Buttons
 
         protected abstract void OnEnableAction();
 
+        protected virtual void Update()
+        {
+            if (HasDetectedKeyBoardShortCut() && Toggle.IsInteractable())
+            {
+                Toggle.isOn = !Toggle.isOn;
+                OnToggleValueChanged(Toggle.isOn);
+            }
+        }
+
+        protected abstract bool HasDetectedKeyBoardShortCut();
+        internal abstract void ExecuteToggleAction(bool isOn);
+
         public void OnToggleValueChanged(bool isOn)
         {
             SetSpriteAndSpriteState(
@@ -43,10 +55,8 @@ namespace Buttons
                 state: isOn ? IsOnSpriteState : IsOffSpriteState
             );
 
-            OnToggleValueChangedAction(isOn);
+            ExecuteToggleAction(isOn);
         }
-
-        public abstract void OnToggleValueChangedAction(bool isOn);
 
         private void SetSpriteAndSpriteState(Sprite sprite, SpriteState state)
         {
