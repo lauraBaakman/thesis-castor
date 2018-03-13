@@ -1406,7 +1406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6c2805d1b874f9ca3d719972382924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsOnSprite: {fileID: 21300000, guid: 4db67f84f1f244600b77844e87cacece, type: 3}
+  IsOnSprite: {fileID: 21300000, guid: 2c0a3f7f3b9d04f76b25efae1f504f71, type: 3}
   IsOnSpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: fd48e756d999744af8ea1e69a3b6cbf1,
       type: 3}
