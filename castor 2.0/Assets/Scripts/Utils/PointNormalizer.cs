@@ -43,7 +43,6 @@ namespace Utils
     internal class _PointNormalizer
     {
         private static Vector3 origin = new Vector3(0, 0, 0);
-        private static Vector3 unitSphereAxes = new Vector3(2, 2, 2);
 
         IEnumerable<Point> Points;
 

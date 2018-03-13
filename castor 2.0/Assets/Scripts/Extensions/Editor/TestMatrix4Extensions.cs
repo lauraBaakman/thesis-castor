@@ -100,7 +100,6 @@ namespace Tests
         [Test]
         public void TestExtractRotation_OnlyRotationSet()
         {
-            Vector3 translation = new Vector3(Random.value, Random.value, Random.value);
             Quaternion rotation = Random.rotation;
 
             Matrix4x4 matrix = new Matrix4x4();
@@ -215,7 +214,7 @@ namespace Tests
                 { 5, 6, 7, 8 },
                 { 9, 10, 11, 12 }
             };
-            Matrix4x4 actual = new Matrix4x4().Filled(array);
+            new Matrix4x4().Filled(array);
         }
 
         [Test]
@@ -232,7 +231,7 @@ namespace Tests
                 { 9, 10, 11, 12, 13},
                 { 13, 14, 15, 16, 17}
             };
-            Matrix4x4 actual = new Matrix4x4().Filled(array);
+            new Matrix4x4().Filled(array);
         }
 
         [Test]
