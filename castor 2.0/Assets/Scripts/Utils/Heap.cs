@@ -46,6 +46,11 @@ public abstract class Heap<T>
             BubbleDown(i);
     }
 
+    public bool IsEmpty()
+    {
+        return this.Count == 0;
+    }
+
     public void Add(T item)
     {
         if (Count == Capacity)

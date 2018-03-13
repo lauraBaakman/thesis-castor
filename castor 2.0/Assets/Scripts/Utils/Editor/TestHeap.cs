@@ -58,6 +58,16 @@ namespace Tests.Utils
         }
 
         [Test]
+        public void Test_IsEmpty()
+        {
+            Assert.IsFalse(heap.IsEmpty());
+            heap.ExtractMax();
+            heap.ExtractMax();
+            heap.ExtractMax();
+            Assert.IsTrue(heap.IsEmpty());
+        }
+
+        [Test]
         public void Test_WithMesages()
         {
             MaxHeap<Message> messageHeap = new MaxHeap<Message>();
