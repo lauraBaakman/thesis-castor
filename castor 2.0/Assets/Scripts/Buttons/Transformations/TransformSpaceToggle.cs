@@ -29,6 +29,11 @@ namespace Buttons
                 options: SendMessageOptions.RequireReceiver
             );
         }
+
+        public void OnToggleButtonInteractability(bool toggle)
+        {
+            Toggle.interactable = toggle;
+        }
     }
 }
 

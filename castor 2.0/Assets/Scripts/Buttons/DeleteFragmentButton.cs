@@ -25,7 +25,7 @@ namespace Buttons
             {
                 DeleteFragment(childTransform.gameObject);
             }
-            RTEditor.EditorObjectSelection.Instance.ClearSelection(allowUndoRedo:false);
+            RTEditor.EditorObjectSelection.Instance.ClearSelection(allowUndoRedo: false);
         }
 
         private void DeleteFragment(GameObject fragment)

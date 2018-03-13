@@ -75,6 +75,11 @@ namespace Fragment
             get { return Locked && Selected; }
         }
 
+        public bool SelectedUnLockedObject
+        {
+            get { return UnLocked && Selected; }
+        }
+
         public FragmentState(bool locked, bool selected)
         {
             this.locked = locked;
