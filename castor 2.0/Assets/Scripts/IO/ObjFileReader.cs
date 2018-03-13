@@ -7,6 +7,7 @@ using System.Linq;
 /// Object file reader imports .obj files at runtime.
 /// Source: http://wiki.unity3d.com/index.php?title=ObjImporter
 /// </summary>
+#pragma warning disable CS0649
 public class ObjFileReader
 {
     private struct MeshStruct
@@ -281,3 +282,4 @@ public class ObjFileReader
         }
     }
 }
+#pragma warning restore CS0649

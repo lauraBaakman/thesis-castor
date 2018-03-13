@@ -17,16 +17,12 @@ namespace OpenTKLib
 
     public class InPolyh
     {
-
-
-        private static int EXIT_FAILURE = 1;
         private static int Xindex = 0;
         private static int Yindex = 1;
         private static int Zindex = 2;
 
         private static int PMAX = 10000;
 
-        private int MAX_INT = int.MaxValue;
         private static int SAFE = 1000000;
         private static int DIM = 3;                  /* Dimension of points */
         public tPointi[] Vertices;        /* All the points */
