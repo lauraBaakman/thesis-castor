@@ -1,11 +1,8 @@
-using UnityEngine;
 using System;
 namespace Utils
 {
     public static class ArrayMatrixUtils
     {
-        private static readonly double EPSILON = 10 * float.Epsilon;
-
         /// <summary>
         /// Represent a column vector with N elements as a N x 1 matrix.
         /// </summary>
