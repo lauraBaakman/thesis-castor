@@ -31,13 +31,16 @@ namespace Fragment
 
         public void OnStateChanged(FragmentState newState)
         {
-            transformationPanel.BroadcastMessage(
-                methodName: "OnToggleButtonInteractability",
-                parameter: newState.UnLocked,
-                options: SendMessageOptions.RequireReceiver
-            );
+            if (newState.SelectedLockedObject)
+            {
+                EditorGizmoSystem.Instance.TurnOffGizmos();
 
-            if (newState.SelectedLockedObject) EditorGizmoSystem.Instance.TurnOffGizmos();
+                transformationPanel.BroadcastMessage(
+                    methodName: "OnToggleButtonInteractability",
+                    parameter: false,
+                    options: SendMessageOptions.RequireReceiver
+                );
+            }
         }
     }
 }
