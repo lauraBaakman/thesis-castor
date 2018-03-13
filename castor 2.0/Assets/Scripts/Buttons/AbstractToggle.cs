@@ -7,11 +7,13 @@ namespace Buttons
     [RequireComponent(typeof(Image))]
     public abstract class AbstractToggle : MonoBehaviour
     {
+        [Header("Sprite if the toggle is on")]
+        public Sprite IsOnSprite;
+        public SpriteState IsOnSpriteState;
+
+        [Header("Sprite if the toggle is off")]
         public Sprite IsOffSprite;
         public SpriteState IsOffSpriteState;
-
-        private Sprite IsOnSprite;
-        private SpriteState IsOnSpriteState;
 
         protected Toggle Toggle;
         private Image Image;
@@ -22,14 +24,8 @@ namespace Buttons
             Toggle.onValueChanged.AddListener(OnToggleValueChanged);
 
             Image = GetComponent<Image>();
-            IsOnSprite = Image.sprite;
 
-            IsOnSpriteState = new SpriteState
-            {
-                disabledSprite = Toggle.spriteState.disabledSprite,
-                highlightedSprite = Toggle.spriteState.highlightedSprite,
-                pressedSprite = Toggle.spriteState.pressedSprite
-            };
+            OnToggleValueChanged(Toggle.isOn);
         }
 
         public void OnEnable()

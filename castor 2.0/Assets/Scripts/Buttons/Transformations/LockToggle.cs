@@ -19,11 +19,10 @@ namespace Buttons
 
         public override void OnToggleValueChangedAction(bool isOn)
         {
-            bool locked = !isOn;
-
+            //The toggle is on if the object is locked.
             SelectedFragments.BroadcastMessage(
                 methodName: "OnToggledLockedState",
-                parameter: locked,
+                parameter: isOn,
                 options: SendMessageOptions.DontRequireReceiver
             );
         }
@@ -38,8 +37,9 @@ namespace Buttons
             //Only works if a single object is selected
             foreach (Transform child in SelectedFragments.transform)
             {
-                bool unLocked = child.gameObject.GetComponent<Fragment.StateTracker>().State.UnLocked;
-                OnToggleValueChanged(unLocked);
+                //The toggle is on if the object is locked.
+                bool locked = child.gameObject.GetComponent<Fragment.StateTracker>().State.Locked;
+                OnToggleValueChanged(locked);
             }
         }
     }

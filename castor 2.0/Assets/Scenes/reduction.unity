@@ -163,7 +163,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -391,7 +391,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -555,7 +555,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -1225,7 +1225,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -1406,6 +1406,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6c2805d1b874f9ca3d719972382924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsOnSprite: {fileID: 21300000, guid: 4db67f84f1f244600b77844e87cacece, type: 3}
+  IsOnSpriteState:
+    m_HighlightedSprite: {fileID: 21300000, guid: fd48e756d999744af8ea1e69a3b6cbf1,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 405b20a51af0c4e709dfa72eeaca0ad3, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 4db67f84f1f244600b77844e87cacece, type: 3}
   IsOffSprite: {fileID: 21300000, guid: 50edfad42f35444238e0e75a66eb0c30, type: 3}
   IsOffSpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 7498d564bb4e94785a57c6f5293cfc7d,
@@ -1483,18 +1489,16 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: fd48e756d999744af8ea1e69a3b6cbf1,
-      type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 405b20a51af0c4e709dfa72eeaca0ad3, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 4db67f84f1f244600b77844e87cacece, type: 3}
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 114806142976312604, guid: fb1aea810508e40a1b72ac086fa1b514,
-    type: 2}
+  m_TargetGraphic: {fileID: 0}
   toggleTransition: 0
   graphic: {fileID: 0}
   m_Group: {fileID: 0}
@@ -1524,7 +1528,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2c0a3f7f3b9d04f76b25efae1f504f71, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2133,7 +2137,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -2420,7 +2424,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -2647,7 +2651,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -3300,7 +3304,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -3505,7 +3509,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -3686,7 +3690,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -4021,7 +4025,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -4190,7 +4194,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -4812,7 +4816,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -4997,12 +5001,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626b6d05822f7444380e5b072d165fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsOffSprite: {fileID: 21300000, guid: 4a0778417b98740179f92c2c7e9bbf4d, type: 3}
-  IsOffSpriteState:
+  IsOnSprite: {fileID: 21300000, guid: 4a0778417b98740179f92c2c7e9bbf4d, type: 3}
+  IsOnSpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: b75f0579b3bab400f8cd84b1ff74ccea,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: aff5e10e402944edaad54c4454761b71, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: 0c9aa8924c6e94bb9a4b97cac5bc1d41, type: 3}
+  IsOffSprite: {fileID: 21300000, guid: cb68e6d68b3614d5686d53cb4d0e7c54, type: 3}
+  IsOffSpriteState:
+    m_HighlightedSprite: {fileID: 21300000, guid: 8cc8a7b3cd00442bb9e0c1476a0c0723,
+      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e05dd2ba817a14e9ca48275fa35ab516, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 6d2500bf2f1ea48e7a02a6e875cb7543, type: 3}
   SelectedFragments: {fileID: 1584437542}
 --- !u!114 &1855002916
 MonoBehaviour:
@@ -5073,17 +5083,16 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 8cc8a7b3cd00442bb9e0c1476a0c0723,
-      type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: e05dd2ba817a14e9ca48275fa35ab516, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 6d2500bf2f1ea48e7a02a6e875cb7543, type: 3}
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1855002920}
+  m_TargetGraphic: {fileID: 0}
   toggleTransition: 0
   graphic: {fileID: 0}
   m_Group: {fileID: 0}
@@ -5092,7 +5101,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!114 &1855002920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5113,7 +5122,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: cb68e6d68b3614d5686d53cb4d0e7c54, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5393,7 +5402,7 @@ Prefab:
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
