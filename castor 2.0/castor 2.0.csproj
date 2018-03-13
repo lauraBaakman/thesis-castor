@@ -522,6 +522,7 @@
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Buttons\AbstractToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\Transformations\LockToggle.cs" />
+    <Compile Include="Assets\Scripts\Fragment\LockController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
