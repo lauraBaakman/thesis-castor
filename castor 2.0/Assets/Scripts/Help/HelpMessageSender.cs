@@ -17,11 +17,6 @@ public class HelpMessageSender : MonoBehaviour, IPointerEnterHandler, IPointerEx
     /// </summary>
     public string KeyBoard;
 
-    /// <summary>
-    /// The receiver of the message.
-    /// </summary>
-    public GameObject Receiver;
-
     private bool Hovering = false;
 
     private void Update()
@@ -35,15 +30,16 @@ public class HelpMessageSender : MonoBehaviour, IPointerEnterHandler, IPointerEx
         SendHelpMessage();
     }
 
-    private void SendHelpMessage(){
-        Receiver.SendMessage(
+    private void SendHelpMessage()
+    {
+        Ticker.Receiver.Instance.SendMessage(
             methodName: "OnMessage",
             value: new Ticker.Message.HelpMessage(
                 text: Message,
                 keyboard: KeyBoard
             ),
             options: SendMessageOptions.RequireReceiver
-        );        
+        );
     }
 
     public void OnPointerExit(PointerEventData eventData)
