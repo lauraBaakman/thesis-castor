@@ -227,7 +227,7 @@ namespace OpenTKLib
           ---------------------------------------------------------------------*/
         protected bool DoubleTriangle()
         {
-            cVertex v0, v1, v2, v3, t;
+            cVertex v0, v1, v2, v3;
             cFace f0, f1 = null;
             double vol;
 
@@ -287,7 +287,6 @@ namespace OpenTKLib
         protected void ConstructHull()
         {
             cVertex v, vnext;
-            double vol;
             bool changed;	/* T if addition changes hull; not used. */
 
             v = Vertices.head;
@@ -372,7 +371,6 @@ namespace OpenTKLib
         protected double VolumeSign(cFace f, cVertex p)
         {
             double vol;
-            double voli = 0;
             double ax, ay, az, bx, by, bz, cx, cy, cz, dx, dy, dz;
             double bxdx, bydy, bzdz, cxdx, cydy, czdz;
 
@@ -413,8 +411,6 @@ namespace OpenTKLib
             double vol;
             double ax, ay, az, bx, by, bz, cx, cy, cz, dx, dy, dz;
             double bxdx, bydy, bzdz, cxdx, cydy, czdz;
-            double vold;
-            int i;
 
             ax = f.Vertices[0].Point.X;
             ay = f.Vertices[0].Point.Y;

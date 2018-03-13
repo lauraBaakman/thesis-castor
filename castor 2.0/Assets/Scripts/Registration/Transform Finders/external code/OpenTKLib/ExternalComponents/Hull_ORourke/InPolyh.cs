@@ -48,24 +48,18 @@ namespace OpenTKLib
         public InPolyh()
         {
 
-            int F = 0;
-            tPointi q, bmin, bmax;
+            tPointi bmin, bmax;
             double radius;
 
-            String s;
-            char c;
             char[] line = new char[20];
             int i = 0;
-            double x, y, z;
-            bool flag;
-            int counter;
 
             Vertices = new tPointi[PMAX];
             Faces = new tPointi[PMAX];
             Box = new tPointi[PMAX][];
 
             //n = ReadVertices();
-           // F = ReadFaces();
+            // F = ReadFaces();
             VerifVertices();
 
             /* Initialize the bounding box */
@@ -81,8 +75,6 @@ namespace OpenTKLib
 
             System.Diagnostics.Debug.WriteLine("Please input query point");
             i = 0;
-            counter = 0;
-            flag = false;
 
             //try{
             //         System.Diagnostics.Debug.WriteLine("\n\nInput query point:\nCoord-s must be seperated by a *tab*\n"+
@@ -173,7 +165,7 @@ namespace OpenTKLib
             if (!InBox(q, bmin, bmax))
                 return 'o';
 
-        
+
             while (k++ < F)
             {
                 crossings = 0;
@@ -238,7 +230,7 @@ namespace OpenTKLib
 
         public int ComputeBox(int F, tPointi bmin, tPointi bmax)
         {
-            int i, j, k;
+            int i, j;
             double radius;
 
             for (i = 0; i < F; i++)
@@ -292,8 +284,6 @@ namespace OpenTKLib
 
         public bool InBox(tPointi q, tPointi bmin, tPointi bmax)
         {
-            int i;
-
             if ((bmin.p[Xindex] <= q.p[Xindex]) && (q.p[Xindex] <= bmax.p[Xindex]) &&
                 (bmin.p[Yindex] <= q.p[Yindex]) && (q.p[Yindex] <= bmax.p[Yindex]) &&
                 (bmin.p[Zindex] <= q.p[Zindex]) && (q.p[Zindex] <= bmax.p[Zindex]))
@@ -383,7 +373,7 @@ namespace OpenTKLib
             }
             return m;
         }
-   
+
         /*---------------------------------------------------------------------
         a - b ==> c.
         ---------------------------------------------------------------------*/

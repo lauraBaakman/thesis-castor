@@ -69,7 +69,6 @@ namespace OpenTKLib
         {
             cVertexList top;
             int i;
-            cVertex p1, p2;  /* Top two points on stack. */
 
 
             /* Initialize stack. */
@@ -223,7 +222,6 @@ namespace OpenTKLib
         private void FindLowest()
         {
             int i;
-            int m = 0;   // Index of lowest so far. 
             cVertex v1;
             v1 = list.head.NextVertex;
 

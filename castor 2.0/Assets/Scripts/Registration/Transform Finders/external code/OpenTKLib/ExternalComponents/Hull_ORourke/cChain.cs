@@ -136,7 +136,6 @@ namespace OpenTKLib
             double halfLength;	//floor of half os total
             cPointi target;   //point for storing the target
             cPointd Jk;      // coords of kinked joint returned by Solve2 
-            cPointi J1;      // Joint1 on x-axis 
 
 
 
@@ -144,7 +143,6 @@ namespace OpenTKLib
             target = new cPointi(x, y);
 
             //Compute Length array and # of links
-            cVertex v0;
             v1 = list.head;
 
             for (i = 0; i < list.n - 1; i++)
@@ -222,9 +220,6 @@ namespace OpenTKLib
             cPointd Jk;      // coords of kinked joint returned by Solve2 
             cPointi J1;      // Joint1 on x-axis 
             cPointi Ttarget; // translated target
-
-            cPointi vaux1;
-            cPointi vaux2;
 
             target = new cPointi(target0.X, target0.Y);
 

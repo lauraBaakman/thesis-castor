@@ -309,7 +309,7 @@ namespace OpenTKLib
           ---------------------------------------------------------------------*/
         private bool DoubleTriangle()
         {
-            cVertex v0, v1, v2, v3, t;
+            cVertex v0, v1, v2, v3;
             cFace f0, f1 = null;
 
             double vol;
@@ -369,7 +369,6 @@ namespace OpenTKLib
         private void ConstructHull()
         {
             cVertex v, vnext;
-            double vol;
             bool changed;	/* T if addition changes hull; not used. */
 
             v = Vertices.head;

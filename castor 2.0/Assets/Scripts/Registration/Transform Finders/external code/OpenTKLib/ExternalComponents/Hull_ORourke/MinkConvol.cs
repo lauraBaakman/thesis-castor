@@ -186,7 +186,6 @@ namespace OpenTKLib
 
         private void Vectorize()
         {
-            int i;
             cVertex v;
             v = P.head;
             System.Diagnostics.Debug.WriteLine("Vectorize: ");

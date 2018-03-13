@@ -257,7 +257,6 @@ namespace OpenTKLib
           ---------------------------------------------------------------------*/
         private double Dot(cPointi a, cPointi b)
         {
-            int i;
             double sum = 0.0;
 
             sum = a.X * b.X + a.Y * b.Y;

@@ -48,176 +48,184 @@ using System;
 namespace OpenTKLib
 {
     public class Sphere
-{
+    {
 
 
         private double r1, r2, r3, r;
-private bool float_pt = false;
-
-        
- public static void TestSphere()
- {
-
-     string[] args = null;
-     Sphere sph = new Sphere(args);
-  }
+        private bool float_pt = false;
 
 
-public void print_instruct()
-{
-  System.Diagnostics.Debug.WriteLine ( "Please enter your input according to the following format:" );
-  System.Diagnostics.Debug.WriteLine ( "\tsphere [number of points] [-flag letter][parameter value] " );
-  System.Diagnostics.Debug.WriteLine ( "\t\t (Please put a space between flag letter and parameter value!) " );
-  System.Diagnostics.Debug.WriteLine ( "Available flags are: " );
-  System.Diagnostics.Debug.WriteLine ( "\t-r[parameter] \t set radius of the sphere (default: 100) " );
-  System.Diagnostics.Debug.WriteLine ( "\t-f            \t set output to floating point format (default: integer) ");
-  System.Diagnostics.Debug.WriteLine ( "\t-a[parameter] \t ellipsoid x-axis Length (default: sphere radius) ");
-  System.Diagnostics.Debug.WriteLine ( "\t-b[parameter] \t ellipsoid y-axis Length (default: sphere radius) ");
-  System.Diagnostics.Debug.WriteLine ( "\t-c[parameter] \t ellipsoid z-axis Length (default: sphere radius) ");
-}
+        public static void TestSphere()
+        {
+
+            string[] args = null;
+            Sphere sph = new Sphere(args);
+        }
+
+
+        public void print_instruct()
+        {
+            System.Diagnostics.Debug.WriteLine("Please enter your input according to the following format:");
+            System.Diagnostics.Debug.WriteLine("\tsphere [number of points] [-flag letter][parameter value] ");
+            System.Diagnostics.Debug.WriteLine("\t\t (Please put a space between flag letter and parameter value!) ");
+            System.Diagnostics.Debug.WriteLine("Available flags are: ");
+            System.Diagnostics.Debug.WriteLine("\t-r[parameter] \t set radius of the sphere (default: 100) ");
+            System.Diagnostics.Debug.WriteLine("\t-f            \t set output to floating point format (default: integer) ");
+            System.Diagnostics.Debug.WriteLine("\t-a[parameter] \t ellipsoid x-axis Length (default: sphere radius) ");
+            System.Diagnostics.Debug.WriteLine("\t-b[parameter] \t ellipsoid y-axis Length (default: sphere radius) ");
+            System.Diagnostics.Debug.WriteLine("\t-c[parameter] \t ellipsoid z-axis Length (default: sphere radius) ");
+        }
 
 
 
 
-public Sphere(String[] args)
+        public Sphere(String[] args)
 
-{
+        {
 
-  int n;		/* number of points */
-  double x, y, z, w, t;
-  double R = 100.0;	/* default radius */
-  int r1a, r2a, r3a;
+            int n;      /* number of points */
+            double x, y, z, w, t;
+            double R = 100.0;   /* default radius */
+            int r1a, r2a, r3a;
 
-  if ( args.Length < 1 )
-    {
-    print_instruct();
-    return;
+            if (args.Length < 1)
+            {
+                print_instruct();
+                return;
+            }
+
+            r = (int)R;
+            r1 = r2 = r3 = r;
+            TestFlags(args);
+            n = 1;
+
+
+            try
+            {
+                int.TryParse(args[0], out n);
+            }
+            catch (Exception) { System.Diagnostics.Debug.WriteLine("Invalid number of points"); return; }
+
+
+            System.Random myRandom = new System.Random();
+
+
+            while (n-- > 0)
+            {
+                /* Generate a random point on a sphere of radius 1. */
+                /* the sphere is sliced at z, and a random point at angle t
+                   generated on the circle of intersection. */
+                z = 2.0 * myRandom.NextDouble() - 1.0;
+                t = 2.0 * Math.PI * myRandom.NextDouble();
+                w = Math.Sqrt(1 - z * z);
+                x = w * Math.Cos(t);
+                y = w * Math.Sin(t);
+
+                if (float_pt == false)
+                {
+                    r1a = (int)Math.Round(r1 * x);
+                    r2a = (int)Math.Round(r2 * y);
+                    r3a = (int)Math.Round(r3 * z);
+                    System.Diagnostics.Debug.WriteLine(r1a + "\t" + r2a + "\t" + r3a);
+                }
+                else
+                    System.Diagnostics.Debug.WriteLine((r1 * x) + "\t" + (r2 * y) + "\t" + (r3 * z));
+
+            }
+            System.Diagnostics.Debug.WriteLine("end");
+        }
+
+
+        public void TestFlags(String[] args)
+        {
+
+            int i = 1;
+
+            /* Test for flags */
+            while (i < args.Length)
+            {
+
+                /* Test for radius flag */
+
+                if (args[i].Equals("-r"))
+                {
+                    i++;
+                    try
+                    {
+                        double.TryParse(args[i], out r);
+                    }
+                    catch (Exception) { System.Diagnostics.Debug.WriteLine("Please enter a valid number for the Radius"); return; }
+                    if (r == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Invalid radius flag ");
+                        return;
+
+                    }
+                    else
+                        r1 = r2 = r3 = r;
+                    System.Diagnostics.Debug.WriteLine("r, r1, r2, r3 are: " + r + r1 + r2 + r3);
+                }
+
+
+                /* Test whether user wants floating point output */
+                if (args[i].Equals("-f"))
+                    float_pt = true;
+
+                /* Test for ellipsoid radius if any */
+                if (args[i].Equals("-a"))
+                {
+                    i++;
+                    try
+                    {
+                        double.TryParse(args[i], out r1);
+                    }
+                    catch (Exception) { System.Diagnostics.Debug.WriteLine("Please enter a valid number for the Radius"); return; }
+                    if (r == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Invalid radius flag ");
+                        return;
+                    }
+                }
+
+                if (args[i].Equals("-b"))
+                {
+                    i++;
+                    try
+                    {
+                        double.TryParse(args[i], out r2);
+                    }
+                    catch (Exception) { System.Diagnostics.Debug.WriteLine("Please enter a valid number for the Radius"); return; }
+                    if (r == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Invalid radius flag ");
+                        return;
+                    }
+                }
+                if (args[i].Equals("-c"))
+                {
+                    i++;
+                    try
+                    {
+                        double.TryParse(args[i], out r3);
+                    }
+                    catch (Exception) { System.Diagnostics.Debug.WriteLine("Please enter a valid number for the Radius"); return; }
+                    if (r == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Invalid radius flag ");
+                        return;
+                    }
+                }
+
+                i++;
+            }
+
+            if (r1 == 0 || r2 == 0 || r3 == 0)
+            {
+                System.Diagnostics.Debug.WriteLine("Invalid ellipsoid radius ");
+                return;
+            }
+        }
+
+
     }
-
-  r = (int) R;
-  r1 = r2 = r3 = r;
-  TestFlags (args);
-  n = 1;
-
-  
-  try 
-    {
-    int.TryParse( args[0] , out n);
-    }
-  catch (Exception e) {System.Diagnostics.Debug.WriteLine ("Invalid number of poits"); return;}
-  
-
-     System.Random myRandom = new System.Random (); 
-
-
-  while (n-->0){
-    /* Generate a random point on a sphere of radius 1. */
-    /* the sphere is sliced at z, and a random point at angle t
-       generated on the circle of intersection. */
-    z = 2.0 *  myRandom.NextDouble() - 1.0;
-    t = 2.0 * Math.PI * myRandom.NextDouble();
-    w = Math.Sqrt( 1 - z*z );
-    x = w * Math.Cos( t );
-    y = w * Math.Sin( t );
-    
-    if ( float_pt == false )
-      {
-	r1a =(int) Math.Round(r1 * x);
-	r2a =(int) Math.Round(r2 * y);
-	r3a =(int) Math.Round(r3 * z);
-	System.Diagnostics.Debug.WriteLine(r1a+"\t"+r2a+"\t"+r3a);
-      }
-    else
-      System.Diagnostics.Debug.WriteLine((r1*x)+"\t"+(r2*y)+"\t"+(r3*z)) ;
-   
-  }
- System.Diagnostics.Debug.WriteLine("end");
-}
-
-
-public void TestFlags (String[] args)
-{
-
-  int i = 1;
-
-  /* Test for flags */
-  while ( i < args.Length) {
-
-    /* Test for radius flag */
-    
-    if (args[i].Equals("-r")) 
-      {
-	i++;
-	try 
-	  {
-	  double.TryParse(args[i], out r);
-	    }
-	  catch (Exception e) {System.Diagnostics.Debug.WriteLine("Please enter a valid number for the Radius"); return;}
-	if (r==0) {
-	  System.Diagnostics.Debug.WriteLine ( "Invalid radius flag " );
-	  return;
-        
-	}
-	else
-	  r1 = r2 = r3 = r;
-	 System.Diagnostics.Debug.WriteLine("r, r1, r2, r3 are: "+r+r1+r2+r3);
-      }
-    
-
-    /* Test whether user wants floating point output */
-    if (args[i].Equals("-f"))
-      float_pt = true;
-
-    /* Test for ellipsoid radius if any */
-    if (args[i].Equals("-a")) 
-      {
-	i++;
-	  try{
-          double.TryParse(args[i], out r1);
-	    }
-	  catch (Exception e) {System.Diagnostics.Debug.WriteLine("Please enter a valid number for the Radius"); return;}
-	if (r==0) {
-	  System.Diagnostics.Debug.WriteLine ( "Invalid radius flag " );
-	  return;
-	}
-      }
-
- if (args[i].Equals("-b")) 
-      {
-	i++;
-	  try{ 
-	  double.TryParse(args[i], out r2);
-	    }
-	  catch (Exception e) {System.Diagnostics.Debug.WriteLine("Please enter a valid number for the Radius"); return;}
-	if (r==0) {
-	  System.Diagnostics.Debug.WriteLine ( "Invalid radius flag " );
-	  return;
-	}
-      }
- if (args[i].Equals("-c")) 
-      {
-	i++;
-	  try
-	    { 
-	  double.TryParse(args[i], out r3);
-	    }
-	  catch (Exception e) {System.Diagnostics.Debug.WriteLine("Please enter a valid number for the Radius"); return;}
-	if (r==0) {
-	  System.Diagnostics.Debug.WriteLine ( "Invalid radius flag " );
-	  return;
-	}
-      }
-
-    i++;
-  }
-
-  if ( r1 == 0 || r2 == 0 || r3 == 0 )
-    {
-    System.Diagnostics.Debug.WriteLine ( "Invalid ellipsoid radius " );
-    return;
-    }
-}
-
-
-}
 }

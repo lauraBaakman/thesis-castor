@@ -105,8 +105,7 @@ namespace OpenTKLib
          */
         public char InPoly1(cPointi q)
         {
-            int i = 0, i1;
-            int d;
+            int i = 0;
             double x;
             int Rcross = 0;
             int Lcross = 0;

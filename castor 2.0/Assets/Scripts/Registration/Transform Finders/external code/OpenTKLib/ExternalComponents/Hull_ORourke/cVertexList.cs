@@ -144,7 +144,7 @@ namespace OpenTKLib
                 InsertBefore(v, vNear.NextVertex);
         }
 
-        public void ResetVertex(cVertex resV, double x, double  y)
+        public void ResetVertex(cVertex resV, double x, double y)
         {
             resV.Point.X = x;
             resV.Point.Y = y;
@@ -290,7 +290,6 @@ namespace OpenTKLib
         {
             cVertex vnear = null, vtemp = head;
             double mindist = 0.0, dist = -1.0;
-            int k;
             cPointi p = new cPointi();
 
             // input query point
