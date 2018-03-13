@@ -1,5 +1,3 @@
-using UnityEngine;
-using System.Collections;
 using NUnit.Framework;
 
 namespace Tests.Utils
