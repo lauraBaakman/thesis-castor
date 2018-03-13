@@ -19,12 +19,12 @@ namespace Tests.Ticker
         }
 
         [Test]
-        public void CompareTo_Equal()
+        public void CompareTo_PriorityLevelEqual_CompareOnDateTime()
         {
             Message thisMessage = new Message.ErrorMessage("");
             Message otherMessage = new Message.ErrorMessage("");
 
-            int expected = 0;
+            int expected = +1;
             int actual = thisMessage.CompareTo(otherMessage);
 
             Assert.AreEqual(expected, actual);

@@ -23,7 +23,9 @@ namespace Ticker
         /// </summary>
         public Color Color;
 
-        public enum PriorityLevel { low = 0, normal = 1, high = 2 }
+        DateTime timeStamp;
+
+        public enum PriorityLevel { help = 0, info = 1, warning = 2, error = 3 }
 
         /// <summary>
         ///  Indicates the priority of the message, if the priority of the message that is being displayed is higher than that of the new message, the new message is ignored.
@@ -37,24 +39,24 @@ namespace Ticker
 
         private static float DefaultDecayInS = 3.0f;
 
-        protected Message()
+        protected Message(PriorityLevel priority)
         {
             DecayInS = DefaultDecayInS;
-            Priority = PriorityLevel.normal;
+            Priority = priority;
+
+            timeStamp = DateTime.UtcNow;
         }
 
         protected Message(string text, Color color, PriorityLevel priority)
+            : this(priority)
         {
             Text = text;
             Color = color;
-            Priority = priority;
         }
 
         protected Message(string text, Color color, PriorityLevel priority, float decayInS)
+            : this(text, color, priority)
         {
-            Text = text;
-            Color = color;
-            Priority = priority;
             DecayInS = decayInS;
         }
 
@@ -66,7 +68,11 @@ namespace Ticker
 
         public int CompareTo(Message other)
         {
-            return this.Priority.CompareTo(other.Priority);
+            int priorityComparison = this.Priority.CompareTo(other.Priority);
+            if (priorityComparison != 0) return priorityComparison;
+
+            //Older messages go before newer messages
+            return -1 * this.timeStamp.CompareTo(other.timeStamp);
         }
 
         /// <summary>
@@ -85,8 +91,13 @@ namespace Ticker
             public InfoMessage(string text)
                 : base(
                     text: text, color: DefaultColor,
-                    decayInS: 5.0f, priority: PriorityLevel.normal)
+                    decayInS: 5.0f, priority: PriorityLevel.info)
             { }
+
+            public override string ToString()
+            {
+                return string.Format("[InfoMessage: {0}]", Text);
+            }
         }
 
         /// <summary>
@@ -103,20 +114,25 @@ namespace Ticker
             /// </summary>
             /// <param name="text">Text of the message.</param>
             /// <param name="keyboard">Keyboard shortcut of the operation.</param>
-            public HelpMessage(string text, string keyboard) : base()
+            public HelpMessage(string text, string keyboard)
+                : base(PriorityLevel.help)
             {
                 Text = BuildMessage(
                     type: "help",
                     text: BuildMessageText(text, keyboard)
                 );
                 Color = DefaultColor;
-                Priority = PriorityLevel.low;
             }
 
             private string BuildMessageText(string text, string keyboard)
             {
                 if (keyboard.Length == 0) return text;
                 return string.Format("({0}) {1}", keyboard, text);
+            }
+
+            public override string ToString()
+            {
+                return string.Format("[HelpMessage: {0}]", Text);
             }
         }
 
@@ -129,7 +145,14 @@ namespace Ticker
                 208.0f / 256.0f, 103f / 256.0f, 29.0f / 256.0f
             );
 
-            public WarningMessage(string text) : base(text, DefaultColor, PriorityLevel.high) { }
+            public WarningMessage(string text)
+                : base(text, DefaultColor, PriorityLevel.warning)
+            { }
+
+            public override string ToString()
+            {
+                return string.Format("[WarningMessage: {0}]", Text);
+            }
         }
 
         /// <summary>
@@ -146,7 +169,12 @@ namespace Ticker
             /// Initializes a new instance of the <see cref="T:Ticker.Message.ErrorMessage"/> class.
             /// </summary>
             /// <param name="text">Text of the message</param>
-            public ErrorMessage(string text) : base(text, DefaultColor, PriorityLevel.high) { }
+            public ErrorMessage(string text) : base(text, DefaultColor, PriorityLevel.error) { }
+
+            public override string ToString()
+            {
+                return string.Format("[ErrorMessage: {0}]", Text);
+            }
         }
 
     }
