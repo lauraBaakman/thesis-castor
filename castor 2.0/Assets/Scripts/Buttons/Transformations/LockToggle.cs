@@ -35,6 +35,7 @@ namespace Buttons
 
         private void SetToggleState()
         {
+            //Only works if a single object is selected
             foreach (Transform child in SelectedFragments.transform)
             {
                 bool unLocked = child.gameObject.GetComponent<Fragment.StateTracker>().State.UnLocked;
