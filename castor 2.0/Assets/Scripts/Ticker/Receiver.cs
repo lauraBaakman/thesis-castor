@@ -13,8 +13,15 @@ namespace Ticker
     {
         private Text TickerText;
         private Timer Timer;
+        private Message currentMessage;
 
         private static string noMessageText = "";
+
+        private void Awake()
+        {
+            TickerText = FindTickerTextComponent();
+            Timer = new Timer(OnMessageHasDecayed);
+        }
 
         /// <summary>
         /// On the receiving of a message this function is called, it displays the message and starts a timer for hiding it.
@@ -22,14 +29,31 @@ namespace Ticker
         /// <param name="message">Message.</param>
         public void OnMessage(Message message)
         {
-            DisplayMessage(message);
-            Timer.Set(message.DecayInS);
+            if (IsMoreImportantThanCurrentMessage(message)) Display(message);
         }
 
-        private void Awake()
+        private bool IsMoreImportantThanCurrentMessage(Message message)
         {
-            TickerText = FindTickerTextComponent();
-            Timer = new Timer(OnMessageHasDecayed);
+            if (currentMessage == null) return true;
+
+            return message.Priority >= currentMessage.Priority;
+        }
+
+        private bool TickerIsShowingMessage()
+        {
+            return currentMessage != null;
+        }
+
+        private void ResetCurretMessage()
+        {
+            currentMessage = null;
+        }
+
+        private void Display(Message message)
+        {
+            currentMessage = message;
+            WriteToTicker(message);
+            Timer.Set(message.DecayInS);
         }
 
         private void Update()
@@ -49,9 +73,10 @@ namespace Ticker
         private void OnMessageHasDecayed()
         {
             TickerText.text = noMessageText;
+            ResetCurretMessage();
         }
 
-        private void DisplayMessage(Message message)
+        private void WriteToTicker(Message message)
         {
             TickerText.text = message.Text;
             TickerText.color = message.Color;
