@@ -24,7 +24,7 @@ namespace Buttons
             SelectedFragments.BroadcastMessage(
                 methodName: "OnToggledLockedState",
                 parameter: locked,
-                options: SendMessageOptions.RequireReceiver
+                options: SendMessageOptions.DontRequireReceiver
             );
         }
 
