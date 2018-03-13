@@ -31,7 +31,7 @@ namespace Buttons
             Button.interactable = ShouldButtonBeInteractable(currentCount);
         }
 
-        public void OnToggleWidgetInteractability(bool toggle)
+        public void OnToggleButtonInteractability(bool toggle)
         {
             Button.interactable = toggle;
             ToggleWidget(toggle);
