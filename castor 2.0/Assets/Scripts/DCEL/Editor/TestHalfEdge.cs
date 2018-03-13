@@ -12,7 +12,6 @@ namespace Tests
         public void TestDestination_TwinIsNull()
         {
             Vertex origin = Auxilaries.RandomVertex();
-            Vertex destination = Auxilaries.RandomVertex();
 
             HalfEdge edge = new HalfEdge(origin);
 
