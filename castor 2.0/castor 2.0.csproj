@@ -324,8 +324,8 @@
     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationStepButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\StopButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\SelectAllButton.cs" />
-    <Compile Include="Assets\Scripts\Buttons\TransformButton.cs" />
-    <Compile Include="Assets\Scripts\Buttons\TransformSpaceToggle.cs" />
+    <Compile Include="Assets\Scripts\Buttons\Transformations\TransformButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\Transformations\TransformSpaceToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\UndoButton.cs" />
     <Compile Include="Assets\Scripts\DCEL\DCEL.cs" />
     <Compile Include="Assets\Scripts\DCEL\Face.cs" />
@@ -521,6 +521,7 @@
     <Compile Include="Assets\Scripts\Utils\RangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Buttons\AbstractToggle.cs" />
+    <Compile Include="Assets\Scripts\Buttons\Transformations\LockToggle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
