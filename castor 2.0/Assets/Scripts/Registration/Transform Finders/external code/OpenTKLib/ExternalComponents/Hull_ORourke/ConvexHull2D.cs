@@ -24,7 +24,6 @@ namespace OpenTKLib
     {
 
         private cVertexList list, top;
-        private cVertex newpoint;
         private int ndelete = 0;
         private int i = 0;
 
