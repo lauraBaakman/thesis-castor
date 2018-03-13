@@ -16,10 +16,9 @@ namespace Buttons
             OnNumberOfSelectedObjectsChanged(EditorObjectSelection.Instance.NumberOfSelectedObjects);
         }
 
-        protected void ToggleWidget()
+        protected void ToggleWidget(bool activate)
         {
-            bool isActive = EditorGizmoSystem.Instance.IsGizmoActive(WidgetType);
-            string method = isActive ? "DeactivateAllGizmoObjects" : "OnChangeActiveGizmo";
+            string method = activate ? "OnChangeActiveGizmo" : "DeactivateAllGizmoObjects";
             EditorGizmoSystem.Instance.SendMessage(
                     methodName: method,
                     value: WidgetType,
@@ -29,7 +28,13 @@ namespace Buttons
 
         public void OnNumberOfSelectedObjectsChanged(int currentCount)
         {
-            Button.interactable = ShouldButtonBeInteractable(currentCount) ? true : false;
+            Button.interactable = ShouldButtonBeInteractable(currentCount);
+        }
+
+        public void OnToggleWidgetInteractability(bool toggle)
+        {
+            Button.interactable = toggle;
+            ToggleWidget(toggle);
         }
 
         private bool ShouldButtonBeInteractable(int numSelectedObjects)
@@ -44,7 +49,8 @@ namespace Buttons
 
         protected override void ExecuteButtonAction()
         {
-            ToggleWidget();
+            bool isActive = EditorGizmoSystem.Instance.IsGizmoActive(WidgetType);
+            ToggleWidget(!isActive);
         }
     }
 }
