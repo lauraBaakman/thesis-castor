@@ -1518,8 +1518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171fd533f8a2049929c6360ee9ad3482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LocalSpaceSprite: {fileID: 21300000, guid: 50edfad42f35444238e0e75a66eb0c30, type: 3}
-  LocalSpaceSpriteState:
+  IsOffSprite: {fileID: 21300000, guid: 50edfad42f35444238e0e75a66eb0c30, type: 3}
+  IsOffSpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 7498d564bb4e94785a57c6f5293cfc7d,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: e592ea41875d04729a5f6efea7bb541a, type: 3}
