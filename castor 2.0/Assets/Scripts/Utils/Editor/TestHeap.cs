@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
+using Ticker;
 
 namespace Tests.Utils
 {
@@ -54,6 +55,32 @@ namespace Tests.Utils
 
             int idx = 0;
             foreach (int actual in heap) Assert.That(actual, Is.EqualTo(expectedHeap[idx++]));
+        }
+
+        [Test]
+        public void Test_WithMesages()
+        {
+            MaxHeap<Message> messageHeap = new MaxHeap<Message>();
+
+            Message.InfoMessage infomessage1 = new Message.InfoMessage("info1");
+            Message.InfoMessage infomessage2 = new Message.InfoMessage("info2");
+
+            Message.WarningMessage warningMessage1 = new Message.WarningMessage("warning1");
+
+            Message.ErrorMessage errorMessage1 = new Message.ErrorMessage("error1");
+            Message.ErrorMessage errorMessage2 = new Message.ErrorMessage("error2");
+
+            messageHeap.Add(infomessage1);
+            messageHeap.Add(warningMessage1);
+            messageHeap.Add(errorMessage1);
+            messageHeap.Add(infomessage2);
+            messageHeap.Add(errorMessage2);
+
+            Assert.That(messageHeap.ExtractMax(), Is.EqualTo(errorMessage1));
+            Assert.That(messageHeap.ExtractMax(), Is.EqualTo(errorMessage2));
+            Assert.That(messageHeap.ExtractMax(), Is.EqualTo(warningMessage1));
+            Assert.That(messageHeap.ExtractMax(), Is.EqualTo(infomessage1));
+            Assert.That(messageHeap.ExtractMax(), Is.EqualTo(infomessage2));
         }
     }
 
