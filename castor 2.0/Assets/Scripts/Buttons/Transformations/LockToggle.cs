@@ -14,6 +14,4 @@ namespace Buttons
             Debug.Log("LockToggle: OnEnableAction");
         }
     }
-
 }
-
