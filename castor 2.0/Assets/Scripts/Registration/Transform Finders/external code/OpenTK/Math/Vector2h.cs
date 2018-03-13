@@ -149,7 +149,6 @@ namespace OpenTK.Math
         /// This is the faster constructor.
         /// </summary>
         /// <param name="v">OpenTK.Vector2d</param>
-        [CLSCompliant(false)]
         public Vector2h(ref Vector2d v)
         {
             X = new Half(v.X);
@@ -161,7 +160,6 @@ namespace OpenTK.Math
         /// </summary>
         /// <param name="v">OpenTK.Vector2d</param>
         /// <param name="throwOnError">Enable checks that will throw if the conversion result is not meaningful.</param>
-        [CLSCompliant(false)]
         public Vector2h(ref Vector2d v, bool throwOnError)
         {
             X = new Half(v.X, throwOnError);

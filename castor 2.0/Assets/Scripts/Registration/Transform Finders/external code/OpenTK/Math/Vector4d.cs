@@ -1304,7 +1304,6 @@ namespace OpenTK
         /// </summary>
         /// <param name="v">The instance.</param>
         /// <returns>A pointer to the first element of v.</returns>
-        [CLSCompliant(false)]
         unsafe public static explicit operator double* (Vector4d v)
         {
             return &v.X;
@@ -1395,10 +1394,10 @@ namespace OpenTK
         public UnityEngine.Vector4 ToUnityVector()
         {
             UnityEngine.Vector4 vector = new UnityEngine.Vector4(
-                x:(float) X,
-                y:(float) Y,
-                z:(float) Z,
-                w:(float) W
+                x: (float)X,
+                y: (float)Y,
+                z: (float)Z,
+                w: (float)W
             );
             return vector;
         }

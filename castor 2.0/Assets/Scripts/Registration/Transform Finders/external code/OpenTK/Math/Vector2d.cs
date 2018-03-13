@@ -97,7 +97,6 @@ namespace OpenTK.Math
 
         /// <summary>Add the Vector passed as parameter to this instance.</summary>
         /// <param name="right">Right operand. This parameter is only read from.</param>
-        [CLSCompliant(false)]
         public void Add(ref Vector2d right)
         {
             this.X += right.X;
@@ -118,7 +117,6 @@ namespace OpenTK.Math
 
         /// <summary>Subtract the Vector passed as parameter from this instance.</summary>
         /// <param name="right">Right operand. This parameter is only read from.</param>
-        [CLSCompliant(false)]
         public void Sub(ref Vector2d right)
         {
             this.X -= right.X;
@@ -255,7 +253,6 @@ namespace OpenTK.Math
 
         /// <summary>Scales this instance by the given parameter.</summary>
         /// <param name="scale">The scaling of the individual components.</param>
-        [CLSCompliant(false)]
         public void Scale(ref Vector2d scale)
         {
             this.X *= scale.X;
