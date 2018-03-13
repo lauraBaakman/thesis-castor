@@ -1,11 +1,14 @@
 using UnityEngine;
 using RTEditor;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Buttons
 {
     public class LockToggle : AbstractToggle, Fragments.ISelectionControllerListener
     {
+        public GameObject SelectedFragments;
+
         public void OnNumberOfSelectedObjectsChanged(int currentCount)
         {
             ///The lock/unlocking functionality is only available for single objects
@@ -18,20 +21,25 @@ namespace Buttons
         {
             bool locked = !isOn;
 
-            HashSet<GameObject> selectedObjects = EditorObjectSelection.Instance.SelectedGameObjects;
-            foreach (GameObject selectedObject in selectedObjects)
-            {
-                selectedObject.SendMessage(
-                    methodName: "OnToggledLockedState",
-                    value: locked,
-                    options: SendMessageOptions.RequireReceiver
-                );
-            }
+            SelectedFragments.BroadcastMessage(
+                methodName: "OnToggledLockedState",
+                parameter: locked,
+                options: SendMessageOptions.RequireReceiver
+            );
         }
 
         protected override void OnEnableAction()
         {
             OnNumberOfSelectedObjectsChanged(EditorObjectSelection.Instance.NumberOfSelectedObjects);
+        }
+
+        private void SetToggleState()
+        {
+            foreach (Transform child in SelectedFragments.transform)
+            {
+                bool unLocked = child.gameObject.GetComponent<Fragment.StateTracker>().State.UnLocked;
+                OnToggleValueChanged(unLocked);
+            }
         }
     }
 }
