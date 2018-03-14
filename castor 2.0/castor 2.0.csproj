@@ -336,8 +336,10 @@
     <Compile Include="Assets\Scripts\DCEL\Vertex.cs" />
     <Compile Include="Assets\Scripts\Extensions\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
+    <Compile Include="Assets\Scripts\Extensions\ICollectionExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Matrix4x4Extensions.cs" />
+    <Compile Include="Assets\Scripts\Extensions\MeshExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\QuaternionExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\RayCastHitExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\SystemRandomExtensions.cs" />
@@ -521,12 +523,11 @@
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
     <Compile Include="Assets\Scripts\Utils\Heap.cs" />
+    <Compile Include="Assets\Scripts\Utils\MeshTransformer.cs" />
     <Compile Include="Assets\Scripts\Utils\Pair.cs" />
     <Compile Include="Assets\Scripts\Utils\PointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\RangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\Utils\MeshTransformer.cs" />
-    <Compile Include="Assets\Scripts\Extensions\MeshExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
