@@ -33,11 +33,21 @@ namespace Fragment
         {
             if (newState.Deselected) return;
 
-            if (newState.SelectedLockedObject) EditorGizmoSystem.Instance.TurnOffGizmos();
+            TurnOfGizmosIfNeeded(newState);
 
+            ToggleTransformationPanelInteractibility(newState);
+        }
+
+        private void TurnOfGizmosIfNeeded(FragmentState state)
+        {
+            if (state.SelectedLockedObject) EditorGizmoSystem.Instance.TurnOffGizmos();
+        }
+
+        private void ToggleTransformationPanelInteractibility(FragmentState state)
+        {
             transformationPanel.BroadcastMessage(
                 methodName: "OnToggleButtonInteractability",
-                parameter: newState.UnLocked,
+                parameter: state.UnLocked,
                 options: SendMessageOptions.RequireReceiver
             );
         }
