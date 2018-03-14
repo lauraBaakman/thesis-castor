@@ -315,6 +315,7 @@
     <Compile Include="Assets\Scripts\Buttons\AbstractToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\AddFragmentButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\DeleteFragmentButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\ExportFragmentsButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\FocusButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\HelpButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
@@ -362,6 +363,7 @@
     <Compile Include="Assets\Scripts\Fragments\SelectionController.cs" />
     <Compile Include="Assets\Scripts\GUI\ICPGUIController.cs" />
     <Compile Include="Assets\Scripts\Help\HelpMessageSender.cs" />
+    <Compile Include="Assets\Scripts\IO\FragmentExporter.cs" />
     <Compile Include="Assets\Scripts\IO\FragmentsImporter.cs" />
     <Compile Include="Assets\Scripts\IO\ObjFileReader.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Correspondence.cs" />
@@ -523,7 +525,6 @@
     <Compile Include="Assets\Scripts\Utils\PointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\RangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
-    <Compile Include="Assets\Scripts\IO\FragmentExporter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
