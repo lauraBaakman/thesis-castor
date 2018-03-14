@@ -54,16 +54,16 @@ namespace Fragment
             get { return locked; }
             internal set
             {
-                this.lockedStatuesChanged = (this.locked != value);
+                this.lockedStatusChanged = (this.locked != value);
                 this.locked = value;
             }
         }
 
 
-        private bool lockedStatuesChanged = false;
-        public bool LockedStatuesChanged
+        private bool lockedStatusChanged = false;
+        public bool LockedStatusChanged
         {
-            get { return lockedStatuesChanged; }
+            get { return lockedStatusChanged; }
         }
 
         private bool selected = false;
@@ -114,7 +114,7 @@ namespace Fragment
         {
             return string.Format(
                 "State( locked : {0} (changed: {1}), selected: {1} (changed: {2}))",
-                locked, lockedStatuesChanged,
+                locked, lockedStatusChanged,
                 selected, selectedStatusChanged
             );
         }
