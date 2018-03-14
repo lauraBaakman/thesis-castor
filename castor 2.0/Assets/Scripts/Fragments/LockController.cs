@@ -7,12 +7,13 @@ namespace Fragments
     {
         public GameObject TransformPanel;
 
-        private void Update()
+        public void OnChildFragmentStateChanged()
         {
             bool anyLockedFragments = AreAnySelectedFragmentsLocked();
 
             if (anyLockedFragments) TurnOfGizmos();
-            ToggleTransformPanel(anyLockedFragments);
+
+            ToggleTransformPanel(!anyLockedFragments);
         }
 
         public bool AreAnySelectedFragmentsLocked()
@@ -29,11 +30,11 @@ namespace Fragments
             RTEditor.EditorGizmoSystem.Instance.TurnOffGizmos();
         }
 
-        private void ToggleTransformPanel(bool anyLockedFragments)
+        private void ToggleTransformPanel(bool toggle)
         {
             TransformPanel.BroadcastMessage(
                 methodName: "OnToggleButtonInteractability",
-                parameter: !anyLockedFragments,
+                parameter: toggle,
                 options: SendMessageOptions.RequireReceiver
             );
         }

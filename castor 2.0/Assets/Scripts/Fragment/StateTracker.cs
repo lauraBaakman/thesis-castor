@@ -26,22 +26,39 @@ namespace Fragment
         {
             state.Locked = locked;
 
-            NotifyOtherComponentsOfStateChange();
+            BroadCastStateChange();
         }
 
         public void OnToggleSelectionState(bool selected)
         {
             state.Selected = selected;
 
-            NotifyOtherComponentsOfStateChange();
+            BroadCastStateChange();
         }
 
-        public void NotifyOtherComponentsOfStateChange()
+        public void BroadCastStateChange()
+        {
+            NotifyComponents();
+            NotifyParent();
+        }
+
+        private void NotifyComponents()
         {
             SendMessage(
                 methodName: "OnStateChanged",
                 value: state,
                 options: SendMessageOptions.RequireReceiver
+            );
+        }
+
+        private void NotifyParent()
+        {
+            //Do not set in Start, the parent changes.
+            GameObject parent = transform.parent.gameObject;
+            parent.SendMessage(
+                methodName: "OnChildFragmentStateChanged",
+                value: null,
+                options: SendMessageOptions.DontRequireReceiver
             );
         }
     }
