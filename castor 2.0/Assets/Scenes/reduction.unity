@@ -2491,6 +2491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button: {fileID: 0}
+  FragmentsRoot: {fileID: 1276394742}
 --- !u!114 &544703888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2502,7 +2503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5821ba9b6cf944bd68067e0ec1a0d62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Receiver: {fileID: 0}
 --- !u!1 &567878341
 GameObject:
   m_ObjectHideFlags: 0
@@ -3980,7 +3980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5821ba9b6cf944bd68067e0ec1a0d62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Receiver: {fileID: 1437549639}
 --- !u!1 &1437549639
 GameObject:
   m_ObjectHideFlags: 0
@@ -5533,7 +5532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5821ba9b6cf944bd68067e0ec1a0d62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Receiver: {fileID: 1437549639}
 --- !u!1001 &1913927472
 Prefab:
   m_ObjectHideFlags: 0

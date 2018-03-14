@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 namespace IO
 {
-    public delegate void Callback();
+    public delegate void Callback(string path, GameObject fragment);
 
     public class FragmentsExporter
     {

@@ -18,13 +18,13 @@ namespace Buttons
         {
             IO.FragmentsImporter importer = new IO.FragmentsImporter(
                 fragmentParent: FragmentsRoot,
-                callBack: NotifyUserOfAddedFragment
+                callBack: NotifyUser
             );
             importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/RoughFracturedCubeXYZRotationTranslationPart1.obj", randomizeTransform: false);
             importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/RoughFracturedCubeXYZRotationTranslationPart2.obj", randomizeTransform: false);
         }
 
-        private void NotifyUserOfAddedFragment(string path, GameObject fragment)
+        private void NotifyUser(string path, GameObject fragment)
         {
             Ticker.Message.InfoMessage message = new Ticker.Message.InfoMessage(
                 string.Format(
@@ -59,7 +59,7 @@ namespace Buttons
         {
             new IO.FragmentsImporter(
                 fragmentParent: FragmentsRoot,
-                callBack: NotifyUserOfAddedFragment
+                callBack: NotifyUser
             ).Import();
         }
     }
