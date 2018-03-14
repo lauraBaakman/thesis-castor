@@ -640,6 +640,11 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114446561927247790, guid: f2474aba1b01746338cfb3d40f0d8cea,
+        type: 2}
+      propertyPath: KeyBoard
+      value: enter
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2474aba1b01746338cfb3d40f0d8cea, type: 2}
   m_IsPrefabParent: 0

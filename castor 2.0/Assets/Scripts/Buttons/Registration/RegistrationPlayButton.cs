@@ -1,4 +1,5 @@
-﻿namespace Buttons
+﻿using UnityEngine;
+namespace Buttons
 {
     namespace RegistrationButtons
     {
@@ -23,8 +24,7 @@
 
             protected override bool HasDetectedKeyBoardShortCut()
             {
-                // Has no keyboard short cut
-                return false;
+                return Input.GetKeyDown(KeyCode.Return);
             }
         }
     }
