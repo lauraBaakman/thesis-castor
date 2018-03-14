@@ -116,8 +116,8 @@ namespace IO
 
         private void ValidateFragment(GameObject fragment)
         {
-            //Check if the fragment has a MeshFilter;
-            throw new NotImplementedException();
+            if (fragment.GetComponent<MeshFilter>() == null)
+                Debug.LogError("Trying to write a gameobject without MeshFilter to file as a mesh.");
         }
     }
 }
