@@ -17,11 +17,6 @@ namespace Fragment
             transformationPanel = findTransformationPanel();
         }
 
-        private void Update()
-        {
-            if (stateTracker.State.Locked && transform.hasChanged) Debug.LogWarning("The transform of a locked object has changed, that should not be possible!");
-        }
-
         private GameObject findTransformationPanel()
         {
             GameObject panel = GameObject.Find(transformationPanelName);
