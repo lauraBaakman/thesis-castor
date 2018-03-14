@@ -52,15 +52,37 @@ namespace Fragment
         public bool Locked
         {
             get { return locked; }
-            internal set { this.locked = value; }
+            internal set
+            {
+                this.lockedStatuesChanged = (this.locked != value);
+                this.locked = value;
+            }
+        }
+
+
+        private bool lockedStatuesChanged = false;
+        public bool LockedStatuesChanged
+        {
+            get { return lockedStatuesChanged; }
         }
 
         private bool selected = false;
         public bool Selected
         {
             get { return selected; }
-            internal set { this.selected = value; }
+            internal set
+            {
+                this.selectedStatusChanged = (this.selected != value);
+                this.selected = value;
+            }
         }
+
+        private bool selectedStatusChanged = false;
+        public bool SelectedStatusChanged
+        {
+            get { return selectedStatusChanged; }
+        }
+
 
         public bool Deselected
         {
@@ -91,8 +113,9 @@ namespace Fragment
         public override string ToString()
         {
             return string.Format(
-                "State( locked : {0}, selected: {1})",
-                locked, selected
+                "State( locked : {0} (changed: {1}), selected: {1} (changed: {2}))",
+                locked, lockedStatuesChanged,
+                selected, selectedStatusChanged
             );
         }
     }
