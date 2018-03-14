@@ -665,7 +665,8 @@ namespace RTEditor
         /// Changes the active transform space to the specified value.
         /// <param name="transformSpace"> The type of the transform space to switch to.</param>
         /// </summary>
-        public void OnChangeTransformSpace(TransformSpace transformSpace){
+        public void OnChangeTransformSpace(TransformSpace transformSpace)
+        {
             ChangeTransformSpace(transformSpace);
         }
 
