@@ -58,11 +58,27 @@ namespace IO
 
         private List<GameObject> GetExportFragments()
         {
-            List<GameObject> exportFragments = new List<GameObject>();
+            List<GameObject> exportFragments;
 
-            throw new System.NotImplementedException();
+            exportFragments = GetSelectedFragments();
 
-            //return exportFragments;
+            if (exportFragments.IsEmpty()) exportFragments = GetAllFragments(exportFragments);
+
+            return exportFragments;
+        }
+
+        private List<GameObject> GetSelectedFragments()
+        {
+            return new List<GameObject>(RTEditor.EditorObjectSelection.Instance.SelectedGameObjects);
+        }
+
+        private List<GameObject> GetAllFragments(List<GameObject> fragments)
+        {
+            foreach (Transform child in FragmentsRoot.transform)
+                //Add only fragments, not the other children of 'Fragments'
+                if (child.GetComponent<MeshFilter>() != null) fragments.Add(child.gameObject);
+
+            return fragments;
         }
     }
 
