@@ -1,21 +1,28 @@
 using UnityEngine;
 using RTEditor;
-using System.Collections.Generic;
-using System.Linq;
+using Fragments;
 
 namespace Buttons
 {
     public class LockToggle : AbstractToggle, Fragments.ISelectionControllerListener
     {
         public GameObject SelectedFragments;
+
+        private LockController lockController;
+
         private static string inputName = "Toggle Lock";
+
+        public override void Awake()
+        {
+            base.Awake();
+
+            lockController = SelectedFragments.GetComponent<LockController>();
+        }
 
         public void OnNumberOfSelectedObjectsChanged(int currentCount)
         {
-            ///The lock/unlocking functionality is only available for single objects
-            Toggle.interactable = (currentCount == 1);
-
-            if (currentCount == 1) SetToggleState();
+            Toggle.interactable = (currentCount >= 1);
+            if (currentCount >= 1) SetToggleState();
         }
 
         protected override bool HasDetectedKeyBoardShortCut()
@@ -40,13 +47,8 @@ namespace Buttons
 
         private void SetToggleState()
         {
-            //Only works if a single object is selected
-            foreach (Transform child in SelectedFragments.transform)
-            {
-                //The toggle is on if the object is locked.
-                bool locked = child.gameObject.GetComponent<Fragment.StateTracker>().State.Locked;
-                OnToggleValueChanged(locked);
-            }
+            //If any fragment is selected the button shoud be on, i.e. locked.
+            SetToggleSprites(lockController.AreAnySelectedFragmentsLocked());
         }
     }
 }

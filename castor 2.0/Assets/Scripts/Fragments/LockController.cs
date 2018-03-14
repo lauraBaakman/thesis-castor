@@ -10,12 +10,12 @@ namespace Fragments
         private void Update()
         {
             bool anyLockedFragments = AreAnySelectedFragmentsLocked();
-            if (anyLockedFragments) TurnOfGizmos();
 
+            if (anyLockedFragments) TurnOfGizmos();
             ToggleTransformPanel(anyLockedFragments);
         }
 
-        private bool AreAnySelectedFragmentsLocked()
+        public bool AreAnySelectedFragmentsLocked()
         {
             foreach (Transform child in transform)
             {

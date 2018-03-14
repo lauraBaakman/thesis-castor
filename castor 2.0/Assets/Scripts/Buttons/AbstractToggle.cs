@@ -18,7 +18,7 @@ namespace Buttons
         protected Toggle Toggle;
         private Image Image;
 
-        public void Awake()
+        public virtual void Awake()
         {
             Toggle = GetComponent<Toggle>();
             Toggle.onValueChanged.AddListener(OnToggleValueChanged);
@@ -50,12 +50,16 @@ namespace Buttons
 
         public void OnToggleValueChanged(bool isOn)
         {
+            SetToggleSprites(isOn);
+            ExecuteToggleAction(isOn);
+        }
+
+        public void SetToggleSprites(bool isOn)
+        {
             SetSpriteAndSpriteState(
                 sprite: isOn ? IsOnSprite : IsOffSprite,
                 state: isOn ? IsOnSpriteState : IsOffSpriteState
             );
-
-            ExecuteToggleAction(isOn);
         }
 
         private void SetSpriteAndSpriteState(Sprite sprite, SpriteState state)
