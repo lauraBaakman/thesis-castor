@@ -95,6 +95,8 @@ namespace IO
 
         public void Export(GameObject fragment, string path)
         {
+            Debug.Log("Exporting " + fragment.name + " to " + path);
+
             ValidateFragment(fragment);
             bool succeeded = Export(
                 mesh: fragment.GetComponent<MeshFilter>().mesh,
