@@ -4,18 +4,18 @@ using Utils;
 
 namespace IO
 {
-    public delegate void CallBack(string path, GameObject fragment);
-
     public class FragmentsImporter
     {
+        public delegate void CallBack(string path, GameObject fragment);
+
         public GameObject FragmentsRoot;
 
-        private readonly CallBack CallBack;
+        private readonly CallBack callBack;
 
         public FragmentsImporter(GameObject fragmentParent, CallBack callBack)
         {
             FragmentsRoot = fragmentParent;
-            CallBack = callBack;
+            this.callBack = callBack;
         }
 
         public void Import()
@@ -44,7 +44,7 @@ namespace IO
 
         private void ProcessFragmentFile(string path, bool randomizeTransform)
         {
-            FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot, CallBack, randomizeTransform);
+            FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot, callBack, randomizeTransform);
             fragmentImporter.Import(path);
         }
     }
@@ -56,9 +56,9 @@ namespace IO
 
         private bool RandomizeTransform;
 
-        private CallBack CallBack;
+        private FragmentsImporter.CallBack CallBack;
 
-        internal FragmentImporter(GameObject parent, CallBack callBack, bool randomizeTransform)
+        internal FragmentImporter(GameObject parent, FragmentsImporter.CallBack callBack, bool randomizeTransform)
         {
             Parent = parent;
             CallBack = callBack;
