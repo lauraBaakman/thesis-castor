@@ -225,7 +225,6 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestHeap.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
-    <Compile Include="Assets\Scripts\IO\FragmentExporter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
