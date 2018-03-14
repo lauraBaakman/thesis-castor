@@ -351,7 +351,6 @@
     <Compile Include="Assets\Scripts\Fragment\ICPPointsController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPStaticFragmentController.cs" />
     <Compile Include="Assets\Scripts\Fragment\Interfaces.cs" />
-    <Compile Include="Assets\Scripts\Fragment\LockController.cs" />
     <Compile Include="Assets\Scripts\Fragment\MaterialController.cs" />
     <Compile Include="Assets\Scripts\Fragment\PivotController.cs" />
     <Compile Include="Assets\Scripts\Fragment\RandomTransformer.cs" />

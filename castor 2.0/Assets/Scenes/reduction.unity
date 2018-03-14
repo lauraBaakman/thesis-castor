@@ -4403,6 +4403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5b8f5a3b2714f799d4a9020ec64d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TransformPanel: {fileID: 2111877658}
 --- !u!1 &1586261602
 GameObject:
   m_ObjectHideFlags: 0
