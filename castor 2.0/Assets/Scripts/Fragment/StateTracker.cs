@@ -24,14 +24,14 @@ namespace Fragment
 
         public void OnToggledLockedState(bool locked)
         {
-            state.locked = locked;
+            state.Locked = locked;
 
             NotifyOtherComponentsOfStateChange();
         }
 
         public void OnToggleSelectionState(bool selected)
         {
-            state.selected = selected;
+            state.Selected = selected;
 
             NotifyOtherComponentsOfStateChange();
         }
@@ -48,16 +48,18 @@ namespace Fragment
 
     public class FragmentState
     {
-        internal bool locked = false;
+        private bool locked = false;
         public bool Locked
         {
             get { return locked; }
+            internal set { this.locked = value; }
         }
 
-        internal bool selected = false;
+        private bool selected = false;
         public bool Selected
         {
             get { return selected; }
+            internal set { this.selected = value; }
         }
 
         public bool Deselected
