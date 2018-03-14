@@ -312,6 +312,7 @@
     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
     <Compile Include="Assets\Scripts\ApplicationInitializer.cs" />
     <Compile Include="Assets\Scripts\Buttons\AbstractButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\AbstractToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\AddFragmentButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\DeleteFragmentButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\FocusButton.cs" />
@@ -324,8 +325,9 @@
     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationStepButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\StopButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\SelectAllButton.cs" />
-    <Compile Include="Assets\Scripts\Buttons\TransformButton.cs" />
-    <Compile Include="Assets\Scripts\Buttons\TransformSpaceToggle.cs" />
+    <Compile Include="Assets\Scripts\Buttons\Transformations\LockToggle.cs" />
+    <Compile Include="Assets\Scripts\Buttons\Transformations\TransformButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\Transformations\TransformSpaceToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\UndoButton.cs" />
     <Compile Include="Assets\Scripts\DCEL\DCEL.cs" />
     <Compile Include="Assets\Scripts\DCEL\Face.cs" />
@@ -356,6 +358,7 @@
     <Compile Include="Assets\Scripts\Fragment\StateTracker.cs" />
     <Compile Include="Assets\Scripts\Fragment\TransformController.cs" />
     <Compile Include="Assets\Scripts\Fragments\ICPCorrespondencesController.cs" />
+    <Compile Include="Assets\Scripts\Fragments\LockController.cs" />
     <Compile Include="Assets\Scripts\Fragments\SelectionController.cs" />
     <Compile Include="Assets\Scripts\GUI\ICPGUIController.cs" />
     <Compile Include="Assets\Scripts\Help\HelpMessageSender.cs" />

@@ -25,8 +25,8 @@ namespace Fragment
 
         private Material DetermineNewMaterial(FragmentState state)
         {
-            if (state.selected) return MaterialSet.Selected;
-            if (state.locked) return MaterialSet.Locked;
+            if (state.Locked) return MaterialSet.Locked;
+            if (state.Selected) return MaterialSet.Selected;
             return MaterialSet.Normal;
         }
 

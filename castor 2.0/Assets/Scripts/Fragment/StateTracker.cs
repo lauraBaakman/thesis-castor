@@ -24,19 +24,25 @@ namespace Fragment
 
         public void OnToggledLockedState(bool locked)
         {
-            state.locked = locked;
+            state.Locked = locked;
 
-            NotifyOtherComponentsOfStateChange();
+            BroadCastStateChange();
         }
 
         public void OnToggleSelectionState(bool selected)
         {
-            state.selected = selected;
+            state.Selected = selected;
 
-            NotifyOtherComponentsOfStateChange();
+            BroadCastStateChange();
         }
 
-        public void NotifyOtherComponentsOfStateChange()
+        public void BroadCastStateChange()
+        {
+            NotifyComponents();
+            NotifyParent();
+        }
+
+        private void NotifyComponents()
         {
             SendMessage(
                 methodName: "OnStateChanged",
@@ -44,21 +50,56 @@ namespace Fragment
                 options: SendMessageOptions.RequireReceiver
             );
         }
+
+        private void NotifyParent()
+        {
+            //Do not set in Start, the parent changes.
+            GameObject parent = transform.parent.gameObject;
+            parent.SendMessage(
+                methodName: "OnChildFragmentStateChanged",
+                value: null,
+                options: SendMessageOptions.DontRequireReceiver
+            );
+        }
     }
 
     public class FragmentState
     {
-        internal bool locked = false;
+        private bool locked = false;
         public bool Locked
         {
             get { return locked; }
+            internal set
+            {
+                this.lockedStatusChanged = (this.locked != value);
+                this.locked = value;
+            }
         }
 
-        internal bool selected = false;
+
+        private bool lockedStatusChanged = false;
+        public bool LockedStatusChanged
+        {
+            get { return lockedStatusChanged; }
+        }
+
+        private bool selected = false;
         public bool Selected
         {
             get { return selected; }
+            internal set
+            {
+                this.selectedStatusChanged = (this.selected != value);
+                this.selected = value;
+            }
         }
+
+        private bool selectedStatusChanged = false;
+        public bool SelectedStatusChanged
+        {
+            get { return selectedStatusChanged; }
+        }
+
 
         public bool Deselected
         {
@@ -70,6 +111,16 @@ namespace Fragment
             get { return !Locked; }
         }
 
+        public bool SelectedLockedObject
+        {
+            get { return Locked && Selected; }
+        }
+
+        public bool SelectedUnLockedObject
+        {
+            get { return UnLocked && Selected; }
+        }
+
         public FragmentState(bool locked, bool selected)
         {
             this.locked = locked;
@@ -79,8 +130,9 @@ namespace Fragment
         public override string ToString()
         {
             return string.Format(
-                "State( locked : {0}, selected: {1})",
-                locked, selected
+                "State( locked : {0} (changed: {1}), selected: {1} (changed: {2}))",
+                locked, lockedStatusChanged,
+                selected, selectedStatusChanged
             );
         }
     }

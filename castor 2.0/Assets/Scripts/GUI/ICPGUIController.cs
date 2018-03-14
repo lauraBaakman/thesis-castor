@@ -3,6 +3,7 @@ using Registration;
 using Registration.Messages;
 
 using Buttons.RegistrationButtons;
+using Fragments;
 
 namespace GraphicalUI
 {
@@ -62,14 +63,26 @@ namespace GraphicalUI
 
         private void GetModelAndStaticFragment(out GameObject modelFragment, out GameObject staticFragment)
         {
-            //We are interested in all children of SelectedFragments that have meshrenderes, i.e. the meshes.
-            MeshRenderer[] childMeshes = SelectedFragments.GetComponentsInChildren<MeshRenderer>();
-            Debug.Assert(
-                childMeshes.Length == 2,
-                "Expected SelectedFragments to have exactly two children with MeshRenders, not " + childMeshes.Length
-            );
-            modelFragment = childMeshes[0].gameObject;
-            staticFragment = childMeshes[1].gameObject;
+            if (SelectedFragments.GetComponent<LockController>().AreAnySelectedFragmentsLocked())
+            {
+                GetModelAndStaticFragmentWithLockedObjects(out modelFragment, out staticFragment);
+            }
+            else
+            {
+                MeshRenderer[] childMeshes = SelectedFragments.GetComponentsInChildren<MeshRenderer>();
+
+                modelFragment = childMeshes[0].gameObject;
+                staticFragment = childMeshes[1].gameObject;
+            }
+        }
+
+        private void GetModelAndStaticFragmentWithLockedObjects(out GameObject modelFragment, out GameObject staticFragment)
+        {
+            LockController lockController = SelectedFragments.GetComponent<LockController>();
+            staticFragment = lockController.LockedObjects[0];
+
+            if (lockController.LockedObjects.Count > 1) modelFragment = lockController.LockedObjects[1];
+            else modelFragment = lockController.UnLockedObjects[0];
         }
 
         public void OnICPTerminated(ICPTerminatedMessage message)
