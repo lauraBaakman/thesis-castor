@@ -1,6 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+
 namespace IO
 {
     public class FragmentsExporter
@@ -11,6 +12,8 @@ namespace IO
 
         private readonly CallBack onSucces;
         private readonly CallBack onFailure;
+
+        private static string extension = "obj";
 
         public FragmentsExporter(GameObject fragmentsRoot, CallBack onSucces, CallBack onFailure)
         {
@@ -44,13 +47,13 @@ namespace IO
 
             foreach (GameObject fragment in exportFragments)
             {
-                exporter.Export(fragment, BuildExportPath(fragment.name));
+                exporter.Export(fragment, BuildExportPath(directory, fragment.name));
             }
         }
 
-        private string BuildExportPath(string name)
+        private string BuildExportPath(string directory, string fragment_name)
         {
-            throw new NotImplementedException();
+            return Path.Combine(directory, fragment_name + '.' + extension);
         }
 
         private List<GameObject> GetExportFragments()
