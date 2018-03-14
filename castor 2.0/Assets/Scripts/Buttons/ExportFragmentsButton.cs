@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Ticker;
 
 namespace Buttons
@@ -13,7 +11,8 @@ namespace Buttons
         {
             new IO.FragmentsExporter(
                 fragmentsRoot: FragmentsRoot,
-                callback: NotifyUser
+                onSucces: NotifyUserOfSucces,
+                onFailure: NotifyUserOfFailure
             ).Export();
         }
 
@@ -22,12 +21,27 @@ namespace Buttons
             return false;
         }
 
-        private void NotifyUser(string path, GameObject fragment)
+        private void NotifyUserOfSucces(string path, GameObject fragment)
         {
             Message.InfoMessage message = new Message.InfoMessage(
                 string.Format(
                     "Exported the fragment '{0}' to the file {1}.",
                     fragment.name, path
+                )
+            );
+            Receiver.Instance.SendMessage(
+                methodName: "OnMessage",
+                value: message,
+                options: SendMessageOptions.RequireReceiver
+            );
+        }
+
+        private void NotifyUserOfFailure(string path, GameObject fragment)
+        {
+            Message.ErrorMessage message = new Message.ErrorMessage(
+                string.Format(
+                    "Could not export the fragment {0}.",
+                    fragment.name
                 )
             );
             Receiver.Instance.SendMessage(

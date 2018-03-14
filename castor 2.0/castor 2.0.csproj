@@ -525,6 +525,8 @@
     <Compile Include="Assets\Scripts\Utils\PointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\RangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
+    <Compile Include="Assets\Scripts\Utils\MeshTransformer.cs" />
+    <Compile Include="Assets\Scripts\Extensions\MeshExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
