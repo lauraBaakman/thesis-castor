@@ -670,11 +670,6 @@ namespace RTEditor
             ChangeTransformSpace(transformSpace);
         }
 
-        /// <summary>
-        /// Is the gizmo active.
-        /// </summary>
-        /// <returns><c>true</c>, if gizmo active is active, <c>false</c> otherwise.</returns>
-        /// <param name="type">Type of the gizmo.</param>
         public bool IsGizmoActive(GizmoType type)
         {
             Dictionary<GizmoType, Gizmo> typeToGameObjectMapping = new Dictionary<GizmoType, Gizmo>();
