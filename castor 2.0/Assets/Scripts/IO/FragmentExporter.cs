@@ -23,7 +23,19 @@ namespace IO
 
         private void GetOutputDirectory()
         {
-            Debug.Log("lets get the output directory.");
+            SimpleFileBrowser.FileBrowser.ShowSaveDialog(
+                onSuccess: ExportFragments,
+                onCancel: () => { },
+                folderMode: true,
+                initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models" : null,
+                title: "Export",
+                saveButtonText: "Export"
+            );
+        }
+
+        private void ExportFragments(string directory)
+        {
+            Debug.Log("Exporting to " + directory);
         }
     }
 }
