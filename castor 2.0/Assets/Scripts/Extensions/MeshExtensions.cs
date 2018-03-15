@@ -17,15 +17,33 @@ public static class MeshExtensions
         return mesh;
     }
 
-    public static bool Equals(this Mesh thisMesh, Mesh otherMesh)
+    public static bool MeshEquals(this Mesh thisMesh, Mesh otherMesh)
     {
-        Debug.Log("Returning false, should be implemented Equals!");
-        return false;
+        return (
+            Vector3ArrayEqual(thisMesh.vertices, otherMesh.vertices) &&
+            Vector3ArrayEqual(thisMesh.normals, otherMesh.normals) &&
+            thisMesh.triangles.OrderedElementsAreEqual(otherMesh.triangles)
+        );
     }
 
-    public static int GetHashCode(this Mesh mesh)
+    private static bool Vector3ArrayEqual(Vector3[] thisVertices, Vector3[] otherVertices)
     {
-        Debug.Log("TO be implemented");
-        return 0;
+        if (thisVertices.Length != otherVertices.Length) return false;
+
+        for (int i = 0; i < thisVertices.Length; i++)
+        {
+            if (thisVertices[i] != otherVertices[i]) return false;
+        }
+        return true;
+    }
+
+    private static int Vector3ArrayGetHashCode(Vector3[] list)
+    {
+        int hash = 17, extra = 0;
+        foreach (Vector3 element in list)
+        {
+            hash *= (31 + element.GetHashCode() + (extra++));
+        }
+        return hash;
     }
 }

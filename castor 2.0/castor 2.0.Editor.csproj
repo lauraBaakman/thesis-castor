@@ -206,6 +206,7 @@
     <Compile Include="Assets\Scripts\Extensions\Editor\TestICollectionExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestIEnumerableExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestMatrix4Extensions.cs" />
+    <Compile Include="Assets\Scripts\Extensions\Editor\TestMeshExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestQuaternionExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestSystemRandomExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestVector3Extensions.cs" />
@@ -224,10 +225,9 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestColors.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestHeap.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\TestMeshTransformer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
-    <Compile Include="Assets\Scripts\Utils\Editor\TestMeshTransformer.cs" />
-    <Compile Include="Assets\Scripts\Extensions\Editor\TestMeshExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

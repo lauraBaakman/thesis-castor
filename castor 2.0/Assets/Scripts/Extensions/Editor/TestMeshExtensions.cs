@@ -21,30 +21,30 @@ namespace Tests.Extensions
 
         private Mesh startMesh()
         {
-            thisMesh = new Mesh();
+            Mesh mesh = new Mesh();
 
-            thisMesh.vertices = new Vector3[]{
+            mesh.vertices = new Vector3[]{
                 p0, p1, p3,
                 p0, p2, p1,
                 p0, p3, p2,
                 p1, p2, p3,
             };
 
-            thisMesh.triangles = new int[]{
+            mesh.triangles = new int[]{
                 00, 01, 02,
                 03, 04, 05,
                 06, 07, 08,
                 09, 10, 11,
             };
 
-            thisMesh.normals = new Vector3[]{
+            mesh.normals = new Vector3[]{
                 new Vector3(0, +1, 0).normalized, new Vector3(0, +1, 0).normalized, new Vector3(0, +1, 0).normalized,
                 new Vector3(0, 0, -1).normalized, new Vector3(0, 0, -1).normalized, new Vector3(0, 0, -1).normalized,
                 new Vector3(-1, 0, 0).normalized, new Vector3(-1, 0, 0).normalized, new Vector3(-1, 0, 0).normalized,
                 new Vector3(+1, 0, 0).normalized, new Vector3(+1, 0, 0).normalized, new Vector3(+1, 0, 0).normalized
             };
 
-            return thisMesh;
+            return mesh;
         }
 
         [Test]
@@ -52,9 +52,8 @@ namespace Tests.Extensions
         {
             Mesh otherMesh = startMesh();
 
-            Assert.IsTrue(thisMesh.Equals(otherMesh));
-            Assert.IsTrue(otherMesh.Equals(thisMesh));
-            Assert.AreEqual(thisMesh.GetHashCode(), otherMesh.GetHashCode());
+            Assert.IsTrue(thisMesh.MeshEquals(otherMesh));
+            Assert.IsTrue(otherMesh.MeshEquals(thisMesh));
         }
 
         [Test]
@@ -69,9 +68,8 @@ namespace Tests.Extensions
                 p0, p3, p2,
             };
 
-            Assert.IsFalse(thisMesh.Equals(otherMesh));
-            Assert.IsFalse(otherMesh.Equals(thisMesh));
-            Assert.AreNotEqual(thisMesh.GetHashCode(), otherMesh.GetHashCode());
+            Assert.IsFalse(thisMesh.MeshEquals(otherMesh));
+            Assert.IsFalse(otherMesh.MeshEquals(thisMesh));
         }
 
         [Test]
@@ -86,9 +84,8 @@ namespace Tests.Extensions
                 p0, p3, p2,
             };
 
-            Assert.IsFalse(thisMesh.Equals(otherMesh));
-            Assert.IsFalse(otherMesh.Equals(thisMesh));
-            Assert.AreNotEqual(thisMesh.GetHashCode(), otherMesh.GetHashCode());
+            Assert.IsFalse(thisMesh.MeshEquals(otherMesh));
+            Assert.IsFalse(otherMesh.MeshEquals(thisMesh));
         }
 
         [Test]
@@ -103,9 +100,8 @@ namespace Tests.Extensions
                 new Vector3(-1, 0, 0).normalized, new Vector3(-1, 0, 0).normalized, new Vector3(-1, 0, 0).normalized,
             };
 
-            Assert.IsFalse(thisMesh.Equals(otherMesh));
-            Assert.IsFalse(otherMesh.Equals(thisMesh));
-            Assert.AreNotEqual(thisMesh.GetHashCode(), otherMesh.GetHashCode());
+            Assert.IsFalse(thisMesh.MeshEquals(otherMesh));
+            Assert.IsFalse(otherMesh.MeshEquals(thisMesh));
         }
 
         [Test]
@@ -120,9 +116,8 @@ namespace Tests.Extensions
                 new Vector3(+1, 0, 0).normalized, new Vector3(+1, 0, 0).normalized, new Vector3(+1, 0, 0).normalized
             };
 
-            Assert.IsFalse(thisMesh.Equals(otherMesh));
-            Assert.IsFalse(otherMesh.Equals(thisMesh));
-            Assert.AreNotEqual(thisMesh.GetHashCode(), otherMesh.GetHashCode());
+            Assert.IsFalse(thisMesh.MeshEquals(otherMesh));
+            Assert.IsFalse(otherMesh.MeshEquals(thisMesh));
         }
 
         [Test]
@@ -136,9 +131,8 @@ namespace Tests.Extensions
                 09, 10, 11,
             };
 
-            Assert.IsFalse(thisMesh.Equals(otherMesh));
-            Assert.IsFalse(otherMesh.Equals(thisMesh));
-            Assert.AreNotEqual(thisMesh.GetHashCode(), otherMesh.GetHashCode());
+            Assert.IsFalse(thisMesh.MeshEquals(otherMesh));
+            Assert.IsFalse(otherMesh.MeshEquals(thisMesh));
         }
 
         [Test]
@@ -153,9 +147,8 @@ namespace Tests.Extensions
                 06, 07, 08,
             };
 
-            Assert.IsFalse(thisMesh.Equals(otherMesh));
-            Assert.IsFalse(otherMesh.Equals(thisMesh));
-            Assert.AreNotEqual(thisMesh.GetHashCode(), otherMesh.GetHashCode());
+            Assert.IsFalse(thisMesh.MeshEquals(otherMesh));
+            Assert.IsFalse(otherMesh.MeshEquals(thisMesh));
         }
 
         [Test]
@@ -170,9 +163,8 @@ namespace Tests.Extensions
                 09, 10, 11,
             };
 
-            Assert.IsFalse(thisMesh.Equals(otherMesh));
-            Assert.IsFalse(otherMesh.Equals(thisMesh));
-            Assert.AreNotEqual(thisMesh.GetHashCode(), otherMesh.GetHashCode());
+            Assert.IsFalse(thisMesh.MeshEquals(otherMesh));
+            Assert.IsFalse(otherMesh.MeshEquals(thisMesh));
         }
 
     }
