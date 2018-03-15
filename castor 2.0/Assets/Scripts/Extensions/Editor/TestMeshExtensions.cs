@@ -58,22 +58,6 @@ namespace Tests.Extensions
         }
 
         [Test]
-        public void Test_Equals_VerticesDifferent_length()
-        {
-            Mesh otherMesh = startMesh();
-
-            otherMesh.vertices = new Vector3[]{
-                p0, p1, p3,
-                p0, p2, p1,
-                p0, p3, p2
-            };
-
-            Assert.IsFalse(thisMesh.Equals(otherMesh));
-            Assert.IsFalse(otherMesh.Equals(thisMesh));
-            Assert.AreNotEqual(thisMesh.GetHashCode(), otherMesh.GetHashCode());
-        }
-
-        [Test]
         public void Test_Equals_VerticesDifferent_order()
         {
             Mesh otherMesh = startMesh();
@@ -100,22 +84,6 @@ namespace Tests.Extensions
                 p0, p3, p3,
                 p0, p2, p3,
                 p0, p3, p2,
-            };
-
-            Assert.IsFalse(thisMesh.Equals(otherMesh));
-            Assert.IsFalse(otherMesh.Equals(thisMesh));
-            Assert.AreNotEqual(thisMesh.GetHashCode(), otherMesh.GetHashCode());
-        }
-
-        [Test]
-        public void Test_Equals_NormalsDifferent_length()
-        {
-            Mesh otherMesh = startMesh();
-
-            otherMesh.normals = new Vector3[]{
-                new Vector3(0, +1, 0).normalized, new Vector3(0, +1, 0).normalized, new Vector3(0, +1, 0).normalized,
-                new Vector3(0, 0, -1).normalized, new Vector3(0, 0, -1).normalized, new Vector3(0, 0, -1).normalized,
-                new Vector3(+1, 0, 0).normalized, new Vector3(+1, 0, 0).normalized, new Vector3(+1, 0, 0).normalized
             };
 
             Assert.IsFalse(thisMesh.Equals(otherMesh));
