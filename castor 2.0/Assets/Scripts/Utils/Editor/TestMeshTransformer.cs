@@ -48,7 +48,7 @@ namespace Tests.Utils
 
             Mesh expected = ReadMesh("NoTransform");
 
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.IsTrue(actual.MeshEquals(expected));
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace Tests.Utils
 
             Mesh expected = ReadMesh("Translation");
 
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.IsTrue(actual.MeshEquals(expected));
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace Tests.Utils
 
             Mesh expected = ReadMesh("Rotation");
 
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.IsTrue(actual.MeshEquals(expected));
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace Tests.Utils
 
             Mesh expected = ReadMesh("TranslationRotation");
 
-            Assert.That(actual, Is.EqualTo(expected));
+            Assert.IsTrue(actual.MeshEquals(expected));
         }
     }
 }
