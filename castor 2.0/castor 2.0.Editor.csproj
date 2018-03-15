@@ -227,6 +227,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestMeshTransformer.cs" />
+    <Compile Include="Assets\Scripts\Extensions\Editor\TestMeshExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

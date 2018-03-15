@@ -1,11 +1,10 @@
 using UnityEngine;
-using System;
 
 public static class MeshExtensions
 {
     public static bool ToFile(this Mesh mesh, string path)
     {
-        Debug.Log("Returning True, but should be implemented!");
+        Debug.Log("Returning True, should be implemented!");
 
         return true;
     }
@@ -16,5 +15,17 @@ public static class MeshExtensions
         transformer.Transform(mesh);
 
         return mesh;
+    }
+
+    public static bool Equals(this Mesh thisMesh, Mesh otherMesh)
+    {
+        Debug.Log("Returning false, should be implemented Equals!");
+        return false;
+    }
+
+    public static int GetHashCode(this Mesh mesh)
+    {
+        Debug.Log("TO be implemented");
+        return 0;
     }
 }
