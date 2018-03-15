@@ -4,9 +4,7 @@ public static class MeshExtensions
 {
     public static bool ToFile(this Mesh mesh, string path)
     {
-        Debug.Log("Returning True, should be implemented!");
-
-        return true;
+        return ObjFile.Write(mesh, path);
     }
 
     public static Mesh Transform(this Mesh mesh, Matrix4x4 transformation)
