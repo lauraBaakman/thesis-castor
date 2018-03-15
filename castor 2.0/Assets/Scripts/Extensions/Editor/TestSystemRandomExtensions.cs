@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.Extensions
 {
     [TestFixture]
     public class SystemRandomExtensionTests

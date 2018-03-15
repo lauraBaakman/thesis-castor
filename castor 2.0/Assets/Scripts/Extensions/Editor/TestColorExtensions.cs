@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Tests
+namespace Tests.Extensions
 {
     [TestFixture]
     public class ColorExtensionsTests
