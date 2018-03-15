@@ -46,6 +46,21 @@ public static class IEnumerable
         return hash;
     }
 
+    public static bool OrderedElementsAreEqual<T>(this IEnumerable<T> thisList, IEnumerable<T> otherList) where T : IEqualityComparer<T>
+    {
+        return thisList.SequenceEqual(otherList);
+    }
+
+    public static int OrderedElementsGetHashCode<T>(this IEnumerable<T> list) where T : IEquatable<T>
+    {
+        int hash = 17, extra = 0;
+        foreach (T element in list)
+        {
+            hash *= (31 + element.GetHashCode() + (extra++));
+        }
+        return hash;
+    }
+
     public static string ElementsToString<T>(this IEnumerable<T> thisList, string prefix = "", string suffix = ", ")
     {
         string returnValue = "";

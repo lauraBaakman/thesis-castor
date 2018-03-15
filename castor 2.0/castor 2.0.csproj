@@ -338,7 +338,6 @@
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\ICollectionExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\IEnumerableExtensions.cs" />
-    <Compile Include="Assets\Scripts\Extensions\IListExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Matrix4x4Extensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\MeshExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\QuaternionExtensions.cs" />

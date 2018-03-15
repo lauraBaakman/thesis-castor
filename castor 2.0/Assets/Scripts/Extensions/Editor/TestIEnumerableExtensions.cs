@@ -151,6 +151,71 @@ namespace Tests.Extensions
                 otherList.UnorderedElementsGetHashCode(new DummyObject.Comparer())
             );
         }
+
+        [Test]
+        public void TestOorderedElementsEqual_EmptyIEnumerables()
+        {
+            IEnumerable<DummyObject> thisList = new List<DummyObject>();
+            IEnumerable<DummyObject> otherList = new List<DummyObject>();
+
+            Assert.IsTrue(thisList.OrderedElementsAreEqual(otherList));
+            Assert.AreEqual(thisList.OrderedElementsGetHashCode(), otherList.OrderedElementsGetHashCode());
+        }
+
+        [Test]
+        public void TestOrderedElementsEqual_EqualLists()
+        {
+            DummyObject a = DummyObject.Random();
+            DummyObject b = DummyObject.Random();
+            DummyObject c = DummyObject.Random();
+
+            IEnumerable<DummyObject> thisList = new List<DummyObject> { a, b, c };
+            IEnumerable<DummyObject> otherList = new List<DummyObject> { a, b, c };
+
+            Assert.IsTrue(thisList.OrderedElementsAreEqual(otherList));
+            Assert.AreEqual(thisList.OrderedElementsGetHashCode(), otherList.OrderedElementsGetHashCode());
+        }
+
+        [Test]
+        public void TestOrderedElementsEqual_NotEqualListsDifferentOrder()
+        {
+            DummyObject a = DummyObject.Random();
+            DummyObject b = DummyObject.Random();
+            DummyObject c = DummyObject.Random();
+
+            IEnumerable<DummyObject> thisList = new List<DummyObject> { a, b, c };
+            IEnumerable<DummyObject> otherList = new List<DummyObject> { c, a, b };
+
+            Assert.IsFalse(thisList.OrderedElementsAreEqual(otherList));
+            Assert.AreNotEqual(thisList.OrderedElementsGetHashCode(), otherList.OrderedElementsGetHashCode());
+        }
+
+        [Test]
+        public void TestOrderedElementsEqual_NotEqualListsDifferentListsSameLength()
+        {
+            DummyObject a = DummyObject.Random();
+            DummyObject b = DummyObject.Random();
+
+            IEnumerable<DummyObject> thisList = new List<DummyObject> { a, b, DummyObject.Random() };
+            IEnumerable<DummyObject> otherList = new List<DummyObject> { a, b, DummyObject.Random() };
+
+            Assert.IsFalse(thisList.OrderedElementsAreEqual(otherList));
+            Assert.AreNotEqual(thisList.OrderedElementsGetHashCode(), otherList.OrderedElementsGetHashCode());
+        }
+
+        [Test]
+        public void TestOrderedElementsEqual_NotEqualListsDifferentListsDifferentLength()
+        {
+            DummyObject a = DummyObject.Random();
+            DummyObject b = DummyObject.Random();
+            DummyObject c = DummyObject.Random();
+
+            IEnumerable<DummyObject> thisList = new List<DummyObject> { a, b, c, DummyObject.Random() };
+            IEnumerable<DummyObject> otherList = new List<DummyObject> { a, b, c };
+
+            Assert.IsFalse(thisList.OrderedElementsAreEqual(otherList));
+            Assert.AreNotEqual(thisList.OrderedElementsGetHashCode(), otherList.OrderedElementsGetHashCode());
+        }
     }
 
     internal class DummyObject : IEquatable<DummyObject>
