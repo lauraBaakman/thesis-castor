@@ -225,7 +225,6 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestColors.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestHeap.cs" />
-    <Compile Include="Assets\Scripts\Utils\Editor\TestMeshTransformer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
   </ItemGroup>
