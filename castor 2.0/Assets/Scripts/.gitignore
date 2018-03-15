@@ -10,3 +10,11 @@
 
 # sftp configuration file
 sftp-config.json
+
+##Unity##
+# Unity3D generated meta files
+*.pidb.meta
+*.pdb.meta
+
+*.sublime-project.meta
+*.sublime-workspace.meta
