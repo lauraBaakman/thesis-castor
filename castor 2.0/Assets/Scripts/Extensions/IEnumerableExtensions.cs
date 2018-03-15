@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnityEngine;
 
 public static class IEnumerable
 {
@@ -46,7 +47,7 @@ public static class IEnumerable
         return hash;
     }
 
-    public static bool OrderedElementsAreEqual<T>(this IEnumerable<T> thisList, IEnumerable<T> otherList) where T : IEqualityComparer<T>
+    public static bool OrderedElementsAreEqual<T>(this IEnumerable<T> thisList, IEnumerable<T> otherList) where T : IEquatable<T>
     {
         return thisList.SequenceEqual(otherList);
     }
