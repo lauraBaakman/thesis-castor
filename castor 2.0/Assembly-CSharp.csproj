@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LangVersion>4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{ABF6CBB5-4DAF-38EA-2ACF-3145B2BDA9CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_1_1;UNITY_2017_1;UNITY_2017;PLATFORM_ARCH_64;UNITY_64;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;ENABLE_SPRITE_MASKING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_VIDEO;ENABLE_RMGUI;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_STYLE_SHEETS;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_VR;ENABLE_MODULAR_UNITYENGINE_ASSEMBLIES;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Libraries\DebugDrawingExtension\DebugExtension.cs" />
+     <Compile Include="Assets\Libraries\DebugDrawingExtension\Example\Example.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCamera.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraBk.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraFocus.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraFocusMode.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraFocusOperationInfo.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraFocusSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraMoveSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraOrbit.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraPan.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraPanMode.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraPanSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraRotation.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraRotationMode.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraZoom.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraZoomMode.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\EditorCameraZoomSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\View Volume\CameraViewVolume.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\View Volume\CameraViewVolumeEdgeRaysCalculator.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\View Volume\CameraViewVolumePlane.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\View Volume\CameraViewVolumePoint.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\View Volume\CameraViewVolumePointsCalculator.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\View Volume\CameraViewVolumePointsCalculatorFactory.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\View Volume\OrthoCameraViewVolumePointsCalculator.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Camera\View Volume\PerspectiveCameraViewVolumePointsCalculator.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Gizmo System\EditorGizmoSystem.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\EditorObjectSelection.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Rendering\Object Selection Box\CornerLinesObjectSelectionBoxRenderer.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Rendering\Object Selection Box\ObjectSelectionBox.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Rendering\Object Selection Box\ObjectSelectionBoxRenderer.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Rendering\Object Selection Box\ObjectSelectionBoxRendererFactory.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Rendering\Object Selection Box\ObjectSelectionBoxRenderMode.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Rendering\Object Selection Box\ObjectSelectionBoxStyle.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Rendering\Object Selection Box\SelectionBoxObjectSelectionRenderer.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Rendering\Object Selection Box\WireObjectSelectionBoxRenderer.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Rendering\ObjectSelectionRenderer.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Rendering\ObjectSelectionRendererFactory.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Shape\ObjectSelectionRectangle.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Object Selection Shape\ObjectSelectionShape.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\ObjectDeselectActionType.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\ObjectDeselectEventArgs.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\ObjectSelectActionType.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\ObjectSelectEventArgs.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\ObjectSelectionBoxCalculator.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\ObjectSelectionChangedEventArgs.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\ObjectSelectionChangedUtils.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Settings\ObjectSelectionBoxRenderSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Settings\ObjectSelectionRectangleRenderSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Settings\ObjectSelectionRenderMode.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Settings\ObjectSelectionSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Snapshots\ObjectSelectionMaskSnapshot.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Object Selection\Snapshots\ObjectSelectionSnapshot.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Undo Redo System\Actions\Editor Actions\EditorActions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Undo Redo System\Actions\IAction.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Undo Redo System\Actions\IRedoableAction.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Undo Redo System\Actions\IUndoableAction.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Undo Redo System\Actions\IUndoableAndRedoableAction.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Undo Redo System\EditorUndoRedoSystem.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Editor Undo Redo System\UndoRedoActionType.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\BoundsExtensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\CameraExtensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\ColliderExtensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\GameObjectExtensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\Matrix4x4Extensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\PlaneExtensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\QuaternionExtensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\RayExtensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\RectExtensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\SpriteRendererExtensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\TransformExtensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\Vector2Extensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Extensions\Vector3Extensions.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\Gizmo.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\GizmoAxis.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\GizmoType.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\MultiAxisSquare.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\MultiAxisTriangle.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\RotationGizmo.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\RotationGizmoSnapSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\ScaleGizmo.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\ScaleGizmoSnapSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\SceneGizmo.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\SceneGizmoComponent.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\SceneGizmoCorner.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\Transform\ObjectTransformSnapshot.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\Transform\TransformPivotPoint.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\Transform\TransformSpace.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\TranslationGizmo.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\TranslationGizmoSnapSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\Vertex Snapping\MeshVertexGroup.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\Vertex Snapping\MeshVertexGroupFactory.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\Vertex Snapping\MeshVertexGroupMappings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Gizmos\VolumeScaleGizmo.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Helpers\ApplicationHelper.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Helpers\GLPrimitives.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Helpers\InputHelper.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Helpers\LayerHelper.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Helpers\MathHelper.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Helpers\ObjectColliderTypeHelper.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Helpers\PhysicsHelper.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Helpers\UnityEditorUndoHelper.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Input\InputDevice.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Input\Mouse.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Input\MouseButton.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Input\MouseCursor.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Input\MouseCursorObjectPickFlags.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Input\ShortcutKeys.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Axis.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\Box.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxCornerPoint.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxCornerPoints.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxFace.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxFaceCornerPoint.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxFaceCornerPoints.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxFacePoint.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxFacePoints.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxFaces.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxPlaneClassificationResult.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxPoint.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\BoxPoints.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\OrientedBox.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Box\OrientedBoxRayHit.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Equation.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\FloatInterval.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Ray3D.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Segment3D.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Sphere\Sphere3D.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Math\Triangle\Triangle3D.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Messaging System\DerivedMessageTypes.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Messaging System\IMessageListener.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Messaging System\IRTEditorEventListener.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Messaging System\Message.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Messaging System\MessageListenerDatabase.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Messaging System\MessageType.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Object Colliders\ObjectColliderAttachment.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Object Colliders\ObjectColliderAttachmentSettings.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Object Colliders\ObjectColliderType.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Procedural Meshes\ProceduralMeshGenerator.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Resource Management\MaterialPool.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Resource Management\MeshPool.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Resource Management\ShaderPool.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Runtime Editor\RuntimeEditorApplication.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Runtime Editor\XZGrid.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Runtime Editor\XZGridCell.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Bounding Volume Hierarchies\Sphere Tree\Game Object Tree\GameObjectSphereTree.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Bounding Volume Hierarchies\Sphere Tree\Game Object Tree\ObjectOverlapPrecision.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Bounding Volume Hierarchies\Sphere Tree\Mesh Tree\MeshSphereTree.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Bounding Volume Hierarchies\Sphere Tree\Mesh Tree\MeshSphereTreeTriangle.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Bounding Volume Hierarchies\Sphere Tree\SphereTree.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Bounding Volume Hierarchies\Sphere Tree\SphereTreeNode.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Bounding Volume Hierarchies\Sphere Tree\SphereTreeNodeFlags.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Bounding Volume Hierarchies\Sphere Tree\SphereTreeNodeRayHit.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\EditorScene.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Entities\EditorMesh.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Entities\EditorMeshDatabase.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Interaction\Raycast\GameObjectRayHit.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Interaction\Raycast\GridCellRayHit.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Interaction\Raycast\MeshRayHit.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Interaction\Raycast\MouseCursorRayHit.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Interaction\Raycast\SpriteRayHit.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Scene Management\Interaction\Raycast\TerrainRayHit.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Singleton\MonoSingletonBase.cs" />
+     <Compile Include="Assets\Libraries\Runtime Transform Gizmos\Scripts\Singleton\SingletonBase.cs" />
+     <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\FileBrowser.cs" />
+     <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\FileBrowserItem.cs" />
+     <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\FileBrowserMovement.cs" />
+     <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\FileBrowserQuickLink.cs" />
+     <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\SimpleRecycledListView\IListViewAdapter.cs" />
+     <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\SimpleRecycledListView\ListItem.cs" />
+     <Compile Include="Assets\Libraries\SimpleFileBrowser\Scripts\SimpleRecycledListView\RecycledListView.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\AssertionComponent.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\AssertionException.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Assertions.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\CheckMethod.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\ActionBase.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\BoolComparer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\ColliderComparer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\ComparerBase.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\FloatComparer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\GeneralComparer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\IntComparer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\IsRenderedByCamera.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\StringComparer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\TransformComparer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\ValueDoesNotChange.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\Vector2Comparer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\Vector3Comparer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\Vector4Comparer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Comparers\VectorComparerBase.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\InvalidPathException.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\MemberResolver.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Common\ITestResult.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\Common\TestResultState.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestingAssets\CallTesting.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\DTOFormatter.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTest.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTestAttribute.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\IntegrationTestsProvider.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\ITestRunnerCallback.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\NetworkResultSender.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\ResultDTO.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestComponent.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestResult.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestResultRenderer.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunner.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerCallbackList.cs" />
+     <Compile Include="Assets\Libraries\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
+     <Compile Include="Assets\Scripts\ApplicationInitializer.cs" />
+     <Compile Include="Assets\Scripts\Buttons\AbstractButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\AbstractToggle.cs" />
+     <Compile Include="Assets\Scripts\Buttons\AddFragmentButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\DeleteFragmentButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\ExportFragmentsButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\FocusButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\HelpButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\QuitButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\RedoButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\Registration\AbstractRegistrationButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationPlayButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationStepButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\Registration\StopButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\SelectAllButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\Transformations\LockToggle.cs" />
+     <Compile Include="Assets\Scripts\Buttons\Transformations\TransformButton.cs" />
+     <Compile Include="Assets\Scripts\Buttons\Transformations\TransformSpaceToggle.cs" />
+     <Compile Include="Assets\Scripts\Buttons\UndoButton.cs" />
+     <Compile Include="Assets\Scripts\DCEL\DCEL.cs" />
+     <Compile Include="Assets\Scripts\DCEL\Face.cs" />
+     <Compile Include="Assets\Scripts\DCEL\HalfEdge.cs" />
+     <Compile Include="Assets\Scripts\DCEL\Vertex.cs" />
+     <Compile Include="Assets\Scripts\Extensions\ColorExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\ICollectionExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\IEnumerableExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\Matrix4x4Extensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\MeshExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\QuaternionExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\RayCastHitExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\SystemRandomExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\TransformExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
+     <Compile Include="Assets\Scripts\Fragment\DoubleConnectedEdgeListStorage.cs" />
+     <Compile Include="Assets\Scripts\Fragment\ICPAbstractFragmentController.cs" />
+     <Compile Include="Assets\Scripts\Fragment\ICPController.cs" />
+     <Compile Include="Assets\Scripts\Fragment\ICPModelFragmentController.cs" />
+     <Compile Include="Assets\Scripts\Fragment\ICPNormalController.cs" />
+     <Compile Include="Assets\Scripts\Fragment\ICPPointController.cs" />
+     <Compile Include="Assets\Scripts\Fragment\ICPPointsController.cs" />
+     <Compile Include="Assets\Scripts\Fragment\ICPStaticFragmentController.cs" />
+     <Compile Include="Assets\Scripts\Fragment\Interfaces.cs" />
+     <Compile Include="Assets\Scripts\Fragment\MaterialController.cs" />
+     <Compile Include="Assets\Scripts\Fragment\PivotController.cs" />
+     <Compile Include="Assets\Scripts\Fragment\RandomTransformer.cs" />
+     <Compile Include="Assets\Scripts\Fragment\SelectionController.cs" />
+     <Compile Include="Assets\Scripts\Fragment\StateTracker.cs" />
+     <Compile Include="Assets\Scripts\Fragment\TransformController.cs" />
+     <Compile Include="Assets\Scripts\Fragments\ICPCorrespondencesController.cs" />
+     <Compile Include="Assets\Scripts\Fragments\LockController.cs" />
+     <Compile Include="Assets\Scripts\Fragments\SelectionController.cs" />
+     <Compile Include="Assets\Scripts\GUI\ICPGUIController.cs" />
+     <Compile Include="Assets\Scripts\Help\HelpMessageSender.cs" />
+     <Compile Include="Assets\Scripts\IO\FragmentsExporter.cs" />
+     <Compile Include="Assets\Scripts\IO\FragmentsImporter.cs" />
+     <Compile Include="Assets\Scripts\IO\ObjFile.cs" />
+     <Compile Include="Assets\Scripts\IO\ObjFileReader.cs" />
+     <Compile Include="Assets\Scripts\Registration\Correspondences\Correspondence.cs" />
+     <Compile Include="Assets\Scripts\Registration\Correspondences\CorrespondenceCollection.cs" />
+     <Compile Include="Assets\Scripts\Registration\Correspondences\Filters\ICorrespondenceFilter.cs" />
+     <Compile Include="Assets\Scripts\Registration\Correspondences\ICorrespondenceFinder.cs" />
+     <Compile Include="Assets\Scripts\Registration\Correspondences\NearestPointCorrespondenceFinder.cs" />
+     <Compile Include="Assets\Scripts\Registration\Correspondences\NormalShootingCorrespondenceFinder.cs" />
+     <Compile Include="Assets\Scripts\Registration\Error Metric\AggregationMethods.cs" />
+     <Compile Include="Assets\Scripts\Registration\Error Metric\DistanceMetrics.cs" />
+     <Compile Include="Assets\Scripts\Registration\Error Metric\ErrorMetric.cs" />
+     <Compile Include="Assets\Scripts\Registration\ICPInterfaces.cs" />
+     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
+     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />
+     <Compile Include="Assets\Scripts\Registration\Point.cs" />
+     <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSelector.cs" />
+     <Compile Include="Assets\Scripts\Registration\PointSelection\SamplingInformation.cs" />
+     <Compile Include="Assets\Scripts\Registration\PointSelection\SelectAllPointsSelector.cs" />
+     <Compile Include="Assets\Scripts\Registration\Settings.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\LandmarkTransform.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MathUtils.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MatrixUtilsNew.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\ConvexHull\Collections.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\ConvexHull\ConvexFace.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\ConvexHull\ConvexFaceInternal.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\ConvexHull\ConvexHull.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\ConvexHull\ConvexHullInternal.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\ConvexHull\IVertexPosition.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\ConvexHull\MathHelper.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\ConvexHull\ObjectManager.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\Triangulation\DelaunayTriangulation.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\Triangulation\Triangulation.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\Triangulation\TriangulationCell.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\Triangulation\VoronoiEdge.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\Triangulation\VoronoiMesh.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\Tuple.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Half.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\MathHelper.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix2.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix2d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix2x3.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix2x3d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix2x4.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix2x4d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix3.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix3d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix3x2.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix3x2d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix3x4.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix3x4d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix4.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix4d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix4x2.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix4x2d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix4x3.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Matrix4x3d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Quaternion.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Quaterniond.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Vector2.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Vector2d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Vector2h.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Vector3.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Vector3d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Vector3h.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Vector4.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Vector4d.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Vector4h.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Extensions\ListExtensions.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Extensions\Matrix3DExtension.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Extensions\Vector3DExtension.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cChain.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cDiagonal.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cDiagonalList.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cEdge.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cEdgeList.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cFace.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cFaceList.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\ConvConv.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\ConvexHull2D.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\ConvexHull3D.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cPointd.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cPointi.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cPolygoni.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cSegSeg.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cVertex.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\cVertexList.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\DelaunayTri.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\DelaunayTri_Old.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\InPolyh.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\MinkConvol.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Hull_ORourke\Sphere.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\KDTree\EllipseWrapper.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\KDTree\KDTree_Numerics.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\KDTree\KDTree_Rednaxela\IDistanceFunction.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\KDTree\KDTree_Rednaxela\IntervalHeap.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\KDTree\KDTree_Rednaxela\KDNode.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\KDTree\KDTree_Rednaxela\KDTree_Rednaxela.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\KDTree\KDTree_Rednaxela\MinHeap.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\KDTree\KDTree_Rednaxela\NearestNeighbour.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\KDTree\KDTree_Stark.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\KDTree\KDTreeVertex.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Hull\BoundingBox.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Hull\Box.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Hull\Edge.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Hull\HullFrameVoronoi.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Hull\HullVoronoi.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Hull\VertexHull.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Line3.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Matrix33.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Matrix44.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\NewList.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Plane3.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Polyline.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Shear.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Utils\ExpressionUtil.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Utils\GenericMath.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Utils\NullOp.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Utils\Numeric.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Utils\NumericConverter.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Utils\Operator.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Vector2.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ExternalComponents\Numerics\Vector3.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Geometry\IntersectionResult.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Geometry\Part.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Geometry\Triangle.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Geometry\Vertex.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Geometry\VertexUtils.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Geometry\Vertices.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Globals\GeneralSettings.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Globals\TimeCalc.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\IO\IOUtils.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Triangulation\Cell2D.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Triangulation\Plane.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Triangulation\Polygon.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Triangulation\Vertex2D.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Triangulation\VoronoiFortune\Voronoi.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Triangulation\VoronoiFortune\VoronoiElements.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\Comparer.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\floatVector.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\MathBase.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\MatrixUtilsOpenTK.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\Point3DUtils.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\PointUtils.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\RandomUtils.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\ScreenSaver.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\TransformPointsUtils.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\HornTransformFinder.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\ITransformFinder.cs" />
+     <Compile Include="Assets\Scripts\Registration\Transform Finders\LowTransformFinder.cs" />
+     <Compile Include="Assets\Scripts\Tests\Auxilaries.cs" />
+     <Compile Include="Assets\Scripts\Ticker\Messages.cs" />
+     <Compile Include="Assets\Scripts\Ticker\Receiver.cs" />
+     <Compile Include="Assets\Scripts\Ticker\Sender.cs" />
+     <Compile Include="Assets\Scripts\Utils\ArrayMatrixUtils.cs" />
+     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
+     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
+     <Compile Include="Assets\Scripts\Utils\Heap.cs" />
+     <Compile Include="Assets\Scripts\Utils\MeshTransformer.cs" />
+     <Compile Include="Assets\Scripts\Utils\Pair.cs" />
+     <Compile Include="Assets\Scripts\Utils\PointNormalizer.cs" />
+     <Compile Include="Assets\Scripts\Utils\RangeF.cs" />
+     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
+     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
+     <None Include="Assets\Libraries\Runtime Transform Gizmos\Resources\Shaders\GLLine.shader" />
+     <None Include="Assets\Libraries\UnityTestTools\LICENSE.txt" />
+     <None Include="Assets\Libraries\Runtime Transform Gizmos\Resources\Shaders\TintedDiffuse.shader" />
+     <None Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\obj\Debug\MIConvexHull.csproj.FileListAbsolute.txt" />
+     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Version History.txt" />
+     <None Include="Assets\Libraries\Runtime Transform Gizmos\Resources\Shaders\Gizmo Solid Component.shader" />
+     <None Include="Assets\Libraries\Runtime Transform Gizmos\Resources\Shaders\Geometry2D.shader" />
+     <None Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\ClassDiagram1.cd" />
+     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Hotkeys.txt" />
+     <None Include="Assets\Libraries\UnityTestTools\changelog.txt" />
+     <None Include="Assets\Libraries\Runtime Transform Gizmos\Resources\Shaders\Gizmo Line.shader" />
+     <None Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\obj\Debug\OpenTKLib.csproj.FileListAbsolute.txt" />
+     <None Include="Assets\Scripts\Registration\Transform Finders\external code\MIConvexHull\bin\Debug\MIConvexHull.xml" />
+     <None Include="Assets\Libraries\Runtime Transform Gizmos\Readme\Readme.txt" />
+     <None Include="Assets\Libraries\Runtime Transform Gizmos\Resources\Shaders\Gradient Camera Bk.shader" />
+     <None Include="Assets\Libraries\Runtime Transform Gizmos\Resources\Shaders\XZGrid.shader" />
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Timeline">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="alglibnet2">
+ <HintPath>/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Libraries/AlgLib/alglibnet2.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
