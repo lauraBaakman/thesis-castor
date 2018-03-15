@@ -1,10 +1,10 @@
 using UnityEngine;
-using System;
 
 public static class ObjFile
 {
     public static Mesh Read(string path)
     {
+        ObjFileReader.ImportFile(path);
         return ObjFileReader.ImportFile(path);
     }
 
