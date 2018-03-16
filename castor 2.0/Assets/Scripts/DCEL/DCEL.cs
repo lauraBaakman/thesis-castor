@@ -50,6 +50,11 @@ namespace DoubleConnectedEdgeList
             );
         }
 
+        public Face GetFace(int meshIdx)
+        {
+            throw new NotImplementedException();
+        }
+
         #region IEquatable
         public override bool Equals(object obj)
         {
