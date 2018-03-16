@@ -41,6 +41,13 @@ namespace DoubleConnectedEdgeList
         }
         float area = notComputed;
 
+        public Vector3 Normal
+        {
+            get { return normal; }
+            internal set { normal = value; }
+        }
+        private Vector3 normal;
+
         private float computeTriangleArea()
         {
             float edgeSum = 0.0f;
@@ -55,6 +62,12 @@ namespace DoubleConnectedEdgeList
         {
             this.MeshIdx = meshIdx;
             this.outerComponents = new List<HalfEdge>();
+        }
+
+        public Face(int meshIdx, Vector3 normal)
+            : this(meshIdx)
+        {
+            this.normal = normal;
         }
 
         /// <summary>
