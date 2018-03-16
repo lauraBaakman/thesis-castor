@@ -2,6 +2,8 @@
 using NUnit.Framework;
 
 using DoubleConnectedEdgeList;
+using System.Collections.Generic;
+using System.Xml.Schema;
 
 namespace Tests.DoubleConnectedEdgeList
 {
@@ -634,6 +636,77 @@ namespace Tests.DoubleConnectedEdgeList
 
             Assert.IsTrue(comparer.Equals(x, y));
             Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+        }
+    }
+
+    [TestFixture]
+    public class VertexKeyValueComparer
+    {
+        private Vertex.KeyValueComparer comparer;
+
+        [SetUp]
+        public void Init()
+        {
+            comparer = new Vertex.KeyValueComparer();
+        }
+
+        [Test, MaxTime(50)]
+        public void XAndyAreEqual()
+        {
+            Vector3 position = Auxilaries.RandomPosition();
+            KeyValuePair<Vector3, Vertex> x = new KeyValuePair<Vector3, Vertex>(new Vector3(1, 2, 3), new Vertex(position));
+            KeyValuePair<Vector3, Vertex> y = new KeyValuePair<Vector3, Vertex>(new Vector3(1, 2, 3), new Vertex(position));
+
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
+
+            x.Value.AddIncidentEdge(edge);
+            y.Value.AddIncidentEdge(edge);
+
+            Assert.IsTrue(comparer.Equals(x, y));
+            Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+        }
+
+        [Test, MaxTime(50)]
+        public void XAndyAreNotEqual_KeyDifferent()
+        {
+            Vector3 position = Auxilaries.RandomPosition();
+            KeyValuePair<Vector3, Vertex> x = new KeyValuePair<Vector3, Vertex>(new Vector3(1, 2, 3), new Vertex(position));
+            KeyValuePair<Vector3, Vertex> y = new KeyValuePair<Vector3, Vertex>(new Vector3(2, 3, 4), new Vertex(position));
+
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
+
+            x.Value.AddIncidentEdge(edge);
+            y.Value.AddIncidentEdge(edge);
+
+            Assert.IsFalse(comparer.Equals(x, y));
+            Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+        }
+
+        public void XAndyAreNotEqual_ValuePositionDifferent()
+        {
+            KeyValuePair<Vector3, Vertex> x = new KeyValuePair<Vector3, Vertex>(new Vector3(1, 2, 3), Auxilaries.RandomVertex());
+            KeyValuePair<Vector3, Vertex> y = new KeyValuePair<Vector3, Vertex>(new Vector3(1, 2, 3), Auxilaries.RandomVertex());
+
+            HalfEdge edge = Auxilaries.RandomHalfEdge();
+
+            x.Value.AddIncidentEdge(edge);
+            y.Value.AddIncidentEdge(edge);
+
+            Assert.IsFalse(comparer.Equals(x, y));
+            Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+        }
+
+        public void XAndyAreNotEqual_ValueIncidentEdgesDifferent()
+        {
+            Vector3 position = Auxilaries.RandomPosition();
+            KeyValuePair<Vector3, Vertex> x = new KeyValuePair<Vector3, Vertex>(new Vector3(1, 2, 3), new Vertex(position));
+            KeyValuePair<Vector3, Vertex> y = new KeyValuePair<Vector3, Vertex>(new Vector3(1, 2, 3), new Vertex(position));
+
+            x.Value.AddIncidentEdge(Auxilaries.RandomHalfEdge());
+            y.Value.AddIncidentEdge(Auxilaries.RandomHalfEdge());
+
+            Assert.IsFalse(comparer.Equals(x, y));
+            Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
         }
     }
 }

@@ -123,5 +123,23 @@ namespace DoubleConnectedEdgeList
             }
         }
 
+        public class KeyValueComparer : IEqualityComparer<KeyValuePair<Vector3, Vertex>>
+        {
+            public bool Equals(KeyValuePair<Vector3, Vertex> x, KeyValuePair<Vector3, Vertex> y)
+            {
+                return (
+                    x.Key.Equals(y.Key) &&
+                    x.Value.Equals(y.Value)
+                );
+            }
+
+            public int GetHashCode(KeyValuePair<Vector3, Vertex> obj)
+            {
+                int hash = 17;
+                hash *= (31 + obj.Key.GetHashCode());
+                hash *= (31 + obj.Value.GetHashCode());
+                return hash;
+            }
+        }
     }
 }
