@@ -6,7 +6,7 @@ namespace IO
 {
     public class FragmentsImporter
     {
-        public delegate void CallBack(string path, GameObject fragment);
+        public delegate void CallBack(Ticker.Message message);
 
         public GameObject FragmentsRoot;
 
@@ -68,11 +68,14 @@ namespace IO
 
         internal void Import(string path)
         {
-            Mesh mesh = ObjFile.Read(path);
-            string name = ExtractObjectName(path);
-            GameObject fragment = AddFragmentToScene(name, mesh);
+            IO.FragmentFile.ReadResult result = IO.FragmentFile.Read(path);
 
-            CallBack(path, fragment);
+            if (result.Succeeded())
+            {
+                string name = ExtractObjectName(path);
+                GameObject fragment = AddFragmentToScene(name, result.Mesh);
+            }
+            CallBack(result.ToTickerMessage());
         }
 
         private string ExtractObjectName(string path)

@@ -365,10 +365,11 @@
     <Compile Include="Assets\Scripts\Fragments\SelectionController.cs" />
     <Compile Include="Assets\Scripts\GUI\ICPGUIController.cs" />
     <Compile Include="Assets\Scripts\Help\HelpMessageSender.cs" />
+    <Compile Include="Assets\Scripts\IO\FragmentFile.cs" />
     <Compile Include="Assets\Scripts\IO\FragmentsExporter.cs" />
     <Compile Include="Assets\Scripts\IO\FragmentsImporter.cs" />
-    <Compile Include="Assets\Scripts\IO\ObjFile.cs" />
     <Compile Include="Assets\Scripts\IO\ObjFileReader.cs" />
+    <Compile Include="Assets\Scripts\IO\ObjWriter.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Correspondence.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\CorrespondenceCollection.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Filters\ICorrespondenceFilter.cs" />

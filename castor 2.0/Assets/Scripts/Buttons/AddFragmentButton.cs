@@ -24,14 +24,8 @@ namespace Buttons
             importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/RoughFracturedCubeXYZRotationTranslationPart2.obj", randomizeTransform: false);
         }
 
-        private void NotifyUser(string path, GameObject fragment)
+        private void NotifyUser(Ticker.Message message)
         {
-            Ticker.Message.InfoMessage message = new Ticker.Message.InfoMessage(
-                string.Format(
-                    "Added a fragment '{0}' to the scene from the file {1}.",
-                    fragment.name, path
-                )
-            );
             SendMessage(
                 methodName: "OnSendMessageToTicker",
                 value: message,
