@@ -440,14 +440,14 @@ namespace Tests.DoubleConnectedEdgeList
         public void Equals_NotEqualDifferentVerticesInOther()
         {
             List<Vertex> thisVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4)),
-            new Vertex(new Vector3(2, 4)),
-            new Vertex(new Vector3(2, 2))
+            new Vertex(new Vector3(0, 4, 1)),
+            new Vertex(new Vector3(2, 4, 2)),
+            new Vertex(new Vector3(2, 2, 3))
         };
             List<Vertex> otherVertices = new List<Vertex> {
-            new Vertex(new Vector3(1, 4)),
-            new Vertex(new Vector3(2, 5)),
-            new Vertex(new Vector3(3, 2))
+            new Vertex(new Vector3(1, 4, 1)),
+            new Vertex(new Vector3(2, 5, 2)),
+            new Vertex(new Vector3(3, 2, 3)),
         };
             List<HalfEdge> halfEdges = new List<HalfEdge>();
 
@@ -473,13 +473,13 @@ namespace Tests.DoubleConnectedEdgeList
         public void Equals_NotEqualMoreVerticesInThis()
         {
             List<Vertex> thisVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4)),
-            new Vertex(new Vector3(2, 4)),
-            new Vertex(new Vector3(2, 2))
+            new Vertex(new Vector3(0, 4, 1)),
+            new Vertex(new Vector3(2, 4, 2)),
+            new Vertex(new Vector3(2, 2, 3))
         };
             List<Vertex> otherVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4)),
-            new Vertex(new Vector3(2, 4)),
+            new Vertex(new Vector3(0, 4, 1)),
+            new Vertex(new Vector3(2, 4, 2)),
         };
 
             List<HalfEdge> halfEdges = new List<HalfEdge>();
@@ -505,13 +505,13 @@ namespace Tests.DoubleConnectedEdgeList
         public void Equals_NotEqualMoreVerticesInOther()
         {
             List<Vertex> thisVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4)),
-            new Vertex(new Vector3(2, 2))
+            new Vertex(new Vector3(0, 4, 1)),
+            new Vertex(new Vector3(2, 2, 3))
         };
             List<Vertex> otherVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4)),
-            new Vertex(new Vector3(2, 4)),
-            new Vertex(new Vector3(2, 2))
+            new Vertex(new Vector3(0, 4, 1)),
+            new Vertex(new Vector3(2, 4, 2)),
+            new Vertex(new Vector3(2, 2, 3))
         };
 
             List<HalfEdge> halfEdges = new List<HalfEdge>();
@@ -537,14 +537,14 @@ namespace Tests.DoubleConnectedEdgeList
         public void Equals_NotEqualDifferentEdgesInOther()
         {
             List<Vertex> thisVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4)),
-            new Vertex(new Vector3(2, 4)),
-            new Vertex(new Vector3(2, 2))
+            new Vertex(new Vector3(0, 4, 1)),
+            new Vertex(new Vector3(2, 4, 2)),
+            new Vertex(new Vector3(2, 2, 3))
         };
             List<Vertex> otherVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4)),
-            new Vertex(new Vector3(2, 4)),
-            new Vertex(new Vector3(2, 2))
+            new Vertex(new Vector3(0, 4, 1)),
+            new Vertex(new Vector3(2, 4, 2)),
+            new Vertex(new Vector3(2, 2, 3))
         };
 
             List<HalfEdge> thisEdges = new List<HalfEdge>{
@@ -581,14 +581,14 @@ namespace Tests.DoubleConnectedEdgeList
         public void Equals_NotEqual_EdgesDifferent()
         {
             List<Vertex> thisVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4)),
-            new Vertex(new Vector3(2, 4)),
-            new Vertex(new Vector3(2, 2))
+            new Vertex(new Vector3(0, 4, 1)),
+            new Vertex(new Vector3(2, 4, 2)),
+            new Vertex(new Vector3(2, 2, 3))
         };
             List<Vertex> otherVertices = new List<Vertex> {
-            new Vertex(new Vector3(0, 4)),
-            new Vertex(new Vector3(2, 4)),
-            new Vertex(new Vector3(2, 2))
+            new Vertex(new Vector3(0, 4, 1)),
+            new Vertex(new Vector3(2, 4, 2)),
+            new Vertex(new Vector3(2, 2, 3))
         };
 
             List<HalfEdge> thisEdges = new List<HalfEdge>{
@@ -722,10 +722,10 @@ namespace Tests.DoubleConnectedEdgeList
         [Test]
         public void GetFace_ExistingFace()
         {
-            Vertex v0 = new Vertex(new Vector3(2, 3));
-            Vertex v1 = new Vertex(new Vector3(7, 3));
-            Vertex v2 = new Vertex(new Vector3(6, 4));
-            Vertex v3 = new Vertex(new Vector3(4, 6));
+            Vertex v0 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v1 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v2 = new Vertex(new Vector3(6, 4, 9));
+            Vertex v3 = new Vertex(new Vector3(4, 6, 7));
 
             List<HalfEdge> halfEdges = new List<HalfEdge>();
             HalfEdge e01 = new HalfEdge(v0);
@@ -1064,9 +1064,9 @@ namespace Tests.DoubleConnectedEdgeList
 
         private DCEL DifferentVertexPositionsDCEL()
         {
-            Vertex v1 = new Vertex(new Vector3(2, 3));
-            Vertex v2 = new Vertex(new Vector3(7, 3));
-            Vertex v3 = new Vertex(new Vector3(6, 5));
+            Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v3 = new Vertex(new Vector3(6, 5, 9));
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -1133,9 +1133,9 @@ namespace Tests.DoubleConnectedEdgeList
 
         private DCEL DifferentIncidentEdgesForVerticesDCEL()
         {
-            Vertex v1 = new Vertex(new Vector3(2, 3));
-            Vertex v2 = new Vertex(new Vector3(7, 3));
-            Vertex v3 = new Vertex(new Vector3(6, 4));
+            Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v3 = new Vertex(new Vector3(6, 4, 9));
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -1203,9 +1203,9 @@ namespace Tests.DoubleConnectedEdgeList
 
         private DCEL DifferentEdgesExtraEdge13DCEL()
         {
-            Vertex v1 = new Vertex(new Vector3(2, 3));
-            Vertex v2 = new Vertex(new Vector3(7, 3));
-            Vertex v3 = new Vertex(new Vector3(6, 4));
+            Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v3 = new Vertex(new Vector3(6, 4, 9));
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -1278,9 +1278,9 @@ namespace Tests.DoubleConnectedEdgeList
 
         private DCEL DifferentEdgesExtraEdge13NothingSetDCEL()
         {
-            Vertex v1 = new Vertex(new Vector3(2, 3));
-            Vertex v2 = new Vertex(new Vector3(7, 3));
-            Vertex v3 = new Vertex(new Vector3(6, 4));
+            Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v3 = new Vertex(new Vector3(6, 4, 9));
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -1348,9 +1348,9 @@ namespace Tests.DoubleConnectedEdgeList
 
         private DCEL DifferentEdgesExtraEdge13OnlyTwinSetDCEL()
         {
-            Vertex v1 = new Vertex(new Vector3(2, 3));
-            Vertex v2 = new Vertex(new Vector3(7, 3));
-            Vertex v3 = new Vertex(new Vector3(6, 4));
+            Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v3 = new Vertex(new Vector3(6, 4, 9));
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -1419,9 +1419,9 @@ namespace Tests.DoubleConnectedEdgeList
 
         private DCEL DifferentEdgesExtraEdge13OnlyTwinNextSetDCEL()
         {
-            Vertex v1 = new Vertex(new Vector3(2, 3));
-            Vertex v2 = new Vertex(new Vector3(7, 3));
-            Vertex v3 = new Vertex(new Vector3(6, 4));
+            Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v3 = new Vertex(new Vector3(6, 4, 9));
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -1491,9 +1491,9 @@ namespace Tests.DoubleConnectedEdgeList
 
         private DCEL DifferentEdgesExtraEdge13OnlyTwinNextPreviousSetDCEL()
         {
-            Vertex v1 = new Vertex(new Vector3(2, 3));
-            Vertex v2 = new Vertex(new Vector3(7, 3));
-            Vertex v3 = new Vertex(new Vector3(6, 4));
+            Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v3 = new Vertex(new Vector3(6, 4, 9));
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -1564,9 +1564,9 @@ namespace Tests.DoubleConnectedEdgeList
 
         private DCEL BaseDCEL()
         {
-            Vertex v1 = new Vertex(new Vector3(2, 3));
-            Vertex v2 = new Vertex(new Vector3(7, 3));
-            Vertex v3 = new Vertex(new Vector3(6, 4));
+            Vertex v1 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v2 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v3 = new Vertex(new Vector3(6, 4, 9));
 
             HalfEdge e11 = new HalfEdge(v1);
             HalfEdge e12 = new HalfEdge(v2);
@@ -1633,10 +1633,10 @@ namespace Tests.DoubleConnectedEdgeList
 
         private DCEL ClosedMesh()
         {
-            Vertex v0 = new Vertex(new Vector3(2, 3));
-            Vertex v1 = new Vertex(new Vector3(7, 3));
-            Vertex v2 = new Vertex(new Vector3(6, 4));
-            Vertex v3 = new Vertex(new Vector3(4, 6));
+            Vertex v0 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v1 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v2 = new Vertex(new Vector3(6, 4, 9));
+            Vertex v3 = new Vertex(new Vector3(4, 6, 7));
 
             List<HalfEdge> halfEdges = new List<HalfEdge>();
             HalfEdge e01 = new HalfEdge(v0);
