@@ -575,6 +575,23 @@ namespace Tests.DoubleConnectedEdgeList
 
             Assert.That(actual, Is.EquivalentTo(expected));
         }
+
+        [Test]
+        public void Test_GetAdjacentFaces_EdgesWithoutIncidentFaces()
+        {
+            DCEL dcel = new DCELTests().Triangle();
+
+            Vertex vertex = dcel.GetVertex(new Vector3(2, 4, 4));
+
+            List<Face> expected = new List<Face>
+            {
+                dcel.GetFace(0),
+            };
+
+            ReadOnlyCollection<Face> actual = vertex.GetAdjacentFaces();
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
     }
 
     [TestFixture]

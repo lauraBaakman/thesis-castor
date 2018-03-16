@@ -47,6 +47,8 @@ namespace DoubleConnectedEdgeList
         public ReadOnlyCollection<Face> GetAdjacentFaces()
         {
             List<Face> faces = new List<Face>();
+            foreach (HalfEdge edge in this.IncidentEdges)
+                if (edge.HasIncidentFace) faces.Add(edge.IncidentFace);
 
             return faces.AsReadOnly();
         }
