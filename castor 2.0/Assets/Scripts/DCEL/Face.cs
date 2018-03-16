@@ -58,7 +58,7 @@ namespace DoubleConnectedEdgeList
             return (edgeSum * 0.5f);
         }
 
-        public Face(int meshIdx)
+        private Face(int meshIdx)
         {
             this.MeshIdx = meshIdx;
             this.outerComponents = new List<HalfEdge>();
@@ -101,6 +101,7 @@ namespace DoubleConnectedEdgeList
 
             int hash = 17;
             hash *= (31 + MeshIdx.GetHashCode());
+            hash *= (31 + Normal.GetHashCode());
             foreach (HalfEdge edge in OuterComponents)
             {
                 hash *= (31 + edgeComparer.GetHashCode(edge));
@@ -137,6 +138,7 @@ namespace DoubleConnectedEdgeList
         {
             return (
                 this.MeshIdx.Equals(other.MeshIdx) &&
+                this.Normal.Equals(other.Normal) &&
                 this.OuterComponents.UnorderedElementsAreEqual(other.OuterComponents)
             );
         }
@@ -159,7 +161,8 @@ namespace DoubleConnectedEdgeList
                 if (x == null || y == null) return false;
 
                 return (
-                    x.MeshIdx.Equals(y.MeshIdx)
+                    x.MeshIdx.Equals(y.MeshIdx) &&
+                    x.Normal.Equals(y.Normal)
                 );
             }
 
@@ -167,7 +170,10 @@ namespace DoubleConnectedEdgeList
             {
                 if (obj == null) return 0;
 
-                return obj.MeshIdx.GetHashCode();
+                int hash = 17;
+                hash *= (31 + obj.MeshIdx.GetHashCode());
+                hash *= (31 + obj.Normal.GetHashCode());
+                return hash;
             }
         }
 

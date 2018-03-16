@@ -15,20 +15,30 @@ namespace Tests.DoubleConnectedEdgeList
         {
             UnityEngine.Mesh mesh = new UnityEngine.Mesh();
             Vector3[] meshVertices = {
-            new Vector3(0, 4, 3),
-            new Vector3(2, 4, 4),
-            new Vector3(2, 2, 5),
-        };
+                new Vector3(0, 4, 3),
+                new Vector3(2, 4, 4),
+                new Vector3(2, 2, 5),
+            };
 
             int[] triangles = {
-            0, 2, 1
-        };
+                0, 2, 1
+            };
+
+            Vector3[] normals = {
+                Vector3.forward,
+                Vector3.forward,
+                Vector3.forward,
+            };
+
             mesh.vertices = meshVertices;
             mesh.triangles = triangles;
+            mesh.normals = normals;
 
             Vertex v1 = new Vertex(meshVertices[0], 0);
             Vertex v2 = new Vertex(meshVertices[1], 1);
             Vertex v3 = new Vertex(meshVertices[2], 2);
+
+            Vector3 normal = normals[0];
 
             List<HalfEdge> halfEdges = new List<HalfEdge>();
             HalfEdge e11 = new HalfEdge(v1);
@@ -62,7 +72,7 @@ namespace Tests.DoubleConnectedEdgeList
 
             List<Face> faces = new List<Face>();
 
-            Face f2 = new Face(0);
+            Face f2 = new Face(0, normal);
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -111,8 +121,13 @@ namespace Tests.DoubleConnectedEdgeList
                 3, 5, 4
             };
 
+            Vector3 normal = Vector3.forward;
+
+            Vector3[] meshNormals = { normal, normal, normal, normal, normal, normal };
+
             mesh.vertices = meshVertices;
             mesh.triangles = triangles;
+            mesh.normals = meshNormals;
 
             Vertex v1 = new Vertex(p1, 0);
             Vertex v2 = new Vertex(p2, 1);
@@ -166,7 +181,7 @@ namespace Tests.DoubleConnectedEdgeList
                 e41, e43
             };
 
-            Face f2 = new Face(0);
+            Face f2 = new Face(0, normal);
             f2.AddOuterComponent(e21);
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e13);
@@ -174,7 +189,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.IncidentFace = f2;
             e13.IncidentFace = f2;
 
-            Face f1 = new Face(1);
+            Face f1 = new Face(1, normal);
             f1.AddOuterComponent(e31);
             f1.AddOuterComponent(e43);
             f1.AddOuterComponent(e14);
@@ -223,11 +238,23 @@ namespace Tests.DoubleConnectedEdgeList
             Vector3 p2 = new Vector3(6, 4, 9);
             Vector3 p3 = new Vector3(4, 6, 7);
 
+            Vector3 nf0 = new Vector3(0, -1, 0);
+            Vector3 nf1 = new Vector3(0, 0, +1);
+            Vector3 nf2 = new Vector3(-0.5f, -0.5f, 0);
+            Vector3 nf3 = new Vector3(+0.5f, +0.5f, 0);
+
             Vector3[] meshVertices = {
                 p0, p1, p3,
                 p0, p2, p1,
                 p0, p3, p2,
                 p1, p2, p3
+            };
+
+            Vector3[] meshNormals = {
+                nf0, nf0, nf0,
+                nf1, nf1, nf1,
+                nf2, nf2, nf2,
+                nf3, nf3, nf3
             };
 
             int[] triangles = {
@@ -239,6 +266,7 @@ namespace Tests.DoubleConnectedEdgeList
 
             mesh.vertices = meshVertices;
             mesh.triangles = triangles;
+            mesh.normals = meshNormals;
 
             Vertex v0 = new Vertex(p0, 0);
             Vertex v1 = new Vertex(p1, 1);
@@ -328,7 +356,7 @@ namespace Tests.DoubleConnectedEdgeList
 
             List<Face> faces = new List<Face>();
 
-            Face f1 = new Face(0);
+            Face f1 = new Face(0, nf0);
             f1.AddOuterComponent(e01);
             f1.AddOuterComponent(e13);
             f1.AddOuterComponent(e30);
@@ -337,7 +365,7 @@ namespace Tests.DoubleConnectedEdgeList
             e30.IncidentFace = f1;
             faces.Add(f1);
 
-            Face f2 = new Face(1);
+            Face f2 = new Face(1, nf1);
             f2.AddOuterComponent(e21);
             f2.AddOuterComponent(e02);
             f2.AddOuterComponent(e10);
@@ -346,7 +374,7 @@ namespace Tests.DoubleConnectedEdgeList
             e10.IncidentFace = f2;
             faces.Add(f2);
 
-            Face f3 = new Face(2);
+            Face f3 = new Face(2, nf2);
             f3.AddOuterComponent(e32);
             f3.AddOuterComponent(e03);
             f3.AddOuterComponent(e20);
@@ -355,7 +383,7 @@ namespace Tests.DoubleConnectedEdgeList
             e20.IncidentFace = f3;
             faces.Add(f3);
 
-            Face f4 = new Face(3);
+            Face f4 = new Face(3, nf3);
             f4.AddOuterComponent(e12);
             f4.AddOuterComponent(e23);
             f4.AddOuterComponent(e31);
@@ -781,7 +809,7 @@ namespace Tests.DoubleConnectedEdgeList
 
             List<Face> faces = new List<Face>();
 
-            Face f1 = new Face(0);
+            Face f1 = new Face(0, Auxilaries.RandomNormal());
             f1.AddOuterComponent(e01);
             f1.AddOuterComponent(e13);
             f1.AddOuterComponent(e30);
@@ -790,7 +818,7 @@ namespace Tests.DoubleConnectedEdgeList
             e30.IncidentFace = f1;
             faces.Add(f1);
 
-            Face f2 = new Face(1);
+            Face f2 = new Face(1, Auxilaries.RandomNormal());
             f2.AddOuterComponent(e21);
             f2.AddOuterComponent(e02);
             f2.AddOuterComponent(e10);
@@ -799,7 +827,7 @@ namespace Tests.DoubleConnectedEdgeList
             e10.IncidentFace = f2;
             faces.Add(f2);
 
-            Face f3 = new Face(2);
+            Face f3 = new Face(2, Auxilaries.RandomNormal());
             f3.AddOuterComponent(e32);
             f3.AddOuterComponent(e03);
             f3.AddOuterComponent(e20);
@@ -808,7 +836,7 @@ namespace Tests.DoubleConnectedEdgeList
             e20.IncidentFace = f3;
             faces.Add(f3);
 
-            Face f4 = new Face(3);
+            Face f4 = new Face(3, Auxilaries.RandomNormal());
             f4.AddOuterComponent(e12);
             f4.AddOuterComponent(e23);
             f4.AddOuterComponent(e31);
@@ -889,7 +917,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(0);
+            Face f2 = new Face(0, Vector3.forward);
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -958,7 +986,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(0);
+            Face f2 = new Face(0, Vector3.forward);
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -1032,7 +1060,7 @@ namespace Tests.DoubleConnectedEdgeList
             e41.Previous = e32;
             e13.Previous = e41;
 
-            Face f2 = new Face(0);
+            Face f2 = new Face(0, Vector3.forward);
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -1104,7 +1132,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(0);
+            Face f2 = new Face(0, Vector3.forward);
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -1175,7 +1203,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(0);
+            Face f2 = new Face(0, Vector3.forward);
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -1247,7 +1275,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(0);
+            Face f2 = new Face(0, Vector3.forward);
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -1320,7 +1348,7 @@ namespace Tests.DoubleConnectedEdgeList
             e41.Previous = e32;
             e13.Previous = e41;
 
-            Face f2 = new Face(0);
+            Face f2 = new Face(0, Vector3.forward);
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -1389,7 +1417,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(0);
+            Face f2 = new Face(0, Vector3.forward);
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -1520,7 +1548,7 @@ namespace Tests.DoubleConnectedEdgeList
 
             List<Face> faces = new List<Face>();
 
-            Face f1 = new Face(0);
+            Face f1 = new Face(0, new Vector3(0, -1, 0));
             f1.AddOuterComponent(e01);
             f1.AddOuterComponent(e13);
             f1.AddOuterComponent(e30);
@@ -1529,7 +1557,7 @@ namespace Tests.DoubleConnectedEdgeList
             e30.IncidentFace = f1;
             faces.Add(f1);
 
-            Face f2 = new Face(1);
+            Face f2 = new Face(1, new Vector3(0, 0, 1));
             f2.AddOuterComponent(e21);
             f2.AddOuterComponent(e02);
             f2.AddOuterComponent(e10);
@@ -1538,7 +1566,7 @@ namespace Tests.DoubleConnectedEdgeList
             e10.IncidentFace = f2;
             faces.Add(f2);
 
-            Face f3 = new Face(2);
+            Face f3 = new Face(2, new Vector3(-0.5f, -0.5f, 0));
             f3.AddOuterComponent(e32);
             f3.AddOuterComponent(e03);
             f3.AddOuterComponent(e20);
@@ -1547,7 +1575,7 @@ namespace Tests.DoubleConnectedEdgeList
             e20.IncidentFace = f3;
             faces.Add(f3);
 
-            Face f4 = new Face(3);
+            Face f4 = new Face(3, new Vector3(+0.5f, +0.5f, 0));
             f4.AddOuterComponent(e12);
             f4.AddOuterComponent(e23);
             f4.AddOuterComponent(e31);

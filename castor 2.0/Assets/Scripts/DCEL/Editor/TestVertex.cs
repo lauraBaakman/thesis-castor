@@ -260,7 +260,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(2);
+            Face f2 = new Face(2, Auxilaries.RandomNormal());
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -299,7 +299,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(2);
+            Face f2 = new Face(2, Auxilaries.RandomNormal());
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -342,7 +342,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(2);
+            Face f2 = new Face(2, Auxilaries.RandomNormal());
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -385,7 +385,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(2);
+            Face f2 = new Face(2, Auxilaries.RandomNormal());
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -434,7 +434,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(2);
+            Face f2 = new Face(2, Auxilaries.RandomNormal());
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);
@@ -479,7 +479,7 @@ namespace Tests.DoubleConnectedEdgeList
             e32.Previous = e12;
             e41.Previous = e32;
 
-            Face f2 = new Face(2);
+            Face f2 = new Face(2, Auxilaries.RandomNormal());
             f2.AddOuterComponent(e32);
             f2.AddOuterComponent(e41);
             f2.AddOuterComponent(e12);

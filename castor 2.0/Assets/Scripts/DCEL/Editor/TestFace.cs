@@ -17,13 +17,15 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge c = Auxilaries.RandomHalfEdge();
             HalfEdge d = Auxilaries.RandomHalfEdge();
 
-            Face thisFace = new Face(0);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(0, normal);
             thisFace.AddOuterComponent(a);
             thisFace.AddOuterComponent(b);
             thisFace.AddOuterComponent(c);
             thisFace.AddOuterComponent(d);
 
-            Face otherFace = new Face(1);
+            Face otherFace = new Face(1, normal);
             otherFace.AddOuterComponent(a);
             otherFace.AddOuterComponent(b);
             otherFace.AddOuterComponent(c);
@@ -42,13 +44,15 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge c = Auxilaries.RandomHalfEdge();
             HalfEdge d = Auxilaries.RandomHalfEdge();
 
-            Face thisFace = new Face(0);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(0, normal);
             thisFace.AddOuterComponent(a);
             thisFace.AddOuterComponent(b);
             thisFace.AddOuterComponent(c);
             thisFace.AddOuterComponent(d);
 
-            Face otherFace = new Face(0);
+            Face otherFace = new Face(0, normal);
             otherFace.AddOuterComponent(a);
             otherFace.AddOuterComponent(b);
             otherFace.AddOuterComponent(c);
@@ -67,13 +71,15 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge c = Auxilaries.RandomHalfEdge();
             HalfEdge d = Auxilaries.RandomHalfEdge();
 
-            Face thisFace = new Face(0);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(0, normal);
             thisFace.AddOuterComponent(a);
             thisFace.AddOuterComponent(b);
             thisFace.AddOuterComponent(c);
             thisFace.AddOuterComponent(d);
 
-            Face otherFace = new Face(0);
+            Face otherFace = new Face(0, normal);
             otherFace.AddOuterComponent(b);
             otherFace.AddOuterComponent(a);
             otherFace.AddOuterComponent(d);
@@ -92,7 +98,9 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge c = Auxilaries.RandomHalfEdge();
             HalfEdge d = Auxilaries.RandomHalfEdge();
 
-            Face thisFace = new Face(0);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(0, normal);
             thisFace.AddOuterComponent(a);
             thisFace.AddOuterComponent(b);
             thisFace.AddOuterComponent(c);
@@ -100,7 +108,7 @@ namespace Tests.DoubleConnectedEdgeList
             thisFace.AddOuterComponent(d);
             thisFace.AddOuterComponent(d);
 
-            Face otherFace = new Face(0);
+            Face otherFace = new Face(0, normal);
             otherFace.AddOuterComponent(b);
             otherFace.AddOuterComponent(a);
             otherFace.AddOuterComponent(d);
@@ -119,13 +127,15 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge c = Auxilaries.RandomHalfEdge();
             HalfEdge d = Auxilaries.RandomHalfEdge();
 
-            Face thisFace = new Face(0);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(0, normal);
             thisFace.AddOuterComponent(a);
             thisFace.AddOuterComponent(b);
             thisFace.AddOuterComponent(c);
             thisFace.AddOuterComponent(d);
 
-            Face otherFace = new Face(0);
+            Face otherFace = new Face(0, normal);
             otherFace.AddOuterComponent(a);
             otherFace.AddOuterComponent(b);
             otherFace.AddOuterComponent(d);
@@ -143,12 +153,14 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge c = Auxilaries.RandomHalfEdge();
             HalfEdge d = Auxilaries.RandomHalfEdge();
 
-            Face thisFace = new Face(0);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(0, normal);
             thisFace.AddOuterComponent(a);
             thisFace.AddOuterComponent(c);
             thisFace.AddOuterComponent(d);
 
-            Face otherFace = new Face(0);
+            Face otherFace = new Face(0, normal);
             otherFace.AddOuterComponent(a);
             otherFace.AddOuterComponent(b);
             otherFace.AddOuterComponent(c);
@@ -168,17 +180,38 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge d = Auxilaries.RandomHalfEdge();
             HalfEdge e = Auxilaries.RandomHalfEdge();
 
-            Face thisFace = new Face(0);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(0, normal);
             thisFace.AddOuterComponent(a);
             thisFace.AddOuterComponent(b);
             thisFace.AddOuterComponent(c);
             thisFace.AddOuterComponent(d);
 
-            Face otherFace = new Face(0);
+            Face otherFace = new Face(0, normal);
             otherFace.AddOuterComponent(a);
             otherFace.AddOuterComponent(b);
             otherFace.AddOuterComponent(e);
             otherFace.AddOuterComponent(d);
+
+            Assert.IsFalse(thisFace.Equals(otherFace));
+            Assert.IsFalse(otherFace.Equals(thisFace));
+            Assert.AreNotEqual(thisFace.GetHashCode(), otherFace.GetHashCode());
+        }
+
+        [Test, MaxTime(2000)]
+        public void TestEquals_NotEqualDifferentNormals()
+        {
+            HalfEdge a = Auxilaries.RandomHalfEdge();
+            HalfEdge b = Auxilaries.RandomHalfEdge();
+
+            Face thisFace = new Face(0, Auxilaries.RandomNormal());
+            thisFace.AddOuterComponent(a);
+            thisFace.AddOuterComponent(b);
+
+            Face otherFace = new Face(0, Auxilaries.RandomNormal());
+            thisFace.AddOuterComponent(a);
+            thisFace.AddOuterComponent(b);
 
             Assert.IsFalse(thisFace.Equals(otherFace));
             Assert.IsFalse(otherFace.Equals(thisFace));
@@ -212,8 +245,10 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_MeshIdxSmaller()
         {
-            Face thisFace = new Face(0);
-            Face otherFace = new Face(1);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(0, normal);
+            Face otherFace = new Face(1, normal);
 
             int expected = -1;
             int actual = thisFace.CompareTo(otherFace);
@@ -224,8 +259,10 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_MeshIdxEqual()
         {
-            Face thisFace = new Face(1);
-            Face otherFace = new Face(1);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(1, normal);
+            Face otherFace = new Face(1, normal);
 
             int expected = 0;
             int actual = thisFace.CompareTo(otherFace);
@@ -236,8 +273,10 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_MeshIdxLarger()
         {
-            Face thisFace = new Face(5);
-            Face otherFace = new Face(1);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(5, normal);
+            Face otherFace = new Face(1, normal);
 
             int expected = 1;
             int actual = thisFace.CompareTo(otherFace);
@@ -270,7 +309,7 @@ namespace Tests.DoubleConnectedEdgeList
             ca.Twin = ac;
             cb.Twin = bc;
 
-            Face triangle = new Face(0);
+            Face triangle = new Face(0, Auxilaries.RandomNormal());
             triangle.AddOuterComponent(ac);
             triangle.AddOuterComponent(cb);
             triangle.AddOuterComponent(ba);
@@ -325,7 +364,7 @@ namespace Tests.DoubleConnectedEdgeList
             da.Next = ab;
             da.Previous = cd;
 
-            Face rectangle = new Face(0);
+            Face rectangle = new Face(0, Auxilaries.RandomNormal());
             rectangle.AddOuterComponent(bc);
             rectangle.AddOuterComponent(cd);
             rectangle.AddOuterComponent(da);
@@ -359,7 +398,7 @@ namespace Tests.DoubleConnectedEdgeList
             ca.Twin = ac;
             cb.Twin = bc;
 
-            Face triangle = new Face(0);
+            Face triangle = new Face(0, Auxilaries.RandomNormal());
             triangle.AddOuterComponent(ac);
             triangle.AddOuterComponent(cb);
             triangle.AddOuterComponent(ba);
@@ -404,7 +443,7 @@ namespace Tests.DoubleConnectedEdgeList
             da.Next = ab;
             da.Previous = cd;
 
-            Face rectangle = new Face(0);
+            Face rectangle = new Face(0, Auxilaries.RandomNormal());
             rectangle.AddOuterComponent(bc);
             rectangle.AddOuterComponent(cd);
             rectangle.AddOuterComponent(da);
@@ -459,8 +498,10 @@ namespace Tests.DoubleConnectedEdgeList
         public void XAndyAreEqual()
         {
             int idx = 3;
-            Face x = new Face(idx);
-            Face y = new Face(idx);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face x = new Face(idx, normal);
+            Face y = new Face(idx, normal);
 
             Assert.IsTrue(comparer.Equals(x, y));
             Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
@@ -469,19 +510,34 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(50)]
         public void XAndyAreNotEqual_IdxDifferent()
         {
-            Face x = Auxilaries.RandomFace();
-            Face y = Auxilaries.RandomFace();
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face x = new Face(1, normal);
+            Face y = new Face(2, normal);
 
             Assert.IsFalse(comparer.Equals(x, y));
             Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
         }
 
         [Test, MaxTime(50)]
-        public void XAndyAreEqual_OuterComponentsDifferent()
+        public void XAndyAreNotEqual_NormalDifferent()
+        {
+            int idx = 0;
+
+            Face x = new Face(idx, Auxilaries.RandomNormal());
+            Face y = new Face(idx, Auxilaries.RandomNormal());
+
+            Assert.IsFalse(comparer.Equals(x, y));
+            Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+        }
+
+        [Test, MaxTime(50)]
+        public void XAndyAreNotEqual_OuterComponentsDifferent()
         {
             int idx = 3;
-            Face x = new Face(idx);
-            Face y = new Face(idx);
+            Vector3 normal = Auxilaries.RandomNormal();
+            Face x = new Face(idx, normal);
+            Face y = new Face(idx, normal);
 
             x.AddOuterComponent(Auxilaries.RandomHalfEdge());
             y.AddOuterComponent(Auxilaries.RandomHalfEdge());
@@ -506,8 +562,9 @@ namespace Tests.DoubleConnectedEdgeList
         public void XAndyAreEqual()
         {
             int idx = 3;
-            KeyValuePair<int, Face> x = new KeyValuePair<int, Face>(idx, new Face(idx));
-            KeyValuePair<int, Face> y = new KeyValuePair<int, Face>(idx, new Face(idx));
+            Vector3 normal = Auxilaries.RandomNormal();
+            KeyValuePair<int, Face> x = new KeyValuePair<int, Face>(idx, new Face(idx, normal));
+            KeyValuePair<int, Face> y = new KeyValuePair<int, Face>(idx, new Face(idx, normal));
 
             Assert.IsTrue(comparer.Equals(x, y));
             Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));

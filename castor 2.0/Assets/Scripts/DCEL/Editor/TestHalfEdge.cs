@@ -525,7 +525,7 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge ca = new HalfEdge(c);
             HalfEdge cb = new HalfEdge(c);
 
-            Face face = new Face(2);
+            Face face = new Face(2, Auxilaries.RandomNormal());
             face.AddOuterComponent(abThis);
             face.AddOuterComponent(bc);
             face.AddOuterComponent(ca);
@@ -586,12 +586,14 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge ca = new HalfEdge(c);
             HalfEdge cb = new HalfEdge(c);
 
-            Face thisFace = new Face(0);
+            Vector3 normal = Auxilaries.RandomNormal();
+
+            Face thisFace = new Face(0, normal);
             thisFace.AddOuterComponent(abThis);
             thisFace.AddOuterComponent(bc);
             thisFace.AddOuterComponent(ca);
 
-            Face otherFace = new Face(1);
+            Face otherFace = new Face(1, normal);
             otherFace.AddOuterComponent(abOther);
 
             abThis.IncidentFace = thisFace;
@@ -714,7 +716,7 @@ namespace Tests.DoubleConnectedEdgeList
         {
             HalfEdge edge = Auxilaries.RandomHalfEdge();
 
-            edge.IncidentFace = new Face(0);
+            edge.IncidentFace = new Face(0, Auxilaries.RandomNormal());
 
             Assert.IsTrue(edge.HasIncidentFace);
         }

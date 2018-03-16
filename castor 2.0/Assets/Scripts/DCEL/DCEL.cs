@@ -160,16 +160,22 @@ namespace DoubleConnectedEdgeList
             {
                 AddFaceAndItsEdges(
                     i / 3,
-                    Vertices[mesh.triangles[i + 0]],
-                    Vertices[mesh.triangles[i + 1]],
-                    Vertices[mesh.triangles[i + 2]]
+                    Vertices[mesh.triangles[i + 0]], Vertices[mesh.triangles[i + 1]], Vertices[mesh.triangles[i + 2]],
+                    mesh.normals[mesh.triangles[i + 0]], mesh.normals[mesh.triangles[i + 1]], mesh.normals[mesh.triangles[i + 2]]
                 );
             }
         }
 
-        private void AddFaceAndItsEdges(int faceIdx, Vertex a, Vertex b, Vertex c)
+        private void AddFaceAndItsEdges(
+            int faceIdx,
+            Vertex a, Vertex b, Vertex c,
+            Vector3 normalA, Vector3 normalB, Vector3 normalC
+        )
         {
-            Face face = new Face(faceIdx);
+            //The normals should be equal
+            Debug.Assert(normalA.Equals(normalB) && normalB.Equals(normalC));
+
+            Face face = new Face(faceIdx, normalA);
 
             HalfEdge ab = AddEdgeWithTwin(a, b);
             HalfEdge bc = AddEdgeWithTwin(b, c);

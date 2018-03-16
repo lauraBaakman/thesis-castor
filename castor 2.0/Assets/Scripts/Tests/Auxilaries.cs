@@ -25,7 +25,7 @@ namespace Tests
 
         public static Face RandomFace()
         {
-            return new Face(random.Next());
+            return new Face(random.Next(), RandomNormal());
         }
 
         public static Point RandomPoint()
