@@ -44,6 +44,13 @@ namespace DoubleConnectedEdgeList
             }
         }
 
+        public ReadOnlyCollection<Face> GetAdjacentFaces()
+        {
+            List<Face> faces = new List<Face>();
+
+            return faces.AsReadOnly();
+        }
+
         /// <summary>
         /// Serves as a hash function for a <see cref="T:DoubleConnectedEdgeList.Vertex"/> object.
         /// </summary>

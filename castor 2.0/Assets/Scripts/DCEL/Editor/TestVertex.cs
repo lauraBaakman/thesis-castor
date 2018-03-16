@@ -4,6 +4,7 @@ using NUnit.Framework;
 using DoubleConnectedEdgeList;
 using System.Collections.Generic;
 using System.Xml.Schema;
+using System.Collections.ObjectModel;
 
 namespace Tests.DoubleConnectedEdgeList
 {
@@ -559,7 +560,20 @@ namespace Tests.DoubleConnectedEdgeList
         [Test]
         public void Test_GetAdjacentFaces()
         {
+            DCEL dcel = new DCELTests().ClosedMesh();
 
+            Vertex vertex = dcel.GetVertex(new Vector3(6, 4, 9));
+
+            List<Face> expected = new List<Face>
+            {
+                dcel.GetFace(3),
+                dcel.GetFace(1),
+                dcel.GetFace(2)
+            };
+
+            ReadOnlyCollection<Face> actual = vertex.GetAdjacentFaces();
+
+            Assert.That(actual, Is.EquivalentTo(expected));
         }
     }
 
