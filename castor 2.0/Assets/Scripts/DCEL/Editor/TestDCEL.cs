@@ -879,6 +879,166 @@ namespace Tests.DoubleConnectedEdgeList
         }
 
         [Test]
+        public void GetVertex_ExistingVertex()
+        {
+            Vertex v0 = new Vertex(new Vector3(2, 3, 4));
+            Vertex v1 = new Vertex(new Vector3(7, 3, 5));
+            Vertex v2 = new Vertex(new Vector3(6, 4, 9));
+            Vertex v3 = new Vertex(new Vector3(4, 6, 7));
+
+            List<HalfEdge> halfEdges = new List<HalfEdge>();
+            HalfEdge e01 = new HalfEdge(v0);
+            HalfEdge e02 = new HalfEdge(v0);
+            HalfEdge e03 = new HalfEdge(v0);
+
+            HalfEdge e10 = new HalfEdge(v1);
+            HalfEdge e12 = new HalfEdge(v1);
+            HalfEdge e13 = new HalfEdge(v1);
+
+            HalfEdge e20 = new HalfEdge(v2);
+            HalfEdge e21 = new HalfEdge(v2);
+            HalfEdge e23 = new HalfEdge(v2);
+
+            HalfEdge e30 = new HalfEdge(v3);
+            HalfEdge e31 = new HalfEdge(v3);
+            HalfEdge e32 = new HalfEdge(v3);
+
+            e01.Twin = e10;
+            e02.Twin = e20;
+            e03.Twin = e30;
+
+            e10.Twin = e01;
+            e12.Twin = e21;
+            e13.Twin = e31;
+
+            e20.Twin = e02;
+            e21.Twin = e12;
+            e23.Twin = e32;
+
+            e30.Twin = e03;
+            e31.Twin = e13;
+            e32.Twin = e23;
+
+            e01.Next = e13;
+            e02.Next = e21;
+            e03.Next = e32;
+
+            e10.Next = e02;
+            e12.Next = e23;
+            e13.Next = e30;
+
+            e20.Next = e03;
+            e21.Next = e10;
+            e23.Next = e31;
+
+            e30.Next = e01;
+            e31.Next = e12;
+            e32.Next = e20;
+
+            e01.Previous = e30;
+            e02.Previous = e10;
+            e03.Previous = e20;
+
+            e10.Previous = e21;
+            e12.Previous = e31;
+            e13.Previous = e01;
+
+            e20.Previous = e32;
+            e21.Previous = e02;
+            e23.Previous = e12;
+
+            e30.Previous = e13;
+            e31.Previous = e23;
+            e32.Previous = e03;
+
+            halfEdges.Add(e01);
+            halfEdges.Add(e02);
+            halfEdges.Add(e03);
+
+            halfEdges.Add(e10);
+            halfEdges.Add(e12);
+            halfEdges.Add(e13);
+
+            halfEdges.Add(e20);
+            halfEdges.Add(e21);
+            halfEdges.Add(e23);
+
+            halfEdges.Add(e30);
+            halfEdges.Add(e31);
+            halfEdges.Add(e32);
+
+            List<Face> faces = new List<Face>();
+
+            Face f1 = new Face(0, Auxilaries.RandomNormal());
+            f1.AddOuterComponent(e01);
+            f1.AddOuterComponent(e13);
+            f1.AddOuterComponent(e30);
+            e01.IncidentFace = f1;
+            e13.IncidentFace = f1;
+            e30.IncidentFace = f1;
+            faces.Add(f1);
+
+            Face f2 = new Face(1, Auxilaries.RandomNormal());
+            f2.AddOuterComponent(e21);
+            f2.AddOuterComponent(e02);
+            f2.AddOuterComponent(e10);
+            e21.IncidentFace = f2;
+            e02.IncidentFace = f2;
+            e10.IncidentFace = f2;
+            faces.Add(f2);
+
+            Face f3 = new Face(2, Auxilaries.RandomNormal());
+            f3.AddOuterComponent(e32);
+            f3.AddOuterComponent(e03);
+            f3.AddOuterComponent(e20);
+            e32.IncidentFace = f3;
+            e03.IncidentFace = f3;
+            e20.IncidentFace = f3;
+            faces.Add(f3);
+
+            Face f4 = new Face(3, Auxilaries.RandomNormal());
+            f4.AddOuterComponent(e12);
+            f4.AddOuterComponent(e23);
+            f4.AddOuterComponent(e31);
+            e12.IncidentFace = f4;
+            e23.IncidentFace = f4;
+            e31.IncidentFace = f4;
+            faces.Add(f4);
+
+            v0.AddIncidentEdge(e01);
+            v0.AddIncidentEdge(e02);
+            v0.AddIncidentEdge(e03);
+
+            v1.AddIncidentEdge(e10);
+            v1.AddIncidentEdge(e12);
+            v1.AddIncidentEdge(e13);
+
+            v2.AddIncidentEdge(e20);
+            v2.AddIncidentEdge(e21);
+            v2.AddIncidentEdge(e23);
+
+            v3.AddIncidentEdge(e30);
+            v3.AddIncidentEdge(e31);
+            v3.AddIncidentEdge(e32);
+
+            List<Vertex> vertices = new List<Vertex> {
+                v0, v1, v2, v3
+            };
+
+            DCEL dcel = new DCEL(
+                vertices.AsReadOnly(),
+                halfEdges.AsReadOnly(),
+                faces.AsReadOnly()
+            );
+
+            Vertex expected = v2;
+            Vertex actual = dcel.GetVertex(new Vector3(6, 4, 9));
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+
+        [Test]
         public void GetFace_InvalidFace()
         {
             Assert.Throws(typeof(ArgumentException), new TestDelegate(GetFace_InvalidFace_Helper));
@@ -888,6 +1048,18 @@ namespace Tests.DoubleConnectedEdgeList
         {
             DCEL dcel = ClosedMesh();
             Face face = dcel.GetFace(10);
+        }
+
+        [Test]
+        public void GetVertex_InvalidVertex()
+        {
+            Assert.Throws(typeof(ArgumentException), new TestDelegate(GetVertex_InvalidVertex_Helper));
+        }
+
+        public void GetVertex_InvalidVertex_Helper()
+        {
+            DCEL dcel = ClosedMesh();
+            Vertex vertex = dcel.GetVertex(new Vector3(1, 2, 3));
         }
 
         private DCEL DifferentVertexPositionsDCEL()

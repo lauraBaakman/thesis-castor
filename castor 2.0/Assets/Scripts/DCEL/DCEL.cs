@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 
 using Utils;
+using NUnit.Framework.Constraints;
 
 namespace DoubleConnectedEdgeList
 {
@@ -53,8 +54,16 @@ namespace DoubleConnectedEdgeList
         {
             Face face;
             bool succes = faces.TryGetValue(meshIdx, out face);
-            if (!succes) throw new ArgumentException(string.Format("Could not find the face with meshidx {0}", meshIdx));
+            if (!succes) throw new ArgumentException(string.Format("Could not find the face with meshidx {0}.", meshIdx));
             return face;
+        }
+
+        public Vertex GetVertex(Vector3 position)
+        {
+            Vertex vertex;
+            bool succes = vertices.TryGetValue(position, out vertex);
+            if (!succes) throw new ArgumentException(string.Format("Could not find the vertex at {0}", position));
+            return vertex;
         }
 
         #region IEquatable
