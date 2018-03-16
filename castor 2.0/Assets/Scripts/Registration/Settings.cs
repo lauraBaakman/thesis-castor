@@ -86,7 +86,7 @@ namespace Registration
             PointSampler = new AllPointsSampler(
                 new SamplingConfiguration(
                     referenceTransform,
-                    SamplingConfiguration.NormalProcessing.VertexNormals
+                    SamplingConfiguration.NormalProcessing.AreaWeightedSmoothNormals
                 )
             );
 
