@@ -279,6 +279,9 @@ namespace Tests.DoubleConnectedEdgeList
             float actual = triangle.Area;
 
             Assert.That(actual, Is.EqualTo(expected).Within(0.0001f));
+
+            //Check the lazy evaluation, sort of
+            Assert.That(triangle.Area, Is.EqualTo(expected).Within(0.0001f));
         }
 
         [Test]

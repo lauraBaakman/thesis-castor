@@ -12,6 +12,8 @@ namespace DoubleConnectedEdgeList
     /// </summary>
     public class Face : IEquatable<Face>, IComparable
     {
+        private static float notComputed = float.NaN;
+
         /// <summary>
         /// The half edges on the boundary of this face in arbitrary order. 
         /// </summary>
@@ -24,9 +26,26 @@ namespace DoubleConnectedEdgeList
 
         public readonly int MeshIdx;
 
+        /// <summary>
+        /// Gets the area of the face, if the face is triangular
+        /// 
+        /// Not this method assumes that the list of outercomponents is complete.
+        /// </summary>
+        /// <value>The area.</value>
         public float Area
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                if (!IsTriangular()) throw new InvalidOperationException("The area property is not supported for non-triangluar faces.");
+                if (area.Equals(notComputed)) area = computeArea();
+                return area;
+            }
+        }
+        float area = notComputed;
+
+        private float computeArea()
+        {
+            throw new NotSupportedException();
         }
 
         public Face(int meshIdx)
