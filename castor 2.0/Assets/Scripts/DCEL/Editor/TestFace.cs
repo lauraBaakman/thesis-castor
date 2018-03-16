@@ -287,9 +287,9 @@ namespace Tests.DoubleConnectedEdgeList
         [Test]
         public void TestArea_Triangle()
         {
-            Vertex a = new Vertex(new Vector3(1, 2, 3), 0);
-            Vertex b = new Vertex(new Vector3(3, 9, -1), 1);
-            Vertex c = new Vertex(new Vector3(4, 4, -7), 2);
+            Vertex a = new Vertex(new Vector3(1, 2, 3));
+            Vertex b = new Vertex(new Vector3(3, 9, -1));
+            Vertex c = new Vertex(new Vector3(4, 4, -7));
 
             HalfEdge ab = new HalfEdge(a);
             HalfEdge ac = new HalfEdge(a);
@@ -376,9 +376,9 @@ namespace Tests.DoubleConnectedEdgeList
         [Test]
         public void TestIsTriangular_Triangle()
         {
-            Vertex a = new Vertex(new Vector3(1, 2, 3), 0);
-            Vertex b = new Vertex(new Vector3(3, 9, -1), 1);
-            Vertex c = new Vertex(new Vector3(4, 4, -7), 2);
+            Vertex a = new Vertex(new Vector3(1, 2, 3));
+            Vertex b = new Vertex(new Vector3(3, 9, -1));
+            Vertex c = new Vertex(new Vector3(4, 4, -7));
 
             HalfEdge ab = new HalfEdge(a);
             HalfEdge ac = new HalfEdge(a);

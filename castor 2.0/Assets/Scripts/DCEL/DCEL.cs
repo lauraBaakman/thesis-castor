@@ -4,14 +4,12 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 
 using Utils;
-using System.Linq;
-using OpenTKLib;
 
 namespace DoubleConnectedEdgeList
 {
     public class DCEL : IEquatable<DCEL>
     {
-        private Dictionary<int, Vertex> vertices;
+        private List<Vertex> vertices;
         private List<HalfEdge> halfEdges;
         private Dictionary<int, Face> faces;
 
@@ -20,14 +18,15 @@ namespace DoubleConnectedEdgeList
                    ReadOnlyCollection<Face> faces
                    ) : this()
         {
-            foreach (Vertex vertex in vertices) AddVertex(vertex);
-            foreach (Face face in faces) AddFace(face);
+            this.vertices.AddRange(vertices);
             this.halfEdges.AddRange(edges);
+
+            foreach (Face face in faces) AddFace(face);
         }
 
         internal DCEL()
         {
-            vertices = new Dictionary<int, Vertex>();
+            vertices = new List<Vertex>();
             halfEdges = new List<HalfEdge>();
             faces = new Dictionary<int, Face>();
         }
@@ -59,14 +58,6 @@ namespace DoubleConnectedEdgeList
             return face;
         }
 
-        public Vertex GetVertex(int meshIdx)
-        {
-            Vertex vertex;
-            bool succes = vertices.TryGetValue(meshIdx, out vertex);
-            if (!succes) throw new ArgumentException(string.Format("Could not find the face with meshidx {0}", meshIdx));
-            return vertex;
-        }
-
         #region IEquatable
         public override bool Equals(object obj)
         {
@@ -79,7 +70,7 @@ namespace DoubleConnectedEdgeList
         public bool Equals(DCEL other)
         {
             return (
-                this.vertices.UnorderedElementsAreEqual(other.vertices, new Vertex.KeyValueComparer<int>()) &&
+                this.vertices.UnorderedElementsAreEqual(other.vertices) &&
                 this.faces.UnorderedElementsAreEqual(other.faces, new Face.KeyValueComparer<int>()) &&
                 this.halfEdges.UnorderedElementsAreEqual(other.halfEdges)
             );
@@ -88,7 +79,7 @@ namespace DoubleConnectedEdgeList
         public override int GetHashCode()
         {
             int hash = 17;
-            hash *= (31 + vertices.UnorderedElementsGetHashCode(new Vertex.KeyValueComparer<int>()));
+            hash *= (31 + vertices.UnorderedElementsGetHashCode());
             hash *= (31 + halfEdges.UnorderedElementsGetHashCode());
             hash *= (31 + faces.UnorderedElementsGetHashCode(new Face.KeyValueComparer<int>()));
             return hash;
@@ -105,22 +96,8 @@ namespace DoubleConnectedEdgeList
         /// <returns>The vertex in the mesh at the position of the passed vertex.</returns>
         internal Vertex AddVertexIfNew(Vertex vertex)
         {
-            Vertex.SimpleComparer positionComparer = new Vertex.SimpleComparer();
-            List<Vertex> values = new List<Vertex>(this.vertices.Values);
-
-            if (!values.Contains(vertex, positionComparer))
-            {
-                AddVertex(vertex);
-                return vertex;
-            }
-            return values.Find(x => positionComparer.Equals(x, vertex));
-        }
-
-        private void AddVertex(Vertex vertex)
-        {
-            if (this.vertices.ContainsKey(vertex.MeshIdx)) throw new InvalidOperationException("The DCEL already as a vertex with this idx");
-
-            this.vertices.Add(vertex.MeshIdx, vertex);
+            if (!this.vertices.Contains(vertex)) this.vertices.Add(vertex);
+            return vertices.Find(x => x.Equals(vertex));
         }
 
         internal void AddEdge(HalfEdge halfEdge)

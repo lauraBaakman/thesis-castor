@@ -15,7 +15,7 @@ namespace Tests
 
         public static Vertex RandomVertex()
         {
-            return new Vertex(RandomPosition(), random.Next());
+            return new Vertex(RandomPosition());
         }
 
         public static HalfEdge RandomHalfEdge()
