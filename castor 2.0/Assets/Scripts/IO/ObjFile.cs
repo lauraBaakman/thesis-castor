@@ -17,15 +17,17 @@ namespace IO
             try
             {
                 ObjExporter.MeshToFile(mesh, path);
-                result = WriteResult.OKResult(string.Format("Wrote a mesh to the file: {}", path));
+                result = WriteResult.OKResult(string.Format("Wrote a mesh to the file: {0}", path));
             }
-            catch (ArgumentException)
+            catch (ArgumentException exception)
             {
                 result = WriteResult.ErrorResult(string.Format("Invalid mesh in the file {0}", path));
+                if (Application.isEditor) throw exception;
             }
             catch (Exception exception)
             {
                 result = WriteResult.ErrorResult(path, exception);
+                if (Application.isEditor) throw exception;
             }
             return result;
         }
