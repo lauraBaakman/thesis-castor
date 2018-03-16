@@ -6,20 +6,18 @@ namespace IO
 {
     public class FragmentsExporter
     {
-        public delegate void CallBack(string path, GameObject fragment);
+        public delegate void CallBack(IO.WriteResult result);
 
         private readonly GameObject FragmentsRoot;
 
-        private readonly CallBack onSucces;
-        private readonly CallBack onFailure;
+        private readonly CallBack callback;
 
         private static string extension = "obj";
 
-        public FragmentsExporter(GameObject fragmentsRoot, CallBack onSucces, CallBack onFailure)
+        public FragmentsExporter(GameObject fragmentsRoot, CallBack callback)
         {
             FragmentsRoot = fragmentsRoot;
-            this.onSucces = onSucces;
-            this.onFailure = onFailure;
+            this.callback = callback;
         }
 
         public void Export()
@@ -41,7 +39,7 @@ namespace IO
 
         private void ExportFragments(string directory)
         {
-            FragmentExporter exporter = new FragmentExporter(onSucces, onFailure);
+            FragmentExporter exporter = new FragmentExporter(callback);
 
             List<GameObject> exportFragments = GetExportFragments();
 
@@ -84,13 +82,11 @@ namespace IO
 
     internal class FragmentExporter
     {
-        private FragmentsExporter.CallBack onSucces;
-        private FragmentsExporter.CallBack onFailure;
+        private FragmentsExporter.CallBack callback;
 
-        public FragmentExporter(FragmentsExporter.CallBack onSucces, FragmentsExporter.CallBack onFailure)
+        public FragmentExporter(FragmentsExporter.CallBack callback)
         {
-            this.onSucces = onSucces;
-            this.onFailure = onFailure;
+            this.callback = callback;
         }
 
         public void Export(GameObject fragment, string path)
@@ -98,17 +94,16 @@ namespace IO
             Debug.Log("Exporting " + fragment.name + " to " + path);
 
             ValidateFragment(fragment);
-            bool succeeded = Export(
+            WriteResult result = Export(
                 mesh: fragment.GetComponent<MeshFilter>().mesh,
                 transformation: fragment.transform.localToWorldMatrix,
                 path: path
             );
 
-            FragmentsExporter.CallBack callback = succeeded ? onSucces : onFailure;
-            callback(path, fragment);
+            callback(result);
         }
 
-        private bool Export(Mesh mesh, Matrix4x4 transformation, string path)
+        private WriteResult Export(Mesh mesh, Matrix4x4 transformation, string path)
         {
             Utils.MeshTransformer meshTransformer = new Utils.MeshTransformer(transformation);
             Mesh transformedMesh = meshTransformer.Transform(mesh);

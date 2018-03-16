@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class MeshExtensions
 {
-    public static bool ToFile(this Mesh mesh, string path)
+    public static IO.WriteResult ToFile(this Mesh mesh, string path)
     {
         return IO.ObjFile.Write(mesh, path);
     }

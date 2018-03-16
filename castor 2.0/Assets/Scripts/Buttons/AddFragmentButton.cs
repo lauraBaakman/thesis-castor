@@ -24,11 +24,11 @@ namespace Buttons
             importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/RoughFracturedCubeXYZRotationTranslationPart2.obj", randomizeTransform: false);
         }
 
-        private void NotifyUser(Ticker.Message message)
+        private void NotifyUser(IO.ReadResult result)
         {
             SendMessage(
                 methodName: "OnSendMessageToTicker",
-                value: message,
+                value: result.ToTickerMessage(),
                 options: SendMessageOptions.RequireReceiver
             );
         }
