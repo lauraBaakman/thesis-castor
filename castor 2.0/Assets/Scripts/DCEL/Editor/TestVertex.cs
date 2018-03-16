@@ -555,6 +555,12 @@ namespace Tests.DoubleConnectedEdgeList
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Test_GetAdjacentFaces()
+        {
+
+        }
     }
 
     [TestFixture]
