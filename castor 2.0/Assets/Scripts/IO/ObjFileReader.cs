@@ -30,32 +30,29 @@ namespace IO
         // Use this for initialization
         public static Mesh ImportFile(string filePath)
         {
-            var newMesh = CreateMeshStruct(filePath);
-            PopulateMeshStruct(ref newMesh);
+            MeshStruct meshInfo = CreateMeshStruct(filePath);
+            PopulateMeshStruct(ref meshInfo);
 
-            var newVerts = new Vector3[newMesh.faceData.Length];
-            var newNormals = new Vector3[newMesh.faceData.Length];
-            var i = 0;
+            Vector3[] vertices = new Vector3[meshInfo.faceData.Length];
+            Vector3[] normals = new Vector3[meshInfo.faceData.Length];
+            int i = 0;
             /* The following foreach loops through the facedata and assigns the appropriate vertex, uv, or normal
              * for the appropriate Unity mesh array. It also performs scaling.
              */
-            foreach (var v in newMesh.faceData)
+            foreach (Vector3 v in meshInfo.faceData)
             {
-                newVerts[i] = newMesh.vertices[(int)v.x - 1] / 10;
+                vertices[i] = meshInfo.vertices[(int)v.x - 1] / 10f;
 
-                if (v.z >= 1)
-                    newNormals[i] = newMesh.normals[(int)v.z - 1];
+                if (v.z >= 1) normals[i] = meshInfo.normals[(int)v.z - 1];
                 i++;
             }
 
-            var mesh = new Mesh
+            Mesh mesh = new Mesh
             {
-                vertices = newVerts,
-                normals = newNormals,
-                triangles = newMesh.triangles
+                vertices = vertices,
+                normals = normals,
+                triangles = meshInfo.triangles
             };
-
-
             mesh.RecalculateBounds();
 
             return mesh;
