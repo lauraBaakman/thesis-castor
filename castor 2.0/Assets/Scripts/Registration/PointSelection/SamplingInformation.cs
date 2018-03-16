@@ -1,4 +1,6 @@
 using UnityEngine;
+using DoubleConnectedEdgeList;
+using Fragment;
 
 namespace Registration
 {
@@ -7,24 +9,28 @@ namespace Registration
         public readonly Transform Transform;
         public readonly Mesh Mesh;
         public readonly Collider Collider;
-
-        public SamplingInformation(Transform transform, Mesh mesh, Collider collider)
-        {
-            if (mesh == null) throw new System.ArgumentNullException("mesh");
-            if (collider == null) throw new System.ArgumentNullException("collider");
-
-            this.Transform = transform;
-            this.Mesh = mesh;
-            this.Collider = collider;
-        }
+        public readonly DCEL DCEL;
 
         public SamplingInformation(GameObject gameObject)
             : this(
                 transform: gameObject.transform,
                 mesh: gameObject.GetComponent<MeshFilter>().mesh,
-                collider: gameObject.GetComponent<Collider>()
+                collider: gameObject.GetComponent<Collider>(),
+                dcel: gameObject.GetComponent<DoubleConnectedEdgeListStorage>().DCEL
             )
         { }
+
+        private SamplingInformation(Transform transform, Mesh mesh, Collider collider, DCEL dcel)
+        {
+            if (mesh == null) throw new System.ArgumentNullException("mesh");
+            if (collider == null) throw new System.ArgumentNullException("collider");
+            if (dcel == null) throw new System.ArgumentNullException("dcel");
+
+            this.Transform = transform;
+            this.Mesh = mesh;
+            this.Collider = collider;
+            this.DCEL = dcel;
+        }
     }
 
     public class SamplingConfiguration

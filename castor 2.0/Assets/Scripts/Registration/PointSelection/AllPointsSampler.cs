@@ -10,7 +10,6 @@ namespace Registration
     /// </summary>
     public class AllPointsSampler : IPointSampler
     {
-
         private delegate List<Point> SamplingFunction(Transform fragmentTransform, Mesh fragment);
 
         /// <summary>
