@@ -454,14 +454,14 @@ namespace Tests.DoubleConnectedEdgeList
     }
 
     [TestFixture]
-    public class FaceSimpleComparerTest
+    public class MeshIdxAndNormalComparerTest
     {
-        private Face.SimpleComparer comparer;
+        private Face.MeshIdxAndNormalComparer comparer;
 
         [SetUp]
         public void Init()
         {
-            comparer = new Face.SimpleComparer();
+            comparer = new Face.MeshIdxAndNormalComparer();
         }
 
         [Test, MaxTime(50)]

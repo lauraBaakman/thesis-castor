@@ -93,7 +93,7 @@ namespace DoubleConnectedEdgeList
         {
             SimpleComparer edge = new SimpleComparer();
             Vertex.SimpleComparer vertex = new Vertex.SimpleComparer();
-            Face.SimpleComparer face = new Face.SimpleComparer();
+            Face.MeshIdxAndNormalComparer face = new Face.MeshIdxAndNormalComparer();
 
             int hash = 17;
             hash *= (31 + vertex.GetHashCode(Origin));
@@ -133,7 +133,7 @@ namespace DoubleConnectedEdgeList
         {
             SimpleComparer edgeComparer = new SimpleComparer();
             Vertex.SimpleComparer vertexComparer = new Vertex.SimpleComparer();
-            Face.SimpleComparer faceComparer = new Face.SimpleComparer();
+            Face.MeshIdxAndNormalComparer faceComparer = new Face.MeshIdxAndNormalComparer();
 
             return (
                 vertexComparer.Equals(this.Origin, other.Origin) &&

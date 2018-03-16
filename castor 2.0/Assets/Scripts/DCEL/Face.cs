@@ -153,7 +153,7 @@ namespace DoubleConnectedEdgeList
             return this.MeshIdx.CompareTo(face.MeshIdx);
         }
 
-        public class SimpleComparer : IEqualityComparer<Face>
+        public class MeshIdxAndNormalComparer : IEqualityComparer<Face>
         {
             public bool Equals(Face x, Face y)
             {
