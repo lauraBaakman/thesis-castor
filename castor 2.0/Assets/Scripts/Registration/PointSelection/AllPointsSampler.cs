@@ -8,10 +8,10 @@ namespace Registration
     /// <summary>
     /// The simple point selector simply selects all the points of the mesh.
     /// </summary>
-    public class SelectAllPointsSelector : IPointSelector
+    public class AllPointsSampler : IPointSampler
     {
 
-        private delegate List<Point> SelectionFunction(Transform fragmentTransform, Mesh fragment);
+        private delegate List<Point> SamplingFunction(Transform fragmentTransform, Mesh fragment);
 
         /// <summary>
         /// The transform that the points should be sampled in.
@@ -22,16 +22,16 @@ namespace Registration
         /// The function used to select the points, chosen based on the paramters 
         /// passed to the constructor.
         /// </summary>
-        private SelectionFunction selectionFunction;
+        private SamplingFunction samplingFunction;
 
-        public SelectAllPointsSelector(SamplingConfiguration configuration)
+        public AllPointsSampler(SamplingConfiguration configuration)
         {
             ReferenceTransform = configuration.referenceTransform;
 
-            selectionFunction = SelectSelectionFunction(configuration.normalProcessing);
+            samplingFunction = SelectSamplingFunction(configuration.normalProcessing);
         }
 
-        private SelectionFunction SelectSelectionFunction(SamplingConfiguration.NormalProcessing normalProcessing)
+        private SamplingFunction SelectSamplingFunction(SamplingConfiguration.NormalProcessing normalProcessing)
         {
             switch (normalProcessing)
             {
@@ -46,9 +46,9 @@ namespace Registration
             }
         }
 
-        public List<Point> Select(SamplingInformation samplingInfo)
+        public List<Point> Sample(SamplingInformation samplingInfo)
         {
-            return selectionFunction(samplingInfo.Transform, samplingInfo.Mesh);
+            return samplingFunction(samplingInfo.Transform, samplingInfo.Mesh);
         }
 
         private List<Point> NoNormals(Transform fragmentTransform, Mesh fragment)

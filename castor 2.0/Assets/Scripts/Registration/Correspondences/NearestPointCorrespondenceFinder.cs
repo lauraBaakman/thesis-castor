@@ -13,15 +13,15 @@ namespace Registration
     /// </summary>
     public class NearstPointCorrespondenceFinder : ICorrespondenceFinder
     {
-        private readonly IPointSelector sampler;
+        private readonly IPointSampler sampler;
 
-        public NearstPointCorrespondenceFinder(IPointSelector sampler)
+        public NearstPointCorrespondenceFinder(IPointSampler sampler)
         {
             this.sampler = sampler;
         }
 
         public NearstPointCorrespondenceFinder(Settings settings)
-            : this(settings.PointSelector)
+            : this(settings.PointSampler)
         { }
 
         public CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
@@ -35,7 +35,7 @@ namespace Registration
 
         public CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation)
         {
-            List<Point> modelPoints = sampler.Select(modelSamplingInformation);
+            List<Point> modelPoints = sampler.Sample(modelSamplingInformation);
             return Find(staticPoints, modelPoints.AsReadOnly());
         }
 

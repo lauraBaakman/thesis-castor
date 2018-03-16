@@ -33,7 +33,7 @@ namespace Registration
         /// correspondence.
         /// </summary>
         /// <value>The selector.</value>
-        public IPointSelector PointSelector { get; set; }
+        public IPointSampler PointSampler { get; set; }
 
         /// <summary>
         /// The method used to find correspondecs within the points selected by
@@ -83,7 +83,7 @@ namespace Registration
 
             MaxNumIterations = maxNumIterations;
 
-            PointSelector = new SelectAllPointsSelector(
+            PointSampler = new AllPointsSampler(
                 new SamplingConfiguration(
                     referenceTransform,
                     SamplingConfiguration.NormalProcessing.VertexNormals

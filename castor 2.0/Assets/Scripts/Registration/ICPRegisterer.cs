@@ -83,7 +83,7 @@ namespace Registration
             hasTerminated = false;
 
             //The static fragment does not change during ICP, consequently its points need only be sampled once.
-            StaticPoints = SelectPoints(StaticFragment);
+            StaticPoints = SamplePoints(StaticFragment);
 
             ModelSamplingInformation = new SamplingInformation(ModelFragment);
 
@@ -172,9 +172,9 @@ namespace Registration
         /// </summary>
         /// <returns>The points.</returns>
         /// <param name="fragment">Fragment.</param>
-        private List<Point> SelectPoints(GameObject fragment)
+        private List<Point> SamplePoints(GameObject fragment)
         {
-            List<Point> points = Settings.PointSelector.Select(new SamplingInformation(fragment));
+            List<Point> points = Settings.PointSampler.Sample(new SamplingInformation(fragment));
             return points;
         }
 

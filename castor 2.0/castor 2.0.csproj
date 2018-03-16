@@ -384,9 +384,9 @@
     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />
     <Compile Include="Assets\Scripts\Registration\Point.cs" />
-    <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSelector.cs" />
+    <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSampler.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\SamplingInformation.cs" />
-    <Compile Include="Assets\Scripts\Registration\PointSelection\SelectAllPointsSelector.cs" />
+    <Compile Include="Assets\Scripts\Registration\PointSelection\AllPointsSampler.cs" />
     <Compile Include="Assets\Scripts\Registration\Settings.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\LandmarkTransform.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MathUtils.cs" />

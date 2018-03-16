@@ -84,7 +84,7 @@ namespace Tests
                     )
                 }
             );
-            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(null)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -129,7 +129,7 @@ namespace Tests
                 cubeRight[4]
             )
         };
-            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(null)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -161,7 +161,7 @@ namespace Tests
                 pyramid[4]
             )
         };
-            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(null)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -193,7 +193,7 @@ namespace Tests
                 cubeRight[5]
             )
         };
-            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(null)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -211,7 +211,7 @@ namespace Tests
             new Point(new Vector3(4.90e-01f, 1.40e-01f, 9.20e-01f)),
         }.AsReadOnly();
 
-            List<DistanceNode> actual = new NearstPointCorrespondenceFinder(new SelectAllPointsSelector(null)).CreateDistanceNodeList(staticPoints, modelPoints);
+            List<DistanceNode> actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(null)).CreateDistanceNodeList(staticPoints, modelPoints);
             List<DistanceNode> expected = new List<DistanceNode> {
             new DistanceNode(staticPoints[1], modelPoints[1], 1.7960e-01f),
             new DistanceNode(staticPoints[0], modelPoints[0], 3.4300e-01f),
