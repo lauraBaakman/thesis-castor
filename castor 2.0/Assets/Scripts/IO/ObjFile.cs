@@ -17,7 +17,7 @@ namespace IO
             try
             {
                 ObjExporter.MeshToFile(mesh, path);
-                result = WriteResult.OKResult(path);
+                result = WriteResult.OKResult(string.Format("Wrote a mesh to the file: {}", path));
             }
             catch (ArgumentException)
             {
@@ -27,9 +27,7 @@ namespace IO
             {
                 result = WriteResult.ErrorResult(path, exception);
             }
-
             return result;
-
         }
     }
 }
