@@ -44,6 +44,25 @@ namespace DoubleConnectedEdgeList
             }
         }
 
+        /// <summary>
+        /// Returns the average normal of the adjacent faces, weighted by their areas.
+        /// </summary>
+        /// <returns>The smoothed normal of this vertex.</returns>
+        public Vector3 SmoothedNormal()
+        {
+            Vector3 smoothedNormal = new Vector3(0, 0, 0);
+            float areaSum = 0;
+
+            ReadOnlyCollection<Face> adjacentFaces = GetAdjacentFaces();
+            foreach (Face face in adjacentFaces)
+            {
+                areaSum += face.Area;
+                smoothedNormal += (face.Area * face.Normal);
+            }
+
+            return ((1.0f / areaSum) * smoothedNormal).normalized;
+        }
+
         public ReadOnlyCollection<Face> GetAdjacentFaces()
         {
             List<Face> faces = new List<Face>();

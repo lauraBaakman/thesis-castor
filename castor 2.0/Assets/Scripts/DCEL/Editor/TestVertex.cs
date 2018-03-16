@@ -592,6 +592,35 @@ namespace Tests.DoubleConnectedEdgeList
 
             Assert.That(actual, Is.EquivalentTo(expected));
         }
+
+        [Test]
+        public void Test_SmoothedNormal_MultipleFace()
+        {
+            DCEL dcel = new DCELTests().ClosedMesh();
+
+            Vertex vertex = dcel.GetVertex(new Vector3(6, 4, 9));
+
+            Vector3 expected = new Vector3(-0.026112582f, -0.026112582f, +0.369209391f).normalized;
+
+            Vector3 actual = vertex.SmoothedNormal();
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Test_SmoothedNormal_SingleFace()
+        {
+            DCEL dcel = new DCELTests().Triangle();
+
+            Vertex vertex = dcel.GetVertex(new Vector3(2, 4, 4));
+
+            Vector3 expected = new Vector3(0, 0, 1);
+
+            Vector3 actual = vertex.SmoothedNormal();
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
     }
 
     [TestFixture]
