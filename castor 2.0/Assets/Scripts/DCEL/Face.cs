@@ -157,5 +157,24 @@ namespace DoubleConnectedEdgeList
                 return obj.MeshIdx.GetHashCode();
             }
         }
+
+        public class KeyValueComparer<K> : IEqualityComparer<KeyValuePair<K, Face>> where K : IEquatable<K>
+        {
+            public bool Equals(KeyValuePair<K, Face> x, KeyValuePair<K, Face> y)
+            {
+                return (
+                    x.Key.Equals(y.Key) &&
+                    x.Value.Equals(y.Value)
+                );
+            }
+
+            public int GetHashCode(KeyValuePair<K, Face> obj)
+            {
+                int hash = 17;
+                hash *= (31 + obj.Key.GetHashCode());
+                hash *= (31 + obj.Value.GetHashCode());
+                return hash;
+            }
+        }
     }
 }

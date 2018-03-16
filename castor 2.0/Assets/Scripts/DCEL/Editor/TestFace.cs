@@ -476,7 +476,6 @@ namespace Tests.DoubleConnectedEdgeList
             Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
         }
 
-
         [Test, MaxTime(50)]
         public void XAndyAreEqual_OuterComponentsDifferent()
         {
@@ -490,5 +489,51 @@ namespace Tests.DoubleConnectedEdgeList
             Assert.IsTrue(comparer.Equals(x, y));
             Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
         }
+    }
+
+    [TestFixture]
+    public class FaceKeyValueComparer
+    {
+        private Face.KeyValueComparer<int> comparer;
+
+        [SetUp]
+        public void Init()
+        {
+            comparer = new Face.KeyValueComparer<int>();
+        }
+
+        [Test, MaxTime(50)]
+        public void XAndyAreEqual()
+        {
+            int idx = 3;
+            KeyValuePair<int, Face> x = new KeyValuePair<int, Face>(idx, new Face(idx));
+            KeyValuePair<int, Face> y = new KeyValuePair<int, Face>(idx, new Face(idx));
+
+            Assert.IsTrue(comparer.Equals(x, y));
+            Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+        }
+
+        [Test, MaxTime(50)]
+        public void XAndyAreNotEqual_KeyDifferent()
+        {
+            Face face = Auxilaries.RandomFace();
+            KeyValuePair<int, Face> x = new KeyValuePair<int, Face>(0, face);
+            KeyValuePair<int, Face> y = new KeyValuePair<int, Face>(1, face);
+
+            Assert.IsFalse(comparer.Equals(x, y));
+            Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+        }
+
+        [Test, MaxTime(50)]
+        public void XAndyAreNotEqual_ValueDifferent()
+        {
+            int idx = 2;
+            KeyValuePair<int, Face> x = new KeyValuePair<int, Face>(idx, Auxilaries.RandomFace());
+            KeyValuePair<int, Face> y = new KeyValuePair<int, Face>(idx, Auxilaries.RandomFace());
+
+            Assert.IsFalse(comparer.Equals(x, y));
+            Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
+        }
+
     }
 }
