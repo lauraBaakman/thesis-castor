@@ -79,9 +79,9 @@ namespace DoubleConnectedEdgeList
         public override int GetHashCode()
         {
             int hash = 17;
-            hash *= (31 + vertices.UnorderedElementsGetHashCode());
-            hash *= (31 + halfEdges.UnorderedElementsGetHashCode());
-            hash *= (31 + faces.UnorderedElementsGetHashCode(new Face.KeyValueComparer<int>()));
+            if (!this.vertices.IsEmpty()) hash *= (31 + vertices.UnorderedElementsGetHashCode());
+            if (!this.halfEdges.IsEmpty()) hash *= (31 + halfEdges.UnorderedElementsGetHashCode());
+            if (!this.faces.IsEmpty()) hash *= (31 + faces.UnorderedElementsGetHashCode(new Face.KeyValueComparer<int>()));
             return hash;
         }
         #endregion
@@ -148,7 +148,7 @@ namespace DoubleConnectedEdgeList
 
         private void AddVertex(int idx, Vector3 position)
         {
-            Vertex vertex = new Vertex(position, idx);
+            Vertex vertex = new Vertex(position);
             vertex = DCEL.AddVertexIfNew(vertex);
             Vertices.Add(idx, vertex);
         }

@@ -19,8 +19,8 @@ namespace Tests.DoubleConnectedEdgeList
         {
             Vector3 position = Auxilaries.RandomPosition();
 
-            Vertex thisVertex = new Vertex(position, 1);
-            Vertex otherVertex = new Vertex(position, 1);
+            Vertex thisVertex = new Vertex(position);
+            Vertex otherVertex = new Vertex(position);
 
             HalfEdge edge1 = Auxilaries.RandomHalfEdge();
             HalfEdge edge2 = Auxilaries.RandomHalfEdge();
@@ -34,19 +34,6 @@ namespace Tests.DoubleConnectedEdgeList
             Assert.IsTrue(thisVertex.Equals(otherVertex));
             Assert.IsTrue(otherVertex.Equals(thisVertex));
             Assert.AreEqual(thisVertex.GetHashCode(), otherVertex.GetHashCode());
-        }
-
-        [Test, MaxTime(2000)]
-        public void TestEquals_MeshIdxNotEqual()
-        {
-            Vector3 position = Auxilaries.RandomPosition();
-
-            Vertex thisVertex = new Vertex(position, 0);
-            Vertex otherVertex = new Vertex(position, 1);
-
-            Assert.IsTrue(thisVertex.Equals(otherVertex));
-            Assert.IsTrue(otherVertex.Equals(thisVertex));
-            Assert.AreEqual(thisVertex, otherVertex);
         }
 
         [Test, MaxTime(2000)]
@@ -532,12 +519,10 @@ namespace Tests.DoubleConnectedEdgeList
         }
 
         [Test, MaxTime(2000)]
-        public void TestCompareTo_MeshIdxSmaller()
+        public void TestCompareTo_ObjSmaller()
         {
-            Vector3 position = Auxilaries.RandomPosition();
-
-            Vertex thisVertex = new Vertex(position, 0);
-            Vertex otherVertex = new Vertex(position, 1);
+            Vertex thisVertex = new Vertex(new Vector3(0, 1));
+            Vertex otherVertex = new Vertex(new Vector3(3, 4));
 
             int expected = -1;
             int actual = thisVertex.CompareTo(otherVertex);
@@ -546,36 +531,10 @@ namespace Tests.DoubleConnectedEdgeList
         }
 
         [Test, MaxTime(2000)]
-        public void TestCompareTo_MeshIdxLarger()
+        public void TestCompareTo_ObjEqual()
         {
-            Vector3 position = Auxilaries.RandomPosition();
-
-            Vertex thisVertex = new Vertex(position, 1);
-            Vertex otherVertex = new Vertex(position, 0);
-
-            int expected = 1;
-            int actual = thisVertex.CompareTo(otherVertex);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test, MaxTime(2000)]
-        public void TestCompareTo_ObjSmallerMeshIdxEqual()
-        {
-            Vertex thisVertex = new Vertex(new Vector3(0, 1, 2));
-            Vertex otherVertex = new Vertex(new Vector3(3, 4, 5));
-
-            int expected = -1;
-            int actual = thisVertex.CompareTo(otherVertex);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test, MaxTime(2000)]
-        public void TestCompareTo_ObjEqualMeshIdxEqual()
-        {
-            Vertex thisVertex = new Vertex(new Vector3(1, 2, 3));
-            Vertex otherVertex = new Vertex(new Vector3(1, 2, 3));
+            Vertex thisVertex = new Vertex(new Vector3(1, 2));
+            Vertex otherVertex = new Vertex(new Vector3(1, 2));
 
             int expected = 0;
             int actual = thisVertex.CompareTo(otherVertex);
@@ -584,36 +543,13 @@ namespace Tests.DoubleConnectedEdgeList
         }
 
         [Test, MaxTime(2000)]
-        public void TestCompareTo_ObjLargerMeshIdxEqual()
+        public void TestCompareTo_ObjLarger()
         {
-            Vertex thisVertex = new Vertex(new Vector3(3, 4, 5));
-            Vertex otherVertex = new Vertex(new Vector3(0, 1, 2));
+            Vertex thisVertex = new Vertex(new Vector3(3, 4));
+            Vertex otherVertex = new Vertex(new Vector3(0, 1));
 
             int expected = 1;
             int actual = thisVertex.CompareTo(otherVertex);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test, MaxTime(2000)]
-        public void TestGetMeshIdx_NotSet()
-        {
-            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestGetMeshIdx_NotSet_Helper));
-        }
-
-        public void TestGetMeshIdx_NotSet_Helper()
-        {
-            Vertex vertex = Auxilaries.RandomVertex();
-            int meshIdx = vertex.MeshIdx;
-        }
-
-        [Test, MaxTime(2000)]
-        public void TestGetMeshIdx_Set()
-        {
-            Vertex vertex = new Vertex(Auxilaries.RandomPosition(), 1);
-
-            int expected = 1;
-            int actual = vertex.MeshIdx;
 
             Assert.AreEqual(expected, actual);
         }

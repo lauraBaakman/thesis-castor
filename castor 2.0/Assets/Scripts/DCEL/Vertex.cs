@@ -16,28 +16,6 @@ namespace DoubleConnectedEdgeList
         public readonly Vector3 Position;
 
         /// <summary>
-        /// The index of the this vertex in the mesh, if the vertex occured multiple time in the mesh,
-        /// the index of the first occurence is used.
-        /// </summary>
-        public int MeshIdx
-        {
-            get
-            {
-                if (this.meshIdx == -1)
-                {
-                    throw new System.ArgumentException("The vertex idx of this vertex was not set");
-                }
-                return this.meshIdx;
-            }
-        }
-        private int meshIdx;
-
-        internal bool HasMeshIdx
-        {
-            get { return this.meshIdx != -1; }
-        }
-
-        /// <summary>
         /// The edges that have their origin at this vertex.
         /// </summary>
         /// <value>The incident edges.</value>
@@ -48,10 +26,9 @@ namespace DoubleConnectedEdgeList
 
         private List<HalfEdge> incidentEdges;
 
-        public Vertex(Vector3 position, int meshIdx = -1)
+        public Vertex(Vector3 position)
         {
             this.Position = position;
-            this.meshIdx = meshIdx;
             this.incidentEdges = new List<HalfEdge>();
         }
 
@@ -87,7 +64,7 @@ namespace DoubleConnectedEdgeList
 
         public override string ToString()
         {
-            return string.Format("[Vertex [{0}]: position={1}]", meshIdx, Position);
+            return string.Format("[Vertex: position={0}]", Position);
         }
 
         /// <summary>
@@ -125,12 +102,7 @@ namespace DoubleConnectedEdgeList
 
             Vertex vertex = obj as Vertex;
 
-            int comparison = this.meshIdx.CompareTo(vertex.meshIdx);
-            if (comparison != 0) return comparison;
-
-            comparison = this.Position.CompareTo(vertex.Position);
-
-            return comparison;
+            return this.Position.CompareTo(vertex.Position);
         }
 
         public class SimpleComparer : IEqualityComparer<Vertex>

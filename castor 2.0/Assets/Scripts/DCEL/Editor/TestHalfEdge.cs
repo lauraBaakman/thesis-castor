@@ -756,8 +756,8 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjSmallerInPosition()
         {
-            HalfEdge thisHalfEdge = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
-            HalfEdge otherHalfEdge = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+            HalfEdge thisHalfEdge = new HalfEdge(new Vertex(new Vector3(0, 1)));
+            HalfEdge otherHalfEdge = new HalfEdge(new Vertex(new Vector3(3, 4)));
 
             int expected = -1;
             int actual = thisHalfEdge.CompareTo(otherHalfEdge);
@@ -768,8 +768,8 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjLargerInPosition()
         {
-            HalfEdge thisHalfEdge = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
-            HalfEdge otherHalfEdge = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+            HalfEdge thisHalfEdge = new HalfEdge(new Vertex(new Vector3(3, 4)));
+            HalfEdge otherHalfEdge = new HalfEdge(new Vertex(new Vector3(0, 1)));
 
             int expected = 1;
             int actual = thisHalfEdge.CompareTo(otherHalfEdge);
@@ -799,8 +799,8 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
 
-            thisEdge.Twin = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
-            otherEdge.Twin = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+            thisEdge.Twin = new HalfEdge(new Vertex(new Vector3(0, 1)));
+            otherEdge.Twin = new HalfEdge(new Vertex(new Vector3(3, 4)));
 
             int expected = -1;
             int actual = thisEdge.CompareTo(otherEdge);
@@ -816,8 +816,8 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
 
-            thisEdge.Twin = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
-            otherEdge.Twin = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+            thisEdge.Twin = new HalfEdge(new Vertex(new Vector3(3, 4)));
+            otherEdge.Twin = new HalfEdge(new Vertex(new Vector3(0, 1)));
 
             int expected = +1;
             int actual = thisEdge.CompareTo(otherEdge);
@@ -833,8 +833,8 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
 
-            thisEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
-            otherEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+            thisEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1)));
+            otherEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4)));
 
             int expected = -1;
             int actual = thisEdge.CompareTo(otherEdge);
@@ -850,8 +850,8 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
 
-            thisEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
-            otherEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+            thisEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4)));
+            otherEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1)));
 
             int expected = +1;
             int actual = thisEdge.CompareTo(otherEdge);
@@ -872,8 +872,8 @@ namespace Tests.DoubleConnectedEdgeList
             thisEdge.Twin = twin;
             otherEdge.Twin = twin;
 
-            thisEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
-            otherEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+            thisEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1)));
+            otherEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4)));
 
             int expected = -1;
             int actual = thisEdge.CompareTo(otherEdge);
@@ -894,8 +894,8 @@ namespace Tests.DoubleConnectedEdgeList
             thisEdge.Twin = twin;
             otherEdge.Twin = twin;
 
-            thisEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
-            otherEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+            thisEdge.Next = new HalfEdge(new Vertex(new Vector3(3, 4)));
+            otherEdge.Next = new HalfEdge(new Vertex(new Vector3(0, 1)));
 
             int expected = +1;
             int actual = thisEdge.CompareTo(otherEdge);
@@ -911,8 +911,8 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
 
-            thisEdge.Previous = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
-            otherEdge.Previous = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
+            thisEdge.Previous = new HalfEdge(new Vertex(new Vector3(0, 1)));
+            otherEdge.Previous = new HalfEdge(new Vertex(new Vector3(3, 4)));
 
             int expected = -1;
             int actual = thisEdge.CompareTo(otherEdge);
@@ -928,8 +928,8 @@ namespace Tests.DoubleConnectedEdgeList
             HalfEdge thisEdge = new HalfEdge(vertex);
             HalfEdge otherEdge = new HalfEdge(vertex);
 
-            thisEdge.Previous = new HalfEdge(new Vertex(new Vector3(3, 4, 5)));
-            otherEdge.Previous = new HalfEdge(new Vertex(new Vector3(0, 1, 2)));
+            thisEdge.Previous = new HalfEdge(new Vertex(new Vector3(3, 4)));
+            otherEdge.Previous = new HalfEdge(new Vertex(new Vector3(0, 1)));
 
             int expected = +1;
             int actual = thisEdge.CompareTo(otherEdge);
@@ -966,8 +966,8 @@ namespace Tests.DoubleConnectedEdgeList
         [Test]
         public void TestLength_Simple()
         {
-            HalfEdge edge = new HalfEdge(new Vertex(new Vector3(5, 0, 0)));
-            edge.Twin = new HalfEdge(new Vertex(new Vector3(2, 0, 0)));
+            HalfEdge edge = new HalfEdge(new Vertex(new Vector3(5, 0)));
+            edge.Twin = new HalfEdge(new Vertex(new Vector3(2, 0)));
 
             float expected = 3;
             float actual = edge.Length;
