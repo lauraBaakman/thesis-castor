@@ -91,7 +91,7 @@ namespace DoubleConnectedEdgeList
         /// hash table.</returns>
         public override int GetHashCode()
         {
-            SimpleComparer edge = new SimpleComparer();
+            OriginDestinationComparer edge = new OriginDestinationComparer();
             Vertex.SimpleComparer vertex = new Vertex.SimpleComparer();
             Face.MeshIdxAndNormalComparer face = new Face.MeshIdxAndNormalComparer();
 
@@ -131,7 +131,7 @@ namespace DoubleConnectedEdgeList
         /// <see cref="T:DoubleConnectedEdgeList.HalfEdge"/>; otherwise, <c>false</c>.</returns>
         public bool Equals(HalfEdge other)
         {
-            SimpleComparer edgeComparer = new SimpleComparer();
+            OriginDestinationComparer edgeComparer = new OriginDestinationComparer();
             Vertex.SimpleComparer vertexComparer = new Vertex.SimpleComparer();
             Face.MeshIdxAndNormalComparer faceComparer = new Face.MeshIdxAndNormalComparer();
 
@@ -174,11 +174,11 @@ namespace DoubleConnectedEdgeList
             return thisEdge.Origin.CompareTo(otherEdge.Origin);
         }
 
-        public class SimpleComparer : IEqualityComparer<HalfEdge>
+        public class OriginDestinationComparer : IEqualityComparer<HalfEdge>
         {
             private Vertex.SimpleComparer vertexComparer;
 
-            public SimpleComparer()
+            public OriginDestinationComparer()
             {
                 vertexComparer = new Vertex.SimpleComparer();
             }

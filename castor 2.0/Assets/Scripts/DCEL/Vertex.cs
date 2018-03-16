@@ -51,7 +51,7 @@ namespace DoubleConnectedEdgeList
         /// hash table.</returns>
         public override int GetHashCode()
         {
-            HalfEdge.SimpleComparer edgeComparer = new HalfEdge.SimpleComparer();
+            HalfEdge.OriginDestinationComparer edgeComparer = new HalfEdge.OriginDestinationComparer();
 
             int hash = 17;
             hash *= (31 + Position.GetHashCode());

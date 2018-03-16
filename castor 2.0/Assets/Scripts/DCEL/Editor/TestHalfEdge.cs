@@ -990,14 +990,14 @@ namespace Tests.DoubleConnectedEdgeList
 
 
     [TestFixture]
-    public class HalfEdgeSimpleComparerTest
+    public class OriginDestinationComparerTest
     {
-        private HalfEdge.SimpleComparer comparer;
+        private HalfEdge.OriginDestinationComparer comparer;
 
         [SetUp]
         public void Init()
         {
-            comparer = new HalfEdge.SimpleComparer();
+            comparer = new HalfEdge.OriginDestinationComparer();
         }
 
         [Test, MaxTime(50)]
