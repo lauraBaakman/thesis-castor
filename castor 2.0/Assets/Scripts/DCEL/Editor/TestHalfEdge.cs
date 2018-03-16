@@ -961,6 +961,29 @@ namespace Tests.DoubleConnectedEdgeList
             Assert.AreEqual(expected, actual);
         }
 
+        [Test]
+        public void TestLength_Simple()
+        {
+            HalfEdge edge = new HalfEdge(new Vertex(new Vector3(5, 0, 0)));
+            edge.Twin = new HalfEdge(new Vertex(new Vector3(2, 0, 0)));
+
+            float expected = 3;
+            float actual = edge.Length;
+
+            Assert.That(actual, Is.EqualTo(expected).Within(0.0001));
+        }
+
+        [Test]
+        public void TestLength_Complex()
+        {
+            HalfEdge edge = new HalfEdge(new Vertex(new Vector3(5, 3, -1)));
+            edge.Twin = new HalfEdge(new Vertex(new Vector3(2, -4, 7)));
+
+            float expected = 11.045361f;
+            float actual = edge.Length;
+
+            Assert.That(actual, Is.EqualTo(expected).Within(0.0001));
+        }
     }
 
 

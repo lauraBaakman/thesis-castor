@@ -74,6 +74,11 @@ namespace DoubleConnectedEdgeList
 
         public bool HasIncidentFace { get { return this.incidentFace != null; } }
 
+        public float Length
+        {
+            get { return (this.Origin.Position - this.Destination.Position).magnitude; }
+        }
+
         public HalfEdge(Vertex origin)
         {
             this.Origin = origin;
