@@ -4,7 +4,7 @@ using System.Text;
 
 namespace IO
 {
-    public static class ObjExporter
+    internal static class ObjExporter
     {
 
         public static string MeshToString(MeshFilter mf)
@@ -12,7 +12,9 @@ namespace IO
             Mesh m = mf.mesh;
             Material[] mats = mf.GetComponent<Renderer>().sharedMaterials;
 
+#pragma warning disable XS0001 // Find APIs marked as TODO in Mono
             StringBuilder sb = new StringBuilder();
+#pragma warning restore XS0001 // Find APIs marked as TODO in Mono
 
             sb.Append("g ").Append(mf.name).Append("\n");
             foreach (Vector3 v in m.vertices)
