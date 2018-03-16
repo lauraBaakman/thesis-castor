@@ -1,6 +1,8 @@
 using NUnit.Framework;
 
 using DoubleConnectedEdgeList;
+using UnityEngine;
+using System.Collections.Generic;
 
 namespace Tests.DoubleConnectedEdgeList
 {
@@ -241,6 +243,92 @@ namespace Tests.DoubleConnectedEdgeList
             int actual = thisFace.CompareTo(otherFace);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void TestArea_Triangle()
+        {
+            Vertex a = new Vertex(new Vector3(1, 2, 3));
+            Vertex b = new Vertex(new Vector3(3, 9, -1));
+            Vertex c = new Vertex(new Vector3(4, 4, -7));
+
+            HalfEdge ab = new HalfEdge(a);
+            HalfEdge ac = new HalfEdge(a);
+
+            HalfEdge ba = new HalfEdge(b);
+            HalfEdge bc = new HalfEdge(b);
+
+            HalfEdge ca = new HalfEdge(c);
+            HalfEdge cb = new HalfEdge(c);
+
+            ab.Twin = ba;
+            ac.Twin = ca;
+
+            ba.Twin = ab;
+            bc.Twin = cb;
+
+            ca.Twin = ac;
+            cb.Twin = bc;
+
+            Face triangle = new Face(0);
+            triangle.AddOuterComponent(ac);
+            triangle.AddOuterComponent(cb);
+            triangle.AddOuterComponent(ba);
+
+            float expected = 32.39212973693076f;
+            float actual = triangle.Area;
+
+            Assert.That(actual, Is.EqualTo(expected).Within(0.0001f));
+        }
+
+        [Test]
+        public void TestArea_NotTriangle()
+        {
+            Assert.Throws(typeof(System.InvalidOperationException), new TestDelegate(TestArea_NotTriangle_Helper));
+        }
+
+        public void TestArea_NotTriangle_Helper()
+        {
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
+            Vertex d = Auxilaries.RandomVertex();
+
+            HalfEdge ab = new HalfEdge(a);
+            HalfEdge ba = new HalfEdge(b);
+
+            HalfEdge bc = new HalfEdge(b);
+            HalfEdge cb = new HalfEdge(c);
+
+            HalfEdge cd = new HalfEdge(c);
+            HalfEdge dc = new HalfEdge(d);
+
+            HalfEdge da = new HalfEdge(d);
+            HalfEdge ad = new HalfEdge(a);
+
+            ab.Twin = ba;
+            ab.Next = bc;
+            ab.Previous = da;
+
+            bc.Twin = cb;
+            bc.Next = cd;
+            bc.Previous = ab;
+
+            cd.Twin = dc;
+            cd.Next = da;
+            cd.Previous = bc;
+
+            da.Twin = ad;
+            da.Next = ab;
+            da.Previous = cd;
+
+            Face rectangle = new Face(0);
+            rectangle.AddOuterComponent(bc);
+            rectangle.AddOuterComponent(cd);
+            rectangle.AddOuterComponent(da);
+            rectangle.AddOuterComponent(ab);
+
+            float area = rectangle.Area;
         }
     }
 

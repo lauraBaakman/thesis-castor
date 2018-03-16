@@ -106,9 +106,9 @@ namespace Tests.DoubleConnectedEdgeList
             Vector3[] meshVertices = { p1, p2, p3, p3, p4, p1 };
 
             int[] triangles = {
-            0, 2, 1,
-            3, 5, 4
-        };
+                0, 2, 1,
+                3, 5, 4
+            };
 
             mesh.vertices = meshVertices;
             mesh.triangles = triangles;
@@ -158,12 +158,12 @@ namespace Tests.DoubleConnectedEdgeList
             e43.Previous = e14;
 
             List<HalfEdge> halfEdges = new List<HalfEdge>
-        {
-            e12, e13, e14,
-            e21, e23,
-            e31, e32, e34,
-            e41, e43
-        };
+            {
+                e12, e13, e14,
+                e21, e23,
+                e31, e32, e34,
+                e41, e43
+            };
 
             Face f2 = new Face(0);
             f2.AddOuterComponent(e21);
@@ -198,8 +198,8 @@ namespace Tests.DoubleConnectedEdgeList
             v4.AddIncidentEdge(e43);
 
             List<Vertex> dcelVertices = new List<Vertex> {
-            v1, v2, v3, v4
-        };
+                v1, v2, v3, v4
+            };
 
             DCEL expected = new DCEL(
                 dcelVertices.AsReadOnly(),

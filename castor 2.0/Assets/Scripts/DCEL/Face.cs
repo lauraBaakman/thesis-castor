@@ -24,6 +24,11 @@ namespace DoubleConnectedEdgeList
 
         public readonly int MeshIdx;
 
+        public float Area
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public Face(int meshIdx)
         {
             this.MeshIdx = meshIdx;
