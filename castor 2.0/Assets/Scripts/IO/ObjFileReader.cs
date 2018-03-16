@@ -41,9 +41,9 @@ namespace IO
              */
             foreach (Vector3 v in meshInfo.faceData)
             {
-                vertices[i] = meshInfo.vertices[(int)v.x - 1] / 10f;
+                vertices[i] = meshInfo.vertices[(int)v.x - 1];
 
-                if (v.z >= 1) normals[i] = meshInfo.normals[(int)v.z - 1];
+                if (v.z >= 1) normals[i] = (meshInfo.normals[(int)v.z - 1]).normalized;
                 i++;
             }
 
