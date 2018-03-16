@@ -13,8 +13,17 @@ namespace IO
 
         public static WriteResult Write(Mesh mesh, string path)
         {
-            Debug.Log("Temporarily returning OK, without writing the mesh to file");
-            return new WriteResult(IOCode.OK, path);
+            IOCode status;
+            try
+            {
+                ObjExporter.MeshToFile(mesh, path);
+                status = IOCode.OK;
+            }
+            catch (ArgumentException)
+            {
+                status = IOCode.Error;
+            }
+            return new WriteResult(status, path);
         }
     }
 }
