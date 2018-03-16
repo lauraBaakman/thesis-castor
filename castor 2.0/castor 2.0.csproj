@@ -335,7 +335,6 @@
     <Compile Include="Assets\Scripts\DCEL\HalfEdge.cs" />
     <Compile Include="Assets\Scripts\DCEL\Vertex.cs" />
     <Compile Include="Assets\Scripts\Extensions\ColorExtensions.cs" />
-    <Compile Include="Assets\Scripts\Extensions\DictionaryExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\ICollectionExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\IEnumerableExtensions.cs" />

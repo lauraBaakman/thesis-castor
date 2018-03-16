@@ -68,7 +68,7 @@ namespace DoubleConnectedEdgeList
         {
             return (
                 this.vertices.UnorderedElementsAreEqual(other.vertices) &&
-                this.faces.UnorderedElementsAreEqual(other.faces) &&
+                this.faces.UnorderedElementsAreEqual(other.faces, new Face.KeyValueComparer<int>()) &&
                 this.halfEdges.UnorderedElementsAreEqual(other.halfEdges)
             );
         }
@@ -78,7 +78,7 @@ namespace DoubleConnectedEdgeList
             int hash = 17;
             hash *= (31 + vertices.UnorderedElementsGetHashCode());
             hash *= (31 + halfEdges.UnorderedElementsGetHashCode());
-            hash *= (31 + faces.UnorderedElementsGetHashCode());
+            hash *= (31 + faces.UnorderedElementsGetHashCode(new Face.KeyValueComparer<int>()));
             return hash;
         }
         #endregion

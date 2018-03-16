@@ -203,7 +203,6 @@
     <Compile Include="Assets\Scripts\DCEL\Editor\TestHalfEdge.cs" />
     <Compile Include="Assets\Scripts\DCEL\Editor\TestVertex.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestColorExtensions.cs" />
-    <Compile Include="Assets\Scripts\Extensions\Editor\TestDictionaryExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestICollectionExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestIEnumerableExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestMatrix4Extensions.cs" />
