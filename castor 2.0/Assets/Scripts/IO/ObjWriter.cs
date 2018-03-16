@@ -4,40 +4,35 @@ using System.Text;
 
 namespace IO
 {
+    //Adapted from http://wiki.unity3d.com/index.php?title=ObjExporter
     internal static class ObjExporter
     {
 
-        public static string MeshToString(MeshFilter mf)
+        public static string MeshToString(Mesh mesh)
         {
-            Mesh m = mf.mesh;
-            Material[] mats = mf.GetComponent<Renderer>().sharedMaterials;
-
 #pragma warning disable XS0001 // Find APIs marked as TODO in Mono
             StringBuilder sb = new StringBuilder();
 #pragma warning restore XS0001 // Find APIs marked as TODO in Mono
 
-            sb.Append("g ").Append(mf.name).Append("\n");
-            foreach (Vector3 v in m.vertices)
+            sb.Append("g ").Append(mesh.name).Append("\n");
+            foreach (Vector3 v in mesh.vertices)
             {
                 sb.Append(string.Format("v {0} {1} {2}\n", v.x, v.y, v.z));
             }
             sb.Append("\n");
-            foreach (Vector3 v in m.normals)
+            foreach (Vector3 v in mesh.normals)
             {
                 sb.Append(string.Format("vn {0} {1} {2}\n", v.x, v.y, v.z));
             }
             sb.Append("\n");
-            foreach (Vector3 v in m.uv)
+            foreach (Vector3 v in mesh.uv)
             {
                 sb.Append(string.Format("vt {0} {1}\n", v.x, v.y));
             }
-            for (int material = 0; material < m.subMeshCount; material++)
+            for (int material = 0; material < mesh.subMeshCount; material++)
             {
                 sb.Append("\n");
-                sb.Append("usemtl ").Append(mats[material].name).Append("\n");
-                sb.Append("usemap ").Append(mats[material].name).Append("\n");
-
-                int[] triangles = m.GetTriangles(material);
+                int[] triangles = mesh.GetTriangles(0);
                 for (int i = 0; i < triangles.Length; i += 3)
                 {
                     sb.Append(string.Format("f {0}/{0}/{0} {1}/{1}/{1} {2}/{2}/{2}\n",
@@ -47,12 +42,19 @@ namespace IO
             return sb.ToString();
         }
 
-        public static void MeshToFile(MeshFilter mf, string filename)
+        public static void MeshToFile(Mesh mesh, string path)
         {
-            using (StreamWriter sw = new StreamWriter(filename))
+            ValidateMesh(mesh);
+
+            using (StreamWriter sw = new StreamWriter(path))
             {
-                sw.Write(MeshToString(mf));
+                sw.Write(MeshToString(mesh));
             }
+        }
+
+        private static void ValidateMesh(Mesh mesh)
+        {
+            if (mesh.subMeshCount != 1) throw new System.ArgumentException("The writer can only handle meshes without submeshes.");
         }
     }
 }
