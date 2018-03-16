@@ -275,7 +275,7 @@ namespace Tests.DoubleConnectedEdgeList
             triangle.AddOuterComponent(cb);
             triangle.AddOuterComponent(ba);
 
-            float expected = 32.39212973693076f;
+            float expected = 13.405389f;
             float actual = triangle.Area;
 
             Assert.That(actual, Is.EqualTo(expected).Within(0.0001f));
