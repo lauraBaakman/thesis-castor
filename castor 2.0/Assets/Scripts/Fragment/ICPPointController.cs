@@ -5,7 +5,7 @@ namespace Fragment
 {
     public class ICPPointController : MonoBehaviour, IRTEditorEventListener
     {
-        public static float defaultScale = 0.01f;
+        public static float defaultScale = 0.1f;
         private Color defaultColor;
         private MeshRenderer meshRenderer;
 
