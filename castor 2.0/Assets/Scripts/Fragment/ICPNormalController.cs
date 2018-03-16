@@ -136,7 +136,7 @@ namespace Fragment
 
     internal class Normal
     {
-        private static float MagnitudeFactor = 0.05f;
+        private static float MagnitudeFactor = 0.5f;
         private static Color DefaultColor = Color.white;
 
         public readonly Vector3 Start;
