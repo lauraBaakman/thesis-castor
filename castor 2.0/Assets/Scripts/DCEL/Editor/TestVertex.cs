@@ -2,7 +2,6 @@
 using NUnit.Framework;
 
 using DoubleConnectedEdgeList;
-using System.Collections.Generic;
 
 namespace Tests.DoubleConnectedEdgeList
 {
@@ -699,52 +698,6 @@ namespace Tests.DoubleConnectedEdgeList
 
             Assert.IsTrue(comparer.Equals(x, y));
             Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
-        }
-    }
-
-    [TestFixture]
-    public class VertexKeyValueComparerTest
-    {
-        private Vertex.KeyValueComparer<int> comparer;
-
-        [SetUp]
-        public void Init()
-        {
-            comparer = new Vertex.KeyValueComparer<int>();
-        }
-
-        [Test, MaxTime(50)]
-        public void XAndyAreEqual()
-        {
-            int idx = 3;
-            Vertex vertex = Auxilaries.RandomVertex();
-            KeyValuePair<int, Vertex> x = new KeyValuePair<int, Vertex>(idx, vertex);
-            KeyValuePair<int, Vertex> y = new KeyValuePair<int, Vertex>(idx, vertex);
-
-            Assert.IsTrue(comparer.Equals(x, y));
-            Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
-        }
-
-        [Test, MaxTime(50)]
-        public void XAndyAreNotEqual_KeyDifferent()
-        {
-            Vertex vertex = Auxilaries.RandomVertex();
-            KeyValuePair<int, Vertex> x = new KeyValuePair<int, Vertex>(1, vertex);
-            KeyValuePair<int, Vertex> y = new KeyValuePair<int, Vertex>(2, vertex);
-
-            Assert.IsFalse(comparer.Equals(x, y));
-            Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
-        }
-
-        [Test, MaxTime(50)]
-        public void XAndyAreNotEqual_ValueDifferent()
-        {
-            int idx = 3;
-            KeyValuePair<int, Vertex> x = new KeyValuePair<int, Vertex>(idx, Auxilaries.RandomVertex());
-            KeyValuePair<int, Vertex> y = new KeyValuePair<int, Vertex>(idx, Auxilaries.RandomVertex());
-
-            Assert.IsFalse(comparer.Equals(x, y));
-            Assert.AreNotEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
         }
     }
 }
