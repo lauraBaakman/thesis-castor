@@ -12,7 +12,7 @@ namespace DoubleConnectedEdgeList
     {
         private List<Vertex> vertices;
         private List<HalfEdge> halfEdges;
-        private List<Face> faces;
+        private Dictionary<int, Face> faces;
 
         public DCEL(ReadOnlyCollection<Vertex> vertices,
                    ReadOnlyCollection<HalfEdge> edges,
@@ -21,14 +21,15 @@ namespace DoubleConnectedEdgeList
         {
             this.vertices.AddRange(vertices);
             this.halfEdges.AddRange(edges);
-            this.faces.AddRange(faces);
+
+            foreach (Face face in faces) AddFace(face);
         }
 
         internal DCEL()
         {
             vertices = new List<Vertex>();
             halfEdges = new List<HalfEdge>();
-            faces = new List<Face>();
+            faces = new Dictionary<int, Face>();
         }
 
         /// <summary>
@@ -104,7 +105,9 @@ namespace DoubleConnectedEdgeList
 
         internal void AddFace(Face face)
         {
-            this.faces.Add(face);
+            if (this.faces.ContainsKey(face.MeshIdx)) throw new InvalidOperationException("The DCEL already as a face with this idx");
+
+            this.faces.Add(face.MeshIdx, face);
         }
         #endregion
     }
