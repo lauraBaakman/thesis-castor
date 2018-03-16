@@ -2,57 +2,55 @@ using NUnit.Framework;
 using System.IO;
 using UnityEngine;
 using IO;
+using System.Runtime.CompilerServices;
 
 namespace Tests.IO
 {
     [TestFixture]
     public class ObjFileTests
     {
-        string cube = "Scripts/IO/Editor/cube.obj";
-        string balk = "Scripts/IO/Editor/balk.obj";
-
-        string balkPath;
         string outputPath;
 
         [SetUp]
         public void SetUp()
         {
-            this.outputPath = UnityEditor.FileUtil.GetUniqueTempPathInProject();
+            this.outputPath = TempPath();
+        }
+
+        private string TempPath()
+        {
+            return Path.Combine(Application.dataPath, UnityEditor.FileUtil.GetUniqueTempPathInProject());
         }
 
         private string InputPath(string file)
         {
-            return Path.Combine(Application.dataPath, file);
+            return Path.Combine(Application.dataPath, Path.Combine("Scripts/IO/Editor", file));
         }
 
         [TearDown]
         public void TearDown()
         {
-            UnityEditor.FileUtil.DeleteFileOrDirectory(this.outputPath);
+            //UnityEditor.FileUtil.DeleteFileOrDirectory(this.outputPath);
         }
 
-        [Test]
-        public void Test_ReadWrite_Cube()
+
+        [TestCase("cube.obj")]
+        [TestCase("balk.obj")]
+        public void Test_ReadWrite(string path)
         {
-            string inputPath = InputPath(cube);
-            ReadResult readResult = ObjFile.Read(inputPath);
-            Mesh mesh = readResult.Mesh;
+            string inputPath = InputPath(path);
+            ReadResult expected = ObjFile.Read(inputPath);
+            Assert.IsTrue(expected.Succeeded());
+
+            Mesh mesh = expected.Mesh;
 
             WriteResult writeResult = ObjFile.Write(mesh, this.outputPath);
+            Assert.IsTrue(writeResult.Succeeded());
 
-            FileAssert.AreEqual(inputPath, this.outputPath);
-        }
+            ReadResult actual = ObjFile.Read(this.outputPath);
+            Assert.IsTrue(actual.Succeeded());
 
-        [Test]
-        public void Test_ReadWrite_Balk()
-        {
-            string inputPath = InputPath(balk);
-            ReadResult readResult = ObjFile.Read(inputPath);
-            Mesh mesh = readResult.Mesh;
-
-            WriteResult writeResult = ObjFile.Write(mesh, this.outputPath);
-
-            FileAssert.AreEqual(inputPath, this.outputPath);
+            Assert.IsTrue(actual.Mesh.Equals(expected.Mesh));
         }
     }
 }

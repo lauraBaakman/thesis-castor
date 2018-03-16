@@ -8,22 +8,28 @@ namespace IO
         public static ReadResult Read(string path)
         {
             Mesh mesh = ObjFileReader.ImportFile(path);
-            return new ReadResult(IOCode.OK, path, mesh);
+            return ReadResult.OKResult(path, mesh);
         }
 
         public static WriteResult Write(Mesh mesh, string path)
         {
-            IOCode status;
+            WriteResult result;
             try
             {
                 ObjExporter.MeshToFile(mesh, path);
-                status = IOCode.OK;
+                result = WriteResult.OKResult(path);
             }
             catch (ArgumentException)
             {
-                status = IOCode.Error;
+                result = WriteResult.ErrorResult(string.Format("Invalid mesh in the file {0}", path));
             }
-            return new WriteResult(status, path);
+            catch (Exception exception)
+            {
+                result = WriteResult.ErrorResult(path, exception);
+            }
+
+            return result;
+
         }
     }
 }

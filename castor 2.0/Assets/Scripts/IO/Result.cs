@@ -1,5 +1,7 @@
+using System;
 using Ticker;
 using UnityEngine;
+using UnityEngine.Networking.NetworkSystem;
 
 namespace IO
 {
@@ -10,21 +12,22 @@ namespace IO
         protected readonly IOCode status;
         protected Message message;
 
-        internal IOResult(IOCode status, string path)
+        internal IOResult(IOCode status, string message)
+            : this(status)
         {
-            this.status = status;
-            this.message = buildMessage(status, path);
+            this.message = buildMessage(message);
         }
 
-        protected Message buildMessage(IOCode statusCode, string path)
+        internal IOResult(IOCode status)
         {
-            string messageText = buildMessageText(statusCode, path);
+            this.status = status;
+        }
 
+        protected Message buildMessage(string messageText)
+        {
             if (status.Equals(IOCode.OK)) return new Message.InfoMessage(messageText);
             return new Message.ErrorMessage(messageText);
         }
-
-        internal abstract string buildMessageText(IOCode statusCode, string path);
 
         public bool Succeeded()
         {
@@ -51,31 +54,55 @@ namespace IO
             get { return mesh; }
         }
 
-        internal ReadResult(IOCode status, string path, Mesh mesh)
-            : base(status, path)
+        private ReadResult(IOCode status, string message)
+            : base(status, message)
+        { }
+
+        private ReadResult(IOCode status, string message, Mesh mesh)
+            : base(status, message)
         {
             this.mesh = mesh;
         }
 
-        internal override string buildMessageText(IOCode statusCode, string path)
+        internal static ReadResult OKResult(string path, Mesh mesh)
         {
-            return statusCode.Equals(IOCode.OK)
-                ? string.Format("Succesfully read the file {0}", path)
-                : string.Format("Could not read the file {0}", path);
+            string messageText = string.Format("Succesfully read the file {0}", path);
+            return new ReadResult(IOCode.OK, messageText, mesh);
+        }
+
+        internal static ReadResult ErrorResult(string messageText)
+        {
+            return new ReadResult(IOCode.Error, messageText);
+        }
+
+        internal static ReadResult ErrorResult(string path, Exception exception)
+        {
+            string messageText = string.Format("Could not read a fragment from the file {0}: {1}", path, exception.Message);
+            return ErrorResult(messageText);
         }
     };
 
     public class WriteResult : IOResult
     {
-        internal WriteResult(IOCode status, string path)
-            : base(status, path)
+        private WriteResult(IOCode status, string messageText)
+            : base(status)
         { }
 
-        internal override string buildMessageText(IOCode statusCode, string path)
+        internal static WriteResult ErrorResult(string messageText)
         {
-            return statusCode.Equals(IOCode.OK)
-                             ? string.Format("Succesfully wrote the fragment to the file {0}", path)
-                                 : string.Format("Could not write the fragment to the file {0}", path);
+            return new WriteResult(IOCode.Error, messageText);
+        }
+
+        internal static WriteResult ErrorResult(string path, Exception exception)
+        {
+            string messageText = string.Format("Could not write the fragment to the file {0}: {1}", path, exception.Message);
+            return ErrorResult(messageText);
+        }
+
+        internal static WriteResult OKResult(string path)
+        {
+            string messageText = string.Format("Succesfully wrote the fragment to the file {0}", path);
+            return new WriteResult(IOCode.OK, messageText);
         }
     }
 }

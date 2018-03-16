@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 using System.Text;
+using System;
 
 namespace IO
 {
@@ -59,7 +60,14 @@ namespace IO
 
             using (StreamWriter sw = new StreamWriter(path))
             {
-                sw.Write(MeshToString(mesh));
+                try
+                {
+                    sw.Write(MeshToString(mesh));
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
         }
 
