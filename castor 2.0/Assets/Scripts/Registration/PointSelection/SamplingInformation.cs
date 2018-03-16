@@ -26,4 +26,18 @@ namespace Registration
             )
         { }
     }
+
+    public class SamplingConfiguration
+    {
+        public enum NormalProcessing { NoNormals, VertexNormals, AreaWeightedSmoothNormals };
+
+        public readonly NormalProcessing normalProcessing;
+        public readonly Transform referenceTransform;
+
+        public SamplingConfiguration(Transform referenceTransform, NormalProcessing normalProcessing)
+        {
+            this.normalProcessing = normalProcessing;
+            this.referenceTransform = referenceTransform;
+        }
+    }
 }

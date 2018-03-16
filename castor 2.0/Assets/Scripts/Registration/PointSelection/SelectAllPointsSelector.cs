@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEditor;
 
 namespace Registration
 {
@@ -22,12 +24,26 @@ namespace Registration
         /// </summary>
         private SelectionFunction selectionFunction;
 
-        public SelectAllPointsSelector(Transform referenceTransform, bool includeNormals = false)
+        public SelectAllPointsSelector(SamplingConfiguration configuration)
         {
-            ReferenceTransform = referenceTransform;
+            ReferenceTransform = configuration.referenceTransform;
 
-            if (includeNormals) selectionFunction = SelectWithNormals;
-            else selectionFunction = SelectNoNormals;
+            selectionFunction = SelectSelectionFunction(configuration.normalProcessing);
+        }
+
+        private SelectionFunction SelectSelectionFunction(SamplingConfiguration.NormalProcessing normalProcessing)
+        {
+            switch (normalProcessing)
+            {
+                case SamplingConfiguration.NormalProcessing.NoNormals:
+                    return NoNormals;
+                case SamplingConfiguration.NormalProcessing.VertexNormals:
+                    return VertexNormals;
+                case SamplingConfiguration.NormalProcessing.AreaWeightedSmoothNormals:
+                    return SmoothNormals;
+                default:
+                    throw new ArgumentException();
+            }
         }
 
         public List<Point> Select(SamplingInformation samplingInfo)
@@ -35,7 +51,7 @@ namespace Registration
             return selectionFunction(samplingInfo.Transform, samplingInfo.Mesh);
         }
 
-        private List<Point> SelectNoNormals(Transform fragmentTransform, Mesh fragment)
+        private List<Point> NoNormals(Transform fragmentTransform, Mesh fragment)
         {
             ///Use a set to avoid duplicate points when the mesh has duplicate vertices
             HashSet<Point> points = new HashSet<Point>();
@@ -51,7 +67,7 @@ namespace Registration
             return new List<Point>(points);
         }
 
-        private List<Point> SelectWithNormals(Transform fragmentTransform, Mesh fragment)
+        private List<Point> VertexNormals(Transform fragmentTransform, Mesh fragment)
         {
             List<Point> points = new List<Point>();
 
@@ -67,6 +83,11 @@ namespace Registration
                 );
             }
             return points;
+        }
+
+        private List<Point> SmoothNormals(Transform fragmentTransform, Mesh fragment)
+        {
+            throw new NotSupportedException();
         }
     }
 }
