@@ -45,9 +45,9 @@ namespace Tests.DoubleConnectedEdgeList
             Vertex thisVertex = new Vertex(position, 0);
             Vertex otherVertex = new Vertex(position, 1);
 
-            Assert.IsTrue(thisVertex.Equals(otherVertex));
-            Assert.IsTrue(otherVertex.Equals(thisVertex));
-            Assert.AreEqual(thisVertex, otherVertex);
+            Assert.IsFalse(thisVertex.Equals(otherVertex));
+            Assert.IsFalse(otherVertex.Equals(thisVertex));
+            Assert.AreNotEqual(thisVertex, otherVertex);
         }
 
         [Test, MaxTime(2000)]
@@ -65,9 +65,9 @@ namespace Tests.DoubleConnectedEdgeList
         public void TestEquals_IncidentEdgesNotEqual()
         {
             Vector3 position = Auxilaries.RandomPosition();
-
-            Vertex thisVertex = new Vertex(position);
-            Vertex otherVertex = new Vertex(position);
+            int idx = 0;
+            Vertex thisVertex = new Vertex(position, idx);
+            Vertex otherVertex = new Vertex(position, idx);
 
             HalfEdge edge1 = Auxilaries.RandomHalfEdge();
             HalfEdge edge2 = Auxilaries.RandomHalfEdge();
@@ -87,9 +87,10 @@ namespace Tests.DoubleConnectedEdgeList
         public void TestEquals_IncidentEdgesSuperSet()
         {
             Vector3 position = Auxilaries.RandomPosition();
+            int idx = 0;
 
-            Vertex thisVertex = new Vertex(position);
-            Vertex otherVertex = new Vertex(position);
+            Vertex thisVertex = new Vertex(position, idx);
+            Vertex otherVertex = new Vertex(position, idx);
 
             HalfEdge edge1 = Auxilaries.RandomHalfEdge();
             HalfEdge edge2 = Auxilaries.RandomHalfEdge();
@@ -111,8 +112,9 @@ namespace Tests.DoubleConnectedEdgeList
         {
             Vector3 position = Auxilaries.RandomPosition();
 
-            Vertex thisVertex = new Vertex(position);
-            Vertex otherVertex = new Vertex(position);
+            int idx = 0;
+            Vertex thisVertex = new Vertex(position, idx);
+            Vertex otherVertex = new Vertex(position, idx);
 
             HalfEdge edge1 = Auxilaries.RandomHalfEdge();
             HalfEdge edge2 = Auxilaries.RandomHalfEdge();
@@ -563,8 +565,9 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjSmallerMeshIdxEqual()
         {
-            Vertex thisVertex = new Vertex(new Vector3(0, 1, 2));
-            Vertex otherVertex = new Vertex(new Vector3(3, 4, 5));
+            int idx = 0;
+            Vertex thisVertex = new Vertex(new Vector3(0, 1, 2), idx);
+            Vertex otherVertex = new Vertex(new Vector3(3, 4, 5), idx);
 
             int expected = -1;
             int actual = thisVertex.CompareTo(otherVertex);
@@ -575,8 +578,9 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqualMeshIdxEqual()
         {
-            Vertex thisVertex = new Vertex(new Vector3(1, 2, 3));
-            Vertex otherVertex = new Vertex(new Vector3(1, 2, 3));
+            int idx = 0;
+            Vertex thisVertex = new Vertex(new Vector3(1, 2, 3), idx);
+            Vertex otherVertex = new Vertex(new Vector3(1, 2, 3), idx);
 
             int expected = 0;
             int actual = thisVertex.CompareTo(otherVertex);
@@ -587,8 +591,9 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjLargerMeshIdxEqual()
         {
-            Vertex thisVertex = new Vertex(new Vector3(3, 4, 5));
-            Vertex otherVertex = new Vertex(new Vector3(0, 1, 2));
+            int idx = 0;
+            Vertex thisVertex = new Vertex(new Vector3(3, 4, 5), idx);
+            Vertex otherVertex = new Vertex(new Vector3(0, 1, 2), idx);
 
             int expected = 1;
             int actual = thisVertex.CompareTo(otherVertex);
@@ -597,19 +602,7 @@ namespace Tests.DoubleConnectedEdgeList
         }
 
         [Test, MaxTime(2000)]
-        public void TestGetMeshIdx_NotSet()
-        {
-            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(TestGetMeshIdx_NotSet_Helper));
-        }
-
-        public void TestGetMeshIdx_NotSet_Helper()
-        {
-            Vertex vertex = Auxilaries.RandomVertex();
-            int meshIdx = vertex.MeshIdx;
-        }
-
-        [Test, MaxTime(2000)]
-        public void TestGetMeshIdx_Set()
+        public void TestGetMeshIdx()
         {
             Vertex vertex = new Vertex(Auxilaries.RandomPosition(), 1);
 
@@ -665,8 +658,9 @@ namespace Tests.DoubleConnectedEdgeList
         public void XAndyAreEqual()
         {
             Vector3 positon = Auxilaries.RandomPosition();
-            Vertex x = new Vertex(positon);
-            Vertex y = new Vertex(positon);
+            int idx = 0;
+            Vertex x = new Vertex(positon, idx);
+            Vertex y = new Vertex(positon, idx);
 
             HalfEdge edge = Auxilaries.RandomHalfEdge();
 
@@ -691,8 +685,9 @@ namespace Tests.DoubleConnectedEdgeList
         public void XAndyAreEqual_IncidentEdgesDifferent()
         {
             Vector3 positon = Auxilaries.RandomPosition();
-            Vertex x = new Vertex(positon);
-            Vertex y = new Vertex(positon);
+            int idx = 0;
+            Vertex x = new Vertex(positon, idx);
+            Vertex y = new Vertex(positon, idx);
 
             x.AddIncidentEdge(Auxilaries.RandomHalfEdge());
             y.AddIncidentEdge(Auxilaries.RandomHalfEdge());

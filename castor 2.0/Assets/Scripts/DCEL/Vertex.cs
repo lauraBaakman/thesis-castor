@@ -21,21 +21,9 @@ namespace DoubleConnectedEdgeList
         /// </summary>
         public int MeshIdx
         {
-            get
-            {
-                if (this.meshIdx == -1)
-                {
-                    throw new System.ArgumentException("The vertex idx of this vertex was not set");
-                }
-                return this.meshIdx;
-            }
+            get { return this.meshIdx; }
         }
         private int meshIdx;
-
-        internal bool HasMeshIdx
-        {
-            get { return this.meshIdx != -1; }
-        }
 
         /// <summary>
         /// The edges that have their origin at this vertex.
@@ -48,7 +36,7 @@ namespace DoubleConnectedEdgeList
 
         private List<HalfEdge> incidentEdges;
 
-        public Vertex(Vector3 position, int meshIdx = -1)
+        public Vertex(Vector3 position, int meshIdx)
         {
             this.Position = position;
             this.meshIdx = meshIdx;
@@ -78,6 +66,7 @@ namespace DoubleConnectedEdgeList
 
             int hash = 17;
             hash *= (31 + Position.GetHashCode());
+            hash *= (31 + MeshIdx.GetHashCode());
             foreach (HalfEdge edge in IncidentEdges)
             {
                 hash *= (31 + edgeComparer.GetHashCode(edge));
@@ -114,6 +103,7 @@ namespace DoubleConnectedEdgeList
         {
             return (
                 this.Position.Equals(other.Position) &&
+                this.MeshIdx.Equals(other.MeshIdx) &&
                 this.IncidentEdges.UnorderedElementsAreEqual(other.IncidentEdges)
             );
         }
