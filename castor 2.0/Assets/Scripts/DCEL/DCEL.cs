@@ -9,7 +9,7 @@ namespace DoubleConnectedEdgeList
 {
     public class DCEL : IEquatable<DCEL>
     {
-        private List<Vertex> vertices;
+        private Dictionary<Vector3, Vertex> vertices;
         private List<HalfEdge> halfEdges;
         private Dictionary<int, Face> faces;
 
@@ -18,15 +18,14 @@ namespace DoubleConnectedEdgeList
                    ReadOnlyCollection<Face> faces
                    ) : this()
         {
-            this.vertices.AddRange(vertices);
+            foreach (Vertex vertex in vertices) AddVertex(vertex);
             this.halfEdges.AddRange(edges);
-
             foreach (Face face in faces) AddFace(face);
         }
 
         internal DCEL()
         {
-            vertices = new List<Vertex>();
+            vertices = new Dictionary<Vector3, Vertex>();
             halfEdges = new List<HalfEdge>();
             faces = new Dictionary<int, Face>();
         }
@@ -70,7 +69,7 @@ namespace DoubleConnectedEdgeList
         public bool Equals(DCEL other)
         {
             return (
-                this.vertices.UnorderedElementsAreEqual(other.vertices) &&
+                this.vertices.UnorderedElementsAreEqual(other.vertices, new Vertex.KeyValueComparer()) &&
                 this.faces.UnorderedElementsAreEqual(other.faces, new Face.KeyValueComparer<int>()) &&
                 this.halfEdges.UnorderedElementsAreEqual(other.halfEdges)
             );
@@ -79,7 +78,7 @@ namespace DoubleConnectedEdgeList
         public override int GetHashCode()
         {
             int hash = 17;
-            if (!this.vertices.IsEmpty()) hash *= (31 + vertices.UnorderedElementsGetHashCode());
+            if (!this.vertices.IsEmpty()) hash *= (31 + vertices.UnorderedElementsGetHashCode(new Vertex.KeyValueComparer()));
             if (!this.halfEdges.IsEmpty()) hash *= (31 + halfEdges.UnorderedElementsGetHashCode());
             if (!this.faces.IsEmpty()) hash *= (31 + faces.UnorderedElementsGetHashCode(new Face.KeyValueComparer<int>()));
             return hash;
@@ -96,8 +95,19 @@ namespace DoubleConnectedEdgeList
         /// <returns>The vertex in the mesh at the position of the passed vertex.</returns>
         internal Vertex AddVertexIfNew(Vertex vertex)
         {
-            if (!this.vertices.Contains(vertex)) this.vertices.Add(vertex);
-            return vertices.Find(x => x.Equals(vertex));
+            if (!this.vertices.ContainsKey(vertex.Position)) AddVertex(vertex);
+
+            Vertex result;
+            vertices.TryGetValue(vertex.Position, out result);
+
+            return result;
+        }
+
+        internal void AddVertex(Vertex vertex)
+        {
+            if (this.vertices.ContainsKey(vertex.Position)) throw new InvalidOperationException("The DCEL already has a vertex at the position " + vertex.Position);
+
+            this.vertices.Add(vertex.Position, vertex);
         }
 
         internal void AddEdge(HalfEdge halfEdge)
@@ -107,7 +117,7 @@ namespace DoubleConnectedEdgeList
 
         internal void AddFace(Face face)
         {
-            if (this.faces.ContainsKey(face.MeshIdx)) throw new InvalidOperationException("The DCEL already as a face with this idx");
+            if (this.faces.ContainsKey(face.MeshIdx)) throw new InvalidOperationException("The DCEL already has a face with this idx");
 
             this.faces.Add(face.MeshIdx, face);
         }
