@@ -558,14 +558,14 @@ namespace Tests.DoubleConnectedEdgeList
     }
 
     [TestFixture]
-    public class VertexSimpleComparerTest
+    public class PositionComparerTest
     {
-        private Vertex.SimpleComparer comparer;
+        private Vertex.PositionComparer comparer;
 
         [SetUp]
         public void Init()
         {
-            comparer = new Vertex.SimpleComparer();
+            comparer = new Vertex.PositionComparer();
         }
 
         [Test, MaxTime(50)]

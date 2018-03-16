@@ -105,7 +105,7 @@ namespace DoubleConnectedEdgeList
             return this.Position.CompareTo(vertex.Position);
         }
 
-        public class SimpleComparer : IEqualityComparer<Vertex>
+        public class PositionComparer : IEqualityComparer<Vertex>
         {
             public bool Equals(Vertex x, Vertex y)
             {
