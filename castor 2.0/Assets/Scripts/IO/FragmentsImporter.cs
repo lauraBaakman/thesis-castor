@@ -68,7 +68,7 @@ namespace IO
 
         internal void Import(string path)
         {
-            IO.FragmentFile.ReadResult result = IO.FragmentFile.Read(path);
+            IO.ObjFile.ReadResult result = IO.ObjFile.Read(path);
 
             if (result.Succeeded())
             {

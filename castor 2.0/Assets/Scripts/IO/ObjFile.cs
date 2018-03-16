@@ -3,7 +3,7 @@ using Ticker;
 
 namespace IO
 {
-    public static class FragmentFile
+    internal static class ObjFile
     {
         public static ReadResult Read(string path)
         {
