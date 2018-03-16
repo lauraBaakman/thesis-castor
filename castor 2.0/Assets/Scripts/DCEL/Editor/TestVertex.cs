@@ -523,8 +523,8 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjSmaller()
         {
-            Vertex thisVertex = new Vertex(new Vector3(0, 1));
-            Vertex otherVertex = new Vertex(new Vector3(3, 4));
+            Vertex thisVertex = new Vertex(new Vector3(0, 1, 2));
+            Vertex otherVertex = new Vertex(new Vector3(3, 4, 5));
 
             int expected = -1;
             int actual = thisVertex.CompareTo(otherVertex);
@@ -535,8 +535,8 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjEqual()
         {
-            Vertex thisVertex = new Vertex(new Vector3(1, 2));
-            Vertex otherVertex = new Vertex(new Vector3(1, 2));
+            Vertex thisVertex = new Vertex(new Vector3(1, 2, 3));
+            Vertex otherVertex = new Vertex(new Vector3(1, 2, 3));
 
             int expected = 0;
             int actual = thisVertex.CompareTo(otherVertex);
@@ -547,8 +547,8 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(2000)]
         public void TestCompareTo_ObjLarger()
         {
-            Vertex thisVertex = new Vertex(new Vector3(3, 4));
-            Vertex otherVertex = new Vertex(new Vector3(0, 1));
+            Vertex thisVertex = new Vertex(new Vector3(3, 4, 5));
+            Vertex otherVertex = new Vertex(new Vector3(0, 1, 2));
 
             int expected = 1;
             int actual = thisVertex.CompareTo(otherVertex);
