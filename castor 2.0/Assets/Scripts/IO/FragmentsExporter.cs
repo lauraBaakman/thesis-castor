@@ -82,25 +82,41 @@ namespace IO
 
     internal class FragmentExporter
     {
+        private static string defaultSuffix = "_transformed";
+
         private FragmentsExporter.CallBack callback;
 
-        public FragmentExporter(FragmentsExporter.CallBack callback)
+        /// <summary>
+        /// The suffix to postpend to the name of the fragment.
+        /// </summary>
+        private string suffix;
+
+        public FragmentExporter(FragmentsExporter.CallBack callback, string suffix = null)
         {
             this.callback = callback;
+            this.suffix = suffix ?? defaultSuffix;
         }
 
         public void Export(GameObject fragment, string path)
         {
-            Debug.Log("Exporting " + fragment.name + " to " + path);
-
             ValidateFragment(fragment);
             WriteResult result = Export(
                 mesh: fragment.GetComponent<MeshFilter>().mesh,
                 transformation: fragment.transform.localToWorldMatrix,
-                path: path
+                path: AddSuffix(path)
             );
-
             callback(result);
+        }
+
+        public string AddSuffix(string path)
+        {
+            string directory = Path.GetDirectoryName(path);
+            string file = Path.GetFileName(path);
+            string extension = Path.GetExtension(file);
+            string name = Path.GetFileNameWithoutExtension(path);
+
+            string newFile = string.Format("{0}{1}{2}", name, suffix, extension);
+            return Path.Combine(directory, newFile);
         }
 
         private WriteResult Export(Mesh mesh, Matrix4x4 transformation, string path)
