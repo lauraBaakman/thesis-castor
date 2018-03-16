@@ -19,30 +19,26 @@ namespace IO
 
         internal enum IOCode { OK, Error }
 
-        public class ReadResult : IToTickerMessage
+        internal abstract class IOResult : IToTickerMessage
         {
-            private Mesh mesh;
-            private readonly IOCode status;
-            private readonly string message;
+            protected readonly IOCode status;
+            protected Message message;
 
-            public Mesh Mesh
+            internal IOResult(IOCode status, string path)
             {
-                get { return mesh; }
-            }
-
-            internal ReadResult(IOCode status, string path, Mesh mesh)
-            {
-                this.mesh = mesh;
                 this.status = status;
                 this.message = buildMessage(status, path);
             }
 
-            private string buildMessage(IOCode statusCode, string path)
+            protected Message buildMessage(IOCode statusCode, string path)
             {
-                return statusCode.Equals(IOCode.OK)
-                    ? string.Format("Succesfully read the file {0}", path)
-                    : string.Format("Could not read the file {0}", path);
+                string messageText = buildMessageText(statusCode, path);
+
+                if (status.Equals(IOCode.OK)) return new Message.InfoMessage(messageText);
+                return new Message.ErrorMessage(messageText);
             }
+
+            protected abstract string buildMessageText(IOCode statusCode, string path);
 
             public bool Succeeded()
             {
@@ -56,21 +52,46 @@ namespace IO
 
             public Message ToTickerMessage()
             {
-                if (status.Equals(IOCode.OK)) return ToInfoMessage();
-                return ToErrorMessage();
+                return this.message;
+            }
+        }
+
+        public class ReadResult : IOResult
+        {
+            private Mesh mesh;
+
+            public Mesh Mesh
+            {
+                get { return mesh; }
             }
 
-            private Message ToInfoMessage()
+            internal ReadResult(IOCode status, string path, Mesh mesh)
+                : base(status, path)
             {
-                return new Message.InfoMessage(message);
+                this.mesh = mesh;
             }
 
-            private Message ToErrorMessage()
+            protected override string buildMessageText(IOCode statusCode, string path)
             {
-                return new Message.ErrorMessage(message);
+                return statusCode.Equals(IOCode.OK)
+                    ? string.Format("Succesfully read the file {0}", path)
+                    : string.Format("Could not read the file {0}", path);
             }
         };
 
+        public class WriteResult : IOResult
+        {
+            internal WriteResult(IOCode status, string path)
+                : base(status, path)
+            { }
+
+            protected override string buildMessageText(IOCode statusCode, string path)
+            {
+                return statusCode.Equals(IOCode.OK)
+                                 ? string.Format("Succesfully wrote the fragment to the file {0}", path)
+                                     : string.Format("Could not write the fragment to the file {0}", path);
+            }
+        }
     }
 }
 
