@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using UnityEngine;
 
 using Utils;
@@ -53,7 +52,10 @@ namespace DoubleConnectedEdgeList
 
         public Face GetFace(int meshIdx)
         {
-            throw new NotImplementedException();
+            Face face;
+            bool succes = faces.TryGetValue(meshIdx, out face);
+            if (!succes) throw new ArgumentException(string.Format("Could not find the face with meshidx {0}", meshIdx));
+            return face;
         }
 
         #region IEquatable

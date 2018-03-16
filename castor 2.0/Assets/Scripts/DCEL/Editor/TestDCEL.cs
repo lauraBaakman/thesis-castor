@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 using DoubleConnectedEdgeList;
 using System.Collections.Generic;
+using System;
 
 namespace Tests.DoubleConnectedEdgeList
 {
@@ -851,7 +852,7 @@ namespace Tests.DoubleConnectedEdgeList
         [Test]
         public void GetFace_InvalidFace()
         {
-            Assert.Throws(typeof(System.IndexOutOfRangeException), new TestDelegate(GetFace_InvalidFace_Helper));
+            Assert.Throws(typeof(ArgumentException), new TestDelegate(GetFace_InvalidFace_Helper));
         }
 
         public void GetFace_InvalidFace_Helper()
