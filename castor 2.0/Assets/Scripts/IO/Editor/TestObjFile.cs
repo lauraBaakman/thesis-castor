@@ -19,7 +19,7 @@ namespace Tests.IO
 
         private string TempPath()
         {
-            return Path.Combine(Application.dataPath, UnityEditor.FileUtil.GetUniqueTempPathInProject());
+            return Path.GetTempFileName();
         }
 
         private string InputPath(string file)
