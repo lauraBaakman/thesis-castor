@@ -34,7 +34,6 @@ namespace IO
             PopulateMeshStruct(ref newMesh);
 
             var newVerts = new Vector3[newMesh.faceData.Length];
-            var newUVs = new Vector2[newMesh.faceData.Length];
             var newNormals = new Vector3[newMesh.faceData.Length];
             var i = 0;
             /* The following foreach loops through the facedata and assigns the appropriate vertex, uv, or normal
@@ -43,8 +42,6 @@ namespace IO
             foreach (var v in newMesh.faceData)
             {
                 newVerts[i] = newMesh.vertices[(int)v.x - 1] / 10;
-                if (v.y >= 1)
-                    newUVs[i] = newMesh.uv[(int)v.y - 1];
 
                 if (v.z >= 1)
                     newNormals[i] = newMesh.normals[(int)v.z - 1];
@@ -54,7 +51,6 @@ namespace IO
             var mesh = new Mesh
             {
                 vertices = newVerts,
-                uv = newUVs,
                 normals = newNormals,
                 triangles = newMesh.triangles
             };
