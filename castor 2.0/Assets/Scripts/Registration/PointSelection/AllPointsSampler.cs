@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEditor;
+using System.Collections.ObjectModel;
+using DoubleConnectedEdgeList;
 
 namespace Registration
 {
@@ -10,7 +11,7 @@ namespace Registration
     /// </summary>
     public class AllPointsSampler : IPointSampler
     {
-        private delegate List<Point> SamplingFunction(Transform fragmentTransform, Mesh fragment);
+        private delegate List<Point> SamplingFunction(SamplingInformation info);
 
         /// <summary>
         /// The transform that the points should be sampled in.
@@ -47,27 +48,32 @@ namespace Registration
 
         public List<Point> Sample(SamplingInformation samplingInfo)
         {
-            return samplingFunction(samplingInfo.Transform, samplingInfo.Mesh);
+            return samplingFunction(samplingInfo);
         }
 
-        private List<Point> NoNormals(Transform fragmentTransform, Mesh fragment)
+        private List<Point> NoNormals(SamplingInformation info)
         {
-            ///Use a set to avoid duplicate points when the mesh has duplicate vertices
-            HashSet<Point> points = new HashSet<Point>();
+            Debug.Log("Using NoNormals!");
+            ReadOnlyCollection<Vertex> vertices = info.DCEL.Vertices;
+            List<Point> points = new List<Point>(vertices.Count);
 
-            foreach (Vector3 vertex in fragment.vertices)
+            Vector3 position;
+            foreach (Vertex vertex in vertices)
             {
+                position = vertex.Position;
                 points.Add(
                     new Point(
-                        vertex.ChangeTransformOfPosition(fragmentTransform, ReferenceTransform)
+                        position.ChangeTransformOfPosition(info.Transform, ReferenceTransform)
                     )
                 );
             }
-            return new List<Point>(points);
+            return points;
         }
 
-        private List<Point> VertexNormals(Transform fragmentTransform, Mesh fragment)
+        private List<Point> VertexNormals(SamplingInformation info)
         {
+            Debug.Log("Using VertexNormals!");
+            Mesh fragment = info.Mesh;
             List<Point> points = new List<Point>();
 
             for (int i = 0; i < fragment.vertices.Length; i++)
@@ -75,18 +81,34 @@ namespace Registration
                 points.Add(
                     new Point(
                         position: fragment.vertices[i].ChangeTransformOfPosition(
-                            fragmentTransform, ReferenceTransform),
+                            info.Transform, ReferenceTransform),
                         normal: fragment.normals[i].ChangeTransformOfDirection(
-                            fragmentTransform, ReferenceTransform)
+                            info.Transform, ReferenceTransform)
                     )
                 );
             }
             return points;
         }
 
-        private List<Point> SmoothNormals(Transform fragmentTransform, Mesh fragment)
+        private List<Point> SmoothNormals(SamplingInformation info)
         {
-            throw new NotSupportedException();
+            Debug.Log("Using SmoothNormals!");
+            ReadOnlyCollection<Vertex> vertices = info.DCEL.Vertices;
+            List<Point> points = new List<Point>(vertices.Count);
+
+            Vector3 position, normal;
+            foreach (Vertex vertex in vertices)
+            {
+                position = vertex.Position;
+                normal = vertex.SmoothedNormal();
+                points.Add(
+                    new Point(
+                        position: position.ChangeTransformOfPosition(info.Transform, ReferenceTransform),
+                        normal: normal.ChangeTransformOfDirection(info.Transform, ReferenceTransform)
+                    )
+                );
+            }
+            return points;
         }
     }
 }
