@@ -12,13 +12,13 @@ namespace IO
         protected readonly IOCode status;
         protected Message message;
 
-        internal IOResult(IOCode status, string message)
+        protected IOResult(IOCode status, string message)
             : this(status)
         {
             this.message = buildMessage(message);
         }
 
-        internal IOResult(IOCode status)
+        protected IOResult(IOCode status)
         {
             this.status = status;
         }
@@ -85,7 +85,7 @@ namespace IO
     public class WriteResult : IOResult
     {
         private WriteResult(IOCode status, string messageText)
-            : base(status)
+            : base(status, messageText)
         { }
 
         internal static WriteResult ErrorResult(string messageText)
