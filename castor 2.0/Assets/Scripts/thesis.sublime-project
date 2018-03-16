@@ -3,10 +3,13 @@
 	[
 		{
 			"path": ".",
-			    "file_exclude_patterns": [
-			    	"*.meta",
-			    	"*.sublime-workspace"
-			    ]
+			"file_exclude_patterns": [
+				"*.meta",
+				"*.sublime-workspace"
+			]
+		},
+		{
+			"path": "../Temp"
 		}
 	]
 }
