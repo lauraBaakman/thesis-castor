@@ -124,7 +124,7 @@ namespace IO
             Utils.MeshTransformer meshTransformer = new Utils.MeshTransformer(transformation);
             Mesh transformedMesh = meshTransformer.Transform(mesh);
 
-            return mesh.ToFile(path);
+            return transformedMesh.ToFile(path);
         }
 
         private void ValidateFragment(GameObject fragment)
