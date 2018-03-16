@@ -55,6 +55,17 @@ namespace DoubleConnectedEdgeList
         }
 
         /// <summary>
+        /// Is the face the triangular.
+        /// 
+        /// Note this method assumes that the list of outercomponents is complete!
+        /// </summary>
+        /// <returns><c>true</c>, if the face is triangular, <c>false</c> otherwise.</returns>
+        public bool IsTriangular()
+        {
+            return (outerComponents.Count == 3);
+        }
+
+        /// <summary>
         /// Adds an edge to the outer component of this face, if that face is not already part of the outer component.
         /// </summary>
         /// <param name="edge">Edge that is part of the outer component of this face.</param>
