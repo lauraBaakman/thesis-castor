@@ -65,28 +65,6 @@ namespace IO
             return mesh;
         }
 
-        public static void AverageVertices(Mesh mesh)
-        {
-            mesh.vertices = AverageVertices(mesh.vertices);
-            mesh.RecalculateBounds();
-        }
-
-        public static Vector3[] AverageVertices(Vector3[] vertices)
-        {
-            var minX = vertices.Min(vertex => vertex.x);
-            var minY = vertices.Min(vertex => vertex.y);
-            var minZ = vertices.Min(vertex => vertex.z);
-            var maxX = vertices.Max(vertex => vertex.x);
-            var maxY = vertices.Max(vertex => vertex.y);
-            var maxZ = vertices.Max(vertex => vertex.z);
-
-            var average = new Vector3((minX + maxX) / 2, (minY + maxY) / 2, (minZ + maxZ) / 2);
-
-            var newVertices = vertices.Select(vertex => vertex - average).ToArray();
-            return newVertices;
-        }
-
-
         private static MeshStruct CreateMeshStruct(string filename)
         {
             var triangles = 0;
