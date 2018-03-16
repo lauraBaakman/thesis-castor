@@ -21,7 +21,7 @@ namespace Buttons
             return false;
         }
 
-        private void NotifyUser(IO.WriteResult result)
+        private void NotifyUser(WriteResult result)
         {
             Receiver.Instance.SendMessage(
                 methodName: "OnMessage",
