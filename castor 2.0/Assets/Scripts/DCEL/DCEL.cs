@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 
 using Utils;
-using NUnit.Framework.Constraints;
+using System.Linq;
 
 namespace DoubleConnectedEdgeList
 {
@@ -13,6 +13,11 @@ namespace DoubleConnectedEdgeList
         private Dictionary<Vector3, Vertex> vertices;
         private List<HalfEdge> halfEdges;
         private Dictionary<int, Face> faces;
+
+        public ReadOnlyCollection<Vertex> Vertices
+        {
+            get { return new ReadOnlyCollection<Vertex>(vertices.Values.ToList()); }
+        }
 
         public DCEL(ReadOnlyCollection<Vertex> vertices,
                    ReadOnlyCollection<HalfEdge> edges,
