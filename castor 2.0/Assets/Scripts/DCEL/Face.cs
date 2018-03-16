@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using UnityEngine;
 
 namespace DoubleConnectedEdgeList
 {
@@ -34,15 +35,20 @@ namespace DoubleConnectedEdgeList
             get
             {
                 if (!IsTriangular()) throw new InvalidOperationException("The area property is not supported for non-triangluar faces.");
-                if (area.Equals(notComputed)) area = computeArea();
+                if (area.Equals(notComputed)) area = computeTriangleArea();
                 return area;
             }
         }
         float area = notComputed;
 
-        private float computeArea()
+        private float computeTriangleArea()
         {
-            throw new NotSupportedException();
+            float edgeSum = 0.0f;
+            foreach (HalfEdge edge in OuterComponents)
+            {
+                edgeSum += edge.Length;
+            }
+            return (edgeSum * 0.5f);
         }
 
         public Face(int meshIdx)
