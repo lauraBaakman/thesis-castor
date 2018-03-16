@@ -1,10 +1,8 @@
-using UnityEngine;
 using NUnit.Framework;
 
 using DoubleConnectedEdgeList;
-using System;
 
-namespace Tests
+namespace Tests.DoubleConnectedEdgeList
 {
     [TestFixture]
     public class FaceTest

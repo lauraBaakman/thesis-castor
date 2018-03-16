@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 using DoubleConnectedEdgeList;
 
-namespace Tests
+namespace Tests.DoubleConnectedEdgeList
 {
     [TestFixture]
     public class VertexTest

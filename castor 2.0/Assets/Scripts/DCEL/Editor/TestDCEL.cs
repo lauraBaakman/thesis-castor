@@ -3,9 +3,8 @@ using NUnit.Framework;
 
 using DoubleConnectedEdgeList;
 using System.Collections.Generic;
-using System;
 
-namespace Tests
+namespace Tests.DoubleConnectedEdgeList
 {
     [TestFixture]
     public class DCELTests
