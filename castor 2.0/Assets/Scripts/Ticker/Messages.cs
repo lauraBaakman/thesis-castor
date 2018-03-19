@@ -161,6 +161,8 @@ namespace Ticker
         public class ErrorMessage : Message
         {
 
+            new private static float DefaultDecayInS = 10.0f;
+
             private static readonly Color DefaultColor = new Color(
                 179.0f / 256.0f, 28.0f / 256.0f, 30f / 256.0f
             );
@@ -169,7 +171,7 @@ namespace Ticker
             /// Initializes a new instance of the <see cref="T:Ticker.Message.ErrorMessage"/> class.
             /// </summary>
             /// <param name="text">Text of the message</param>
-            public ErrorMessage(string text) : base(text, DefaultColor, PriorityLevel.error) { }
+            public ErrorMessage(string text) : base(text, DefaultColor, PriorityLevel.error, DefaultDecayInS) { }
 
             public override string ToString()
             {
