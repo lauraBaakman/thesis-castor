@@ -47,6 +47,29 @@ public static class MeshExtensions
 
     public static void SetWindingOrderToCCW(this Mesh mesh)
     {
+        Vector3 a, b, c;
+        int idxA, idxB, idxC;
+        Utils.TriangleUtils.WindingOrder windingOrder;
 
+        int[] triangles = mesh.triangles;
+        for (int i = 0; i < triangles.Length; i += 3)
+        {
+            idxA = triangles[i + 0];
+            idxB = triangles[i + 1];
+            idxC = triangles[i + 2];
+
+            a = mesh.vertices[idxA];
+            b = mesh.vertices[idxB];
+            c = mesh.vertices[idxC];
+
+            windingOrder = Utils.TriangleUtils.DetermineWindingOrder(a, b, c);
+            if (windingOrder == Utils.TriangleUtils.WindingOrder.ClockWise)
+            {
+                //Swap the first and second vertex
+                triangles[i + 0] = idxB;
+                triangles[i + 1] = idxA;
+            }
+        }
+        mesh.triangles = triangles;
     }
 }

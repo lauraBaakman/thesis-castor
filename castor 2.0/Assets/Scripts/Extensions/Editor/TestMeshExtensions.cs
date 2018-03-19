@@ -186,6 +186,8 @@ namespace Tests.Extensions
 
             Mesh expected = CCWRectangularMesh();
 
+            foreach (int i in actual.triangles) Debug.Log(i);
+
             Assert.IsTrue(actual.MeshEquals(expected));
         }
 
@@ -228,8 +230,8 @@ namespace Tests.Extensions
             Vector3[] vertices = { p1, p2, p3, p4 };
             Vector3[] normals = { normal, normal, normal, normal };
             int[] triangles = {
-                0, 1, 2,
-                2, 3, 0
+                2, 0, 1,
+                3, 0, 2,
             };
 
             CWMesh.vertices = vertices;
