@@ -2,7 +2,6 @@ using NUnit.Framework;
 using System.IO;
 using UnityEngine;
 using IO;
-using System.Runtime.CompilerServices;
 
 namespace Tests.IO
 {
