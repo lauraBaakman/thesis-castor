@@ -7,7 +7,15 @@ namespace IO
     {
         public static ReadResult Read(string path)
         {
-            Mesh mesh = ObjFileReader.ImportFile(path);
+            Mesh mesh;
+            try
+            {
+                mesh = ObjFileReader.ImportFile(path);
+            }
+            catch (FileNotFoundException exception)
+            {
+                return ReadResult.ErrorResult(path, exception);
+            }
             return ReadResult.OKResult(path, mesh);
         }
 
