@@ -20,8 +20,8 @@ namespace Buttons
                 fragmentParent: FragmentsRoot,
                 callBack: NotifyUser
             );
-            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/RoughFracturedCubeXYZRotationTranslationPart1.obj", randomizeTransform: false);
-            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/RoughFracturedCubeXYZRotationTranslationPart2.obj", randomizeTransform: false);
+            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/roughfracturedcube_part1_translationrotation.obj", randomizeTransform: false);
+            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/roughfracturedcube_part2.obj", randomizeTransform: false);
         }
 
         private void NotifyUser(IO.ReadResult result)
