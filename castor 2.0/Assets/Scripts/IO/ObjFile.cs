@@ -14,6 +14,7 @@ namespace IO
                 mesh = ObjFileReader.ImportFile(path);
                 mesh.RecalculateNormals();
                 mesh.RecalculateBounds();
+                mesh.SetWindingOrderToCCW();
             }
             catch (FileNotFoundException exception)
             {

@@ -44,4 +44,9 @@ public static class MeshExtensions
         }
         return hash;
     }
+
+    public static void SetWindingOrderToCCW(this Mesh mesh)
+    {
+
+    }
 }
