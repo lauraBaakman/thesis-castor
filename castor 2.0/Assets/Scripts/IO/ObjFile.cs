@@ -12,6 +12,7 @@ namespace IO
             try
             {
                 mesh = ObjFileReader.ImportFile(path);
+                mesh.RecalculateNormals();
             }
             catch (FileNotFoundException exception)
             {
