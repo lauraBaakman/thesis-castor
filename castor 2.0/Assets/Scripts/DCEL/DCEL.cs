@@ -180,12 +180,19 @@ namespace DoubleConnectedEdgeList
         private void AddFacesAndEdges(Mesh mesh)
         {
             int maxIdx = mesh.triangles.Length - 3;
+            Vector3 faceNormal;
             for (int i = 0; i <= maxIdx; i += 3)
             {
+                faceNormal = mesh.normals[mesh.triangles[i + 0]];
+
+                ///The vertex normals should be the same
+                Debug.Assert(faceNormal.Equals(mesh.normals[mesh.triangles[i + 1]]));
+                Debug.Assert(faceNormal.Equals(mesh.normals[mesh.triangles[i + 2]]));
+
                 AddFaceAndItsEdges(
                     i / 3,
                     Vertices[mesh.triangles[i + 0]], Vertices[mesh.triangles[i + 1]], Vertices[mesh.triangles[i + 2]],
-                    mesh.normals[mesh.triangles[i + 0]], mesh.normals[mesh.triangles[i + 1]], mesh.normals[mesh.triangles[i + 2]]
+                    faceNormal
                 );
             }
         }
@@ -193,13 +200,10 @@ namespace DoubleConnectedEdgeList
         private void AddFaceAndItsEdges(
             int faceIdx,
             Vertex a, Vertex b, Vertex c,
-            Vector3 normalA, Vector3 normalB, Vector3 normalC
+            Vector3 faceNormal
         )
         {
-            //The normals should be equal
-            Debug.Assert(normalA.Equals(normalB) && normalB.Equals(normalC));
-
-            Face face = new Face(faceIdx, normalA);
+            Face face = new Face(faceIdx, faceNormal);
 
             HalfEdge ab = AddEdgeWithTwin(a, b);
             HalfEdge bc = AddEdgeWithTwin(b, c);
