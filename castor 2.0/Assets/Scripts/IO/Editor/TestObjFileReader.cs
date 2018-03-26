@@ -1,10 +1,8 @@
 using System.IO;
 using NUnit.Framework;
 using UnityEngine;
-using NUnit.Framework.Constraints;
-using IO;
 
-namespace Tests.IO
+namespace IO
 {
     [TestFixture]
     public class ObjFileReaderTests
@@ -145,7 +143,20 @@ namespace Tests.IO
             ReadResult expected = ReadResult.OKResult(inputPath, mesh);
             ReadResult actual = new ObjFileReader(inputPath).ImportFile();
 
-            Assert.IsTrue(actual.MeshEquals(expected));
+            Assert.IsTrue(actual.Mesh.MeshEquals(expected.Mesh));
+            Assert.IsTrue(actual.Succeeded());
+        }
+
+        [TestCase]
+        public void Test_InvalidFile()
+        {
+            string inputPath = InputPath("nonexistentfile.obj");
+
+            ReadResult expected = ReadResult.ErrorResult(inputPath, new FileNotFoundException());
+            ReadResult actual = new ObjFileReader(inputPath).ImportFile();
+
+            Assert.IsFalse(actual.Succeeded());
+            Assert.IsTrue(actual.Failed());
         }
     }
 }
