@@ -33,7 +33,8 @@ namespace IO
         {
             string[] lines = ReadLines();
 
-            foreach (string line in lines) ProcessLine(line);
+            int row = 0;
+            foreach (string line in lines) ProcessLine(row++, line);
 
             if (!EncounteredError())
             {
@@ -61,14 +62,14 @@ namespace IO
             return lines;
         }
 
-        private void ProcessLine(string line)
+        private void ProcessLine(int row, string line)
         {
             string trimmedLine = Trim(line);
             foreach (Reader reader in this.readers)
             {
                 if (reader.IsApplicable(line))
                 {
-                    reader.Read(line);
+                    reader.Read(row, line);
                     return;
                 }
             }
@@ -107,7 +108,7 @@ namespace IO
             return isApplicableRegex.IsMatch(line);
         }
 
-        public abstract void Read(string line);
+        public abstract void Read(int row, string line);
     }
 
     public class CommentReader : Reader
@@ -116,7 +117,7 @@ namespace IO
             : base("#")
         { }
 
-        public override void Read(string line)
+        public override void Read(int row, string line)
         {
             //do nothing, comments are irrelevant
         }
@@ -132,7 +133,7 @@ namespace IO
             vertices = new Dictionary<int, Vector3>();
         }
 
-        public override void Read(string line)
+        public override void Read(int row, string line)
         {
             vertices.Add(row, ExtractVertex(line));
         }
@@ -151,7 +152,7 @@ namespace IO
             : base("vn")
         { }
 
-        public override void Read(string line)
+        public override void Read(int row, string line)
         {
             throw new NotImplementedException();
         }
@@ -163,7 +164,7 @@ namespace IO
             : base("f")
         { }
 
-        public override void Read(string line)
+        public override void Read(int row, string line)
         {
             throw new NotImplementedException();
         }
@@ -175,7 +176,7 @@ namespace IO
             : base("vt")
         { }
 
-        public override void Read(string line)
+        public override void Read(int row, string line)
         {
             //do nothing
         }
@@ -187,7 +188,7 @@ namespace IO
             : base("g")
         { }
 
-        public override void Read(string line)
+        public override void Read(int row, string line)
         {
             //do nothing
         }
@@ -199,7 +200,7 @@ namespace IO
             : base("s")
         { }
 
-        public override void Read(string line)
+        public override void Read(int row, string line)
         {
             //do nothing
         }
@@ -211,7 +212,7 @@ namespace IO
             : base("o")
         { }
 
-        public override void Read(string line)
+        public override void Read(int row, string line)
         {
             //do nothing
         }
