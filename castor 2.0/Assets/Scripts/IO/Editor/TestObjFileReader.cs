@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using NUnit.Framework;
 using UnityEngine;
@@ -245,7 +246,6 @@ namespace IO
     [TestFixture]
     public class VertexReaderTests
     {
-
         VertexReader reader;
 
         [SetUp]
@@ -275,12 +275,41 @@ namespace IO
 
 
         [TestCase("v 1 2 3", 1, 2, 3)]
+        [TestCase("v +1 +2 +3", 1, 2, 3)]
+        [TestCase("v -1 +2 -3", -1, 2, -3)]
         [TestCase("v 1.5 2.4 3.6", 1.5f, 2.4f, 3.6f)]
+        [TestCase("v -1.5 -2.4 -3.6", -1.5f, -2.4f, -3.6f)]
+        [TestCase("v 1.53 2.47 3.68", 1.53f, 2.47f, 3.68f)]
         public void ExtractVertexTest(string line, float x, float y, float z)
         {
             Vector3 actual = reader.ExtractVertex(line);
             Vector3 expected = new Vector3(x, y, z);
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReadVertexTest_ValidVertex()
+        {
+            string line = "v 1.53 +2.47 -3.68";
+            reader.Read(line);
+
+            Vector3 expected = new Vector3(1.53f, 2.47f, -3.68f);
+
+            Vector3 actual = reader.vertices[1];
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReadVertexTest_InValidVertex()
+        {
+            Assert.Throws(typeof(ArgumentOutOfRangeException), new TestDelegate(ReadVertexTest_InValidVertex_Helper));
+        }
+
+        private void ReadVertexTest_InValidVertex_Helper()
+        {
+            string line = "v 1.53 +2.47";
+            reader.Read(line);
         }
     }
 

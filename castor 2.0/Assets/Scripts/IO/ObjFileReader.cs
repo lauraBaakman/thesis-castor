@@ -33,8 +33,7 @@ namespace IO
         {
             string[] lines = ReadLines();
 
-            int row = 0;
-            foreach (string line in lines) ProcessLine(row++, line);
+            foreach (string line in lines) ProcessLine(line);
 
             if (!EncounteredError())
             {
@@ -62,18 +61,25 @@ namespace IO
             return lines;
         }
 
-        private void ProcessLine(int row, string line)
+        private void ProcessLine(string line)
         {
-            string trimmedLine = Trim(line);
-            foreach (Reader reader in this.readers)
+            try
             {
-                if (reader.IsApplicable(line))
+                string trimmedLine = Trim(line);
+                foreach (Reader reader in this.readers)
                 {
-                    reader.Read(row, line);
-                    return;
+                    if (reader.IsApplicable(line))
+                    {
+                        reader.Read(line);
+                        return;
+                    }
                 }
+                Debug.LogWarning("Encountered and ignored an unrecognised line: " + line);
             }
-            Debug.LogWarning("Encountered and ignored an unrecognised line: " + line);
+            catch (Exception e)
+            {
+                result = ReadResult.ErrorResult(filePath, e);
+            }
         }
 
         public string Trim(string line)
@@ -108,7 +114,7 @@ namespace IO
             return isApplicableRegex.IsMatch(line);
         }
 
-        public abstract void Read(int row, string line);
+        public abstract void Read(string line);
     }
 
     public class CommentReader : Reader
@@ -117,7 +123,7 @@ namespace IO
             : base("#")
         { }
 
-        public override void Read(int row, string line)
+        public override void Read(string line)
         {
             //do nothing, comments are irrelevant
         }
@@ -127,21 +133,44 @@ namespace IO
     {
         public Dictionary<int, Vector3> vertices;
 
+        private readonly Regex extractTypeRegex;
+        private int currentReferenceNumber = 1;
+
         public VertexReader()
             : base("v")
         {
             vertices = new Dictionary<int, Vector3>();
+
+            extractTypeRegex = new Regex(@"^v\s+
+            	(?<x>\+?\-?\d+(\.\d+)?)\s+
+				(?<y>\+?\-?\d+(\.\d+)?)\s+
+				(?<z>\+?\-?\d+(\.\d+)?)$");
         }
 
-        public override void Read(int row, string line)
+        public override void Read(string line)
         {
-            vertices.Add(row, ExtractVertex(line));
+            try
+            {
+                Vector3 vertex = ExtractVertex(line);
+                vertices.Add(currentReferenceNumber++, vertex);
+            }
+            catch (Exception e) { throw e; }
         }
 
         public Vector3 ExtractVertex(string line)
         {
-            Vector3 vertex = new Vector3();
-
+            Vector3 vertex;
+            try
+            {
+                MatchCollection matches = extractTypeRegex.Matches(line);
+                GroupCollection groups = matches[0].Groups;
+                vertex = new Vector3(
+                    x: float.Parse(groups["x"].Value),
+                    y: float.Parse(groups["y"].Value),
+                    z: float.Parse(groups["z"].Value)
+                );
+            }
+            catch (Exception e) { throw e; }
             return vertex;
         }
     }
@@ -152,7 +181,7 @@ namespace IO
             : base("vn")
         { }
 
-        public override void Read(int row, string line)
+        public override void Read(string line)
         {
             throw new NotImplementedException();
         }
@@ -164,7 +193,7 @@ namespace IO
             : base("f")
         { }
 
-        public override void Read(int row, string line)
+        public override void Read(string line)
         {
             throw new NotImplementedException();
         }
@@ -176,7 +205,7 @@ namespace IO
             : base("vt")
         { }
 
-        public override void Read(int row, string line)
+        public override void Read(string line)
         {
             //do nothing
         }
@@ -188,7 +217,7 @@ namespace IO
             : base("g")
         { }
 
-        public override void Read(int row, string line)
+        public override void Read(string line)
         {
             //do nothing
         }
@@ -200,7 +229,7 @@ namespace IO
             : base("s")
         { }
 
-        public override void Read(int row, string line)
+        public override void Read(string line)
         {
             //do nothing
         }
@@ -212,7 +241,7 @@ namespace IO
             : base("o")
         { }
 
-        public override void Read(int row, string line)
+        public override void Read(string line)
         {
             //do nothing
         }
