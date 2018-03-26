@@ -140,11 +140,7 @@ namespace IO
             : base("v")
         {
             vertices = new Dictionary<int, Vector3>();
-
-            extractTypeRegex = new Regex(@"^v\s+
-            	(?<x>\+?\-?\d+(\.\d+)?)\s+
-				(?<y>\+?\-?\d+(\.\d+)?)\s+
-				(?<z>\+?\-?\d+(\.\d+)?)$");
+            extractTypeRegex = new Regex(@"^v\s+(?<x>\+?\-?\d+(\.\d+)?)\s+(?<y>\+?\-?\d+(\.\d+)?)\s+(?<z>\+?\-?\d+(\.\d+)?)$");
         }
 
         public override void Read(string line)
