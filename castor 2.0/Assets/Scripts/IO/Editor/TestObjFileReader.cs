@@ -13,7 +13,7 @@ namespace IO
             return Path.Combine(Application.dataPath, Path.Combine("Scripts/IO/Editor", file));
         }
 
-        [TestCase]
+        [Test]
         public void Test_ReadCube()
         {
             string inputPath = InputPath("cube.obj");
@@ -147,7 +147,7 @@ namespace IO
             Assert.IsTrue(actual.Succeeded());
         }
 
-        [TestCase]
+        [Test]
         public void Test_InvalidFile()
         {
             string inputPath = InputPath("nonexistentfile.obj");
@@ -159,7 +159,7 @@ namespace IO
             Assert.IsTrue(actual.Failed());
         }
 
-        [TestCase]
+        [Test]
         public void Trim_NoWhiteSpace()
         {
             string input = "hoi";
@@ -169,7 +169,7 @@ namespace IO
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase]
+        [Test]
         public void Trim_MiddleWhiteSpace()
         {
             string input = "hoi hallo\tdoeg";
@@ -179,7 +179,7 @@ namespace IO
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase]
+        [Test]
         public void Trim_OnlyStartWhiteSpace()
         {
             string input = " hoi hallo\tdoeg";
@@ -189,7 +189,7 @@ namespace IO
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase]
+        [Test]
         public void Trim_OnlyEndWhiteSpace()
         {
             string input = "hoi hallo\tdoeg   ";
@@ -199,13 +199,141 @@ namespace IO
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase]
+        [Test]
         public void Trim_StartAndEndWhiteSpace()
         {
             string input = "\thoi hallo\tdoeg   ";
             string expected = "hoi hallo\tdoeg";
             string actual = new ObjFileReader("").Trim(input);
 
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class CommentReaderTests
+    {
+
+        CommentReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new CommentReader();
+        }
+
+        [TestCase("# some comment", true)]
+        [TestCase("v some vertex", false)]
+        [TestCase("vn some normal", false)]
+        [TestCase("vt some texture", false)]
+        [TestCase("f some face", false)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", false)]
+        [TestCase("s some smoothing group", false)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", false)]
+        public void IsApplicableReader(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class VertexReaderTests
+    {
+
+        VertexReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new VertexReader();
+        }
+
+        [TestCase("# some comment", false)]
+        [TestCase("v some vertex", true)]
+        [TestCase("vn some normal", false)]
+        [TestCase("vt some texture", false)]
+        [TestCase("f some face", false)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", false)]
+        [TestCase("s some smoothing group", false)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", false)]
+        public void IsApplicableReader(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class VertexNormalReaderTests
+    {
+
+        VertexNormalReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new VertexNormalReader();
+        }
+
+        [TestCase("# some comment", false)]
+        [TestCase("v some vertex", false)]
+        [TestCase("vn some normal", true)]
+        [TestCase("vt some texture", false)]
+        [TestCase("f some face", false)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", false)]
+        [TestCase("s some smoothing group", false)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", false)]
+        public void IsApplicableReader(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class FaceReaderTests
+    {
+
+        FaceReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new FaceReader();
+        }
+
+        [TestCase("# some comment", false)]
+        [TestCase("v some vertex", false)]
+        [TestCase("vn some normal", false)]
+        [TestCase("f some face", true)]
+        [TestCase("vt some texture", false)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", false)]
+        [TestCase("s some smoothing group", false)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", false)]
+        public void IsApplicableReader(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
         }
     }

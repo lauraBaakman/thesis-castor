@@ -75,6 +75,11 @@ namespace IO
     public abstract class Reader
     {
         protected string lineTypeSymbol;
+
+        public bool IsApplicable(string line)
+        {
+            return false;
+        }
     }
 
     public class CommentReader : Reader
