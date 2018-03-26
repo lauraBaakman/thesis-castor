@@ -272,6 +272,16 @@ namespace IO
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
         }
+
+
+        [TestCase("v 1 2 3", 1, 2, 3)]
+        [TestCase("v 1.5 2.4 3.6", 1.5f, 2.4f, 3.6f)]
+        public void ExtractVertexTest(string line, float x, float y, float z)
+        {
+            Vector3 actual = reader.ExtractVertex(line);
+            Vector3 expected = new Vector3(x, y, z);
+            Assert.AreEqual(expected, actual);
+        }
     }
 
     [TestFixture]

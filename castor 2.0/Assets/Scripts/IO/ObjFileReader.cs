@@ -134,7 +134,14 @@ namespace IO
 
         public override void Read(string line)
         {
-            throw new NotImplementedException();
+            vertices.Add(row, ExtractVertex(line));
+        }
+
+        public Vector3 ExtractVertex(string line)
+        {
+            Vector3 vertex = new Vector3();
+
+            return vertex;
         }
     }
 
