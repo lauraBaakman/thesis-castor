@@ -8,9 +8,13 @@ namespace IO
         private readonly string filePath;
         private ReadResult result = null;
 
+        private CommentReader commentReader;
+
         public ObjFileReader(string filePath)
         {
             this.filePath = filePath;
+
+            commentReader = new CommentReader();
         }
 
         public ReadResult ImportFile()
@@ -34,7 +38,12 @@ namespace IO
 
         private void ProcessLine(string line)
         {
+            string trimmedLine = Trim(line);
+        }
 
+        public string Trim(string line)
+        {
+            return line.Trim();
         }
 
         private Mesh BuildMesh()
@@ -60,6 +69,43 @@ namespace IO
                 result = ReadResult.ErrorResult(filePath, exception);
             }
             return lines;
+        }
+    }
+
+    public abstract class Reader
+    {
+        protected string lineTypeSymbol;
+    }
+
+    public class CommentReader : Reader
+    {
+        public CommentReader()
+        {
+            lineTypeSymbol = "#";
+        }
+    }
+
+    public class VertexReader : Reader
+    {
+        public VertexReader()
+        {
+            lineTypeSymbol = "v";
+        }
+    }
+
+    public class VertexNormalReader : Reader
+    {
+        public VertexNormalReader()
+        {
+            lineTypeSymbol = "vt";
+        }
+    }
+
+    public class FaceReader : Reader
+    {
+        public FaceReader()
+        {
+            lineTypeSymbol = "f";
         }
     }
 }
