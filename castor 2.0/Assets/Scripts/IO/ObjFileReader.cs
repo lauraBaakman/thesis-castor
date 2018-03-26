@@ -1,26 +1,17 @@
 using UnityEngine;
-using NUnit.Framework;
 
 namespace IO
 {
-    public static class ObjFileReader
+    public class ObjFileReader
     {
-        public static Mesh ImportFile(string filePath)
-        {
-            return new _ObjFileReader(filePath).Read();
-        }
-    }
+        private string filePath;
 
-    public class _ObjFileReader
-    {
-        private string filepath;
-
-        public _ObjFileReader(string filepath)
+        public ObjFileReader(string filePath)
         {
-            this.filepath = filepath;
+            this.filePath = filePath;
         }
 
-        public Mesh Read()
+        public Mesh ImportFile()
         {
             Mesh mesh = new Mesh();
 
