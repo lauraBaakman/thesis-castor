@@ -235,7 +235,7 @@ namespace IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
-        public void IsApplicableReader(string line, bool expected)
+        public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
@@ -267,7 +267,7 @@ namespace IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
-        public void IsApplicableReader(string line, bool expected)
+        public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
@@ -299,7 +299,7 @@ namespace IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
-        public void IsApplicableReader(string line, bool expected)
+        public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
@@ -331,7 +331,7 @@ namespace IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
-        public void IsApplicableReader(string line, bool expected)
+        public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
@@ -363,7 +363,7 @@ namespace IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
-        public void IsApplicableReader(string line, bool expected)
+        public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
@@ -395,7 +395,7 @@ namespace IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
-        public void IsApplicableReader(string line, bool expected)
+        public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
@@ -427,7 +427,7 @@ namespace IO
         [TestCase("s some smoothing group", true)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
-        public void IsApplicableReader(string line, bool expected)
+        public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
@@ -459,7 +459,7 @@ namespace IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", true)]
-        public void IsApplicableReader(string line, bool expected)
+        public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
