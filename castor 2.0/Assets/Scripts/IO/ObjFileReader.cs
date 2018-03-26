@@ -117,48 +117,37 @@ namespace IO
         public abstract void Read(string line);
     }
 
-    public class CommentReader : Reader
+    public abstract class VectorReader : Reader
     {
-        public CommentReader()
-            : base("#")
-        { }
+        public Dictionary<int, Vector3> vectors;
 
-        public override void Read(string line)
-        {
-            //do nothing, comments are irrelevant
-        }
-    }
+        private readonly Regex vectorRegex;
 
-    public class VertexReader : Reader
-    {
-        public Dictionary<int, Vector3> vertices;
-
-        private readonly Regex extractTypeRegex;
         private int currentReferenceNumber = 1;
 
-        public VertexReader()
-            : base("v")
+        protected VectorReader(string lineTypeSymbol)
+            : base(lineTypeSymbol)
         {
-            vertices = new Dictionary<int, Vector3>();
-            extractTypeRegex = new Regex(typeRegex + @"(?<x>\+?\-?\d+(\.\d+)?)\s+(?<y>\+?\-?\d+(\.\d+)?)\s+(?<z>\+?\-?\d+(\.\d+)?)$");
+            vectors = new Dictionary<int, Vector3>();
+            vectorRegex = new Regex(typeRegex + @"(?<x>\+?\-?\d+(\.\d+)?)\s+(?<y>\+?\-?\d+(\.\d+)?)\s+(?<z>\+?\-?\d+(\.\d+)?)$");
         }
 
         public override void Read(string line)
         {
             try
             {
-                Vector3 vertex = ExtractVertex(line);
-                vertices.Add(currentReferenceNumber++, vertex);
+                Vector3 vertex = ExtractVector(line);
+                vectors.Add(currentReferenceNumber++, vertex);
             }
             catch (Exception e) { throw e; }
         }
 
-        public Vector3 ExtractVertex(string line)
+        public Vector3 ExtractVector(string line)
         {
             Vector3 vertex;
             try
             {
-                MatchCollection matches = extractTypeRegex.Matches(line);
+                MatchCollection matches = vectorRegex.Matches(line);
                 GroupCollection groups = matches[0].Groups;
                 vertex = new Vector3(
                     x: float.Parse(groups["x"].Value),
@@ -171,16 +160,30 @@ namespace IO
         }
     }
 
-    public class VertexNormalReader : Reader
+    public class CommentReader : Reader
     {
-        public VertexNormalReader()
-            : base("vn")
+        public CommentReader()
+            : base("#")
         { }
 
         public override void Read(string line)
         {
-            throw new NotImplementedException();
+            //do nothing, comments are not part of the mesh
         }
+    }
+
+    public class VertexReader : VectorReader
+    {
+        public VertexReader()
+            : base("v")
+        { }
+    }
+
+    public class VertexNormalReader : VectorReader
+    {
+        public VertexNormalReader()
+            : base("vn")
+        { }
     }
 
     public class FaceReader : Reader
@@ -203,7 +206,7 @@ namespace IO
 
         public override void Read(string line)
         {
-            //do nothing
+            Debug.LogWarning("Textures are ignored");
         }
     }
 
@@ -215,7 +218,7 @@ namespace IO
 
         public override void Read(string line)
         {
-            //do nothing
+            Debug.LogWarning("Groups are ignored");
         }
     }
 
@@ -227,7 +230,7 @@ namespace IO
 
         public override void Read(string line)
         {
-            //do nothing
+            Debug.LogWarning("Smoothing Groups are ignored");
         }
     }
 
@@ -239,7 +242,7 @@ namespace IO
 
         public override void Read(string line)
         {
-            //do nothing
+            Debug.LogWarning("Objects are ignored");
         }
     }
 }

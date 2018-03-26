@@ -282,7 +282,7 @@ namespace IO
         [TestCase("v 1.53 2.47 3.68", 1.53f, 2.47f, 3.68f)]
         public void ExtractVertexTest(string line, float x, float y, float z)
         {
-            Vector3 actual = reader.ExtractVertex(line);
+            Vector3 actual = reader.ExtractVector(line);
             Vector3 expected = new Vector3(x, y, z);
             Assert.AreEqual(expected, actual);
         }
@@ -290,14 +290,17 @@ namespace IO
         [Test]
         public void ReadVertexTest_ValidVertex()
         {
-            string line = "v 1.53 +2.47 -3.68";
-            reader.Read(line);
+            reader.Read("v 1.53 +2.47 -3.68");
+            reader.Read("v -1.5 -2.4 -3.6");
+            reader.Read("v -1.5 -2.4 -3.6");
 
-            Vector3 expected = new Vector3(1.53f, 2.47f, -3.68f);
+            Vector3 expected1 = new Vector3(+1.53f, +2.47f, -3.68f);
+            Vector3 expected2 = new Vector3(-1.50f, -2.40f, -3.60f);
+            Vector3 expected3 = new Vector3(-1.50f, -2.40f, -3.60f);
 
-            Vector3 actual = reader.vertices[1];
-
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected1, reader.vectors[1]);
+            Assert.AreEqual(expected2, reader.vectors[2]);
+            Assert.AreEqual(expected3, reader.vectors[3]);
         }
 
         [Test]
@@ -316,7 +319,6 @@ namespace IO
     [TestFixture]
     public class VertexNormalReaderTests
     {
-
         VertexNormalReader reader;
 
         [SetUp]
@@ -341,6 +343,19 @@ namespace IO
         public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReadTest()
+        {
+            string line = "vn 1.53 +2.47 -3.68";
+            reader.Read(line);
+
+            Vector3 expected = new Vector3(1.53f, 2.47f, -3.68f);
+
+            Vector3 actual = reader.vectors[1];
+
             Assert.AreEqual(expected, actual);
         }
     }
