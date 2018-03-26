@@ -282,7 +282,7 @@ namespace IO
         [TestCase("v 1.53 2.47 3.68", 1.53f, 2.47f, 3.68f)]
         public void ExtractVertexTest(string line, float x, float y, float z)
         {
-            Vector3 actual = reader.ExtractVector(line);
+            Vector3 actual = reader.ExtractElement(line);
             Vector3 expected = new Vector3(x, y, z);
             Assert.AreEqual(expected, actual);
         }
@@ -298,9 +298,9 @@ namespace IO
             Vector3 expected2 = new Vector3(-1.50f, -2.40f, -3.60f);
             Vector3 expected3 = new Vector3(-1.50f, -2.40f, -3.60f);
 
-            Assert.AreEqual(expected1, reader.vectors[1]);
-            Assert.AreEqual(expected2, reader.vectors[2]);
-            Assert.AreEqual(expected3, reader.vectors[3]);
+            Assert.AreEqual(expected1, reader.elements[1]);
+            Assert.AreEqual(expected2, reader.elements[2]);
+            Assert.AreEqual(expected3, reader.elements[3]);
         }
 
         [Test]
@@ -354,7 +354,7 @@ namespace IO
 
             Vector3 expected = new Vector3(1.53f, 2.47f, -3.68f);
 
-            Vector3 actual = reader.vectors[1];
+            Vector3 actual = reader.elements[1];
 
             Assert.AreEqual(expected, actual);
         }
@@ -389,6 +389,32 @@ namespace IO
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReadTest_NoNormals()
+        {
+            string line = "f 1 4 8";
+
+            reader.Read(line);
+        }
+
+        [Test]
+        public void ReadTest_WithNormals()
+        {
+
+        }
+
+        [Test]
+        public void ReadTest_TwoVertices()
+        {
+
+        }
+
+        [Test]
+        public void ReadTest_FourVertices()
+        {
+
         }
     }
 

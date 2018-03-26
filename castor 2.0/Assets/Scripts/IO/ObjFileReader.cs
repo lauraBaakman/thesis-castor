@@ -117,32 +117,42 @@ namespace IO
         public abstract void Read(string line);
     }
 
-    public abstract class VectorReader : Reader
+    public abstract class ReferenceReader<T> : Reader
     {
-        public Dictionary<int, Vector3> vectors;
-
-        private readonly Regex vectorRegex;
-
         private int currentReferenceNumber = 1;
 
-        protected VectorReader(string lineTypeSymbol)
+        public Dictionary<int, T> elements;
+
+        protected ReferenceReader(string lineTypeSymbol)
             : base(lineTypeSymbol)
         {
-            vectors = new Dictionary<int, Vector3>();
-            vectorRegex = new Regex(typeRegex + @"(?<x>\+?\-?\d+(\.\d+)?)\s+(?<y>\+?\-?\d+(\.\d+)?)\s+(?<z>\+?\-?\d+(\.\d+)?)$");
+            elements = new Dictionary<int, T>();
         }
 
         public override void Read(string line)
         {
             try
             {
-                Vector3 vertex = ExtractVector(line);
-                vectors.Add(currentReferenceNumber++, vertex);
+                T vertex = ExtractElement(line);
+                elements.Add(currentReferenceNumber++, vertex);
             }
             catch (Exception e) { throw e; }
         }
 
-        public Vector3 ExtractVector(string line)
+        public abstract T ExtractElement(string line);
+    }
+
+    public abstract class VectorReader : ReferenceReader<Vector3>
+    {
+        private readonly Regex vectorRegex;
+
+        protected VectorReader(string lineTypeSymbol)
+            : base(lineTypeSymbol)
+        {
+            vectorRegex = new Regex(typeRegex + @"(?<x>\+?\-?\d+(\.\d+)?)\s+(?<y>\+?\-?\d+(\.\d+)?)\s+(?<z>\+?\-?\d+(\.\d+)?)$");
+        }
+
+        public override Vector3 ExtractElement(string line)
         {
             Vector3 vertex;
             try
