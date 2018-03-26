@@ -118,15 +118,19 @@ namespace IO
 
         public override void Read(string line)
         {
-            throw new NotImplementedException();
+            //do nothing, comments are irrelevant
         }
     }
 
     public class VertexReader : Reader
     {
+        public Dictionary<int, Vector3> vertices;
+
         public VertexReader()
             : base("v")
-        { }
+        {
+            vertices = new Dictionary<int, Vector3>();
+        }
 
         public override void Read(string line)
         {
