@@ -7,7 +7,7 @@ namespace IO
     {
         public static ReadResult Read(string path)
         {
-            Mesh mesh = ObjFileReader.ImportFile(path);
+            Mesh mesh = OldObjFileReader.ImportFile(path);
             return ReadResult.OKResult(path, mesh);
         }
 

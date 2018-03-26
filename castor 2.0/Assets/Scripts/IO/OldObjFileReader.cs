@@ -10,7 +10,7 @@ namespace IO
     /// Object file reader imports .obj files at runtime.
     /// Source: http://wiki.unity3d.com/index.php?title=ObjImporter
     /// </summary>
-    internal class ObjFileReader
+    internal class OldObjFileReader
     {
         private struct MeshStruct
         {
