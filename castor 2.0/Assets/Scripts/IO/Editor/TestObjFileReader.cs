@@ -20,7 +20,7 @@ namespace Tests.IO
         {
             string inputPath = InputPath("cube.obj");
 
-            Mesh expected = new Mesh();
+            Mesh mesh = new Mesh();
 
             Vector3[] vertices = {
                 //face 1
@@ -72,7 +72,7 @@ namespace Tests.IO
                 new Vector3(+1.000000f, -1.000000f, +1.000000f),
                 new Vector3(+1.000000f, +1.000000f, +1.000000f),
             };
-            expected.vertices = vertices;
+            mesh.vertices = vertices;
 
             Vector3[] normals = {
                 //face 1
@@ -124,7 +124,7 @@ namespace Tests.IO
                 new Vector3(-0.0000f, +0.0000f, +1.0000f),
                 new Vector3(-0.0000f, +0.0000f, +1.0000f),
             };
-            expected.normals = normals;
+            mesh.normals = normals;
 
             int[] triangles = {
                 2, 4, 1,
@@ -140,9 +140,10 @@ namespace Tests.IO
                 3, 7, 8,
                 1, 4, 8,
             };
-            expected.triangles = triangles;
+            mesh.triangles = triangles;
 
-            Mesh actual = new ObjFileReader(inputPath).ImportFile();
+            ReadResult expected = ReadResult.OKResult(inputPath, mesh);
+            ReadResult actual = new ObjFileReader(inputPath).ImportFile();
 
             Assert.IsTrue(actual.MeshEquals(expected));
         }
