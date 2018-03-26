@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -9,19 +10,23 @@ namespace IO
         private readonly string filePath;
         private ReadResult result = null;
 
-        private CommentReader commentReader;
-        private VertexReader vertexReader;
-        private VertexNormalReader normalReader;
-        private FaceReader faceReader;
+        List<Reader> readers;
 
         public ObjFileReader(string filePath)
         {
             this.filePath = filePath;
 
-            commentReader = new CommentReader();
-            vertexReader = new VertexReader();
-            normalReader = new VertexNormalReader();
-            faceReader = new FaceReader();
+            this.readers = new List<Reader>
+            {
+                new CommentReader(),
+                new VertexReader(),
+                new VertexNormalReader(),
+                new FaceReader(),
+                new VertexTextureReader(),
+                new GroupReader(),
+                new SmoothingGroupReader(),
+                new ObjectReader(),
+            };
         }
 
         public ReadResult ImportFile()
@@ -59,11 +64,15 @@ namespace IO
         private void ProcessLine(string line)
         {
             string trimmedLine = Trim(line);
-
-            if (commentReader.IsApplicable(trimmedLine)) commentReader.Read(trimmedLine);
-            if (vertexReader.IsApplicable(trimmedLine)) vertexReader.Read(trimmedLine);
-            if (normalReader.IsApplicable(trimmedLine)) normalReader.Read(trimmedLine);
-            if (faceReader.IsApplicable(trimmedLine)) faceReader.Read(trimmedLine);
+            foreach (Reader reader in this.readers)
+            {
+                if (reader.IsApplicable(line))
+                {
+                    reader.Read(line);
+                    return;
+                }
+            }
+            Debug.LogWarning("Encountered and ignored an unrecognised line: " + line);
         }
 
         public string Trim(string line)
