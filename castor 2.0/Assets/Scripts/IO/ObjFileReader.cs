@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace IO
@@ -74,43 +75,44 @@ namespace IO
 
     public abstract class Reader
     {
-        protected string lineTypeSymbol;
+        protected Regex isApplicableRegex;
+
+        protected Reader(string lineTypeSymbol)
+        {
+            isApplicableRegex = new Regex(@"^" + lineTypeSymbol + @"\s");
+        }
 
         public bool IsApplicable(string line)
         {
-            return false;
+            return isApplicableRegex.IsMatch(line);
         }
     }
 
     public class CommentReader : Reader
     {
         public CommentReader()
-        {
-            lineTypeSymbol = "#";
-        }
+            : base("#")
+        { }
     }
 
     public class VertexReader : Reader
     {
         public VertexReader()
-        {
-            lineTypeSymbol = "v";
-        }
+            : base("v")
+        { }
     }
 
     public class VertexNormalReader : Reader
     {
         public VertexNormalReader()
-        {
-            lineTypeSymbol = "vt";
-        }
+            : base("vn")
+        { }
     }
 
     public class FaceReader : Reader
     {
         public FaceReader()
-        {
-            lineTypeSymbol = "f";
-        }
+            : base("f")
+        { }
     }
 }
