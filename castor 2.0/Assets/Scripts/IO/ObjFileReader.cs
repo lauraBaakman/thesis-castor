@@ -198,13 +198,103 @@ namespace IO
 
     public class FaceReader : Reader
     {
+        private Regex noNormalFaceRegex;
+        private Regex completeFaceRegex;
+
+        public List<Face> faces;
+
         public FaceReader()
             : base("f")
-        { }
+        {
+            faces = new List<Face>();
+
+            noNormalFaceRegex = new Regex(typeRegex + @"(?<v0>\d+)\s+(?<v1>\d+)\s+(?<v2>\d+)$");
+            completeFaceRegex = new Regex(typeRegex + @"(?<v0>\d+)\s+(?<v1>\d+)\s+(?<v2>\d+)");
+        }
 
         public override void Read(string line)
         {
-            throw new NotImplementedException();
+            Face face = ExtractFace(line);
+        }
+
+        public Face ExtractFace(string line)
+        {
+            if (HasNormals(line)) return ExtractCompleteFace(line);
+
+            return ExtractNoNormalFace(line);
+        }
+
+        public bool HasNormals(string line)
+        {
+            return completeFaceRegex.Match(line).Success;
+        }
+
+        public Face ExtractNoNormalFace(string line)
+        {
+            MatchCollection matches = noNormalFaceRegex.Matches(line);
+            GroupCollection groups = matches[0].Groups;
+
+            Face face = new Face(
+                v0: int.Parse(groups["v0"].Value),
+                v1: int.Parse(groups["v1"].Value),
+                v2: int.Parse(groups["v2"].Value)
+            );
+            return face;
+        }
+
+        public Face ExtractCompleteFace(string line)
+        {
+            MatchCollection matches = completeFaceRegex.Matches(line);
+            GroupCollection groups = matches[0].Groups;
+            Face face = new Face(
+                v0: int.Parse(groups["v0"].Value),
+                v1: int.Parse(groups["v1"].Value),
+                v2: int.Parse(groups["v2"].Value),
+                n0: int.Parse(groups["n0"].Value),
+                n1: int.Parse(groups["n1"].Value),
+                n2: int.Parse(groups["n2"].Value)
+            );
+            return face;
+        }
+
+        public class Face
+        {
+            public readonly int[] vertexIndices = null;
+            public readonly int[] normalIndices = null;
+
+            public Face()
+            {
+
+            }
+
+            public Face(
+                int v0, int v1, int v2,
+                int n0, int n1, int n2
+            )
+            {
+                vertexIndices = new int[3];
+                vertexIndices[0] = v0;
+                vertexIndices[1] = v1;
+                vertexIndices[2] = v2;
+
+                normalIndices = new int[3];
+                normalIndices[0] = n0;
+                normalIndices[1] = n1;
+                normalIndices[2] = n2;
+            }
+
+            public Face(int v0, int v1, int v2)
+            {
+                vertexIndices = new int[3];
+                vertexIndices[0] = v0;
+                vertexIndices[1] = v1;
+                vertexIndices[2] = v2;
+            }
+
+            public bool HasNormalIndices()
+            {
+                return this.normalIndices != null;
+            }
         }
     }
 

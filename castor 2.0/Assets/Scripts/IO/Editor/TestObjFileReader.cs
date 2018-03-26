@@ -395,26 +395,100 @@ namespace IO
         public void ReadTest_NoNormals()
         {
             string line = "f 1 4 8";
+            FaceReader.Face expected = new FaceReader.Face(1, 4, 8);
+            FaceReader.Face actual = reader.ExtractFace(line);
 
-            reader.Read(line);
+            Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
+            Assert.AreEqual(expected.normalIndices, actual.normalIndices);
+        }
+
+        [Test]
+        public void ExtractCompleteFace()
+        {
+            string line = "f 1//2 4//3 8//5";
+            FaceReader.Face expected = new FaceReader.Face(1, 4, 8, 2, 3, 5);
+            FaceReader.Face actual = reader.ExtractCompleteFace(line);
+
+            Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
+            Assert.AreEqual(expected.normalIndices, actual.normalIndices);
+        }
+
+        [Test]
+        public void ExtractNoNormalsFace()
+        {
+            string line = "f 1 4 8";
+            FaceReader.Face expected = new FaceReader.Face(1, 4, 8);
+            FaceReader.Face actual = reader.ExtractNoNormalFace(line);
+
+            Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
+            Assert.AreEqual(expected.normalIndices, actual.normalIndices);
+        }
+
+        [TestCase("f 1 4 8", false)]
+        [TestCase("f 1//2 4//3 8//5", true)]
+        public void HasNormals(string line, bool expected)
+        {
+            bool actual = reader.HasNormals(line);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void ReadTest_WithNormals()
         {
+            string line = "f 1//2 4//3 8//5";
+            FaceReader.Face expected = new FaceReader.Face(1, 4, 8, 2, 3, 5);
+            FaceReader.Face actual = reader.ExtractFace(line);
 
+            Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
+            Assert.AreEqual(expected.normalIndices, actual.normalIndices);
         }
 
         [Test]
-        public void ReadTest_TwoVertices()
+        public void ReadTest_TwoVerticesNoNormals()
         {
+            Assert.Throws(typeof(ArgumentOutOfRangeException), new TestDelegate(ReadTest_TwoVerticesNoNormals_Helper));
+        }
 
+        private void ReadTest_TwoVerticesNoNormals_Helper()
+        {
+            string line = "f 1 4";
+            FaceReader.Face actual = reader.ExtractFace(line);
         }
 
         [Test]
-        public void ReadTest_FourVertices()
+        public void ReadTest_TwoVertices_WithNormals()
         {
+            Assert.Throws(typeof(ArgumentOutOfRangeException), new TestDelegate(ReadTest_TwoVertices_WithNormals_Helper));
+        }
 
+        private void ReadTest_TwoVertices_WithNormals_Helper()
+        {
+            string line = "f 1//2 4//3";
+            FaceReader.Face actual = reader.ExtractFace(line);
+        }
+
+        [Test]
+        public void ReadTest_FourVerticesNoNormals()
+        {
+            Assert.Throws(typeof(ArgumentOutOfRangeException), new TestDelegate(ReadTest_FourVerticesNoNormals_Helper));
+        }
+
+        private void ReadTest_FourVerticesNoNormals_Helper()
+        {
+            string line = "f 1 4 8 7";
+            FaceReader.Face actual = reader.ExtractFace(line);
+        }
+
+        [Test]
+        public void ReadTest_FourVertices_WithNormals()
+        {
+            Assert.Throws(typeof(ArgumentOutOfRangeException), new TestDelegate(ReadTest_FourVertices_WithNormals_Helper));
+        }
+
+        private void ReadTest_FourVertices_WithNormals_Helper()
+        {
+            string line = "f 1//2 4//3 1//2 4//3";
+            FaceReader.Face actual = reader.ExtractFace(line);
         }
     }
 
