@@ -102,16 +102,16 @@ namespace IO
 
     public abstract class Reader
     {
-        protected Regex isApplicableRegex;
+        protected Regex typeRegex;
 
         protected Reader(string lineTypeSymbol)
         {
-            isApplicableRegex = new Regex(@"^" + lineTypeSymbol + @"\s");
+            typeRegex = new Regex(@"^" + lineTypeSymbol + @"\s+");
         }
 
         public bool IsApplicable(string line)
         {
-            return isApplicableRegex.IsMatch(line);
+            return typeRegex.IsMatch(line);
         }
 
         public abstract void Read(string line);
@@ -140,7 +140,7 @@ namespace IO
             : base("v")
         {
             vertices = new Dictionary<int, Vector3>();
-            extractTypeRegex = new Regex(@"^v\s+(?<x>\+?\-?\d+(\.\d+)?)\s+(?<y>\+?\-?\d+(\.\d+)?)\s+(?<z>\+?\-?\d+(\.\d+)?)$");
+            extractTypeRegex = new Regex(typeRegex + @"(?<x>\+?\-?\d+(\.\d+)?)\s+(?<y>\+?\-?\d+(\.\d+)?)\s+(?<z>\+?\-?\d+(\.\d+)?)$");
         }
 
         public override void Read(string line)
