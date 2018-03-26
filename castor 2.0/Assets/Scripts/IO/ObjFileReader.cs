@@ -32,28 +32,6 @@ namespace IO
             return result;
         }
 
-        private bool EncounteredError()
-        {
-            return (result != null);
-        }
-
-        private void ProcessLine(string line)
-        {
-            string trimmedLine = Trim(line);
-        }
-
-        public string Trim(string line)
-        {
-            return line.Trim();
-        }
-
-        private Mesh BuildMesh()
-        {
-            Mesh mesh = new Mesh();
-
-            return mesh;
-        }
-
         private string[] ReadLines()
         {
             string[] lines;
@@ -70,6 +48,28 @@ namespace IO
                 result = ReadResult.ErrorResult(filePath, exception);
             }
             return lines;
+        }
+
+        private void ProcessLine(string line)
+        {
+            string trimmedLine = Trim(line);
+        }
+
+        public string Trim(string line)
+        {
+            return line.Trim();
+        }
+
+        private bool EncounteredError()
+        {
+            return (result != null);
+        }
+
+        private Mesh BuildMesh()
+        {
+            Mesh mesh = new Mesh();
+
+            return mesh;
         }
     }
 
