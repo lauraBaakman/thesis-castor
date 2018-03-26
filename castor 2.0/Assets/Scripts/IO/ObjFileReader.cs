@@ -10,12 +10,18 @@ namespace IO
         private ReadResult result = null;
 
         private CommentReader commentReader;
+        private VertexReader vertexReader;
+        private VertexNormalReader normalReader;
+        private FaceReader faceReader;
 
         public ObjFileReader(string filePath)
         {
             this.filePath = filePath;
 
             commentReader = new CommentReader();
+            vertexReader = new VertexReader();
+            normalReader = new VertexNormalReader();
+            faceReader = new FaceReader();
         }
 
         public ReadResult ImportFile()
@@ -53,6 +59,11 @@ namespace IO
         private void ProcessLine(string line)
         {
             string trimmedLine = Trim(line);
+
+            if (commentReader.IsApplicable(trimmedLine)) commentReader.Read(trimmedLine);
+            if (vertexReader.IsApplicable(trimmedLine)) vertexReader.Read(trimmedLine);
+            if (normalReader.IsApplicable(trimmedLine)) normalReader.Read(trimmedLine);
+            if (faceReader.IsApplicable(trimmedLine)) faceReader.Read(trimmedLine);
         }
 
         public string Trim(string line)
@@ -86,6 +97,8 @@ namespace IO
         {
             return isApplicableRegex.IsMatch(line);
         }
+
+        public abstract void Read(string line);
     }
 
     public class CommentReader : Reader
@@ -93,6 +106,11 @@ namespace IO
         public CommentReader()
             : base("#")
         { }
+
+        public override void Read(string line)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class VertexReader : Reader
@@ -100,6 +118,11 @@ namespace IO
         public VertexReader()
             : base("v")
         { }
+
+        public override void Read(string line)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class VertexNormalReader : Reader
@@ -107,6 +130,11 @@ namespace IO
         public VertexNormalReader()
             : base("vn")
         { }
+
+        public override void Read(string line)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class FaceReader : Reader
@@ -114,5 +142,58 @@ namespace IO
         public FaceReader()
             : base("f")
         { }
+
+        public override void Read(string line)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class VertexTextureReader : Reader
+    {
+        public VertexTextureReader()
+            : base("vt")
+        { }
+
+        public override void Read(string line)
+        {
+            //do nothing
+        }
+    }
+
+    public class GroupReader : Reader
+    {
+        public GroupReader()
+            : base("g")
+        { }
+
+        public override void Read(string line)
+        {
+            //do nothing
+        }
+    }
+
+    public class SmoothingGroupReader : Reader
+    {
+        public SmoothingGroupReader()
+            : base("s")
+        { }
+
+        public override void Read(string line)
+        {
+            //do nothing
+        }
+    }
+
+    public class ObjectReader : Reader
+    {
+        public ObjectReader()
+            : base("o")
+        { }
+
+        public override void Read(string line)
+        {
+            //do nothing
+        }
     }
 }

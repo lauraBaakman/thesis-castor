@@ -337,4 +337,132 @@ namespace IO
             Assert.AreEqual(expected, actual);
         }
     }
+
+    [TestFixture]
+    public class VertexTextureReaderTests
+    {
+
+        VertexTextureReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new VertexTextureReader();
+        }
+
+        [TestCase("# some comment", false)]
+        [TestCase("v some vertex", false)]
+        [TestCase("vn some normal", false)]
+        [TestCase("f some face", false)]
+        [TestCase("vt some texture", true)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", false)]
+        [TestCase("s some smoothing group", false)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", false)]
+        public void IsApplicableReader(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class GroupReaderTests
+    {
+
+        GroupReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new GroupReader();
+        }
+
+        [TestCase("# some comment", false)]
+        [TestCase("v some vertex", false)]
+        [TestCase("vn some normal", false)]
+        [TestCase("f some face", false)]
+        [TestCase("vt some texture", false)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", true)]
+        [TestCase("s some smoothing group", false)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", false)]
+        public void IsApplicableReader(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class SmoothingGroupReaderTests
+    {
+
+        SmoothingGroupReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new SmoothingGroupReader();
+        }
+
+        [TestCase("# some comment", false)]
+        [TestCase("v some vertex", false)]
+        [TestCase("vn some normal", false)]
+        [TestCase("f some face", false)]
+        [TestCase("vt some texture", false)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", false)]
+        [TestCase("s some smoothing group", true)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", false)]
+        public void IsApplicableReader(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class ObjectReaderTests
+    {
+
+        ObjectReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new ObjectReader();
+        }
+
+        [TestCase("# some comment", false)]
+        [TestCase("v some vertex", false)]
+        [TestCase("vn some normal", false)]
+        [TestCase("f some face", false)]
+        [TestCase("vt some texture", false)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", false)]
+        [TestCase("s some smoothing group", false)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", true)]
+        public void IsApplicableReader(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+    }
 }
