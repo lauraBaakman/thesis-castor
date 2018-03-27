@@ -257,12 +257,12 @@ namespace IO
             try
             {
                 face = new Face(
-                    v0: Int32.Parse(groups[0].Value),
-                    n0: Int32.Parse(groups[1].Value),
-                    v1: Int32.Parse(groups[2].Value),
-                    n1: Int32.Parse(groups[3].Value),
-                    v2: Int32.Parse(groups[4].Value),
-                    n2: Int32.Parse(groups[5].Value));
+                    v0: Int32.Parse(groups[1].Value),
+                    n0: Int32.Parse(groups[2].Value),
+                    v1: Int32.Parse(groups[3].Value),
+                    n1: Int32.Parse(groups[4].Value),
+                    v2: Int32.Parse(groups[5].Value),
+                    n2: Int32.Parse(groups[6].Value));
             }
             catch (Exception e) { throw e; }
 
