@@ -209,7 +209,8 @@ namespace IO
             faces = new List<Face>();
 
             noNormalFaceRegex = new Regex(typeRegex + @"(?<v0>\d+)\s+(?<v1>\d+)\s+(?<v2>\d+)$");
-            completeFaceRegex = new Regex(typeRegex + @"(?<v0>\d+)\s+(?<v1>\d+)\s+(?<v2>\d+)");
+
+            completeFaceRegex = new Regex(typeRegex.ToString() + @"(\d+)\s*/\s*/\s*(\d+)\s+" + @"(\d+)\s*/\s*/\s*(\d+)\s+" + @"(\d+)\s*/\s*/\s*(\d+)$");
         }
 
         public override void Read(string line)
@@ -226,7 +227,7 @@ namespace IO
 
         public bool HasNormals(string line)
         {
-            return completeFaceRegex.Match(line).Success;
+            return !noNormalFaceRegex.Match(line).Success;
         }
 
         public Face ExtractNoNormalFace(string line)
@@ -234,11 +235,16 @@ namespace IO
             MatchCollection matches = noNormalFaceRegex.Matches(line);
             GroupCollection groups = matches[0].Groups;
 
-            Face face = new Face(
-                v0: int.Parse(groups["v0"].Value),
-                v1: int.Parse(groups["v1"].Value),
-                v2: int.Parse(groups["v2"].Value)
-            );
+            Face face;
+            try
+            {
+                face = new Face(
+                    v0: Int32.Parse(groups["v0"].Value),
+                    v1: Int32.Parse(groups["v1"].Value),
+                    v2: Int32.Parse(groups["v2"].Value)
+                );
+            }
+            catch (Exception e) { throw e; }
             return face;
         }
 
@@ -246,14 +252,20 @@ namespace IO
         {
             MatchCollection matches = completeFaceRegex.Matches(line);
             GroupCollection groups = matches[0].Groups;
-            Face face = new Face(
-                v0: int.Parse(groups["v0"].Value),
-                v1: int.Parse(groups["v1"].Value),
-                v2: int.Parse(groups["v2"].Value),
-                n0: int.Parse(groups["n0"].Value),
-                n1: int.Parse(groups["n1"].Value),
-                n2: int.Parse(groups["n2"].Value)
-            );
+
+            Face face;
+            try
+            {
+                face = new Face(
+                    v0: Int32.Parse(groups[0].Value),
+                    n0: Int32.Parse(groups[1].Value),
+                    v1: Int32.Parse(groups[2].Value),
+                    n1: Int32.Parse(groups[3].Value),
+                    v2: Int32.Parse(groups[4].Value),
+                    n2: Int32.Parse(groups[5].Value));
+            }
+            catch (Exception e) { throw e; }
+
             return face;
         }
 
@@ -261,11 +273,6 @@ namespace IO
         {
             public readonly int[] vertexIndices = null;
             public readonly int[] normalIndices = null;
-
-            public Face()
-            {
-
-            }
 
             public Face(
                 int v0, int v1, int v2,
