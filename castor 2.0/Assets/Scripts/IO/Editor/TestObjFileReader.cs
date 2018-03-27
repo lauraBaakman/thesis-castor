@@ -127,26 +127,28 @@ namespace IO
             mesh.normals = normals;
 
             int[] triangles = {
-                2, 4, 1,
-                8, 6, 5,
-                5, 2, 1,
-                6, 3, 2,
-                3, 8, 4,
-                1, 8, 5,
-                2, 3, 4,
-                8, 7, 6,
-                5, 6, 2,
-                6, 7, 3,
-                3, 7, 8,
-                1, 4, 8,
+                00, 01, 02,
+                03, 04, 05,
+                06, 07, 08,
+                09, 10, 11,
+                12, 13, 14,
+                15, 16, 17,
+                18, 19, 20,
+                21, 22, 23,
+                24, 25, 26,
+                27, 28, 29,
+                30, 31, 32,
+                33, 34, 35
             };
             mesh.triangles = triangles;
 
             ReadResult expected = ReadResult.OKResult(inputPath, mesh);
             ReadResult actual = new ObjFileReader(inputPath).ImportFile();
 
-            Assert.IsTrue(actual.Mesh.MeshEquals(expected.Mesh));
             Assert.IsTrue(actual.Succeeded());
+            Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
+            Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);
+            Assert.AreEqual(expected.Mesh.triangles, actual.Mesh.triangles);
         }
 
         [Test]
