@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using NUnit.Framework;
+using DoubleConnectedEdgeList;
 
 namespace IO
 {
@@ -364,7 +365,9 @@ namespace IO
 
         private List<Vector3> meshVertices;
         private List<Vector3> meshNormals;
-        private List<int> meshFaces;
+        private int[] meshTriangles;
+
+        private int idx = 0;
 
         public MeshBuilder(Dictionary<int, Vector3> vertices, Dictionary<int, Vector3> normals, List<FaceReader.Face> faces)
         {
@@ -374,7 +377,7 @@ namespace IO
 
             meshVertices = new List<Vector3>();
             meshNormals = new List<Vector3>();
-            meshFaces = new List<int>();
+            meshTriangles = new int[faces.Count * 3];
         }
 
         public Mesh Build()
@@ -384,7 +387,7 @@ namespace IO
             Mesh mesh = new Mesh();
             mesh.vertices = meshVertices.ToArray();
             mesh.normals = meshNormals.ToArray();
-            mesh.triangles = meshFaces.ToArray();
+            mesh.triangles = meshTriangles;
 
             return mesh;
         }
@@ -404,6 +407,12 @@ namespace IO
 
             meshVertices.Add(objVertices[face.v2]);
             meshNormals.Add(objMormals[face.n2]);
+
+            meshTriangles[idx + 0] = idx + 0;
+            meshTriangles[idx + 1] = idx + 1;
+            meshTriangles[idx + 2] = idx + 2;
+
+            idx += 3;
         }
     }
 }
