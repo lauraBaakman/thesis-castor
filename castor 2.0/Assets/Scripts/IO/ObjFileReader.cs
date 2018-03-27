@@ -264,7 +264,7 @@ namespace IO
             return face;
         }
 
-        public class Face
+        public class Face : IEquatable<Face>
         {
             public readonly int[] vertexIndices = null;
             public readonly int[] normalIndices = null;
@@ -304,6 +304,44 @@ namespace IO
             public bool HasNormalIndices()
             {
                 return this.normalIndices != null;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null || GetType() != obj.GetType())
+                    return false;
+                return this.Equals(obj as Face);
+            }
+
+            public override int GetHashCode()
+            {
+                int hashCode = 67;
+
+                if (HasNormalIndices())
+                {
+                    hashCode *= (31 + this.n0.GetHashCode());
+                    hashCode *= (31 + this.n1.GetHashCode());
+                    hashCode *= (31 + this.n2.GetHashCode());
+                }
+                hashCode *= (31 + this.v0.GetHashCode());
+                hashCode *= (31 + this.v1.GetHashCode());
+                hashCode *= (31 + this.v2.GetHashCode());
+                return hashCode;
+            }
+
+            public bool Equals(Face other)
+            {
+                bool verticesEqual = (
+                    this.v0.Equals(other.v0) &
+                    this.v1.Equals(other.v1) &
+                    this.v2.Equals(other.v2)
+                );
+                bool normalsEqual = !HasNormalIndices() || (
+                    this.n0.Equals(other.n0) &
+                    this.n1.Equals(other.n1) &
+                    this.n2.Equals(other.n2)
+                );
+                return verticesEqual && normalsEqual;
             }
         }
     }

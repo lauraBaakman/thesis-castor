@@ -657,6 +657,66 @@ namespace IO
     }
 
     [TestFixture]
+    public class FaceReaderFaceTests
+    {
+        [TestCase(1, 2, 3, true, 1, 2, 3)]
+        [TestCase(2, 2, 3, false, 1, 2, 3)]
+        [TestCase(1, 3, 3, false, 1, 2, 3)]
+        [TestCase(1, 2, 4, false, 1, 2, 3)]
+        [TestCase(1, 2, 3, false, 4, 2, 3)]
+        [TestCase(1, 2, 3, false, 1, 4, 3)]
+        [TestCase(1, 2, 3, false, 1, 2, 4)]
+        public void EqualsNoNormals(int this_v0, int this_v1, int this_v2, bool expected, int other_v0, int other_v1, int other_v2)
+        {
+            FaceReader.Face thisFace = new FaceReader.Face(this_v0, this_v1, this_v2);
+            FaceReader.Face otherFace = new FaceReader.Face(other_v0, other_v1, other_v2);
+
+            bool actual = thisFace.Equals(otherFace);
+
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, thisFace.GetHashCode().Equals(otherFace.GetHashCode()));
+        }
+
+        [TestCase(1, 2, 3, 4, 5, 6, true, 1, 2, 3, 4, 5, 6)]
+        [TestCase(9, 2, 3, 4, 5, 6, false, 1, 2, 3, 4, 5, 6)]
+        [TestCase(1, 9, 3, 4, 5, 6, false, 1, 2, 3, 4, 5, 6)]
+        [TestCase(1, 2, 9, 4, 5, 6, false, 1, 2, 3, 4, 5, 6)]
+        [TestCase(1, 2, 3, 9, 5, 6, false, 1, 2, 3, 4, 5, 6)]
+        [TestCase(1, 2, 3, 4, 9, 6, false, 1, 2, 3, 4, 5, 6)]
+        [TestCase(1, 2, 3, 4, 5, 9, false, 1, 2, 3, 4, 5, 6)]
+        [TestCase(1, 2, 3, 4, 5, 6, false, 9, 2, 3, 4, 5, 6)]
+        [TestCase(1, 2, 3, 4, 5, 6, false, 1, 9, 3, 4, 5, 6)]
+        [TestCase(1, 2, 3, 4, 5, 6, false, 1, 2, 9, 4, 5, 6)]
+        [TestCase(1, 2, 3, 4, 5, 6, false, 1, 2, 3, 9, 5, 6)]
+        [TestCase(1, 2, 3, 4, 5, 6, false, 1, 2, 3, 4, 9, 6)]
+        [TestCase(1, 2, 3, 4, 5, 6, false, 1, 2, 3, 4, 5, 9)]
+        public void EqualsWithNormals(
+            int this_v0, int this_v1, int this_v2,
+            int this_n0, int this_n1, int this_n2,
+            bool expected,
+            int other_v0, int other_v1, int other_v2,
+            int other_n0, int other_n1, int other_n2
+        )
+        {
+            FaceReader.Face thisFace = new FaceReader.Face(
+                v0: this_v0, n0: this_n0,
+                v1: this_v1, n1: this_n1,
+                v2: this_v2, n2: this_n2
+            );
+            FaceReader.Face otherFace = new FaceReader.Face(
+                v0: other_v0, n0: other_n0,
+                v1: other_v1, n1: other_n1,
+                v2: other_v2, n2: other_n2
+            );
+
+            bool actual = thisFace.Equals(otherFace);
+
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, thisFace.GetHashCode().Equals(otherFace.GetHashCode()));
+        }
+    }
+
+    [TestFixture]
     public class MeshBuilderTests
     {
         [Test]
