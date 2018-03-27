@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using NUnit.Framework;
-using DoubleConnectedEdgeList;
 
 namespace IO
 {
