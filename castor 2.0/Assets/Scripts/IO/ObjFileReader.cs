@@ -10,7 +10,6 @@ namespace IO
     public class ObjFileReader
     {
         private readonly string filePath;
-        private ReadResult result = null;
 
         private Dictionary<string, Reader> readers;
 
@@ -31,16 +30,26 @@ namespace IO
 
         public ReadResult ImportFile()
         {
-            string[] lines = ReadLines();
-
-            foreach (string line in lines) ProcessLine(line);
-
-            if (!EncounteredError())
+            ReadResult result = null;
+            try
             {
+                string[] lines = ReadLines();
+                ProcessLines(lines);
+
                 Mesh mesh = BuildMesh();
+
                 result = ReadResult.OKResult(filePath, mesh);
             }
+            catch (Exception exception)
+            {
+                result = ReadResult.ErrorResult(filePath, exception);
+            }
             return result;
+        }
+
+        private void ProcessLines(string[] lines)
+        {
+            foreach (string line in lines) ProcessLine(line);
         }
 
         private string[] ReadLines()
@@ -50,14 +59,7 @@ namespace IO
             {
                 lines = System.IO.File.ReadAllLines(filePath);
             }
-            catch (Exception exception)
-            {
-                //Generate an empty string array
-                lines = new string[0];
-
-                //Fill the result object
-                result = ReadResult.ErrorResult(filePath, exception);
-            }
+            catch (Exception exception) { throw exception; }
             return lines;
         }
 
@@ -76,20 +78,17 @@ namespace IO
                 }
                 Debug.LogWarning("Encountered and ignored an unrecognised line: " + line);
             }
-            catch (Exception e)
-            {
-                result = ReadResult.ErrorResult(filePath, e);
-            }
-        }
-
-        private bool EncounteredError()
-        {
-            return (result != null);
+            catch (Exception exception) { throw exception; }
         }
 
         private Mesh BuildMesh()
         {
-            Mesh mesh = new Mesh();
+            VertexReader vertexReader = readers["vertex"] as VertexReader;
+            VertexNormalReader normalReader = readers["normal"] as VertexNormalReader;
+            FaceReader faceReader = readers["face"] as FaceReader;
+
+            MeshBuilder builder = new MeshBuilder(vertexReader.elements, normalReader.elements, faceReader.faces);
+            Mesh mesh = builder.Build();
 
             return mesh;
         }
