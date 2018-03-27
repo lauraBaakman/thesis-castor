@@ -208,8 +208,10 @@ namespace IO
         {
             faces = new List<Face>();
 
+            Regex vertex = new Regex(@"(\d+)\s*/\s*/\s*(\d+)");
+
             noNormalFaceRegex = new Regex(typeRegex + @"(?<v0>\d+)\s+(?<v1>\d+)\s+(?<v2>\d+)$");
-            completeFaceRegex = new Regex(typeRegex.ToString() + @"(\d+)\s*/\s*/\s*(\d+)" + @"\s+" + @"(\d+)\s*/\s*/\s*(\d+)" + @"\s+" + @"(\d+)\s*/\s*/\s*(\d+)" + @"$");
+            completeFaceRegex = new Regex(typeRegex.ToString() + vertex + @"\s+" + vertex + @"\s+" + vertex + @"$");
         }
 
         public override void Read(string line)
