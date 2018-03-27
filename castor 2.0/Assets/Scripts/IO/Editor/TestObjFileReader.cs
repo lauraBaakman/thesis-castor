@@ -2,6 +2,10 @@ using System;
 using System.IO;
 using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
+using DoubleConnectedEdgeList;
+using System.Security.Cryptography;
+using NSubstitute;
 
 namespace IO
 {
@@ -567,6 +571,79 @@ namespace IO
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class MeshBuilderTests
+    {
+        [Test]
+        public void Build_Triangle()
+        {
+            Vector3 a = new Vector3(1, 1, 1);
+            Vector3 b = new Vector3(2, 2, 2);
+            Vector3 c = new Vector3(3, 3, 3);
+
+            Vector3 n = Vector3.forward;
+
+            Dictionary<int, Vector3> vertices = new Dictionary<int, Vector3>();
+            vertices.Add(1, a);
+            vertices.Add(2, b);
+            vertices.Add(3, c);
+
+            Dictionary<int, Vector3> normals = new Dictionary<int, Vector3>();
+            normals.Add(1, n);
+
+            List<FaceReader.Face> faces = new List<FaceReader.Face>();
+            faces.Add(new FaceReader.Face(v0: 1, v1: 2, v2: 3, n0: 1, n1: 1, n2: 1));
+
+            Mesh expected = new Mesh();
+            expected.vertices = new Vector3[] { a, b, c };
+            expected.normals = new Vector3[] { n, n, n };
+            expected.triangles = new int[] { 0, 1, 2 };
+
+            Mesh actual = new MeshBuilder(vertices, normals, faces).Build();
+
+            Assert.AreEqual(expected.vertices, actual.vertices);
+            Assert.AreEqual(expected.normals, actual.normals);
+            Assert.AreEqual(expected.triangles, actual.triangles);
+        }
+
+        [Test]
+        public void Build_Rectangle()
+        {
+            Vector3 a = new Vector3(1, 1, 1);
+            Vector3 b = new Vector3(2, 2, 2);
+            Vector3 c = new Vector3(3, 3, 3);
+            Vector3 d = new Vector3(4, 4, 4);
+
+            Vector3 n1 = Vector3.forward;
+            Vector3 n2 = Vector3.up;
+
+            Dictionary<int, Vector3> vertices = new Dictionary<int, Vector3>();
+            vertices.Add(1, a);
+            vertices.Add(2, b);
+            vertices.Add(3, c);
+            vertices.Add(4, d);
+
+            Dictionary<int, Vector3> normals = new Dictionary<int, Vector3>();
+            normals.Add(1, n1);
+            normals.Add(2, n2);
+
+            List<FaceReader.Face> faces = new List<FaceReader.Face>();
+            faces.Add(new FaceReader.Face(v0: 1, v1: 2, v2: 3, n0: 1, n1: 1, n2: 1));
+            faces.Add(new FaceReader.Face(v0: 2, v1: 4, v2: 3, n0: 2, n1: 2, n2: 2));
+
+            Mesh expected = new Mesh();
+            expected.vertices = new Vector3[] { a, b, c, b, d, c };
+            expected.normals = new Vector3[] { n1, n1, n1, n2, n2, n2 };
+            expected.triangles = new int[] { 0, 1, 2, 3, 4, 5 };
+
+            Mesh actual = new MeshBuilder(vertices, normals, faces).Build();
+
+            Assert.AreEqual(expected.vertices, actual.vertices);
+            Assert.AreEqual(expected.normals, actual.normals);
+            Assert.AreEqual(expected.triangles, actual.triangles);
         }
     }
 }
