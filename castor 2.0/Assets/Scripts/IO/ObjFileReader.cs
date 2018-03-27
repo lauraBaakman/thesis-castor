@@ -211,6 +211,7 @@ namespace IO
         public override void Read(string line)
         {
             Face face = ExtractFace(line);
+            faces.Add(face);
         }
 
         public Face ExtractFace(string line)
