@@ -159,56 +159,6 @@ namespace IO
             Assert.IsFalse(actual.Succeeded());
             Assert.IsTrue(actual.Failed());
         }
-
-        [Test]
-        public void Trim_NoWhiteSpace()
-        {
-            string input = "hoi";
-            string expected = "hoi";
-            string actual = new ObjFileReader("").Trim(input);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void Trim_MiddleWhiteSpace()
-        {
-            string input = "hoi hallo\tdoeg";
-            string expected = "hoi hallo\tdoeg";
-            string actual = new ObjFileReader("").Trim(input);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void Trim_OnlyStartWhiteSpace()
-        {
-            string input = " hoi hallo\tdoeg";
-            string expected = "hoi hallo\tdoeg";
-            string actual = new ObjFileReader("").Trim(input);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void Trim_OnlyEndWhiteSpace()
-        {
-            string input = "hoi hallo\tdoeg   ";
-            string expected = "hoi hallo\tdoeg";
-            string actual = new ObjFileReader("").Trim(input);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void Trim_StartAndEndWhiteSpace()
-        {
-            string input = "\thoi hallo\tdoeg   ";
-            string expected = "hoi hallo\tdoeg";
-            string actual = new ObjFileReader("").Trim(input);
-
-            Assert.AreEqual(expected, actual);
-        }
     }
 
     [TestFixture]

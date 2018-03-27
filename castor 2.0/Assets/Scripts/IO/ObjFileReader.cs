@@ -65,7 +65,7 @@ namespace IO
         {
             try
             {
-                string trimmedLine = Trim(line);
+                string trimmedLine = line.Trim();
                 foreach (Reader reader in this.readers)
                 {
                     if (reader.IsApplicable(line))
@@ -80,11 +80,6 @@ namespace IO
             {
                 result = ReadResult.ErrorResult(filePath, e);
             }
-        }
-
-        public string Trim(string line)
-        {
-            return line.Trim();
         }
 
         private bool EncounteredError()
