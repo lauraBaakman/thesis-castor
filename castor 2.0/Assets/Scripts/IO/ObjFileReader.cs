@@ -363,9 +363,9 @@ namespace IO
         private readonly Dictionary<int, Vector3> objMormals;
         private readonly List<FaceReader.Face> objFaces;
 
-        private List<Vector3> meshVertices;
-        private List<Vector3> meshNormals;
-        private int[] meshTriangles;
+        private readonly List<Vector3> meshVertices;
+        private readonly List<Vector3> meshNormals;
+        private readonly int[] meshTriangles;
 
         private int idx = 0;
 
