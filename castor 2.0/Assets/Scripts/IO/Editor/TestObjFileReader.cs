@@ -3,9 +3,6 @@ using System.IO;
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
-using DoubleConnectedEdgeList;
-using System.Security.Cryptography;
-using NSubstitute;
 
 namespace IO
 {
@@ -268,6 +265,33 @@ namespace IO
             string line = "v 1.53 +2.47";
             reader.Read(line);
         }
+
+        [Test]
+        public void ReadCubeVertices_Test()
+        {
+            reader.Read("v -1.000000 -1.000000 1.000000");
+            reader.Read("v -1.000000 -1.000000 -1.000000");
+            reader.Read("v 1.000000 -1.000000 -1.000000");
+            reader.Read("v 1.000000 -1.000000 1.000000");
+            reader.Read("v -1.000000 1.000000 0.999999");
+            reader.Read("v -0.999999 1.000000 -1.000001");
+            reader.Read("v 1.000000 1.000000 -1.000000");
+            reader.Read("v 1.000000 1.000000 1.000000");
+
+            Dictionary<int, Vector3> expected = new Dictionary<int, Vector3>();
+            expected.Add(1, new Vector3(-1.000000f, -1.000000f, +1.000000f));
+            expected.Add(2, new Vector3(-1.000000f, -1.000000f, -1.000000f));
+            expected.Add(3, new Vector3(+1.000000f, -1.000000f, -1.000000f));
+            expected.Add(4, new Vector3(+1.000000f, -1.000000f, +1.000000f));
+            expected.Add(5, new Vector3(-1.000000f, +1.000000f, +0.999999f));
+            expected.Add(6, new Vector3(-0.999999f, +1.000000f, -1.000001f));
+            expected.Add(7, new Vector3(+1.000000f, +1.000000f, -1.000000f));
+            expected.Add(8, new Vector3(+1.000000f, +1.000000f, +1.000000f));
+
+            Dictionary<int, Vector3> actual = reader.elements;
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
     }
 
     [TestFixture]
@@ -312,6 +336,29 @@ namespace IO
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Read_CubeTest()
+        {
+            reader.Read("vn 0.0000 -1.0000 0.0000");
+            reader.Read("vn 0.0000 1.0000 -0.0000");
+            reader.Read("vn -1.0000 -0.0000 0.0000");
+            reader.Read("vn 0.0000 -0.0000 -1.0000");
+            reader.Read("vn 1.0000 -0.0000 0.0000");
+            reader.Read("vn -0.0000 0.0000 1.0000");
+
+            Dictionary<int, Vector3> expected = new Dictionary<int, Vector3>();
+            expected.Add(1, new Vector3(+0.0000f, -1.0000f, +0.0000f));
+            expected.Add(2, new Vector3(+0.0000f, +1.0000f, -0.0000f));
+            expected.Add(3, new Vector3(-1.0000f, -0.0000f, +0.0000f));
+            expected.Add(4, new Vector3(+0.0000f, -0.0000f, -1.0000f));
+            expected.Add(5, new Vector3(+1.0000f, -0.0000f, +0.0000f));
+            expected.Add(6, new Vector3(-0.0000f, +0.0000f, +1.0000f));
+
+            Dictionary<int, Vector3> actual = reader.elements;
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
     }
 
     [TestFixture]
@@ -343,6 +390,41 @@ namespace IO
         {
             bool actual = reader.IsApplicable(line);
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Read_CubeTest()
+        {
+            reader.Read("f 2//1 4//1 1//1");
+            reader.Read("f 8//2 6//2 5//2");
+            reader.Read("f 5//3 2//3 1//3");
+            reader.Read("f 6//4 3//4 2//4");
+            reader.Read("f 3//5 8//5 4//5");
+            reader.Read("f 1//6 8//6 5//6");
+            reader.Read("f 2//1 3//1 4//1");
+            reader.Read("f 8//2 7//2 6//2");
+            reader.Read("f 5//3 6//3 2//3");
+            reader.Read("f 6//4 7//4 3//4");
+            reader.Read("f 3//5 7//5 8//5");
+            reader.Read("f 1//6 4//6 8//6");
+
+            List<FaceReader.Face> expected = new List<FaceReader.Face>();
+            expected.Add(new FaceReader.Face(v0: 2, n0: 1, v1: 4, n1: 1, v2: 1, n2: 1));
+            expected.Add(new FaceReader.Face(v0: 8, n0: 2, v1: 6, n1: 2, v2: 5, n2: 2));
+            expected.Add(new FaceReader.Face(v0: 5, n0: 3, v1: 2, n1: 3, v2: 1, n2: 3));
+            expected.Add(new FaceReader.Face(v0: 6, n0: 4, v1: 3, n1: 4, v2: 2, n2: 4));
+            expected.Add(new FaceReader.Face(v0: 3, n0: 5, v1: 8, n1: 5, v2: 4, n2: 5));
+            expected.Add(new FaceReader.Face(v0: 1, n0: 6, v1: 8, n1: 6, v2: 5, n2: 6));
+            expected.Add(new FaceReader.Face(v0: 2, n0: 1, v1: 3, n1: 1, v2: 4, n2: 1));
+            expected.Add(new FaceReader.Face(v0: 8, n0: 2, v1: 7, n1: 2, v2: 6, n2: 2));
+            expected.Add(new FaceReader.Face(v0: 5, n0: 3, v1: 6, n1: 3, v2: 2, n2: 3));
+            expected.Add(new FaceReader.Face(v0: 6, n0: 4, v1: 7, n1: 4, v2: 3, n2: 4));
+            expected.Add(new FaceReader.Face(v0: 3, n0: 5, v1: 7, n1: 5, v2: 8, n2: 5));
+            expected.Add(new FaceReader.Face(v0: 1, n0: 6, v1: 4, n1: 6, v2: 8, n2: 6));
+
+            List<FaceReader.Face> actual = reader.faces;
+
+            Assert.That(actual, Is.EquivalentTo(expected));
         }
 
         [Test]
