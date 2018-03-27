@@ -9,7 +9,7 @@ namespace IO
     {
         private readonly string filePath;
 
-        private Dictionary<string, Reader> readers;
+        private readonly Dictionary<string, Reader> readers;
 
         public ObjFileReader(string filePath)
         {
@@ -92,7 +92,7 @@ namespace IO
         }
     }
 
-    public abstract class Reader
+    internal abstract class Reader
     {
         protected Regex typeRegex;
 
@@ -109,7 +109,7 @@ namespace IO
         public abstract void Read(string line);
     }
 
-    public abstract class ReferenceReader<T> : Reader
+    internal abstract class ReferenceReader<T> : Reader
     {
         private int currentReferenceNumber = 1;
 
@@ -134,7 +134,7 @@ namespace IO
         public abstract T ExtractElement(string line);
     }
 
-    public abstract class VectorReader : ReferenceReader<Vector3>
+    internal abstract class VectorReader : ReferenceReader<Vector3>
     {
         private readonly Regex vectorRegex;
 
@@ -162,7 +162,7 @@ namespace IO
         }
     }
 
-    public class CommentReader : Reader
+    internal class CommentReader : Reader
     {
         public CommentReader()
             : base("#")
@@ -174,21 +174,21 @@ namespace IO
         }
     }
 
-    public class VertexReader : VectorReader
+    internal class VertexReader : VectorReader
     {
         public VertexReader()
             : base("v")
         { }
     }
 
-    public class VertexNormalReader : VectorReader
+    internal class VertexNormalReader : VectorReader
     {
         public VertexNormalReader()
             : base("vn")
         { }
     }
 
-    public class FaceReader : Reader
+    internal class FaceReader : Reader
     {
         private Regex noNormalFaceRegex;
         private Regex completeFaceRegex;
@@ -345,7 +345,7 @@ namespace IO
         }
     }
 
-    public class VertexTextureReader : Reader
+    internal class VertexTextureReader : Reader
     {
         public VertexTextureReader()
             : base("vt")
@@ -357,7 +357,7 @@ namespace IO
         }
     }
 
-    public class GroupReader : Reader
+    internal class GroupReader : Reader
     {
         public GroupReader()
             : base("g")
@@ -369,7 +369,7 @@ namespace IO
         }
     }
 
-    public class SmoothingGroupReader : Reader
+    internal class SmoothingGroupReader : Reader
     {
         public SmoothingGroupReader()
             : base("s")
@@ -381,7 +381,7 @@ namespace IO
         }
     }
 
-    public class ObjectReader : Reader
+    internal class ObjectReader : Reader
     {
         public ObjectReader()
             : base("o")
@@ -393,7 +393,7 @@ namespace IO
         }
     }
 
-    public class MeshBuilder
+    internal class MeshBuilder
     {
         private readonly Dictionary<int, Vector3> objVertices;
         private readonly Dictionary<int, Vector3> objMormals;
