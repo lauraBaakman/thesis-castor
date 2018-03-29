@@ -485,7 +485,7 @@ namespace Tests.IO
         [Test]
         public void ReadTest_TwoVerticesNoNormals()
         {
-            Assert.Throws(typeof(ArgumentOutOfRangeException), new TestDelegate(ReadTest_TwoVerticesNoNormals_Helper));
+            Assert.Throws(typeof(CouldNotReadFileException), new TestDelegate(ReadTest_TwoVerticesNoNormals_Helper));
         }
 
         private void ReadTest_TwoVerticesNoNormals_Helper()
@@ -497,7 +497,7 @@ namespace Tests.IO
         [Test]
         public void ReadTest_TwoVertices_WithNormals()
         {
-            Assert.Throws(typeof(ArgumentOutOfRangeException), new TestDelegate(ReadTest_TwoVertices_WithNormals_Helper));
+            Assert.Throws(typeof(CouldNotReadFileException), new TestDelegate(ReadTest_TwoVertices_WithNormals_Helper));
         }
 
         private void ReadTest_TwoVertices_WithNormals_Helper()
@@ -509,7 +509,7 @@ namespace Tests.IO
         [Test]
         public void ReadTest_FourVerticesNoNormals()
         {
-            Assert.Throws(typeof(ArgumentOutOfRangeException), new TestDelegate(ReadTest_FourVerticesNoNormals_Helper));
+            Assert.Throws(typeof(CouldNotReadFileException), new TestDelegate(ReadTest_FourVerticesNoNormals_Helper));
         }
 
         private void ReadTest_FourVerticesNoNormals_Helper()
@@ -521,7 +521,7 @@ namespace Tests.IO
         [Test]
         public void ReadTest_FourVertices_WithNormals()
         {
-            Assert.Throws(typeof(ArgumentOutOfRangeException), new TestDelegate(ReadTest_FourVertices_WithNormals_Helper));
+            Assert.Throws(typeof(CouldNotReadFileException), new TestDelegate(ReadTest_FourVertices_WithNormals_Helper));
         }
 
         private void ReadTest_FourVertices_WithNormals_Helper()
