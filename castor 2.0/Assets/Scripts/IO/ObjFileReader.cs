@@ -76,7 +76,16 @@ namespace IO
                 }
                 Debug.LogWarning("Encountered and ignored an unrecognised line: " + line);
             }
-            catch (Exception exception) { throw exception; }
+            catch (InvalidObjFileException exception)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the file {0}: {1}" + this.filePath, exception.Message));
+            }
+            catch (Exception exception)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the file {0}, got the error: {1}", this.filePath, exception.Message));
+            }
         }
 
         private Mesh BuildMesh()
