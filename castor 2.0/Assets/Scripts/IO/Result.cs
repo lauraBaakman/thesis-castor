@@ -1,7 +1,6 @@
 using System;
 using Ticker;
 using UnityEngine;
-using UnityEngine.Networking.NetworkSystem;
 
 namespace IO
 {
@@ -64,18 +63,18 @@ namespace IO
             this.mesh = mesh;
         }
 
-        internal static ReadResult OKResult(string path, Mesh mesh)
+        public static ReadResult OKResult(string path, Mesh mesh)
         {
             string messageText = string.Format("Succesfully read the file {0}", path);
             return new ReadResult(IOCode.OK, messageText, mesh);
         }
 
-        internal static ReadResult ErrorResult(string messageText)
+        public static ReadResult ErrorResult(string messageText)
         {
             return new ReadResult(IOCode.Error, messageText);
         }
 
-        internal static ReadResult ErrorResult(string path, Exception exception)
+        public static ReadResult ErrorResult(string path, Exception exception)
         {
             string messageText = string.Format("Could not read a fragment from the file {0}: {1}", path, exception.Message);
             return ErrorResult(messageText);

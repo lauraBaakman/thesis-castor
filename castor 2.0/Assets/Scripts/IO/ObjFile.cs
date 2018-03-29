@@ -8,18 +8,7 @@ namespace IO
     {
         public static ReadResult Read(string path)
         {
-            Mesh mesh;
-            try
-            {
-                mesh = ObjFileReader.ImportFile(path);
-                mesh.RecalculateNormals();
-                mesh.RecalculateBounds();
-            }
-            catch (FileNotFoundException exception)
-            {
-                return ReadResult.ErrorResult(path, exception);
-            }
-            return ReadResult.OKResult(path, mesh);
+            return new ObjFileReader(path).ImportFile();
         }
 
         public static WriteResult Write(Mesh mesh, string path)

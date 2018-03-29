@@ -1,259 +1,505 @@
-using UnityEngine;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using System.Text.RegularExpressions;
+using UnityEngine;
 
-#pragma warning disable CS0649
 namespace IO
 {
-    /// <summary>
-    /// Object file reader imports .obj files at runtime.
-    /// Source: http://wiki.unity3d.com/index.php?title=ObjImporter
-    /// </summary>
-    internal class ObjFileReader
+    public class ObjFileReader
     {
-        private struct MeshStruct
+        private readonly string filePath;
+
+        private readonly Dictionary<string, Reader> readers;
+
+        public ObjFileReader(string filePath)
         {
-            public Vector3[] vertices;
-            public Vector3[] normals;
-            public Vector2[] uv;
-            public Vector2[] uv1;
-            public Vector2[] uv2;
-            public int[] triangles;
-            public int[] faceVerts;
-            public int[] faceUVs;
-            public Vector3[] faceData;
-            public string name;
-            public string fileName;
+            this.filePath = filePath;
+
+            this.readers = new Dictionary<string, Reader>();
+            this.readers.Add("comment", new CommentReader());
+            this.readers.Add("vertex", new VertexReader());
+            this.readers.Add("normal", new VertexNormalReader());
+            this.readers.Add("face", new FaceReader());
+            this.readers.Add("texture", new VertexTextureReader());
+            this.readers.Add("group", new GroupReader());
+            this.readers.Add("smoothing group", new SmoothingGroupReader());
+            this.readers.Add("object", new ObjectReader());
         }
 
-        // Use this for initialization
-        public static Mesh ImportFile(string filePath)
+        public ReadResult ImportFile()
         {
-            MeshStruct meshInfo = CreateMeshStruct(filePath);
-            PopulateMeshStruct(ref meshInfo);
+            Debug.Log("The new OBJ File reader!");
 
-            Vector3[] vertices = new Vector3[meshInfo.faceData.Length];
-            Vector3[] normals = new Vector3[meshInfo.faceData.Length];
-            int i = 0;
-            /* The following foreach loops through the facedata and assigns the appropriate vertex, uv, or normal
-             * for the appropriate Unity mesh array. It also performs scaling.
-             */
-            foreach (Vector3 v in meshInfo.faceData)
+            ReadResult result = null;
+            try
             {
-                vertices[i] = meshInfo.vertices[(int)v.x - 1];
+                string[] lines = ReadLines();
+                ProcessLines(lines);
 
-                if (v.z >= 1) normals[i] = (meshInfo.normals[(int)v.z - 1]).normalized;
-                i++;
+                Mesh mesh = BuildMesh();
+
+                result = ReadResult.OKResult(filePath, mesh);
             }
-
-            Mesh mesh = new Mesh
+            catch (Exception exception)
             {
-                vertices = vertices,
-                normals = normals,
-                triangles = meshInfo.triangles
-            };
-            mesh.RecalculateBounds();
+                result = ReadResult.ErrorResult(filePath, exception);
+            }
+            return result;
+        }
+
+        private void ProcessLines(string[] lines)
+        {
+            foreach (string line in lines) ProcessLine(line);
+        }
+
+        private string[] ReadLines()
+        {
+            string[] lines;
+            try
+            {
+                lines = System.IO.File.ReadAllLines(filePath);
+            }
+            catch (Exception exception) { throw exception; }
+            return lines;
+        }
+
+        private void ProcessLine(string line)
+        {
+            try
+            {
+                string trimmedLine = line.Trim();
+                foreach (Reader reader in this.readers.Values)
+                {
+                    if (reader.IsApplicable(line))
+                    {
+                        reader.Read(line);
+                        return;
+                    }
+                }
+                Debug.LogWarning("Encountered and ignored an unrecognised line: " + line);
+            }
+            catch (InvalidObjFileException exception)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the file {0}: {1}" + this.filePath, exception.Message));
+            }
+            catch (Exception exception)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the file {0}, got the error: {1}", this.filePath, exception.Message));
+            }
+        }
+
+        private Mesh BuildMesh()
+        {
+            VertexReader vertexReader = readers["vertex"] as VertexReader;
+            VertexNormalReader normalReader = readers["normal"] as VertexNormalReader;
+            FaceReader faceReader = readers["face"] as FaceReader;
+
+            MeshBuilder builder = new MeshBuilder(vertexReader.elements, normalReader.elements, faceReader.faces);
+            Mesh mesh = builder.Build();
 
             return mesh;
         }
+    }
 
-        private static MeshStruct CreateMeshStruct(string filename)
+    public abstract class Reader
+    {
+        protected Regex typeRegex;
+
+        protected Reader(string lineTypeSymbol)
         {
-            var triangles = 0;
-            var vertices = 0;
-            var vt = 0;
-            var vn = 0;
-            var face = 0;
-            var mesh = new MeshStruct { fileName = filename };
-            var stream = File.OpenText(filename);
-            var entireText = stream.ReadToEnd();
-            stream.Close();
-            using (var reader = new StringReader(entireText))
-            {
-                var currentText = reader.ReadLine();
-                char[] splitIdentifier = { ' ' };
-                while (currentText != null)
-                {
-                    if (!currentText.StartsWith("f ") &&
-                        !currentText.StartsWith("v ") &&
-                        !currentText.StartsWith("vt ") &&
-                        !currentText.StartsWith("vn ")
-                    )
-                    {
-                        currentText = reader.ReadLine();
-                        if (currentText != null)
-                        {
-                            currentText = currentText.Replace("  ", " ");
-                        }
-                    }
-                    else
-                    {
-                        currentText = currentText.Trim(); //Trim the current line
-                        var brokenString = currentText.Split(splitIdentifier,
-                            50);
-                        switch (brokenString[0])
-                        {
-                            case "v":
-                                vertices++;
-                                break;
-                            case "vt":
-                                vt++;
-                                break;
-                            case "vn":
-                                vn++;
-                                break;
-                            case "f":
-                                face = face + brokenString.Length - 1;
-                                triangles = triangles + 3 *
-                                            (brokenString.Length -
-                                             2); /*brokenString.Length is 3 or greater since a face must have at least
-                                                                                     3 vertices.  For each additional vertice, there is an additional
-                                                                                     triangle in the mesh (hence this formula).*/
-                                break;
-                        }
-                        currentText = reader.ReadLine();
-                        if (currentText != null)
-                        {
-                            currentText = currentText.Replace("  ", " ");
-                        }
-                    }
-                }
-            }
-            mesh.triangles = new int[triangles];
-            mesh.vertices = new Vector3[vertices];
-            mesh.uv = new Vector2[vt];
-            mesh.normals = new Vector3[vn];
-            mesh.faceData = new Vector3[face];
-            return mesh;
+            typeRegex = new Regex(@"^" + lineTypeSymbol + @"\s+");
         }
 
-        private static void PopulateMeshStruct(ref MeshStruct mesh)
+        public bool IsApplicable(string line)
         {
-            var stream = File.OpenText(mesh.fileName);
-            var entireText = stream.ReadToEnd();
-            stream.Close();
-            using (var reader = new StringReader(entireText))
+            return typeRegex.IsMatch(line);
+        }
+
+        public abstract void Read(string line);
+    }
+
+    public abstract class ReferenceReader<T> : Reader
+    {
+        private int currentReferenceNumber = 1;
+
+        public Dictionary<int, T> elements;
+
+        protected ReferenceReader(string lineTypeSymbol)
+            : base(lineTypeSymbol)
+        {
+            elements = new Dictionary<int, T>();
+        }
+
+        public override void Read(string line)
+        {
+            try
             {
-                var currentText = reader.ReadLine();
+                T vertex = ExtractElement(line);
+                elements.Add(currentReferenceNumber++, vertex);
+            }
+            catch (Exception e) { throw e; }
+        }
 
-                char[] splitIdentifier = { ' ' };
-                char[] splitIdentifier2 = { '/' };
-                var f = 0;
-                var f2 = 0;
-                var v = 0;
-                var vn = 0;
-                var vt = 0;
-                var vt1 = 0;
-                var vt2 = 0;
-                while (currentText != null)
+        public abstract T ExtractElement(string line);
+    }
+
+    public abstract class VectorReader : ReferenceReader<Vector3>
+    {
+        private readonly Regex vectorRegex;
+
+        protected VectorReader(string lineTypeSymbol)
+            : base(lineTypeSymbol)
+        {
+            vectorRegex = new Regex(typeRegex + @"(?<x>\+?\-?\d+(\.\d+)?)\s+(?<y>\+?\-?\d+(\.\d+)?)\s+(?<z>\+?\-?\d+(\.\d+)?)$");
+        }
+
+        public override Vector3 ExtractElement(string line)
+        {
+            Vector3 vertex;
+            try
+            {
+                MatchCollection matches = vectorRegex.Matches(line);
+                GroupCollection groups = matches[0].Groups;
+                vertex = new Vector3(
+                    x: float.Parse(groups["x"].Value),
+                    y: float.Parse(groups["y"].Value),
+                    z: float.Parse(groups["z"].Value)
+                );
+            }
+            catch (Exception e)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the line {0}, got the execption: {1}", line, e.Message)
+                );
+            }
+            return vertex;
+        }
+    }
+
+    public class CommentReader : Reader
+    {
+        public CommentReader()
+            : base("#")
+        { }
+
+        public override void Read(string line)
+        {
+            //do nothing, comments are not part of the mesh
+        }
+    }
+
+    public class VertexReader : VectorReader
+    {
+        public VertexReader()
+            : base("v")
+        { }
+    }
+
+    public class VertexNormalReader : VectorReader
+    {
+        public VertexNormalReader()
+            : base("vn")
+        { }
+    }
+
+    public class FaceReader : Reader
+    {
+        private Regex noNormalFaceRegex;
+        private Regex completeFaceRegex;
+
+        public List<Face> faces;
+
+        public FaceReader()
+            : base("f")
+        {
+            faces = new List<Face>();
+
+            Regex vertex = new Regex(@"(\d+)\s*/\s*/\s*(\d+)");
+
+            noNormalFaceRegex = new Regex(typeRegex + @"(?<v0>\d+)\s+(?<v1>\d+)\s+(?<v2>\d+)$");
+            completeFaceRegex = new Regex(typeRegex.ToString() + vertex + @"\s+" + vertex + @"\s+" + vertex + @"$");
+        }
+
+        public override void Read(string line)
+        {
+            Face face = ExtractFace(line);
+            faces.Add(face);
+        }
+
+        public Face ExtractFace(string line)
+        {
+            if (HasNormals(line)) return ExtractCompleteFace(line);
+
+            return ExtractNoNormalFace(line);
+        }
+
+        public bool HasNormals(string line)
+        {
+            return !noNormalFaceRegex.Match(line).Success;
+        }
+
+        public Face ExtractNoNormalFace(string line)
+        {
+            Face face;
+            try
+            {
+                MatchCollection matches = noNormalFaceRegex.Matches(line);
+                GroupCollection groups = matches[0].Groups;
+
+                face = new Face(
+                    v0: Int32.Parse(groups["v0"].Value),
+                    v1: Int32.Parse(groups["v1"].Value),
+                    v2: Int32.Parse(groups["v2"].Value)
+                );
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the face: '{0}', only triangular faces are accepted.", line)
+                );
+            }
+            catch (Exception e)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the face: '{0}', got the execption: {1}", line, e.Message)
+                );
+            }
+            return face;
+        }
+
+        public Face ExtractCompleteFace(string line)
+        {
+            Face face;
+            try
+            {
+                MatchCollection matches = completeFaceRegex.Matches(line);
+                GroupCollection groups = matches[0].Groups;
+
+                face = new Face(
+                    v0: Int32.Parse(groups[1].Value),
+                    n0: Int32.Parse(groups[2].Value),
+                    v1: Int32.Parse(groups[3].Value),
+                    n1: Int32.Parse(groups[4].Value),
+                    v2: Int32.Parse(groups[5].Value),
+                    n2: Int32.Parse(groups[6].Value));
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the face: '{0}', only triangular faces are accepted.", line)
+                );
+            }
+            catch (Exception e)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the face: '{0}', got the exception: {1}", line, e.Message)
+                );
+            }
+            return face;
+        }
+
+        public class Face : IEquatable<Face>
+        {
+            public readonly int[] vertexIndices = null;
+            public readonly int[] normalIndices = null;
+
+            public int v0 { get { return vertexIndices[0]; } }
+            public int v1 { get { return vertexIndices[1]; } }
+            public int v2 { get { return vertexIndices[2]; } }
+
+            public int n0 { get { return normalIndices[0]; } }
+            public int n1 { get { return normalIndices[1]; } }
+            public int n2 { get { return normalIndices[2]; } }
+
+            public Face(
+                int v0, int v1, int v2,
+                int n0, int n1, int n2
+            )
+            {
+                vertexIndices = new int[3];
+                vertexIndices[0] = v0;
+                vertexIndices[1] = v1;
+                vertexIndices[2] = v2;
+
+                normalIndices = new int[3];
+                normalIndices[0] = n0;
+                normalIndices[1] = n1;
+                normalIndices[2] = n2;
+            }
+
+            public Face(int v0, int v1, int v2)
+            {
+                vertexIndices = new int[3];
+                vertexIndices[0] = v0;
+                vertexIndices[1] = v1;
+                vertexIndices[2] = v2;
+            }
+
+            public bool HasNormalIndices()
+            {
+                return this.normalIndices != null;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null || GetType() != obj.GetType())
+                    return false;
+                return this.Equals(obj as Face);
+            }
+
+            public override int GetHashCode()
+            {
+                int hashCode = 67;
+
+                if (HasNormalIndices())
                 {
-                    if (!currentText.StartsWith("f ") && !currentText.StartsWith("v ") && !currentText.StartsWith("vt ") &&
-                        !currentText.StartsWith("vn ") && !currentText.StartsWith("g ") &&
-                        !currentText.StartsWith("usemtl ") &&
-                        !currentText.StartsWith("mtllib ") && !currentText.StartsWith("vt1 ") &&
-                        !currentText.StartsWith("vt2 ") &&
-                        !currentText.StartsWith("vc ") && !currentText.StartsWith("usemap "))
-                    {
-                        currentText = reader.ReadLine();
-                        if (currentText != null)
-                        {
-                            currentText = currentText.Replace("  ", " ");
-                        }
-                    }
-                    else
-                    {
-                        currentText = currentText.Trim();
-                        var brokenString = currentText.Split(splitIdentifier, 50);
-                        switch (brokenString[0])
-                        {
-                            case "g":
-                                break;
-                            case "usemtl":
-                                break;
-                            case "usemap":
-                                break;
-                            case "mtllib":
-                                break;
-                            case "v":
-                                mesh.vertices[v] = new Vector3(System.Convert.ToSingle(brokenString[1]),
-                                    System.Convert.ToSingle(brokenString[2]),
-                                    System.Convert.ToSingle(brokenString[3]));
-                                v++;
-                                break;
-                            case "vt":
-                                mesh.uv[vt] = new Vector2(System.Convert.ToSingle(brokenString[1]),
-                                    System.Convert.ToSingle(brokenString[2]));
-                                vt++;
-                                break;
-                            case "vt1":
-                                mesh.uv[vt1] = new Vector2(System.Convert.ToSingle(brokenString[1]),
-                                    System.Convert.ToSingle(brokenString[2]));
-                                vt1++;
-                                break;
-                            case "vt2":
-                                mesh.uv[vt2] = new Vector2(System.Convert.ToSingle(brokenString[1]),
-                                    System.Convert.ToSingle(brokenString[2]));
-                                vt2++;
-                                break;
-                            case "vn":
-                                mesh.normals[vn] = new Vector3(System.Convert.ToSingle(brokenString[1]),
-                                    System.Convert.ToSingle(brokenString[2]),
-                                    System.Convert.ToSingle(brokenString[3]));
-                                vn++;
-                                break;
-                            case "vc":
-                                break;
-                            case "f":
-
-                                var j = 1;
-                                var intArray = new List<int>();
-                                while (j < brokenString.Length && ("" + brokenString[j]).Length > 0)
-                                {
-                                    var temp = new Vector3();
-                                    var brokenBrokenString = brokenString[j]
-                                        .Split(splitIdentifier2,
-                                            3);
-                                    temp.x = System.Convert.ToInt32(brokenBrokenString[0]);
-                                    if (brokenBrokenString.Length > 1) //Some .obj files skip UV and normal
-                                    {
-                                        if (brokenBrokenString[1] != "") //Some .obj files skip the uv and not the normal
-                                        {
-                                            temp.y = System.Convert.ToInt32(brokenBrokenString[1]);
-                                        }
-                                        temp.z = System.Convert.ToInt32(brokenBrokenString[2]);
-                                    }
-                                    j++;
-
-                                    mesh.faceData[f2] = temp;
-                                    intArray.Add(f2);
-                                    f2++;
-                                }
-                                j = 1;
-                                while (j + 2 < brokenString.Length
-                                ) //Create triangles out of the face data.  There will generally be more than 1 triangle per face.
-                                {
-                                    mesh.triangles[f] = intArray[0];
-                                    f++;
-                                    mesh.triangles[f] = intArray[j];
-                                    f++;
-                                    mesh.triangles[f] = intArray[j + 1];
-                                    f++;
-
-                                    j++;
-                                }
-                                break;
-                        }
-                        currentText = reader.ReadLine();
-                        if (currentText != null)
-                        {
-                            currentText =
-                                currentText.Replace("  ", " "); //Some .obj files insert double spaces, this removes them.
-                        }
-                    }
+                    hashCode *= (31 + this.n0.GetHashCode());
+                    hashCode *= (31 + this.n1.GetHashCode());
+                    hashCode *= (31 + this.n2.GetHashCode());
                 }
+                hashCode *= (31 + this.v0.GetHashCode());
+                hashCode *= (31 + this.v1.GetHashCode());
+                hashCode *= (31 + this.v2.GetHashCode());
+                return hashCode;
+            }
+
+            public bool Equals(Face other)
+            {
+                bool verticesEqual = (
+                    this.v0.Equals(other.v0) &
+                    this.v1.Equals(other.v1) &
+                    this.v2.Equals(other.v2)
+                );
+                bool normalsEqual = !HasNormalIndices() || (
+                    this.n0.Equals(other.n0) &
+                    this.n1.Equals(other.n1) &
+                    this.n2.Equals(other.n2)
+                );
+                return verticesEqual && normalsEqual;
             }
         }
     }
+
+    public class VertexTextureReader : Reader
+    {
+        public VertexTextureReader()
+            : base("vt")
+        { }
+
+        public override void Read(string line)
+        {
+            Debug.LogWarning("Textures are ignored");
+        }
+    }
+
+    public class GroupReader : Reader
+    {
+        public GroupReader()
+            : base("g")
+        { }
+
+        public override void Read(string line)
+        {
+            Debug.LogWarning("Groups are ignored");
+        }
+    }
+
+    public class SmoothingGroupReader : Reader
+    {
+        public SmoothingGroupReader()
+            : base("s")
+        { }
+
+        public override void Read(string line)
+        {
+            Debug.LogWarning("Smoothing Groups are ignored");
+        }
+    }
+
+    public class ObjectReader : Reader
+    {
+        public ObjectReader()
+            : base("o")
+        { }
+
+        public override void Read(string line)
+        {
+            Debug.LogWarning("Objects are ignored");
+        }
+    }
+
+    public class MeshBuilder
+    {
+        private readonly Dictionary<int, Vector3> objVertices;
+        private readonly Dictionary<int, Vector3> objMormals;
+        private readonly List<FaceReader.Face> objFaces;
+
+        private readonly List<Vector3> meshVertices;
+        private readonly List<Vector3> meshNormals;
+        private readonly int[] meshTriangles;
+
+        private int idx = 0;
+
+        public MeshBuilder(Dictionary<int, Vector3> vertices, Dictionary<int, Vector3> normals, List<FaceReader.Face> faces)
+        {
+            this.objVertices = vertices;
+            this.objMormals = normals;
+            this.objFaces = faces;
+
+            meshVertices = new List<Vector3>();
+            meshNormals = new List<Vector3>();
+            meshTriangles = new int[faces.Count * 3];
+        }
+
+        public Mesh Build()
+        {
+            ProcessFaces();
+
+            Mesh mesh = new Mesh();
+            mesh.vertices = meshVertices.ToArray();
+            mesh.normals = meshNormals.ToArray();
+            mesh.triangles = meshTriangles;
+
+            return mesh;
+        }
+
+        private void ProcessFaces()
+        {
+            foreach (FaceReader.Face face in objFaces) ProcessFace(face);
+        }
+
+        private void ProcessFace(FaceReader.Face face)
+        {
+            meshVertices.Add(objVertices[face.v0]);
+            meshNormals.Add(objMormals[face.n0]);
+
+            meshVertices.Add(objVertices[face.v1]);
+            meshNormals.Add(objMormals[face.n1]);
+
+            meshVertices.Add(objVertices[face.v2]);
+            meshNormals.Add(objMormals[face.n2]);
+
+            meshTriangles[idx + 0] = idx + 0;
+            meshTriangles[idx + 1] = idx + 1;
+            meshTriangles[idx + 2] = idx + 2;
+
+            idx += 3;
+        }
+    }
+
+    public class InvalidObjFileException : Exception
+    {
+        public InvalidObjFileException()
+        { }
+
+        public InvalidObjFileException(string message)
+            : base(message)
+        { }
+
+        public InvalidObjFileException(string message, Exception inner)
+            : base(message, inner)
+        { }
+    }
 }
-#pragma warning restore CS0649

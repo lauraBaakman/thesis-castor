@@ -14,6 +14,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile></TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneOSXIntel64:27</UnityBuildTarget>
     <UnityVersion>2017.1.1f1</UnityVersion>
@@ -210,7 +211,9 @@
     <Compile Include="Assets\Scripts\Extensions\Editor\TestQuaternionExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestSystemRandomExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestVector3Extensions.cs" />
+    <Compile Include="Assets\Scripts\IO\Editor\TestObjeFileReader.cs" />
     <Compile Include="Assets\Scripts\IO\Editor\TestObjFile.cs" />
+    <Compile Include="Assets\Scripts\IO\Editor\TestObjFileReader.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondence.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondenceCollection.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestNearestPointCorrespondences.cs" />
@@ -229,7 +232,6 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestTriangleUtils.cs" />
-    <Compile Include="Assets\Scripts\IO\Editor\TestObjeFileReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
