@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3a8e7164b9a5544c29225ba2bc770513
-timeCreated: 1519719816
+guid: 11234990b9d5144858f677224858bf7c
+timeCreated: 1521449743
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -13,7 +13,7 @@ ModelImporter:
     3300000: default
     4300000: default
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
@@ -44,8 +44,8 @@ ModelImporter:
     addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

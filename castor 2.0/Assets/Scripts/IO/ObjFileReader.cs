@@ -28,6 +28,8 @@ namespace IO
 
         public ReadResult ImportFile()
         {
+            Debug.Log("The new OBJ File reader!");
+
             ReadResult result = null;
             try
             {

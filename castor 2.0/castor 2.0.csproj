@@ -370,7 +370,6 @@
     <Compile Include="Assets\Scripts\IO\ObjFile.cs" />
     <Compile Include="Assets\Scripts\IO\ObjFileReader.cs" />
     <Compile Include="Assets\Scripts\IO\ObjWriter.cs" />
-    <Compile Include="Assets\Scripts\IO\OldObjFileReader.cs" />
     <Compile Include="Assets\Scripts\IO\Result.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Correspondence.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\CorrespondenceCollection.cs" />
