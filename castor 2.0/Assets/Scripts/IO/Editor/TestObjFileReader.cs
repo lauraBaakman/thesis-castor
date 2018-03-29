@@ -260,7 +260,7 @@ namespace Tests.IO
         [Test]
         public void ReadVertexTest_InValidVertex()
         {
-            Assert.Throws(typeof(CouldNotReadFileException), new TestDelegate(ReadVertexTest_InValidVertex_Helper));
+            Assert.Throws(typeof(InvalidObjFileException), new TestDelegate(ReadVertexTest_InValidVertex_Helper));
         }
 
         private void ReadVertexTest_InValidVertex_Helper()
@@ -485,49 +485,49 @@ namespace Tests.IO
         [Test]
         public void ReadTest_TwoVerticesNoNormals()
         {
-            Assert.Throws(typeof(CouldNotReadFileException), new TestDelegate(ReadTest_TwoVerticesNoNormals_Helper));
+            Assert.Throws(typeof(InvalidObjFileException), new TestDelegate(ReadTest_TwoVerticesNoNormals_Helper));
         }
 
         private void ReadTest_TwoVerticesNoNormals_Helper()
         {
             string line = "f 1 4";
-            FaceReader.Face actual = reader.ExtractFace(line);
+            reader.Read(line);
         }
 
         [Test]
         public void ReadTest_TwoVertices_WithNormals()
         {
-            Assert.Throws(typeof(CouldNotReadFileException), new TestDelegate(ReadTest_TwoVertices_WithNormals_Helper));
+            Assert.Throws(typeof(InvalidObjFileException), new TestDelegate(ReadTest_TwoVertices_WithNormals_Helper));
         }
 
         private void ReadTest_TwoVertices_WithNormals_Helper()
         {
             string line = "f 1//2 4//3";
-            FaceReader.Face actual = reader.ExtractFace(line);
+            reader.Read(line);
         }
 
         [Test]
         public void ReadTest_FourVerticesNoNormals()
         {
-            Assert.Throws(typeof(CouldNotReadFileException), new TestDelegate(ReadTest_FourVerticesNoNormals_Helper));
+            Assert.Throws(typeof(InvalidObjFileException), new TestDelegate(ReadTest_FourVerticesNoNormals_Helper));
         }
 
         private void ReadTest_FourVerticesNoNormals_Helper()
         {
             string line = "f 1 4 8 7";
-            FaceReader.Face actual = reader.ExtractFace(line);
+            reader.Read(line);
         }
 
         [Test]
         public void ReadTest_FourVertices_WithNormals()
         {
-            Assert.Throws(typeof(CouldNotReadFileException), new TestDelegate(ReadTest_FourVertices_WithNormals_Helper));
+            Assert.Throws(typeof(InvalidObjFileException), new TestDelegate(ReadTest_FourVertices_WithNormals_Helper));
         }
 
         private void ReadTest_FourVertices_WithNormals_Helper()
         {
             string line = "f 1//2 4//3 1//2 4//3";
-            FaceReader.Face actual = reader.ExtractFace(line);
+            reader.Read(line);
         }
     }
 

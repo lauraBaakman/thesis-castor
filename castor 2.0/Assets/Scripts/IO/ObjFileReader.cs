@@ -159,7 +159,7 @@ namespace IO
             }
             catch (Exception e)
             {
-                throw new CouldNotReadFileException(
+                throw new InvalidObjFileException(
                     string.Format("Could not read the line {0}, got the execption: {1}", line, e.Message)
                 );
             }
@@ -231,30 +231,41 @@ namespace IO
 
         public Face ExtractNoNormalFace(string line)
         {
-            MatchCollection matches = noNormalFaceRegex.Matches(line);
-            GroupCollection groups = matches[0].Groups;
-
             Face face;
             try
             {
+                MatchCollection matches = noNormalFaceRegex.Matches(line);
+                GroupCollection groups = matches[0].Groups;
+
                 face = new Face(
                     v0: Int32.Parse(groups["v0"].Value),
                     v1: Int32.Parse(groups["v1"].Value),
                     v2: Int32.Parse(groups["v2"].Value)
                 );
             }
-            catch (Exception e) { throw e; }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the face: '{0}', only triangular faces are accepted.", line)
+                );
+            }
+            catch (Exception e)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the face: '{0}', got the execption: {1}", line, e.Message)
+                );
+            }
             return face;
         }
 
         public Face ExtractCompleteFace(string line)
         {
-            MatchCollection matches = completeFaceRegex.Matches(line);
-            GroupCollection groups = matches[0].Groups;
-
             Face face;
             try
             {
+                MatchCollection matches = completeFaceRegex.Matches(line);
+                GroupCollection groups = matches[0].Groups;
+
                 face = new Face(
                     v0: Int32.Parse(groups[1].Value),
                     n0: Int32.Parse(groups[2].Value),
@@ -263,8 +274,18 @@ namespace IO
                     v2: Int32.Parse(groups[5].Value),
                     n2: Int32.Parse(groups[6].Value));
             }
-            catch (Exception e) { throw e; }
-
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the face: '{0}', only triangular faces are accepted.", line)
+                );
+            }
+            catch (Exception e)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the face: '{0}', got the exception: {1}", line, e.Message)
+                );
+            }
             return face;
         }
 
@@ -457,16 +478,16 @@ namespace IO
         }
     }
 
-    public class CouldNotReadFileException : Exception
+    public class InvalidObjFileException : Exception
     {
-        public CouldNotReadFileException()
+        public InvalidObjFileException()
         { }
 
-        public CouldNotReadFileException(string message)
+        public InvalidObjFileException(string message)
             : base(message)
         { }
 
-        public CouldNotReadFileException(string message, Exception inner)
+        public InvalidObjFileException(string message, Exception inner)
             : base(message, inner)
         { }
     }
