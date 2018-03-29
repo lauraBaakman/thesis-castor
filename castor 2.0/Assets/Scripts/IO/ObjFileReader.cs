@@ -157,7 +157,12 @@ namespace IO
                     z: float.Parse(groups["z"].Value)
                 );
             }
-            catch (Exception e) { throw e; }
+            catch (Exception e)
+            {
+                throw new CouldNotReadFileException(
+                    string.Format("Could not read the line {0}, got the execption: {1}", line, e.Message)
+                );
+            }
             return vertex;
         }
     }

@@ -260,7 +260,7 @@ namespace Tests.IO
         [Test]
         public void ReadVertexTest_InValidVertex()
         {
-            Assert.Throws(typeof(ArgumentOutOfRangeException), new TestDelegate(ReadVertexTest_InValidVertex_Helper));
+            Assert.Throws(typeof(CouldNotReadFileException), new TestDelegate(ReadVertexTest_InValidVertex_Helper));
         }
 
         private void ReadVertexTest_InValidVertex_Helper()
