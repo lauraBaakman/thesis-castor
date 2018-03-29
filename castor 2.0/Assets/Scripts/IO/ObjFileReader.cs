@@ -473,13 +473,13 @@ namespace IO
         private void ProcessFace(FaceReader.Face face)
         {
             meshVertices.Add(objVertices[face.v0]);
-            meshNormals.Add(objNormals[face.n0]);
+            meshNormals.Add(objNormals[face.n0].normalized);
 
             meshVertices.Add(objVertices[face.v1]);
-            meshNormals.Add(objNormals[face.n1]);
+            meshNormals.Add(objNormals[face.n1].normalized);
 
             meshVertices.Add(objVertices[face.v2]);
-            meshNormals.Add(objNormals[face.n2]);
+            meshNormals.Add(objNormals[face.n2].normalized);
 
             meshTriangles[idx + 0] = idx + 0;
             meshTriangles[idx + 1] = idx + 1;
