@@ -111,7 +111,7 @@ namespace DoubleConnectedEdgeList
 
         public override string ToString()
         {
-            return string.Format("[Face [{0}]]", MeshIdx);
+            return string.Format("[Face [{0}, {1}]]", MeshIdx, Normal);
         }
 
         /// <summary>
