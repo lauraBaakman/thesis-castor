@@ -8,7 +8,10 @@ namespace Fragment
     public class ICPNormalController : MonoBehaviour, IICPListener
     {
         static Material normalMaterial;
+
         public bool ShowNormals = true;
+        public float normalScale = 1.0f;
+        public Color normalColor = Color.white;
 
         private List<Normal> Normals = new List<Normal>();
         private Transform ReferenceTransform;
@@ -18,8 +21,11 @@ namespace Fragment
         private void Awake()
         {
             GameObject parent = this.transform.parent.gameObject;
+
             ICPControllerOfParent = parent.GetComponent<ICPController>();
             Debug.Assert(ICPControllerOfParent != null, "The parent gameobject of the object that has the " + this.name + " is expected to have an ICPController.");
+
+            Normal.MagnitudeFactor = normalScale;
         }
 
         public void OnRenderObject()
@@ -64,7 +70,7 @@ namespace Fragment
 
         private void DrawNormal(Normal normal)
         {
-            GL.Color(normal.Color);
+            GL.Color(normalColor);
 
             GL.Vertex3(
                 normal.Start.x,
@@ -136,12 +142,10 @@ namespace Fragment
 
     internal class Normal
     {
-        private static float MagnitudeFactor = 0.5f;
-        private static Color DefaultColor = Color.white;
+        private static float magnitudeFactor = 0.5f;
 
         public readonly Vector3 Start;
         public readonly Vector3 End;
-        public readonly Color Color;
 
         public Normal(Point point) :
         this(
@@ -154,12 +158,17 @@ namespace Fragment
         {
             Start = position;
             End = ComputeEnd(position, direction);
-            Color = DefaultColor;
+        }
+
+        public static float MagnitudeFactor
+        {
+            get { return magnitudeFactor; }
+            set { magnitudeFactor = value; }
         }
 
         private Vector3 ComputeEnd(Vector3 position, Vector3 direction)
         {
-            return position + direction * MagnitudeFactor * direction.magnitude;
+            return position + direction * magnitudeFactor * direction.magnitude;
         }
     }
 }

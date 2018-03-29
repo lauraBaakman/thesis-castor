@@ -234,6 +234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowNormals: 1
+  normalScale: 2
+  normalColor: {r: 1, g: 0, b: 0.5019608, a: 1}
 --- !u!114 &114627018207738400
 MonoBehaviour:
   m_ObjectHideFlags: 1
