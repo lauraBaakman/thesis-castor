@@ -92,7 +92,7 @@ namespace IO
         }
     }
 
-    internal abstract class Reader
+    public abstract class Reader
     {
         protected Regex typeRegex;
 
@@ -109,7 +109,7 @@ namespace IO
         public abstract void Read(string line);
     }
 
-    internal abstract class ReferenceReader<T> : Reader
+    public abstract class ReferenceReader<T> : Reader
     {
         private int currentReferenceNumber = 1;
 
@@ -134,7 +134,7 @@ namespace IO
         public abstract T ExtractElement(string line);
     }
 
-    internal abstract class VectorReader : ReferenceReader<Vector3>
+    public abstract class VectorReader : ReferenceReader<Vector3>
     {
         private readonly Regex vectorRegex;
 
@@ -162,7 +162,7 @@ namespace IO
         }
     }
 
-    internal class CommentReader : Reader
+    public class CommentReader : Reader
     {
         public CommentReader()
             : base("#")
@@ -174,21 +174,21 @@ namespace IO
         }
     }
 
-    internal class VertexReader : VectorReader
+    public class VertexReader : VectorReader
     {
         public VertexReader()
             : base("v")
         { }
     }
 
-    internal class VertexNormalReader : VectorReader
+    public class VertexNormalReader : VectorReader
     {
         public VertexNormalReader()
             : base("vn")
         { }
     }
 
-    internal class FaceReader : Reader
+    public class FaceReader : Reader
     {
         private Regex noNormalFaceRegex;
         private Regex completeFaceRegex;
@@ -345,7 +345,7 @@ namespace IO
         }
     }
 
-    internal class VertexTextureReader : Reader
+    public class VertexTextureReader : Reader
     {
         public VertexTextureReader()
             : base("vt")
@@ -357,7 +357,7 @@ namespace IO
         }
     }
 
-    internal class GroupReader : Reader
+    public class GroupReader : Reader
     {
         public GroupReader()
             : base("g")
@@ -369,7 +369,7 @@ namespace IO
         }
     }
 
-    internal class SmoothingGroupReader : Reader
+    public class SmoothingGroupReader : Reader
     {
         public SmoothingGroupReader()
             : base("s")
@@ -381,7 +381,7 @@ namespace IO
         }
     }
 
-    internal class ObjectReader : Reader
+    public class ObjectReader : Reader
     {
         public ObjectReader()
             : base("o")
@@ -393,7 +393,7 @@ namespace IO
         }
     }
 
-    internal class MeshBuilder
+    public class MeshBuilder
     {
         private readonly Dictionary<int, Vector3> objVertices;
         private readonly Dictionary<int, Vector3> objMormals;
