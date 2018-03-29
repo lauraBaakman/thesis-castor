@@ -451,4 +451,18 @@ namespace IO
             idx += 3;
         }
     }
+
+    public class CouldNotReadFileException : Exception
+    {
+        public CouldNotReadFileException()
+        { }
+
+        public CouldNotReadFileException(string message)
+            : base(message)
+        { }
+
+        public CouldNotReadFileException(string message, Exception inner)
+            : base(message, inner)
+        { }
+    }
 }
