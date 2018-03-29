@@ -433,7 +433,7 @@ namespace IO
     public class MeshBuilder
     {
         private readonly Dictionary<int, Vector3> objVertices;
-        private readonly Dictionary<int, Vector3> objMormals;
+        private readonly Dictionary<int, Vector3> objNormals;
         private readonly List<FaceReader.Face> objFaces;
 
         private readonly List<Vector3> meshVertices;
@@ -445,7 +445,7 @@ namespace IO
         public MeshBuilder(Dictionary<int, Vector3> vertices, Dictionary<int, Vector3> normals, List<FaceReader.Face> faces)
         {
             this.objVertices = vertices;
-            this.objMormals = normals;
+            this.objNormals = normals;
             this.objFaces = faces;
 
             meshVertices = new List<Vector3>();
@@ -473,13 +473,13 @@ namespace IO
         private void ProcessFace(FaceReader.Face face)
         {
             meshVertices.Add(objVertices[face.v0]);
-            meshNormals.Add(objMormals[face.n0]);
+            meshNormals.Add(objNormals[face.n0]);
 
             meshVertices.Add(objVertices[face.v1]);
-            meshNormals.Add(objMormals[face.n1]);
+            meshNormals.Add(objNormals[face.n1]);
 
             meshVertices.Add(objVertices[face.v2]);
-            meshNormals.Add(objMormals[face.n2]);
+            meshNormals.Add(objNormals[face.n2]);
 
             meshTriangles[idx + 0] = idx + 0;
             meshTriangles[idx + 1] = idx + 1;
