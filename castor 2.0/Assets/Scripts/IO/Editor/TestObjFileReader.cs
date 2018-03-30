@@ -479,6 +479,14 @@ namespace Tests.IO
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCase("f 1 4 8", true)]
+        [TestCase("f 1//2 4//3 8//5", false)]
+        public void NoNormals(string line, bool expected)
+        {
+            bool actual = reader.NoNormals(line);
+            Assert.AreEqual(expected, actual);
+        }
+
         [Test]
         public void ReadTest_WithNormals()
         {

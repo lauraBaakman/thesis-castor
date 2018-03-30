@@ -232,7 +232,12 @@ namespace IO
 
         public bool HasNormals(string line)
         {
-            return !noNormalFaceRegex.Match(line).Success;
+            return completeFaceRegex.Match(line).Success;
+        }
+
+        public bool NoNormals(string line)
+        {
+            return noNormalFaceRegex.Match(line).Success;
         }
 
         public Face ExtractNoNormalFace(string line)
