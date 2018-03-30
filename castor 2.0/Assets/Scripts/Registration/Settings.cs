@@ -96,7 +96,7 @@ namespace Registration
 
             TransFormFinder = new LowTransformFinder();
 
-            CorrespondenceFinder = new NormalShootingCorrespondenceFinder(this);
+            CorrespondenceFinder = new NearstPointCorrespondenceFinder(this);
         }
     }
 }
