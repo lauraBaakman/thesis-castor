@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beefb4bec9da4415db98706d68e42ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showCorrespondences: 1
 --- !u!1 &37977596 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1135060811400328, guid: f2474aba1b01746338cfb3d40f0d8cea,
@@ -2226,7 +2227,7 @@ Prefab:
     - target: {fileID: 114446561927247790, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
       propertyPath: KeyBoard
-      value: cmd/ctrl + backspace
+      value: cmd/ctrl + backspace or delete
       objectReference: {fileID: 0}
     - target: {fileID: 224491853207679746, guid: f2474aba1b01746338cfb3d40f0d8cea,
         type: 2}
@@ -5801,7 +5802,7 @@ MonoBehaviour:
     _useStrictMouseCheck: 0
     _name: Duplicate selection
   _deleteSelectionShortcut:
-    _keys: 7f00000000000000
+    _keys: 0000000000000000
     _numberOfKeys: 1
     _lCtrl: 0
     _lCmd: 0

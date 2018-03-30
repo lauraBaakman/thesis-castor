@@ -1,4 +1,5 @@
 using UnityEngine;
+using RTEditor;
 
 namespace Buttons
 {
@@ -30,12 +31,13 @@ namespace Buttons
         private void DeleteFragment(GameObject fragment)
         {
             fragment.SetActive(false);
-            Destroy(fragment, 5.0f);
+            fragment.DestroyAllChildren();
+            Destroy(fragment, 2.0f);
         }
 
         protected override bool HasDetectedKeyBoardShortCut()
         {
-            return Input.GetKeyDown(KeyCode.Backspace) && RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed();
+            return (Input.GetKeyDown(KeyCode.Backspace) && InputHelper.IsAnyCtrlOrCommandKeyPressed()) || (Input.GetKeyDown(KeyCode.Delete));
         }
 
         public void OnNumberOfSelectedObjectsChanged(int currentCount)
