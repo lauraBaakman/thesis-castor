@@ -3,6 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using IO;
+using System.Runtime.CompilerServices;
 
 namespace Tests.IO
 {
@@ -489,52 +490,16 @@ namespace Tests.IO
             Assert.AreEqual(expected.normalIndices, actual.normalIndices);
         }
 
-        [Test]
-        public void ReadTest_TwoVerticesNoNormals()
+        [TestCase("f 1 4")]
+        [TestCase("f 1//2 4//3")]
+        [TestCase("f 1 4 8 7")]
+        [TestCase("f 1//2 4//3 1//2 4//3")]
+        public void ReadTest_InvalidFace(string face)
         {
-            Assert.Throws(typeof(InvalidObjFileException), new TestDelegate(ReadTest_TwoVerticesNoNormals_Helper));
-        }
-
-        private void ReadTest_TwoVerticesNoNormals_Helper()
-        {
-            string line = "f 1 4";
-            reader.Read(line);
-        }
-
-        [Test]
-        public void ReadTest_TwoVertices_WithNormals()
-        {
-            Assert.Throws(typeof(InvalidObjFileException), new TestDelegate(ReadTest_TwoVertices_WithNormals_Helper));
-        }
-
-        private void ReadTest_TwoVertices_WithNormals_Helper()
-        {
-            string line = "f 1//2 4//3";
-            reader.Read(line);
-        }
-
-        [Test]
-        public void ReadTest_FourVerticesNoNormals()
-        {
-            Assert.Throws(typeof(InvalidObjFileException), new TestDelegate(ReadTest_FourVerticesNoNormals_Helper));
-        }
-
-        private void ReadTest_FourVerticesNoNormals_Helper()
-        {
-            string line = "f 1 4 8 7";
-            reader.Read(line);
-        }
-
-        [Test]
-        public void ReadTest_FourVertices_WithNormals()
-        {
-            Assert.Throws(typeof(InvalidObjFileException), new TestDelegate(ReadTest_FourVertices_WithNormals_Helper));
-        }
-
-        private void ReadTest_FourVertices_WithNormals_Helper()
-        {
-            string line = "f 1//2 4//3 1//2 4//3";
-            reader.Read(line);
+            Assert.Throws(
+                typeof(InvalidObjFileException),
+                delegate { reader.Read(face); }
+            );
         }
     }
 
