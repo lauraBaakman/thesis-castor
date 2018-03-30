@@ -24,6 +24,8 @@ namespace IO
             this.readers.Add("group", new GroupReader());
             this.readers.Add("smoothing group", new SmoothingGroupReader());
             this.readers.Add("object", new ObjectReader());
+            this.readers.Add("material name", new MaterialNameReader());
+            this.readers.Add("material library", new MaterialLibraryReader());
         }
 
         public ReadResult ImportFile()
