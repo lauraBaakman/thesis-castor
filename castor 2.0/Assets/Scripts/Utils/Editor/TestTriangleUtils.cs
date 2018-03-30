@@ -35,7 +35,6 @@ namespace Tests.Utils
             Assert.AreEqual(expected, actual);
         }
 
-
         [Test]
         public void TestWindingOrder_Colinear()
         {
