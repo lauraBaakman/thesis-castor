@@ -10,6 +10,8 @@ namespace Fragments
         private List<Correspondence> Correspondences = new List<Correspondence>();
         private Transform ReferenceTransform;
 
+        public bool showCorrespondences = true;
+
         static Material CorrespondenceMaterial;
 
         #region Correspondences
@@ -101,7 +103,7 @@ namespace Fragments
         /// </summary
         public void OnRenderObject()
         {
-            RenderCorrespondences();
+            if (showCorrespondences) RenderCorrespondences();
         }
 
         #region ICPProgress
