@@ -46,9 +46,6 @@ namespace Utils
             Vector3[] transformedVertices = new Vector3[vertices.Length];
             for (int i = 0; i < vertices.Length; i++)
             {
-                Vector3 originalVertex = vertices[i];
-                Vector3 transformedVertex = this.transformation.MultiplyPoint(originalVertex);
-
                 transformedVertices[i] = this.transformation.MultiplyPoint(vertices[i]);
             }
             return transformedVertices;

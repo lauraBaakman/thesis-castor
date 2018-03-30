@@ -228,7 +228,7 @@ namespace Utils
             // numColsA x numColsA matrix
             Vt = new double[A.GetLength(1), A.GetLength(1)];
 
-            bool succes = alglib.rmatrixsvd(
+            alglib.rmatrixsvd(
                 A, A.GetLength(0), A.GetLength(1),
                 uneeded: 2, vtneeded: 2, additionalmemory: 2,
                 w: out singularValues, vt: out Vt, u: out U

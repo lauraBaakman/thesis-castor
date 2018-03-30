@@ -73,7 +73,7 @@ namespace IO
             if (result.Succeeded())
             {
                 string name = ExtractObjectName(path);
-                GameObject fragment = AddFragmentToScene(name, result.Mesh);
+                AddFragmentToScene(name, result.Mesh);
             }
             CallBack(result);
         }
@@ -83,7 +83,7 @@ namespace IO
             return Path.GetFileNameWithoutExtension(path);
         }
 
-        private GameObject AddFragmentToScene(string name, Mesh mesh)
+        private void AddFragmentToScene(string name, Mesh mesh)
         {
             GameObject fragment = UnityEngine.Object.Instantiate(
                 original: Resources.Load(PrefabPath),
@@ -98,8 +98,6 @@ namespace IO
 
 
             if (RandomizeTransform) RandomizeTheTransform(fragment);
-
-            return fragment;
         }
 
         private void SetDoubleConnectedEdgeList(GameObject fragment, Mesh mesh)

@@ -70,13 +70,13 @@ namespace IO
                 string trimmedLine = line.Trim();
                 foreach (Reader reader in this.readers.Values)
                 {
-                    if (reader.IsApplicable(line))
+                    if (reader.IsApplicable(trimmedLine))
                     {
-                        reader.Read(line);
+                        reader.Read(trimmedLine);
                         return;
                     }
                 }
-                Debug.LogWarning("Encountered and ignored an unrecognised line: " + line);
+                Debug.LogWarning("Encountered and ignored an unrecognised line: " + trimmedLine);
             }
             catch (InvalidObjFileException exception)
             {

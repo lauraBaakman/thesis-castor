@@ -157,7 +157,6 @@ namespace Tests.IO
         {
             string inputPath = InputPath("nonexistentfile.obj");
 
-            ReadResult expected = ReadResult.ErrorResult(inputPath, new FileNotFoundException());
             ReadResult actual = new ObjFileReader(inputPath).ImportFile();
 
             Assert.IsFalse(actual.Succeeded());

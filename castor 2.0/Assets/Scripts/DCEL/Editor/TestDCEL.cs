@@ -1040,25 +1040,27 @@ namespace Tests.DoubleConnectedEdgeList
         [Test]
         public void GetFace_InvalidFace()
         {
-            Assert.Throws(typeof(ArgumentException), new TestDelegate(GetFace_InvalidFace_Helper));
-        }
-
-        public void GetFace_InvalidFace_Helper()
-        {
-            DCEL dcel = ClosedMesh();
-            Face face = dcel.GetFace(10);
+            Assert.Throws(
+                typeof(ArgumentException),
+                delegate
+                {
+                    DCEL dcel = ClosedMesh();
+                    dcel.GetFace(10);
+                }
+            );
         }
 
         [Test]
         public void GetVertex_InvalidVertex()
         {
-            Assert.Throws(typeof(ArgumentException), new TestDelegate(GetVertex_InvalidVertex_Helper));
-        }
-
-        public void GetVertex_InvalidVertex_Helper()
-        {
-            DCEL dcel = ClosedMesh();
-            Vertex vertex = dcel.GetVertex(new Vector3(1, 2, 3));
+            Assert.Throws(
+                typeof(ArgumentException),
+                delegate
+                {
+                    DCEL dcel = ClosedMesh();
+                    dcel.GetVertex(new Vector3(1, 2, 3));
+                }
+            );
         }
 
         private DCEL DifferentVertexPositionsDCEL()
