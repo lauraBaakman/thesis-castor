@@ -261,12 +261,6 @@ namespace IO
                     v2: Int32.Parse(groups["v2"].Value)
                 );
             }
-            catch (ArgumentOutOfRangeException)
-            {
-                throw new InvalidObjFileException(
-                    string.Format("Could not read the face: '{0}', only triangular faces are accepted.", line)
-                );
-            }
             catch (Exception e)
             {
                 throw new InvalidObjFileException(
@@ -291,12 +285,6 @@ namespace IO
                     n1: Int32.Parse(groups[4].Value),
                     v2: Int32.Parse(groups[5].Value),
                     n2: Int32.Parse(groups[6].Value));
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                throw new InvalidObjFileException(
-                    string.Format("Could not read the face: '{0}', only triangular faces are accepted.", line)
-                );
             }
             catch (Exception e)
             {
