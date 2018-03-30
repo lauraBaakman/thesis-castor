@@ -53,7 +53,6 @@ namespace Registration
 
         private List<Point> NoNormals(SamplingInformation info)
         {
-            Debug.Log("Using NoNormals!");
             ReadOnlyCollection<Vertex> vertices = info.DCEL.Vertices;
             List<Point> points = new List<Point>(vertices.Count);
 
@@ -72,7 +71,6 @@ namespace Registration
 
         private List<Point> VertexNormals(SamplingInformation info)
         {
-            Debug.Log("Using VertexNormals!");
             Mesh fragment = info.Mesh;
             List<Point> points = new List<Point>();
 
@@ -92,7 +90,6 @@ namespace Registration
 
         private List<Point> SmoothNormals(SamplingInformation info)
         {
-            Debug.Log("Using SmoothNormals!");
             ReadOnlyCollection<Vertex> vertices = info.DCEL.Vertices;
             List<Point> points = new List<Point>(vertices.Count);
 
