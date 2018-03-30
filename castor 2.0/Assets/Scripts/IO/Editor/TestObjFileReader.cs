@@ -189,6 +189,8 @@ namespace Tests.IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
+        [TestCase("mtllib some material library", false)]
+        [TestCase("usemtl some material name", false)]
         public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
@@ -220,6 +222,8 @@ namespace Tests.IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
+        [TestCase("mtllib some material library", false)]
+        [TestCase("usemtl some material name", false)]
         public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
@@ -320,6 +324,8 @@ namespace Tests.IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
+        [TestCase("mtllib some material library", false)]
+        [TestCase("usemtl some material name", false)]
         public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
@@ -388,6 +394,8 @@ namespace Tests.IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
+        [TestCase("mtllib some material library", false)]
+        [TestCase("usemtl some material name", false)]
         public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
@@ -555,6 +563,8 @@ namespace Tests.IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
+        [TestCase("mtllib some material library", false)]
+        [TestCase("usemtl some material name", false)]
         public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
@@ -587,6 +597,8 @@ namespace Tests.IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
+        [TestCase("mtllib some material library", false)]
+        [TestCase("usemtl some material name", false)]
         public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
@@ -619,6 +631,8 @@ namespace Tests.IO
         [TestCase("s some smoothing group", true)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", false)]
+        [TestCase("mtllib some material library", false)]
+        [TestCase("usemtl some material name", false)]
         public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);
@@ -651,6 +665,76 @@ namespace Tests.IO
         [TestCase("s some smoothing group", false)]
         [TestCase("mg some merging group", false)]
         [TestCase("o some object name", true)]
+        [TestCase("mtllib some material library", false)]
+        [TestCase("usemtl some material name", false)]
+        public void IsApplicableReaderTest(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class MaterialLibraryReaderTests
+    {
+
+        MaterialLibraryReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new MaterialLibraryReader();
+        }
+
+        [TestCase("# some comment", false)]
+        [TestCase("v some vertex", false)]
+        [TestCase("vn some normal", false)]
+        [TestCase("f some face", false)]
+        [TestCase("vt some texture", false)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", false)]
+        [TestCase("s some smoothing group", false)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", false)]
+        [TestCase("mtllib some material library", true)]
+        [TestCase("usemtl some material name", false)]
+        public void IsApplicableReaderTest(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class MaterialNameReaderTests
+    {
+
+        MaterialNameReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new MaterialNameReader();
+        }
+
+        [TestCase("# some comment", false)]
+        [TestCase("v some vertex", false)]
+        [TestCase("vn some normal", false)]
+        [TestCase("f some face", false)]
+        [TestCase("vt some texture", false)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", false)]
+        [TestCase("s some smoothing group", false)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", false)]
+        [TestCase("mtllib some material library", false)]
+        [TestCase("usemtl some material name", true)]
         public void IsApplicableReaderTest(string line, bool expected)
         {
             bool actual = reader.IsApplicable(line);

@@ -413,6 +413,24 @@ namespace IO
         public override void Read(string line) { }
     }
 
+    public class MaterialNameReader : Reader
+    {
+        public MaterialNameReader()
+            : base("usemtl")
+        { }
+
+        public override void Read(string line) { }
+    }
+
+    public class MaterialLibraryReader : Reader
+    {
+        public MaterialLibraryReader()
+            : base("mtllib")
+        { }
+
+        public override void Read(string line) { }
+    }
+
     public class MeshBuilder
     {
         private readonly Dictionary<int, Vector3> objVertices;
