@@ -182,10 +182,7 @@ namespace IO
             : base("#")
         { }
 
-        public override void Read(string line)
-        {
-            //do nothing, comments are not part of the mesh
-        }
+        public override void Read(string line) { }
     }
 
     public class VertexReader : VectorReader
@@ -386,10 +383,7 @@ namespace IO
             : base("vt")
         { }
 
-        public override void Read(string line)
-        {
-            Debug.LogWarning("Textures are ignored");
-        }
+        public override void Read(string line) { }
     }
 
     public class GroupReader : Reader
@@ -398,10 +392,7 @@ namespace IO
             : base("g")
         { }
 
-        public override void Read(string line)
-        {
-            Debug.LogWarning("Groups are ignored");
-        }
+        public override void Read(string line) { }
     }
 
     public class SmoothingGroupReader : Reader
@@ -410,10 +401,7 @@ namespace IO
             : base("s")
         { }
 
-        public override void Read(string line)
-        {
-            Debug.LogWarning("Smoothing Groups are ignored");
-        }
+        public override void Read(string line) { }
     }
 
     public class ObjectReader : Reader
@@ -422,10 +410,7 @@ namespace IO
             : base("o")
         { }
 
-        public override void Read(string line)
-        {
-            Debug.LogWarning("Objects are ignored");
-        }
+        public override void Read(string line) { }
     }
 
     public class MeshBuilder
