@@ -16,8 +16,8 @@ namespace Tests.DoubleConnectedEdgeList
             UnityEngine.Mesh mesh = new UnityEngine.Mesh();
             Vector3[] meshVertices = {
                 new Vector3(0, 4, 3),
-                new Vector3(2, 4, 4),
-                new Vector3(2, 2, 5),
+                new Vector3(2, 4, 3),
+                new Vector3(2, 2, 3),
             };
 
             int[] triangles = {
@@ -108,10 +108,10 @@ namespace Tests.DoubleConnectedEdgeList
         [Test, MaxTime(5000)]
         public void Build_Rectangle()
         {
-            Vector3 p1 = new Vector3(5, 7, 2);
-            Vector3 p2 = new Vector3(5, 3, 3);
+            Vector3 p1 = new Vector3(5, 7, 2.5f);
+            Vector3 p2 = new Vector3(5, 3, 2.5f);
             Vector3 p3 = new Vector3(2, 3, 2.5f);
-            Vector3 p4 = new Vector3(2, 5, 3f);
+            Vector3 p4 = new Vector3(2, 5, 2.5f);
 
             Mesh mesh = new Mesh();
             Vector3[] meshVertices = { p1, p2, p3, p3, p4, p1 };
@@ -238,10 +238,10 @@ namespace Tests.DoubleConnectedEdgeList
             Vector3 p2 = new Vector3(6, 4, 9);
             Vector3 p3 = new Vector3(4, 6, 7);
 
-            Vector3 nf0 = new Vector3(0, -1, 0);
-            Vector3 nf1 = new Vector3(0, 0, +1);
-            Vector3 nf2 = new Vector3(-0.5f, -0.5f, 0);
-            Vector3 nf3 = new Vector3(+0.5f, +0.5f, 0);
+            Vector3 nf0 = new Vector3(-0.149440644416015f, -0.647576125802733f, +0.747203222080077f);
+            Vector3 nf1 = new Vector3(-0.046274481338275f, -0.971764108103770f, +0.231372406691374f);
+            Vector3 nf2 = new Vector3(-0.762000762001143f, -0.127000127000191f, +0.635000635000952f);
+            Vector3 nf3 = new Vector3(+0.707106781186547f, +0.707106781186547f, -0.000000000000000f);
 
             Vector3[] meshVertices = {
                 p0, p1, p3,
@@ -420,8 +420,8 @@ namespace Tests.DoubleConnectedEdgeList
 
             DCEL actual = DCEL.FromMesh(mesh);
 
-            Assert.AreEqual(actual, expected);
-            Assert.AreEqual(actual.GetHashCode(), expected.GetHashCode());
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected.GetHashCode(), actual.GetHashCode());
         }
 
         [Test, MaxTime(5000)]
