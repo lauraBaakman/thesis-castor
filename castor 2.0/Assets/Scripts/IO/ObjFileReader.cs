@@ -226,8 +226,13 @@ namespace IO
         public Face ExtractFace(string line)
         {
             if (HasNormals(line)) return ExtractCompleteFace(line);
+            if (NoNormals(line)) return ExtractNoNormalFace(line);
 
-            return ExtractNoNormalFace(line);
+            throw new InvalidObjFileException(
+                string.Format(
+                    "The line: '{0}' does not define a valid face.", line
+                )
+            );
         }
 
         public bool HasNormals(string line)

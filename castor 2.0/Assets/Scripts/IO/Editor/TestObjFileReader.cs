@@ -504,10 +504,17 @@ namespace Tests.IO
         [TestCase("f 1//2 4//3 1//2 4//3")]
         public void ReadTest_InvalidFace(string face)
         {
-            Assert.Throws(
-                typeof(InvalidObjFileException),
-                delegate { reader.Read(face); }
+            InvalidObjFileException exception = Assert.Throws<InvalidObjFileException>(
+                delegate
+                {
+                    reader.Read(face);
+                }
             );
+            Assert.That(exception.Message, Is.EqualTo(
+                string.Format(
+                    "The line: '{0}' does not define a valid face.", face
+                )
+            ));
         }
     }
 
