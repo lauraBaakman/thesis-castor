@@ -33,3 +33,16 @@ for i = 1:size(X, 1)
     P(:, i) = M * X(:,i);    
 end
 
+
+% Auxilaries
+convergence = @(M_actual, M_expected) (sum(M_actual(:) == M_expected(:)) == size(M_actual, 1) * size(M_actual, 2));
+
+t_current = eye(4);
+
+M_actual = eye(4);
+
+while 1
+    if(convergence(M_actual, M)) 
+        break;
+    end
+end
