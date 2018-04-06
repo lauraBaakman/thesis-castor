@@ -36,9 +36,13 @@ N = size(X, 2);
 %% Transformation Matrix 4, P is rotated with R, and translated with T, w.r.t. X.
 M = TrMat * RMat;
 
-noise_vector = @(dimension, scale) [((rand(dimension, 1) * 2) - 1) * scale; 0];
+%% Compute the scale of the data
+compute_scale = @(data) max(max(data(1:end -1, :), [], 2) - min(data(1:end -1, :), [], 2));
+scale = compute_scale(X);
 
 %% Compute Static Points
+noise_vector = @(dimension, scale) [((rand(dimension, 1) * 2) - 1) * scale; 0];
+
 P = nan(size(X));
 for i = 1:size(X, 1)
     P(:, i) = M * X(:,i) + noise_vector(3, 0.001);    
@@ -46,7 +50,7 @@ end
 
 %% Configuration
 max_iterations = 5000;
-learning_rate = 0.0001;
+learning_rate = 0.001;
 
 %% Anonymous Functions
 has_converged = @(error, iteration) error <= 0.00001 || iteration > max_iterations;
@@ -110,6 +114,10 @@ while 1
     end
     t_change = (1 / (2 * N)) * t_change;
     q_change = (1 / (2 * N)) * q_change;
+    
+    % Normalize the effect of scale on gradient directions
+    t_change = t_change / scale;
+    q_change = q_change / (scale * scale);
     
     % Update t_current and T_actual
     t_current = t_previous - learning_rate * t_change;
