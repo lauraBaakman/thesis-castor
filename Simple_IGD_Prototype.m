@@ -1,14 +1,20 @@
 % A prototype for using iterative gradient descent to find the rotation and
-% translation that minimizes the squared error as proposed by "Wheeler, M.
-% D., and K. Ikeuchi. "Iterative estimation of rotation and translation
-% using the quaternion: School of Computer Science." (1995)".
+% translation that minimizes the squared error as proposed by
+%    "Wheeler, M. D., and K. Ikeuchi. "Iterative estimation of rotation and
+%    translation using the quaternion: School of Computer Science."
+%    (1995)".
 
 close all; clear variables; clc;
 
 %%Translation Vector and Rotation Matrix
 t = [3, 4, 7];
-TrMat = makehgtform('translate', t);
-RMat = makehgtform('xrotate',pi/2,'yrotate',pi/4, 'zrotate', pi/8);
+TrMat = eye(4);
+TrMat(1:3, end) = t';
+% RMat = makehgtform('xrotate',pi/16,'yrotate',pi/12, 'zrotate', pi/8);
+RMat = [+0.892399100832523, -0.369643810614386, +0.258819045102521, 0;
+        +0.421979810690146, +0.886804577034556, -0.188442780494429, 0;
+        -0.159865206355897, +0.277382579526975, +0.947365832385646, 0;
+        +0,                 +0,                 +0,                 1;];
 
 %%Model Points: each column is a point
 X = [
@@ -22,23 +28,28 @@ N = size(X, 2);
 % M = eye(4);
 
 %% Transformation Matrix 2, P is translated w.r.t. X with t.
-M = TrMat;
+% M = TrMat;
 
 %% Transformation Matrix 3, P is rotated w.r.t. X with R
 % M = RMat;
 
 %% Transformation Matrix 4, P is rotated with R, and translated with T, w.r.t. X.
-% M = TrMat * RMat;
+M = TrMat * RMat;
+
+noise_vector = @(dimension, scale) [((rand(dimension, 1) * 2) - 1) * scale; 0];
 
 %% Compute Static Points
 P = nan(size(X));
 for i = 1:size(X, 1)
-    P(:, i) = M * X(:,i);    
+    P(:, i) = M * X(:,i) + noise_vector(3, 0.001);    
 end
 
+%% Configuration
+max_iterations = 5000;
+learning_rate = 0.0001;
 
-% Auxilaries
-has_converged = @(M_actual, M_expected) (sum(M_actual(:) == M_expected(:)) == size(M_actual, 1) * size(M_actual, 2));
+%% Anonymous Functions
+has_converged = @(error, iteration) error <= 0.00001 || iteration > max_iterations;
 
 Ru = @(u, v, w, s)...  
 [
@@ -51,17 +62,28 @@ R = @(q) 1 / dot(q, q) * Ru(q(1), q(2), q(3), q(4));
 
 Xc = @(x, q) R(q) * x;
 
-compute_local_error = @(q, t, x, p) (R(q) * x + t - p).^2;
+homogeneous_cross = @(a, b) [cross(a(1:3), b(1:3)); 0];
 
-partialToT = @(q, t, x, p) 2 * (Xc(x, q) + t - p);
+quaternion_multiplication_aux = @(u1, s1, u2, s2) [(s1 * u2 + s2 * u1 + cross(u1, u2)); s1 * s2 - dot(u1, u2)];
+quaternion_multiplication = @(q1, q2) quaternion_multiplication_aux(q1(1:3), q1(4), q2(1:3), q2(4));
 
+compute_local_error = @(q, t, x, p) dot((R(q) * x + t - p), (R(q) * x + t - p));
+
+%% Partial Derivatices
+partialToT = @(q, t, x, p) +2 * (Xc(x, q) + t - p);
+partialToR = @(q, t, x, p) -4 * homogeneous_cross(Xc(x, q), t - p);
+
+%% Initialization
 t_current = [0, 0, 0, 0]';
 q_current = [0, 0, 0, 1]';
 
 M_actual = eye(4);
 
-learning_rate = 1;
+iteration = 1;
 
+errors = nan(max_iterations,1);
+
+%% Iteration
 while 1
     t_previous = t_current;
     q_previous = q_current;
@@ -71,20 +93,23 @@ while 1
     for i = 1:size(X, 2)
         error = error + compute_local_error(q_current, t_current, X(:, i), P(:,i));
     end
-    error = 1/N .* error;
-    fprintf('Error: [%5.5f, %5.5f, %5.5f, %5.5f]\n', error);
+    error = 1/N * error;
+    errors(iteration) = error;
     
     % Check for convergence
-    if(has_converged(M_actual, M)) 
+    if(has_converged(error, iteration)) 
         break;
     end
     
     % Compute the gradient of the error w.r.t. to t and q
     t_change = [0, 0, 0, 0]';
+    q_change = [0, 0, 0, 0]';
     for i = 1:size(X, 2)
         t_change = t_change + partialToT(q_current, t_current, X(:, i), P(:,i));
+        q_change = q_change + partialToR(q_current, t_current, X(:, i), P(:,i));
     end
     t_change = (1 / (2 * N)) * t_change;
+    q_change = (1 / (2 * N)) * q_change;
     
     % Update t_current and T_actual
     t_current = t_previous - learning_rate * t_change;
@@ -92,8 +117,14 @@ while 1
     T_actual(:, end) = t_current;
     
     % Update q_current and R_actual
-    R_actual = eye(4);
+    q_current = [-1 * learning_rate * q_change(1:3) ; 1];
+    R_actual = R(q_current);
     
     % Update M_actual
     M_actual = T_actual * R_actual;
+    
+    % Update iteration count
+    iteration = iteration + 1;
 end
+
+plot(1:(max_iterations + 1), errors);
