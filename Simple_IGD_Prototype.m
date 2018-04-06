@@ -71,17 +71,19 @@ homogeneous_cross = @(a, b) [cross(a(1:3), b(1:3)); 0];
 quaternion_multiplication_aux = @(u1, s1, u2, s2) [(s1 * u2 + s2 * u1 + cross(u1, u2)); s1 * s2 - dot(u1, u2)];
 quaternion_multiplication = @(q1, q2) quaternion_multiplication_aux(q1(1:3), q1(4), q2(1:3), q2(4));
 
-compute_local_error = @(q, t, x, p) dot((R(q) * x + t - p), (R(q) * x + t - p));
+compute_local_error = @(t, xc, p) dot((xc + t - p), (xc + t - p));
 
 %% Partial Derivatices
-partialToT = @(q, t, x, p) +2 * (Xc(x, q) + t - p);
-partialToR = @(q, t, x, p) -4 * homogeneous_cross(Xc(x, q), t - p);
+partialToT = @(t, xc, p) +2 * (xc + t - p);
+partialToR = @(t, xc, p) -4 * homogeneous_cross(xc, t - p);
 
 %% Initialization
 t_current = [0, 0, 0, 0]';
 q_current = [0, 0, 0, 1]';
 
 M_actual = eye(4);
+
+XC = nan(size(X));
 
 iteration = 1;
 
@@ -92,10 +94,15 @@ while 1
     t_previous = t_current;
     q_previous = q_current;
     
+    %Premultiply the model points
+    for i = 1:size(X, 1)
+        XC(:, i) = Xc(X(:, i), q_current);
+    end
+    
     % Compute Error
     error = 0;
     for i = 1:size(X, 2)
-        error = error + compute_local_error(q_current, t_current, X(:, i), P(:,i));
+        error = error + compute_local_error(t_current, XC(:, i), P(:,i));
     end
     error = 1/N * error;
     errors(iteration) = error;
@@ -109,8 +116,8 @@ while 1
     t_change = [0, 0, 0, 0]';
     q_change = [0, 0, 0, 0]';
     for i = 1:size(X, 2)
-        t_change = t_change + partialToT(q_current, t_current, X(:, i), P(:,i));
-        q_change = q_change + partialToR(q_current, t_current, X(:, i), P(:,i));
+        t_change = t_change + partialToT(t_current, XC(:, i), P(:,i));
+        q_change = q_change + partialToR(t_current, XC(:, i), P(:,i));
     end
     t_change = (1 / (2 * N)) * t_change;
     q_change = (1 / (2 * N)) * q_change;
