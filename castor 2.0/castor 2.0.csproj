@@ -535,6 +535,7 @@
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\AbstractIterativeErrorMetric.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\WheelerIterativeError.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
