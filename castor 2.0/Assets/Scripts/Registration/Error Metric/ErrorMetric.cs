@@ -24,7 +24,7 @@ namespace Registration
             /// <param name="correspondences">the correspondences</param>
             /// <param name="newTransform">the new transform of the correspondences.</param>
             /// <param name="originalTransform">the original transform of the correspondences.</param>
-            public float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
+            public virtual float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
             {
                 //Apply the newTransform to the model points
                 List<Point> modelPoints = TransformPoints(correspondences.ModelPoints, originalTransform, newTransform);
