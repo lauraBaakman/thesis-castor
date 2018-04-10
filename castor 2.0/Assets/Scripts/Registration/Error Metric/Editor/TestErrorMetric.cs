@@ -44,178 +44,176 @@ namespace Tests.Registration.Error
                         }
                     );
 
-                    float expected = 78.610000f;
-                    float actual = errorMetric.ComputeError(correspondences, null, null);
-                    Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
-                }
+            float expected = 78.610000f;
+            float actual = errorMetric.ComputeError(correspondences, null, null);
+            Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
+        }
 
-                [Test]
-                public void Test_ComputeError_EmptyCorrespondences()
-                {
-                    CorrespondenceCollection correspondences = new CorrespondenceCollection();
+        [Test]
+        public void Test_ComputeError_EmptyCorrespondences()
+        {
+            CorrespondenceCollection correspondences = new CorrespondenceCollection();
 
-                    float expected = 0.0f;
-                    float actual = errorMetric.ComputeError(correspondences, null, null);
+            float expected = 0.0f;
+            float actual = errorMetric.ComputeError(correspondences, null, null);
 
-                    Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
-                }
+            Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
+        }
 
 
-                [Test]
-                public void Test_ComputeError_WithNormalization()
-                {
-                    CorrespondenceCollection correspondences = new CorrespondenceCollection();
-                    correspondences.Add(new Correspondence(
-                        staticPoint: new Point(new Vector3(1, 2, 3)),
-                        modelPoint: new Point(new Vector3(2, 4, 4))
-                    ));
-                    correspondences.Add(new Correspondence(
-                        staticPoint: new Point(new Vector3(2, 3, 4)),
-                        modelPoint: new Point(new Vector3(4, 4, 3))
-                    ));
+        [Test]
+        public void Test_ComputeError_WithNormalization()
+        {
+            CorrespondenceCollection correspondences = new CorrespondenceCollection();
+            correspondences.Add(new Correspondence(
+                staticPoint: new Point(new Vector3(1, 2, 3)),
+                modelPoint: new Point(new Vector3(2, 4, 4))
+            ));
+            correspondences.Add(new Correspondence(
+                staticPoint: new Point(new Vector3(2, 3, 4)),
+                modelPoint: new Point(new Vector3(4, 4, 3))
+            ));
 
-                    errorMetric = new ErrorMetric(
-                        new ErrorMetric.Configuration(
-                            distanceMetric: DistanceMetrics.SquaredEuclidean,
-                            aggregationMethod: AggregationMethods.Sum,
-                            normalizePoints: true
-                        )
-                    );
+            errorMetric = new ErrorMetric(
+                new ErrorMetric.Configuration(
+                    distanceMetric: DistanceMetrics.SquaredEuclidean,
+                    aggregationMethod: AggregationMethods.Sum,
+                    normalizePoints: true
+                )
+            );
 
-                    float expected = 1.3333333333f;
-                    float actual = errorMetric.ComputeError(correspondences, null, null);
+            float expected = 1.3333333333f;
+            float actual = errorMetric.ComputeError(correspondences, null, null);
 
-                    Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
-                }
+            Assert.That(actual, Is.EqualTo(expected).Within(tolerance));
+        }
 
-                [Test]
-                public void Test_Equals_Equal()
-                {
-                    ErrorMetric thisMetric = new ErrorMetric(
-                        new ErrorMetric.Configuration(
-                            distanceMetric: DistanceMetrics.PointToPlane,
-                            normalizePoints: true,
-                            aggregationMethod: AggregationMethods.Sum
-                        )
-                    );
-                    ErrorMetric otherMetric = new ErrorMetric(
-                        new ErrorMetric.Configuration(
-                            distanceMetric: DistanceMetrics.PointToPlane,
-                            normalizePoints: true,
-                            aggregationMethod: AggregationMethods.Sum
-                        )
-                    );
+        [Test]
+        public void Test_Equals_Equal()
+        {
+            ErrorMetric thisMetric = new ErrorMetric(
+                new ErrorMetric.Configuration(
+                    distanceMetric: DistanceMetrics.PointToPlane,
+                    normalizePoints: true,
+                    aggregationMethod: AggregationMethods.Sum
+                )
+            );
+            ErrorMetric otherMetric = new ErrorMetric(
+                new ErrorMetric.Configuration(
+                    distanceMetric: DistanceMetrics.PointToPlane,
+                    normalizePoints: true,
+                    aggregationMethod: AggregationMethods.Sum
+                )
+            );
 
-                    Assert.IsTrue(thisMetric.Equals(otherMetric));
-                    Assert.IsTrue(otherMetric.Equals(thisMetric));
-                    Assert.AreEqual(thisMetric.GetHashCode(), otherMetric.GetHashCode());
-                }
+            Assert.IsTrue(thisMetric.Equals(otherMetric));
+            Assert.IsTrue(otherMetric.Equals(thisMetric));
+            Assert.AreEqual(thisMetric.GetHashCode(), otherMetric.GetHashCode());
+        }
 
-                [Test]
-                public void Test_Equals_NotEqual()
-                {
-                    ErrorMetric thisMetric = new ErrorMetric(
-                        new ErrorMetric.Configuration(
-                            distanceMetric: DistanceMetrics.PointToPlane,
-                            normalizePoints: true,
-                            aggregationMethod: AggregationMethods.Sum
-                        )
-                    );
-                    ErrorMetric otherMetric = new ErrorMetric(
-                        new ErrorMetric.Configuration(
-                            distanceMetric: DistanceMetrics.PointToPlane,
-                            normalizePoints: false,
-                            aggregationMethod: AggregationMethods.Sum
-                        )
-                    );
+        [Test]
+        public void Test_Equals_NotEqual()
+        {
+            ErrorMetric thisMetric = new ErrorMetric(
+                new ErrorMetric.Configuration(
+                    distanceMetric: DistanceMetrics.PointToPlane,
+                    normalizePoints: true,
+                    aggregationMethod: AggregationMethods.Sum
+                )
+            );
+            ErrorMetric otherMetric = new ErrorMetric(
+                new ErrorMetric.Configuration(
+                    distanceMetric: DistanceMetrics.PointToPlane,
+                    normalizePoints: false,
+                    aggregationMethod: AggregationMethods.Sum
+                )
+            );
 
-                    Assert.IsFalse(thisMetric.Equals(otherMetric));
-                    Assert.IsFalse(otherMetric.Equals(thisMetric));
-                    Assert.AreNotEqual(thisMetric.GetHashCode(), otherMetric.GetHashCode());
-                }
-            }
+            Assert.IsFalse(thisMetric.Equals(otherMetric));
+            Assert.IsFalse(otherMetric.Equals(thisMetric));
+            Assert.AreNotEqual(thisMetric.GetHashCode(), otherMetric.GetHashCode());
+        }
+    }
 
-            [TestFixture]
-            public class ErrorMetricConfigurationTests
-            {
-                [Test]
-                public void Test_Equals_Equal()
-                {
-                    ErrorMetric.Configuration thisConfig = new ErrorMetric.Configuration(
-                        distanceMetric: DistanceMetrics.PointToPlane,
-                        normalizePoints: true,
-                        aggregationMethod: AggregationMethods.Sum
-                    );
+    [TestFixture]
+    public class ErrorMetricConfigurationTests
+    {
+        [Test]
+        public void Test_Equals_Equal()
+        {
+            ErrorMetric.Configuration thisConfig = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.PointToPlane,
+                normalizePoints: true,
+                aggregationMethod: AggregationMethods.Sum
+            );
 
-                    ErrorMetric.Configuration otherConfig = new ErrorMetric.Configuration(
-                        distanceMetric: DistanceMetrics.PointToPlane,
-                        normalizePoints: true,
-                        aggregationMethod: AggregationMethods.Sum
-                    );
+            ErrorMetric.Configuration otherConfig = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.PointToPlane,
+                normalizePoints: true,
+                aggregationMethod: AggregationMethods.Sum
+            );
 
-                    Assert.IsTrue(thisConfig.Equals(otherConfig));
-                    Assert.IsTrue(otherConfig.Equals(thisConfig));
-                    Assert.AreEqual(thisConfig.GetHashCode(), otherConfig.GetHashCode());
-                }
+            Assert.IsTrue(thisConfig.Equals(otherConfig));
+            Assert.IsTrue(otherConfig.Equals(thisConfig));
+            Assert.AreEqual(thisConfig.GetHashCode(), otherConfig.GetHashCode());
+        }
 
-                [Test]
-                public void Test_Equals_NotEqual_DistanceMethod()
-                {
-                    ErrorMetric.Configuration thisConfig = new ErrorMetric.Configuration(
-                        distanceMetric: DistanceMetrics.PointToPlane,
-                        normalizePoints: true,
-                        aggregationMethod: AggregationMethods.Sum
-                    );
+        [Test]
+        public void Test_Equals_NotEqual_DistanceMethod()
+        {
+            ErrorMetric.Configuration thisConfig = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.PointToPlane,
+                normalizePoints: true,
+                aggregationMethod: AggregationMethods.Sum
+            );
 
-                    ErrorMetric.Configuration otherConfig = new ErrorMetric.Configuration(
-                        distanceMetric: DistanceMetrics.SquaredEuclidean,
-                        normalizePoints: true,
-                        aggregationMethod: AggregationMethods.Sum
-                    );
+            ErrorMetric.Configuration otherConfig = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.SquaredEuclidean,
+                normalizePoints: true,
+                aggregationMethod: AggregationMethods.Sum
+            );
 
-                    Assert.IsFalse(thisConfig.Equals(otherConfig));
-                    Assert.IsFalse(otherConfig.Equals(thisConfig));
-                    Assert.AreNotEqual(thisConfig.GetHashCode(), otherConfig.GetHashCode());
-                }
+            Assert.IsFalse(thisConfig.Equals(otherConfig));
+            Assert.IsFalse(otherConfig.Equals(thisConfig));
+            Assert.AreNotEqual(thisConfig.GetHashCode(), otherConfig.GetHashCode());
+        }
 
-                [Test]
-                public void Test_Equals_NotEqual_AggregationMethod()
-                {
-                    ErrorMetric.Configuration thisConfig = new ErrorMetric.Configuration(
-                        distanceMetric: DistanceMetrics.PointToPlane,
-                        normalizePoints: true,
-                        aggregationMethod: AggregationMethods.Sum
-                    );
+        [Test]
+        public void Test_Equals_NotEqual_AggregationMethod()
+        {
+            ErrorMetric.Configuration thisConfig = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.PointToPlane,
+                normalizePoints: true,
+                aggregationMethod: AggregationMethods.Sum
+            );
 
-                    ErrorMetric.Configuration otherConfig = new ErrorMetric.Configuration(
-                        distanceMetric: DistanceMetrics.PointToPlane,
-                        normalizePoints: true,
-                        aggregationMethod: AggregationMethods.Mean
-                    );
-                    Assert.IsFalse(thisConfig.Equals(otherConfig));
-                    Assert.IsFalse(otherConfig.Equals(thisConfig));
-                    Assert.AreNotEqual(thisConfig.GetHashCode(), otherConfig.GetHashCode());
-                }
+            ErrorMetric.Configuration otherConfig = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.PointToPlane,
+                normalizePoints: true,
+                aggregationMethod: AggregationMethods.Mean
+            );
+            Assert.IsFalse(thisConfig.Equals(otherConfig));
+            Assert.IsFalse(otherConfig.Equals(thisConfig));
+            Assert.AreNotEqual(thisConfig.GetHashCode(), otherConfig.GetHashCode());
+        }
 
-                [Test]
-                public void Test_Equals_NotEqual_Normalization()
-                {
-                    ErrorMetric.Configuration thisConfig = new ErrorMetric.Configuration(
-                        distanceMetric: DistanceMetrics.PointToPlane,
-                        normalizePoints: true,
-                        aggregationMethod: AggregationMethods.Sum
-                    );
+        [Test]
+        public void Test_Equals_NotEqual_Normalization()
+        {
+            ErrorMetric.Configuration thisConfig = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.PointToPlane,
+                normalizePoints: true,
+                aggregationMethod: AggregationMethods.Sum
+            );
 
-                    ErrorMetric.Configuration otherConfig = new ErrorMetric.Configuration(
-                        distanceMetric: DistanceMetrics.PointToPlane,
-                        normalizePoints: false,
-                        aggregationMethod: AggregationMethods.Sum
-                    );
-                    Assert.IsFalse(thisConfig.Equals(otherConfig));
-                    Assert.IsFalse(otherConfig.Equals(thisConfig));
-                    Assert.AreNotEqual(thisConfig.GetHashCode(), otherConfig.GetHashCode());
-                }
-            }
+            ErrorMetric.Configuration otherConfig = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.PointToPlane,
+                normalizePoints: false,
+                aggregationMethod: AggregationMethods.Sum
+            );
+            Assert.IsFalse(thisConfig.Equals(otherConfig));
+            Assert.IsFalse(otherConfig.Equals(thisConfig));
+            Assert.AreNotEqual(thisConfig.GetHashCode(), otherConfig.GetHashCode());
         }
     }
 }

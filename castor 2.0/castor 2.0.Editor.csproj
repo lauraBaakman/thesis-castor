@@ -232,6 +232,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestTriangleUtils.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestWheelerIterativeError.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

@@ -381,6 +381,8 @@
     <Compile Include="Assets\Scripts\Registration\Error Metric\AggregationMethods.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\DistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\ErrorMetric.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\IIterativeErrorMetric.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\WheelerIterativeError.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPInterfaces.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPRegisterer.cs" />
@@ -534,8 +536,6 @@
     <Compile Include="Assets\Scripts\Utils\RangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\AbstractIterativeErrorMetric.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\WheelerIterativeError.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
