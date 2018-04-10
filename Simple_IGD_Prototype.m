@@ -5,6 +5,7 @@
 %    (1995)".
 
 close all; clear variables; clc;
+rng(42);
 
 %%Translation Vector and Rotation Matrix
 t = [3, 4, 7];
