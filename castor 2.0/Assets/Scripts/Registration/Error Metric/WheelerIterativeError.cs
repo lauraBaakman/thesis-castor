@@ -3,24 +3,25 @@ using Registration.Error;
 using Registration;
 using System.Collections.Generic;
 
-public class WheelerIterativeError : AbstractIterativeErrorMetric
+public class WheelerIterativeError : IIterativeErrorMetric
 {
-    protected WheelerIterativeError(Configuration configuration)
-        : base(configuration)
-    { }
+    public WheelerIterativeError()
+    {
 
-    public override float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
+    }
+
+    public float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
     {
         throw new System.NotImplementedException();
     }
 
-    public override Vector4 RotationalGradient(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation)
+    public Vector4 RotationalGradient(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation)
     {
         throw new System.NotImplementedException();
     }
 
-    public override Vector4 TranslationalGradient(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation)
+    public Vector4 TranslationalGradient(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation)
     {
-        throw new System.NotImplementedException();
+        return new Vector4();
     }
 }

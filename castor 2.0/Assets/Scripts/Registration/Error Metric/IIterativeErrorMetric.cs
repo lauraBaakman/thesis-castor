@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Registration.Error
 {
-    public interface AbstractIterativeErrorMetric
+    public interface IIterativeErrorMetric
     {
         float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform);
 
