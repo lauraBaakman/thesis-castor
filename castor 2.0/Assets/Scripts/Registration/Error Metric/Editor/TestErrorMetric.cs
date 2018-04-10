@@ -4,35 +4,31 @@ using Registration;
 using Registration.Error;
 using UnityEngine;
 
-namespace Tests
+namespace Tests.Registration.Error
 {
-    namespace Registration
+    [TestFixture]
+    public class ErrorMetricTests
     {
-        namespace Error
+        private static double tolerance = 0.0001;
+        private ErrorMetric errorMetric;
+
+        [SetUp]
+        public void Init()
         {
-            [TestFixture]
-            public class ErrorMetricTests
-            {
-                private static double tolerance = 0.0001;
-                private ErrorMetric errorMetric;
+            ErrorMetric.Configuration configuration = new ErrorMetric.Configuration(
+                distanceMetric: DistanceMetrics.SquaredEuclidean,
+                aggregationMethod: AggregationMethods.Sum,
+                normalizePoints: false
+            );
 
-                [SetUp]
-                public void Init()
-                {
-                    ErrorMetric.Configuration configuration = new ErrorMetric.Configuration(
-                        distanceMetric: DistanceMetrics.SquaredEuclidean,
-                        aggregationMethod: AggregationMethods.Sum,
-                        normalizePoints: false
-                    );
+            errorMetric = new ErrorMetric(configuration);
+        }
 
-                    errorMetric = new ErrorMetric(configuration);
-                }
-
-                [Test]
-                public void Test_ComputeError_NormalCorrespondences()
-                {
-                    CorrespondenceCollection correspondences = new CorrespondenceCollection(
-                        new List<Correspondence>{
+        [Test]
+        public void Test_ComputeError_NormalCorrespondences()
+        {
+            CorrespondenceCollection correspondences = new CorrespondenceCollection(
+                new List<Correspondence>{
                     new Correspondence(
                         new Point(new Vector3(1.0f, 2.0f, 3.0f)),
                         new Point(new Vector3(2.0f, 3.0f, 4.0f))
