@@ -87,7 +87,7 @@ XC = nan(size(X));
 
 iteration = 1;
 
-errors = nan(max_iterations,1);
+errors = nan(max_iterations + 1,1);
 
 %% Iteration
 while 1
@@ -98,6 +98,7 @@ while 1
     for i = 1:size(X, 1)
         XC(:, i) = Xc(X(:, i), q_current);
     end
+    XC(end, :) = ones(1, size(XC, 2));
     
     % Compute Error
     error = 0;
