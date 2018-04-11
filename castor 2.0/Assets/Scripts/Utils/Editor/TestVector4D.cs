@@ -40,6 +40,34 @@ namespace Tests.Utils
         }
 
         [Test]
+        public void Test_Constructor_Vector3D()
+        {
+            double w = 4;
+            Vector3D input = new Vector3D(1, 2, 3);
+
+            Vector4D actual = new Vector4D(input, w);
+
+            Assert.AreEqual(input.x, actual.x);
+            Assert.AreEqual(input.y, actual.y);
+            Assert.AreEqual(input.z, actual.z);
+            Assert.AreEqual(w, actual.w);
+        }
+
+        [Test]
+        public void Test_Constructor_Vector3()
+        {
+            double w = 4;
+            Vector3 input = new Vector3(1, 2, 3);
+
+            Vector4D actual = new Vector4D(input, w);
+
+            Assert.AreEqual(input.x, actual.x);
+            Assert.AreEqual(input.y, actual.y);
+            Assert.AreEqual(input.z, actual.z);
+            Assert.AreEqual(w, actual.w);
+        }
+
+        [Test]
         public void Test_Constructor_NoArguments()
         {
             Vector4D actual = new Vector4D();
@@ -67,6 +95,20 @@ namespace Tests.Utils
         {
             Vector4D expected = new Vector4D(0, 0, 0, 1);
             Vector4D actual = Vector4D.UnitQuaternion();
+
+            Assert.AreEqual(expected.x, actual.x);
+            Assert.AreEqual(expected.y, actual.y);
+            Assert.AreEqual(expected.z, actual.z);
+            Assert.AreEqual(expected.w, actual.w);
+        }
+
+        [Test]
+        public void Test_Static_Constructor_HomogeneousCoordinate()
+        {
+            Vector3 input = new Vector3(1, 2, 3);
+
+            Vector4D expected = new Vector4D(1, 2, 3, 1);
+            Vector4D actual = Vector4D.HomogeneousCoordinate(input);
 
             Assert.AreEqual(expected.x, actual.x);
             Assert.AreEqual(expected.y, actual.y);

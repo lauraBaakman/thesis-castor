@@ -34,12 +34,21 @@ namespace Utils
         public Vector4D(Vector3D xyz, double w)
             : this(xyz.x, xyz.y, xyz.z, w)
         { }
+
+        public Vector4D(Vector3 xyz, double w)
+            : this(xyz.x, xyz.y, xyz.z, w)
+        { }
         #endregion
 
         #region static constructors
         public static Vector4D UnitQuaternion()
         {
             return new Vector4D(0, 0, 0, 1);
+        }
+
+        public static Vector4D HomogeneousCoordinate(Vector3 position)
+        {
+            return new Vector4D(position, 1);
         }
         #endregion
 
