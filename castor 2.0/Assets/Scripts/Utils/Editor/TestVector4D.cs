@@ -62,6 +62,30 @@ namespace Tests.Utils
             Assert.AreEqual(input.w, actual.w);
         }
 
+        [Test]
+        public void Test_Static_Constructor_UnitQuaternion()
+        {
+            Vector4D expected = new Vector4D(0, 0, 0, 1);
+            Vector4D actual = Vector4D.UnitQuaternion();
+
+            Assert.AreEqual(expected.x, actual.x);
+            Assert.AreEqual(expected.y, actual.y);
+            Assert.AreEqual(expected.z, actual.z);
+            Assert.AreEqual(expected.w, actual.w);
+        }
+
+        [Test]
+        public void Test_XYZ_Property()
+        {
+            Vector4D vector = new Vector4D(1, 2, 3, 4);
+
+            Vector3D expected = new Vector3D(1, 2, 3);
+
+            Vector3D actual = vector.xyz;
+
+            Assert.AreEqual(expected, actual);
+        }
+
         [Test, TestCaseSource("EqualsCases")]
         public void Test_GenericEquals(Vector4D self, Vector4D other, bool expected)
         {

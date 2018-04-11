@@ -30,6 +30,24 @@ namespace Utils
         public Vector4D(Vector4D vector)
             : this(vector.x, vector.y, vector.z, vector.w)
         { }
+
+        public Vector4D(Vector3D xyz, double w)
+            : this(xyz.x, xyz.y, xyz.z, w)
+        { }
+        #endregion
+
+        #region static constructors
+        public static Vector4D UnitQuaternion()
+        {
+            return new Vector4D(0, 0, 0, 1);
+        }
+        #endregion
+
+        #region properties
+        public Vector3D xyz
+        {
+            get { return new Vector3D(this.x, this.y, this.z); }
+        }
         #endregion
 
         #region IEquatable
