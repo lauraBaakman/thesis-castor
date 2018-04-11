@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
+
 namespace Registration.Error
 {
     public interface IIterativeErrorMetric
@@ -13,7 +15,7 @@ namespace Registration.Error
         /// <param name="XCs">The model points premultiplied with the rotation matrix.</param>
         /// <param name="Ps">The static points in the same order as the model points.</param>
         /// <param name="translation">The translation vector</param>/// 
-        Vector4 RotationalGradient(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation);
+        Vector4D RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation);
 
         /// <summary>
         /// Computes the rotation gradient of the error function.
@@ -22,6 +24,6 @@ namespace Registration.Error
         /// <param name="XCs">The model points premultiplied with the rotation matrix.</param>
         /// <param name="Ps">The static points in the same order as the model points.</param>
         /// <param name="translation">The translation vector</param>/// 
-        Vector4 TranslationalGradient(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation);
+        Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation);
     }
 }
