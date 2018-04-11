@@ -11,7 +11,7 @@ namespace Registration
     /// 
     /// Horn, Berthold KP. "Closed-form solution of absolute orientation using unit quaternions." JOSA A 4.4 (1987): 629-642.
     /// </summary>
-    public class HornTransformFinder : ITransformFinder
+    public class HornTransformFinder : AbstractTransformFinder
     {
         /// <summary>
         /// Finds the transform that should be applied to the model points to 
@@ -19,10 +19,8 @@ namespace Registration
         /// </summary>
         /// <returns>The transform.</returns>
         /// <param name="correspondences">Correspondences.</param>
-        public Matrix4x4 FindTransform(CorrespondenceCollection correspondences)
+        protected override Matrix4x4 FindTransformImplementation(CorrespondenceCollection correspondences)
         {
-            ValidateCorrespondences(correspondences);
-
             List<Vector3d> modelPoints = new List<Vector3d>();
             List<Vector3d> staticPoints = new List<Vector3d>();
 
@@ -50,15 +48,6 @@ namespace Registration
             {
                 modelPoints.Add(new Vector3d(correspondence.ModelPoint.Position));
                 staticPoints.Add(new Vector3d(correspondence.StaticPoint.Position));
-            }
-        }
-
-        private void ValidateCorrespondences(CorrespondenceCollection correspondences)
-        {
-            if (correspondences == null) throw new System.NullReferenceException();
-            if (correspondences.IsEmpty())
-            {
-                throw new System.NotSupportedException("Cannot compute the transform if no correspondences are given.");
             }
         }
     }

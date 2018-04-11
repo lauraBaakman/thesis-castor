@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Registration
 {
-    public class LowTransformFinder : ITransformFinder
+    public class LowTransformFinder : AbstractTransformFinder
     {
         private static int numUnknowns = 6;
 
-        public Matrix4x4 FindTransform(CorrespondenceCollection correspondences)
+        protected override Matrix4x4 FindTransformImplementation(CorrespondenceCollection correspondences)
         {
             // Correspondences.Count x 6 matrix
             double[,] A = BuildA(correspondences);
@@ -16,6 +16,13 @@ namespace Registration
             double[] b = BuildB(correspondences);
 
             return ComputeTransform(A, b);
+        }
+
+        protected override void ValidateCorrespondences(CorrespondenceCollection correspondences)
+        {
+            base.ValidateCorrespondences(correspondences);
+
+            if (correspondences.Count < numUnknowns) throw new System.ArgumentException("The system is underdetermined, cannot compute the transform.");
         }
 
         private double[,] BuildA(CorrespondenceCollection correspondences)
