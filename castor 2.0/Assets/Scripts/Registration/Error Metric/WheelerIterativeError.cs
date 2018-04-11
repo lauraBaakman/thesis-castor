@@ -4,9 +4,14 @@ using Utils;
 
 namespace Registration.Error
 {
+    /// <summary>
+    /// Implements the error proposed by Wheeler, M. D., and K. Ikeuchi. 
+    /// "Iterative estimation of rotation and translation using the 
+    /// quaternion: School of Computer Science." (1995).
+    /// </summary>
     public class WheelerIterativeError : IIterativeErrorMetric
     {
-        public float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
+        public float ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
             throw new System.NotImplementedException();
         }

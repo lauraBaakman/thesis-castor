@@ -6,7 +6,7 @@ namespace Registration.Error
 {
     public interface IIterativeErrorMetric
     {
-        float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform);
+        float ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation);
 
         /// <summary>
         /// Computes the rotational gradient of the error function.
