@@ -1,5 +1,6 @@
 using UnityEngine;
 using NUnit.Framework;
+using Utils;
 
 namespace Tests.Extensions
 {
@@ -260,6 +261,24 @@ namespace Tests.Extensions
             Matrix4x4 actual = new Matrix4x4().DiagonalFilled(array);
 
             for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
+        }
+
+        [Test]
+        public void MultiplyVector()
+        {
+            //Note, the vectors are the columns of the matrix
+            Matrix4x4 matrix = new Matrix4x4(
+                new Vector4(-20, +02, -07, -21),
+                new Vector4(+11, -36, -21, -13),
+                new Vector4(-04, +29, -30, +01),
+                new Vector4(+09, -45, +11, -33)
+            );
+            Vector4D vector = new Vector4D(+33, -29, -32, -32);
+
+            Vector4D expected = new Vector4D(-1139, +1622, +0986, +0708);
+            Vector4D actual = matrix.MultiplyVector(vector);
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }

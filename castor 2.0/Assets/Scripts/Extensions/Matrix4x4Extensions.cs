@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 public static class Matrix4x4Extensions
 {
@@ -33,10 +34,10 @@ public static class Matrix4x4Extensions
     }
 
     /// <summary>
-    /// Extracts the scale from the matrix. 
-    /// 
+    /// Extracts the scale from the matrix.
+    ///
     /// Note that this function cannot handle negative scales.
-    /// 
+    ///
     /// Source: https://answers.unity.com/questions/402280/how-to-decompose-a-trs-matrix.html?childToView=402281#answer-402281
     /// </summary>
     /// <returns>The rotation.</returns>
@@ -112,5 +113,15 @@ public static class Matrix4x4Extensions
         for (int i = 0; i < 4; i++) matrix[i, i] = (float)diagonal[i];
 
         return matrix;
+    }
+
+    public static Vector4D MultiplyVector(this Matrix4x4 matrix, Vector4D vector)
+    {
+        Vector4D result = new Vector4D();
+        result.x = matrix.m00 * vector.x + matrix.m01 * vector.y + matrix.m02 * vector.z + matrix.m03 * vector.w;
+        result.y = matrix.m10 * vector.x + matrix.m11 * vector.y + matrix.m12 * vector.z + matrix.m13 * vector.w;
+        result.z = matrix.m20 * vector.x + matrix.m21 * vector.y + matrix.m22 * vector.z + matrix.m23 * vector.w;
+        result.w = matrix.m30 * vector.x + matrix.m31 * vector.y + matrix.m32 * vector.z + matrix.m33 * vector.w;
+        return result;
     }
 }
