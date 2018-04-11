@@ -233,6 +233,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestTriangleUtils.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\TestVector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector4D.cs" />
   </ItemGroup>
   <ItemGroup>
