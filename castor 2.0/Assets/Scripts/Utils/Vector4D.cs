@@ -141,6 +141,24 @@ namespace Utils
         {
             return Vector4D.Dot(a, a);
         }
+
+        /// <summary>
+        /// Compute the cross product of the homogeneous vectors 
+        /// a = [ax, ay, az, 1] and b = [bx, by, bz, 1]. The results is defined
+        ///  as [[ax, ay, az] x [bx, by, bz], 1]
+        /// </summary>
+        /// <returns>The cross.</returns>
+        /// <param name="lhs">Lhs.</param>
+        /// <param name="rhs">Rhs.</param>
+        public static Vector4D Cross(Vector4D lhs, Vector4D rhs)
+        {
+            return new Vector4D(
+                lhs.y * rhs.z - lhs.z * rhs.y,
+                lhs.z * rhs.x - lhs.x * rhs.z,
+                lhs.x * rhs.y - lhs.y * rhs.x,
+                1
+            );
+        }
         #endregion
 
         #region operators
