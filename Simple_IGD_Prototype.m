@@ -67,7 +67,7 @@ R = @(q) 1 / dot(q, q) * Ru(q(1), q(2), q(3), q(4));
 
 Xc = @(x, q) R(q) * x;
 
-homogeneous_cross = @(a, b) [cross(a(1:3), b(1:3)); 0];
+homogeneous_cross = @(a, b) [cross(a(1:3), b(1:3)); 1];
 
 quaternion_multiplication_aux = @(u1, s1, u2, s2) [(s1 * u2 + s2 * u1 + cross(u1, u2)); s1 * s2 - dot(u1, u2)];
 quaternion_multiplication = @(q1, q2) quaternion_multiplication_aux(q1(1:3), q1(4), q2(1:3), q2(4));
