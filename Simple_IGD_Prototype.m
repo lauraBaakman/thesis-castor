@@ -124,6 +124,8 @@ while 1
     t_change = (1 / (2 * N)) * t_change;
     q_change = (1 / (2 * N)) * q_change;
     
+    q_change(4) = 1;
+    
     % Normalize the effect of scale on gradient directions
     t_change = t_change / scale;
     q_change = q_change / (scale * scale);
