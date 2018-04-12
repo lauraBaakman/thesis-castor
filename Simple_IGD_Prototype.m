@@ -50,7 +50,7 @@ for i = 1:size(X, 1)
 end
 
 %% Configuration
-max_iterations = 5000;
+max_iterations = 50;
 learning_rate = 0.001;
 minimum_error = 0.00001;
 
