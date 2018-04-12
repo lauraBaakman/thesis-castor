@@ -127,6 +127,16 @@ namespace Registration
             {
                 return new ErrorMetric(Configuration.Low());
             }
+
+            /// <summary>
+            /// The error metric proposed by Wheeler, i.e. the mean of the 
+            /// squared distances between the points.
+            /// </summary>
+            /// <returns>The wheeler.</returns>
+            public static ErrorMetric Wheeler()
+            {
+                return new ErrorMetric(Configuration.Wheeler());
+            }
             #endregion
 
             #region inner classes
@@ -216,6 +226,19 @@ namespace Registration
                         distanceMetric: DistanceMetrics.SquaredPointToPlane,
                         aggregationMethod: AggregationMethods.Sum,
                         normalizePoints: true
+                    );
+                }
+
+                /// <summary>
+                /// The error metric proposed by Wheeler.
+                /// </summary>
+                /// <returns>The wheeler.</returns>
+                public static Configuration Wheeler()
+                {
+                    return new Configuration(
+                        distanceMetric: DistanceMetrics.SquaredEuclidean,
+                        aggregationMethod: AggregationMethods.Mean,
+                        normalizePoints: false
                     );
                 }
             }
