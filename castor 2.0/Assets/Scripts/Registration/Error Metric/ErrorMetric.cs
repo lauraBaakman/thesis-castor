@@ -42,6 +42,7 @@ namespace Registration
 
                 //Aggregate the errors
                 float error = configuration.AggregationMethod(errors);
+
                 return error;
             }
 
