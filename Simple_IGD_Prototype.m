@@ -56,18 +56,19 @@ learning_rate = 0.001;
 %% Anonymous Functions
 has_converged = @(error, iteration) error <= 0.00001 || iteration > max_iterations;
 
-Ru = @(u, v, w, s)...  
+Ru_aux = @(u, v, w, s)...  
 [
     s * s + u * u - v * v - w * w,  2 * (u * v - s * w),            2 * (u * w + s * v),            0;
     2 * (u * v + s * w),            s * s - u * u + v * v - w * w,  2 * (v * w - s * u),            0;
     2 * (u * w - s * v),            2 * (v * w + s * u),            s * s - u * u - v * v + w * w,  0;
     0,                              0,                              0,                              1;
 ];
-R = @(q) 1 / dot(q, q) * Ru(q(1), q(2), q(3), q(4));
+Ru = @(q) Ru_aux(q(1), q(2), q(3), q(4));
+R = @(q) 1 / dot(q, q) * Ru(q);
 
 Xc = @(x, q) R(q) * x;
 
-homogeneous_cross = @(a, b) [cross(a(1:3), b(1:3)); 1];
+homogeneous_cross = @(a, b) [cross(a(1:3), b(1:3)); 0];
 
 quaternion_multiplication_aux = @(u1, s1, u2, s2) [(s1 * u2 + s2 * u1 + cross(u1, u2)); s1 * s2 - dot(u1, u2)];
 quaternion_multiplication = @(q1, q2) quaternion_multiplication_aux(q1(1:3), q1(4), q2(1:3), q2(4));
