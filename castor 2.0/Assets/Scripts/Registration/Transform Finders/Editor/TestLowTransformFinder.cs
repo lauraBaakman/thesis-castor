@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Registration;
 using UnityEngine;
-using NUnit.Framework.Internal.Commands;
 
 namespace Tests.Registration.TransformFinders
 {
