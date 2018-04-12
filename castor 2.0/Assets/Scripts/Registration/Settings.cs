@@ -92,9 +92,16 @@ namespace Registration
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
-            ErrorMetric = ErrorMetric.Low();
+            ErrorMetric = ErrorMetric.Wheeler();
 
-            TransFormFinder = new LowTransformFinder();
+            TransFormFinder = new IGDTransformFinder(
+                new IGDTransformFinder.Configuration(
+                     convergenceError: 0.001,
+                    learningRate: 0.001,
+                    maxNumIterations: 50,
+                    errorMetric: new WheelerIterativeError()
+                )
+            );
 
             CorrespondenceFinder = new NearstPointCorrespondenceFinder(this);
         }
