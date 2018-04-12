@@ -5,15 +5,30 @@ using Utils;
 namespace Registration.Error
 {
     /// <summary>
-    /// Implements the error proposed by Wheeler, M. D., and K. Ikeuchi. 
-    /// "Iterative estimation of rotation and translation using the 
+    /// Implements the error proposed by Wheeler, M. D., and K. Ikeuchi.
+    /// "Iterative estimation of rotation and translation using the
     /// quaternion: School of Computer Science." (1995).
     /// </summary>
     public class WheelerIterativeError : IIterativeErrorMetric
     {
-        public float ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
+        public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
-            throw new System.NotImplementedException();
+            int N = XCs.Count;
+
+            double error = 0;
+            for (int i = 0; i < N; i++)
+            {
+                error += ComputeError(XCs[i], Ps[i], translation);
+            }
+            error /= N;
+
+            return error;
+        }
+
+        private double ComputeError(Vector4D Xc, Vector4D p, Vector4D translation)
+        {
+            Vector4D distance = Xc + translation - p;
+            return distance.SqrMagnitude();
         }
 
         /// <summary>
