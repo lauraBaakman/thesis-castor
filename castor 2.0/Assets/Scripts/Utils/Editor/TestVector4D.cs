@@ -91,18 +91,6 @@ namespace Tests.Utils
         }
 
         [Test]
-        public void Test_Static_Constructor_UnitQuaternion()
-        {
-            Vector4D expected = new Vector4D(0, 0, 0, 1);
-            Vector4D actual = Vector4D.UnitQuaternion();
-
-            Assert.AreEqual(expected.x, actual.x);
-            Assert.AreEqual(expected.y, actual.y);
-            Assert.AreEqual(expected.z, actual.z);
-            Assert.AreEqual(expected.w, actual.w);
-        }
-
-        [Test]
         public void Test_Static_Constructor_HomogeneousCoordinate()
         {
             Vector3 input = new Vector3(1, 2, 3);
@@ -290,6 +278,18 @@ namespace Tests.Utils
             double actual = Vector4D.SqrMagnitude(vector);
 
             Assert.That(expected, Is.EqualTo(actual).Within(precision));
+        }
+
+        [Test]
+        public void Test_ToUnityVector()
+        {
+            Vector4 expected = new Vector4(1, 2, 3, 4);
+
+            Vector4D vector = new Vector4D(expected);
+
+            Vector4 actual = vector.ToUnityVector();
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test, TestCaseSource("AdditionCases")]

@@ -41,11 +41,6 @@ namespace Utils
         #endregion
 
         #region static constructors
-        public static Vector4D UnitQuaternion()
-        {
-            return new Vector4D(0, 0, 0, 1);
-        }
-
         public static Vector4D HomogeneousCoordinate(Vector3 position)
         {
             return new Vector4D(position, 1);
@@ -108,6 +103,11 @@ namespace Utils
         public double Dot(Vector4D rhs)
         {
             return Vector4D.Dot(this, rhs);
+        }
+
+        public Vector4 ToUnityVector()
+        {
+            return new Vector4((float)this.x, (float)this.y, (float)this.z, (float)this.w);
         }
         #endregion
 
