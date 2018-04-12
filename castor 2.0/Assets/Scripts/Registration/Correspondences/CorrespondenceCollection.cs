@@ -176,7 +176,7 @@ namespace Registration
 
         public override string ToString()
         {
-            return string.Format("[CorrespondenceCollection: \n{}", this.correspondences.ElementsToString());
+            return string.Format("[CorrespondenceCollection: \n{0}", this.correspondences.ElementsToString());
         }
     }
 
