@@ -60,12 +60,23 @@ namespace Utils
 
         public static Matrix4x4D TransformationMatrixFromUnitQuaternion(QuaternionD unitQuaternion)
         {
-            throw new NotSupportedException();
+            double s = unitQuaternion.Ws;
+
+            double u = unitQuaternion.Wu;
+            double v = unitQuaternion.Wv;
+            double w = unitQuaternion.Ww;
+
+            return new Matrix4x4D(
+                s * s + u * u - v * v - w * w, 2 * (u * v - s * w), 2 * (u * w + s * v), 0,
+                2 * (u * v + s * w), s * s - u * u + v * v - w * w, 2 * (v * w - s * u), 0,
+                2 * (u * w - s * v), 2 * (v * w + s * u), s * s - u * u - v * v + w * w, 0,
+                0, 0, 0, 1
+            );
         }
 
         public static Matrix4x4D TransformationMatrixFromQuaternion(QuaternionD quaternion)
         {
-            throw new NotSupportedException();
+            return (1 / QuaternionD.Dot(quaternion, quaternion)) * TransformationMatrixFromUnitQuaternion(quaternion);
         }
         #endregion
 
