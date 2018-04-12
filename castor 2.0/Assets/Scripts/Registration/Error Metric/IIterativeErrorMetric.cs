@@ -15,7 +15,7 @@ namespace Registration.Error
         /// <param name="XCs">The model points premultiplied with the rotation matrix.</param>
         /// <param name="Ps">The static points in the same order as the model points.</param>
         /// <param name="translation">The translation vector</param>/// 
-        Vector4D RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation);
+        QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation);
 
         /// <summary>
         /// Computes the rotation gradient of the error function.

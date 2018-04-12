@@ -100,17 +100,17 @@ namespace Tests.Registration.Error
             },
         };
 
-        [Test, TestCaseSource("RotationGradientsCases")]
-        public void Test_RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, Vector4D expected)
+        [Test, TestCaseSource("RotationGradientCases")]
+        public void Test_RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, QuaternionD expected)
         {
-            Vector4D actual = error.RotationalGradient(XCs, Ps, translation);
+            QuaternionD actual = error.RotationalGradient(XCs, Ps, translation);
             Assert.That(actual.x, Is.EqualTo(expected.x).Within(precision));
             Assert.That(actual.y, Is.EqualTo(expected.y).Within(precision));
             Assert.That(actual.z, Is.EqualTo(expected.z).Within(precision));
             Assert.That(actual.w, Is.EqualTo(expected.w).Within(precision));
         }
 
-        static object[] RotationGradientsCases =
+        static object[] RotationGradientCases =
         {
             // M = eye(3) iteration 1
             new object[] {
@@ -127,7 +127,7 @@ namespace Tests.Registration.Error
                     new Vector4D(+7.00041614515559e+000f, +8.99904116898859e+000f, -999.060180295676e-003f, 1),
                 },
                 new Vector4D(0, 0, 0, 0),
-                new Vector4D(3.28209492978226e-003, -2.20876866164743e-003, -4.64125972346974e-003, 1),
+                new QuaternionD(3.28209492978226e-003, -2.20876866164743e-003, -4.64125972346974e-003, 0),
             },
             //M = TrMat, iteration 2
             new object[] {
@@ -144,7 +144,7 @@ namespace Tests.Registration.Error
                    new Vector4D(+10.0004161451556e+000f, +12.9990411689886e+000f, +6.00093981970432e+000f, 1),
                },
                 new Vector4D(+333.318853044056e-006, +444.444082977051e-006, +777.803278518114e-006, 0),
-                new Vector4D(+61.2823385485841e+000, -19.6079743092595e+000, -15.0770126606125e+000, 1),
+                new QuaternionD(+61.2823385485841e+000, -19.6079743092595e+000, -15.0770126606125e+000, 0),
             },
             //M = RotMat, iteration 2
             new object[] {
@@ -161,7 +161,7 @@ namespace Tests.Registration.Error
                    new Vector4D(+2.66159651035126e+000f, +11.1225838176250e+000f, +430.960758570174e-003f, 1),
                },
                 new Vector4D(-195.292801544933e-006, -5.55656293916782e-006, +117.874293836879e-006, 0),
-                new Vector4D(+19.4817994388753e+000, -2.94423452884511e+000, +42.0035634391288e+000, 1),
+                new QuaternionD(+19.4817994388753e+000, -2.94423452884511e+000, +42.0035634391288e+000, 0),
             },
             //M = M = TrMat * RotMat, iteration 2
             new object[] {
@@ -178,7 +178,7 @@ namespace Tests.Registration.Error
                    new Vector4D(+5.66159651035126e+000f, +15.1225838176250e+000f, +7.43096075857017e+000f, 1),
                },
                 new Vector4D(+138.040531788400e-006, +438.887881505277e-006, +895.652071614657e-006, 0),
-                new Vector4D(+80.7761445472091e+000, -22.5924461555999e+000, +26.9911459768104e+000, 1),
+                new QuaternionD(+80.7761445472091e+000, -22.5924461555999e+000, +26.9911459768104e+000, 0),
             },
         };
     }

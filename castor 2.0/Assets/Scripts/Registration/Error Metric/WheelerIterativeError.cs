@@ -23,7 +23,7 @@ namespace Registration.Error
         /// <param name="XCs">The model points, premultiplied with the rotation matrix.</param>
         /// <param name="Ps">The static points.</param>
         /// <param name="translation">The current translation vector.</param>
-        public Vector4D RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
+        public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
             int N = XCs.Count;
             Vector4D gradient = new Vector4D();
@@ -33,10 +33,8 @@ namespace Registration.Error
             }
             gradient *= (1.0 / (2 * N));
 
-            //Set the w value of the gradient to 1.
-            gradient.w = 1;
-
-            return gradient;
+            //Wheeler: The gradient w.r.t. to q will have no w component
+            return new QuaternionD(x: gradient.x, y: gradient.y, z: gradient.z, w: 0);
         }
 
         private Vector4D RotationalGradient(Vector4D Xc, Vector4D p, Vector4D translation)
