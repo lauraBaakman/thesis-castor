@@ -533,6 +533,7 @@
     <Compile Include="Assets\Scripts\Utils\NumericalMath.cs" />
     <Compile Include="Assets\Scripts\Utils\Pair.cs" />
     <Compile Include="Assets\Scripts\Utils\PointNormalizer.cs" />
+    <Compile Include="Assets\Scripts\Utils\QuaternionD.cs" />
     <Compile Include="Assets\Scripts\Utils\RangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
