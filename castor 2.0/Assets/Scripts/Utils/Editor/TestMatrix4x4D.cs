@@ -130,7 +130,6 @@ namespace Tests.Utils
             Assert.AreEqual(actual, expected);
         }
 
-
         [Test, TestCaseSource("QuaternionRotationCases")]
         public void Test_Static_Constructor_Rotation_Quaternion(QuaternionD quaternion, Matrix4x4D expected)
         {
@@ -156,7 +155,7 @@ namespace Tests.Utils
         };
 
         [Test, TestCaseSource("EqualsCases")]
-        public void Test_Static_Constructor_Rotation_Unit_Quaternion(Matrix4x4D self, Matrix4x4D other, bool expected)
+        public void Test_Equals(Matrix4x4D self, Matrix4x4D other, bool expected)
         {
             bool actual = self.Equals(other);
             bool hasCodeActual = self.GetHashCode().Equals(other.GetHashCode());
