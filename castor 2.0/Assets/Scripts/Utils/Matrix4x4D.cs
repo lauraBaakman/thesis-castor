@@ -287,6 +287,21 @@ namespace Utils
             result.w = lhs.m30 * vector.x + lhs.m31 * vector.y + lhs.m32 * vector.z + lhs.m33 * vector.w;
             return result;
         }
+
+        public static Matrix4x4D operator *(Matrix4x4D matrix, double scalar)
+        {
+            return new Matrix4x4D(
+                scalar * matrix.GetColumn(0),
+                scalar * matrix.GetColumn(1),
+                scalar * matrix.GetColumn(2),
+                scalar * matrix.GetColumn(3)
+            );
+        }
+
+        public static Matrix4x4D operator *(double scalar, Matrix4x4D matrix)
+        {
+            return matrix * scalar;
+        }
         #endregion
 
         #region IEquatable

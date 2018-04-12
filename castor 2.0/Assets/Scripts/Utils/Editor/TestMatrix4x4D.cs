@@ -366,5 +366,30 @@ namespace Tests.Utils
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test, TestCaseSource("MatrixScalarMultiplicationCases")]
+        public void Test_Operator_Matrix_Multiplication_Scalar(Matrix4x4D matrix, double scalar, Matrix4x4D expected)
+        {
+            Matrix4x4D actual = matrix * scalar;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test, TestCaseSource("MatrixScalarMultiplicationCases")]
+        public void Test_Operator_Scalar_Multiplication_Matrix(Matrix4x4D matrix, double scalar, Matrix4x4D expected)
+        {
+            Matrix4x4D actual = scalar * matrix;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        static object[] MatrixScalarMultiplicationCases =
+        {
+            new object[]{B, 7.5, new Matrix4x4D(-240.0, -157.5, -097.5, +007.5,
+                                                -150.0, +082.5, -030.0, +067.5,
+                                                +015.0, -270.0, +217.5, -337.5,
+                                                -052.5, -157.5, -225.0, +082.5)
+            },
+        };
     }
 }
