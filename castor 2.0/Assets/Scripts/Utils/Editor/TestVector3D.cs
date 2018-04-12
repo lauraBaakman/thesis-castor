@@ -1,7 +1,5 @@
 using Utils;
 using NUnit.Framework;
-using UnityEngine;
-using System;
 
 namespace Tests.Utils
 {
@@ -23,7 +21,6 @@ namespace Tests.Utils
             Assert.AreEqual(y, actual.y);
             Assert.AreEqual(z, actual.z);
         }
-
 
         [Test]
         public void Test_Constructor_NoArguments()
