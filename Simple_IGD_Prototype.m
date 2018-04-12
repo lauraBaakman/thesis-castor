@@ -35,7 +35,7 @@ N = size(X, 2);
 % M = RMat;
 
 %% Transformation Matrix 4, P is rotated with R, and translated with T, w.r.t. X.
-M = TrMat * RMat;
+% M = TrMat * RMat;
 
 %% Compute the scale of the data
 compute_scale = @(data) max(max(data(1:end -1, :), [], 2) - min(data(1:end -1, :), [], 2));
@@ -52,9 +52,10 @@ end
 %% Configuration
 max_iterations = 5000;
 learning_rate = 0.001;
+minimum_error = 0.00001;
 
 %% Anonymous Functions
-has_converged = @(error, iteration) error <= 0.00001 || iteration > max_iterations;
+has_converged = @(error, iteration) minimum_error <= 0.00001 || iteration > max_iterations;
 
 Ru_aux = @(u, v, w, s)...  
 [
