@@ -237,6 +237,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector4D.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestQuaternionD.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\Editor\TestIGDTransformFinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

@@ -391,6 +391,7 @@
     <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSampler.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\SamplingInformation.cs" />
     <Compile Include="Assets\Scripts\Registration\Settings.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\AbstractTransformFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\LandmarkTransform.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MathUtils.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\MatrixUtilsNew.cs" />
@@ -519,6 +520,7 @@
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\ScreenSaver.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTKLib\Utils\TransformPointsUtils.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\HornTransformFinder.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\IGDTransformFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\ITransformFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\LowTransformFinder.cs" />
     <Compile Include="Assets\Scripts\Tests\Auxilaries.cs" />
@@ -540,7 +542,6 @@
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\AbstractTransformFinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
