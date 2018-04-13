@@ -183,7 +183,7 @@ namespace Utils
 
         public override string ToString()
         {
-            return string.Format("({0:F1}, {1:F1}, {2:F1}, {3:F1})", new object[] {
+            return string.Format("({0}, {1}, {2}, {3})", new object[] {
                 this.x,
                 this.y,
                 this.z,
