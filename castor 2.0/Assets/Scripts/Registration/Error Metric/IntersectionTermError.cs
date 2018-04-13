@@ -35,7 +35,7 @@ namespace Registration.Error
 
         private double ComputeError(Vector4D xc, Vector4D p, Vector4D translation, int xi)
         {
-            return 0;
+            return (this.distanceWeight + this.intersectionWeight * xi) * (xc + translation - p).SqrMagnitude();
         }
 
         public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
