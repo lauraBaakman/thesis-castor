@@ -1,5 +1,3 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using Utils;
 using System;
@@ -8,8 +6,8 @@ namespace Registration.Error
 {
     public class IntersectionTermError : IIterativeErrorMetric
     {
-        double distanceWeight;
-        double intersectionWeight;
+        private readonly double distanceWeight;
+        private readonly double intersectionWeight;
 
         public IntersectionTermError(double distanceWeight, double intersectionWeight)
         {
@@ -38,14 +36,14 @@ namespace Registration.Error
         {
             return (this.distanceWeight + this.intersectionWeight * xi) * (xc + translation - p).SqrMagnitude();
         }
+        #endregion
 
+        #region rotationalGradient
         public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
             throw new System.NotImplementedException();
         }
-        #endregion
 
-        #region rotationalGradient
         public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int[] XIs)
         {
             int N = XCs.Count;
