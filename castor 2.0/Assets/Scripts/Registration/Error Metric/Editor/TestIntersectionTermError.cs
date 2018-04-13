@@ -58,103 +58,104 @@ namespace Tests.Registration.Error
             Assert.That(actual, Is.EqualTo(expected).Within(precision));
         }
 
+        //Forgot the  1/4 while computing the values for the tests.
         static object[] ErrorCases =
         {
             new object[] {
-                Xc_0, P,  translation_0, Xis_0, intersection_weight_0, distance_weight_0, +8.587005082531676e-01
+                Xc_0, P,  translation_0, Xis_0, intersection_weight_0, distance_weight_0, +8.587005082531676e-01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_0, Xis_0, intersection_weight_0, distance_weight_1, +2.576101524759503e-01
+                Xc_0, P,  translation_0, Xis_0, intersection_weight_0, distance_weight_1, +2.576101524759503e-01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_0, Xis_0, intersection_weight_1, distance_weight_0, +8.587005082531676e-01
+                Xc_0, P,  translation_0, Xis_0, intersection_weight_1, distance_weight_0, +8.587005082531676e-01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_0, Xis_0, intersection_weight_1, distance_weight_1, +2.576101524759503e-01
+                Xc_0, P,  translation_0, Xis_0, intersection_weight_1, distance_weight_1, +2.576101524759503e-01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_0, Xis_1, intersection_weight_0, distance_weight_0, +1.717401016506335e+00
+                Xc_0, P,  translation_0, Xis_1, intersection_weight_0, distance_weight_0, +1.717401016506335e+00 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_0, Xis_1, intersection_weight_0, distance_weight_1, +1.116310660729118e+00
+                Xc_0, P,  translation_0, Xis_1, intersection_weight_0, distance_weight_1, +1.116310660729118e+00 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_0, Xis_1, intersection_weight_1, distance_weight_0, +1.030440609903801e+00
+                Xc_0, P,  translation_0, Xis_1, intersection_weight_1, distance_weight_0, +1.030440609903801e+00 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_0, Xis_1, intersection_weight_1, distance_weight_1, +4.293502541265838e-01
+                Xc_0, P,  translation_0, Xis_1, intersection_weight_1, distance_weight_1, +4.293502541265838e-01 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_0, Xis_0, intersection_weight_0, distance_weight_0, +1.464418440559290e+02
+                Xc_1, P,  translation_0, Xis_0, intersection_weight_0, distance_weight_0, +1.464418440559290e+02 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_0, Xis_0, intersection_weight_0, distance_weight_1, +4.393255321677871e+01
+                Xc_1, P,  translation_0, Xis_0, intersection_weight_0, distance_weight_1, +4.393255321677871e+01 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_0, Xis_0, intersection_weight_1, distance_weight_0, +1.464418440559290e+02
+                Xc_1, P,  translation_0, Xis_0, intersection_weight_1, distance_weight_0, +1.464418440559290e+02 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_0, Xis_0, intersection_weight_1, distance_weight_1, +4.393255321677871e+01
+                Xc_1, P,  translation_0, Xis_0, intersection_weight_1, distance_weight_1, +4.393255321677871e+01 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_0, Xis_1, intersection_weight_0, distance_weight_0, +2.928836881118581e+02
+                Xc_1, P,  translation_0, Xis_1, intersection_weight_0, distance_weight_0, +2.928836881118581e+02 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_0, Xis_1, intersection_weight_0, distance_weight_1, +1.903743972727078e+02
+                Xc_1, P,  translation_0, Xis_1, intersection_weight_0, distance_weight_1, +1.903743972727078e+02 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_0, Xis_1, intersection_weight_1, distance_weight_0, +1.757302128671149e+02
+                Xc_1, P,  translation_0, Xis_1, intersection_weight_1, distance_weight_0, +1.757302128671149e+02 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_0, Xis_1, intersection_weight_1, distance_weight_1, +7.322092202796452e+01
+                Xc_1, P,  translation_0, Xis_1, intersection_weight_1, distance_weight_1, +7.322092202796452e+01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_1, Xis_0, intersection_weight_0, distance_weight_0, +5.354724644324055e+01
+                Xc_0, P,  translation_1, Xis_0, intersection_weight_0, distance_weight_0, +5.354724644324055e+01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_1, Xis_0, intersection_weight_0, distance_weight_1, +1.606417393297217e+01
+                Xc_0, P,  translation_1, Xis_0, intersection_weight_0, distance_weight_1, +1.606417393297217e+01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_1, Xis_0, intersection_weight_1, distance_weight_0, +5.354724644324055e+01
+                Xc_0, P,  translation_1, Xis_0, intersection_weight_1, distance_weight_0, +5.354724644324055e+01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_1, Xis_0, intersection_weight_1, distance_weight_1, +1.606417393297217e+01
+                Xc_0, P,  translation_1, Xis_0, intersection_weight_1, distance_weight_1, +1.606417393297217e+01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_1, Xis_1, intersection_weight_0, distance_weight_0, +1.070944928864811e+02
+                Xc_0, P,  translation_1, Xis_1, intersection_weight_0, distance_weight_0, +1.070944928864811e+02 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_1, Xis_1, intersection_weight_0, distance_weight_1, +6.961142037621272e+01
+                Xc_0, P,  translation_1, Xis_1, intersection_weight_0, distance_weight_1, +6.961142037621272e+01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_1, Xis_1, intersection_weight_1, distance_weight_0, +6.425669573188867e+01
+                Xc_0, P,  translation_1, Xis_1, intersection_weight_1, distance_weight_0, +6.425669573188867e+01 / 4.0
             },
             new object[] {
-                Xc_0, P,  translation_1, Xis_1, intersection_weight_1, distance_weight_1, +2.677362322162028e+01
+                Xc_0, P,  translation_1, Xis_1, intersection_weight_1, distance_weight_1, +2.677362322162028e+01 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_1, Xis_0, intersection_weight_0, distance_weight_0, +1.559106201398074e+02
+                Xc_1, P,  translation_1, Xis_0, intersection_weight_0, distance_weight_0, +1.559106201398074e+02 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_1, Xis_0, intersection_weight_0, distance_weight_1, +4.677318604194222e+01
+                Xc_1, P,  translation_1, Xis_0, intersection_weight_0, distance_weight_1, +4.677318604194222e+01 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_1, Xis_0, intersection_weight_1, distance_weight_0, +1.559106201398074e+02
+                Xc_1, P,  translation_1, Xis_0, intersection_weight_1, distance_weight_0, +1.559106201398074e+02 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_1, Xis_0, intersection_weight_1, distance_weight_1, +4.677318604194222e+01
+                Xc_1, P,  translation_1, Xis_0, intersection_weight_1, distance_weight_1, +4.677318604194222e+01 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_1, Xis_1, intersection_weight_0, distance_weight_0, +3.118212402796148e+02
+                Xc_1, P,  translation_1, Xis_1, intersection_weight_0, distance_weight_0, +3.118212402796148e+02 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_1, Xis_1, intersection_weight_0, distance_weight_1, +2.026838061817496e+02
+                Xc_1, P,  translation_1, Xis_1, intersection_weight_0, distance_weight_1, +2.026838061817496e+02 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_1, Xis_1, intersection_weight_1, distance_weight_0, +1.870927441677689e+02
+                Xc_1, P,  translation_1, Xis_1, intersection_weight_1, distance_weight_0, +1.870927441677689e+02 / 4.0
             },
             new object[] {
-                Xc_1, P,  translation_1, Xis_1, intersection_weight_1, distance_weight_1, +7.795531006990370e+01
+                Xc_1, P,  translation_1, Xis_1, intersection_weight_1, distance_weight_1, +7.795531006990370e+01 / 4.0
             }
         };
 

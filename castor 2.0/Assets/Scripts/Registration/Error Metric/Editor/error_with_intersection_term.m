@@ -117,7 +117,7 @@ for t = ts
                         q_gradient = q_gradient +    rotationalGradient(xc, p, t, xi, omega_d, omega_i);
                     end
 
-                    error = 1 / N * error;
+                    error = (1 / (N * 4)) * error;
                     t_gradient = 1 / (2 * N) * t_gradient;
                     q_gradient = 1 / N * q_gradient;
 
