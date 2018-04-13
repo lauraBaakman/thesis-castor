@@ -221,6 +221,7 @@
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestDistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestErrorMetric.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestWheelerIterativeError.cs" />
+    <Compile Include="Assets\Scripts\Registration\Transform Finders\Editor\TestIGDTransformFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\Editor\TestLowTransformFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Editor\TestMatrix4d.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\external code\OpenTK\Math\Editor\TestVector4d.cs" />
@@ -232,12 +233,11 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestMatrix4x4D.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestNumericalMath.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\TestQuaternionD.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestTriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector4D.cs" />
-    <Compile Include="Assets\Scripts\Utils\Editor\TestQuaternionD.cs" />
-    <Compile Include="Assets\Scripts\Registration\Transform Finders\Editor\TestIGDTransformFinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
