@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Utils
 {
@@ -61,6 +62,17 @@ namespace Utils
         {
             double margin = Math.Abs((self + other) * .000005);
             return Math.Abs(self - other) <= margin;
+        }
+        #endregion
+
+        #region methods
+        public Vector3 ToUnityVector()
+        {
+            return new Vector3(
+                (float)this.x,
+                (float)this.y,
+                (float)this.z
+            );
         }
         #endregion
 

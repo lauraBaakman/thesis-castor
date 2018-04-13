@@ -1,5 +1,6 @@
 using Utils;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace Tests.Utils
 {
@@ -69,6 +70,17 @@ namespace Tests.Utils
                 new Vector3D(1, 2, 3), new Vector3D(1, 2, 4), false
             },
         };
+
+        [Test]
+        public void Test_To_Unity_Vector3()
+        {
+            Vector3D vector = new Vector3D(1, 2, 3);
+            Vector3 actual = vector.ToUnityVector();
+
+            Vector3 expected = new Vector3(1, 2, 3);
+
+            Assert.AreEqual(expected, actual);
+        }
 
         [Test, TestCaseSource("ScalarMultiplicationCases")]
         public void Test_Scaling_Operator(Vector3D vector, double scale, Vector3D expected)
