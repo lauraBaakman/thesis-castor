@@ -382,6 +382,7 @@
     <Compile Include="Assets\Scripts\Registration\Error Metric\DistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\ErrorMetric.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\IIterativeErrorMetric.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\IntersectionTermError.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\WheelerIterativeError.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPInterfaces.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPMessages.cs" />
@@ -542,8 +543,6 @@
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\IntersectionTermError.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestIntersectionTermError.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
