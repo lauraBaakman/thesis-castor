@@ -51,6 +51,11 @@ namespace Registration.Error
             throw new System.NotImplementedException();
         }
 
+        public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int xi)
+        {
+            return QuaternionD.identity;
+        }
+
         public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
             throw new System.NotImplementedException();
