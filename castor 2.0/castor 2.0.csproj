@@ -381,7 +381,7 @@
     <Compile Include="Assets\Scripts\Registration\Error Metric\AggregationMethods.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\DistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\ErrorMetric.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\IIterativeErrorMetric.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\ErrorInterfaces.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\IntersectionTermError.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\WheelerIterativeError.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPInterfaces.cs" />

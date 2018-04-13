@@ -1,13 +1,16 @@
 using System.Collections.Generic;
 using Utils;
 using System;
+using UnityEngine;
 
 namespace Registration.Error
 {
-    public class IntersectionTermError : IIterativeErrorMetric
+    public class IntersectionTermError : IIterativeErrorMetric, IErrorMetric
     {
         private readonly double distanceWeight;
         private readonly double intersectionWeight;
+
+        private GameObject staticModel;
 
         public IntersectionTermError(double distanceWeight, double intersectionWeight)
         {
@@ -83,6 +86,18 @@ namespace Registration.Error
         public Vector4D TranslationalGradient(Vector4D xc, Vector4D p, Vector4D translation, int xi)
         {
             return (this.distanceWeight + xi * this.intersectionWeight) * (xc + translation - p);
+        }
+        #endregion
+
+        #region IErrorMetric
+        public float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetStaticFragment(GameObject staticModel)
+        {
+            this.staticModel = staticModel;
         }
         #endregion
     }

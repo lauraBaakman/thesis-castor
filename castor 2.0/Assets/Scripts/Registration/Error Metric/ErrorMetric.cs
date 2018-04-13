@@ -7,7 +7,7 @@ namespace Registration
 {
     namespace Error
     {
-        public class ErrorMetric : IEquatable<ErrorMetric>
+        public class ErrorMetric : IEquatable<ErrorMetric>, IErrorMetric
         {
             #region the class
             protected readonly Configuration configuration;
@@ -24,7 +24,7 @@ namespace Registration
             /// <param name="correspondences">the correspondences</param>
             /// <param name="newTransform">the new transform of the correspondences.</param>
             /// <param name="originalTransform">the original transform of the correspondences.</param>
-            public virtual float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
+            public float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
             {
                 //Apply the newTransform to the model points
                 List<Point> modelPoints = TransformPoints(correspondences.ModelPoints, originalTransform, newTransform);
@@ -136,6 +136,11 @@ namespace Registration
             public static ErrorMetric Wheeler()
             {
                 return new ErrorMetric(Configuration.Wheeler());
+            }
+
+            public void SetStaticFragment(GameObject staticModel)
+            {
+                //Do nothing, we don't need the static model, no need to store a reference to it.
             }
             #endregion
 

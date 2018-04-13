@@ -9,7 +9,7 @@ namespace Registration.Error
     /// "Iterative estimation of rotation and translation using the
     /// quaternion: School of Computer Science." (1995).
     /// </summary>
-    public class WheelerIterativeError : IIterativeErrorMetric
+    public class WheelerIterativeError : IIterativeErrorMetric, IErrorMetric
     {
         public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
@@ -80,6 +80,16 @@ namespace Registration.Error
         private Vector4D TranslationalGradient(Vector4D Xc, Vector4D p, Vector4D translation)
         {
             return 2 * (Xc + translation - p);
+        }
+
+        public float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
+        {
+            return ErrorMetric.Wheeler().ComputeError(correspondences, originalTransform, newTransform);
+        }
+
+        public void SetStaticFragment(GameObject staticModel)
+        {
+            //Do nothing, we don't need the static model, no need to store a reference to it.
         }
     }
 }

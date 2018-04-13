@@ -88,6 +88,8 @@ namespace Registration
             ModelSamplingInformation = new SamplingInformation(ModelFragment);
 
             SendMessageToAllListeners("OnICPStarted");
+
+            settings.ErrorMetric.SetStaticFragment(staticFragment);
         }
 
         public void AddListener(GameObject listener)

@@ -26,4 +26,11 @@ namespace Registration.Error
         /// <param name="translation">The translation vector</param>/// 
         Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation);
     }
+
+    public interface IErrorMetric
+    {
+        float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform);
+
+        void SetStaticFragment(GameObject staticModel);
+    }
 }
