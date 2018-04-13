@@ -47,7 +47,7 @@ translationalGradient = @(x, p, t, q, xi, omega) aux_translationalGradient((Xc(x
 %% Local Error
 g = @(xc, p, t) xc + t - p;
 h = @(xc, p, t, intersection_weight) intersection_weight * (norm(xc + t - p)^2);
-aux_local_error = @(xc, p, t, intersection_weight) transpose(g(xc, p, t)) * g(xc, p, t) + h(xc, p, t, intersection_weight);
+aux_local_error = @(xc, p, t, intersection_weight) (1 + intersection_weight) * dot(xc + t - p, xc + t - p);
 local_error = @(x, p, t, q, xi, omega) aux_local_error(Xc(x,q), p, t, xi * omega);
 
 %% Model Points: each column is a point
