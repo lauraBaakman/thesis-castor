@@ -38,7 +38,7 @@ C = @(x) [
 
 %% Gradients
 homogeneous_cross = @(a, b) [cross(a(1:3), b(1:3)); 0];
-aux_rotationalGradient = @(xc, p, t, xi, omega) homogeneous_cross(xc, t - p) + C(xc) * ((xc + t - p) * xi * omega);
+aux_rotationalGradient = @(xc, p, t, xi, omega) homogeneous_cross(xc, t - p) * (1 + xi * omega);
 rotationalGradient = @(x, p, t, q, xi, omega) aux_rotationalGradient(Xc(x, q), p, t, xi, omega);
 
 aux_translationalGradient = @(distance, xi, omega) (distance * (xi * omega + 1));
