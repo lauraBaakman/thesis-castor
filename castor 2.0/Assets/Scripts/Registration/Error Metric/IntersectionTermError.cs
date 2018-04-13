@@ -22,16 +22,13 @@ namespace Registration.Error
             throw new NotImplementedException();
         }
 
-        public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int xi)
+        public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int[] XIs)
         {
-            //int N = XCs.Count;
+            int N = XCs.Count;
 
             double error = 0;
-            //for (int i = 0; i < N; i++)
-            //{
-            //    error += ComputeError(XCs[i], Ps[i], translation, xi);
-            //}
-            //error /= (4 * N);
+            for (int i = 0; i < N; i++) error += ComputeError(XCs[i], Ps[i], translation, XIs[i]);
+            error /= (4 * N);
 
             return error;
         }
@@ -41,17 +38,12 @@ namespace Registration.Error
             return 0;
         }
 
-        private int Xi(Vector4D modelPoint)
-        {
-            throw new NotImplementedException();
-        }
-
         public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
             throw new System.NotImplementedException();
         }
 
-        public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int xi)
+        public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int[] XIs)
         {
             return QuaternionD.identity;
         }
@@ -61,7 +53,7 @@ namespace Registration.Error
             throw new System.NotImplementedException();
         }
 
-        public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int xi)
+        public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int[] XIs)
         {
             return new Vector4D();
         }
