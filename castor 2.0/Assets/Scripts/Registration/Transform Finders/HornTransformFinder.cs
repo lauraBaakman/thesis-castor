@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using ICPLib;
 using OpenTK;
+using Registration.Error;
 
 namespace Registration
 {
@@ -13,6 +14,18 @@ namespace Registration
     /// </summary>
     public class HornTransformFinder : AbstractTransformFinder
     {
+        private IErrorMetric errorMetric;
+
+        public HornTransformFinder()
+        {
+            this.errorMetric = ErrorMetric.Horn();
+        }
+
+        public override IErrorMetric GetErrorMetric()
+        {
+            return this.errorMetric;
+        }
+
         /// <summary>
         /// Finds the transform that should be applied to the model points to 
         /// reduce the sum of squard distances error.

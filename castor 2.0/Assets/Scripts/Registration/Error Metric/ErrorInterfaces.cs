@@ -4,7 +4,14 @@ using Utils;
 
 namespace Registration.Error
 {
-    public interface IIterativeErrorMetric
+    public interface IErrorMetric
+    {
+        float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform);
+
+        void SetStaticFragment(GameObject staticModel);
+    }
+
+    public interface IIterativeErrorMetric : IErrorMetric
     {
         double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation);
 
@@ -25,12 +32,5 @@ namespace Registration.Error
         /// <param name="Ps">The static points in the same order as the model points.</param>
         /// <param name="translation">The translation vector</param>/// 
         Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation);
-    }
-
-    public interface IErrorMetric
-    {
-        float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform);
-
-        void SetStaticFragment(GameObject staticModel);
     }
 }

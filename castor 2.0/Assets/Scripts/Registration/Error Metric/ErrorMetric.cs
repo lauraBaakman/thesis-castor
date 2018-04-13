@@ -110,9 +110,9 @@ namespace Registration
             /// Horn, Berthold KP. "Closed-form solution of absolute orientation using unit quaternions." JOSA A 4.4 (1987): 629-642.
             /// </summary>
             /// <returns>The error used by the horn transform finder.</returns>
-            public static ErrorMetric Horn()
+            public static IErrorMetric Horn()
             {
-                return new ErrorMetric(Configuration.Horn());
+                return new ErrorMetric(Configuration.Horn);
             }
 
             /// <summary>
@@ -123,9 +123,9 @@ namespace Registration
             /// University of North Carolina 4 (2004).
             /// </summary>
             /// <returns>The low.</returns>
-            public static ErrorMetric Low()
+            public static IErrorMetric Low()
             {
-                return new ErrorMetric(Configuration.Low());
+                return new ErrorMetric(Configuration.Low);
             }
 
             /// <summary>
@@ -133,9 +133,17 @@ namespace Registration
             /// squared distances between the points.
             /// </summary>
             /// <returns>The wheeler.</returns>
-            public static ErrorMetric Wheeler()
+            public static IErrorMetric Wheeler()
             {
-                return new ErrorMetric(Configuration.Wheeler());
+                return new ErrorMetric(Configuration.Wheeler);
+            }
+
+            public static IErrorMetric IntersectionTermError(double distanceWeight, double intersectionWeight)
+            {
+                return new IntersectionTermError(
+                    distanceWeight: distanceWeight,
+                    intersectionWeight: intersectionWeight
+                );
             }
 
             public void SetStaticFragment(GameObject staticModel)
@@ -208,13 +216,16 @@ namespace Registration
                 /// Horn, Berthold KP. "Closed-form solution of absolute orientation using unit quaternions." JOSA A 4.4 (1987): 629-642.
                 /// </summary>
                 /// <returns>The error used by the horn transform finder.</returns>
-                public static Configuration Horn()
+                internal static Configuration Horn
                 {
-                    return new Configuration(
-                        distanceMetric: DistanceMetrics.SquaredEuclidean,
-                        aggregationMethod: AggregationMethods.Sum,
-                        normalizePoints: true
-                    );
+                    get
+                    {
+                        return new Configuration(
+                            distanceMetric: DistanceMetrics.SquaredEuclidean,
+                            aggregationMethod: AggregationMethods.Sum,
+                            normalizePoints: true
+                        );
+                    }
                 }
 
                 /// <summary>
@@ -224,27 +235,33 @@ namespace Registration
                 /// point-to-plane icp surface registration." Chapel Hill, 
                 /// University of North Carolina 4 (2004).
                 /// </summary>
-                /// <returns>The low.</returns>
-                public static Configuration Low()
+                /// <returns>The configuration of the error metric proposed by low.</returns>
+                internal static Configuration Low
                 {
-                    return new Configuration(
-                        distanceMetric: DistanceMetrics.SquaredPointToPlane,
-                        aggregationMethod: AggregationMethods.Sum,
-                        normalizePoints: true
-                    );
+                    get
+                    {
+                        return new Configuration(
+                            distanceMetric: DistanceMetrics.SquaredPointToPlane,
+                            aggregationMethod: AggregationMethods.Sum,
+                            normalizePoints: true
+                        );
+                    }
                 }
 
                 /// <summary>
                 /// The error metric proposed by Wheeler.
                 /// </summary>
-                /// <returns>The wheeler.</returns>
-                public static Configuration Wheeler()
+                /// <returns>The configuration of the error metric proposed by wheeler.</returns>
+                internal static Configuration Wheeler
                 {
-                    return new Configuration(
-                        distanceMetric: DistanceMetrics.SquaredEuclidean,
-                        aggregationMethod: AggregationMethods.Mean,
-                        normalizePoints: false
-                    );
+                    get
+                    {
+                        return new Configuration(
+                            distanceMetric: DistanceMetrics.SquaredEuclidean,
+                            aggregationMethod: AggregationMethods.Mean,
+                            normalizePoints: false
+                        );
+                    }
                 }
             }
             #endregion

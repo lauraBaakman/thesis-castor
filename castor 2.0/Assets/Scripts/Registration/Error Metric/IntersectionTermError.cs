@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Registration.Error
 {
-    public class IntersectionTermError : IIterativeErrorMetric, IErrorMetric
+    public class IntersectionTermError : IIterativeErrorMetric
     {
         private readonly double distanceWeight;
         private readonly double intersectionWeight;

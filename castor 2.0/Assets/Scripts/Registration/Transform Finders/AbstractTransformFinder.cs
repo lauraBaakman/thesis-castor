@@ -1,3 +1,4 @@
+using Registration.Error;
 using UnityEngine;
 
 namespace Registration
@@ -10,6 +11,8 @@ namespace Registration
 
             return FindTransformImplementation(correspondences);
         }
+
+        public abstract IErrorMetric GetErrorMetric();
 
         protected abstract Matrix4x4 FindTransformImplementation(CorrespondenceCollection correspondences);
 

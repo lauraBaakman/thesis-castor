@@ -6,8 +6,6 @@ namespace Tests.Utils
     [TestFixture]
     public class Vector3DTest
     {
-        double precision = 0.00000001;
-
         [Test]
         public void Test_Constructor_Three_Doubles()
         {

@@ -61,7 +61,10 @@ namespace Registration
         /// The error metric used to compute the error of a registration.
         /// </summary>
         /// <value>The error metric.</value>
-        public ErrorMetric ErrorMetric { get; set; }
+        public IErrorMetric ErrorMetric
+        {
+            get { return TransFormFinder.GetErrorMetric(); }
+        }
 
         /// <summary>
         /// The method used to find the transform between the static points and the model points.
@@ -92,11 +95,9 @@ namespace Registration
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
-            ErrorMetric = ErrorMetric.Wheeler();
-
             TransFormFinder = new IGDTransformFinder(
                 new IGDTransformFinder.Configuration(
-                     convergenceError: 0.001,
+                    convergenceError: 0.001,
                     learningRate: 0.001,
                     maxNumIterations: 50,
                     errorMetric: new WheelerIterativeError()

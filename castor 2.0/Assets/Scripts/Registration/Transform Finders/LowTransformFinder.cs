@@ -1,11 +1,23 @@
 using Utils;
 using UnityEngine;
+using Registration.Error;
 
 namespace Registration
 {
     public class LowTransformFinder : AbstractTransformFinder
     {
         private static int numUnknowns = 6;
+        private IErrorMetric errorMetric;
+
+        public LowTransformFinder()
+        {
+            this.errorMetric = ErrorMetric.Low();
+        }
+
+        public override IErrorMetric GetErrorMetric()
+        {
+            return this.errorMetric;
+        }
 
         protected override Matrix4x4 FindTransformImplementation(CorrespondenceCollection correspondences)
         {

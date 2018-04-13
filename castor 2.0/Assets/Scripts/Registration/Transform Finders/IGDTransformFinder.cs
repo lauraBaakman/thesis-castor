@@ -15,6 +15,11 @@ namespace Registration
             this.configuration = configuration;
         }
 
+        public override IErrorMetric GetErrorMetric()
+        {
+            return configuration.errorMetric;
+        }
+
         protected override Matrix4x4 FindTransformImplementation(CorrespondenceCollection correspondences)
         {
             List<Vector4D> modelCoordinates = new List<Vector4D>(correspondences.Count);

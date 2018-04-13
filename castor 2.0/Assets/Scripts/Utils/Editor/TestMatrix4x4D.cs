@@ -7,8 +7,6 @@ namespace Tests.Utils
     [TestFixture]
     public class Matrix4x4DTest
     {
-        double precision = 0.00000001;
-
         static Vector4D ACol0 = new Vector4D(-13, +45, +23, 00);
         static Vector4D ACol1 = new Vector4D(+10, -34, -34, 00);
         static Vector4D ACol2 = new Vector4D(-44, +37, +10, 00);

@@ -9,7 +9,7 @@ namespace Registration.Error
     /// "Iterative estimation of rotation and translation using the
     /// quaternion: School of Computer Science." (1995).
     /// </summary>
-    public class WheelerIterativeError : IIterativeErrorMetric, IErrorMetric
+    public class WheelerIterativeError : IIterativeErrorMetric
     {
         public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
