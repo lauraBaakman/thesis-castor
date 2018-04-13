@@ -173,12 +173,16 @@ namespace Utils
         #region overrides
         public bool Equals(QuaternionD other)
         {
-            return (
-                this.x.Equals(other.x) &&
-                this.y.Equals(other.y) &&
-                this.z.Equals(other.z) &&
-                this.w.Equals(other.w)
-            );
+            return (EqualsWithMargin(this.x, other.x) &&
+                    EqualsWithMargin(this.y, other.y) &&
+                    EqualsWithMargin(this.z, other.z) &&
+                    EqualsWithMargin(this.w, other.w));
+        }
+
+        private bool EqualsWithMargin(double self, double other)
+        {
+            double margin = Math.Abs((self + other) * .000005);
+            return Math.Abs(self - other) <= margin;
         }
 
         public override string ToString()
