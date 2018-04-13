@@ -62,7 +62,8 @@ P = X + [
 ];
 
 %% Parameters
-omegas = [0.2, 1.0];
+omegas_i = [1.0, 0.2];
+omegas_d = [1.0, 0.3];
 xis = [0, 1];
 
 ts = [
