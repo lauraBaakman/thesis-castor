@@ -87,8 +87,8 @@ for t = ts
                 
                 fprintf('t: new Vector4D(%+015.15e %+015.15e %+015.15e %+015.15e)\n', t);    
                 fprintf('q: new QuaternionD(%+015.15e, %+015.15e, %+015.15e, %+015.15e)\n', q);
-                fprintf('xi: %d\n', xi);
-                fprintf('omega: %d\n', omega);
+                fprintf('xi: %1.1d\n', xi);
+                fprintf('omega: %1.1f\n', omega);
 
                 t_gradient = [0; 0; 0; 0];
                 q_gradient = [0; 0; 0; 0];
