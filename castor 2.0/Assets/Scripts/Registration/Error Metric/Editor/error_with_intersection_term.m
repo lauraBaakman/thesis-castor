@@ -74,44 +74,61 @@ qs = [
     [0; 0; 0; 1]';
     random_quaternion()'
 ]';
+
+%% Init
+XC = nan(size(X));
+
+fprintf('P:\n');
+fprintf('new Vector4D(%+015.15e %+015.15e %+015.15e %+015.15e)\n', P);
+fprintf('\n');
+
 %% Compute the error and the gradients
-
-
-
 for t = ts
     for q = qs
         for xi = xis
-            for omega = omegas
-                
-                fprintf('t: new Vector4D(%+015.15e %+015.15e %+015.15e %+015.15e)\n', t);    
-                fprintf('q: new QuaternionD(%+015.15e, %+015.15e, %+015.15e, %+015.15e)\n', q);
-                fprintf('xi: %1.1d\n', xi);
-                fprintf('omega: %1.1f\n', omega);
+            for omega_i = omegas_i
+                for omega_d = omegas_d
+                    
+                    %Premultiply the model points
+                    for i = 1:size(X, 1)
+                        XC(:, i) = Xc(X(:, i), q);
+                    end
+                    XC(end, :) = ones(1, size(XC, 2));
+                    
+                    fprintf('XC:\n');
+                    fprintf('new Vector4D(%+015.15e %+015.15e %+015.15e %+015.15e)\n', XC);
+                    
+                    fprintf('t: new Vector4D(%+015.15e %+015.15e %+015.15e %+015.15e)\n', t);    
+                    fprintf('q: new QuaternionD(%+015.15e, %+015.15e, %+015.15e, %+015.15e)\n', q);
+                    fprintf('xi: %1.1d\n', xi);
+                    fprintf('omega_i: %1.1f\n', omega_i);
+                    fprintf('omega_d: %1.1f\n', omega_d);
 
-                t_gradient = [0; 0; 0; 0];
-                q_gradient = [0; 0; 0; 0];
+                    t_gradient = [0; 0; 0; 0];
+                    q_gradient = [0; 0; 0; 0];
 
-                error = 0;
-                for i = 1:size(X, 2)
-                    x = X(:,i);
-                    p = P(:,i);
+                    error = 0;
+                    for i = 1:size(X, 2)
+                        xc = XC(:,i);
+                        p = P(:,i);
 
-                    error = error + local_error(x, p, t, q, xi, omega);
-                    t_gradient = t_gradient + translationalGradient(x, p, t, q, xi, omega);
-                    q_gradient = q_gradient +    rotationalGradient(x, p, t, q, xi, omega);
+                        error = error + local_error(xc, p, t, xi, omega_d, omega_i);
+                        t_gradient = t_gradient + translationalGradient(xc, p, t, xi, omega_d, omega_i);
+                        q_gradient = q_gradient +    rotationalGradient(xc, p, t, xi, omega_d, omega_i);
+                    end
+
+                    error = 1 / N * error;
+                    t_gradient = 1 / (2 * N) * t_gradient;
+                    q_gradient = 1 / N * q_gradient;
+
+                    % Fix final values
+                    t_gradient(4) = 1;
+                    q_gradient(4) = 0;
+
+                    fprintf('error: %+015.15e\n', error);
+                    fprintf('translational gradient: new Vector4D(%+015.15e %+015.15e %+015.15e %+015.15e)\n', t_gradient);
+                    fprintf('rotational gradient: new QuaternionD(%+015.15e %+015.15e %+015.15e %+015.15e)\n\n', q_gradient);
                 end
-
-                error = 1 / N * error;
-                t_gradient = 1 / (2 * N) * t_gradient;
-                q_gradient = 1 / N * q_gradient;
-
-                % Fix final values
-                t_gradient(4) = 1;
-                q_gradient(4) = 0;
-
-                fprintf('error: %+015.15e\n', error);
-                fprintf('translational gradient: new Vector4D(%+015.15e %+015.15e %+015.15e %+015.15e)\n', t_gradient);
-                fprintf('rotational gradient: new QuaternionD(%+015.15e %+015.15e %+015.15e %+015.15e)\n\n', q_gradient);
             end
         end
     end

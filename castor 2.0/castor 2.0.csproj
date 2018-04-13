@@ -543,6 +543,7 @@
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\IntersectionTermError.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestIntersectionTermError.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

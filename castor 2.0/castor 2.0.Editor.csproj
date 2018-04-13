@@ -238,6 +238,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestTriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector4D.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestIntersectionTermError.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
