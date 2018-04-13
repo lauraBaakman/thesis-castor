@@ -65,7 +65,7 @@ P = X + [
 ];
 
 %% Parameters
-omegas = [0.2, 0.5, 1.0, 1.5];
+omegas = [0.2, 1.0];
 xis = [0, 1];
 
 ts = [
