@@ -58,7 +58,7 @@ N = size(X, 2);
 %% Static Points
 P = X + [
     random_matrix(3, 3, 1), zeros(3,1); 
-    zeros(1, 3), 1
+    zeros(1, 4)
 ];
 
 %% Parameters
