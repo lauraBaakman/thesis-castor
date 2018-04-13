@@ -122,7 +122,6 @@ for t = ts
                     q_gradient = 1 / N * q_gradient;
 
                     % Fix final values
-                    t_gradient(4) = 1;
                     q_gradient(4) = 0;
 
                     fprintf('error: %+015.15e\n', error);
