@@ -57,6 +57,7 @@ namespace Tests.Registration.Error
 
             Assert.That(actual, Is.EqualTo(expected).Within(precision));
         }
+
         static object[] ErrorCases =
         {
             new object[] {
@@ -157,5 +158,146 @@ namespace Tests.Registration.Error
             }
         };
 
+
+        [Test, TestCaseSource("TranslationalGradientCases")]
+        public void Test_TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int xi, double intersection_weight, double distance_weight, Vector4D expected)
+        {
+            IntersectionTermError errorMetric = new IntersectionTermError(distance_weight, intersection_weight);
+            Vector4D actual = errorMetric.TranslationalGradient(XCs, Ps, translation, xi);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        static object[] TranslationalGradientCases =
+        {
+            new object[]{
+                Xc_0, P, translation_0, xi_0, intersection_weight_0, distance_weight_0,
+                new Vector4D(+1.171794461968503e-01, -1.182272731568220e-01, +2.724131527295892e-03, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_0, xi_0, intersection_weight_0, distance_weight_1,
+                new Vector4D(+3.515383385905510e-02, -3.546818194704661e-02, +8.172394581887682e-04, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_0, xi_0, intersection_weight_1, distance_weight_0,
+                new Vector4D(+1.171794461968503e-01, -1.182272731568220e-01, +2.724131527295892e-03, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_0, xi_0, intersection_weight_1, distance_weight_1,
+                new Vector4D(+3.515383385905510e-02, -3.546818194704661e-02, +8.172394581887682e-04, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_0, xi_1, intersection_weight_0, distance_weight_0,
+                new Vector4D(+2.343588923937007e-01, -2.364545463136440e-01, +5.448263054591784e-03, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_0, xi_1, intersection_weight_0, distance_weight_1,
+                new Vector4D(+1.523332800559054e-01, -1.536954551038686e-01, +3.541370985484661e-03, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_0, xi_1, intersection_weight_1, distance_weight_0,
+                new Vector4D(+1.406153354362204e-01, -1.418727277881864e-01, +3.268957832755073e-03, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_0, xi_1, intersection_weight_1, distance_weight_1,
+                new Vector4D(+5.858972309842517e-02, -5.911363657841101e-02, +1.362065763647946e-03, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_0, xi_0, intersection_weight_0, distance_weight_0,
+                new Vector4D(-3.621031662083670e+00, -1.813225254346350e+00, -2.370674369951836e+00, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_0, xi_0, intersection_weight_0, distance_weight_1,
+                new Vector4D(-1.086309498625101e+00, -5.439675763039051e-01, -7.112023109855510e-01, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_0, xi_0, intersection_weight_1, distance_weight_0,
+                new Vector4D(-3.621031662083670e+00, -1.813225254346350e+00, -2.370674369951836e+00, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_0, xi_0, intersection_weight_1, distance_weight_1,
+                new Vector4D(-1.086309498625101e+00, -5.439675763039051e-01, -7.112023109855510e-01, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_0, xi_1, intersection_weight_0, distance_weight_0,
+                new Vector4D(-7.242063324167340e+00, -3.626450508692701e+00, -4.741348739903673e+00, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_0, xi_1, intersection_weight_0, distance_weight_1,
+                new Vector4D(-4.707341160708770e+00, -2.357192830650256e+00, -3.081876680937388e+00, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_0, xi_1, intersection_weight_1, distance_weight_0,
+                new Vector4D(-4.345237994500403e+00, -2.175870305215621e+00, -2.844809243942204e+00, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_0, xi_1, intersection_weight_1, distance_weight_1,
+                new Vector4D(-1.810515831041835e+00, -9.066126271731751e-01, -1.185337184975918e+00, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_1, xi_0, intersection_weight_0, distance_weight_0,
+                new Vector4D(+1.157542335177078e+00, -2.515304801677810e+00, +2.352273392337268e+00, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_1, xi_0, intersection_weight_0, distance_weight_1,
+                new Vector4D(+3.472627005531233e-01, -7.545914405033429e-01, +7.056820177011802e-01, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_1, xi_0, intersection_weight_1, distance_weight_0,
+                new Vector4D(+1.157542335177078e+00, -2.515304801677810e+00, +2.352273392337268e+00, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_1, xi_0, intersection_weight_1, distance_weight_1,
+                new Vector4D(+3.472627005531233e-01, -7.545914405033429e-01, +7.056820177011802e-01, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_1, xi_1, intersection_weight_0, distance_weight_0,
+                new Vector4D(+2.315084670354155e+00, -5.030609603355620e+00, +4.704546784674536e+00, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_1, xi_1, intersection_weight_0, distance_weight_1,
+                new Vector4D(+1.504805035730201e+00, -3.269896242181153e+00, +3.057955410038448e+00, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_1, xi_1, intersection_weight_1, distance_weight_0,
+                new Vector4D(+1.389050802212493e+00, -3.018365762013372e+00, +2.822728070804721e+00, 1)
+            },
+            new object[]{
+                Xc_0, P, translation_1, xi_1, intersection_weight_1, distance_weight_1,
+                new Vector4D(+5.787711675885389e-01, -1.257652400838905e+00, +1.176136696168634e+00, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_1, xi_0, intersection_weight_0, distance_weight_0,
+                new Vector4D(-2.580668773103442e+00, -4.210302782867338e+00, -2.112510914186516e-02, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_1, xi_0, intersection_weight_0, distance_weight_1,
+                new Vector4D(-7.742006319310327e-01, -1.263090834860201e+00, -6.337532742559535e-03, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_1, xi_0, intersection_weight_1, distance_weight_0,
+                new Vector4D(-2.580668773103442e+00, -4.210302782867338e+00, -2.112510914186516e-02, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_1, xi_0, intersection_weight_1, distance_weight_1,
+                new Vector4D(-7.742006319310327e-01, -1.263090834860201e+00, -6.337532742559535e-03, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_1, xi_1, intersection_weight_0, distance_weight_0,
+                new Vector4D(-5.161337546206885e+00, -8.420605565734675e+00, -4.225021828373032e-02, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_1, xi_1, intersection_weight_0, distance_weight_1,
+                new Vector4D(-3.354869405034475e+00, -5.473393617727540e+00, -2.746264188442477e-02, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_1, xi_1, intersection_weight_1, distance_weight_0,
+                new Vector4D(-3.096802527724131e+00, -5.052363339440806e+00, -2.535013097023814e-02, 1)
+            },
+            new object[]{
+                Xc_1, P, translation_1, xi_1, intersection_weight_1, distance_weight_1,
+                new Vector4D(-1.290334386551721e+00, -2.105151391433669e+00, -1.056255457093258e-02, 1)
+            },
+        };
     }
 }

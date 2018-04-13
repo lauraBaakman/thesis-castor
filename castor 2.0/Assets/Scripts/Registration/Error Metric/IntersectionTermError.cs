@@ -24,21 +24,21 @@ namespace Registration.Error
 
         public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int xi)
         {
-            int N = XCs.Count;
+            //int N = XCs.Count;
 
             double error = 0;
-            for (int i = 0; i < N; i++)
-            {
-                error += ComputeError(XCs[i], Ps[i], translation, xi);
-            }
-            error /= (4 * N);
+            //for (int i = 0; i < N; i++)
+            //{
+            //    error += ComputeError(XCs[i], Ps[i], translation, xi);
+            //}
+            //error /= (4 * N);
 
             return error;
         }
 
         private double ComputeError(Vector4D xc, Vector4D p, Vector4D translation, int xi)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         private int Xi(Vector4D modelPoint)
@@ -54,6 +54,11 @@ namespace Registration.Error
         public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
             throw new System.NotImplementedException();
+        }
+
+        public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int xi)
+        {
+            return new Vector4D();
         }
     }
 }
