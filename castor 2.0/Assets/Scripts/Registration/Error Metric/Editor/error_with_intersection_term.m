@@ -38,17 +38,14 @@ C = @(x) [
 
 %% Gradients
 homogeneous_cross = @(a, b) [cross(a(1:3), b(1:3)); 0];
-aux_rotationalGradient = @(xc, p, t, xi, omega) homogeneous_cross(xc, t - p) * (1 + xi * omega);
-rotationalGradient = @(x, p, t, q, xi, omega) aux_rotationalGradient(Xc(x, q), p, t, xi, omega);
+rotationalGradient = @(xc, p, t, xi, omega_d, omega_i) homogeneous_cross(xc, t - p) * (omega_d + xi * omega_i);
 
-aux_translationalGradient = @(distance, xi, omega) (distance * (xi * omega + 1));
-translationalGradient = @(x, p, t, q, xi, omega) aux_translationalGradient((Xc(x, q) + t - p), xi, omega);
+aux_translationalGradient = @(distance, xi, omega_d, omega_i) (distance * (xi * omega_i + omega_d));
+translationalGradient = @(xc, p, t, xi, omega_d, omega_i) aux_translationalGradient((xc + t - p), xi, omega_d, omega_i);
 
 %% Local Error
-g = @(xc, p, t) xc + t - p;
-h = @(xc, p, t, intersection_weight) intersection_weight * (norm(xc + t - p)^2);
-aux_local_error = @(xc, p, t, intersection_weight) (1 + intersection_weight) * dot(xc + t - p, xc + t - p);
-local_error = @(x, p, t, q, xi, omega) aux_local_error(Xc(x,q), p, t, xi * omega);
+aux_local_error = @(distance, distance_weight, intersection_weight) (distance_weight + intersection_weight) * dot(distance, distance);
+local_error = @(xc, p, t, xi, omega_d, omega_i) aux_local_error(xc + t - p, omega_d, xi * omega_i);
 
 %% Model Points: each column is a point
 X = [
