@@ -346,6 +346,7 @@
     <Compile Include="Assets\Scripts\Extensions\SystemRandomExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
+    <Compile Include="Assets\Scripts\Fragment\ContainmentDetector.cs" />
     <Compile Include="Assets\Scripts\Fragment\DoubleConnectedEdgeListStorage.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPAbstractFragmentController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPController.cs" />
@@ -380,8 +381,8 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\NormalShootingCorrespondenceFinder.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\AggregationMethods.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\DistanceMetrics.cs" />
-    <Compile Include="Assets\Scripts\Registration\Error Metric\ErrorMetric.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\ErrorInterfaces.cs" />
+    <Compile Include="Assets\Scripts\Registration\Error Metric\ErrorMetric.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\IntersectionTermError.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\WheelerIterativeError.cs" />
     <Compile Include="Assets\Scripts\Registration\ICPInterfaces.cs" />
@@ -543,7 +544,6 @@
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
-    <Compile Include="Assets\Scripts\Fragment\ContainmentDetector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
