@@ -17,6 +17,7 @@ namespace Registration.Error
             this.intersectionWeight = intersectionWeight;
         }
 
+        #region error
         public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
             throw new NotImplementedException();
@@ -42,12 +43,29 @@ namespace Registration.Error
         {
             throw new System.NotImplementedException();
         }
+        #endregion
 
+        #region rotationalGradient
         public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int[] XIs)
         {
-            return QuaternionD.identity;
+            int N = XCs.Count;
+            Vector4D gradient = new Vector4D();
+
+            for (int i = 0; i < N; i++) gradient += RotationalGradient(XCs[i], Ps[i], translation, XIs[i]);
+
+            gradient /= N;
+
+            //Wheeler: The gradient w.r.t. to q will have no w component
+            return new QuaternionD(x: gradient.x, y: gradient.y, z: gradient.z, w: 0);
         }
 
+        public Vector4D RotationalGradient(Vector4D xc, Vector4D p, Vector4D translation, int xi)
+        {
+            return (this.distanceWeight + xi * this.intersectionWeight) * Vector4D.Cross(xc, translation - p);
+        }
+        #endregion
+
+        #region translationalGradient
         public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
         {
             throw new System.NotImplementedException();
@@ -55,7 +73,19 @@ namespace Registration.Error
 
         public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int[] XIs)
         {
-            return new Vector4D();
+            int N = XCs.Count;
+            Vector4D gradient = new Vector4D();
+
+            for (int i = 0; i < N; i++) gradient += TranslationalGradient(XCs[i], Ps[i], translation, XIs[i]);
+
+            gradient /= (2 * N);
+            return gradient;
         }
+
+        public Vector4D TranslationalGradient(Vector4D xc, Vector4D p, Vector4D translation, int xi)
+        {
+            return (this.distanceWeight + xi * this.intersectionWeight) * (xc + translation - p);
+        }
+        #endregion
     }
 }
