@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 114961052426293090}
   - component: {fileID: 222277075536673266}
   - component: {fileID: 114963199229690276}
-  - component: {fileID: 114675086643982678}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -77,22 +76,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
---- !u!114 &114675086643982678
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1632534687229154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 171fd533f8a2049929c6360ee9ad3482, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsOffSprite: {fileID: 0}
-  IsOffSpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
 --- !u!114 &114806142976312604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,7 +119,6 @@ MonoBehaviour:
     circles occur along those axes. In local space the local axes are used for translation
     and rotation.
   KeyBoard: 
-  Receiver: {fileID: 0}
 --- !u!114 &114963199229690276
 MonoBehaviour:
   m_ObjectHideFlags: 1
