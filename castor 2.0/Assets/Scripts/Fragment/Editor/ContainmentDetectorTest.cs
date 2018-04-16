@@ -46,6 +46,9 @@ public class ContainmentDetectorTest
         Vector4D position = new Vector4D(point.transform.position, 1.0);
 
         ContainmentDetector detector = demisphere.GetComponent<ContainmentDetector>();
+        //Awake/update is not run by the test
+        detector.collider = demisphere.GetComponent<MeshCollider>();
+
         return detector.GameObjectContains(position);
     }
 }

@@ -1,11 +1,20 @@
 using UnityEngine;
 using Utils;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(MeshCollider))]
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(MeshFilter))] //Otherwise the meshrender will give empty bounds
 public class ContainmentDetector : MonoBehaviour
 {
+    public new Collider collider;
+    private static float stepSize = 0.0001f;
+
+    private void Start()
+    {
+        collider = this.GetComponent<MeshCollider>();
+    }
+
     /// <summary>
     /// Verifies if the object contains the passed position. 
     /// 
@@ -18,9 +27,9 @@ public class ContainmentDetector : MonoBehaviour
         Vector3 position = point.xyz.ToUnityVector();
 
         //Cheap check, if the point falls outside the objects bounding box there is no need to check further.
-        if (!InBoundingBox(position)) return false;
+        if (!IsInBoundingBox(position)) return false;
 
-        return RayCheck(position);
+        return DetermineContainmentWithRayCasting(position);
     }
 
     /// <summary>
@@ -28,19 +37,59 @@ public class ContainmentDetector : MonoBehaviour
     /// </summary>
     /// <returns><c>true</c>, if the position falls within the bounding box of the gameobject, <c>false</c> otherwise.</returns>
     /// <param name="position">Position.</param>
-    private bool InBoundingBox(Vector3 position)
+    private bool IsInBoundingBox(Vector3 position)
     {
         Bounds bounds = GetComponent<Renderer>().bounds;
         return bounds.Contains(position);
     }
 
-    private bool RayCheck(Vector3 position)
+    private bool DetermineContainmentWithRayCasting(Vector3 position)
     {
-        Debug.Log("Ray Check");
+        Vector3 pointOutsideObject = FindPointOutsideGameObject();
 
-        Vector3 start = FindPointOutsideGameObject();
-        Vector3 goal = position;
+        int intersections = 0;
 
+        intersections += CountIntersectionsOnRay(pointOutsideObject, position);
+        intersections += CountIntersectionsOnRay(position, pointOutsideObject);
+
+        return IsOdd(intersections);
+    }
+
+    private bool IsOdd(int number)
+    {
+        return (number % 2) != 0;
+    }
+
+    private int CountIntersectionsOnRay(Vector3 start, Vector3 end)
+    {
+        Vector3 direction = (end - start).normalized;
+        Vector3 current = start;
+
+        int intersections = 0;
+
+        RaycastHit hit;
+
+        while (current != end)
+        {
+            if (HasHitThisColliderAlongRay(current, end, out hit))
+            {
+                intersections++;
+                current = hit.point + stepSize * direction;
+            }
+            else current = end;
+        }
+        return intersections;
+    }
+
+    private bool HasHitThisColliderAlongRay(Vector3 start, Vector3 end, out RaycastHit hit)
+    {
+        if (Physics.Linecast(start, end, out hit))
+        {
+            Assert.IsNotNull(this.collider, "The collider of this object should not be null.");
+
+            //Check if we have hit this object, or another object
+            return hit.collider.Equals(this.collider);
+        };
         return false;
     }
 
@@ -48,8 +97,6 @@ public class ContainmentDetector : MonoBehaviour
     {
         Bounds bounds = GetComponent<MeshRenderer>().bounds;
         Vector3 position = bounds.center + bounds.extents * 2;
-
-        //Debug.Log(position);
 
         return position;
     }
