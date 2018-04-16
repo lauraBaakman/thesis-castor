@@ -175,8 +175,8 @@ namespace Registration
 
         private void step()
         {
-            Vector4D translationalGradient = configuration.errorMetric.TranslationalGradient(modelPoints, staticPoints, translation);
-            QuaternionD rotationalGradient = configuration.errorMetric.RotationalGradient(modelPoints, staticPoints, translation);
+            Vector4D translationalGradient = configuration.errorMetric.TranslationalGradient(preMultipliedModelPoints, staticPoints, translation);
+            QuaternionD rotationalGradient = configuration.errorMetric.RotationalGradient(preMultipliedModelPoints, staticPoints, translation);
 
             updateTranslation(translationalGradient);
             updateRotation(rotationalGradient);
