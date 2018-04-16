@@ -100,7 +100,7 @@ namespace Registration
                     convergenceError: 0.001,
                     learningRate: 0.001,
                     maxNumIterations: 50,
-                    errorMetric: new WheelerIterativeError()
+                    errorMetric: new IntersectionTermError(0.5, 0.5)
                 )
             );
 
