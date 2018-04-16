@@ -46,6 +46,12 @@ namespace Registration
             }
         }
 
+        /// <summary>
+        /// Sample the specified samplingInfo, and returns the position of the 
+        /// sampled points in the reference transform.
+        /// </summary>
+        /// <returns>The sample.</returns>
+        /// <param name="samplingInfo">Sampling info.</param>
         public List<Point> Sample(SamplingInformation samplingInfo)
         {
             return samplingFunction(samplingInfo);
