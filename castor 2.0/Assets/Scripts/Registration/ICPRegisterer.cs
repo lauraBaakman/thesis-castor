@@ -89,7 +89,7 @@ namespace Registration
 
             SendMessageToAllListeners("OnICPStarted");
 
-            settings.ErrorMetric.SetStaticFragment(staticFragment);
+            settings.ErrorMetric.Set(staticFragment, settings.ReferenceTransform);
         }
 
         public void AddListener(GameObject listener)

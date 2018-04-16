@@ -146,9 +146,9 @@ namespace Registration
                 );
             }
 
-            public void SetStaticFragment(GameObject staticModel)
+            public void Set(GameObject staticModel, Transform referenceTransform)
             {
-                //Do nothing, we don't need the static model, no need to store a reference to it.
+                //Do nothing, we don't need this information, no need to store a reference to it.
             }
             #endregion
 

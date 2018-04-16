@@ -95,7 +95,7 @@ namespace Registration.Error
             throw new NotImplementedException();
         }
 
-        public void SetStaticFragment(GameObject staticModel)
+        public void Set(GameObject staticModel, Transform referenceTransform)
         {
             this.staticModel = staticModel;
         }

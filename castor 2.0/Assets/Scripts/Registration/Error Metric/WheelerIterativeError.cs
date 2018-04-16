@@ -87,7 +87,7 @@ namespace Registration.Error
             return ErrorMetric.Wheeler().ComputeError(correspondences, originalTransform, newTransform);
         }
 
-        public void SetStaticFragment(GameObject staticModel)
+        public void Set(GameObject staticModel, Transform referenceTransform)
         {
             //Do nothing, we don't need the static model, no need to store a reference to it.
         }

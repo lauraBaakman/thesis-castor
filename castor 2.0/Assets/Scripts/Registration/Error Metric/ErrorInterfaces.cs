@@ -8,7 +8,7 @@ namespace Registration.Error
     {
         float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform);
 
-        void SetStaticFragment(GameObject staticModel);
+        void Set(GameObject staticModel, Transform referenceTransform);
     }
 
     public interface IIterativeErrorMetric : IErrorMetric
