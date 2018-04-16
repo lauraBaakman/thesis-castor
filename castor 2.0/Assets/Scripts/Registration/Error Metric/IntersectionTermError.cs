@@ -19,17 +19,17 @@ namespace Registration.Error
         }
 
         #region error
-        public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
+        public double ComputeError(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation)
         {
             throw new NotImplementedException();
         }
 
-        public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int[] XIs)
+        public double ComputeError(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation, int[] XIs)
         {
-            int N = XCs.Count;
+            int N = rotatedModelPoints.Count;
 
             double error = 0;
-            for (int i = 0; i < N; i++) error += ComputeError(XCs[i], Ps[i], translation, XIs[i]);
+            for (int i = 0; i < N; i++) error += ComputeError(rotatedModelPoints[i], staticPoints[i], translation, XIs[i]);
             error /= (4 * N);
 
             return error;
@@ -42,17 +42,17 @@ namespace Registration.Error
         #endregion
 
         #region rotationalGradient
-        public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
+        public QuaternionD RotationalGradient(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation)
         {
             throw new System.NotImplementedException();
         }
 
-        public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int[] XIs)
+        public QuaternionD RotationalGradient(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation, int[] XIs)
         {
-            int N = XCs.Count;
+            int N = rotatedModelPoints.Count;
             Vector4D gradient = new Vector4D();
 
-            for (int i = 0; i < N; i++) gradient += RotationalGradient(XCs[i], Ps[i], translation, XIs[i]);
+            for (int i = 0; i < N; i++) gradient += RotationalGradient(rotatedModelPoints[i], staticPoints[i], translation, XIs[i]);
 
             gradient /= N;
 
@@ -67,17 +67,17 @@ namespace Registration.Error
         #endregion
 
         #region translationalGradient
-        public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
+        public Vector4D TranslationalGradient(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation)
         {
             throw new System.NotImplementedException();
         }
 
-        public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, int[] XIs)
+        public Vector4D TranslationalGradient(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation, int[] XIs)
         {
-            int N = XCs.Count;
+            int N = rotatedModelPoints.Count;
             Vector4D gradient = new Vector4D();
 
-            for (int i = 0; i < N; i++) gradient += TranslationalGradient(XCs[i], Ps[i], translation, XIs[i]);
+            for (int i = 0; i < N; i++) gradient += TranslationalGradient(rotatedModelPoints[i], staticPoints[i], translation, XIs[i]);
 
             gradient /= (2 * N);
             return gradient;
