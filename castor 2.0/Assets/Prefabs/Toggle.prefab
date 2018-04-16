@@ -114,10 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f3397806c284dfda136d40262c7384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Message: Toggle the axis system of the transform between world space and local space.
-    In world space the object is translated along the global axes, and the rotation
-    circles occur along those axes. In local space the local axes are used for translation
-    and rotation.
+  Message: 
   KeyBoard: 
 --- !u!114 &114963199229690276
 MonoBehaviour:
