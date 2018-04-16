@@ -82,7 +82,7 @@ namespace Tests.Registration.Error
         [Test, TestCaseSource("ErrorCases")]
         public void Test_ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, double expected)
         {
-            double actual = error.ComputeError(XCs, Ps, translation);
+            double actual = error.ComputeError(XCs, Ps, translation, null);
 
             Assert.That(expected, Is.EqualTo(actual).Within(precision));
         }
@@ -113,7 +113,7 @@ namespace Tests.Registration.Error
         [Test, TestCaseSource("TranslationGradientsCases")]
         public void Test_TranslatonalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, Vector4D expected)
         {
-            Vector4D actual = error.TranslationalGradient(XCs, Ps, translation);
+            Vector4D actual = error.TranslationalGradient(XCs, Ps, translation, null);
             Assert.That(actual.x, Is.EqualTo(expected.x).Within(precision));
             Assert.That(actual.y, Is.EqualTo(expected.y).Within(precision));
             Assert.That(actual.z, Is.EqualTo(expected.z).Within(precision));
@@ -147,7 +147,7 @@ namespace Tests.Registration.Error
         [Test, TestCaseSource("RotationGradientCases")]
         public void Test_RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, QuaternionD expected)
         {
-            QuaternionD actual = error.RotationalGradient(XCs, Ps, translation);
+            QuaternionD actual = error.RotationalGradient(XCs, Ps, translation, null);
             Assert.That(actual.x, Is.EqualTo(expected.x).Within(precision));
             Assert.That(actual.y, Is.EqualTo(expected.y).Within(precision));
             Assert.That(actual.z, Is.EqualTo(expected.z).Within(precision));

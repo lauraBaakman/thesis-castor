@@ -11,7 +11,7 @@ namespace Registration.Error
     /// </summary>
     public class WheelerIterativeError : IIterativeErrorMetric
     {
-        public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
+        public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, object sharedParameters)
         {
             int N = XCs.Count;
 
@@ -38,7 +38,7 @@ namespace Registration.Error
         /// <param name="XCs">The model points, premultiplied with the rotation matrix.</param>
         /// <param name="Ps">The static points.</param>
         /// <param name="translation">The current translation vector.</param>
-        public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
+        public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, object sharedParameters)
         {
             int N = XCs.Count;
             Vector4D gradient = new Vector4D();
@@ -65,7 +65,7 @@ namespace Registration.Error
         /// <param name="XCs">The model points, premultiplied with the rotation matrix.</param>
         /// <param name="Ps">The static points.</param>
         /// <param name="translation">The current translation vector.</param>
-        public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation)
+        public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, object sharedParameters)
         {
             int N = XCs.Count;
             Vector4D gradient = new Vector4D();
@@ -90,6 +90,11 @@ namespace Registration.Error
         public void Set(GameObject staticModel, Transform referenceTransform)
         {
             //Do nothing, we don't need the static model, no need to store a reference to it.
+        }
+
+        public object ComputeSharedParameters(List<Vector4D> modelPoints, List<Vector4D> staticPoints, Vector4D translation)
+        {
+            return null;
         }
     }
 }

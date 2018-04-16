@@ -69,11 +69,13 @@ namespace Registration
         private readonly IGDTransformFinder.Configuration configuration;
 
         private readonly List<Vector4D> modelPoints;
-        private List<Vector4D> preMultipliedModelPoints;
+        private List<Vector4D> preRotatedModelPoints;
         private readonly List<Vector4D> staticPoints;
 
         private Vector4D translation;
         private QuaternionD rotation;
+
+        private object sharedParameters;
 
         private double error;
         private int iteration;
@@ -130,7 +132,7 @@ namespace Registration
             translation = new Vector4D(0, 0, 0, 0);
             rotation = QuaternionD.identity;
 
-            preMultipliedModelPoints = new List<Vector4D>(this.modelPoints.Count);
+            preRotatedModelPoints = new List<Vector4D>(this.modelPoints.Count);
 
             error = 0;
         }
@@ -139,9 +141,11 @@ namespace Registration
         {
             while (true)
             {
-                preMultiplyModelPoints();
+                preRotateModelPoints();
 
-                error = configuration.errorMetric.ComputeError(preMultipliedModelPoints, staticPoints, translation);
+                sharedParameters = configuration.errorMetric.ComputeSharedParameters(preRotatedModelPoints, staticPoints, translation);
+
+                error = configuration.errorMetric.ComputeError(preRotatedModelPoints, staticPoints, translation, sharedParameters);
 
                 if (convergence()) return buildTransformationMatrix().ToUnityMatrix4x4();
 
@@ -151,9 +155,12 @@ namespace Registration
             }
         }
 
-        private void preMultiplyModelPoints()
+        /// <summary>
+        /// Apply the current rotation to the model points.
+        /// </summary>
+        private void preRotateModelPoints()
         {
-            preMultipliedModelPoints.Clear();
+            preRotatedModelPoints.Clear();
 
             Matrix4x4D rotationMatrix = Matrix4x4D.TransformationMatrixFromQuaternion(rotation);
 
@@ -161,7 +168,7 @@ namespace Registration
             foreach (Vector4D x in modelPoints)
             {
                 xc = rotationMatrix * x;
-                preMultipliedModelPoints.Add(xc);
+                preRotatedModelPoints.Add(xc);
             }
         }
 
@@ -175,8 +182,8 @@ namespace Registration
 
         private void step()
         {
-            Vector4D translationalGradient = configuration.errorMetric.TranslationalGradient(preMultipliedModelPoints, staticPoints, translation);
-            QuaternionD rotationalGradient = configuration.errorMetric.RotationalGradient(preMultipliedModelPoints, staticPoints, translation);
+            Vector4D translationalGradient = configuration.errorMetric.TranslationalGradient(preRotatedModelPoints, staticPoints, translation, sharedParameters);
+            QuaternionD rotationalGradient = configuration.errorMetric.RotationalGradient(preRotatedModelPoints, staticPoints, translation, sharedParameters);
 
             updateTranslation(translationalGradient);
             updateRotation(rotationalGradient);
