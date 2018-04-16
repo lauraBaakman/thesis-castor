@@ -16,6 +16,19 @@ public class ContainmentDetector : MonoBehaviour
     }
 
     /// <summary>
+    /// Verifies if the associated gameobject contains the passed position.
+    /// </summary>
+    /// <returns><c>true</c>, if the position falls inside the object, <c>false</c> otherwise.</returns>
+    /// <param name="point">The point in the passed transform.</param>
+    /// <param name="pointTransform">The transform of the passed point.</param>
+    public bool GameObjectContains(Vector3 point, Transform pointTransform)
+    {
+        Vector3 worldSpacePoint = pointTransform.TransformPoint(point);
+
+        return GameObjectContains(worldSpacePoint);
+    }
+
+    /// <summary>
     /// Verifies if the object contains the passed position. 
     /// 
     /// Note the position should be in worldspace.
@@ -26,6 +39,18 @@ public class ContainmentDetector : MonoBehaviour
     {
         Vector3 position = point.xyz.ToUnityVector();
 
+        return GameObjectContains(position);
+    }
+
+    /// <summary>
+    /// Verifies if the object contains the passed position. 
+    /// 
+    /// Note the position should be in worldspace.
+    /// </summary>
+    /// <returns><c>true</c>, if the position falls inside the object, <c>false</c> otherwise.</returns>
+    /// <param name="position">Position in worldspace of the point.</param>
+    public bool GameObjectContains(Vector3 position)
+    {
         //Cheap check, if the point falls outside the objects bounding box there is no need to check further.
         if (!IsInBoundingBox(position)) return false;
 
