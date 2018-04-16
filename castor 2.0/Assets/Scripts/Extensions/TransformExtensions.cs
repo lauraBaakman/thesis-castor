@@ -33,4 +33,28 @@ public static class TransformExtensions
 
         return toOther * toWorld;
     }
+
+    /// <summary>
+    /// Transforms position from local space to world space.
+    /// </summary>
+    /// <returns>The point in world space.</returns>
+    /// <param name="transform">Transform.</param>
+    /// <param name="position">The position in local space.</param>
+    public static Utils.Vector4D TransformPoint(this Transform transform, Utils.Vector4D position)
+    {
+        Vector3 transformed = transform.TransformPoint(position.xyz.ToUnityVector());
+        return new Utils.Vector4D(transformed, position.w);
+    }
+
+    /// <summary>
+    /// Transforms direction from local space to world space.
+    /// </summary>
+    /// <returns>The direction in world space.</returns>
+    /// <param name="transform">Transform.</param>
+    /// <param name="direction">The direction in local space.</param>
+    public static Utils.Vector4D TransformDirection(this Transform transform, Utils.Vector4D direction)
+    {
+        Vector3 transformed = transform.TransformDirection(direction.xyz.ToUnityVector());
+        return new Utils.Vector4D(transformed, direction.w);
+    }
 }
