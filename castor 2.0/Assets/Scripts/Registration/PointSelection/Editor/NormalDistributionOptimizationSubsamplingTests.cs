@@ -46,30 +46,14 @@ namespace Tests.Registration
         }
 
         static object[] DetermineFaceIdxCases = {
-            new object[] {
-                new Vector3(+0, +0, -1), 4
-            },
-            new object[] {
-                new Vector3(+0, +0, +1), 0
-            },
-            new object[] {
-                new Vector3(+0, +1, +0), 2
-            },
-            new object[] {
-                new Vector3(+0, -1, +0), 5
-            },
-            new object[] {
-                new Vector3(-1, +0, +0), 3
-            },
-            new object[] {
-                new Vector3(+1, +0, +0), 1
-            },
-            new object[] {
-                new Vector3(0.5f, 0.5f, 0.5f).normalized, 0
-            },
-            new object[] {
-                new Vector3(0.9f, 0.1f, 0.2f).normalized, 1
-            },
+            new object[] {new Vector3(+0, +0, -1), 4},
+            new object[] {new Vector3(+0, +0, +1), 0},
+            new object[] {new Vector3(+0, +1, +0), 2},
+            new object[] {new Vector3(+0, -1, +0), 5},
+            new object[] {new Vector3(-1, +0, +0), 3},
+            new object[] {new Vector3(+1, +0, +0), 1},
+            new object[] {new Vector3(0.5f, 0.5f, 0.5f).normalized, 0},
+            new object[] {new Vector3(0.9f, 0.1f, 0.2f).normalized, 1},
         };
     }
 
