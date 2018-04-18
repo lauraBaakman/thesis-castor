@@ -113,5 +113,18 @@ namespace Registration
             }
             return points;
         }
+
+        public class SamplingConfiguration : Registration.SamplingConfiguration
+        {
+            public enum NormalProcessing { NoNormals, VertexNormals, AreaWeightedSmoothNormals };
+
+            public readonly NormalProcessing normalProcessing;
+
+            public SamplingConfiguration(Transform referenceTransform, NormalProcessing normalProcessing)
+                : base(referenceTransform)
+            {
+                this.normalProcessing = normalProcessing;
+            }
+        }
     }
 }

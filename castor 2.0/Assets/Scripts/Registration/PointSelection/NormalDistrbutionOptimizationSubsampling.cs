@@ -25,6 +25,34 @@ namespace Registration
         {
             throw new System.NotImplementedException();
         }
+
+        public class SamplingConfiguration : Registration.SamplingConfiguration
+        {
+            /// <summary>
+            /// The percentage of the points that should be kept.
+            /// </summary>
+            private float percentage;
+            public float Percentage
+            {
+                get { return percentage; }
+                set
+                {
+                    ValidatePercentage(value);
+                    this.percentage = value;
+                }
+            }
+
+            public SamplingConfiguration(Transform referenceTransform, float percentage)
+                : base(referenceTransform)
+            {
+                this.Percentage = percentage;
+            }
+
+            private void ValidatePercentage(float value)
+            {
+                if (value < 0 || value > 100) throw new ArgumentException("Percentages outside of the range [0, 100] are not accepted.");
+            }
+        }
     }
 
     /// <summary>

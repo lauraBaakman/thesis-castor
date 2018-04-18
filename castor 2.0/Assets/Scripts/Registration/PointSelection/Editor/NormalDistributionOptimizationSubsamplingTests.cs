@@ -1,8 +1,9 @@
 using UnityEngine;
 using Registration;
-using NUnit;
 using NUnit.Framework;
+using UnityEditor.SceneManagement;
 using System.Collections.Generic;
+using System;
 
 namespace Tests.Registration
 {
@@ -120,6 +121,8 @@ namespace Tests.Registration
         [Test, TestCaseSource("BinCases")]
         public void Test_Bin(string gameObjectName, Dictionary<int, List<Point>> expected)
         {
+            EditorSceneManager.OpenScene(sceneName);
+
             //The 'default' child of a mesh contains the stuff we are interested in
             GameObject gameObject = GameObject.Find(gameObjectName).transform.GetChild(0).gameObject;
             Transform referenceTransform = gameObject.transform.root;
@@ -266,5 +269,51 @@ namespace Tests.Registration
             },
         };
         #endregion
+    }
+
+    [TestFixture]
+    public class SamplingConfigurationTests
+    {
+        [TestCase(-005f)]
+        [TestCase(+200f)]
+        public void SetInvalidPercentage(float percentage)
+        {
+            Assert.Throws(
+                typeof(ArgumentException),
+                delegate
+                {
+                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(null, percentage);
+                }
+            );
+
+            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(null, 10);
+            Assert.Throws(
+                typeof(ArgumentException),
+                delegate
+                {
+                    x.Percentage = percentage;
+                }
+            );
+        }
+
+        [TestCase(+05f)]
+        [TestCase(+20f)]
+        public void SetValidPercentage(float percentage)
+        {
+            Assert.DoesNotThrow(
+                delegate
+                {
+                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(null, percentage);
+                }
+            );
+
+            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(null, 10);
+            Assert.DoesNotThrow(
+                delegate
+                {
+                    x.Percentage = percentage;
+                }
+            );
+        }
     }
 }
