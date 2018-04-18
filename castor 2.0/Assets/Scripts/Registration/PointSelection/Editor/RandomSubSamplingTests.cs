@@ -123,7 +123,7 @@ namespace Tests.Registration
 
             AllPointsSampler.Configuration allPointsConfig = new AllPointsSampler.Configuration(
                 referenceTransform: gameObject.transform.root,
-                normalProcessing: AllPointsSampler.Configuration.NormalProcessing.VertexNormals
+                normalProcessing: normalProcessing
             );
 
             SamplingInformation samplingInfo = new SamplingInformation(gameObject);
