@@ -46,7 +46,7 @@ namespace Registration
                 {
                     ValidatePercentage(value);
                     this.percentage = value;
-                    this.probability = 1.0f / percentage;
+                    this.probability = percentage / 100;
                 }
             }
 
