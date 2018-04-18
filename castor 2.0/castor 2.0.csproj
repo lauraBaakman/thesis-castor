@@ -391,6 +391,7 @@
     <Compile Include="Assets\Scripts\Registration\Point.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\AllPointsSampler.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSampler.cs" />
+    <Compile Include="Assets\Scripts\Registration\PointSelection\NormalDistrbutionOptimizationSubsampling.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\SamplingInformation.cs" />
     <Compile Include="Assets\Scripts\Registration\Settings.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\AbstractTransformFinder.cs" />
@@ -544,7 +545,6 @@
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
-    <Compile Include="Assets\Scripts\Registration\PointSelection\NormalDistrbutionOptimizationSubsampling.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
