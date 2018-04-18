@@ -170,19 +170,19 @@ namespace Tests.Registration
 
         [TestCase("cube", 50f, 12, AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
         [TestCase("transformedCube", 50f, 12, AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
-        [TestCase("pyramid", 50f, 10, AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
-        [TestCase("cube", 30f, 8, AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
-        [TestCase("transformedCube", 30f, 8, AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
-        [TestCase("pyramid", 30f, 7, AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
-        [TestCase("cube", 70f, 17, AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
-        [TestCase("transformedCube", 70f, 17, AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
-        [TestCase("pyramid", 70f, 14, AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
+        [TestCase("pyramid", 50f, 8, AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
+        [TestCase("cube", 30f, 2, AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
+        [TestCase("transformedCube", 30f, 2, AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
+        [TestCase("pyramid", 30f, 2, AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
+        [TestCase("cube", 70f, 6, AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
+        [TestCase("transformedCube", 70f, 6, AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
+        [TestCase("pyramid", 70f, 4, AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
         public void TestSample(string gameObjectname, float percentage, int expectedSampleSize, AllPointsSampler.Configuration.NormalProcessing normalProcessing)
         {
             EditorSceneManager.OpenScene(sceneName);
 
             //The 'default' child of a mesh contains the stuff we are interested in
-            GameObject gameObject = GameObject.Find("cube").transform.GetChild(0).gameObject;
+            GameObject gameObject = GameObject.Find(gameObjectname).transform.GetChild(0).gameObject;
             DoubleConnectedEdgeListStorage dcelStorage = gameObject.GetComponent<DoubleConnectedEdgeListStorage>();
             dcelStorage.DCEL = DCEL.FromMesh(gameObject.GetComponent<MeshFilter>().sharedMesh);
 
