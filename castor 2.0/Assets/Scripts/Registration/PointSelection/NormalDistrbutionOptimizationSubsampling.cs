@@ -13,9 +13,12 @@ namespace Registration
     /// </summary>
     public class NormalDistributionOptimizationSubsampling : IPointSampler
     {
+        SamplingConfiguration config;
+
         public NormalDistributionOptimizationSubsampling(SamplingConfiguration configuration)
         {
-
+            this.config = configuration;
+            //Give warning if the normal enum is unexpected
         }
 
         public List<Point> Sample(SamplingInformation samplingInfo)
@@ -25,7 +28,7 @@ namespace Registration
     }
 
     /// <summary>
-    /// Bin the normals with the approach discussed here: 
+    /// Bin the normals with the approach discussed here:
     /// https://stackoverflow.com/a/18319848/1357229
     /// </summary>
     public class NormalBinner

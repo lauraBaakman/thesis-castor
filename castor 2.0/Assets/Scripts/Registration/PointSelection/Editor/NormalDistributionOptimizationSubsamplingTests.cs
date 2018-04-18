@@ -120,21 +120,20 @@ namespace Tests.Registration
         [Test, TestCaseSource("BinCases")]
         public void Test_Bin(string gameObjectName, Dictionary<int, List<Point>> expected)
         {
-            GameObject gameObject = GameObject.Find(gameObjectName);
-            Transform referenceTransform = gameObject.transform.parent;
+            //The 'default' child of a mesh contains the stuff we are interested in
+            GameObject gameObject = GameObject.Find(gameObjectName).transform.GetChild(0).gameObject;
+            Transform referenceTransform = gameObject.transform.root;
 
             SamplingInformation samplingInformation = new SamplingInformation(gameObject);
 
             NormalBinner binner = new NormalBinner(6, referenceTransform);
             Dictionary<int, List<Point>> actual = binner.Bin(samplingInformation);
 
-            Assert.That(actual, Is.EquivalentTo(expected));
-
-            Assert.Fail("Not implemented, use TestIntersection form");
+            Assert.That(actual.Keys, Is.EquivalentTo(expected.Keys));
+            for (int i = 0; i < actual.Count; i++) Assert.That(actual[i], Is.EquivalentTo(expected[i]));
         }
 
-        //new object[] {new Vector3(+0, -1, +0), 5},
-
+        #region cases
         static object[] BinCases = {
             new object[] {"cube", new Dictionary<int, List<Point>>{
                     {0,
@@ -182,32 +181,78 @@ namespace Tests.Registration
                     },
                 }
             },
-            new object[] {"pyramid", new Dictionary<int, List<Point>>{
+            new object[] {"transformedCube", new Dictionary<int, List<Point>>{
                     {0,
                         new List<Point>{
-                            new Point(new Vector3(+1, -1, -1), new Vector3(+0, +0.1644, -0.9864)),
-                            new Point(new Vector3(-1, -1, -1), new Vector3(+0, +0.1644, -0.9864)),
-                            new Point(new Vector3(+0, +5, +0), new Vector3(+0, +0.1644, -0.9864)),
+                            new Point(new Vector3(+6, -2, +3), new Vector3(+0, +0, +1)),
+                            new Point(new Vector3(+6, -4, +3), new Vector3(+0, +0, +1)),
+                            new Point(new Vector3(+4, -2, +3), new Vector3(+0, +0, +1)),
+                            new Point(new Vector3(+4, -4, +3), new Vector3(+0, +0, +1)),
                         }
                     },
                     {1, new List<Point>{
-                            new Point(new Vector3(+1, -1, -1), new Vector3(+0.9864, +0.1644, +0)),
-                            new Point(new Vector3(+1, -1, +1), new Vector3(+0.9864, +0.1644, +0)),
-                            new Point(new Vector3(+0, +5, +0), new Vector3(+0.9864, +0.1644, +0)),
+                            new Point(new Vector3(+6, -2, +3), new Vector3(+1, +0, +0)),
+                            new Point(new Vector3(+6, -2, +1), new Vector3(+1, +0, +0)),
+                            new Point(new Vector3(+6, -4, +3), new Vector3(+1, +0, +0)),
+                            new Point(new Vector3(+6, -4, +1), new Vector3(+1, +0, +0)),
+                        }
+                    },
+                    {2, new List<Point>{
+                            new Point(new Vector3(+6, -2, +3), new Vector3(+0, +1, +0)),
+                            new Point(new Vector3(+6, -2, +1), new Vector3(+0, +1, +0)),
+                            new Point(new Vector3(+4, -2, +3), new Vector3(+0, +1, +0)),
+                            new Point(new Vector3(+4, -2, +1), new Vector3(+0, +1, +0)),
+                        }
+                    },
+                    {3, new List<Point>{
+                            new Point(new Vector3(+4, -2, +3), new Vector3(-1, +0, +0)),
+                            new Point(new Vector3(+4, -2, +1), new Vector3(-1, +0, +0)),
+                            new Point(new Vector3(+4, -4, +3), new Vector3(-1, +0, +0)),
+                            new Point(new Vector3(+4, -4, +1), new Vector3(-1, +0, +0)),
+                        }
+                    },
+                    {4, new List<Point>{
+                            new Point(new Vector3(+6, -2, +1), new Vector3(+0, +0, -1)),
+                            new Point(new Vector3(+6, -4, +1), new Vector3(+0, +0, -1)),
+                            new Point(new Vector3(+4, -2, +1), new Vector3(+0, +0, -1)),
+                            new Point(new Vector3(+4, -4, +1), new Vector3(+0, +0, -1)),
+                        }
+                    },
+                    {5, new List<Point>{
+                            new Point(new Vector3(+6, -4, +3), new Vector3(+0, -1, +0)),
+                            new Point(new Vector3(+6, -4, +1), new Vector3(+0, -1, +0)),
+                            new Point(new Vector3(+4, -4, +3), new Vector3(+0, -1, +0)),
+                            new Point(new Vector3(+4, -4, +1), new Vector3(+0, -1, +0)),
+                        }
+                    },
+                }
+            },
+            new object[] {"pyramid", new Dictionary<int, List<Point>>{
+                    {4,
+                        new List<Point>{
+                            new Point(new Vector3(+1, -1, -1), new Vector3(+0, +0.1644f, -0.9864f)),
+                            new Point(new Vector3(-1, -1, -1), new Vector3(+0, +0.1644f, -0.9864f)),
+                            new Point(new Vector3(+0, +5, +0), new Vector3(+0, +0.1644f, -0.9864f)),
+                        }
+                    },
+                    {1, new List<Point>{
+                            new Point(new Vector3(+1, -1, -1), new Vector3(+0.9864f, +0.1644f, +0)),
+                            new Point(new Vector3(+1, -1, +1), new Vector3(+0.9864f, +0.1644f, +0)),
+                            new Point(new Vector3(+0, +5, +0), new Vector3(+0.9864f, +0.1644f, +0)),
                         }
                     },
                     {2, new List<Point>{}
                     },
                     {3, new List<Point>{
-                            new Point(new Vector3(-1, -1, -1), new Vector3(-0.9864, +0.1644, +0)),
-                            new Point(new Vector3(-1, -1, +1), new Vector3(-0.9864, +0.1644, +0)),
-                            new Point(new Vector3(+0, +5, +0), new Vector3(-0.9864, +0.1644, +0)),
+                            new Point(new Vector3(-1, -1, -1), new Vector3(-0.9864f, +0.1644f, +0)),
+                            new Point(new Vector3(-1, -1, +1), new Vector3(-0.9864f, +0.1644f, +0)),
+                            new Point(new Vector3(+0, +5, +0), new Vector3(-0.9864f, +0.1644f, +0)),
                         }
                     },
-                    {4, new List<Point>{
-                            new Point(new Vector3(+1, -1, +1), new Vector3(+0, +0.1644, +0.9864)),
-                            new Point(new Vector3(-1, -1, +1), new Vector3(+0, +0.1644, +0.9864)),
-                            new Point(new Vector3(+0, +5, +0), new Vector3(+0, +0.1644, +0.9864)),
+                    {0, new List<Point>{
+                            new Point(new Vector3(+1, -1, +1), new Vector3(+0, +0.1644f, +0.9864f)),
+                            new Point(new Vector3(-1, -1, +1), new Vector3(+0, +0.1644f, +0.9864f)),
+                            new Point(new Vector3(+0, +5, +0), new Vector3(+0, +0.1644f, +0.9864f)),
                         }
                     },
                     {5, new List<Point>{
@@ -220,5 +265,6 @@ namespace Tests.Registration
                 }
             },
         };
+        #endregion
     }
 }
