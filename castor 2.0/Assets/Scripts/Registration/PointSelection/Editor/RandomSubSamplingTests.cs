@@ -6,6 +6,8 @@ using Registration;
 using UnityEditor.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
+using Fragment;
+using DoubleConnectedEdgeList;
 
 namespace Tests.Registration
 {
@@ -108,6 +110,8 @@ namespace Tests.Registration
 
             //The 'default' child of a mesh contains the stuff we are interested in
             GameObject gameObject = GameObject.Find(gameObjectName).transform.GetChild(0).gameObject;
+            DoubleConnectedEdgeListStorage dcelStorage = gameObject.GetComponent<DoubleConnectedEdgeListStorage>();
+            dcelStorage.DCEL = DCEL.FromMesh(gameObject.GetComponent<MeshFilter>().sharedMesh);
 
             SamplingInformation samplingInformation = new SamplingInformation(gameObject);
 
@@ -145,6 +149,8 @@ namespace Tests.Registration
 
             //The 'default' child of a mesh contains the stuff we are interested in
             GameObject gameObject = GameObject.Find(gameObjectName).transform.GetChild(0).gameObject;
+            DoubleConnectedEdgeListStorage dcelStorage = gameObject.GetComponent<DoubleConnectedEdgeListStorage>();
+            dcelStorage.DCEL = DCEL.FromMesh(gameObject.GetComponent<MeshFilter>().sharedMesh);
 
             SamplingInformation samplingInformation = new SamplingInformation(gameObject);
 
@@ -177,6 +183,8 @@ namespace Tests.Registration
 
             //The 'default' child of a mesh contains the stuff we are interested in
             GameObject gameObject = GameObject.Find("cube").transform.GetChild(0).gameObject;
+            DoubleConnectedEdgeListStorage dcelStorage = gameObject.GetComponent<DoubleConnectedEdgeListStorage>();
+            dcelStorage.DCEL = DCEL.FromMesh(gameObject.GetComponent<MeshFilter>().sharedMesh);
 
             SamplingInformation samplingInformation = new SamplingInformation(gameObject);
 
