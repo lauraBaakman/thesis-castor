@@ -13,6 +13,11 @@ namespace Registration
     /// </summary>
     public class NormalDistributionOptimizationSubsampling : IPointSampler
     {
+        public NormalDistributionOptimizationSubsampling(SamplingConfiguration configuration)
+        {
+
+        }
+
         public List<Point> Sample(SamplingInformation samplingInfo)
         {
             throw new System.NotImplementedException();
@@ -26,6 +31,7 @@ namespace Registration
     public class NormalBinner
     {
         private readonly UniformPolyhedron polyhedron;
+        private readonly Transform referenceTransform;
 
         private static Dictionary<int, UniformPolyhedron> polyhedra = new Dictionary<int, UniformPolyhedron>
         {
@@ -36,14 +42,52 @@ namespace Registration
             {20, new IsocaHedron()}
         };
 
-        public NormalBinner(int numberOfBins)
+        public NormalBinner(int numberOfBins, Transform referenceTransform)
         {
+            this.referenceTransform = referenceTransform;
             if (!polyhedra.TryGetValue(numberOfBins, out polyhedron)) throw new ArgumentException(string.Format("NormalDistribution Subsampling with {0} is not supported.", numberOfBins));
         }
 
-        public NormalBinner(UniformPolyhedron polyhedron)
+        public NormalBinner(UniformPolyhedron polyhedron, Transform referenceTransform)
         {
+            this.referenceTransform = referenceTransform;
             this.polyhedron = polyhedron;
+        }
+
+        public Dictionary<int, List<Point>> Bin(SamplingInformation config)
+        {
+            Mesh fragment = config.Mesh;
+            Dictionary<int, List<Point>> bins = InitializeBins(fragment.vertexCount);
+
+            Vector3 position, normal;
+            int bin;
+
+            for (int i = 0; i < fragment.vertices.Length; i++)
+            {
+                position = fragment.vertices[i];
+                normal = fragment.normals[i];
+
+                bin = polyhedron.DetermineFaceIdx(normal);
+
+                bins[bin].Add(
+                    new Point(
+                        position: position.ChangeTransformOfPosition(config.Transform, referenceTransform),
+                        normal: normal.ChangeTransformOfDirection(config.Transform, referenceTransform)
+                    )
+                );
+            }
+            return bins;
+        }
+
+        private Dictionary<int, List<Point>> InitializeBins(int numberOfNormals)
+        {
+            Dictionary<int, List<Point>> bins = new Dictionary<int, List<Point>>();
+
+            int approxBinCardinality = numberOfNormals / polyhedron.NumberOfFaces;
+
+            for (int i = 0; i < polyhedron.NumberOfFaces; i++) bins.Add(i, new List<Point>(approxBinCardinality));
+
+            return bins;
         }
 
         /// <summary>
@@ -54,12 +98,17 @@ namespace Registration
         {
             public readonly Vector3[] normals;
 
+            public int NumberOfFaces
+            {
+                get { return normals.Count(); }
+            }
+
             protected UniformPolyhedron(Vector3[][] faces)
             {
                 this.normals = ComputeNormals(faces);
             }
 
-            public virtual int GetNearestNormalIdx(Vector3 normal)
+            public int DetermineFaceIdx(Vector3 normal)
             {
                 return ArgMaxDot(normal, this.normals);
             }
@@ -68,6 +117,8 @@ namespace Registration
             {
                 float dot, maxDot = float.MinValue;
                 int maxIdx = -1;
+
+                normal.Normalize();
 
                 for (int N = normals.Count(), i = 0; i < N; i++)
                 {
