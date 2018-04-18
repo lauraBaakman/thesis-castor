@@ -18,12 +18,11 @@ namespace Registration
         public NormalDistributionOptimizationSubsampling(SamplingConfiguration configuration)
         {
             this.config = configuration;
-            //Give warning if the normal enum is unexpected
         }
 
         public List<Point> Sample(SamplingInformation samplingInfo)
         {
-            throw new System.NotImplementedException();
+            return new List<Point>();
         }
 
         public class SamplingConfiguration : Registration.SamplingConfiguration
