@@ -157,7 +157,7 @@ namespace Tests.Registration
             RandomSubSampling.Configuration config = new RandomSubSampling.Configuration(
                 referenceTransform: gameObject.transform.root,
                 normalProcessing: normalProcessing,
-                percentage: 100
+                percentage: 0
             );
 
             SamplingInformation samplingInfo = new SamplingInformation(gameObject);
