@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEditor.SceneManagement;
-using UnityEditor;
-using UnityEngine.TestTools;
 using NUnit.Framework;
 using Utils;
 
