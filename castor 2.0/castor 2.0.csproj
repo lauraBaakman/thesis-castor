@@ -391,7 +391,7 @@
     <Compile Include="Assets\Scripts\Registration\Point.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\AllPointsSampler.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\IPointSampler.cs" />
-    <Compile Include="Assets\Scripts\Registration\PointSelection\NormalDistrbutionOptimizationSubsampling.cs" />
+    <Compile Include="Assets\Scripts\Registration\PointSelection\NDOSubsampling.cs" />
     <Compile Include="Assets\Scripts\Registration\PointSelection\SamplingInformation.cs" />
     <Compile Include="Assets\Scripts\Registration\Settings.cs" />
     <Compile Include="Assets\Scripts\Registration\Transform Finders\AbstractTransformFinder.cs" />

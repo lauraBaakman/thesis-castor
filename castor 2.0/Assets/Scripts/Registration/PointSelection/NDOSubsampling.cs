@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using NUnit.Framework;
 
 namespace Registration
 {
@@ -22,13 +23,29 @@ namespace Registration
 
         public List<Point> Sample(SamplingInformation samplingInfo)
         {
+            Dictionary<int, List<Point>> bins = new NormalBinner(config.BinCount, config.referenceTransform).Bin(samplingInfo);
+
+            List<Point> sample = new List<Point>(ApproximateSampleSize(samplingInfo.Mesh.vertexCount));
+
+            foreach (List<Point> bin in bins.Values) SampleBin(bin, out sample);
+
             return new List<Point>();
+        }
+
+        private List<Point> SampleBin(List<Point> bin)
+        {
+            throw new NotSupportedException("Implement a SubSampler first, use that here");
+        }
+
+        private int ApproximateSampleSize(int numElements)
+        {
+            return (int)Math.Round(numElements * config.Probability);
         }
 
         public class Configuration : Registration.SamplingConfiguration
         {
             /// <summary>
-            /// The percentage of the points that should be kept.
+            /// The percentage of the points that should be kept, percentage in [0, 100].
             /// </summary>
             private float percentage;
             public float Percentage
@@ -38,7 +55,17 @@ namespace Registration
                 {
                     ValidatePercentage(value);
                     this.percentage = value;
+                    this.probability = 1.0f / percentage;
                 }
+            }
+
+            private float probability;
+            /// <summary>
+            /// 1.0 / percentage, probability in [0, 1].
+            /// </summary>
+            public float Probability
+            {
+                get { return probability; }
             }
 
             private int binCount;

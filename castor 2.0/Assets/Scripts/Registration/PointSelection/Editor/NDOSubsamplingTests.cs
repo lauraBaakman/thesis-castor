@@ -367,6 +367,33 @@ namespace Tests.Registration
                 }
             );
         }
+
+        [TestCase(0, 0)]
+        [TestCase(20, 0.2f)]
+        [TestCase(50, 0.5f)]
+        [TestCase(45.5, 0.02197802198f)]
+        [TestCase(100, 1)]
+        public void ValidProbability_WithConstructor(float percentage, float expected)
+        {
+            NDOSubsampling.Configuration config = new NDOSubsampling.Configuration(validTransform, percentage, validBinCount);
+
+            float actual = config.Probability;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(0, 0)]
+        [TestCase(20, 0.2f)]
+        [TestCase(50, 0.5f)]
+        [TestCase(45.5, 0.02197802198f)]
+        [TestCase(100, 1)]
+        public void ValidProbability_WithSetter(float percentage, float expected)
+        {
+            NDOSubsampling.Configuration config = new NDOSubsampling.Configuration(validTransform, validPercentage, validBinCount);
+            config.Percentage = percentage;
+
+            float actual = config.Probability;
+            Assert.AreEqual(expected, actual);
+        }
     }
 
     [TestFixture]
