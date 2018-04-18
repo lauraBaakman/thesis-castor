@@ -274,6 +274,10 @@ namespace Tests.Registration
     [TestFixture]
     public class SamplingConfigurationTests
     {
+        private static float validPercentage = 50.0f;
+        private static int validBinCount = 6;
+        private static Transform validTransform = null;
+
         [TestCase(-005f)]
         [TestCase(+200f)]
         public void SetInvalidPercentage(float percentage)
@@ -282,11 +286,11 @@ namespace Tests.Registration
                 typeof(ArgumentException),
                 delegate
                 {
-                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(null, percentage);
+                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, percentage, validBinCount);
                 }
             );
 
-            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(null, 10);
+            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, 10, validBinCount);
             Assert.Throws(
                 typeof(ArgumentException),
                 delegate
@@ -296,24 +300,204 @@ namespace Tests.Registration
             );
         }
 
-        [TestCase(+05f)]
-        [TestCase(+20f)]
+        [TestCase(0)]
+        [TestCase(5)]
+        [TestCase(20)]
+        [TestCase(100)]
         public void SetValidPercentage(float percentage)
         {
             Assert.DoesNotThrow(
                 delegate
                 {
-                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(null, percentage);
+                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, percentage, validBinCount);
                 }
             );
 
-            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(null, 10);
+            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, 10, validBinCount);
             Assert.DoesNotThrow(
                 delegate
                 {
                     x.Percentage = percentage;
                 }
             );
+        }
+
+        [TestCase(0)]
+        [TestCase(200)]
+        [TestCase(3)]
+        public void SetInvalidBinCount(int binCount)
+        {
+            Assert.Throws(
+                typeof(ArgumentException),
+                delegate
+                {
+                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, validPercentage, binCount);
+                }
+            );
+
+            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, validPercentage, validBinCount);
+            Assert.Throws(
+                typeof(ArgumentException),
+                delegate
+                {
+                    x.BinCount = binCount;
+                }
+            );
+        }
+
+        [TestCase(4)]
+        [TestCase(6)]
+        [TestCase(8)]
+        [TestCase(12)]
+        [TestCase(20)]
+        public void SetValidBinCount(int binCount)
+        {
+            Assert.DoesNotThrow(
+                delegate
+                {
+                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(null, 10, binCount);
+                }
+            );
+
+            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, validPercentage, validBinCount);
+            Assert.DoesNotThrow(
+                delegate
+                {
+                    x.BinCount = binCount;
+                }
+            );
+        }
+    }
+
+    [TestFixture]
+    public class NormalDistributionOptimizationSubsamplingTests
+    {
+        private static string sceneName = "Assets/Scenes/TestSceneNormalBinner.unity";
+
+        [TestCase("cube")]
+        [TestCase("pyramid")]
+        [TestCase("translatedCube")]
+        public void TestSample_100(string gameObjectName)
+        {
+            EditorSceneManager.OpenScene(sceneName);
+
+            //The 'default' child of a mesh contains the stuff we are interested in
+            GameObject gameObject = GameObject.Find(gameObjectName).transform.GetChild(0).gameObject;
+
+            SamplingInformation samplingInformation = new SamplingInformation(gameObject);
+
+            NormalDistributionOptimizationSubsampling.SamplingConfiguration ndosConfig = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(
+                referenceTransform: gameObject.transform.root,
+                percentage: 100,
+                binCount: 6
+            );
+
+            AllPointsSampler.SamplingConfiguration allPointsConfig = new AllPointsSampler.SamplingConfiguration(
+                referenceTransform: gameObject.transform.root,
+                normalProcessing: AllPointsSampler.SamplingConfiguration.NormalProcessing.VertexNormals
+            );
+
+            SamplingInformation samplingInfo = new SamplingInformation(gameObject);
+
+            List<Point> expected = new AllPointsSampler(allPointsConfig).Sample(samplingInfo);
+            List<Point> actual = new NormalDistributionOptimizationSubsampling(ndosConfig).Sample(samplingInfo);
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+
+        [TestCase("cube")]
+        [TestCase("pyramid")]
+        [TestCase("translatedCube")]
+        public void TestSample_0(string gameObjectName)
+        {
+            EditorSceneManager.OpenScene(sceneName);
+
+            //The 'default' child of a mesh contains the stuff we are interested in
+            GameObject gameObject = GameObject.Find(gameObjectName).transform.GetChild(0).gameObject;
+
+            SamplingInformation samplingInformation = new SamplingInformation(gameObject);
+
+            NormalDistributionOptimizationSubsampling.SamplingConfiguration ndosConfig = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(
+                referenceTransform: gameObject.transform.root,
+                percentage: 100,
+                binCount: 6
+            );
+
+            SamplingInformation samplingInfo = new SamplingInformation(gameObject);
+
+            List<Point> expected = new List<Point>();
+            List<Point> actual = new NormalDistributionOptimizationSubsampling(ndosConfig).Sample(samplingInfo);
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+
+        [Test]
+        public void TestSample_Cube_50()
+        {
+            EditorSceneManager.OpenScene(sceneName);
+
+            //The 'default' child of a mesh contains the stuff we are interested in
+            GameObject gameObject = GameObject.Find("cube").transform.GetChild(0).gameObject;
+
+            SamplingInformation samplingInformation = new SamplingInformation(gameObject);
+
+            NormalDistributionOptimizationSubsampling.SamplingConfiguration ndosConfig = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(
+                referenceTransform: gameObject.transform.root,
+                percentage: 50,
+                binCount: 6
+            );
+
+            SamplingInformation samplingInfo = new SamplingInformation(gameObject);
+
+            List<Point> actual = new NormalDistributionOptimizationSubsampling(ndosConfig).Sample(samplingInfo);
+
+
+            NormalBinner binner = new NormalBinner(ndosConfig.BinCount, ndosConfig.referenceTransform);
+            Dictionary<int, List<Point>> bins = binner.Bin(samplingInformation);
+
+            for (int i = 0; i < bins.Count; i++)
+            {
+                Assert.That(CountPointsSampledFromBin(actual, bins[i]), Is.EqualTo(2));
+            }
+        }
+
+        [Test]
+        public void TestSample_Pyramid_45(string gameObjectName, int expectedSampledBinSize)
+        {
+            EditorSceneManager.OpenScene(sceneName);
+
+            //The 'default' child of a mesh contains the stuff we are interested in
+            GameObject gameObject = GameObject.Find(gameObjectName).transform.GetChild(0).gameObject;
+
+            SamplingInformation samplingInformation = new SamplingInformation(gameObject);
+
+            NormalDistributionOptimizationSubsampling.SamplingConfiguration ndosConfig = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(
+                referenceTransform: gameObject.transform.root,
+                percentage: 0.45f,
+                binCount: 6
+            );
+
+            SamplingInformation samplingInfo = new SamplingInformation(gameObject);
+
+            List<Point> actual = new NormalDistributionOptimizationSubsampling(ndosConfig).Sample(samplingInfo);
+
+
+            NormalBinner binner = new NormalBinner(ndosConfig.BinCount, ndosConfig.referenceTransform);
+            Dictionary<int, List<Point>> bins = binner.Bin(samplingInformation);
+
+            Assert.That(CountPointsSampledFromBin(actual, bins[0]), Is.EqualTo(1));
+            Assert.That(CountPointsSampledFromBin(actual, bins[1]), Is.EqualTo(1));
+            Assert.That(CountPointsSampledFromBin(actual, bins[2]), Is.EqualTo(0));
+            Assert.That(CountPointsSampledFromBin(actual, bins[3]), Is.EqualTo(1));
+            Assert.That(CountPointsSampledFromBin(actual, bins[4]), Is.EqualTo(1));
+            Assert.That(CountPointsSampledFromBin(actual, bins[5]), Is.EqualTo(2));
+        }
+
+        private int CountPointsSampledFromBin(List<Point> actual, List<Point> bin)
+        {
+            int count = 0;
+            foreach (Point point in bin) count += actual.Contains(point) ? 1 : 0;
+            return count;
         }
     }
 }

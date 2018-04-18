@@ -42,15 +42,34 @@ namespace Registration
                 }
             }
 
-            public SamplingConfiguration(Transform referenceTransform, float percentage)
+            private int binCount;
+            public int BinCount
+            {
+                get { return binCount; }
+                set
+                {
+                    ValidateBinCount(value);
+                    this.binCount = value;
+                }
+            }
+
+            public SamplingConfiguration(Transform referenceTransform, float percentage, int binCount)
                 : base(referenceTransform)
             {
                 this.Percentage = percentage;
+                this.BinCount = binCount;
             }
 
             private void ValidatePercentage(float value)
             {
-                if (value < 0 || value > 100) throw new ArgumentException("Percentages outside of the range [0, 100] are not accepted.");
+                if (value < 0 || value > 100)
+                    throw new ArgumentException("Percentages outside of the range [0, 100] are not accepted.");
+            }
+
+            private void ValidateBinCount(int count)
+            {
+                if (!NormalBinner.ValidBinCounts.Contains(count))
+                    throw new ArgumentException(string.Format("Subsampling with {0} bins is not supported.", count));
             }
         }
     }
@@ -63,6 +82,11 @@ namespace Registration
     {
         private readonly UniformPolyhedron polyhedron;
         private readonly Transform referenceTransform;
+
+        public static List<int> ValidBinCounts
+        {
+            get { return polyhedra.Keys.ToList<int>(); }
+        }
 
         private static Dictionary<int, UniformPolyhedron> polyhedra = new Dictionary<int, UniformPolyhedron>
         {
