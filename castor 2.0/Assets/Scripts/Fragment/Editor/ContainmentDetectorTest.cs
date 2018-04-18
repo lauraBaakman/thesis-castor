@@ -7,7 +7,7 @@ using Utils;
 
 public class ContainmentDetectorTest
 {
-    private static string sceneName = "Assets/Scenes/ContainmentDetectorTestScene.unity";
+    private static string sceneName = "Assets/Scenes/TestSceneContainmentDetector.unity";
     private static string demispherename = "hollowdemisphere";
 
     [Test]
