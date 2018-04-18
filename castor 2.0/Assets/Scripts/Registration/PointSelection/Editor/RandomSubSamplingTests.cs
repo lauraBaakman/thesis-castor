@@ -10,7 +10,7 @@ using System.Linq;
 namespace Tests.Registration
 {
     [TestFixture]
-    public class ConfigurationTests
+    public class RandomSubSamplingConfigurationTests
     {
         private static Transform validTransform = null;
         private static float validPercentage = 50.0f;
@@ -51,7 +51,7 @@ namespace Tests.Registration
                 }
             );
 
-            RandomSubSampling.Configuration x = new RandomSubSampling.Configuration(validTransform, percentage);
+            RandomSubSampling.Configuration x = new RandomSubSampling.Configuration(validTransform, validNormalProcessing, percentage);
             Assert.DoesNotThrow(
                 delegate
                 {
@@ -93,10 +93,16 @@ namespace Tests.Registration
     {
         private static string sceneName = "Assets/Scenes/TestSceneNormalBinner.unity";
 
-        [TestCase("cube")]
-        [TestCase("pyramid")]
-        [TestCase("transformedCube")]
-        public void TestSample_100(string gameObjectName)
+        [TestCase("cube", AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
+        [TestCase("pyramid", AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
+        [TestCase("transformedCube", AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
+        [TestCase("cube", AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
+        [TestCase("pyramid", AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
+        [TestCase("transformedCube", AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
+        [TestCase("cube", AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
+        [TestCase("pyramid", AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
+        [TestCase("transformedCube", AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
+        public void TestSample_100(string gameObjectName, AllPointsSampler.Configuration.NormalProcessing normalProcessing)
         {
             EditorSceneManager.OpenScene(sceneName);
 
@@ -107,6 +113,7 @@ namespace Tests.Registration
 
             RandomSubSampling.Configuration randomConfig = new RandomSubSampling.Configuration(
                 referenceTransform: gameObject.transform.root,
+                normalProcessing: normalProcessing,
                 percentage: 100
             );
 
@@ -123,10 +130,16 @@ namespace Tests.Registration
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
-        [TestCase("cube")]
-        [TestCase("pyramid")]
-        [TestCase("transformedCube")]
-        public void TestSample_0(string gameObjectName)
+        [TestCase("cube", AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
+        [TestCase("pyramid", AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
+        [TestCase("transformedCube", AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
+        [TestCase("cube", AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
+        [TestCase("pyramid", AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
+        [TestCase("transformedCube", AllPointsSampler.Configuration.NormalProcessing.NoNormals)]
+        [TestCase("cube", AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
+        [TestCase("pyramid", AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
+        [TestCase("transformedCube", AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals)]
+        public void TestSample_0(string gameObjectName, AllPointsSampler.Configuration.NormalProcessing normalProcessing)
         {
             EditorSceneManager.OpenScene(sceneName);
 
@@ -137,6 +150,7 @@ namespace Tests.Registration
 
             RandomSubSampling.Configuration config = new RandomSubSampling.Configuration(
                 referenceTransform: gameObject.transform.root,
+                normalProcessing: normalProcessing,
                 percentage: 100
             );
 

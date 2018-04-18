@@ -272,7 +272,7 @@ namespace Tests.Registration
     }
 
     [TestFixture]
-    public class SamplingConfigurationTests
+    public class NDOSubSamplingConfigurationTests
     {
         private static float validPercentage = 50.0f;
         private static int validBinCount = 6;
