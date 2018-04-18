@@ -240,7 +240,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestTriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector4D.cs" />
-    <Compile Include="Assets\Scripts\Registration\PointSelection\Editor\NormalDistributionOptimizationSubsamplingTests.cs" />
+    <Compile Include="Assets\Scripts\Registration\PointSelection\Editor\NDOSubsamplingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

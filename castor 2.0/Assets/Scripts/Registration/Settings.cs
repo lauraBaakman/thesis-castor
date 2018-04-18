@@ -87,9 +87,9 @@ namespace Registration
             MaxNumIterations = maxNumIterations;
 
             PointSampler = new AllPointsSampler(
-                new AllPointsSampler.SamplingConfiguration(
+                new AllPointsSampler.Configuration(
                     referenceTransform,
-                    AllPointsSampler.SamplingConfiguration.NormalProcessing.AreaWeightedSmoothNormals
+                    AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals
                 )
             );
 

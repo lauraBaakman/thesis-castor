@@ -11,11 +11,11 @@ namespace Registration
     /// Digital Imaging and Modeling, 2001. Proceedings. Third International
     /// Conference on (pp. 145-152). IEEE..
     /// </summary>
-    public class NormalDistributionOptimizationSubsampling : IPointSampler
+    public class NDOSubsampling : IPointSampler
     {
-        SamplingConfiguration config;
+        Configuration config;
 
-        public NormalDistributionOptimizationSubsampling(SamplingConfiguration configuration)
+        public NDOSubsampling(Configuration configuration)
         {
             this.config = configuration;
         }
@@ -25,7 +25,7 @@ namespace Registration
             return new List<Point>();
         }
 
-        public class SamplingConfiguration : Registration.SamplingConfiguration
+        public class Configuration : Registration.SamplingConfiguration
         {
             /// <summary>
             /// The percentage of the points that should be kept.
@@ -52,7 +52,7 @@ namespace Registration
                 }
             }
 
-            public SamplingConfiguration(Transform referenceTransform, float percentage, int binCount)
+            public Configuration(Transform referenceTransform, float percentage, int binCount)
                 : base(referenceTransform)
             {
                 this.Percentage = percentage;

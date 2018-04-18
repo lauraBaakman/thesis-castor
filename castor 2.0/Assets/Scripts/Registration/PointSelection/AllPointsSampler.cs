@@ -24,22 +24,22 @@ namespace Registration
         /// </summary>
         private SamplingFunction samplingFunction;
 
-        public AllPointsSampler(SamplingConfiguration configuration)
+        public AllPointsSampler(Configuration configuration)
         {
             ReferenceTransform = configuration.referenceTransform;
 
             samplingFunction = SelectSamplingFunction(configuration.normalProcessing);
         }
 
-        private SamplingFunction SelectSamplingFunction(SamplingConfiguration.NormalProcessing normalProcessing)
+        private SamplingFunction SelectSamplingFunction(Configuration.NormalProcessing normalProcessing)
         {
             switch (normalProcessing)
             {
-                case SamplingConfiguration.NormalProcessing.NoNormals:
+                case Configuration.NormalProcessing.NoNormals:
                     return NoNormals;
-                case SamplingConfiguration.NormalProcessing.VertexNormals:
+                case Configuration.NormalProcessing.VertexNormals:
                     return VertexNormals;
-                case SamplingConfiguration.NormalProcessing.AreaWeightedSmoothNormals:
+                case Configuration.NormalProcessing.AreaWeightedSmoothNormals:
                     return SmoothNormals;
                 default:
                     throw new ArgumentException();
@@ -114,13 +114,13 @@ namespace Registration
             return points;
         }
 
-        public class SamplingConfiguration : Registration.SamplingConfiguration
+        public class Configuration : Registration.SamplingConfiguration
         {
             public enum NormalProcessing { NoNormals, VertexNormals, AreaWeightedSmoothNormals };
 
             public readonly NormalProcessing normalProcessing;
 
-            public SamplingConfiguration(Transform referenceTransform, NormalProcessing normalProcessing)
+            public Configuration(Transform referenceTransform, NormalProcessing normalProcessing)
                 : base(referenceTransform)
             {
                 this.normalProcessing = normalProcessing;

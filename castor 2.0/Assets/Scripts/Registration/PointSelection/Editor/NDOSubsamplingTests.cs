@@ -286,11 +286,11 @@ namespace Tests.Registration
                 typeof(ArgumentException),
                 delegate
                 {
-                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, percentage, validBinCount);
+                    new NDOSubsampling.Configuration(validTransform, percentage, validBinCount);
                 }
             );
 
-            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, 10, validBinCount);
+            NDOSubsampling.Configuration x = new NDOSubsampling.Configuration(validTransform, 10, validBinCount);
             Assert.Throws(
                 typeof(ArgumentException),
                 delegate
@@ -309,11 +309,11 @@ namespace Tests.Registration
             Assert.DoesNotThrow(
                 delegate
                 {
-                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, percentage, validBinCount);
+                    new NDOSubsampling.Configuration(validTransform, percentage, validBinCount);
                 }
             );
 
-            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, 10, validBinCount);
+            NDOSubsampling.Configuration x = new NDOSubsampling.Configuration(validTransform, 10, validBinCount);
             Assert.DoesNotThrow(
                 delegate
                 {
@@ -331,11 +331,11 @@ namespace Tests.Registration
                 typeof(ArgumentException),
                 delegate
                 {
-                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, validPercentage, binCount);
+                    new NDOSubsampling.Configuration(validTransform, validPercentage, binCount);
                 }
             );
 
-            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, validPercentage, validBinCount);
+            NDOSubsampling.Configuration x = new NDOSubsampling.Configuration(validTransform, validPercentage, validBinCount);
             Assert.Throws(
                 typeof(ArgumentException),
                 delegate
@@ -355,11 +355,11 @@ namespace Tests.Registration
             Assert.DoesNotThrow(
                 delegate
                 {
-                    new NormalDistributionOptimizationSubsampling.SamplingConfiguration(null, 10, binCount);
+                    new NDOSubsampling.Configuration(null, 10, binCount);
                 }
             );
 
-            NormalDistributionOptimizationSubsampling.SamplingConfiguration x = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(validTransform, validPercentage, validBinCount);
+            NDOSubsampling.Configuration x = new NDOSubsampling.Configuration(validTransform, validPercentage, validBinCount);
             Assert.DoesNotThrow(
                 delegate
                 {
@@ -370,7 +370,7 @@ namespace Tests.Registration
     }
 
     [TestFixture]
-    public class NormalDistributionOptimizationSubsamplingTests
+    public class NDOSubsamplingTests
     {
         private static string sceneName = "Assets/Scenes/TestSceneNormalBinner.unity";
 
@@ -386,21 +386,21 @@ namespace Tests.Registration
 
             SamplingInformation samplingInformation = new SamplingInformation(gameObject);
 
-            NormalDistributionOptimizationSubsampling.SamplingConfiguration ndosConfig = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(
+            NDOSubsampling.Configuration ndosConfig = new NDOSubsampling.Configuration(
                 referenceTransform: gameObject.transform.root,
                 percentage: 100,
                 binCount: 6
             );
 
-            AllPointsSampler.SamplingConfiguration allPointsConfig = new AllPointsSampler.SamplingConfiguration(
+            AllPointsSampler.Configuration allPointsConfig = new AllPointsSampler.Configuration(
                 referenceTransform: gameObject.transform.root,
-                normalProcessing: AllPointsSampler.SamplingConfiguration.NormalProcessing.VertexNormals
+                normalProcessing: AllPointsSampler.Configuration.NormalProcessing.VertexNormals
             );
 
             SamplingInformation samplingInfo = new SamplingInformation(gameObject);
 
             List<Point> expected = new AllPointsSampler(allPointsConfig).Sample(samplingInfo);
-            List<Point> actual = new NormalDistributionOptimizationSubsampling(ndosConfig).Sample(samplingInfo);
+            List<Point> actual = new NDOSubsampling(ndosConfig).Sample(samplingInfo);
 
             Assert.That(actual, Is.EquivalentTo(expected));
         }
@@ -417,7 +417,7 @@ namespace Tests.Registration
 
             SamplingInformation samplingInformation = new SamplingInformation(gameObject);
 
-            NormalDistributionOptimizationSubsampling.SamplingConfiguration ndosConfig = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(
+            NDOSubsampling.Configuration ndosConfig = new NDOSubsampling.Configuration(
                 referenceTransform: gameObject.transform.root,
                 percentage: 100,
                 binCount: 6
@@ -426,7 +426,7 @@ namespace Tests.Registration
             SamplingInformation samplingInfo = new SamplingInformation(gameObject);
 
             List<Point> expected = new List<Point>();
-            List<Point> actual = new NormalDistributionOptimizationSubsampling(ndosConfig).Sample(samplingInfo);
+            List<Point> actual = new NDOSubsampling(ndosConfig).Sample(samplingInfo);
 
             Assert.That(actual, Is.EquivalentTo(expected));
         }
@@ -441,7 +441,7 @@ namespace Tests.Registration
 
             SamplingInformation samplingInformation = new SamplingInformation(gameObject);
 
-            NormalDistributionOptimizationSubsampling.SamplingConfiguration ndosConfig = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(
+            NDOSubsampling.Configuration ndosConfig = new NDOSubsampling.Configuration(
                 referenceTransform: gameObject.transform.root,
                 percentage: 50,
                 binCount: 6
@@ -449,7 +449,7 @@ namespace Tests.Registration
 
             SamplingInformation samplingInfo = new SamplingInformation(gameObject);
 
-            List<Point> actual = new NormalDistributionOptimizationSubsampling(ndosConfig).Sample(samplingInfo);
+            List<Point> actual = new NDOSubsampling(ndosConfig).Sample(samplingInfo);
 
 
             NormalBinner binner = new NormalBinner(ndosConfig.BinCount, ndosConfig.referenceTransform);
@@ -471,7 +471,7 @@ namespace Tests.Registration
 
             SamplingInformation samplingInformation = new SamplingInformation(gameObject);
 
-            NormalDistributionOptimizationSubsampling.SamplingConfiguration ndosConfig = new NormalDistributionOptimizationSubsampling.SamplingConfiguration(
+            NDOSubsampling.Configuration ndosConfig = new NDOSubsampling.Configuration(
                 referenceTransform: gameObject.transform.root,
                 percentage: 0.45f,
                 binCount: 6
@@ -479,7 +479,7 @@ namespace Tests.Registration
 
             SamplingInformation samplingInfo = new SamplingInformation(gameObject);
 
-            List<Point> actual = new NormalDistributionOptimizationSubsampling(ndosConfig).Sample(samplingInfo);
+            List<Point> actual = new NDOSubsampling(ndosConfig).Sample(samplingInfo);
 
 
             NormalBinner binner = new NormalBinner(ndosConfig.BinCount, ndosConfig.referenceTransform);
