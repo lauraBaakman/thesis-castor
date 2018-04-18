@@ -23,18 +23,9 @@ namespace Registration
 
         public List<Point> Sample(SamplingInformation samplingInfo)
         {
-            Dictionary<int, List<Point>> bins = new NormalBinner(config.BinCount, config.referenceTransform).Bin(samplingInfo);
-
             List<Point> sample = new List<Point>(ApproximateSampleSize(samplingInfo.Mesh.vertexCount));
 
-            foreach (List<Point> bin in bins.Values) SampleBin(bin, out sample);
-
-            return new List<Point>();
-        }
-
-        private List<Point> SampleBin(List<Point> bin)
-        {
-            throw new NotSupportedException("Implement a SubSampler first, use that here");
+            return sample;
         }
 
         private int ApproximateSampleSize(int numElements)
