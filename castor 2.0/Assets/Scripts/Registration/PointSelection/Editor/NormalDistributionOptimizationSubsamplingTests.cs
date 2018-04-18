@@ -231,11 +231,10 @@ namespace Tests.Registration
                 }
             },
             new object[] {"pyramid", new Dictionary<int, List<Point>>{
-                    {4,
-                        new List<Point>{
-                            new Point(new Vector3(+1, -1, -1), new Vector3(+0, +0.1644f, -0.9864f)),
-                            new Point(new Vector3(-1, -1, -1), new Vector3(+0, +0.1644f, -0.9864f)),
-                            new Point(new Vector3(+0, +5, +0), new Vector3(+0, +0.1644f, -0.9864f)),
+                    {0, new List<Point>{
+                            new Point(new Vector3(+1, -1, +1), new Vector3(+0, +0.1644f, +0.9864f)),
+                            new Point(new Vector3(-1, -1, +1), new Vector3(+0, +0.1644f, +0.9864f)),
+                            new Point(new Vector3(+0, +5, +0), new Vector3(+0, +0.1644f, +0.9864f)),
                         }
                     },
                     {1, new List<Point>{
@@ -252,10 +251,11 @@ namespace Tests.Registration
                             new Point(new Vector3(+0, +5, +0), new Vector3(-0.9864f, +0.1644f, +0)),
                         }
                     },
-                    {0, new List<Point>{
-                            new Point(new Vector3(+1, -1, +1), new Vector3(+0, +0.1644f, +0.9864f)),
-                            new Point(new Vector3(-1, -1, +1), new Vector3(+0, +0.1644f, +0.9864f)),
-                            new Point(new Vector3(+0, +5, +0), new Vector3(+0, +0.1644f, +0.9864f)),
+                    {4,
+                        new List<Point>{
+                            new Point(new Vector3(+1, -1, -1), new Vector3(+0, +0.1644f, -0.9864f)),
+                            new Point(new Vector3(-1, -1, -1), new Vector3(+0, +0.1644f, -0.9864f)),
+                            new Point(new Vector3(+0, +5, +0), new Vector3(+0, +0.1644f, -0.9864f)),
                         }
                     },
                     {5, new List<Point>{
