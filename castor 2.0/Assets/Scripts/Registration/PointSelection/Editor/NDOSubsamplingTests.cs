@@ -376,7 +376,7 @@ namespace Tests.Registration
 
         [TestCase("cube")]
         [TestCase("pyramid")]
-        [TestCase("translatedCube")]
+        [TestCase("transformedCube")]
         public void TestSample_100(string gameObjectName)
         {
             EditorSceneManager.OpenScene(sceneName);
@@ -407,7 +407,7 @@ namespace Tests.Registration
 
         [TestCase("cube")]
         [TestCase("pyramid")]
-        [TestCase("translatedCube")]
+        [TestCase("transformedCube")]
         public void TestSample_0(string gameObjectName)
         {
             EditorSceneManager.OpenScene(sceneName);
