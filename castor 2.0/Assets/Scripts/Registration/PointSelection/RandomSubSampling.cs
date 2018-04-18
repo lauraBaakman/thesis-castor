@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace Registration
 {
@@ -16,18 +17,33 @@ namespace Registration
         public List<Point> Sample(SamplingInformation samplingInfo)
         {
             List<Point> points = new AllPointsSampler(new AllPointsSampler.Configuration(this.config)).Sample(samplingInfo);
-
-            List<Point> sample = new List<Point>(ApproximateSampleSize(points.Count));
-
-            //TODO Implement
-
-
-            return sample;
+            return Sample(points);
         }
 
-        private int ApproximateSampleSize(int numElements)
+        public List<Point> Sample(List<Point> points)
         {
-            return (int)Math.Round(numElements * config.Probability);
+            Point[] shuffeledPoints = points.ToArray();
+            Double[] order = BuildOrderArray(points.Count);
+
+            Array.Sort(order, shuffeledPoints);
+
+            int sampleSize = ComputeSampleSize(points.Count);
+
+            return new List<Point>(shuffeledPoints).Take(sampleSize).ToList();
+        }
+
+        private Double[] BuildOrderArray(int size)
+        {
+            Double[] order = new Double[size];
+            System.Random random = new System.Random();
+            for (int i = 0; i < order.Length; i++) order[i] = random.NextDouble();
+
+            return order;
+        }
+
+        private int ComputeSampleSize(int numElements)
+        {
+            return (int)Mathf.Round(numElements * config.Probability);
         }
 
         public class Configuration : Registration.SamplingConfiguration
