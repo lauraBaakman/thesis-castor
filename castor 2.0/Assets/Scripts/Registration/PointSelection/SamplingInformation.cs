@@ -14,22 +14,22 @@ namespace Registration
         public SamplingInformation(GameObject gameObject)
             : this(
                 transform: gameObject.transform,
-                mesh: gameObject.GetComponent<MeshFilter>().mesh,
+                meshFilter: gameObject.GetComponent<MeshFilter>(),
                 collider: gameObject.GetComponent<Collider>(),
-                dcel: gameObject.GetComponent<DoubleConnectedEdgeListStorage>().DCEL
+                dcelStorage: gameObject.GetComponent<DoubleConnectedEdgeListStorage>()
             )
         { }
 
-        private SamplingInformation(Transform transform, Mesh mesh, Collider collider, DCEL dcel)
+        private SamplingInformation(Transform transform, MeshFilter meshFilter, Collider collider, DoubleConnectedEdgeListStorage dcelStorage)
         {
-            if (mesh == null) throw new System.ArgumentNullException("mesh");
+            if (meshFilter == null) throw new System.ArgumentNullException("mesh filter");
             if (collider == null) throw new System.ArgumentNullException("collider");
-            if (dcel == null) throw new System.ArgumentNullException("dcel");
+            if (dcelStorage == null) throw new System.ArgumentNullException("dcel storage");
 
             this.Transform = transform;
-            this.Mesh = mesh;
+            this.Mesh = Application.isEditor ? meshFilter.sharedMesh : meshFilter.mesh;
             this.Collider = collider;
-            this.DCEL = dcel;
+            this.DCEL = dcelStorage.DCEL;
         }
     }
 
