@@ -33,32 +33,8 @@ namespace Registration
             return (int)Math.Round(numElements * config.Probability);
         }
 
-        public class Configuration : Registration.SamplingConfiguration
+        public class Configuration : RandomSubSampling.Configuration
         {
-            /// <summary>
-            /// The percentage of the points that should be kept, percentage in [0, 100].
-            /// </summary>
-            private float percentage;
-            public float Percentage
-            {
-                get { return percentage; }
-                set
-                {
-                    ValidatePercentage(value);
-                    this.percentage = value;
-                    this.probability = 1.0f / percentage;
-                }
-            }
-
-            private float probability;
-            /// <summary>
-            /// 1.0 / percentage, probability in [0, 1].
-            /// </summary>
-            public float Probability
-            {
-                get { return probability; }
-            }
-
             private int binCount;
             public int BinCount
             {
@@ -71,16 +47,9 @@ namespace Registration
             }
 
             public Configuration(Transform referenceTransform, float percentage, int binCount)
-                : base(referenceTransform)
+                : base(referenceTransform, AllPointsSampler.Configuration.NormalProcessing.VertexNormals, percentage)
             {
-                this.Percentage = percentage;
                 this.BinCount = binCount;
-            }
-
-            private void ValidatePercentage(float value)
-            {
-                if (value < 0 || value > 100)
-                    throw new ArgumentException("Percentages outside of the range [0, 100] are not accepted.");
             }
 
             private void ValidateBinCount(int count)

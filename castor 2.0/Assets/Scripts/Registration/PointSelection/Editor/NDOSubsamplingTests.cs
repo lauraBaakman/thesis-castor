@@ -280,22 +280,25 @@ namespace Tests.Registration
 
         [TestCase(-005f)]
         [TestCase(+200f)]
-        public void SetInvalidPercentage(float percentage)
+        public void SetInvalidPercentageConstructor(float percentage)
         {
-            Assert.Throws(
-                typeof(ArgumentException),
+            Assert.Throws<ArgumentException>(
                 delegate
                 {
-                    new NDOSubsampling.Configuration(validTransform, percentage, validBinCount);
+                    NDOSubsampling.Configuration y = new NDOSubsampling.Configuration(validTransform, percentage, validBinCount);
                 }
             );
+        }
 
-            NDOSubsampling.Configuration x = new NDOSubsampling.Configuration(validTransform, 10, validBinCount);
-            Assert.Throws(
-                typeof(ArgumentException),
+        [TestCase(-005f)]
+        [TestCase(+200f)]
+        public void SetInvalidPercentageSetter(float percentage)
+        {
+            NDOSubsampling.Configuration config = new NDOSubsampling.Configuration(validTransform, validPercentage, validBinCount);
+            Assert.Throws<ArgumentException>(
                 delegate
                 {
-                    x.Percentage = percentage;
+                    config.Percentage = percentage;
                 }
             );
         }
@@ -304,20 +307,27 @@ namespace Tests.Registration
         [TestCase(5)]
         [TestCase(20)]
         [TestCase(100)]
-        public void SetValidPercentage(float percentage)
+        public void SetValidPercentageConstructor(float percentage)
         {
             Assert.DoesNotThrow(
                 delegate
                 {
-                    new NDOSubsampling.Configuration(validTransform, percentage, validBinCount);
+                    NDOSubsampling.Configuration config = new NDOSubsampling.Configuration(validTransform, percentage, validBinCount);
                 }
             );
+        }
 
-            NDOSubsampling.Configuration x = new NDOSubsampling.Configuration(validTransform, 10, validBinCount);
+        [TestCase(0)]
+        [TestCase(5)]
+        [TestCase(20)]
+        [TestCase(100)]
+        public void SetValidPercentageSetter(float percentage)
+        {
+            NDOSubsampling.Configuration config = new NDOSubsampling.Configuration(validTransform, validPercentage, validBinCount);
             Assert.DoesNotThrow(
                 delegate
                 {
-                    x.Percentage = percentage;
+                    config.Percentage = percentage;
                 }
             );
         }
@@ -325,22 +335,28 @@ namespace Tests.Registration
         [TestCase(0)]
         [TestCase(200)]
         [TestCase(3)]
-        public void SetInvalidBinCount(int binCount)
+        public void SetInvalidBinCountConstructor(int binCount)
         {
             Assert.Throws(
                 typeof(ArgumentException),
                 delegate
                 {
-                    new NDOSubsampling.Configuration(validTransform, validPercentage, binCount);
+                    NDOSubsampling.Configuration config = new NDOSubsampling.Configuration(validTransform, validPercentage, binCount);
                 }
             );
+        }
 
-            NDOSubsampling.Configuration x = new NDOSubsampling.Configuration(validTransform, validPercentage, validBinCount);
+        [TestCase(0)]
+        [TestCase(200)]
+        [TestCase(3)]
+        public void SetInvalidBinCountSetter(int binCount)
+        {
+            NDOSubsampling.Configuration config = new NDOSubsampling.Configuration(validTransform, validPercentage, validBinCount);
             Assert.Throws(
                 typeof(ArgumentException),
                 delegate
                 {
-                    x.BinCount = binCount;
+                    config.BinCount = binCount;
                 }
             );
         }
@@ -350,20 +366,28 @@ namespace Tests.Registration
         [TestCase(8)]
         [TestCase(12)]
         [TestCase(20)]
-        public void SetValidBinCount(int binCount)
+        public void SetValidBinCountConstructor(int binCount)
         {
             Assert.DoesNotThrow(
                 delegate
                 {
-                    new NDOSubsampling.Configuration(null, 10, binCount);
+                    object config = new NDOSubsampling.Configuration(validTransform, validPercentage, binCount);
                 }
             );
+        }
 
-            NDOSubsampling.Configuration x = new NDOSubsampling.Configuration(validTransform, validPercentage, validBinCount);
+        [TestCase(4)]
+        [TestCase(6)]
+        [TestCase(8)]
+        [TestCase(12)]
+        [TestCase(20)]
+        public void SetValidBinCountSetter(int binCount)
+        {
+            NDOSubsampling.Configuration config = new NDOSubsampling.Configuration(validTransform, validPercentage, validBinCount);
             Assert.DoesNotThrow(
                 delegate
                 {
-                    x.BinCount = binCount;
+                    config.BinCount = binCount;
                 }
             );
         }
@@ -371,7 +395,7 @@ namespace Tests.Registration
         [TestCase(0, 0)]
         [TestCase(20, 0.2f)]
         [TestCase(50, 0.5f)]
-        [TestCase(45.5, 0.02197802198f)]
+        [TestCase(45.5f, 0.455f)]
         [TestCase(100, 1)]
         public void ValidProbability_WithConstructor(float percentage, float expected)
         {
@@ -384,7 +408,7 @@ namespace Tests.Registration
         [TestCase(0, 0)]
         [TestCase(20, 0.2f)]
         [TestCase(50, 0.5f)]
-        [TestCase(45.5, 0.02197802198f)]
+        [TestCase(45.5f, 0.455f)]
         [TestCase(100, 1)]
         public void ValidProbability_WithSetter(float percentage, float expected)
         {
