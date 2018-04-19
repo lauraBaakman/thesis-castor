@@ -41,6 +41,8 @@ namespace Tests
         new Point(new Vector3(1.7f, 5.0f, 1.2f)),
         };
 
+        private static AllPointsSampler.Configuration configuration = new AllPointsSampler.Configuration(null, AllPointsSampler.Configuration.NormalProcessing.NoNormals);
+
         [Test]
         public void TestFindCorrespondencesStaticEqualsModel()
         {
@@ -84,7 +86,7 @@ namespace Tests
                     )
                 }
             );
-            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(configuration)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -129,7 +131,7 @@ namespace Tests
                 cubeRight[4]
             )
         };
-            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(configuration)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -161,7 +163,7 @@ namespace Tests
                 pyramid[4]
             )
         };
-            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(configuration)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -193,7 +195,7 @@ namespace Tests
                 cubeRight[5]
             )
         };
-            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(null)).Find(staticPoints, modelPoints);
+            CorrespondenceCollection actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(configuration)).Find(staticPoints, modelPoints);
             Assert.That(actual, Is.EquivalentTo(expected));
         }
 
@@ -201,27 +203,27 @@ namespace Tests
         public void TestCreateDistanceNodeList()
         {
             ReadOnlyCollection<Point> staticPoints = new List<Point> {
-            new Point(new Vector3(8.10e-01f, 6.30e-01f, 9.60e-01f)),
-            new Point(new Vector3(9.10e-01f, 1.00e-01f, 9.60e-01f)),
-            new Point(new Vector3(1.30e-01f, 2.80e-01f, 1.60e-01f)),
-            new Point(new Vector3(9.10e-01f, 5.50e-01f, 9.70e-01f)),
-        }.AsReadOnly();
+                new Point(new Vector3(8.10e-01f, 6.30e-01f, 9.60e-01f)),
+                new Point(new Vector3(9.10e-01f, 1.00e-01f, 9.60e-01f)),
+                new Point(new Vector3(1.30e-01f, 2.80e-01f, 1.60e-01f)),
+                new Point(new Vector3(9.10e-01f, 5.50e-01f, 9.70e-01f)),
+            }.AsReadOnly();
             ReadOnlyCollection<Point> modelPoints = new List<Point> {
-            new Point(new Vector3(9.60e-01f, 8.00e-01f, 4.20e-01f)),
-            new Point(new Vector3(4.90e-01f, 1.40e-01f, 9.20e-01f)),
-        }.AsReadOnly();
+                new Point(new Vector3(9.60e-01f, 8.00e-01f, 4.20e-01f)),
+                new Point(new Vector3(4.90e-01f, 1.40e-01f, 9.20e-01f)),
+            }.AsReadOnly();
 
-            List<DistanceNode> actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(null)).CreateDistanceNodeList(staticPoints, modelPoints);
+            List<DistanceNode> actual = new NearstPointCorrespondenceFinder(new AllPointsSampler(configuration)).CreateDistanceNodeList(staticPoints, modelPoints);
             List<DistanceNode> expected = new List<DistanceNode> {
-            new DistanceNode(staticPoints[1], modelPoints[1], 1.7960e-01f),
-            new DistanceNode(staticPoints[0], modelPoints[0], 3.4300e-01f),
-            new DistanceNode(staticPoints[0], modelPoints[1], 3.4410e-01f),
-            new DistanceNode(staticPoints[3], modelPoints[1], 3.4700e-01f),
-            new DistanceNode(staticPoints[3], modelPoints[0], 3.6750e-01f),
-            new DistanceNode(staticPoints[2], modelPoints[1], 7.2680e-01f),
-            new DistanceNode(staticPoints[1], modelPoints[0], 7.8410e-01f),
-            new DistanceNode(staticPoints[2], modelPoints[0], 1.0269e+00f),
-        };
+                new DistanceNode(staticPoints[1], modelPoints[1], 1.7960e-01f),
+                new DistanceNode(staticPoints[0], modelPoints[0], 3.4300e-01f),
+                new DistanceNode(staticPoints[0], modelPoints[1], 3.4410e-01f),
+                new DistanceNode(staticPoints[3], modelPoints[1], 3.4700e-01f),
+                new DistanceNode(staticPoints[3], modelPoints[0], 3.6750e-01f),
+                new DistanceNode(staticPoints[2], modelPoints[1], 7.2680e-01f),
+                new DistanceNode(staticPoints[1], modelPoints[0], 7.8410e-01f),
+                new DistanceNode(staticPoints[2], modelPoints[0], 1.0269e+00f),
+            };
 
             Assert.That(actual, Is.EquivalentTo(expected));
         }
