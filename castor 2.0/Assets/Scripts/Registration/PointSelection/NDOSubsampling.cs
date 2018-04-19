@@ -15,15 +15,22 @@ namespace Registration
     public class NDOSubsampling : IPointSampler
     {
         Configuration config;
+        NormalBinner normalBinner;
+        RandomSubSampling randomSubSampling;
 
         public NDOSubsampling(Configuration configuration)
         {
             this.config = configuration;
+            this.normalBinner = new NormalBinner(configuration);
+            this.randomSubSampling = new RandomSubSampling(configuration);
         }
 
         public List<Point> Sample(SamplingInformation samplingInfo)
         {
-            List<Point> sample = new List<Point>(ApproximateSampleSize(samplingInfo.Mesh.vertexCount));
+            List<Point> sample = new List<Point>(ApproximateSampleSize(samplingInfo.VertexCount));
+            Dictionary<int, List<Point>> bins = normalBinner.Bin(samplingInfo);
+
+            foreach (List<Point> bin in bins.Values) sample.AddRange(randomSubSampling.Sample(bin));
 
             return sample;
         }
