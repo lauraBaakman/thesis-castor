@@ -453,6 +453,90 @@ namespace Tests.DoubleConnectedEdgeList
         }
 
         [Test]
+        public void Test_Centroid_TriangleFace()
+        {
+            Vertex a = new Vertex(new Vector3(1, 2, 3));
+            Vertex b = new Vertex(new Vector3(3, 9, -1));
+            Vertex c = new Vertex(new Vector3(4, 4, -7));
+
+            HalfEdge ab = new HalfEdge(a);
+            HalfEdge ac = new HalfEdge(a);
+
+            HalfEdge ba = new HalfEdge(b);
+            HalfEdge bc = new HalfEdge(b);
+
+            HalfEdge ca = new HalfEdge(c);
+            HalfEdge cb = new HalfEdge(c);
+
+            ab.Twin = ba;
+            ac.Twin = ca;
+
+            ba.Twin = ab;
+            bc.Twin = cb;
+
+            ca.Twin = ac;
+            cb.Twin = bc;
+
+            Face face = new Face(0, Auxilaries.RandomNormal());
+            face.AddOuterComponent(ac);
+            face.AddOuterComponent(cb);
+            face.AddOuterComponent(ba);
+
+            Vector3 actual = face.Centroid;
+            Vector3 expected = new Vector3(8, 15, -5) * (1.0f / 3.0f);
+
+            Assert.IsTrue(expected == actual);
+        }
+
+        [Test]
+        public void Test_Centroid_RectangularFace()
+        {
+            Vertex a = new Vertex(new Vector3(1, 2, 3));
+            Vertex b = new Vertex(new Vector3(3, 9, -1));
+            Vertex c = new Vertex(new Vector3(4, 4, -7));
+            Vertex d = new Vertex(new Vector3(5, 7, 5));
+
+            HalfEdge ab = new HalfEdge(a);
+            HalfEdge ba = new HalfEdge(b);
+
+            HalfEdge bc = new HalfEdge(b);
+            HalfEdge cb = new HalfEdge(c);
+
+            HalfEdge cd = new HalfEdge(c);
+            HalfEdge dc = new HalfEdge(d);
+
+            HalfEdge da = new HalfEdge(d);
+            HalfEdge ad = new HalfEdge(a);
+
+            ab.Twin = ba;
+            ab.Next = bc;
+            ab.Previous = da;
+
+            bc.Twin = cb;
+            bc.Next = cd;
+            bc.Previous = ab;
+
+            cd.Twin = dc;
+            cd.Next = da;
+            cd.Previous = bc;
+
+            da.Twin = ad;
+            da.Next = ab;
+            da.Previous = cd;
+
+            Face face = new Face(0, Auxilaries.RandomNormal());
+            face.AddOuterComponent(bc);
+            face.AddOuterComponent(cd);
+            face.AddOuterComponent(da);
+            face.AddOuterComponent(ab);
+
+            Vector3 actual = face.Centroid;
+            Vector3 expected = new Vector3(13, 22, 0) * (1.0f / 4.0f);
+
+            Assert.IsTrue(expected == actual);
+        }
+
+        [Test]
         public void Test_Vertices_Triangle()
         {
             Vertex a = new Vertex(new Vector3(1, 2, 3));

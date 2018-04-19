@@ -24,6 +24,23 @@ namespace DoubleConnectedEdgeList
 
         public readonly int MeshIdx;
 
+        public Vector3 Centroid
+        {
+            get { return GetCentroid(); }
+        }
+
+        private Vector3 GetCentroid()
+        {
+            ReadOnlyCollection<Vertex> vertices = this.Vertices;
+            float vertexCount = (float)this.Vertices.Count;
+
+            Vector3 centroid = new Vector3();
+
+            foreach (Vertex vertex in vertices) centroid += vertex.Position;
+
+            return centroid / vertexCount;
+        }
+
         public ReadOnlyCollection<Vertex> Vertices
         {
             get { return GetVertices(); }
