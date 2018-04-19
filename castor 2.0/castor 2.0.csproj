@@ -348,6 +348,7 @@
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
     <Compile Include="Assets\Scripts\Fragment\ContainmentDetector.cs" />
     <Compile Include="Assets\Scripts\Fragment\DoubleConnectedEdgeListStorage.cs" />
+    <Compile Include="Assets\Scripts\Fragment\FaceNormalPainter.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPAbstractFragmentController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPModelFragmentController.cs" />
@@ -537,6 +538,7 @@
     <Compile Include="Assets\Scripts\Utils\Heap.cs" />
     <Compile Include="Assets\Scripts\Utils\Matrix4x4D.cs" />
     <Compile Include="Assets\Scripts\Utils\MeshTransformer.cs" />
+    <Compile Include="Assets\Scripts\Utils\Normal.cs" />
     <Compile Include="Assets\Scripts\Utils\NumericalMath.cs" />
     <Compile Include="Assets\Scripts\Utils\Pair.cs" />
     <Compile Include="Assets\Scripts\Utils\PointNormalizer.cs" />
@@ -546,7 +548,6 @@
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
-    <Compile Include="Assets\Scripts\Fragment\FaceNormalPainter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
