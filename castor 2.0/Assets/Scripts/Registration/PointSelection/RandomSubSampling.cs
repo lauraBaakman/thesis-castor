@@ -46,11 +46,8 @@ namespace Registration
             return (int)Mathf.Round(numElements * config.Probability);
         }
 
-        public class Configuration : Registration.SamplingConfiguration
+        public class Configuration : AllPointsSampler.Configuration
         {
-            public readonly AllPointsSampler.Configuration.NormalProcessing normalProcessing;
-
-
             /// <summary>
             /// The percentage of the points that should be kept, percentage in [0, 100].
             /// </summary>
@@ -76,9 +73,8 @@ namespace Registration
             }
 
             public Configuration(Transform referenceTransform, AllPointsSampler.Configuration.NormalProcessing normalProcessing, float percentage)
-                : base(referenceTransform)
+                : base(referenceTransform, normalProcessing)
             {
-                this.normalProcessing = normalProcessing;
                 this.Percentage = percentage;
             }
 
