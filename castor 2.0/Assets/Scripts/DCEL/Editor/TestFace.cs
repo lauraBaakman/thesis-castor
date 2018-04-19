@@ -3,6 +3,7 @@ using NUnit.Framework;
 using DoubleConnectedEdgeList;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Tests.DoubleConnectedEdgeList
 {
@@ -406,7 +407,6 @@ namespace Tests.DoubleConnectedEdgeList
             Assert.IsTrue(triangle.IsTriangular());
         }
 
-
         [Test]
         public void TestIsTriangular_Rectangle()
         {
@@ -451,6 +451,91 @@ namespace Tests.DoubleConnectedEdgeList
 
             Assert.IsFalse(rectangle.IsTriangular());
         }
+
+        [Test]
+        public void Test_Vertices_Triangle()
+        {
+            Vertex a = new Vertex(new Vector3(1, 2, 3));
+            Vertex b = new Vertex(new Vector3(3, 9, -1));
+            Vertex c = new Vertex(new Vector3(4, 4, -7));
+
+            HalfEdge ab = new HalfEdge(a);
+            HalfEdge ac = new HalfEdge(a);
+
+            HalfEdge ba = new HalfEdge(b);
+            HalfEdge bc = new HalfEdge(b);
+
+            HalfEdge ca = new HalfEdge(c);
+            HalfEdge cb = new HalfEdge(c);
+
+            ab.Twin = ba;
+            ac.Twin = ca;
+
+            ba.Twin = ab;
+            bc.Twin = cb;
+
+            ca.Twin = ac;
+            cb.Twin = bc;
+
+            Face face = new Face(0, Auxilaries.RandomNormal());
+            face.AddOuterComponent(ac);
+            face.AddOuterComponent(cb);
+            face.AddOuterComponent(ba);
+
+            ReadOnlyCollection<Vertex> expected = new List<Vertex> { a, b, c }.AsReadOnly();
+            ReadOnlyCollection<Vertex> actual = face.Vertices;
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+
+        [Test]
+        public void Test_Vertices_Rectangle()
+        {
+            Vertex a = Auxilaries.RandomVertex();
+            Vertex b = Auxilaries.RandomVertex();
+            Vertex c = Auxilaries.RandomVertex();
+            Vertex d = Auxilaries.RandomVertex();
+
+            HalfEdge ab = new HalfEdge(a);
+            HalfEdge ba = new HalfEdge(b);
+
+            HalfEdge bc = new HalfEdge(b);
+            HalfEdge cb = new HalfEdge(c);
+
+            HalfEdge cd = new HalfEdge(c);
+            HalfEdge dc = new HalfEdge(d);
+
+            HalfEdge da = new HalfEdge(d);
+            HalfEdge ad = new HalfEdge(a);
+
+            ab.Twin = ba;
+            ab.Next = bc;
+            ab.Previous = da;
+
+            bc.Twin = cb;
+            bc.Next = cd;
+            bc.Previous = ab;
+
+            cd.Twin = dc;
+            cd.Next = da;
+            cd.Previous = bc;
+
+            da.Twin = ad;
+            da.Next = ab;
+            da.Previous = cd;
+
+            Face face = new Face(0, Auxilaries.RandomNormal());
+            face.AddOuterComponent(bc);
+            face.AddOuterComponent(cd);
+            face.AddOuterComponent(da);
+            face.AddOuterComponent(ab);
+
+            ReadOnlyCollection<Vertex> expected = new List<Vertex> { a, b, c, d }.AsReadOnly();
+            ReadOnlyCollection<Vertex> actual = face.Vertices;
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+
     }
 
     [TestFixture]

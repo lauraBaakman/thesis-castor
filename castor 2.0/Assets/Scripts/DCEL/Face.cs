@@ -24,6 +24,11 @@ namespace DoubleConnectedEdgeList
 
         public readonly int MeshIdx;
 
+        public ReadOnlyCollection<Vertex> Vertices
+        {
+            get { return GetVertices(); }
+        }
+
         /// <summary>
         /// Gets the area of the face, if the face is triangular
         /// 
