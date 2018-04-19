@@ -104,18 +104,14 @@ namespace Tests.Registration
     [TestFixture]
     public class NormalBinnerTest
     {
-        private static string sceneName = "Assets/Scenes/TestSceneNormalBinner.unity";
+        private static string sceneName = "Assets/Scenes/TestSceneSampling.unity";
 
         [Test]
         public void Test_Constructor_With_Invalid_Bin_Count()
         {
-            Assert.Throws(typeof(System.ArgumentException), new TestDelegate(Test_Constructor_With_Invalid_Bin_Count_Helper));
-        }
-
-        public void Test_Constructor_With_Invalid_Bin_Count_Helper()
-        {
-            int numBins = 7;
-            NormalBinner binner = new NormalBinner(numBins, null);
+            Assert.Throws<ArgumentException>(
+                delegate { NormalBinner binner = new NormalBinner(7, null); }
+            );
         }
 
         [Test, TestCaseSource("BinCases")]
@@ -423,7 +419,7 @@ namespace Tests.Registration
     [TestFixture]
     public class NDOSubsamplingTests
     {
-        private static string sceneName = "Assets/Scenes/TestSceneNormalBinner.unity";
+        private static string sceneName = "Assets/Scenes/TestSceneSampling.unity";
 
         [TestCase("cube")]
         [TestCase("pyramid")]

@@ -93,7 +93,7 @@ namespace Tests.Registration
     [TestFixture]
     public class RandomSubSamplingTests
     {
-        private static string sceneName = "Assets/Scenes/TestSceneNormalBinner.unity";
+        private static string sceneName = "Assets/Scenes/TestSceneSampling.unity";
 
         [TestCase("cube", AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
         [TestCase("pyramid", AllPointsSampler.Configuration.NormalProcessing.VertexNormals)]
