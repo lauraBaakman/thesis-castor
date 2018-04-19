@@ -103,6 +103,13 @@ namespace DoubleConnectedEdgeList
             return (outerComponents.Count == 3);
         }
 
+        private ReadOnlyCollection<Vertex> GetVertices()
+        {
+            List<Vertex> vertices = new List<Vertex>();
+            foreach (HalfEdge edge in outerComponents) vertices.Add(edge.Origin);
+            return vertices.AsReadOnly();
+        }
+
         /// <summary>
         /// Adds an edge to the outer component of this face, if that face is not already part of the outer component.
         /// </summary>

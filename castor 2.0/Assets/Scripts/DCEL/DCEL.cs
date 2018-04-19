@@ -19,6 +19,11 @@ namespace DoubleConnectedEdgeList
             get { return new ReadOnlyCollection<Vertex>(vertices.Values.ToList()); }
         }
 
+        public ReadOnlyCollection<Face> Faces
+        {
+            get { return new ReadOnlyCollection<Face>(faces.Values.ToList<Face>()); }
+        }
+
         public DCEL(ReadOnlyCollection<Vertex> vertices,
                    ReadOnlyCollection<HalfEdge> edges,
                    ReadOnlyCollection<Face> faces
