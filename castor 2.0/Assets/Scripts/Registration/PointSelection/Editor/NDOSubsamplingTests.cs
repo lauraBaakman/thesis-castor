@@ -470,7 +470,7 @@ namespace Tests.Registration
 
             NDOSubsampling.Configuration ndosConfig = new NDOSubsampling.Configuration(
                 referenceTransform: gameObject.transform.root,
-                percentage: 100,
+                percentage: 0,
                 binCount: 6
             );
 
@@ -513,28 +513,25 @@ namespace Tests.Registration
         }
 
         [Test]
-        public void TestSample_Pyramid_45(string gameObjectName, int expectedSampledBinSize)
+        public void TestSample_Pyramid_45()
         {
             EditorSceneManager.OpenScene(sceneName);
 
             //The 'default' child of a mesh contains the stuff we are interested in
-            GameObject gameObject = GameObject.Find(gameObjectName).transform.GetChild(0).gameObject;
+            GameObject gameObject = GameObject.Find("pyramid").transform.GetChild(0).gameObject;
 
             SamplingInformation samplingInformation = new SamplingInformation(gameObject);
 
             NDOSubsampling.Configuration ndosConfig = new NDOSubsampling.Configuration(
                 referenceTransform: gameObject.transform.root,
-                percentage: 0.45f,
+                percentage: 45,
                 binCount: 6
             );
 
             SamplingInformation samplingInfo = new SamplingInformation(gameObject);
+            Dictionary<int, List<Point>> bins = new NormalBinner(ndosConfig).Bin(samplingInformation);
 
             List<Point> actual = new NDOSubsampling(ndosConfig).Sample(samplingInfo);
-
-
-            NormalBinner binner = new NormalBinner(ndosConfig.BinCount, ndosConfig.referenceTransform);
-            Dictionary<int, List<Point>> bins = binner.Bin(samplingInformation);
 
             Assert.That(CountPointsSampledFromBin(actual, bins[0]), Is.EqualTo(1));
             Assert.That(CountPointsSampledFromBin(actual, bins[1]), Is.EqualTo(1));
@@ -547,7 +544,7 @@ namespace Tests.Registration
         private int CountPointsSampledFromBin(List<Point> actual, List<Point> bin)
         {
             int count = 0;
-            foreach (Point point in bin) count += actual.Contains(point) ? 1 : 0;
+            foreach (Point point in actual) count += (bin.Contains(point) ? 1 : 0);
             return count;
         }
     }

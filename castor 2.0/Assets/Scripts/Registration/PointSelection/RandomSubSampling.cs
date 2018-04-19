@@ -16,7 +16,7 @@ namespace Registration
 
         public List<Point> Sample(SamplingInformation samplingInfo)
         {
-            List<Point> points = new AllPointsSampler(new AllPointsSampler.Configuration(this.config)).Sample(samplingInfo);
+            List<Point> points = new AllPointsSampler(this.config).Sample(samplingInfo);
             return Sample(points);
         }
 

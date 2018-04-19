@@ -83,6 +83,10 @@ namespace Registration
             {20, new IsocaHedron()}
         };
 
+        public NormalBinner(NDOSubsampling.Configuration configuration)
+            : this(configuration.BinCount, configuration.referenceTransform)
+        { }
+
         public NormalBinner(int numberOfBins, Transform referenceTransform)
         {
             this.referenceTransform = referenceTransform;

@@ -125,10 +125,6 @@ namespace Registration
             {
                 this.normalProcessing = normalProcessing;
             }
-
-            public Configuration(RandomSubSampling.Configuration configuration)
-                : this(configuration.referenceTransform, configuration.normalProcessing)
-            { }
         }
     }
 }
