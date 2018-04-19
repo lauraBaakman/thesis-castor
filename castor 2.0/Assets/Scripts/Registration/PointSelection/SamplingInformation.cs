@@ -11,6 +11,11 @@ namespace Registration
         public readonly Collider Collider;
         public readonly DCEL DCEL;
 
+        public int VertexCount
+        {
+            get { return this.Mesh.vertexCount; }
+        }
+
         public SamplingInformation(GameObject gameObject)
             : this(
                 transform: gameObject.transform,

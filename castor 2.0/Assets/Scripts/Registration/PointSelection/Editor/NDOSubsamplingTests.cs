@@ -513,12 +513,12 @@ namespace Tests.Registration
         }
 
         [Test]
-        public void TestSample_Pyramid_45(string gameObjectName, int expectedSampledBinSize)
+        public void TestSample_Pyramid_45()
         {
             EditorSceneManager.OpenScene(sceneName);
 
             //The 'default' child of a mesh contains the stuff we are interested in
-            GameObject gameObject = GameObject.Find(gameObjectName).transform.GetChild(0).gameObject;
+            GameObject gameObject = GameObject.Find("pyramid").transform.GetChild(0).gameObject;
 
             SamplingInformation samplingInformation = new SamplingInformation(gameObject);
 
