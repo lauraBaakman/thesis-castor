@@ -1,5 +1,6 @@
 ﻿using Registration;
 using UnityEngine;
+using DoubleConnectedEdgeList;
 
 namespace Utils
 {
@@ -32,6 +33,11 @@ namespace Utils
         private Vector3 ComputeEnd(Vector3 position, Vector3 direction)
         {
             return position + direction * magnitudeFactor * direction.magnitude;
+        }
+
+        public static Normal FaceNormal(Face face)
+        {
+            return new Normal(face.Centroid, face.Normal);
         }
     }
 }
