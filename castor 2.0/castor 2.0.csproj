@@ -316,6 +316,7 @@
     <Compile Include="Assets\Scripts\Buttons\AbstractToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\AddFragmentButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\DeleteFragmentButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\ExperimentButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\ExportFragmentsButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\FocusButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\HelpButton.cs" />
