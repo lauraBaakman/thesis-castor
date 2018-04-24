@@ -18,8 +18,13 @@ namespace Buttons
 
         private void Start()
         {
-            initialPath = Application.isEditor ? "/Users/laura/Repositories/thesis-experiment" : null;
+            initialPath = Application.isEditor ? "/Users/laura/Repositories/thesis-experiment/simulated" : null;
             modelFragmentFiles = new List<string>();
+
+            FileBrowser.SetFilters(
+                showAllFilesFilter: false,
+                filters: new FileBrowser.Filter("Fragments", ".obj")
+            );
         }
 
         protected override void ExecuteButtonAction()
