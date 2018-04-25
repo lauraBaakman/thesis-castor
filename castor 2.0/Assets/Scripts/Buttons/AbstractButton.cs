@@ -15,6 +15,11 @@ namespace Buttons
             AddListenerToButton();
         }
 
+        public void OnExecuteButtonAction()
+        {
+            ExecuteButtonAction();
+        }
+
         private Button GetButton()
         {
             Button button = GetComponent<Button>();
