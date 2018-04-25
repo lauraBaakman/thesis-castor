@@ -47,14 +47,16 @@ namespace Buttons
 
         private void RetrieveExperimentInputData()
         {
-            FileBrowser.ShowLoadDialog(
-                onSuccess: ProcessExperimentConfigurtionFile,
-                onCancel: () => { },
-                folderMode: false,
-                initialPath: initialPath,
-                title: "Select the configuration file generated when the obj files were generated",
-                loadButtonText: "Select"
-            );
+            //FileBrowser.ShowLoadDialog(
+            //    onSuccess: ProcessExperimentConfigurtionFile,
+            //    onCancel: () => { },
+            //    folderMode: false,
+            //    initialPath: initialPath,
+            //    title: "Select the configuration file generated when the obj files were generated",
+            //    loadButtonText: "Select"
+            //);
+            Debug.Log("Temporarily using a fixed path");
+            ProcessExperimentConfigurtionFile("/Users/laura/Repositories/thesis-experiment/simulated/test_data/cube_1773d72ee0fdb6fae90788445db0bb76.json");
         }
 
         private void ProcessExperimentConfigurtionFile(string path)
