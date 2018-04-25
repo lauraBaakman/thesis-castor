@@ -17,7 +17,7 @@ namespace Fragment
         }
         private FragmentState state;
 
-        void Start()
+        void Awake()
         {
             state = new FragmentState(locked: false, selected: false);
         }
