@@ -68,7 +68,7 @@ namespace Buttons
             }
             catch (Exception e)
             {
-                Debug.LogError("Could not read the file " + path + e.Message);
+                Debug.LogError("Could not read the file " + path + "\n\t error: " + e.Message);
             }
         }
 
