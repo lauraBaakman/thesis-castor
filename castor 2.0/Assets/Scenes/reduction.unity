@@ -3586,6 +3586,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button: {fileID: 0}
+  DeleteButton: {fileID: 1404554086}
+  SelectAllButton: {fileID: 899934975}
 --- !u!1001 &1217867797
 Prefab:
   m_ObjectHideFlags: 0

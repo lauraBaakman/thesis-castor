@@ -6,6 +6,9 @@ namespace Buttons
 {
     public class ExperimentButton : AbstractButton
     {
+        public AbstractButton DeleteButton;
+        public AbstractButton SelectAllButton;
+
         private static string initialPath;
         private Experiment.Configuration configuration;
 
