@@ -66,8 +66,8 @@ namespace IO
             RandomizeTransform = randomizeTransform;
         }
 
-        public FragmentImporter(GameObject parent)
-            : this(parent, (ReadResult) => { }, false)
+        public FragmentImporter(GameObject parent, FragmentsImporter.CallBack callBack)
+            : this(parent, callBack, false)
         { }
 
         public GameObject Import(string path)

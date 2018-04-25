@@ -91,6 +91,10 @@ namespace IO
         /// </summary>
         private string suffix;
 
+        public FragmentExporter(FragmentsExporter.CallBack callback)
+            : this(callback, "")
+        { }
+
         public FragmentExporter(FragmentsExporter.CallBack callback, string suffix = null)
         {
             this.callback = callback;

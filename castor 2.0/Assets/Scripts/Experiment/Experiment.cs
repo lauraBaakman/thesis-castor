@@ -11,13 +11,37 @@ namespace Experiment
         GameObject staticFragment;
 
         IO.FragmentImporter fragmentImporter;
+        IO.FragmentExporter fragmentExporter;
 
         private string outputDirectory;
 
         public Experiment(Configuration configuration, GameObject fragments)
         {
             this.configuration = configuration;
-            this.fragmentImporter = new IO.FragmentImporter(fragments);
+            this.fragmentImporter = new IO.FragmentImporter(fragments, FragmentReaderCallBack);
+
+            this.fragmentExporter = new IO.FragmentExporter(FragmentWriterCallBack);
+        }
+
+        private void FragmentReaderCallBack(IO.ReadResult result)
+        {
+            if (result.Failed())
+            {
+                Ticker.Receiver.Instance.SendMessage(
+                    methodName: "OnMessage",
+                    value: result.ToTickerMessage(),
+                    options: SendMessageOptions.RequireReceiver
+                );
+            }
+        }
+
+        private void FragmentWriterCallBack(IO.WriteResult result)
+        {
+            Ticker.Receiver.Instance.SendMessage(
+                methodName: "OnMessage",
+                value: result.ToTickerMessage(),
+                options: SendMessageOptions.RequireReceiver
+            );
         }
 
         public void SetUp()
@@ -27,6 +51,8 @@ namespace Experiment
             HandleStaticFragment();
 
             //Find the list of model fragments
+
+            //Write Settings to File
         }
 
         public void Run()
@@ -56,8 +82,7 @@ namespace Experiment
 
             Lock(staticFragment);
 
-            string outputPath = "";
-            Write(staticFragment, outputPath);
+            Write(staticFragment);
         }
 
         private GameObject Import(string path)
@@ -67,12 +92,20 @@ namespace Experiment
 
         private void Lock(GameObject fragment)
         {
-            Debug.Log("Lock the fragment");
+            fragment.SendMessage(
+                methodName: "OnToggledLockedState",
+                value: true,
+                options: SendMessageOptions.DontRequireReceiver
+            );
         }
 
-        private void Write(GameObject fragment, string path)
+        private void Write(GameObject fragment)
         {
-            Debug.Log("Write the fragment");
+            string path = Path.Combine(
+                path1: this.outputDirectory,
+                path2: Path.GetFileName(configuration.lockedFragmentFile)
+            );
+            fragmentExporter.Export(fragment, path);
         }
     }
 }
