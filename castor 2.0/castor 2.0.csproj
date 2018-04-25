@@ -336,7 +336,6 @@
     <Compile Include="Assets\Scripts\DCEL\Face.cs" />
     <Compile Include="Assets\Scripts\DCEL\HalfEdge.cs" />
     <Compile Include="Assets\Scripts\DCEL\Vertex.cs" />
-    <Compile Include="Assets\Scripts\Experiment\Configuration.cs" />
     <Compile Include="Assets\Scripts\Experiment\Experiment.cs" />
     <Compile Include="Assets\Scripts\Extensions\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
@@ -552,6 +551,7 @@
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
+    <Compile Include="Assets\Scripts\Experiment\Run.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

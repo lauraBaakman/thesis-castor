@@ -60,8 +60,8 @@ namespace Buttons
 
         private void ProcessExperimentConfigurtionFile(string path)
         {
-            Experiment.Configuration configuration;
-            try { configuration = Experiment.Configuration.FromJson(path); }
+            Experiment.Experiment.Configuration configuration;
+            try { configuration = Experiment.Experiment.Configuration.FromJson(path); }
             catch (Exception e)
             {
                 Debug.LogError("Could not read the file " + path + "\n\t error: " + e.Message);
@@ -72,7 +72,7 @@ namespace Buttons
 
             Experiment.Experiment experiment = new Experiment.Experiment(configuration, Fragments);
             experiment.SetUp();
-            experiment.Run();
+            experiment.Perform();
         }
 
         private void ClearScene()
