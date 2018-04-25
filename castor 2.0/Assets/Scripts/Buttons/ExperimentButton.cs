@@ -9,6 +9,8 @@ namespace Buttons
         public AbstractButton DeleteButton;
         public AbstractButton SelectAllButton;
 
+        public GameObject Fragments;
+
         private static string initialPath;
 
         private void Start()
@@ -68,7 +70,7 @@ namespace Buttons
 
             ClearScene();
 
-            Experiment.Experiment experiment = new Experiment.Experiment(configuration);
+            Experiment.Experiment experiment = new Experiment.Experiment(configuration, Fragments);
             experiment.SetUp();
             experiment.Run();
         }

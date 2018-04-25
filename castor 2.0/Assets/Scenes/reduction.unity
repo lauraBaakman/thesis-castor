@@ -3588,6 +3588,7 @@ MonoBehaviour:
   Button: {fileID: 0}
   DeleteButton: {fileID: 1404554086}
   SelectAllButton: {fileID: 899934975}
+  Fragments: {fileID: 1276394742}
 --- !u!1001 &1217867797
 Prefab:
   m_ObjectHideFlags: 0

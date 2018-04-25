@@ -49,7 +49,7 @@ namespace IO
         }
     }
 
-    internal class FragmentImporter
+    public class FragmentImporter
     {
         private static string PrefabPath = "Fragment";
         private readonly GameObject Parent;
@@ -66,16 +66,22 @@ namespace IO
             RandomizeTransform = randomizeTransform;
         }
 
-        internal void Import(string path)
+        public FragmentImporter(GameObject parent)
+            : this(parent, (ReadResult) => { }, false)
+        { }
+
+        public GameObject Import(string path)
         {
             ReadResult result = IO.ObjFile.Read(path);
+            GameObject fragment = null;
 
             if (result.Succeeded())
             {
                 string name = ExtractObjectName(path);
-                AddFragmentToScene(name, result.Mesh);
+                fragment = AddFragmentToScene(name, result.Mesh);
             }
             CallBack(result);
+            return fragment;
         }
 
         private string ExtractObjectName(string path)
@@ -83,7 +89,7 @@ namespace IO
             return Path.GetFileNameWithoutExtension(path);
         }
 
-        private void AddFragmentToScene(string name, Mesh mesh)
+        private GameObject AddFragmentToScene(string name, Mesh mesh)
         {
             GameObject fragment = UnityEngine.Object.Instantiate(
                 original: Resources.Load(PrefabPath),
@@ -98,6 +104,8 @@ namespace IO
 
 
             if (RandomizeTransform) RandomizeTheTransform(fragment);
+
+            return fragment;
         }
 
         private void SetDoubleConnectedEdgeList(GameObject fragment, Mesh mesh)
