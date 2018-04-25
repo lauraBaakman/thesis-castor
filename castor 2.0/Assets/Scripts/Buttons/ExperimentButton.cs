@@ -64,7 +64,7 @@ namespace Buttons
             try
             {
                 this.configuration = Experiment.Configuration.FromJson(path);
-                RetrieveDataFromConfiguration();
+                StartExperiment();
             }
             catch (Exception e)
             {
@@ -72,7 +72,7 @@ namespace Buttons
             }
         }
 
-        private void RetrieveDataFromConfiguration()
+        private void StartExperiment()
         {
             ClearScene();
 
