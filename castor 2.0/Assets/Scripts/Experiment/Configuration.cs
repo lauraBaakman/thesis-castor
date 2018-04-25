@@ -7,6 +7,7 @@ namespace Experiment
     public class Configuration
     {
         public string lockedFragmentFile;
+        public string outputDirectory;
         public string configurations;
         public string id;
 

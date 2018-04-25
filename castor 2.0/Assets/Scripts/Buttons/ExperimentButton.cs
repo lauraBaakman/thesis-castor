@@ -69,6 +69,17 @@ namespace Buttons
 
         private void RetrieveDataFromConfiguration()
         {
+            Debug.Log("The output directory: " + configuration.outputDirectory);
+            //Remove all currently existing objects
+
+            //Get the current date time in a pretty format
+
+            //Generate an output folder within the output folder in the configuration
+
+            //Find the static fragment, read it, lock it, write it
+
+            //Find the list of model fragments
+
             Debug.Log("Time to retrieve data from the configuration");
         }
     }
