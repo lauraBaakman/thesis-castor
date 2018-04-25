@@ -337,6 +337,7 @@
     <Compile Include="Assets\Scripts\DCEL\HalfEdge.cs" />
     <Compile Include="Assets\Scripts\DCEL\Vertex.cs" />
     <Compile Include="Assets\Scripts\Experiment\Configuration.cs" />
+    <Compile Include="Assets\Scripts\Experiment\Experiment.cs" />
     <Compile Include="Assets\Scripts\Extensions\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\ICollectionExtensions.cs" />
@@ -370,6 +371,7 @@
     <Compile Include="Assets\Scripts\Fragments\SelectionController.cs" />
     <Compile Include="Assets\Scripts\GUI\ICPGUIController.cs" />
     <Compile Include="Assets\Scripts\Help\HelpMessageSender.cs" />
+    <Compile Include="Assets\Scripts\IO\CSVFileReader.cs" />
     <Compile Include="Assets\Scripts\IO\FragmentsExporter.cs" />
     <Compile Include="Assets\Scripts\IO\FragmentsImporter.cs" />
     <Compile Include="Assets\Scripts\IO\ObjFile.cs" />
@@ -550,7 +552,6 @@
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
-    <Compile Include="Assets\Scripts\Experiment\Experiment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
