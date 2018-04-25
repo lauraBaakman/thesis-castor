@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using SimpleFileBrowser;
 using UnityEngine;
 
@@ -8,29 +6,35 @@ namespace Buttons
 {
     public class ExperimentButton : AbstractButton
     {
-        private string staticFragmentFile;
-        private string outputDirectory;
-        private List<String> modelFragmentFiles;
-
-        private IEnumerator retrieveModelFragmentFilesCoroutine;
-
         private static string initialPath;
+        private Experiment.Configuration configuration;
 
         private void Start()
         {
             initialPath = Application.isEditor ? "/Users/laura/Repositories/thesis-experiment/simulated" : null;
-            modelFragmentFiles = new List<string>();
 
-            FileBrowser.SetFilters(
-                showAllFilesFilter: false,
-                filters: new FileBrowser.Filter("Fragments", ".obj")
-            );
+            ConfigureFileBrowser();
+        }
+
+        private void ConfigureFileBrowser()
+        {
+            FileBrowser.Filter configurationFilter = new FileBrowser.Filter("Configuration", ".json");
+            FileBrowser.Filter fragmentFilter = new FileBrowser.Filter("Fragments", ".obj");
+
+            FileBrowser.SetFilters(false, configurationFilter, fragmentFilter);
+            FileBrowser.SetDefaultFilter(configurationFilter.defaultExtension);
+            FileBrowser.SetExcludedExtensions(".lnk", ".tmp", ".zip", ".rar", ".exe", fragmentFilter.defaultExtension);
         }
 
         protected override void ExecuteButtonAction()
         {
             Reset();
             RetrieveExperimentInputData();
+        }
+
+        private void Reset()
+        {
+            configuration = null;
         }
 
         protected override bool HasDetectedKeyBoardShortCut()
@@ -40,99 +44,32 @@ namespace Buttons
 
         private void RetrieveExperimentInputData()
         {
-            RetrieveStaticFragment();
-        }
-
-        private void Reset()
-        {
-            this.staticFragmentFile = null;
-            this.outputDirectory = null;
-            this.modelFragmentFiles.Clear();
-            this.retrieveModelFragmentFilesCoroutine = null;
-        }
-
-        private void RetrieveStaticFragment()
-        {
             FileBrowser.ShowLoadDialog(
-                onSuccess: (path) =>
-                {
-                    this.staticFragmentFile = path;
-                    RetrieveModelFragmentDirectory();
-                },
-                onCancel: OnCancel,
+                onSuccess: ProcessExperimentConfigurtionFile,
+                onCancel: () => { },
                 folderMode: false,
                 initialPath: initialPath,
-                title: "Select the Static Fragment",
+                title: "Select the configuration file generated when the obj files were generated",
                 loadButtonText: "Select"
             );
         }
 
-        private void RetrieveModelFragmentDirectory()
+        private void ProcessExperimentConfigurtionFile(string path)
         {
-            FileBrowser.ShowLoadDialog(
-                onSuccess: (path) =>
-                {
-                    this.retrieveModelFragmentFilesCoroutine = RetrieveModelFragmentFiles(path);
-                    StartCoroutine(retrieveModelFragmentFilesCoroutine);
-
-                    RetrieveOutputDirectory();
-                },
-                onCancel: OnCancel,
-                folderMode: true,
-                initialPath: initialPath,
-                title: "Select the Model Fragment Directory",
-                loadButtonText: "Select"
-            );
-        }
-
-        private IEnumerator RetrieveModelFragmentFiles(string result)
-        {
-            ///Use a local variable so that we can use the state of the 
-            /// property to check if this function is finished.
-            List<string> files = new List<string>();
-            for (int i = 0; i < 400; i++)
+            try
             {
-                files.Add("Hi!");
-                yield return null;
+                this.configuration = Experiment.Configuration.FromJson(path);
+                RetrieveDataFromConfiguration();
             }
-            this.modelFragmentFiles.AddRange(files);
-
-            StartExperiment();
+            catch (Exception e)
+            {
+                Debug.LogError("Could not read the file " + path + e.Message);
+            }
         }
 
-        void RetrieveOutputDirectory()
+        private void RetrieveDataFromConfiguration()
         {
-            FileBrowser.ShowSaveDialog(
-                onSuccess: (path) =>
-                {
-                    this.outputDirectory = path;
-                    StartExperiment();
-                },
-                onCancel: OnCancel,
-                folderMode: true,
-                initialPath: initialPath,
-                title: "Select the Output Directory",
-                saveButtonText: "Select"
-            );
-        }
-
-        private void OnCancel()
-        {
-            if (retrieveModelFragmentFilesCoroutine != null) StopCoroutine(retrieveModelFragmentFilesCoroutine);
-        }
-
-        private void StartExperiment()
-        {
-            if (!ExperimentDataReady()) return;
-            throw new NotImplementedException("Write the code to actually run the experiment!");
-        }
-
-        private bool ExperimentDataReady()
-        {
-            return (
-                this.outputDirectory != null &&
-                !this.modelFragmentFiles.IsEmpty()
-            );
+            Debug.Log("Time to retrieve data from the configuration");
         }
     }
 }
