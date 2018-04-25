@@ -74,8 +74,7 @@ namespace Buttons
 
         private void RetrieveDataFromConfiguration()
         {
-            Debug.Log("The output directory: " + configuration.outputDirectory);
-            //Remove all currently existing objects
+            ClearScene();
 
             //Get the current date time in a pretty format
 
@@ -86,6 +85,12 @@ namespace Buttons
             //Find the list of model fragments
 
             Debug.Log("Time to retrieve data from the configuration");
+        }
+
+        private void ClearScene()
+        {
+            SelectAllButton.OnExecuteButtonAction();
+            DeleteButton.OnExecuteButtonAction();
         }
     }
 }
