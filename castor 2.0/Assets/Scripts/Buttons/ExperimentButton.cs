@@ -10,7 +10,6 @@ namespace Buttons
         public AbstractButton SelectAllButton;
 
         private static string initialPath;
-        private Experiment.Configuration configuration;
 
         private void Start()
         {
@@ -36,9 +35,7 @@ namespace Buttons
         }
 
         private void Reset()
-        {
-            configuration = null;
-        }
+        { }
 
         protected override bool HasDetectedKeyBoardShortCut()
         {
@@ -61,30 +58,19 @@ namespace Buttons
 
         private void ProcessExperimentConfigurtionFile(string path)
         {
-            try
-            {
-                this.configuration = Experiment.Configuration.FromJson(path);
-                StartExperiment();
-            }
+            Experiment.Configuration configuration;
+            try { configuration = Experiment.Configuration.FromJson(path); }
             catch (Exception e)
             {
                 Debug.LogError("Could not read the file " + path + "\n\t error: " + e.Message);
+                return;
             }
-        }
 
-        private void StartExperiment()
-        {
             ClearScene();
 
-            //Get the current date time in a pretty format
-
-            //Generate an output folder within the output folder in the configuration
-
-            //Find the static fragment, read it, lock it, write it
-
-            //Find the list of model fragments
-
-            Debug.Log("Time to retrieve data from the configuration");
+            Experiment.Experiment experiment = new Experiment.Experiment(configuration);
+            experiment.SetUp();
+            experiment.Run();
         }
 
         private void ClearScene()
