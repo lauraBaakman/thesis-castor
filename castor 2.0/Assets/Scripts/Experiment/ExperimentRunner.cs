@@ -6,30 +6,33 @@ using IO;
 
 namespace Experiment
 {
-    public class Experiment
+    public class ExperimentRunner : MonoBehaviour
     {
-        private readonly Configuration configuration;
+        private Configuration configuration;
 
         public static string ExperimentFragmentPrefabPath = "ExperimentFragment";
 
-        GameObject staticFragment;
-        List<RunExecuter.Run> runs;
+        private GameObject staticFragment;
+        private List<RunExecuter.Run> runs;
 
-        IO.FragmentImporter fragmentImporter;
-        IO.FragmentExporter fragmentExporter;
+        private IO.FragmentImporter fragmentImporter;
+        private IO.FragmentExporter fragmentExporter;
 
-        Registration.Settings ICPSettings;
+        private Registration.Settings ICPSettings;
 
         private string outputDirectory;
 
-        public Experiment(Configuration configuration, GameObject ICPFragmentParentObject)
+
+        public void Init(Configuration configuration)
         {
             this.configuration = configuration;
 
-            this.fragmentImporter = new IO.FragmentImporter(ICPFragmentParentObject, FragmentReaderCallBack);
+            this.fragmentImporter = new IO.FragmentImporter(this.gameObject, FragmentReaderCallBack);
             this.fragmentExporter = new IO.FragmentExporter(FragmentWriterCallBack);
 
-            this.ICPSettings = new Registration.Settings(ICPFragmentParentObject.transform);
+            this.ICPSettings = new Registration.Settings(this.gameObject.transform);
+
+            SetUp();
         }
 
         private void FragmentReaderCallBack(IO.ReadResult result)
@@ -53,7 +56,7 @@ namespace Experiment
             );
         }
 
-        public void SetUp()
+        private void SetUp()
         {
             CreateResultsDirectory();
 
@@ -122,7 +125,11 @@ namespace Experiment
             RunExecuter executer = new RunExecuter(
                 staticFragment, ICPSettings,
                 fragmentExporter, fragmentImporter, outputDirectory);
-            foreach (RunExecuter.Run run in runs) executer.Execute(run);
+            foreach (RunExecuter.Run run in runs)
+            {
+                Debug.Log("Execute a Run!");
+                //executer.Execute(run);
+            }
         }
 
         [System.Serializable]

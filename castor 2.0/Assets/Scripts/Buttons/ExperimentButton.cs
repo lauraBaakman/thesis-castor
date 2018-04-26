@@ -1,6 +1,7 @@
 ﻿using System;
 using SimpleFileBrowser;
 using UnityEngine;
+using Experiment;
 
 namespace Buttons
 {
@@ -56,8 +57,8 @@ namespace Buttons
 
         private void ProcessExperimentConfigurtionFile(string path)
         {
-            Experiment.Experiment.Configuration configuration;
-            try { configuration = Experiment.Experiment.Configuration.FromJson(path); }
+            Experiment.ExperimentRunner.Configuration configuration;
+            try { configuration = Experiment.ExperimentRunner.Configuration.FromJson(path); }
             catch (Exception e)
             {
                 Debug.LogError("Could not read the file " + path + "\n\t error: " + e.Message);
@@ -66,8 +67,8 @@ namespace Buttons
 
             ClearScene();
 
-            Experiment.Experiment experiment = new Experiment.Experiment(configuration, ICPFragmentParent);
-            experiment.SetUp();
+            ExperimentRunner experiment = ICPFragmentParent.GetComponent<ExperimentRunner>();
+            experiment.Init(configuration);
             experiment.Execute();
         }
 

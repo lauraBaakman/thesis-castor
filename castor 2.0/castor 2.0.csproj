@@ -336,7 +336,7 @@
     <Compile Include="Assets\Scripts\DCEL\Face.cs" />
     <Compile Include="Assets\Scripts\DCEL\HalfEdge.cs" />
     <Compile Include="Assets\Scripts\DCEL\Vertex.cs" />
-    <Compile Include="Assets\Scripts\Experiment\Experiment.cs" />
+    <Compile Include="Assets\Scripts\Experiment\ExperimentRunner.cs" />
     <Compile Include="Assets\Scripts\Experiment\RunExecuter.cs" />
     <Compile Include="Assets\Scripts\Extensions\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />

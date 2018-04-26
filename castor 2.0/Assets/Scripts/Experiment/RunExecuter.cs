@@ -48,7 +48,7 @@ namespace Experiment
             Debug.Log(message);
 
             // Load ModelFragment
-            GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath, prefabPath: Experiment.ExperimentFragmentPrefabPath);
+            GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath, prefabPath: ExperimentRunner.ExperimentFragmentPrefabPath);
 
             // Run ICP
             ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
