@@ -72,7 +72,7 @@ namespace Buttons
 
             Experiment.Experiment experiment = new Experiment.Experiment(configuration, Fragments);
             experiment.SetUp();
-            experiment.Perform();
+            experiment.Execute();
         }
 
         private void ClearScene()

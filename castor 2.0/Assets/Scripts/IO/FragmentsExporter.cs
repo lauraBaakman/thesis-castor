@@ -80,7 +80,7 @@ namespace IO
         }
     }
 
-    internal class FragmentExporter
+    public class FragmentExporter
     {
         private static string defaultSuffix = "_transformed";
 

@@ -11,7 +11,7 @@ namespace Experiment
         private readonly Configuration configuration;
 
         GameObject staticFragment;
-        List<Run.Configuration> runs;
+        List<RunRunner.Run> runs;
 
         IO.FragmentImporter fragmentImporter;
         IO.FragmentExporter fragmentExporter;
@@ -53,14 +53,14 @@ namespace Experiment
 
             HandleStaticFragment();
 
-            this.runs = CollectRunConfigurations();
+            this.runs = CollectRuns();
 
-            //Write Settings to File
+            throw new NotImplementedException("Write a copy of the settings file to the output directory");
         }
 
-        private List<Run.Configuration> CollectRunConfigurations()
+        private List<RunRunner.Run> CollectRuns()
         {
-            return Run.Configuration.FromCSV(configuration.configurations);
+            return RunRunner.Run.FromCSV(configuration.configurations);
         }
 
         private void CreateResultsDirectory()
@@ -111,9 +111,9 @@ namespace Experiment
             fragmentExporter.Export(fragment, path);
         }
 
-        public void Perform()
+        public void Execute()
         {
-
+            throw new NotSupportedException("Implement the execute function");
         }
 
         [System.Serializable]
