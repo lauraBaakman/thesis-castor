@@ -32,12 +32,8 @@ namespace Buttons
 
         protected override void ExecuteButtonAction()
         {
-            Reset();
             RetrieveExperimentInputData();
         }
-
-        private void Reset()
-        { }
 
         protected override bool HasDetectedKeyBoardShortCut()
         {
