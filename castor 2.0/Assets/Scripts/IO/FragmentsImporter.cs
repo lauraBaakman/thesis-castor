@@ -70,7 +70,7 @@ namespace IO
             : this(parent, callBack, false)
         { }
 
-        public GameObject Import(string path)
+        public GameObject Import(string path, bool initUI = true)
         {
             ReadResult result = IO.ObjFile.Read(path);
             GameObject fragment = null;
@@ -89,7 +89,7 @@ namespace IO
             return Path.GetFileNameWithoutExtension(path);
         }
 
-        private GameObject AddFragmentToScene(string name, Mesh mesh)
+        private GameObject AddFragmentToScene(string name, Mesh mesh, bool initUI = true)
         {
             GameObject fragment = UnityEngine.Object.Instantiate(
                 original: Resources.Load(PrefabPath),
