@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using IO;
 using UnityEngine;
-using Registration;
-using System;
 using System.IO;
+using Fragment;
 
 namespace Experiment
 {
@@ -35,15 +34,17 @@ namespace Experiment
         {
             GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath);
 
-            ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
+            //ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
 
-            throw new NotImplementedException("Actually do ICP");
+            //throw new NotImplementedException("Actually do ICP");
 
-            fragmentExporter.Export(staticFragment, run.GetOutputPath(this.outputDirectory));
+            Debug.Log("Doing ICP with " + run.id);
 
-            // Delete the model fragment from the scene
-            throw new NotImplementedException("Delete the model fragment from the scene");
+            fragmentExporter.Export(modelFragment, run.GetOutputPath(this.outputDirectory));
+
+            modelFragment.GetComponent<FragmentDestroyer>().DestroyFragment();
         }
+
 
         public class Run
         {
@@ -61,7 +62,7 @@ namespace Experiment
                 return Path.Combine(outputDirectory, string.Format("{0}.obj", this.id));
             }
 
-            public static List<Run> ConfigurationsFromCSV(List<Dictionary<string, object>> rows)
+            public static List<Run> FromCSV(List<Dictionary<string, object>> rows)
             {
                 List<Run> configurations = new List<Run>(rows.Count);
 
@@ -73,7 +74,7 @@ namespace Experiment
             public static List<Run> FromCSV(string csvPath)
             {
                 List<Dictionary<string, object>> configurations = new IO.CSVFileReader().Read(csvPath);
-                return ConfigurationsFromCSV(configurations);
+                return FromCSV(configurations);
             }
 
             public static Run FromCSV(Dictionary<string, object> csvRow)
