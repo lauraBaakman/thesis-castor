@@ -16,14 +16,18 @@ namespace Experiment
         IO.FragmentImporter fragmentImporter;
         IO.FragmentExporter fragmentExporter;
 
+        Registration.Settings ICPSettings;
+
         private string outputDirectory;
 
-        public Experiment(Configuration configuration, GameObject fragments)
+        public Experiment(Configuration configuration, GameObject ICPFragmentParentObject)
         {
             this.configuration = configuration;
-            this.fragmentImporter = new IO.FragmentImporter(fragments, FragmentReaderCallBack);
 
+            this.fragmentImporter = new IO.FragmentImporter(ICPFragmentParentObject, FragmentReaderCallBack);
             this.fragmentExporter = new IO.FragmentExporter(FragmentWriterCallBack);
+
+            this.ICPSettings = new Registration.Settings(ICPFragmentParentObject.transform);
         }
 
         private void FragmentReaderCallBack(IO.ReadResult result)
@@ -55,7 +59,7 @@ namespace Experiment
 
             this.runs = CollectRuns();
 
-            throw new NotImplementedException("Write a copy of the settings file to the output directory");
+            //throw new NotImplementedException("Write a copy of the settings file to the output directory");
         }
 
         private List<RunExecuter.Run> CollectRuns()
@@ -113,7 +117,10 @@ namespace Experiment
 
         public void Execute()
         {
-            throw new NotSupportedException("Implement the execute function");
+            RunExecuter executer = new RunExecuter(
+                staticFragment, ICPSettings,
+                fragmentExporter, fragmentImporter, outputDirectory);
+            foreach (RunExecuter.Run run in runs) executer.Execute(run);
         }
 
         [System.Serializable]
