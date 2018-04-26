@@ -38,7 +38,7 @@ namespace Registration
                 staticFragment.SendMessage(
                     "OnToggleIsICPFragment",
                     Fragment.ICPFragmentType.Static,
-                    SendMessageOptions.RequireReceiver
+                    SendMessageOptions.DontRequireReceiver
                 );
                 AddListener(staticFragment);
             }
@@ -56,7 +56,7 @@ namespace Registration
                 modelFragment.SendMessage(
                     "OnToggleIsICPFragment",
                     Fragment.ICPFragmentType.Model,
-                    SendMessageOptions.RequireReceiver
+                    SendMessageOptions.DontRequireReceiver
                 );
                 AddListener(modelFragment);
             }
