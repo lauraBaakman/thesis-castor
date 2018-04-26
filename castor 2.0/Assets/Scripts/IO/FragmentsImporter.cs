@@ -51,7 +51,7 @@ namespace IO
 
     public class FragmentImporter
     {
-        private static string PrefabPath = "Fragment";
+        private static string DefaultPrefabPath = "Fragment";
         private readonly GameObject Parent;
 
         private bool RandomizeTransform;
@@ -70,15 +70,17 @@ namespace IO
             : this(parent, callBack, false)
         { }
 
-        public GameObject Import(string path, bool initUI = true)
+        public GameObject Import(string path, string prefabPath = null)
         {
+            prefabPath = prefabPath ?? DefaultPrefabPath;
+
             ReadResult result = IO.ObjFile.Read(path);
             GameObject fragment = null;
 
             if (result.Succeeded())
             {
                 string name = ExtractObjectName(path);
-                fragment = AddFragmentToScene(name, result.Mesh);
+                fragment = AddFragmentToScene(name, result.Mesh, prefabPath);
             }
             CallBack(result);
             return fragment;
@@ -89,10 +91,10 @@ namespace IO
             return Path.GetFileNameWithoutExtension(path);
         }
 
-        private GameObject AddFragmentToScene(string name, Mesh mesh)
+        private GameObject AddFragmentToScene(string name, Mesh mesh, string prefabPath)
         {
             GameObject fragment = UnityEngine.Object.Instantiate(
-                original: Resources.Load(PrefabPath),
+                original: Resources.Load(prefabPath),
                 parent: Parent.transform
             ) as GameObject;
 
