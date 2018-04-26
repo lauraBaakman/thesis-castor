@@ -74,8 +74,8 @@ namespace Registration
 
         public Settings(
             Transform referenceTransform,
-            float errorThreshold = 0.001f, int maxNumIterations = 50,
-            float maxWithinCorrespondenceDistance = 10.0f
+            float errorThreshold = 0.001f, int maxNumIterations = 100,
+            float maxWithinCorrespondenceDistance = 1.0f
         )
         {
             ReferenceTransform = referenceTransform;
