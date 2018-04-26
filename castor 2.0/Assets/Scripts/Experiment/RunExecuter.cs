@@ -39,8 +39,8 @@ namespace Experiment
             GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath);
 
             // Run ICP
-            //ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
-            //icp.RunUntilTermination();
+            ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
+            icp.RunUntilTermination();
 
             // Export Current Position of the ModelFragment
             fragmentExporter.Export(modelFragment, run.GetOutputPath(this.outputDirectory));
