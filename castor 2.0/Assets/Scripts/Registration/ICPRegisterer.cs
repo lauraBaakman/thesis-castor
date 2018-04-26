@@ -218,7 +218,7 @@ namespace Registration
                 listener.SendMessage(
                     methodName: methodName,
                     value: message,
-                    options: SendMessageOptions.RequireReceiver
+                    options: SendMessageOptions.DontRequireReceiver
                 );
                 if (message is Ticker.IToTickerMessage) SendMessageToTicker(message as Ticker.IToTickerMessage);
             }

@@ -40,6 +40,7 @@ namespace Experiment
             string message = string.Format("Starting run number {0} with fragment {1}.",
                                            currentRunNumber, run.id);
 
+            //Notify the user via the ticker and via the debug log
             Ticker.Receiver.Instance.SendMessage(
                  methodName: "OnMessage",
                 value: new Ticker.Message.InfoMessage(message)
