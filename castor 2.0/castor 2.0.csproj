@@ -552,6 +552,7 @@
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
     <Compile Include="Assets\Scripts\Experiment\RunExecuter.cs" />
+    <Compile Include="Assets\Scripts\Fragment\FragmentDestroyer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
