@@ -36,17 +36,17 @@ namespace Experiment
             Debug.Log("Running the experiment with " + run.id);
 
             // Load ModelFragment
-            GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath);
+            GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath, prefabPath: Experiment.ExperimentFragmentPrefabPath);
 
             // Run ICP
-            ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
-            icp.RunUntilTermination();
+            //ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
+            //icp.RunUntilTermination();
 
             // Export Current Position of the ModelFragment
             fragmentExporter.Export(modelFragment, run.GetOutputPath(this.outputDirectory));
 
             // Delete the ModelFragment
-            modelFragment.GetComponent<FragmentDestroyer>().DestroyFragment();
+            //modelFragment.GetComponent<FragmentDestroyer>().DestroyFragment();
         }
 
         public class Run

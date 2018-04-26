@@ -10,6 +10,8 @@ namespace Experiment
     {
         private readonly Configuration configuration;
 
+        public static string ExperimentFragmentPrefabPath = "ExperimentFragment";
+
         GameObject staticFragment;
         List<RunExecuter.Run> runs;
 
@@ -94,7 +96,7 @@ namespace Experiment
 
         private GameObject Import(string path)
         {
-            return fragmentImporter.Import(path);
+            return fragmentImporter.Import(path, prefabPath: ExperimentFragmentPrefabPath);
         }
 
         private void Lock(GameObject fragment)
