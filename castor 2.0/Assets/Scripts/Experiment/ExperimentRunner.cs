@@ -1,8 +1,7 @@
-using UnityEngine;
-using System.IO;
-using System;
+
 using System.Collections.Generic;
-using IO;
+using System.IO;
+using UnityEngine;
 
 namespace Experiment
 {
@@ -84,7 +83,7 @@ namespace Experiment
 
         private string CreateOutputDirectoryName()
         {
-            DateTime now = DateTime.Now.ToLocalTime();
+            System.DateTime now = System.DateTime.Now.ToLocalTime();
             return now.ToString("MM-dd_HH-mm-ss");
         }
 
@@ -113,22 +112,22 @@ namespace Experiment
 
         private void Write(GameObject fragment)
         {
-            string path = Path.Combine(
+            string path = System.IO.Path.Combine(
                 path1: this.outputDirectory,
                 path2: Path.GetFileName(configuration.lockedFragmentFile)
             );
             fragmentExporter.Export(fragment, path);
         }
 
-        public void Execute()
+        public IEnumerator<object> Execute()
         {
             RunExecuter executer = new RunExecuter(
                 staticFragment, ICPSettings,
                 fragmentExporter, fragmentImporter, outputDirectory);
             foreach (RunExecuter.Run run in runs)
             {
-                Debug.Log("Execute a Run!");
-                //executer.Execute(run);
+                executer.Execute(run);
+                yield return null;
             }
         }
 

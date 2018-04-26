@@ -69,7 +69,7 @@ namespace Buttons
 
             ExperimentRunner experiment = ICPFragmentParent.GetComponent<ExperimentRunner>();
             experiment.Init(configuration);
-            experiment.Execute();
+            StartCoroutine(experiment.Execute());
         }
 
         private void ClearScene()
