@@ -15,11 +15,7 @@ namespace Buttons
             protected override void ExecuteButtonAction()
             {
                 if (registerer == null) return;
-                while (!registerer.HasTerminated)
-                {
-                    registerer.PrepareStep();
-                    registerer.Step();
-                }
+                registerer.RunUntilTermination();
             }
 
             protected override bool HasDetectedKeyBoardShortCut()

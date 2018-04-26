@@ -97,6 +97,15 @@ namespace Registration
             Listeners.Add(listener);
         }
 
+        public void RunUntilTermination()
+        {
+            while (!HasTerminated)
+            {
+                PrepareStep();
+                Step();
+            }
+        }
+
         public void PrepareStep()
         {
             if (HasTerminated) return;
