@@ -18,14 +18,15 @@ namespace Fragment
         private Transform Fragments;
 
         private static string ICPFragmentsName = "ICP Fragments";
+        private static string FragmentsName = "Fragments";
 
         public void Awake()
         {
-            GameObject FragmentsGO = transform.parent.gameObject;
+            GameObject FragmentsGO = GameObject.Find(FragmentsName);
             Debug.Assert(FragmentsGO, "Could not find the parent gameobject of this gameobject");
             Fragments = FragmentsGO.transform;
 
-            GameObject ICPFragmentsGO = FragmentsGO.FindChildByName(ICPFragmentsName);
+            GameObject ICPFragmentsGO = GameObject.Find(ICPFragmentsName);
             Debug.Assert(ICPFragmentsGO, "Could not find the gameobject with the name " + ICPFragmentsName);
             ICPFragments = ICPFragmentsGO.transform;
         }
