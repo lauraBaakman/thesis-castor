@@ -337,6 +337,7 @@
     <Compile Include="Assets\Scripts\DCEL\HalfEdge.cs" />
     <Compile Include="Assets\Scripts\DCEL\Vertex.cs" />
     <Compile Include="Assets\Scripts\Experiment\Experiment.cs" />
+    <Compile Include="Assets\Scripts\Experiment\RunExecuter.cs" />
     <Compile Include="Assets\Scripts\Extensions\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\GameObjectExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\ICollectionExtensions.cs" />
@@ -351,6 +352,7 @@
     <Compile Include="Assets\Scripts\Fragment\ContainmentDetector.cs" />
     <Compile Include="Assets\Scripts\Fragment\DoubleConnectedEdgeListStorage.cs" />
     <Compile Include="Assets\Scripts\Fragment\FaceNormalPainter.cs" />
+    <Compile Include="Assets\Scripts\Fragment\FragmentDestroyer.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPAbstractFragmentController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPController.cs" />
     <Compile Include="Assets\Scripts\Fragment\ICPModelFragmentController.cs" />
@@ -551,8 +553,6 @@
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
-    <Compile Include="Assets\Scripts\Experiment\RunExecuter.cs" />
-    <Compile Include="Assets\Scripts\Fragment\FragmentDestroyer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

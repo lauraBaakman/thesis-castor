@@ -3,6 +3,7 @@ using IO;
 using UnityEngine;
 using System.IO;
 using Fragment;
+using Registration;
 
 namespace Experiment
 {
@@ -32,19 +33,21 @@ namespace Experiment
 
         public void Execute(Run run)
         {
-            GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath);
+            Debug.Log("Running the experiment with " + run.id);
 
+            // Load ModelFragment
+            GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath, initUI: false);
+
+            // Run ICP
             //ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
+            //icp.RunUntilTermination();
 
-            //throw new NotImplementedException("Actually do ICP");
-
-            Debug.Log("Doing ICP with " + run.id);
-
+            // Export Current Position of the ModelFragment
             fragmentExporter.Export(modelFragment, run.GetOutputPath(this.outputDirectory));
 
+            // Delete the ModelFragment
             modelFragment.GetComponent<FragmentDestroyer>().DestroyFragment();
         }
-
 
         public class Run
         {
