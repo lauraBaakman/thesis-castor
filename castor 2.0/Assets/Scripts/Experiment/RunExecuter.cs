@@ -18,6 +18,8 @@ namespace Experiment
 
         private string outputDirectory;
 
+        private int currentRunNumber = 0;
+
         public RunExecuter(GameObject staticFragment, Registration.Settings IPCsettings,
                    FragmentExporter fragmentExporter, FragmentImporter fragmentImporter,
                   string outputDirectory)
@@ -33,7 +35,16 @@ namespace Experiment
 
         public void Execute(Run run)
         {
-            Debug.Log("Running the experiment with " + run.id);
+            currentRunNumber++;
+
+            string message = string.Format("Starting run number {0} with fragment {1}.",
+                                           currentRunNumber, run.id);
+
+            Ticker.Receiver.Instance.SendMessage(
+                 methodName: "OnMessage",
+                value: new Ticker.Message.InfoMessage(message)
+             );
+            Debug.Log(message);
 
             // Load ModelFragment
             GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath, prefabPath: Experiment.ExperimentFragmentPrefabPath);
