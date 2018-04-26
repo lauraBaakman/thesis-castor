@@ -89,7 +89,7 @@ namespace IO
             return Path.GetFileNameWithoutExtension(path);
         }
 
-        private GameObject AddFragmentToScene(string name, Mesh mesh, bool initUI = true)
+        private GameObject AddFragmentToScene(string name, Mesh mesh)
         {
             GameObject fragment = UnityEngine.Object.Instantiate(
                 original: Resources.Load(PrefabPath),
