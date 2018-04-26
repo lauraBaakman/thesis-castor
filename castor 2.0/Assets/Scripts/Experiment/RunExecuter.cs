@@ -36,7 +36,7 @@ namespace Experiment
             Debug.Log("Running the experiment with " + run.id);
 
             // Load ModelFragment
-            GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath, initUI: false);
+            GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath);
 
             // Run ICP
             //ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
