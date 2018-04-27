@@ -126,8 +126,8 @@ namespace Experiment
                 fragmentExporter, fragmentImporter, outputDirectory);
             foreach (RunExecuter.Run run in runs)
             {
-                executer.Execute(run);
-                yield return null;
+                StartCoroutine(executer.Execute(run));
+                yield return new WaitUntil(executer.IsCurrentRunFinished);
             }
         }
 

@@ -20,6 +20,8 @@ namespace Experiment
 
         private int currentRunNumber = 0;
 
+        private bool isCurrentRunFinsihed = false;
+
         public RunExecuter(GameObject staticFragment, Registration.Settings IPCsettings,
                    FragmentExporter fragmentExporter, FragmentImporter fragmentImporter,
                   string outputDirectory)
@@ -33,9 +35,10 @@ namespace Experiment
             this.outputDirectory = outputDirectory;
         }
 
-        public void Execute(Run run)
+        public IEnumerator<object> Execute(Run run)
         {
             currentRunNumber++;
+            isCurrentRunFinsihed = false;
 
             string message = string.Format("Starting run number {0} with fragment {1}.",
                                            currentRunNumber, run.id);
@@ -49,16 +52,31 @@ namespace Experiment
 
             // Load ModelFragment
             GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath, prefabPath: ExperimentRunner.ExperimentFragmentPrefabPath);
+            yield return null;
 
             // Run ICP
             ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
-            //icp.RunUntilTermination();
+            while (!icp.HasTerminated)
+            {
+                icp.PrepareStep();
+                yield return null;
+
+                icp.Step();
+                yield return null;
+            }
 
             // Export Current Position of the ModelFragment
             fragmentExporter.Export(modelFragment, run.GetOutputPath(this.outputDirectory));
+            yield return null;
 
             // Delete the ModelFragment
-            //modelFragment.GetComponent<FragmentDestroyer>().DestroyFragment();
+            modelFragment.GetComponent<FragmentDestroyer>().DestroyFragment();
+            isCurrentRunFinsihed = true;
+        }
+
+        public bool IsCurrentRunFinished()
+        {
+            return isCurrentRunFinsihed;
         }
 
         public class Run
