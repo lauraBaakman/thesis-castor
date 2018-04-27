@@ -6,5 +6,7 @@ namespace Registration
     public interface ICorrespondenceFilter
     {
         CorrespondenceCollection Filter(CorrespondenceCollection correspondences);
+
+        string ToJson();
     }
 }

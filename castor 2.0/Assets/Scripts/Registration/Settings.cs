@@ -132,11 +132,35 @@ namespace Registration
                 }
             }
 
+            [System.Serializable]
+            public class SerializableCorrespondences
+            {
+                public List<string> correspondenceFilters;
+
+                public SerializableCorrespondences(ReadOnlyCollection<ICorrespondenceFilter> correspondenceFilters)
+                {
+                    foreach (ICorrespondenceFilter filter in correspondenceFilters)
+                    {
+                        this.correspondenceFilters.Add(filter.ToJson());
+                    }
+                }
+            }
+
             public SerializableTransform referenceTransform;
+
+            public SerializableCorrespondences correspondences;
 
             public SerializableSettings(Settings settings)
             {
                 referenceTransform = new SerializableTransform(settings.ReferenceTransform);
+
+                correspondences = new SerializableCorrespondences(settings.CorrespondenceFilters);
+
+                //find transform
+
+                //error
+
+                //Apply transform
             }
 
             public void ToJson(string outputPath)
