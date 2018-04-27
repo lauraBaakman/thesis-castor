@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Registration;
 
 namespace Experiment
 {
@@ -63,7 +64,9 @@ namespace Experiment
 
             this.runs = CollectRuns();
 
-            //throw new NotImplementedException("Write a copy of the settings file to the output directory");
+            this.ICPSettings.ToJson("/Users/laura/Desktop/settings.json");
+
+            Debug.Log("Write a copy of the settings file to the output directory");
         }
 
         private List<RunExecuter.Run> CollectRuns()

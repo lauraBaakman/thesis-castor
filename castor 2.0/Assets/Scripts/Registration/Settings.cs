@@ -116,16 +116,34 @@ namespace Registration
         [System.Serializable]
         public class SerializableSettings
         {
-            public string referenceTransform;
+
+            [System.Serializable]
+            public class SerializableTransform
+            {
+                public string name;
+                public string world_space_position;
+                public string world_space_eulerAngles;
+
+                public SerializableTransform(Transform transform)
+                {
+                    name = transform.name;
+                    world_space_position = transform.position.ToString();
+                    world_space_eulerAngles = transform.eulerAngles.ToString();
+                }
+            }
+
+            public SerializableTransform referenceTransform;
 
             public SerializableSettings(Settings settings)
             {
-                referenceTransform = settings.ReferenceTransform.name;
+                referenceTransform = new SerializableTransform(settings.ReferenceTransform);
             }
 
             public void ToJson(string outputPath)
             {
                 string jsonString = JsonUtility.ToJson(this);
+
+                Debug.Log("jsonString: " + jsonString);
 
                 StreamWriter streamWriter = new StreamWriter(outputPath);
                 streamWriter.Write(jsonString);
