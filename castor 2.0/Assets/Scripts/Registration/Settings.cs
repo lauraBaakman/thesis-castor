@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 using Registration.Error;
+using System.IO;
 
 namespace Registration
 {
@@ -106,6 +107,32 @@ namespace Registration
 
             CorrespondenceFinder = new NearstPointCorrespondenceFinder(this);
         }
+
+        public void ToJson(string outputPath)
+        {
+            new SerializableSettings(this).ToJson(outputPath);
+        }
+
+        [System.Serializable]
+        public class SerializableSettings
+        {
+            public string referenceTransform;
+
+            public SerializableSettings(Settings settings)
+            {
+                referenceTransform = settings.ReferenceTransform.name;
+            }
+
+            public void ToJson(string outputPath)
+            {
+                string jsonString = JsonUtility.ToJson(this);
+
+                StreamWriter streamWriter = new StreamWriter(outputPath);
+                streamWriter.Write(jsonString);
+                streamWriter.Close();
+            }
+        }
     }
+
 }
 
