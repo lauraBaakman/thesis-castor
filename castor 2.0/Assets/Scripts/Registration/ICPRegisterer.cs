@@ -164,7 +164,7 @@ namespace Registration
 
         private bool InvalidCorrespondences(out string message)
         {
-            message = "Found zero correspondences, cannot register without correspondenes.";
+            message = "Found zero correspondences, cannot register without correspondences.";
             return Correspondences.Count <= 0;
         }
 
@@ -176,6 +176,7 @@ namespace Registration
                 methodName: "OnICPTerminated",
                 message: new ICPTerminatedMessage(reason, message)
             );
+            Debug.Log(string.Format("Terminated at iteration {0}", iterationCounter.CurrentCount));
         }
 
         /// <summary>
