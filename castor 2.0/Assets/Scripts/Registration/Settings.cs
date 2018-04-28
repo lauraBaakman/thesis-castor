@@ -74,9 +74,13 @@ namespace Registration
         /// <value>The trans form finder.</value>
         public ITransformFinder TransFormFinder { get; set; }
 
+        public Settings(Transform referenceTransform)
+            : this(referenceTransform, new HornTransformFinder())
+        { }
+
         public Settings(
-            Transform referenceTransform,
-            float errorThreshold = 0.001f, int maxNumIterations = 100,
+            Transform referenceTransform, ITransformFinder transformFinder,
+            float errorThreshold = 0.001f, int maxNumIterations = 1000,
             float maxWithinCorrespondenceDistance = 1.0f
         )
         {
@@ -91,22 +95,15 @@ namespace Registration
             PointSampler = new AllPointsSampler(
                 new AllPointsSampler.Configuration(
                     referenceTransform,
-                    AllPointsSampler.Configuration.NormalProcessing.AreaWeightedSmoothNormals
+                    AllPointsSampler.Configuration.NormalProcessing.VertexNormals
                 )
             );
 
             correspondenceFilters = new List<ICorrespondenceFilter>();
 
-            TransFormFinder = new IGDTransformFinder(
-                new IGDTransformFinder.Configuration(
-                    convergenceError: 0.001,
-                    learningRate: 0.001,
-                    maxNumIterations: 50,
-                    errorMetric: new IntersectionTermError(0.5, 0.5)
-                )
-            );
+            this.TransFormFinder = transformFinder;
 
-            CorrespondenceFinder = new NearstPointCorrespondenceFinder(this);
+            CorrespondenceFinder = new NormalShootingCorrespondenceFinder(this);
         }
 
         public void ToJson(string outputPath)

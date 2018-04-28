@@ -11,8 +11,6 @@ namespace Experiment
     {
         private GameObject staticFragment;
 
-        private Registration.Settings icpSettings;
-
         private FragmentExporter fragmentExporter;
         private FragmentImporter fragmentImporter;
 
@@ -22,17 +20,20 @@ namespace Experiment
 
         private bool isCurrentRunFinsihed = false;
 
-        public RunExecuter(GameObject staticFragment, Registration.Settings IPCsettings,
-                   FragmentExporter fragmentExporter, FragmentImporter fragmentImporter,
-                  string outputDirectory)
+        public RunExecuter(GameObject staticFragment,
+                           FragmentExporter fragmentExporter, FragmentImporter fragmentImporter)
         {
             this.staticFragment = staticFragment;
-            this.icpSettings = IPCsettings;
 
             this.fragmentExporter = fragmentExporter;
             this.fragmentImporter = fragmentImporter;
+        }
 
-            this.outputDirectory = outputDirectory;
+        public string OutputDirectory
+        {
+            get { return outputDirectory; }
+
+            set { outputDirectory = value; }
         }
 
         public IEnumerator<object> Execute(Run run)
@@ -55,7 +56,7 @@ namespace Experiment
             yield return null;
 
             // Run ICP
-            ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, icpSettings);
+            ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, run.ICPSettings);
             while (!icp.HasTerminated)
             {
                 icp.PrepareStep();
@@ -83,6 +84,8 @@ namespace Experiment
         {
             public readonly string modelFragmentPath;
             public readonly string id;
+
+            public Settings ICPSettings;
 
             public Run(string modelFragmentPath, string id)
             {

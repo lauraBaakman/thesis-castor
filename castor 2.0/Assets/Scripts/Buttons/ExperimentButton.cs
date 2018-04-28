@@ -70,8 +70,7 @@ namespace Buttons
             ExperimentRunner experiment = ICPFragmentParent.GetComponent<ExperimentRunner>();
             experiment.Init(configuration);
 
-            Debug.Log("Temporary don't start the experiment");
-            //StartCoroutine(experiment.Execute());
+            StartCoroutine(experiment.Execute());
         }
 
         private void ClearScene()

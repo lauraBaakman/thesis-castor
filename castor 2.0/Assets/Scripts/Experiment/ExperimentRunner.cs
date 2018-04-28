@@ -15,10 +15,10 @@ namespace Experiment
         private GameObject staticFragment;
         private List<RunExecuter.Run> runs;
 
+        private List<Settings> ICPSettings;
+
         private IO.FragmentImporter fragmentImporter;
         private IO.FragmentExporter fragmentExporter;
-
-        private Registration.Settings ICPSettings;
 
         private string outputDirectory;
 
@@ -30,7 +30,7 @@ namespace Experiment
             this.fragmentImporter = new IO.FragmentImporter(this.gameObject, FragmentReaderCallBack);
             this.fragmentExporter = new IO.FragmentExporter(FragmentWriterCallBack);
 
-            this.ICPSettings = new Registration.Settings(this.gameObject.transform);
+            this.ICPSettings = new List<Settings>();
 
             SetUp();
         }
@@ -58,15 +58,56 @@ namespace Experiment
 
         private void SetUp()
         {
-            CreateResultsDirectory();
-
             HandleStaticFragment();
 
+            GenerateICPSettings();
+
             this.runs = CollectRuns();
+        }
 
-            this.ICPSettings.ToJson("/Users/laura/Desktop/settings.json");
+        private void GenerateICPSettings()
+        {
+            ICPSettings.Add(
+                new Settings(
+                    this.gameObject.transform,
+                    new IGDTransformFinder(
+                        new IGDTransformFinder.Configuration(
+                            convergenceError: 0.001,
+                            learningRate: 0.001,
+                            maxNumIterations: 200,
+                            errorMetric: new Registration.Error.IntersectionTermError(0.5, 0.5)
+                        )
+                    )
+                )
+            );
 
-            Debug.Log("Write a copy of the settings file to the output directory");
+            ICPSettings.Add(
+                new Settings(
+                    this.gameObject.transform,
+                    new IGDTransformFinder(
+                        new IGDTransformFinder.Configuration(
+                            convergenceError: 0.001,
+                            learningRate: 0.001,
+                            maxNumIterations: 200,
+                            errorMetric: new Registration.Error.WheelerIterativeError()
+                        )
+                    )
+                )
+            );
+
+            ICPSettings.Add(
+                new Settings(
+                    this.gameObject.transform,
+                    new HornTransformFinder()
+                )
+            );
+
+            ICPSettings.Add(
+                new Settings(
+                    this.gameObject.transform,
+                    new LowTransformFinder()
+                )
+            );
         }
 
         private List<RunExecuter.Run> CollectRuns()
@@ -74,20 +115,26 @@ namespace Experiment
             return RunExecuter.Run.FromCSV(configuration.configurations);
         }
 
-        private void CreateResultsDirectory()
+        private string CreateResultsDirectory()
         {
             string basePath = configuration.outputDirectory;
-            string directoryName = CreateOutputDirectoryName();
+            string directoryName = CreateResultsDirectoryName();
 
-            this.outputDirectory = Path.Combine(basePath, directoryName);
+            string directory = Path.Combine(basePath, directoryName);
 
-            Directory.CreateDirectory(outputDirectory);
+            Directory.CreateDirectory(directory);
+
+            return directory;
         }
 
-        private string CreateOutputDirectoryName()
+        private string CreateResultsDirectoryName()
         {
             System.DateTime now = System.DateTime.Now.ToLocalTime();
-            return now.ToString("MM-dd_HH-mm-ss");
+            return string.Format(
+                "{0}_{1}",
+                now.ToString("MM-dd_HH-mm-ss"),
+                Time.frameCount
+            );
         }
 
         private void HandleStaticFragment()
@@ -95,8 +142,6 @@ namespace Experiment
             this.staticFragment = Import(configuration.lockedFragmentFile);
 
             Lock(staticFragment);
-
-            Write(staticFragment);
         }
 
         private GameObject Import(string path)
@@ -124,13 +169,27 @@ namespace Experiment
 
         public IEnumerator<object> Execute()
         {
-            RunExecuter executer = new RunExecuter(
-                staticFragment, ICPSettings,
-                fragmentExporter, fragmentImporter, outputDirectory);
-            foreach (RunExecuter.Run run in runs)
+            RunExecuter executer = new RunExecuter(staticFragment,
+                                                   fragmentExporter, fragmentImporter);
+
+            foreach (Settings ICPSetting in this.ICPSettings)
             {
-                StartCoroutine(executer.Execute(run));
-                yield return new WaitUntil(executer.IsCurrentRunFinished);
+                this.outputDirectory = CreateResultsDirectory();
+                yield return null;
+
+                Write(staticFragment);
+                yield return null;
+
+                //ICPSetting.ToJson(Path.Combine(this.outputDirectory, "settings.json"));
+
+                foreach (RunExecuter.Run run in runs)
+                {
+                    run.ICPSettings = ICPSetting;
+                    executer.OutputDirectory = this.outputDirectory;
+
+                    StartCoroutine(executer.Execute(run));
+                    yield return new WaitUntil(executer.IsCurrentRunFinished);
+                }
             }
         }
 
