@@ -112,7 +112,7 @@ namespace Registration
             /// <returns>The error used by the horn transform finder.</returns>
             public static IErrorMetric Horn()
             {
-                return new ErrorMetric(Configuration.Horn);
+                return new ErrorMetric(Configuration._Horn);
             }
 
             /// <summary>
@@ -125,7 +125,7 @@ namespace Registration
             /// <returns>The low.</returns>
             public static IErrorMetric Low()
             {
-                return new ErrorMetric(Configuration.Low);
+                return new ErrorMetric(Configuration._Low);
             }
 
             /// <summary>
@@ -135,7 +135,7 @@ namespace Registration
             /// <returns>The wheeler.</returns>
             public static IErrorMetric Wheeler()
             {
-                return new ErrorMetric(Configuration.Wheeler);
+                return new ErrorMetric(Configuration._Wheeler);
             }
 
             public static IErrorMetric IntersectionTermError(double distanceWeight, double intersectionWeight)
@@ -221,7 +221,7 @@ namespace Registration
                 /// Horn, Berthold KP. "Closed-form solution of absolute orientation using unit quaternions." JOSA A 4.4 (1987): 629-642.
                 /// </summary>
                 /// <returns>The error used by the horn transform finder.</returns>
-                internal static Configuration Horn
+                internal static Configuration _Horn
                 {
                     get
                     {
@@ -241,7 +241,7 @@ namespace Registration
                 /// University of North Carolina 4 (2004).
                 /// </summary>
                 /// <returns>The configuration of the error metric proposed by low.</returns>
-                internal static Configuration Low
+                internal static Configuration _Low
                 {
                     get
                     {
@@ -257,7 +257,7 @@ namespace Registration
                 /// The error metric proposed by Wheeler.
                 /// </summary>
                 /// <returns>The configuration of the error metric proposed by wheeler.</returns>
-                internal static Configuration Wheeler
+                internal static Configuration _Wheeler
                 {
                     get
                     {

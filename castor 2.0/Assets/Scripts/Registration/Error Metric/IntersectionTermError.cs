@@ -197,7 +197,10 @@ namespace Registration.Error
 
         public SerializableErrorMetric Serialize()
         {
-            throw new NotImplementedException();
+            return new SerializableErrorMetric(
+                (float)this.distanceWeight, (float)this.intersectionWeight,
+                aggregationMethod: "1/4 * mean", distanceMethod: "squared euclidean", normalizePoints: 0
+            );
         }
         #endregion
     }

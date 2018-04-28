@@ -100,7 +100,7 @@ namespace Registration.Error
             : this(1, 0, aggregationMethod, distanceMethod, normalizePoints)
         { }
 
-        private SerializableErrorMetric(
+        public SerializableErrorMetric(
             float distanceWeight = -1, float intersectionWeight = -1,
             string aggregationMethod = "", string distanceMethod = "",
             int normalizePoints = -1)
