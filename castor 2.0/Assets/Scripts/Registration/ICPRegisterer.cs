@@ -174,7 +174,7 @@ namespace Registration
             if (FinishedCallBack != null) FinishedCallBack();
             SendMessageToAllListeners(
                 methodName: "OnICPTerminated",
-                message: new ICPTerminatedMessage(reason, message)
+                message: new ICPTerminatedMessage(reason, this.error, message)
             );
             Debug.Log(string.Format("Terminated at iteration {0}", iterationCounter.CurrentCount));
         }

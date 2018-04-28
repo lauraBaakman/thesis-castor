@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Registration;
+using Registration.Messages;
 
 namespace Experiment
 {
-    public class ExperimentRunner : MonoBehaviour
+    public class ExperimentRunner : MonoBehaviour, IICPListener
     {
         private Configuration configuration;
 
@@ -22,6 +23,7 @@ namespace Experiment
 
         private string outputDirectory;
 
+        private StreamWriter streamWriter;
 
         public void Init(Configuration configuration)
         {
@@ -66,6 +68,7 @@ namespace Experiment
         }
 
         private void GenerateICPSettings()
+
         {
             ICPSettings.Add(
                 new Settings(
@@ -169,7 +172,7 @@ namespace Experiment
 
         public IEnumerator<object> Execute()
         {
-            RunExecuter executer = new RunExecuter(staticFragment,
+            RunExecuter executer = new RunExecuter(this.gameObject, staticFragment,
                                                    fragmentExporter, fragmentImporter);
 
             foreach (Settings ICPSetting in this.ICPSettings)
@@ -183,16 +186,40 @@ namespace Experiment
                 ICPSetting.ToJson(Path.Combine(this.outputDirectory, "settings.json"));
                 yield return null;
 
+                streamWriter = new StreamWriter(Path.Combine(this.outputDirectory, "data.csv"));
+                streamWriter.WriteLine(
+                    string.Format(
+                        "{0}, {1}, {2}",
+                        "id", "termination message", "termination error"
+                    )
+                );
+                yield return null;
+
                 foreach (RunExecuter.Run run in runs)
                 {
                     run.ICPSettings = ICPSetting;
                     executer.OutputDirectory = this.outputDirectory;
 
+                    streamWriter.Write(string.Format("{0}, ", run.id));
+                    yield return null;
+
                     StartCoroutine(executer.Execute(run));
                     yield return new WaitUntil(executer.IsCurrentRunFinished);
                 }
+                streamWriter.Close();
             }
         }
+
+        #region ICPInterface
+        public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message) { }
+
+        public void OnStepCompleted(ICPStepCompletedMessage message) { }
+
+        public void OnICPTerminated(ICPTerminatedMessage message)
+        {
+            streamWriter.WriteLine(string.Format("'{0}', {1}", message.Message, message.errorAtTermination));
+        }
+        #endregion
 
         [System.Serializable]
         public class Configuration

@@ -10,6 +10,7 @@ namespace Experiment
     public class RunExecuter
     {
         private GameObject staticFragment;
+        private GameObject listener;
 
         private FragmentExporter fragmentExporter;
         private FragmentImporter fragmentImporter;
@@ -20,10 +21,11 @@ namespace Experiment
 
         private bool isCurrentRunFinsihed = false;
 
-        public RunExecuter(GameObject staticFragment,
+        public RunExecuter(GameObject listener, GameObject staticFragment,
                            FragmentExporter fragmentExporter, FragmentImporter fragmentImporter)
         {
             this.staticFragment = staticFragment;
+            this.listener = listener;
 
             this.fragmentExporter = fragmentExporter;
             this.fragmentImporter = fragmentImporter;
@@ -57,6 +59,8 @@ namespace Experiment
 
             // Run ICP
             ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, run.ICPSettings);
+            icp.AddListener(this.listener);
+
             while (!icp.HasTerminated)
             {
                 icp.PrepareStep();

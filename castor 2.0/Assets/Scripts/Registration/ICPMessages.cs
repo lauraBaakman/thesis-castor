@@ -54,10 +54,15 @@ namespace Registration
             public readonly TerminationReason Reason;
             private readonly string message;
 
-            public ICPTerminatedMessage(TerminationReason reason, string message = "")
+            public string Message { get { return message; } }
+
+            public float errorAtTermination;
+
+            public ICPTerminatedMessage(TerminationReason reason, float currentError, string message = "")
             {
                 this.Reason = reason;
                 this.message = message;
+                this.errorAtTermination = currentError;
             }
 
             public Message ToTickerMessage()
