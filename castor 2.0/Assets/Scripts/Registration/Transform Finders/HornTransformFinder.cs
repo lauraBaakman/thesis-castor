@@ -26,6 +26,11 @@ namespace Registration
             return this.errorMetric;
         }
 
+        public override SerializableTransformFinder Serialize()
+        {
+            return new SerializableTransformFinder("HornTransformFinder");
+        }
+
         /// <summary>
         /// Finds the transform that should be applied to the model points to 
         /// reduce the sum of squard distances error.

@@ -19,6 +19,11 @@ namespace Registration
             return this.errorMetric;
         }
 
+        public override SerializableTransformFinder Serialize()
+        {
+            return new SerializableTransformFinder("LowTransformFinder");
+        }
+
         protected override Matrix4x4 FindTransformImplementation(CorrespondenceCollection correspondences)
         {
             // Correspondences.Count x 6 matrix

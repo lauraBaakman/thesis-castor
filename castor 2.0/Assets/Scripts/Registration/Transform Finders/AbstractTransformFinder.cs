@@ -1,5 +1,6 @@
 using Registration.Error;
 using UnityEngine;
+using System;
 
 namespace Registration
 {
@@ -14,6 +15,8 @@ namespace Registration
 
         public abstract IErrorMetric GetErrorMetric();
 
+        public abstract SerializableTransformFinder Serialize();
+
         protected abstract Matrix4x4 FindTransformImplementation(CorrespondenceCollection correspondences);
 
         protected virtual void ValidateCorrespondences(CorrespondenceCollection correspondences)
@@ -23,6 +26,17 @@ namespace Registration
             {
                 throw new System.NotSupportedException("Cannot compute the transform if no correspondences are given.");
             }
+        }
+    }
+
+    [System.Serializable]
+    public class SerializableTransformFinder
+    {
+        public string name;
+
+        public SerializableTransformFinder(string name)
+        {
+            this.name = name;
         }
     }
 }

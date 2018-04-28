@@ -1,5 +1,6 @@
 using UnityEngine;
 using Registration.Error;
+using System;
 
 namespace Registration
 {
@@ -8,5 +9,7 @@ namespace Registration
         Matrix4x4 FindTransform(CorrespondenceCollection correspondences);
 
         IErrorMetric GetErrorMetric();
+
+        SerializableTransformFinder Serialize();
     }
 }

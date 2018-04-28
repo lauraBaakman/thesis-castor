@@ -175,6 +175,8 @@ namespace Registration
 
             public SerializableError error;
 
+            public SerializableTransformFinder transformFinder;
+
             public int maxNumIterations;
 
             public SerializableSettings(Settings settings)
@@ -185,12 +187,9 @@ namespace Registration
 
                 correspondences = new SerializableCorrespondences(settings);
 
-                //find transform
-
-                //error
                 error = new SerializableError(settings);
 
-                //Apply transform
+                transformFinder = settings.TransFormFinder.Serialize();
             }
 
             public void ToJson(string outputPath)
