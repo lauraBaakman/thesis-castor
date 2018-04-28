@@ -121,13 +121,18 @@ namespace Registration
             public class SerializableCorrespondences
             {
                 public List<string> correspondenceFilters;
+                public float maxWithinCorrespondenceDistance;
 
-                public SerializableCorrespondences(ReadOnlyCollection<ICorrespondenceFilter> correspondenceFilters)
+                public SerializableCorrespondences(
+                    ReadOnlyCollection<ICorrespondenceFilter> correspondenceFilters,
+                    float maxWithinCorrespondenceDistance
+                )
                 {
                     foreach (ICorrespondenceFilter filter in correspondenceFilters)
                     {
                         this.correspondenceFilters.Add(filter.ToJson());
                     }
+                    this.maxWithinCorrespondenceDistance = maxWithinCorrespondenceDistance;
                 }
             }
 
@@ -139,7 +144,10 @@ namespace Registration
             {
                 referenceTransform = new SerializableTransform(settings.ReferenceTransform);
 
-                correspondences = new SerializableCorrespondences(settings.CorrespondenceFilters);
+                correspondences = new SerializableCorrespondences(
+                    settings.CorrespondenceFilters,
+                    settings.MaxWithinCorrespondenceDistance
+                );
 
                 //find transform
 
