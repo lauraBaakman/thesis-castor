@@ -53,7 +53,7 @@ namespace Registration
 
         public SerializebleCorrespondenceFinder Serialize()
         {
-            throw new System.NotImplementedException();
+            return new SerializebleCorrespondenceFinder(MaxDistance, ReferenceTransform);
         }
 
         private Correspondence FindCorrespondence(Point staticPoint, SamplingInformation model)
