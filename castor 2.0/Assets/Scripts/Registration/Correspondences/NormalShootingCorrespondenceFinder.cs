@@ -51,6 +51,11 @@ namespace Registration
             return correspondences;
         }
 
+        public SerializebleCorrespondenceFinder ToSerializableObject()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private Correspondence FindCorrespondence(Point staticPoint, SamplingInformation model)
         {
             Point intersectionInReferenceTransform = FindIntersection(staticPoint, model);

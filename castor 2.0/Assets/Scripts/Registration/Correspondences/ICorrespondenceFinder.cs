@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System;
 
 namespace Registration
 {
@@ -8,5 +9,15 @@ namespace Registration
         CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints);
 
         CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation);
+
+        SerializebleCorrespondenceFinder ToSerializableObject();
+    }
+
+    public class SerializebleCorrespondenceFinder
+    {
+        public SerializebleCorrespondenceFinder()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

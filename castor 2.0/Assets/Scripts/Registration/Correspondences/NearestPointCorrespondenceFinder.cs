@@ -80,6 +80,11 @@ namespace Registration
         {
             return new CorrespondenceCollectionBuilder(distanceNodes, numPointsSmallestFragment).Build();
         }
+
+        public SerializebleCorrespondenceFinder ToSerializableObject()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     internal class CorrespondenceCollectionBuilder
