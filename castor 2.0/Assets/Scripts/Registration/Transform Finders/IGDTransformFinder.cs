@@ -22,7 +22,7 @@ namespace Registration
 
         public override SerializableTransformFinder Serialize()
         {
-            throw new NotImplementedException();
+            return new SerializableIGDTransformFinder(this);
         }
 
         protected override Matrix4x4 FindTransformImplementation(CorrespondenceCollection correspondences)
