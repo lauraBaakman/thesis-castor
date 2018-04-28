@@ -33,10 +33,34 @@ namespace Registration
     public class SerializableTransformFinder
     {
         public string name;
+        public int maxNumIterations;
+        public double learningRate;
+        public double convergenceError;
+        public SerializableErrorMetric errorMetric;
 
-        public SerializableTransformFinder(string name)
+        private SerializableTransformFinder(
+            string name,
+            int maxNumIterations, double learningRate, double convergenceError,
+            SerializableErrorMetric errorMetric)
         {
             this.name = name;
+            this.maxNumIterations = maxNumIterations;
+            this.learningRate = learningRate;
+            this.convergenceError = convergenceError;
+            this.errorMetric = errorMetric;
         }
+
+        public SerializableTransformFinder(string name)
+            : this(name, -1, -1, -1, null)
+        { }
+
+        public SerializableTransformFinder(IGDTransformFinder.Configuration configuration)
+            : this("IGD",
+                configuration.maxNumIterations,
+                configuration.learningRate,
+                configuration.convergenceError,
+                configuration.errorMetric.Serialize()
+            )
+        { }
     }
 }

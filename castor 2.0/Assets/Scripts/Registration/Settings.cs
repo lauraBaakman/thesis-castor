@@ -193,8 +193,6 @@ namespace Registration
             {
                 string jsonString = JsonUtility.ToJson(this);
 
-                Debug.Log("jsonString: " + jsonString);
-
                 StreamWriter streamWriter = new StreamWriter(outputPath);
                 streamWriter.Write(jsonString);
                 streamWriter.Close();

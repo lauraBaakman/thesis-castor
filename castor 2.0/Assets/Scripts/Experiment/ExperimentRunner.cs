@@ -180,7 +180,8 @@ namespace Experiment
                 Write(staticFragment);
                 yield return null;
 
-                //ICPSetting.ToJson(Path.Combine(this.outputDirectory, "settings.json"));
+                ICPSetting.ToJson(Path.Combine(this.outputDirectory, "settings.json"));
+                yield return null;
 
                 foreach (RunExecuter.Run run in runs)
                 {

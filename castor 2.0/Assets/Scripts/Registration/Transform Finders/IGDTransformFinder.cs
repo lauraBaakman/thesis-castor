@@ -22,7 +22,7 @@ namespace Registration
 
         public override SerializableTransformFinder Serialize()
         {
-            return new SerializableIGDTransformFinder(this);
+            return new SerializableTransformFinder(this.configuration);
         }
 
         protected override Matrix4x4 FindTransformImplementation(CorrespondenceCollection correspondences)
@@ -40,39 +40,6 @@ namespace Registration
                 modelPoints: modelCoordinates, staticPoints: staticCoordinates,
                 configuration: configuration
             ).FindTransform();
-        }
-
-        [System.Serializable]
-        public class SerializableIGDTransformFinder : SerializableTransformFinder
-        {
-            int maxNumIterations;
-            double learningRate;
-            double convergenceError;
-            SerializableErrorMetric errorMetric;
-
-            private SerializableIGDTransformFinder(
-                int maxNumIterations, double learningRate,
-                double convergenceError, SerializableErrorMetric errorMetric
-            ) : base("Iterative Gradient Descent")
-            {
-                this.maxNumIterations = maxNumIterations;
-                this.learningRate = learningRate;
-                this.convergenceError = convergenceError;
-                this.errorMetric = errorMetric;
-            }
-
-            private SerializableIGDTransformFinder(IGDTransformFinder.Configuration configuration)
-                : this(
-                    configuration.maxNumIterations,
-                    configuration.learningRate,
-                    configuration.convergenceError,
-                    configuration.errorMetric.Serialize()
-                )
-            { }
-
-            public SerializableIGDTransformFinder(IGDTransformFinder transformFinder)
-                : this(transformFinder.configuration)
-            { }
         }
 
         public class Configuration

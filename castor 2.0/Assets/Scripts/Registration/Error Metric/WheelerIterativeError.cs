@@ -99,7 +99,11 @@ namespace Registration.Error
 
         public SerializableErrorMetric Serialize()
         {
-            throw new System.NotImplementedException();
+            return new SerializableErrorMetric(
+                distanceWeight: 1, intersectionWeight: 0,
+                aggregationMethod: "mean", distanceMethod: "squared euclidean",
+                normalizePoints: 0
+            );
         }
     }
 }

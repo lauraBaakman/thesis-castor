@@ -53,7 +53,10 @@ namespace Registration
 
         public SerializebleCorrespondenceFinder Serialize()
         {
-            return new SerializebleCorrespondenceFinder(MaxDistance, ReferenceTransform);
+            return new SerializebleCorrespondenceFinder(
+                "normal shooting",
+                MaxDistance, ReferenceTransform
+            );
         }
 
         private Correspondence FindCorrespondence(Point staticPoint, SamplingInformation model)

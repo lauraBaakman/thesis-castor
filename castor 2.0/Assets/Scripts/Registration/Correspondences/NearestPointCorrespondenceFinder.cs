@@ -83,7 +83,7 @@ namespace Registration
 
         public SerializebleCorrespondenceFinder Serialize()
         {
-            return new SerializebleCorrespondenceFinder("SquaredEuclideanDistance");
+            return new SerializebleCorrespondenceFinder("nearest point", "SquaredEuclideanDistance");
         }
     }
 
