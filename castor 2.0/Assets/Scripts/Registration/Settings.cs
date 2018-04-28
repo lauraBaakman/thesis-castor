@@ -156,11 +156,17 @@ namespace Registration
             public class SerializableError
             {
                 public float errorThreshold;
+                public SerializableErrorMetric errorMetric;
 
-                public SerializableError(float errorThreshold)
+                private SerializableError(float errorThreshold, SerializableErrorMetric errorMetric)
                 {
                     this.errorThreshold = errorThreshold;
+                    this.errorMetric = errorMetric;
                 }
+
+                public SerializableError(Settings settings)
+                    : this(settings.ErrorThreshold, new SerializableErrorMetric(settings.ErrorMetric))
+                { }
             }
 
             public SerializableTransform referenceTransform;
@@ -182,7 +188,7 @@ namespace Registration
                 //find transform
 
                 //error
-                error = new SerializableError(settings.ErrorThreshold);
+                error = new SerializableError(settings);
 
                 //Apply transform
             }

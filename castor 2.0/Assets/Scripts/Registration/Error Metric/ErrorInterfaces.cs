@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+using System;
 
 namespace Registration.Error
 {
@@ -41,5 +42,34 @@ namespace Registration.Error
         /// <param name="staticPOints">Static Points.</param>
         /// <param name="translation">Translation.</param>
         object ComputeSharedParameters(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation);
+    }
+
+    [System.Serializable]
+    public class SerializableErrorMetric
+    {
+        float distanceWeight;
+        float intersectionWeight;
+
+        string aggregationMethod;
+        string distanceMethod;
+        int normalizePoints;
+
+        private SerializableErrorMetric(
+            float distanceWeight = -1, float intersectionWeight = -1,
+            string aggregationMethod = "", string distanceMethod = "",
+            int normalizePoints = -1)
+        {
+            this.distanceWeight = distanceWeight;
+            this.intersectionWeight = intersectionWeight;
+
+            this.aggregationMethod = aggregationMethod;
+            this.distanceMethod = distanceMethod;
+            this.normalizePoints = normalizePoints;
+        }
+
+        public SerializableErrorMetric(IErrorMetric errorMetric)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
