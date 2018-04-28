@@ -10,6 +10,8 @@ namespace Registration.Error
         float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform);
 
         void Set(GameObject staticModel, Transform referenceTransform);
+
+        SerializableErrorMetric Serialize();
     }
 
     public interface IIterativeErrorMetric : IErrorMetric
@@ -47,12 +49,56 @@ namespace Registration.Error
     [System.Serializable]
     public class SerializableErrorMetric
     {
-        float distanceWeight;
-        float intersectionWeight;
+        public float distanceWeight;
+        public float intersectionWeight;
 
-        string aggregationMethod;
-        string distanceMethod;
-        int normalizePoints;
+        public string aggregationMethod;
+        public string distanceMethod;
+        public int normalizePoints;
+
+        public SerializableErrorMetric(ErrorMetric.Configuration configuration)
+            : this(
+                AggregationMethodToString(configuration.AggregationMethod),
+                DistanceMethodToString(configuration.DistanceMetric),
+                NormalizePointsToInt(configuration.NormalizePoints))
+        { }
+
+        private static int NormalizePointsToInt(bool normalizePoints)
+        {
+            return normalizePoints ? 1 : 0;
+        }
+
+        private static string DistanceMethodToString(DistanceMetrics.Metric distanceMetric)
+        {
+            DistanceMetrics.Metric squaredEuclidean = DistanceMetrics.SquaredEuclidean;
+            if (distanceMetric.Equals(squaredEuclidean)) return "squared Euclidean";
+
+            DistanceMetrics.Metric PointToPlane = DistanceMetrics.PointToPlane;
+            if (distanceMetric.Equals(PointToPlane)) return "point to plane";
+
+            DistanceMetrics.Metric SquaredPointToPlane = DistanceMetrics.SquaredPointToPlane;
+            if (distanceMetric.Equals(SquaredPointToPlane)) return "squared point to plane";
+
+            return "unkown distance metric";
+        }
+
+        private static string AggregationMethodToString(AggregationMethods.AggregationMethod aggregationMethod)
+        {
+            AggregationMethods.AggregationMethod mean = AggregationMethods.Mean;
+            if (aggregationMethod.Equals(mean)) return "mean";
+
+            AggregationMethods.AggregationMethod sum = AggregationMethods.Sum;
+            if (aggregationMethod.Equals(sum)) return "sum";
+
+            return "unkown aggregatin method";
+        }
+
+        private SerializableErrorMetric(
+            string aggregationMethod = "", string distanceMethod = "",
+            int normalizePoints = -1
+        )
+            : this(1, 0, aggregationMethod, distanceMethod, normalizePoints)
+        { }
 
         private SerializableErrorMetric(
             float distanceWeight = -1, float intersectionWeight = -1,
@@ -65,17 +111,6 @@ namespace Registration.Error
             this.aggregationMethod = aggregationMethod;
             this.distanceMethod = distanceMethod;
             this.normalizePoints = normalizePoints;
-        }
-
-        public SerializableErrorMetric(IErrorMetric errorMetric)
-        {
-            throw new NotImplementedException();
-        }
-
-        public SerializableErrorMetric(IIterativeErrorMetric errorMetric)
-            : this(errorMetric as IErrorMetric)
-        {
-            throw new NotImplementedException();
         }
     }
 }

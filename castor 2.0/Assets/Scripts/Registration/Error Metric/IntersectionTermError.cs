@@ -194,6 +194,11 @@ namespace Registration.Error
             this.staticModelContainmentDetector = staticModel.GetComponent<ContainmentDetector>();
             this.referenceTransform = referenceTransform;
         }
+
+        public SerializableErrorMetric Serialize()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

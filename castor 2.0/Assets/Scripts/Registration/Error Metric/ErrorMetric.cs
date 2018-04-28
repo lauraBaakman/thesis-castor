@@ -150,6 +150,11 @@ namespace Registration
             {
                 //Do nothing, we don't need this information, no need to store a reference to it.
             }
+
+            public SerializableErrorMetric Serialize()
+            {
+                return new SerializableErrorMetric(this.configuration);
+            }
             #endregion
 
             #region inner classes

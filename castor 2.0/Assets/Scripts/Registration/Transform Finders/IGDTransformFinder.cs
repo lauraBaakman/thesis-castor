@@ -66,7 +66,7 @@ namespace Registration
                     configuration.maxNumIterations,
                     configuration.learningRate,
                     configuration.convergenceError,
-                    new SerializableErrorMetric(configuration.errorMetric)
+                    configuration.errorMetric.Serialize()
                 )
             { }
 

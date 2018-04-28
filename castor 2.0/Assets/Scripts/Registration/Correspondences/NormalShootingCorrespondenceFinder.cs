@@ -51,7 +51,7 @@ namespace Registration
             return correspondences;
         }
 
-        public SerializebleCorrespondenceFinder ToSerializableObject()
+        public SerializebleCorrespondenceFinder Serialize()
         {
             throw new System.NotImplementedException();
         }

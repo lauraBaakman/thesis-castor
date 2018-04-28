@@ -10,7 +10,7 @@ namespace Registration
 
         CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation);
 
-        SerializebleCorrespondenceFinder ToSerializableObject();
+        SerializebleCorrespondenceFinder Serialize();
     }
 
     public class SerializebleCorrespondenceFinder

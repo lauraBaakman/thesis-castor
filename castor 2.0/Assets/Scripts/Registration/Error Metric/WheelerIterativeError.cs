@@ -96,5 +96,10 @@ namespace Registration.Error
         {
             return null;
         }
+
+        public SerializableErrorMetric Serialize()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -81,7 +81,7 @@ namespace Registration
             return new CorrespondenceCollectionBuilder(distanceNodes, numPointsSmallestFragment).Build();
         }
 
-        public SerializebleCorrespondenceFinder ToSerializableObject()
+        public SerializebleCorrespondenceFinder Serialize()
         {
             throw new NotImplementedException();
         }

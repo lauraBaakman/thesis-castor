@@ -139,7 +139,7 @@ namespace Registration
                     this.maxWithinCorrespondenceDistance = maxWithinCorrespondenceDistance;
 
                     this.pointSampler = pointSampler.ToSerializableObject();
-                    this.correspondenceFinder = correspondenceFinder.ToSerializableObject();
+                    this.correspondenceFinder = correspondenceFinder.Serialize();
                 }
 
                 public SerializableCorrespondences(Settings settings)
@@ -165,7 +165,7 @@ namespace Registration
                 }
 
                 public SerializableError(Settings settings)
-                    : this(settings.ErrorThreshold, new SerializableErrorMetric(settings.ErrorMetric))
+                    : this(settings.ErrorThreshold, settings.ErrorMetric.Serialize())
                 { }
             }
 
