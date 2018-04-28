@@ -24,11 +24,15 @@ namespace Registration
         /// </summary>
         private SamplingFunction samplingFunction;
 
+        private Configuration configuration;
+
         public AllPointsSampler(Configuration configuration)
         {
             ReferenceTransform = configuration.referenceTransform;
 
             samplingFunction = SelectSamplingFunction(configuration.normalProcessing);
+
+            this.configuration = configuration;
         }
 
         private SamplingFunction SelectSamplingFunction(Configuration.NormalProcessing normalProcessing)
@@ -116,7 +120,7 @@ namespace Registration
 
         public SerializablePointSampler ToSerializableObject()
         {
-            throw new NotImplementedException();
+            return new SerializablePointSampler(configuration);
         }
 
         public class Configuration : Registration.SamplingConfiguration

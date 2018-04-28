@@ -34,7 +34,7 @@ namespace Registration
 
         public SerializablePointSampler ToSerializableObject()
         {
-            throw new NotImplementedException();
+            return new SerializablePointSampler(config);
         }
 
         private Double[] BuildOrderArray(int size)

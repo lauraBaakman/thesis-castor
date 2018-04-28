@@ -37,7 +37,7 @@ namespace Registration
 
         public SerializablePointSampler ToSerializableObject()
         {
-            throw new NotImplementedException();
+            return new SerializablePointSampler(config);
         }
 
         private int ApproximateSampleSize(int numElements)

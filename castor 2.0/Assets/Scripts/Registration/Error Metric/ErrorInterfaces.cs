@@ -71,5 +71,11 @@ namespace Registration.Error
         {
             throw new NotImplementedException();
         }
+
+        public SerializableErrorMetric(IIterativeErrorMetric errorMetric)
+            : this(errorMetric as IErrorMetric)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
