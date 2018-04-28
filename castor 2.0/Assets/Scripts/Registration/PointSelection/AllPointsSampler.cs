@@ -114,6 +114,11 @@ namespace Registration
             return points;
         }
 
+        public SerializablePointSampler ToSerializableObject()
+        {
+            throw new NotImplementedException();
+        }
+
         public class Configuration : Registration.SamplingConfiguration
         {
             public enum NormalProcessing { NoNormals, VertexNormals, AreaWeightedSmoothNormals };

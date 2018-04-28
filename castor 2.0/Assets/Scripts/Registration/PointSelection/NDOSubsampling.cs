@@ -35,6 +35,11 @@ namespace Registration
             return sample;
         }
 
+        public SerializablePointSampler ToSerializableObject()
+        {
+            throw new NotImplementedException();
+        }
+
         private int ApproximateSampleSize(int numElements)
         {
             return (int)Math.Round(numElements * config.Probability);

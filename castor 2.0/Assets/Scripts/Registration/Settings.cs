@@ -123,9 +123,12 @@ namespace Registration
                 public List<string> correspondenceFilters;
                 public float maxWithinCorrespondenceDistance;
 
+                public SerializablePointSampler pointSampler;
+
                 public SerializableCorrespondences(
                     ReadOnlyCollection<ICorrespondenceFilter> correspondenceFilters,
-                    float maxWithinCorrespondenceDistance
+                    float maxWithinCorrespondenceDistance,
+                    IPointSampler pointSampler
                 )
                 {
                     foreach (ICorrespondenceFilter filter in correspondenceFilters)
@@ -133,6 +136,19 @@ namespace Registration
                         this.correspondenceFilters.Add(filter.ToJson());
                     }
                     this.maxWithinCorrespondenceDistance = maxWithinCorrespondenceDistance;
+
+                    this.pointSampler = pointSampler.ToSerializableObject();
+                }
+            }
+
+            [System.Serializable]
+            public class SerializableError
+            {
+                public float errorThreshold;
+
+                public SerializableError(float errorThreshold)
+                {
+                    this.errorThreshold = errorThreshold;
                 }
             }
 
@@ -140,18 +156,26 @@ namespace Registration
 
             public SerializableCorrespondences correspondences;
 
+            public SerializableError error;
+
+            public int maxNumIterations;
+
             public SerializableSettings(Settings settings)
             {
+                this.maxNumIterations = settings.MaxNumIterations;
+
                 referenceTransform = new SerializableTransform(settings.ReferenceTransform);
 
                 correspondences = new SerializableCorrespondences(
                     settings.CorrespondenceFilters,
-                    settings.MaxWithinCorrespondenceDistance
+                    settings.MaxWithinCorrespondenceDistance,
+                    settings.PointSampler
                 );
 
                 //find transform
 
                 //error
+                error = new SerializableError(settings.ErrorThreshold);
 
                 //Apply transform
             }

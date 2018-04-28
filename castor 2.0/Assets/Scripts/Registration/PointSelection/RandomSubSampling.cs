@@ -32,6 +32,11 @@ namespace Registration
             return new List<Point>(shuffeledPoints).Take(sampleSize).ToList();
         }
 
+        public SerializablePointSampler ToSerializableObject()
+        {
+            throw new NotImplementedException();
+        }
+
         private Double[] BuildOrderArray(int size)
         {
             Double[] order = new Double[size];
