@@ -122,12 +122,10 @@ namespace Registration
             {
                 public List<string> correspondenceFilters;
                 public float maxWithinCorrespondenceDistance;
-
                 public SerializablePointSampler pointSampler;
-
                 public SerializebleCorrespondenceFinder correspondenceFinder;
 
-                public SerializableCorrespondences(
+                private SerializableCorrespondences(
                     ReadOnlyCollection<ICorrespondenceFilter> correspondenceFilters,
                     float maxWithinCorrespondenceDistance,
                     IPointSampler pointSampler,
@@ -143,6 +141,15 @@ namespace Registration
                     this.pointSampler = pointSampler.ToSerializableObject();
                     this.correspondenceFinder = correspondenceFinder.ToSerializableObject();
                 }
+
+                public SerializableCorrespondences(Settings settings)
+                    : this(
+                        settings.CorrespondenceFilters,
+                        settings.MaxWithinCorrespondenceDistance,
+                        settings.PointSampler,
+                        settings.CorrespondenceFinder
+                    )
+                { }
             }
 
             [System.Serializable]
@@ -170,12 +177,7 @@ namespace Registration
 
                 referenceTransform = new SerializableTransform(settings.ReferenceTransform);
 
-                correspondences = new SerializableCorrespondences(
-                    settings.CorrespondenceFilters,
-                    settings.MaxWithinCorrespondenceDistance,
-                    settings.PointSampler,
-                    settings.CorrespondenceFinder
-                );
+                correspondences = new SerializableCorrespondences(settings);
 
                 //find transform
 
