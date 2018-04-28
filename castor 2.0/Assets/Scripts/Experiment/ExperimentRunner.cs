@@ -134,10 +134,7 @@ namespace Experiment
         {
             System.DateTime now = System.DateTime.Now.ToLocalTime();
             return string.Format(
-                "{0}_{1}",
-                now.ToString("MM-dd_HH-mm-ss"),
-                Time.frameCount
-            );
+                "{0}", now.ToString("MM-dd_HH-mm-ss-fff"));
         }
 
         private void HandleStaticFragment()
