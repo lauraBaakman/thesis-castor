@@ -377,13 +377,11 @@ namespace IO
         }
     }
 
-    public class VertexTextureReader : Reader
+    public class VertexTextureReader : VectorReader
     {
         public VertexTextureReader()
             : base("vt")
         { }
-
-        public override void Read(string line) { }
     }
 
     public class GroupReader : Reader

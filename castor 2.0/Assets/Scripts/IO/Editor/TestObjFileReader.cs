@@ -370,6 +370,75 @@ namespace Tests.IO
     }
 
     [TestFixture]
+    public class VertexTextureReaderTest
+    {
+        VertexTextureReader reader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            reader = new VertexTextureReader();
+        }
+
+        [TestCase("# some comment", false)]
+        [TestCase("v some vertex", false)]
+        [TestCase("vn some normal", false)]
+        [TestCase("vt some texture", true)]
+        [TestCase("f some face", false)]
+        [TestCase("p some point", false)]
+        [TestCase("l some line", false)]
+        [TestCase("curv2 some 2D curve", false)]
+        [TestCase("surf some surface", false)]
+        [TestCase("g some group", false)]
+        [TestCase("s some smoothing group", false)]
+        [TestCase("mg some merging group", false)]
+        [TestCase("o some object name", false)]
+        [TestCase("mtllib some material library", false)]
+        [TestCase("usemtl some material name", false)]
+        public void IsApplicableReaderTest(string line, bool expected)
+        {
+            bool actual = reader.IsApplicable(line);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReadTest()
+        {
+            string line = "vt 1.53 +2.47 -3.68";
+            reader.Read(line);
+
+            Vector3 expected = new Vector3(1.53f, 2.47f, -3.68f);
+
+            Vector3 actual = reader.elements[1];
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Read_CubeTest()
+        {
+            reader.Read("vt 0.0000 -1.0000 0.0000");
+            reader.Read("vt 0.0000 1.0000 -0.0000");
+            reader.Read("vt -1.0000 -0.0000 0.0000");
+            reader.Read("vt 0.0000 -0.0000 -1.0000");
+            reader.Read("vt 1.0000 -0.0000 0.0000");
+            reader.Read("vt -0.0000 0.0000 1.0000");
+
+            Dictionary<int, Vector3> expected = new Dictionary<int, Vector3>();
+            expected.Add(1, new Vector3(+0.0000f, -1.0000f, +0.0000f));
+            expected.Add(2, new Vector3(+0.0000f, +1.0000f, -0.0000f));
+            expected.Add(3, new Vector3(-1.0000f, -0.0000f, +0.0000f));
+            expected.Add(4, new Vector3(+0.0000f, -0.0000f, -1.0000f));
+            expected.Add(5, new Vector3(+1.0000f, -0.0000f, +0.0000f));
+            expected.Add(6, new Vector3(-0.0000f, +0.0000f, +1.0000f));
+
+            Dictionary<int, Vector3> actual = reader.elements;
+
+            Assert.That(actual, Is.EquivalentTo(expected));
+        }
+    }
+
+    [TestFixture]
     public class FaceReaderTests
     {
 
