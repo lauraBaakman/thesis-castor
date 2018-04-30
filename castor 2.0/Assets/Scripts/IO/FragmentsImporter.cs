@@ -13,16 +13,17 @@ namespace IO
 
         private readonly CallBack callBack;
 
-        private readonly bool randomizeTransform;
-        private readonly bool copyVerticesToTexture;
+        private FragmentImporter fragmentImporter;
 
         public FragmentsImporter(GameObject fragmentParent, CallBack callBack, bool randomizeTransform = false, bool copyVerticesToTexture = false)
         {
             FragmentsRoot = fragmentParent;
             this.callBack = callBack;
 
-            this.randomizeTransform = randomizeTransform;
-            this.copyVerticesToTexture = copyVerticesToTexture;
+            this.fragmentImporter = new FragmentImporter(
+                FragmentsRoot, callBack,
+                randomizeTransform, copyVerticesToTexture
+            );
         }
 
         public void Import()
@@ -46,7 +47,6 @@ namespace IO
 
         private void ProcessFragmentFile(string path)
         {
-            FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot, callBack, this.randomizeTransform, this.copyVerticesToTexture);
             fragmentImporter.Import(path);
         }
     }
