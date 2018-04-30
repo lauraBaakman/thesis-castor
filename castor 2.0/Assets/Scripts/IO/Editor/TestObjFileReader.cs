@@ -142,6 +142,8 @@ namespace Tests.IO
                 33, 34, 35
             };
             mesh.triangles = triangles;
+            mesh.uv2 = new Vector2[0];
+            mesh.uv3 = new Vector2[0];
 
             ReadResult expected = ReadResult.OKResult(inputPath, mesh);
             ReadResult actual = new ObjFileReader(inputPath).ImportFile();
@@ -150,6 +152,8 @@ namespace Tests.IO
             Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
             Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);
             Assert.AreEqual(expected.Mesh.triangles, actual.Mesh.triangles);
+            Assert.AreEqual(expected.Mesh.uv2, actual.Mesh.uv2);
+            Assert.AreEqual(expected.Mesh.uv3, actual.Mesh.uv3);
         }
 
         [Test]
