@@ -3,7 +3,6 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using IO;
-using System.Runtime.CompilerServices;
 
 namespace Tests.IO
 {
