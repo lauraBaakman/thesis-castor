@@ -29,7 +29,11 @@ namespace Experiment
         {
             this.configuration = configuration;
 
-            this.fragmentImporter = new IO.FragmentImporter(this.gameObject, FragmentReaderCallBack);
+            this.fragmentImporter = new IO.FragmentImporter(
+                this.gameObject, FragmentReaderCallBack,
+                copyVerticesToTexture: true,
+                randomizeTransform: false
+            );
             this.fragmentExporter = new IO.FragmentExporter(FragmentWriterCallBack);
 
             this.ICPSettings = new List<Settings>();
