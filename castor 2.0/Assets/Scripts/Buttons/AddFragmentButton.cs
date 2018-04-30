@@ -16,7 +16,7 @@ namespace Buttons
             importer = new IO.FragmentsImporter(
                 fragmentParent: FragmentsRoot,
                 callBack: NotifyUser,
-                randomizeTransform: false, copyVerticesToTexture: false
+                randomizeTransform: false, copyVerticesToTexture: true
             );
 
             if (Application.isEditor) LoadTestFragments();
