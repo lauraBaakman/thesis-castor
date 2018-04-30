@@ -310,28 +310,28 @@ namespace Tests.IO
                 new Vector3(+0.8f, +0.1f, +0.7f),
                 //face 7
                 new Vector3(+0.2f, +0.4f, +0.8f),
-                new Vector3(+0.4f, +0.3f, +0.6f),
-                new Vector3(+0.6f, +0.2f, +0.3f),
+                new Vector3(+0.2f, +0.4f, +0.8f),
+                new Vector3(+0.2f, +0.4f, +0.8f),
                 //face 8
                 new Vector3(+0.6f, +0.4f, -0.4f),
-                new Vector3(+0.8f, +0.3f, -0.3f),
-                new Vector3(+1.0f, +0.2f, -0.8f),
+                new Vector3(+0.6f, +0.4f, -0.4f),
+                new Vector3(+0.6f, +0.4f, -0.4f),
                 //face 9
                 new Vector3(+0.8f, +0.1f, +0.7f),
-                new Vector3(+1.0f, +0.2f, -0.8f),
-                new Vector3(+0.2f, +0.4f, +0.8f),
+                new Vector3(+0.8f, +0.1f, +0.7f),
+                new Vector3(+0.8f, +0.1f, +0.7f),
                 //face 10
                 new Vector3(+1.0f, +0.2f, -0.8f),
-                new Vector3(+0.8f, +0.3f, -0.3f),
-                new Vector3(+0.4f, +0.3f, +0.6f),
+                new Vector3(+1.0f, +0.2f, -0.8f),
+                new Vector3(+1.0f, +0.2f, -0.8f),
                 //face 11
                 new Vector3(+0.4f, +0.3f, +0.6f),
-                new Vector3(+0.8f, +0.3f, -0.3f),
-                new Vector3(+0.6f, +0.4f, -0.4f),
+                new Vector3(+0.4f, +0.3f, +0.6f),
+                new Vector3(+0.4f, +0.3f, +0.6f),
                 //face 12
                 new Vector3(+0.0f, +0.5f, +0.6f),
-                new Vector3(+0.6f, +0.2f, +0.3f),
-                new Vector3(+0.6f, +0.4f, -0.4f),
+                new Vector3(+0.0f, +0.5f, +0.6f),
+                new Vector3(+0.0f, +0.5f, +0.6f),
             };
 
             Vector2[] uv_xy = new Vector2[uvws.Length];
