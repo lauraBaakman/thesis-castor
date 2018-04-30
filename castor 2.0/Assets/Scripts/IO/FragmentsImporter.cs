@@ -13,10 +13,16 @@ namespace IO
 
         private readonly CallBack callBack;
 
-        public FragmentsImporter(GameObject fragmentParent, CallBack callBack)
+        private readonly bool randomizeTransform;
+        private readonly bool copyVerticesToTexture;
+
+        public FragmentsImporter(GameObject fragmentParent, CallBack callBack, bool randomizeTransform = false, bool copyVerticesToTexture = false)
         {
             FragmentsRoot = fragmentParent;
             this.callBack = callBack;
+
+            this.randomizeTransform = randomizeTransform;
+            this.copyVerticesToTexture = copyVerticesToTexture;
         }
 
         public void Import()
@@ -24,9 +30,9 @@ namespace IO
             GetFragmentFiles();
         }
 
-        public void Import(string file, bool randomizeTransform = false)
+        public void Import(string file)
         {
-            ProcessFragmentFile(file, randomizeTransform);
+            ProcessFragmentFile(file);
         }
 
         private void GetFragmentFiles()
@@ -40,12 +46,7 @@ namespace IO
 
         private void ProcessFragmentFile(string path)
         {
-            ProcessFragmentFile(path, false);
-        }
-
-        private void ProcessFragmentFile(string path, bool randomizeTransform)
-        {
-            FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot, callBack, randomizeTransform);
+            FragmentImporter fragmentImporter = new FragmentImporter(FragmentsRoot, callBack, this.randomizeTransform, this.copyVerticesToTexture);
             fragmentImporter.Import(path);
         }
     }
@@ -55,20 +56,22 @@ namespace IO
         private static string DefaultPrefabPath = "Fragment";
         private readonly GameObject Parent;
 
-        private bool RandomizeTransform;
+        private readonly bool RandomizeTransform;
+        private readonly bool CopyVerticesToTexture;
 
         private FragmentsImporter.CallBack CallBack;
 
-        internal FragmentImporter(GameObject parent, FragmentsImporter.CallBack callBack, bool randomizeTransform)
+        internal FragmentImporter(GameObject parent, FragmentsImporter.CallBack callBack, bool randomizeTransform, bool copyVerticesToTexture)
         {
             Parent = parent;
             CallBack = callBack;
 
-            RandomizeTransform = randomizeTransform;
+            this.RandomizeTransform = randomizeTransform;
+            this.CopyVerticesToTexture = copyVerticesToTexture;
         }
 
         public FragmentImporter(GameObject parent, FragmentsImporter.CallBack callBack)
-            : this(parent, callBack, false)
+            : this(parent, callBack, false, false)
         { }
 
         public GameObject Import(string path, string prefabPath = null)
