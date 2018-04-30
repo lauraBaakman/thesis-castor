@@ -83,6 +83,8 @@ namespace IO
 
             if (result.Succeeded())
             {
+                if (CopyVerticesToTexture) Utils.MeshUtils.CopyVerticesToUV2AndUV3(result.Mesh);
+
                 string name = ExtractObjectName(path);
                 fragment = AddFragmentToScene(name, result.Mesh, prefabPath);
             }
