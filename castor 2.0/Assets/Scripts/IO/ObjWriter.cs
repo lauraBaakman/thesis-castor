@@ -27,7 +27,7 @@ namespace IO
         private static void WriteInfoString(StringBuilder sb)
         {
             sb.Append(string.Format(
-                "# Generated this file using CAstOR on {0}",
+                "# Generated this file using CAstOR on {0}\n",
                 System.DateTime.Now.ToLocalTime().ToString()));
         }
 
