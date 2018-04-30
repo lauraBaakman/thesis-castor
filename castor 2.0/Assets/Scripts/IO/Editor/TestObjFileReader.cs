@@ -711,7 +711,7 @@ namespace Tests.IO
         {
             string line = "f 1//2 4//3 8//5";
             FaceReader.Face expected = new FaceReader.Face(1, 4, 8, 2, 3, 5);
-            FaceReader.Face actual = reader.ExtractNormalsNoTexturesFace(line);
+            FaceReader.Face actual = reader.ExtractFace(line);
 
             Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
             Assert.AreEqual(expected.normalIndices, actual.normalIndices);
@@ -722,14 +722,14 @@ namespace Tests.IO
         {
             string line = "f 1 4 8";
             FaceReader.Face expected = new FaceReader.Face(1, 4, 8);
-            FaceReader.Face actual = reader.ExtractNoNormalsNoTexturesFace(line);
+            FaceReader.Face actual = reader.ExtractFace(line);
 
             Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
             Assert.AreEqual(expected.normalIndices, actual.normalIndices);
         }
 
         [TestCase("f 1 4 8", true)]
-        [TestCase("f 1//2 4//3     //5", false)]
+        [TestCase("f 1//2 4//3 4//5", false)]
         [TestCase("f 1/3/2 4/5/3 8/7/5", false)]
         public void HasNoTexturesHasNoNormals_Test(string line, bool expected)
         {
@@ -742,7 +742,7 @@ namespace Tests.IO
         [TestCase("f 1/3/2 4/5/3 8/7/5", false)]
         public void HasNoTexturesHasNormals_Test(string line, bool expected)
         {
-            bool actual = reader.HasNoTexturesHasNoNormals(line);
+            bool actual = reader.HasNoTexturesHasNormals(line);
             Assert.AreEqual(expected, actual);
         }
 

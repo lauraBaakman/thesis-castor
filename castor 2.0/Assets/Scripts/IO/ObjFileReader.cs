@@ -216,10 +216,10 @@ namespace IO
 
             noTexturesNoNormalsRegex = new Regex(typeRegex + @"(?<v0>\d+)\s+(?<v1>\d+)\s+(?<v2>\d+)$");
 
-            Regex vertex = new Regex(@"(\d+)\s*/\s*/\s*(\d+)");
+            Regex vertex = new Regex(@"(\d+)//(\d+)");
             noTexturesNormalsRegex = new Regex(typeRegex.ToString() + vertex + @"\s+" + vertex + @"\s+" + vertex + @"$");
 
-            vertex = new Regex(@"(\d+)\s*/\s*(\d+)\s*/\s*(\d+)");
+            vertex = new Regex(@"(\d+)/(\d+)/(\d+)");
             TexturesNormalsRegex = new Regex(typeRegex.ToString() + vertex + @"\s+" + vertex + @"\s+" + vertex + @"$");
         }
 
@@ -257,7 +257,7 @@ namespace IO
             return noTexturesNoNormalsRegex.Match(line).Success;
         }
 
-        public Face ExtractNoNormalsNoTexturesFace(string line)
+        private Face ExtractNoNormalsNoTexturesFace(string line)
         {
             Face face;
             try
@@ -280,7 +280,7 @@ namespace IO
             return face;
         }
 
-        public Face ExtractNormalsNoTexturesFace(string line)
+        private Face ExtractNormalsNoTexturesFace(string line)
         {
             Face face;
             try
@@ -305,16 +305,36 @@ namespace IO
             return face;
         }
 
-        public Face ExtractNormalsTexturesFace(string line)
+        private Face ExtractNormalsTexturesFace(string line)
         {
-            throw new NotImplementedException();
-            //catch (Exception e)
-            //{
-            //    throw new InvalidObjFileException(
-            //        string.Format("Could not read the face: '{0}', got the exception: {1}", line, e.Message)
-            //    );
-            //}
-            //return face;
+            Face face;
+            try
+            {
+                MatchCollection matches = TexturesNormalsRegex.Matches(line);
+                GroupCollection groups = matches[0].Groups;
+
+                face = new Face(
+                    //Vertex 0
+                    v0: Int32.Parse(groups[1].Value),
+                    t0: Int32.Parse(groups[2].Value),
+                    n0: Int32.Parse(groups[3].Value),
+                    //Vertex 1
+                    v1: Int32.Parse(groups[4].Value),
+                    t1: Int32.Parse(groups[5].Value),
+                    n1: Int32.Parse(groups[6].Value),
+                    //Vertex 2
+                    v2: Int32.Parse(groups[7].Value),
+                    t2: Int32.Parse(groups[8].Value),
+                    n2: Int32.Parse(groups[9].Value)
+                );
+            }
+            catch (Exception e)
+            {
+                throw new InvalidObjFileException(
+                    string.Format("Could not read the face: '{0}', got the exception: {1}", line, e.Message)
+                );
+            }
+            return face;
         }
 
         public class Face : IEquatable<Face>
