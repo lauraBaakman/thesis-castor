@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using IO;
 
 namespace Buttons
 {
@@ -7,21 +8,25 @@ namespace Buttons
     {
         public GameObject FragmentsRoot;
 
-        protected override void Awake()
+        private FragmentsImporter importer;
+
+
+        private void Start()
         {
-            base.Awake();
+            importer = new IO.FragmentsImporter(
+                fragmentParent: FragmentsRoot,
+                callBack: NotifyUser,
+                randomizeTransform: false, copyVerticesToTexture: false
+            );
 
             if (Application.isEditor) LoadTestFragments();
         }
 
+
         private void LoadTestFragments()
         {
-            IO.FragmentsImporter importer = new IO.FragmentsImporter(
-                fragmentParent: FragmentsRoot,
-                callBack: NotifyUser
-            );
-            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/roughfracturedcube_part1_translationrotation.obj", randomizeTransform: false);
-            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/roughfracturedcube_part2.obj", randomizeTransform: false);
+            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/roughfracturedcube_part1_translationrotation.obj");
+            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/roughfracturedcube_part2.obj");
         }
 
         private void NotifyUser(IO.ReadResult result)
@@ -51,10 +56,7 @@ namespace Buttons
 
         protected override void ExecuteButtonAction()
         {
-            new IO.FragmentsImporter(
-                fragmentParent: FragmentsRoot,
-                callBack: NotifyUser
-            ).Import();
+            importer.Import();
         }
     }
 }
