@@ -34,7 +34,7 @@ namespace Tests.IO
 
         [TestCase("cube.obj")]
         [TestCase("balk.obj")]
-        [Ignore("This test does not succeed due to they messy way fragments are written to file, we'll fix it if it becomes an issue.")]
+        [TestCase("cube_vt.obj")]
         public void Test_ReadWrite(string path)
         {
             string inputPath = InputPath(path);
@@ -49,7 +49,11 @@ namespace Tests.IO
             ReadResult actual = ObjFile.Read(this.outputPath);
             Assert.IsTrue(actual.Succeeded());
 
-            Assert.IsTrue(actual.Mesh.Equals(expected.Mesh));
+            Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
+            Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);
+            Assert.AreEqual(expected.Mesh.triangles, actual.Mesh.triangles);
+            Assert.AreEqual(expected.Mesh.uv2, actual.Mesh.uv2);
+            Assert.AreEqual(expected.Mesh.uv3, actual.Mesh.uv3);
         }
     }
 }
