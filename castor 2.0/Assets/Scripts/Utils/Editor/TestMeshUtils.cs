@@ -36,7 +36,7 @@ namespace Tests.Utils
                 new Vector2(5, 0),
                 new Vector2(8, 0),
                 new Vector2(9, 0),
-                new Vector2(8, 0),
+                new Vector2(4, 0),
             };
 
             Assert.AreEqual(expected.vertices, actual.vertices);
@@ -58,8 +58,8 @@ namespace Tests.Utils
             Vector3 n = Vector3.forward;
 
             Mesh mesh = new Mesh();
-            mesh.vertices = new Vector3[] { v_a, v_b, v_c, v_d, v_e, v_d };
-            mesh.normals = new Vector3[] { n, n, n };
+            mesh.vertices = new Vector3[] { v_a, v_b, v_c, v_d, v_e, v_f };
+            mesh.normals = new Vector3[] { n, n, n, n, n, n };
             mesh.triangles = new int[] { 0, 1, 2 };
 
 
