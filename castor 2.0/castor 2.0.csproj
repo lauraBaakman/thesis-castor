@@ -549,11 +549,11 @@
     <Compile Include="Assets\Scripts\Utils\PointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\QuaternionD.cs" />
     <Compile Include="Assets\Scripts\Utils\RangeF.cs" />
+    <Compile Include="Assets\Scripts\Utils\SerializableTransform.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
-    <Compile Include="Assets\Scripts\Utils\SerializableTransform.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
