@@ -543,6 +543,7 @@
     <Compile Include="Assets\Scripts\Utils\Heap.cs" />
     <Compile Include="Assets\Scripts\Utils\Matrix4x4D.cs" />
     <Compile Include="Assets\Scripts\Utils\MeshTransformer.cs" />
+    <Compile Include="Assets\Scripts\Utils\MeshUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Normal.cs" />
     <Compile Include="Assets\Scripts\Utils\NumericalMath.cs" />
     <Compile Include="Assets\Scripts\Utils\Pair.cs" />

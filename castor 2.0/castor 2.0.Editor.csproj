@@ -215,6 +215,7 @@
     <Compile Include="Assets\Scripts\IO\Editor\TestCSVFileReader.cs" />
     <Compile Include="Assets\Scripts\IO\Editor\TestObjFile.cs" />
     <Compile Include="Assets\Scripts\IO\Editor\TestObjFileReader.cs" />
+    <Compile Include="Assets\Scripts\IO\Editor\TestObjFileWriter.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondence.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondenceCollection.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestNearestPointCorrespondences.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestHeap.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestMatrix4x4D.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\TestMeshUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestNumericalMath.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestQuaternionD.cs" />
@@ -243,7 +245,6 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestTriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector3D.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVector4D.cs" />
-    <Compile Include="Assets\Scripts\IO\Editor\TestObjFileWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
