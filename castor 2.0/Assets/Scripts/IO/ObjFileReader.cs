@@ -95,8 +95,13 @@ namespace IO
             VertexReader vertexReader = readers["vertex"] as VertexReader;
             VertexNormalReader normalReader = readers["normal"] as VertexNormalReader;
             FaceReader faceReader = readers["face"] as FaceReader;
+            VertexTextureReader vertexTextureReader = readers["texture"] as VertexTextureReader;
 
-            MeshBuilder builder = new MeshBuilder(vertexReader.elements, normalReader.elements, faceReader.faces);
+            MeshBuilder builder = new MeshBuilder(
+                vertices: vertexReader.elements,
+                normals: normalReader.elements,
+                textures: vertexTextureReader.elements,
+                faces: faceReader.faces);
             Mesh mesh = builder.Build();
 
             return mesh;
@@ -503,23 +508,43 @@ namespace IO
     {
         private readonly Dictionary<int, Vector3> objVertices;
         private readonly Dictionary<int, Vector3> objNormals;
+        private readonly Dictionary<int, Vector3> objTextures;
         private readonly List<FaceReader.Face> objFaces;
 
         private readonly List<Vector3> meshVertices;
         private readonly List<Vector3> meshNormals;
+        private readonly List<Vector2> meshUV2;
+        private readonly List<Vector2> meshUV3;
+
         private readonly int[] meshTriangles;
 
         private int idx = 0;
 
-        public MeshBuilder(Dictionary<int, Vector3> vertices, Dictionary<int, Vector3> normals, List<FaceReader.Face> faces)
+        private MeshBuilder(Dictionary<int, Vector3> vertices, List<FaceReader.Face> faces)
         {
             this.objVertices = vertices;
-            this.objNormals = normals;
             this.objFaces = faces;
 
             meshVertices = new List<Vector3>();
-            meshNormals = new List<Vector3>();
             meshTriangles = new int[faces.Count * 3];
+        }
+
+        private MeshBuilder(Dictionary<int, Vector3> vertices, Dictionary<int, Vector3> normals, List<FaceReader.Face> faces)
+            : this(vertices, faces)
+        {
+            this.objNormals = normals;
+            this.objFaces = faces;
+
+            meshNormals = new List<Vector3>();
+        }
+
+        public MeshBuilder(Dictionary<int, Vector3> vertices, Dictionary<int, Vector3> normals, Dictionary<int, Vector3> textures, List<FaceReader.Face> faces)
+            : this(vertices, normals, faces)
+        {
+            this.objTextures = textures;
+
+            meshUV2 = new List<Vector2>();
+            meshUV3 = new List<Vector2>();
         }
 
         public Mesh Build()
@@ -530,6 +555,8 @@ namespace IO
             mesh.vertices = meshVertices.ToArray();
             mesh.normals = meshNormals.ToArray();
             mesh.triangles = meshTriangles;
+            mesh.uv2 = meshUV2.ToArray();
+            mesh.uv3 = meshUV3.ToArray();
 
             return mesh;
         }
@@ -541,20 +568,32 @@ namespace IO
 
         private void ProcessFace(FaceReader.Face face)
         {
-            meshVertices.Add(objVertices[face.v0]);
-            meshNormals.Add(objNormals[face.n0].normalized);
-
-            meshVertices.Add(objVertices[face.v1]);
-            meshNormals.Add(objNormals[face.n1].normalized);
-
-            meshVertices.Add(objVertices[face.v2]);
-            meshNormals.Add(objNormals[face.n2].normalized);
+            AddVertexFromFace(face, 0);
+            AddVertexFromFace(face, 1);
+            AddVertexFromFace(face, 2);
 
             meshTriangles[idx + 0] = idx + 0;
             meshTriangles[idx + 1] = idx + 1;
             meshTriangles[idx + 2] = idx + 2;
 
             idx += 3;
+        }
+
+        private void AddVertexFromFace(FaceReader.Face face, int vertexIdx)
+        {
+            meshVertices.Add(objVertices[face.vertexIndices[vertexIdx]]);
+
+            if (face.HasNormalIndices())
+            {
+                meshNormals.Add(objNormals[face.normalIndices[vertexIdx]].normalized);
+            }
+
+            if (face.HasTextureIndices())
+            {
+                Vector3 texture = objTextures[face.textureIndices[vertexIdx]];
+                meshUV2.Add(new Vector2(texture.x, texture.y));
+                meshUV3.Add(new Vector2(texture.z, 0));
+            }
         }
     }
 
