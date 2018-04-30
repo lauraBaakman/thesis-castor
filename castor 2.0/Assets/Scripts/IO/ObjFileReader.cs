@@ -68,6 +68,8 @@ namespace IO
             try
             {
                 string trimmedLine = line.Trim();
+                if (trimmedLine.Equals("")) return;
+
                 foreach (Reader reader in this.readers.Values)
                 {
                     if (reader.IsApplicable(trimmedLine))
