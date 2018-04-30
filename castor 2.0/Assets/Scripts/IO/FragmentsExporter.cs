@@ -31,7 +31,7 @@ namespace IO
                 onSuccess: ExportFragments,
                 onCancel: () => { },
                 folderMode: true,
-                initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models" : null,
+                initialPath: Application.isEditor ? "/Users/laura/Desktop" : null,
                 title: "Export",
                 saveButtonText: "Export"
             );
