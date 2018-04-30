@@ -117,7 +117,6 @@ namespace Tests.IO
 
             Vector3 n = Vector3.forward;
 
-
             Vector3 t_a = new Vector3(0, 1, 2);
             Vector3 t_b = new Vector3(2, 3, 4);
             Vector3 t_c = new Vector3(4, 5, 6);
