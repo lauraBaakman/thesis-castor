@@ -1207,7 +1207,7 @@ namespace Tests.IO
             Dictionary<int, Vector3> normals = new Dictionary<int, Vector3>();
             normals.Add(1, n);
 
-            Dictionary<int, Vector3> textures = new Dictionary<int, Vector3>() { };
+            Dictionary<int, Vector3> textures = new Dictionary<int, Vector3> { };
 
             List<FaceReader.Face> faces = new List<FaceReader.Face>();
             faces.Add(new FaceReader.Face(v0: 1, v1: 2, v2: 3, n0: 1, n1: 1, n2: 1));
@@ -1245,6 +1245,8 @@ namespace Tests.IO
             normals.Add(1, n1);
             normals.Add(2, n2);
 
+            Dictionary<int, Vector3> textures = new Dictionary<int, Vector3> { };
+
             List<FaceReader.Face> faces = new List<FaceReader.Face>();
             faces.Add(new FaceReader.Face(v0: 1, v1: 2, v2: 3, n0: 1, n1: 1, n2: 1));
             faces.Add(new FaceReader.Face(v0: 2, v1: 4, v2: 3, n0: 2, n1: 2, n2: 2));
@@ -1254,7 +1256,7 @@ namespace Tests.IO
             expected.normals = new Vector3[] { n1, n1, n1, n2, n2, n2 };
             expected.triangles = new int[] { 0, 1, 2, 3, 4, 5 };
 
-            Mesh actual = new MeshBuilder(vertices, normals, faces).Build();
+            Mesh actual = new MeshBuilder(vertices, normals, textures, faces).Build();
 
             Assert.AreEqual(expected.vertices, actual.vertices);
             Assert.AreEqual(expected.normals, actual.normals);
