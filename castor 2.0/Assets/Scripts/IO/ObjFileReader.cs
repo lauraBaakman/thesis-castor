@@ -203,8 +203,9 @@ namespace IO
 
     public class FaceReader : Reader
     {
-        private Regex noNormalFaceRegex;
-        private Regex completeFaceRegex;
+        private Regex noTexturesNoNormalsRegex;
+        private Regex noTexturesNormalsRegex;
+        private Regex TexturesNormalsRegex;
 
         public List<Face> faces;
 
@@ -213,10 +214,13 @@ namespace IO
         {
             faces = new List<Face>();
 
-            Regex vertex = new Regex(@"(\d+)\s*/\s*/\s*(\d+)");
+            noTexturesNoNormalsRegex = new Regex(typeRegex + @"(?<v0>\d+)\s+(?<v1>\d+)\s+(?<v2>\d+)$");
 
-            noNormalFaceRegex = new Regex(typeRegex + @"(?<v0>\d+)\s+(?<v1>\d+)\s+(?<v2>\d+)$");
-            completeFaceRegex = new Regex(typeRegex.ToString() + vertex + @"\s+" + vertex + @"\s+" + vertex + @"$");
+            Regex vertex = new Regex(@"(\d+)\s*/\s*/\s*(\d+)");
+            noTexturesNormalsRegex = new Regex(typeRegex.ToString() + vertex + @"\s+" + vertex + @"\s+" + vertex + @"$");
+
+            vertex = new Regex(@"(\d+)\s*/\s*(\d+)\s*/\s*(\d+)");
+            TexturesNormalsRegex = new Regex(typeRegex.ToString() + vertex + @"\s+" + vertex + @"\s+" + vertex + @"$");
         }
 
         public override void Read(string line)
@@ -227,8 +231,9 @@ namespace IO
 
         public Face ExtractFace(string line)
         {
-            if (HasNormals(line)) return ExtractCompleteFace(line);
-            if (NoNormals(line)) return ExtractNoNormalFace(line);
+            if (HasNormalsHasTextures(line)) return ExtractNormalsTexturesFace(line);
+            if (HasNoTexturesHasNormals(line)) return ExtractNormalsNoTexturesFace(line);
+            if (HasNoTexturesHasNoNormals(line)) return ExtractNoNormalsNoTexturesFace(line);
 
             throw new InvalidObjFileException(
                 string.Format(
@@ -237,22 +242,27 @@ namespace IO
             );
         }
 
-        public bool HasNormals(string line)
+        public bool HasNormalsHasTextures(string line)
         {
-            return completeFaceRegex.Match(line).Success;
+            return TexturesNormalsRegex.Match(line).Success;
         }
 
-        public bool NoNormals(string line)
+        public bool HasNoTexturesHasNormals(string line)
         {
-            return noNormalFaceRegex.Match(line).Success;
+            return noTexturesNormalsRegex.Match(line).Success;
         }
 
-        public Face ExtractNoNormalFace(string line)
+        public bool HasNoTexturesHasNoNormals(string line)
+        {
+            return noTexturesNoNormalsRegex.Match(line).Success;
+        }
+
+        public Face ExtractNoNormalsNoTexturesFace(string line)
         {
             Face face;
             try
             {
-                MatchCollection matches = noNormalFaceRegex.Matches(line);
+                MatchCollection matches = noTexturesNoNormalsRegex.Matches(line);
                 GroupCollection groups = matches[0].Groups;
 
                 face = new Face(
@@ -270,12 +280,12 @@ namespace IO
             return face;
         }
 
-        public Face ExtractCompleteFace(string line)
+        public Face ExtractNormalsNoTexturesFace(string line)
         {
             Face face;
             try
             {
-                MatchCollection matches = completeFaceRegex.Matches(line);
+                MatchCollection matches = noTexturesNormalsRegex.Matches(line);
                 GroupCollection groups = matches[0].Groups;
 
                 face = new Face(
@@ -295,10 +305,23 @@ namespace IO
             return face;
         }
 
+        public Face ExtractNormalsTexturesFace(string line)
+        {
+            throw new NotImplementedException();
+            //catch (Exception e)
+            //{
+            //    throw new InvalidObjFileException(
+            //        string.Format("Could not read the face: '{0}', got the exception: {1}", line, e.Message)
+            //    );
+            //}
+            //return face;
+        }
+
         public class Face : IEquatable<Face>
         {
             public readonly int[] vertexIndices = null;
             public readonly int[] normalIndices = null;
+            public readonly int[] textureIndices = null;
 
             public int v0 { get { return vertexIndices[0]; } }
             public int v1 { get { return vertexIndices[1]; } }
@@ -308,21 +331,9 @@ namespace IO
             public int n1 { get { return normalIndices[1]; } }
             public int n2 { get { return normalIndices[2]; } }
 
-            public Face(
-                int v0, int v1, int v2,
-                int n0, int n1, int n2
-            )
-            {
-                vertexIndices = new int[3];
-                vertexIndices[0] = v0;
-                vertexIndices[1] = v1;
-                vertexIndices[2] = v2;
-
-                normalIndices = new int[3];
-                normalIndices[0] = n0;
-                normalIndices[1] = n1;
-                normalIndices[2] = n2;
-            }
+            public int t0 { get { return textureIndices[0]; } }
+            public int t1 { get { return textureIndices[1]; } }
+            public int t2 { get { return textureIndices[2]; } }
 
             public Face(int v0, int v1, int v2)
             {
@@ -332,9 +343,37 @@ namespace IO
                 vertexIndices[2] = v2;
             }
 
+            public Face(
+                int v0, int v1, int v2,
+                int n0, int n1, int n2
+            ) : this(v0, v1, v2)
+            {
+                normalIndices = new int[3];
+                normalIndices[0] = n0;
+                normalIndices[1] = n1;
+                normalIndices[2] = n2;
+            }
+
+            public Face(
+                int v0, int v1, int v2,
+                int n0, int n1, int n2,
+                int t0, int t1, int t2
+            ) : this(v0, v1, v2, n0, n1, n2)
+            {
+                textureIndices = new int[3];
+                textureIndices[0] = t0;
+                textureIndices[1] = t1;
+                textureIndices[2] = t2;
+            }
+
             public bool HasNormalIndices()
             {
                 return this.normalIndices != null;
+            }
+
+            public bool HasTextureIndices()
+            {
+                return this.textureIndices != null;
             }
 
             public override bool Equals(object obj)
@@ -354,6 +393,12 @@ namespace IO
                     hashCode *= (31 + this.n1.GetHashCode());
                     hashCode *= (31 + this.n2.GetHashCode());
                 }
+                if (HasTextureIndices())
+                {
+                    hashCode *= (31 + this.t0.GetHashCode());
+                    hashCode *= (31 + this.t1.GetHashCode());
+                    hashCode *= (31 + this.t2.GetHashCode());
+                }
                 hashCode *= (31 + this.v0.GetHashCode());
                 hashCode *= (31 + this.v1.GetHashCode());
                 hashCode *= (31 + this.v2.GetHashCode());
@@ -372,7 +417,12 @@ namespace IO
                     this.n1.Equals(other.n1) &
                     this.n2.Equals(other.n2)
                 );
-                return verticesEqual && normalsEqual;
+                bool texturesEqual = !HasTextureIndices() || (
+                    this.t0.Equals(other.t0) &
+                    this.t1.Equals(other.t1) &
+                    this.t2.Equals(other.t2)
+                );
+                return verticesEqual && normalsEqual && texturesEqual;
             }
         }
     }

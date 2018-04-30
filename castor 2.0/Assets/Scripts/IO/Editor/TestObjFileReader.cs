@@ -17,7 +17,7 @@ namespace Tests.IO
         }
 
         [Test]
-        public void Test_ReadCube()
+        public void Test_ReadCube_No_VT()
         {
             string inputPath = InputPath("cube.obj");
 
@@ -150,6 +150,206 @@ namespace Tests.IO
             Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
             Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);
             Assert.AreEqual(expected.Mesh.triangles, actual.Mesh.triangles);
+        }
+
+        [Test]
+        public void Test_ReadCube_With_VT()
+        {
+            string inputPath = InputPath("cube_vt.obj");
+
+            Mesh mesh = new Mesh();
+
+            Vector3[] vertices = {
+                //face 1
+                new Vector3(-1.000000f, -1.000000f, -1.000000f),
+                new Vector3(+1.000000f, -1.000000f, +1.000000f),
+                new Vector3(-1.000000f, -1.000000f, +1.000000f),
+                //face 2
+                new Vector3(+1.000000f, +1.000000f, +1.000000f),
+                new Vector3(-0.999999f, +1.000000f, -1.000001f),
+                new Vector3(-1.000000f, +1.000000f, +0.999999f),
+                //face 3
+                new Vector3(-1.000000f, +1.000000f, +0.999999f),
+                new Vector3(-1.000000f, -1.000000f, -1.000000f),
+                new Vector3(-1.000000f, -1.000000f, +1.000000f),
+                //face 4
+                new Vector3(-0.999999f, +1.000000f, -1.000001f),
+                new Vector3(+1.000000f, -1.000000f, -1.000000f),
+                new Vector3(-1.000000f, -1.000000f, -1.000000f),
+                //face 5
+                new Vector3(+1.000000f, -1.000000f, -1.000000f),
+                new Vector3(+1.000000f, +1.000000f, +1.000000f),
+                new Vector3(+1.000000f, -1.000000f, +1.000000f),
+                //face 6
+                new Vector3(-1.000000f, -1.000000f, +1.000000f),
+                new Vector3(+1.000000f, +1.000000f, +1.000000f),
+                new Vector3(-1.000000f, +1.000000f, +0.999999f),
+                //face 7
+                new Vector3(-1.000000f, -1.000000f, -1.000000f),
+                new Vector3(+1.000000f, -1.000000f, -1.000000f),
+                new Vector3(+1.000000f, -1.000000f, +1.000000f),
+                //face 8
+                new Vector3(+1.000000f, +1.000000f, +1.000000f),
+                new Vector3(+1.000000f, +1.000000f, -1.000000f),
+                new Vector3(-0.999999f, +1.000000f, -1.000001f),
+                //face 9
+                new Vector3(-1.000000f, +1.000000f, +0.999999f),
+                new Vector3(-0.999999f, +1.000000f, -1.000001f),
+                new Vector3(-1.000000f, -1.000000f, -1.000000f),
+                //face 10
+                new Vector3(-0.999999f, +1.000000f, -1.000001f),
+                new Vector3(+1.000000f, +1.000000f, -1.000000f),
+                new Vector3(+1.000000f, -1.000000f, -1.000000f),
+                //face 11
+                new Vector3(+1.000000f, -1.000000f, -1.000000f),
+                new Vector3(+1.000000f, +1.000000f, -1.000000f),
+                new Vector3(+1.000000f, +1.000000f, +1.000000f),
+                //face 12
+                new Vector3(-1.000000f, -1.000000f, +1.000000f),
+                new Vector3(+1.000000f, -1.000000f, +1.000000f),
+                new Vector3(+1.000000f, +1.000000f, +1.000000f),
+            };
+            mesh.vertices = vertices;
+
+            Vector3[] normals = {
+                //face 1
+                new Vector3(+0.0000f, -1.0000f, +0.0000f),
+                new Vector3(+0.0000f, -1.0000f, +0.0000f),
+                new Vector3(+0.0000f, -1.0000f, +0.0000f),
+                //face 2
+                new Vector3(+0.0000f, +1.0000f, -0.0000f),
+                new Vector3(+0.0000f, +1.0000f, -0.0000f),
+                new Vector3(+0.0000f, +1.0000f, -0.0000f),
+                //face 3
+                new Vector3(-1.0000f, -0.0000f, +0.0000f),
+                new Vector3(-1.0000f, -0.0000f, +0.0000f),
+                new Vector3(-1.0000f, -0.0000f, +0.0000f),
+                //face 4
+                new Vector3(+0.0000f, -0.0000f, -1.0000f),
+                new Vector3(+0.0000f, -0.0000f, -1.0000f),
+                new Vector3(+0.0000f, -0.0000f, -1.0000f),
+                //face 5
+                new Vector3(+1.0000f, -0.0000f, +0.0000f),
+                new Vector3(+1.0000f, -0.0000f, +0.0000f),
+                new Vector3(+1.0000f, -0.0000f, +0.0000f),
+                //face 6
+                new Vector3(-0.0000f, +0.0000f, +1.0000f),
+                new Vector3(-0.0000f, +0.0000f, +1.0000f),
+                new Vector3(-0.0000f, +0.0000f, +1.0000f),
+                //face 7
+                new Vector3(+0.0000f, -1.0000f, +0.0000f),
+                new Vector3(+0.0000f, -1.0000f, +0.0000f),
+                new Vector3(+0.0000f, -1.0000f, +0.0000f),
+                //face 8
+                new Vector3(+0.0000f, +1.0000f, -0.0000f),
+                new Vector3(+0.0000f, +1.0000f, -0.0000f),
+                new Vector3(+0.0000f, +1.0000f, -0.0000f),
+                //face 9
+                new Vector3(-1.0000f, -0.0000f, +0.0000f),
+                new Vector3(-1.0000f, -0.0000f, +0.0000f),
+                new Vector3(-1.0000f, -0.0000f, +0.0000f),
+                //face 10
+                new Vector3(+0.0000f, -0.0000f, -1.0000f),
+                new Vector3(+0.0000f, -0.0000f, -1.0000f),
+                new Vector3(+0.0000f, -0.0000f, -1.0000f),
+                //face 11
+                new Vector3(+1.0000f, -0.0000f, +0.0000f),
+                new Vector3(+1.0000f, -0.0000f, +0.0000f),
+                new Vector3(+1.0000f, -0.0000f, +0.0000f),
+                //face 12
+                new Vector3(-0.0000f, +0.0000f, +1.0000f),
+                new Vector3(-0.0000f, +0.0000f, +1.0000f),
+                new Vector3(-0.0000f, +0.0000f, +1.0000f),
+            };
+            mesh.normals = normals;
+
+            int[] triangles = {
+                00, 01, 02,
+                03, 04, 05,
+                06, 07, 08,
+                09, 10, 11,
+                12, 13, 14,
+                15, 16, 17,
+                18, 19, 20,
+                21, 22, 23,
+                24, 25, 26,
+                27, 28, 29,
+                30, 31, 32,
+                33, 34, 35
+            };
+            mesh.triangles = triangles;
+
+            Vector3[] uvws = {
+                //face 1
+                new Vector3(+0.2f, +0.4f, +0.8f),
+                new Vector3(+0.6f, +0.2f, +0.3f),
+                new Vector3(+0.0f, +0.5f, +0.6f),
+                //face 2
+                new Vector3(+0.6f, +0.4f, -0.4f),
+                new Vector3(+1.0f, +0.2f, -0.8f),
+                new Vector3(+0.8f, +0.1f, +0.7f),
+                //face 3
+                new Vector3(+0.8f, +0.1f, +0.7f),
+                new Vector3(+0.2f, +0.4f, +0.8f),
+                new Vector3(+0.0f, +0.5f, +0.6f),
+                //face 4
+                new Vector3(+1.0f, +0.2f, -0.8f),
+                new Vector3(+0.4f, +0.3f, +0.6f),
+                new Vector3(+0.2f, +0.4f, +0.8f),
+                //face 5
+                new Vector3(+0.4f, +0.3f, +0.6f),
+                new Vector3(+0.6f, +0.4f, -0.4f),
+                new Vector3(+0.6f, +0.2f, +0.3f),
+                //face 6
+                new Vector3(+0.0f, +0.5f, +0.6f),
+                new Vector3(+0.6f, +0.4f, -0.4f),
+                new Vector3(+0.8f, +0.1f, +0.7f),
+                //face 7
+                new Vector3(+0.2f, +0.4f, +0.8f),
+                new Vector3(+0.4f, +0.3f, +0.6f),
+                new Vector3(+0.6f, +0.2f, +0.3f),
+                //face 8
+                new Vector3(+0.6f, +0.4f, -0.4f),
+                new Vector3(+0.8f, +0.3f, -0.3f),
+                new Vector3(+1.0f, +0.2f, -0.8f),
+                //face 9
+                new Vector3(+0.8f, +0.1f, +0.7f),
+                new Vector3(+1.0f, +0.2f, -0.8f),
+                new Vector3(+0.2f, +0.4f, +0.8f),
+                //face 10
+                new Vector3(+1.0f, +0.2f, -0.8f),
+                new Vector3(+0.8f, +0.3f, -0.3f),
+                new Vector3(+0.4f, +0.3f, +0.6f),
+                //face 11
+                new Vector3(+0.4f, +0.3f, +0.6f),
+                new Vector3(+0.8f, +0.3f, -0.3f),
+                new Vector3(+0.6f, +0.4f, -0.4f),
+                //face 12
+                new Vector3(+0.0f, +0.5f, +0.6f),
+                new Vector3(+0.6f, +0.2f, +0.3f),
+                new Vector3(+0.6f, +0.4f, -0.4f),
+            };
+
+            Vector2[] uv_xy = new Vector2[uvws.Length];
+            Vector2[] uv_z0 = new Vector2[uvws.Length];
+            for (int i = 0; i < uvws.Length; i++)
+            {
+                uv_xy[i] = new Vector2(uvws[i].x, uvws[i].y);
+                uv_z0[i] = new Vector2(uvws[i].z, 0.0f);
+            }
+            mesh.uv2 = uv_xy;
+            mesh.uv3 = uv_z0;
+
+            ReadResult expected = ReadResult.OKResult(inputPath, mesh);
+            ReadResult actual = new ObjFileReader(inputPath).ImportFile();
+
+            Assert.IsTrue(actual.Succeeded());
+            Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
+            Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);
+            Assert.AreEqual(expected.Mesh.triangles, actual.Mesh.triangles);
+            Assert.AreEqual(expected.Mesh.uv, actual.Mesh.uv);
+            Assert.AreEqual(expected.Mesh.uv2, actual.Mesh.uv2);
+            Assert.AreEqual(expected.Mesh.uv3, actual.Mesh.uv3);
         }
 
         [Test]
@@ -507,6 +707,55 @@ namespace Tests.IO
         }
 
         [Test]
+        public void ExtractCompleteFace()
+        {
+            string line = "f 1//2 4//3 8//5";
+            FaceReader.Face expected = new FaceReader.Face(1, 4, 8, 2, 3, 5);
+            FaceReader.Face actual = reader.ExtractNormalsNoTexturesFace(line);
+
+            Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
+            Assert.AreEqual(expected.normalIndices, actual.normalIndices);
+        }
+
+        [Test]
+        public void ExtractNoNormalsFace()
+        {
+            string line = "f 1 4 8";
+            FaceReader.Face expected = new FaceReader.Face(1, 4, 8);
+            FaceReader.Face actual = reader.ExtractNoNormalsNoTexturesFace(line);
+
+            Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
+            Assert.AreEqual(expected.normalIndices, actual.normalIndices);
+        }
+
+        [TestCase("f 1 4 8", true)]
+        [TestCase("f 1//2 4//3     //5", false)]
+        [TestCase("f 1/3/2 4/5/3 8/7/5", false)]
+        public void HasNoTexturesHasNoNormals_Test(string line, bool expected)
+        {
+            bool actual = reader.HasNoTexturesHasNoNormals(line);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase("f 1 4 8", false)]
+        [TestCase("f 1//2 4//3 8//5", true)]
+        [TestCase("f 1/3/2 4/5/3 8/7/5", false)]
+        public void HasNoTexturesHasNormals_Test(string line, bool expected)
+        {
+            bool actual = reader.HasNoTexturesHasNoNormals(line);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase("f 1 4 8", false)]
+        [TestCase("f 1//2 4//3 8//5", false)]
+        [TestCase("f 1/3/2 4/5/3 8/7/5", true)]
+        public void HasTexturesHasNormals_Test(string line, bool expected)
+        {
+            bool actual = reader.HasNormalsHasTextures(line);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
         public void ReadTest_NoNormals()
         {
             string line = "f 1 4 8";
@@ -518,48 +767,25 @@ namespace Tests.IO
         }
 
         [Test]
-        public void ExtractCompleteFace()
+        public void ReadTest_WithNormals_NoTextures()
         {
             string line = "f 1//2 4//3 8//5";
             FaceReader.Face expected = new FaceReader.Face(1, 4, 8, 2, 3, 5);
-            FaceReader.Face actual = reader.ExtractCompleteFace(line);
+            FaceReader.Face actual = reader.ExtractFace(line);
 
             Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
             Assert.AreEqual(expected.normalIndices, actual.normalIndices);
         }
 
         [Test]
-        public void ExtractNoNormalsFace()
+        public void ReadTest_WithNormals_WithTextures()
         {
-            string line = "f 1 4 8";
-            FaceReader.Face expected = new FaceReader.Face(1, 4, 8);
-            FaceReader.Face actual = reader.ExtractNoNormalFace(line);
-
-            Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
-            Assert.AreEqual(expected.normalIndices, actual.normalIndices);
-        }
-
-        [TestCase("f 1 4 8", false)]
-        [TestCase("f 1//2 4//3 8//5", true)]
-        public void HasNormals(string line, bool expected)
-        {
-            bool actual = reader.HasNormals(line);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestCase("f 1 4 8", true)]
-        [TestCase("f 1//2 4//3 8//5", false)]
-        public void NoNormals(string line, bool expected)
-        {
-            bool actual = reader.NoNormals(line);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void ReadTest_WithNormals()
-        {
-            string line = "f 1//2 4//3 8//5";
-            FaceReader.Face expected = new FaceReader.Face(1, 4, 8, 2, 3, 5);
+            string line = "f 1/3/2 4/5/3 8/7/5";
+            FaceReader.Face expected = new FaceReader.Face(
+                1, 4, 8,
+                2, 3, 5,
+                3, 5, 7
+            );
             FaceReader.Face actual = reader.ExtractFace(line);
 
             Assert.AreEqual(expected.vertexIndices, actual.vertexIndices);
@@ -583,40 +809,6 @@ namespace Tests.IO
                     "The line: '{0}' does not define a valid face.", face
                 )
             ));
-        }
-    }
-
-    [TestFixture]
-    public class VertexTextureReaderTests
-    {
-
-        VertexTextureReader reader;
-
-        [SetUp]
-        public void SetUp()
-        {
-            reader = new VertexTextureReader();
-        }
-
-        [TestCase("# some comment", false)]
-        [TestCase("v some vertex", false)]
-        [TestCase("vn some normal", false)]
-        [TestCase("f some face", false)]
-        [TestCase("vt some texture", true)]
-        [TestCase("p some point", false)]
-        [TestCase("l some line", false)]
-        [TestCase("curv2 some 2D curve", false)]
-        [TestCase("surf some surface", false)]
-        [TestCase("g some group", false)]
-        [TestCase("s some smoothing group", false)]
-        [TestCase("mg some merging group", false)]
-        [TestCase("o some object name", false)]
-        [TestCase("mtllib some material library", false)]
-        [TestCase("usemtl some material name", false)]
-        public void IsApplicableReaderTest(string line, bool expected)
-        {
-            bool actual = reader.IsApplicable(line);
-            Assert.AreEqual(expected, actual);
         }
     }
 
