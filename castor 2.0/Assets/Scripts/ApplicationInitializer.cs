@@ -24,10 +24,12 @@ public class ApplicationInitializer : MonoBehaviour
     /// </summary>
     private void SharedInitialization()
     {
-        FileBrowser.SetFilters(
-            true,
-            new FileBrowser.Filter("Bones", ".obj", ".stl")
-        );
+        FileBrowser.Filter configurationFilter = new FileBrowser.Filter("Configuration", ".json");
+        FileBrowser.Filter fragmentFilter = new FileBrowser.Filter("Fragments", "obj");
+
+        FileBrowser.SetFilters(true, configurationFilter, fragmentFilter);
+        FileBrowser.SetDefaultFilter(configurationFilter.defaultExtension);
+        FileBrowser.SetExcludedExtensions(".lnk", ".tmp", ".zip", ".rar", ".exe", fragmentFilter.defaultExtension);
     }
 
     /// <summary>
@@ -35,7 +37,6 @@ public class ApplicationInitializer : MonoBehaviour
     /// </summary>
     private void DeploySpecificInitialization()
     {
-        Debug.Log("DeployInitialization");
     }
 
     /// <summary>

@@ -17,18 +17,6 @@ namespace Buttons
         private void Start()
         {
             initialPath = Application.isEditor ? "/Users/laura/Repositories/thesis-experiment/simulated" : null;
-
-            ConfigureFileBrowser();
-        }
-
-        private void ConfigureFileBrowser()
-        {
-            FileBrowser.Filter configurationFilter = new FileBrowser.Filter("Configuration", ".json");
-            FileBrowser.Filter fragmentFilter = new FileBrowser.Filter("Fragments", ".obj");
-
-            FileBrowser.SetFilters(false, configurationFilter, fragmentFilter);
-            FileBrowser.SetDefaultFilter(configurationFilter.defaultExtension);
-            FileBrowser.SetExcludedExtensions(".lnk", ".tmp", ".zip", ".rar", ".exe", fragmentFilter.defaultExtension);
         }
 
         protected override void ExecuteButtonAction()
