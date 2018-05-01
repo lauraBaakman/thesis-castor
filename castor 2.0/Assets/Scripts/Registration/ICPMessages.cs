@@ -92,12 +92,12 @@ namespace Registration
 
         public class ICPStepCompletedMessage : IToTickerMessage
         {
-            public readonly int IterationIndx;
+            public readonly int iteration;
             public readonly float Error;
 
-            public ICPStepCompletedMessage(int iterationIndx, float error)
+            public ICPStepCompletedMessage(int iteration, float error)
             {
-                this.IterationIndx = iterationIndx;
+                this.iteration = iteration;
                 this.Error = error;
             }
 
@@ -106,7 +106,7 @@ namespace Registration
                 return new Message.InfoMessage(
                     string.Format(
                         "Finished iteration {0}, the current error is {1}",
-                        IterationIndx, Error
+                        iteration, Error
                     )
                 );
             }
