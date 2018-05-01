@@ -35,13 +35,13 @@ namespace Tests.Registration
         [Test]
         public void TestSDTooLowData()
         {
-            StabilizationTermiationCondition condition = new StabilizationTermiationCondition(5, 0.05);
+            StabilizationTermiationCondition condition = new StabilizationTermiationCondition(5, 0.00005);
 
-            condition.ErrorHasStabilized(0.0010f);
-            condition.ErrorHasStabilized(0.0011f);
-            condition.ErrorHasStabilized(0.0009f);
-            condition.ErrorHasStabilized(0.0010f);
-            Assert.IsTrue(condition.ErrorHasStabilized(0.0012f));
+            condition.ErrorHasStabilized(0.0424007f);
+            condition.ErrorHasStabilized(0.0424006f);
+            condition.ErrorHasStabilized(0.0424005f);
+            condition.ErrorHasStabilized(0.0424008f);
+            Assert.IsTrue(condition.ErrorHasStabilized(0.0424012f));
         }
     }
 }

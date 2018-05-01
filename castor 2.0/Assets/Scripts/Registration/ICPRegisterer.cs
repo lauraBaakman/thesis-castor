@@ -78,6 +78,8 @@ namespace Registration
             StaticFragment = staticFragment;
             ModelFragment = modelFragment;
 
+            stabilization = new StabilizationTermiationCondition();
+
             Settings = settings;
             FinishedCallBack = callBack;
 
@@ -264,20 +266,25 @@ namespace Registration
             // We have insufficient data
             if (!ErrorsArrayIsFilled()) return false;
 
-            return StandardDeviationUnderThreshold();
+            return CoefficientOfVariationUnderThreshold();
         }
 
-        private bool StandardDeviationUnderThreshold()
+        private bool CoefficientOfVariationUnderThreshold()
         {
-            return ComputeErrorStandardDeviation() < threshold;
+            double mean = errors.Average();
+            double standardDeviation = ComputeErrorStandardDeviation(mean);
+
+            //use this instead of the SD to scale insensitivity
+            double coefficientOfVariation = standardDeviation / mean;
+
+            return coefficientOfVariation < threshold;
         }
 
-        private double ComputeErrorStandardDeviation()
+        private double ComputeErrorStandardDeviation(double mean)
         {
             double standardDeviation = 0;
             if (errors.Count() > 0)
             {
-                double mean = errors.Average();
                 double sum = errors.Sum(d => Math.Pow(d - mean, 2));
                 standardDeviation = Math.Sqrt((sum) / errors.Count());
             }
