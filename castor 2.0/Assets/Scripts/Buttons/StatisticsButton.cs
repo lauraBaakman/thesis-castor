@@ -3,6 +3,7 @@ using SimpleFileBrowser;
 using UnityEngine;
 using IO;
 using System.IO;
+using System;
 
 namespace Buttons
 {
@@ -14,6 +15,8 @@ namespace Buttons
 
         private List<string> objFilePaths;
 
+        public StatisticsComputer statisticsComputer;
+
         protected override void Awake()
         {
             base.Awake();
@@ -22,6 +25,7 @@ namespace Buttons
 
         protected override void ExecuteButtonAction()
         {
+            Reset();
             RetrieveExperimentResultFolder();
         }
 
@@ -30,23 +34,45 @@ namespace Buttons
             return Input.GetButtonDown("Statistics");
         }
 
+        private void Reset()
+        {
+            directory = "";
+            objFilePaths = null;
+        }
+
         private void RetrieveExperimentResultFolder()
         {
-            FileBrowser.ShowLoadDialog(
-                onSuccess: (path) => StartCoroutine(ProcessExperimentResultsFolder(path)),
-                onCancel: () => { },
-                folderMode: true,
-                initialPath: initialPath,
-                title: "Select a results directory.",
-                loadButtonText: "Select"
-            );
+            //FileBrowser.ShowLoadDialog(
+            //    onSuccess: (path) => StartCoroutine(ProcessExperimentResultsFolder(path)),
+            //    onCancel: () => { },
+            //    folderMode: true,
+            //    initialPath: initialPath,
+            //    title: "Select a results directory.",
+            //    loadButtonText: "Select"
+            //);
+            Debug.Log("Temporarily using a fixed directory");
+            StartCoroutine(ProcessExperimentResultsFolder("/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/results_05-01_15-51-22-393"));
         }
 
         private IEnumerator<object> ProcessExperimentResultsFolder(string inputDirectory)
         {
             StartCoroutine(FindObjectIDs(inputDirectory));
             yield return new WaitWhile(() => objFilePaths == null);
-            Debug.Log("Read all obj file paths");
+
+            statisticsComputer.Init();
+
+            foreach (string objFile in objFilePaths)
+            {
+                StartCoroutine(statisticsComputer.Compute(objFile));
+                yield return new WaitUntil(() => statisticsComputer.Done);
+            }
+
+            WriteNewCSVDataFile();
+        }
+
+        private void WriteNewCSVDataFile()
+        {
+            throw new NotImplementedException();
         }
 
         private IEnumerator<object> FindObjectIDs(string inputDirectory)

@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 33415125}
   - component: {fileID: 33415126}
   - component: {fileID: 33415127}
+  - component: {fileID: 33415128}
   m_Layer: 0
   m_Name: ICP Fragments
   m_TagString: Untagged
@@ -328,6 +329,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58e6dcd3c2c184c4386ed66cbd3490f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &33415128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 33415124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb47d59d05fc44439ae37d810e71e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &37977596 stripped
@@ -5120,6 +5132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button: {fileID: 0}
+  statisticsComputer: {fileID: 33415128}
 --- !u!1001 &1681475636
 Prefab:
   m_ObjectHideFlags: 0
