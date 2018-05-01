@@ -58,12 +58,14 @@ namespace Registration
             public string Message { get { return message; } }
 
             public float errorAtTermination;
+            public readonly int terminationIteration;
 
-            public ICPTerminatedMessage(TerminationReason reason, float currentError, string message = "")
+            public ICPTerminatedMessage(TerminationReason reason, float currentError, int terminationIteration, string message = "")
             {
                 this.Reason = reason;
-                this.message = message;
+                this.message = message ?? ReasonToString();
                 this.errorAtTermination = currentError;
+                this.terminationIteration = terminationIteration;
             }
 
             public Message ToTickerMessage()

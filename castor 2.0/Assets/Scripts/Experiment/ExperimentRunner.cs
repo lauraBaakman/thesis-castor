@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using Registration;
 using Registration.Messages;
+using System.Globalization;
 
 namespace Experiment
 {
@@ -138,7 +139,7 @@ namespace Experiment
         {
             System.DateTime now = System.DateTime.Now.ToLocalTime();
             return string.Format(
-                "{0}", now.ToString("MM-dd_HH-mm-ss-fff"));
+                "results_{0}", now.ToString("MM-dd_HH-mm-ss-fff"));
         }
 
         private void HandleStaticFragment()
@@ -190,8 +191,8 @@ namespace Experiment
                 streamWriter = new StreamWriter(Path.Combine(this.outputDirectory, "data.csv"));
                 streamWriter.WriteLine(
                     string.Format(
-                        "{0}, {1}, {2}",
-                        "id", "termination message", "termination error"
+                        "{0}, {1}, {2}, {3}",
+                        "id", "termination message", "termination error", "termination iteration"
                     )
                 );
                 yield return null;
@@ -218,7 +219,11 @@ namespace Experiment
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
-            streamWriter.WriteLine(string.Format("'{0}', {1}", message.Message, message.errorAtTermination));
+            streamWriter.WriteLine(string.Format(
+                "'{0}', {1}, {2}",
+                message.Message,
+                message.errorAtTermination.ToString("E10", CultureInfo.InvariantCulture),
+                message.terminationIteration));
         }
         #endregion
 

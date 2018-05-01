@@ -180,7 +180,7 @@ namespace Registration
             if (FinishedCallBack != null) FinishedCallBack();
             SendMessageToAllListeners(
                 methodName: "OnICPTerminated",
-                message: new ICPTerminatedMessage(reason, this.error, message)
+                message: new ICPTerminatedMessage(reason, this.error, this.iterationCounter.CurrentCount, message)
             );
             Debug.Log(string.Format("Terminated at iteration {0}", iterationCounter.CurrentCount));
         }
