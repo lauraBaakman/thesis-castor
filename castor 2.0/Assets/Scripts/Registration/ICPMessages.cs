@@ -53,11 +53,12 @@ namespace Registration
             }
 
             public readonly TerminationReason Reason;
-            private readonly string message;
 
+            private readonly string message;
             public string Message { get { return message; } }
 
             public float errorAtTermination;
+
             public readonly int terminationIteration;
 
             public ICPTerminatedMessage(TerminationReason reason, float currentError, int terminationIteration, string message = "")
