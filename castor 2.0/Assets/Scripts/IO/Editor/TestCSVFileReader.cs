@@ -7,7 +7,8 @@ namespace Tests.IO
     [TestFixture]
     public class CSVFileReaderTests
     {
-        string inputPath = "/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Scripts/IO/Editor/testcsv.csv";
+        const string inputPath_no_comment = "/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Scripts/IO/Editor/testcsv.csv";
+        const string inputPath_with_comment = "/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Scripts/IO/Editor/testcsv_withcomments.csv";
 
         [SetUp]
         public void SetUp()
@@ -15,8 +16,9 @@ namespace Tests.IO
 
         }
 
-        [Test]
-        public void Test_Read()
+        [TestCase(inputPath_no_comment)]
+        [TestCase(inputPath_with_comment)]
+        public void Test_Read(string path)
         {
             List<Dictionary<string, object>> expected = new List<Dictionary<string, object>>
             {
@@ -41,7 +43,7 @@ namespace Tests.IO
                     {"rotation z", +1.5707963705062866f}
                 }
             };
-            List<Dictionary<string, object>> actual = new CSVFileReader().Read(inputPath);
+            List<Dictionary<string, object>> actual = new CSVFileReader().Read(path);
 
             Dictionary<string, object> actualRow, expectedRow;
             for (int i = 0; i < actual.Count; i++)

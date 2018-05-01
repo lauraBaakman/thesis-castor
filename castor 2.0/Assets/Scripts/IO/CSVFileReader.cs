@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.IO;
+using System;
 
 namespace IO
 {
@@ -35,6 +36,9 @@ namespace IO
             var data = new List<Dictionary<string, object>>();
 
             string[] lines = ReadLines(fileContent);
+
+            RemoveCommentLines(lines);
+
             if (IsEmptyFile(lines)) return data;
 
             string[] header = ReadHeader(lines);
@@ -50,6 +54,11 @@ namespace IO
                 data.Add(entry);
             }
             return data;
+        }
+
+        private void RemoveCommentLines(string[] lines)
+        {
+            //
         }
 
         private bool IsEmptyFile(string[] lines)

@@ -1,0 +1,5 @@
+# File written on 2018-05-01 12:40:16
+# Angles are in radians in Euler Angles in the order XYZ.
+path,uuid,translation x,translation y,translation z,rotation x,rotation y,rotation z
+/Users/laura/Repositories/thesis-experiment/simulated/test_data/6200ea96-2c42-3778-b7a7-4463dd1b508d.obj,6200ea96-2c42-3778-b7a7-4463dd1b508d,-2.0489096641540527e-07,-1.0058283805847168e-07,-2.0,-1.5707963705062866,-1.5707963705062866,-1.5707963705062866
+/Users/laura/Repositories/thesis-experiment/simulated/test_data/a6aeaeda-90f4-35b5-8e65-5fffe6c8f53c.obj,a6aeaeda-90f4-35b5-8e65-5fffe6c8f53c,-2.0489096641540527e-07,-1.0058283805847168e-07,-2.0,-1.5707963705062866,-1.5707963705062866,1.5707963705062866
