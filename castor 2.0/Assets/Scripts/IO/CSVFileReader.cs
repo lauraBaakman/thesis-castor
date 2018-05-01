@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.IO;
 using System;
+using System.Globalization;
 
 namespace IO
 {
@@ -17,6 +18,7 @@ namespace IO
         private static string split_regex = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
         private static string line_split_regex = @"\r\n|\n\r|\n|\r";
         private static char[] trim_characters = { '\"' };
+        private static string commentCharacter = "#";
 
         public CSVFileReader() { }
 
@@ -37,7 +39,7 @@ namespace IO
 
             string[] lines = ReadLines(fileContent);
 
-            RemoveCommentLines(lines);
+            lines = RemoveCommentLines(lines);
 
             if (IsEmptyFile(lines)) return data;
 
@@ -56,9 +58,21 @@ namespace IO
             return data;
         }
 
-        private void RemoveCommentLines(string[] lines)
+        private string[] RemoveCommentLines(string[] lines)
         {
-            //
+            List<string> content = new List<string>(lines.Length);
+
+            foreach (string line in lines)
+            {
+                if (!IsCommentLine(line)) content.Add(line);
+            }
+
+            return content.ToArray();
+        }
+
+        private bool IsCommentLine(string line)
+        {
+            return line.StartsWith(commentCharacter, StringComparison.Ordinal);
         }
 
         private bool IsEmptyFile(string[] lines)
