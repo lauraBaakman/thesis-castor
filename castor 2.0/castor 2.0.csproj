@@ -328,6 +328,7 @@
     <Compile Include="Assets\Scripts\Buttons\Registration\RegistrationStepButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Registration\StopButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\SelectAllButton.cs" />
+    <Compile Include="Assets\Scripts\Buttons\StatisticsButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Transformations\LockToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\Transformations\TransformButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Transformations\TransformSpaceToggle.cs" />
