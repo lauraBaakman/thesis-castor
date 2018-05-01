@@ -48,6 +48,7 @@ namespace Registration
                 UserTerminated,
                 ExceededNumberOfIterations,
                 ErrorBelowThreshold,
+                ErrorStabilized,
                 Error
             }
 
@@ -80,6 +81,8 @@ namespace Registration
                         return "The number of iterations exceed the maximum number of iterations";
                     case TerminationReason.ErrorBelowThreshold:
                         return "The error of the current iteration was below the threshold.";
+                    case TerminationReason.ErrorStabilized:
+                        return "The error of the process had stabilized";
                     case TerminationReason.Error:
                         return message;
                 }

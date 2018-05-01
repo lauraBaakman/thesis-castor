@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using Utils;
 using Registration.Messages;
+using System.Linq;
 
 namespace Registration
 {
@@ -22,6 +23,8 @@ namespace Registration
         private SamplingInformation ModelSamplingInformation;
 
         private float error = float.MaxValue;
+
+        private StabilizationTermiationCondition stabilization;
 
         public bool HasTerminated
         {
@@ -155,6 +158,7 @@ namespace Registration
             if (iterationCounter.IsCompleted()) Terminate(ICPTerminatedMessage.TerminationReason.ExceededNumberOfIterations);
             if (ErrorBelowThreshold()) Terminate(ICPTerminatedMessage.TerminationReason.ErrorBelowThreshold);
             if (InvalidCorrespondences(out message)) Terminate(ICPTerminatedMessage.TerminationReason.Error, message);
+            if (stabilization.ErrorHasStabilized(error)) Terminate(ICPTerminatedMessage.TerminationReason.ErrorStabilized);
         }
 
         private bool ErrorBelowThreshold()
@@ -228,6 +232,68 @@ namespace Registration
         private void SendMessageToTicker(Ticker.IToTickerMessage message)
         {
             Ticker.Receiver.Instance.SendMessage("OnMessage", message.ToTickerMessage());
+        }
+    }
+
+    public class StabilizationTermiationCondition
+    {
+        private int numPatternsToConsider;
+
+        //If the SD is smaller than this value we terminate
+        private double threshold;
+
+        private static int storedErrorsCount;
+        private int idx;
+
+        private double[] errors;
+
+        public StabilizationTermiationCondition(int numPatternsToConsider = 20, double threshold = 5e-07)
+        {
+            this.numPatternsToConsider = numPatternsToConsider;
+            this.threshold = threshold;
+
+            storedErrorsCount = 0;
+            errors = new double[numPatternsToConsider];
+            idx = 0;
+        }
+
+        public bool ErrorHasStabilized(float currentError)
+        {
+            AddErrorToErrors(currentError);
+
+            // We have insufficient data
+            if (!ErrorsArrayIsFilled()) return false;
+
+            return StandardDeviationUnderThreshold();
+        }
+
+        private bool StandardDeviationUnderThreshold()
+        {
+            return ComputeErrorStandardDeviation() < threshold;
+        }
+
+        private double ComputeErrorStandardDeviation()
+        {
+            double standardDeviation = 0;
+            if (errors.Count() > 0)
+            {
+                double mean = errors.Average();
+                double sum = errors.Sum(d => Math.Pow(d - mean, 2));
+                standardDeviation = Math.Sqrt((sum) / errors.Count());
+            }
+            return standardDeviation;
+        }
+
+        private bool ErrorsArrayIsFilled()
+        {
+            return storedErrorsCount >= numPatternsToConsider;
+        }
+
+        private void AddErrorToErrors(float error)
+        {
+            errors[idx] = (double)error;
+            idx = (idx + 1) % numPatternsToConsider;
+            storedErrorsCount++;
         }
     }
 }
