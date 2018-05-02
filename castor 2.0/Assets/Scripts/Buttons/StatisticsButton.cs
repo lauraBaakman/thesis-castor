@@ -119,7 +119,7 @@ namespace Buttons
         private string ExtractObjFile(Dictionary<string, object> csvRow)
         {
             string id = csvRow["id"] as string;
-            string path = Path.Combine(directory, id);
+            string path = Path.Combine(directory, String.Format("{0}.obj", id));
             return path;
         }
     }
