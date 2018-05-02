@@ -52,6 +52,9 @@ public class _StatisticsComputer
         get { return correspondences; }
     }
 
+    private Matrix4x4 transformationMatrix;
+    public Matrix4x4 TransformationMatrix { get { return transformationMatrix; } }
+
     internal Dictionary<string, object> Results;
 
     public _StatisticsComputer(string path)
@@ -104,9 +107,15 @@ public class _StatisticsComputer
         );
     }
 
+    /// <summary>
+    /// Find the transformation matrix that transforms the original vertex 
+    /// positions, stored in the texture coordinates, to the output vertex 
+    /// position, stord in vertex coordinates.
+    /// </summary>
     public void ComputeTransformationMatrix()
     {
-        throw new NotImplementedException();
+        HornTransformFinder horn = new HornTransformFinder();
+        transformationMatrix = horn.FindTransform(this.correspondences);
     }
 
     public void ExtractTranslationAndRotation()
