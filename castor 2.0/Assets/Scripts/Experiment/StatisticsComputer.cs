@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.CodeDom;
 using IO;
+using System;
 
 public class StatisticsComputer : MonoBehaviour
 {
@@ -37,6 +38,9 @@ public class StatisticsComputer : MonoBehaviour
         private bool done;
         public bool Done { get { return done; } }
 
+        private string path;
+        private Mesh mesh;
+
         internal Dictionary<string, object> Results;
 
         internal _StatisticsComputer(string path)
@@ -44,28 +48,36 @@ public class StatisticsComputer : MonoBehaviour
             this.done = false;
             this.Results = new Dictionary<string, object>();
 
-            Debug.Log("Constructor");
+            this.path = path;
         }
 
         internal void ReadObjFile()
         {
-            Debug.Log("ReadObjFile");
+            ReadResult result = ObjFile.Read(path);
+            if (result.Failed)
+                throw new InvalidObjFileException(
+                    string.Format(
+                        "Encountered the error {0} while reading the obj file {1}.",
+                        result.Message, this.path
+                    )
+                );
+
+            this.mesh = result.Mesh;
         }
 
         internal void CollectTrueCorrespondences()
         {
-            Debug.Log("CollectTrueCorrespondences");
+            throw new NotImplementedException();
         }
 
         internal void ComputeTransformationMatrix()
         {
-            Debug.Log("ComputeTransformationMatrix");
+            throw new NotImplementedException();
         }
 
         internal void ExtractTranslationAndRotation()
         {
-            Debug.Log("ExtractTranslationAndRotation");
-
+            throw new NotImplementedException();
             done = true;
         }
     }
