@@ -14,6 +14,8 @@ namespace Tests.Experiment
         const string inputPath_only_rotation = "rotation_no_translation.obj";
         const string inputPath_tranlsation_rotation = "rotation_translation.obj";
 
+        private float precision = 0.00001f;
+
         private Vector3 translation = new Vector3(+0.5f, +07f, -0.9f);
 
         private static List<Point> oldPositions = new List<Point>
@@ -313,7 +315,10 @@ namespace Tests.Experiment
             computer.ComputeTransformationMatrix();
 
             Matrix4x4 actual = computer.TransformationMatrix;
-            Assert.AreEqual(expected, actual);
+            for (int i = 0; i < 16; i++)
+            {
+                Assert.That(expected[i], Is.EqualTo(actual[i]).Within(precision));
+            }
         }
 
         #region TransformCases
@@ -351,7 +356,7 @@ namespace Tests.Experiment
                     column0: new Vector4(+0.612372435695795f, -0.353553390593274f, -0.707106781186547f, 0),
                     column1: new Vector4(+0.612372435695794f, -0.353553390593274f, +0.707106781186548f, 0),
                     column2: new Vector4(-0.500000000000000f, -0.866025403784439f, +0.000000000000000f, 0),
-                    column3: new Vector4(-0.500000000000000f, -0.700000000000000f, +0.900000000000000f, 1)
+                    column3: new Vector4(+0.500000000000000f, +0.700000000000000f, -0.900000000000000f, 1)
                 )
             },
         };
