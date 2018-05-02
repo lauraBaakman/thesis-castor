@@ -147,7 +147,7 @@ namespace Tests.IO
             ReadResult expected = ReadResult.OKResult(inputPath, mesh);
             ReadResult actual = new ObjFileReader(inputPath).ImportFile();
 
-            Assert.IsTrue(actual.Succeeded());
+            Assert.IsTrue(actual.Succeeded);
             Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
             Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);
             Assert.AreEqual(expected.Mesh.triangles, actual.Mesh.triangles);
@@ -346,7 +346,7 @@ namespace Tests.IO
             ReadResult expected = ReadResult.OKResult(inputPath, mesh);
             ReadResult actual = new ObjFileReader(inputPath).ImportFile();
 
-            Assert.IsTrue(actual.Succeeded());
+            Assert.IsTrue(actual.Succeeded);
             Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
             Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);
             Assert.AreEqual(expected.Mesh.triangles, actual.Mesh.triangles);
@@ -362,8 +362,8 @@ namespace Tests.IO
 
             ReadResult actual = new ObjFileReader(inputPath).ImportFile();
 
-            Assert.IsFalse(actual.Succeeded());
-            Assert.IsTrue(actual.Failed());
+            Assert.IsFalse(actual.Succeeded);
+            Assert.IsTrue(actual.Failed);
         }
     }
 

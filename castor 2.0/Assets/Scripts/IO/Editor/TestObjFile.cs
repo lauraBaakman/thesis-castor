@@ -39,15 +39,15 @@ namespace Tests.IO
         {
             string inputPath = InputPath(path);
             ReadResult expected = ObjFile.Read(inputPath);
-            Assert.IsTrue(expected.Succeeded());
+            Assert.IsTrue(expected.Succeeded);
 
             Mesh mesh = expected.Mesh;
 
             WriteResult writeResult = ObjFile.Write(mesh, this.outputPath);
-            Assert.IsTrue(writeResult.Succeeded());
+            Assert.IsTrue(writeResult.Succeeded);
 
             ReadResult actual = ObjFile.Read(this.outputPath);
-            Assert.IsTrue(actual.Succeeded());
+            Assert.IsTrue(actual.Succeeded);
 
             Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
             Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);

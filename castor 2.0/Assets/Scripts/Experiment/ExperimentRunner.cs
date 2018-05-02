@@ -44,7 +44,7 @@ namespace Experiment
 
         private void FragmentReaderCallBack(IO.ReadResult result)
         {
-            if (result.Failed())
+            if (result.Failed)
             {
                 Ticker.Receiver.Instance.SendMessage(
                     methodName: "OnMessage",

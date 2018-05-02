@@ -81,7 +81,7 @@ namespace IO
             ReadResult result = IO.ObjFile.Read(path);
             GameObject fragment = null;
 
-            if (result.Succeeded())
+            if (result.Succeeded)
             {
                 if (CopyVerticesToTexture) Utils.MeshUtils.CopyVerticesToUV2AndUV3(result.Mesh);
 
