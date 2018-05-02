@@ -24,7 +24,7 @@ public class StatisticsComputer : MonoBehaviour
         computer.ReadObjFile();
         yield return null;
 
-        computer.CollectTrueCorrespondences();
+        computer.CollectCorrespondences();
         yield return null;
 
         computer.ComputeTransformationMatrix();
@@ -78,15 +78,15 @@ public class _StatisticsComputer
         this.mesh = result.Mesh;
     }
 
-    public void CollectTrueCorrespondences()
+    public void CollectCorrespondences()
     {
         int vertexCount = mesh.vertexCount;
 
         for (int i = 0; i < vertexCount; i++)
-            AddTrueCorrespondence(i);
+            AddCorrespondence(i);
     }
 
-    private void AddTrueCorrespondence(int idx)
+    private void AddCorrespondence(int idx)
     {
         Vector3 newPosition = mesh.vertices[idx];
 
