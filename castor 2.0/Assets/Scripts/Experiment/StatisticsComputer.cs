@@ -3,6 +3,7 @@ using UnityEngine;
 using System.CodeDom;
 using IO;
 using System;
+using Registration;
 
 public class StatisticsComputer : MonoBehaviour
 {
@@ -32,53 +33,85 @@ public class StatisticsComputer : MonoBehaviour
         computer.ExtractTranslationAndRotation();
         yield return null;
     }
+}
 
-    private class _StatisticsComputer
+//Shouldn't be public, but wanted to test it
+public class _StatisticsComputer
+{
+    private bool done;
+    public bool Done { get { return done; } }
+
+    private string path;
+
+    private Mesh mesh;
+    public Mesh Mesh { get { return mesh; } }
+
+    private CorrespondenceCollection correspondences;
+    public CorrespondenceCollection Correspondences
     {
-        private bool done;
-        public bool Done { get { return done; } }
+        get { return correspondences; }
+    }
 
-        private string path;
-        private Mesh mesh;
+    internal Dictionary<string, object> Results;
 
-        internal Dictionary<string, object> Results;
+    public _StatisticsComputer(string path)
+    {
+        this.done = false;
+        this.Results = new Dictionary<string, object>();
 
-        internal _StatisticsComputer(string path)
-        {
-            this.done = false;
-            this.Results = new Dictionary<string, object>();
+        correspondences = new CorrespondenceCollection();
 
-            this.path = path;
-        }
+        this.path = path;
+    }
 
-        internal void ReadObjFile()
-        {
-            ReadResult result = ObjFile.Read(path);
-            if (result.Failed)
-                throw new InvalidObjFileException(
-                    string.Format(
-                        "Encountered the error {0} while reading the obj file {1}.",
-                        result.Message, this.path
-                    )
-                );
+    public void ReadObjFile()
+    {
+        ReadResult result = ObjFile.Read(path);
+        if (result.Failed)
+            throw new InvalidObjFileException(
+                string.Format(
+                    "Encountered the error {0} while reading the obj file {1}.",
+                    result.Message, this.path
+                )
+            );
 
-            this.mesh = result.Mesh;
-        }
+        this.mesh = result.Mesh;
+    }
 
-        internal void CollectTrueCorrespondences()
-        {
-            throw new NotImplementedException();
-        }
+    public void CollectTrueCorrespondences()
+    {
+        int vertexCount = mesh.vertexCount;
 
-        internal void ComputeTransformationMatrix()
-        {
-            throw new NotImplementedException();
-        }
+        for (int i = 0; i < vertexCount; i++)
+            AddTrueCorrespondence(i);
+    }
 
-        internal void ExtractTranslationAndRotation()
-        {
-            throw new NotImplementedException();
-            done = true;
-        }
+    private void AddTrueCorrespondence(int idx)
+    {
+        Vector3 newPosition = mesh.vertices[idx];
+
+        Vector3 oldPosition = new Vector3(
+            x: mesh.uv2[idx].x,
+            y: mesh.uv2[idx].y,
+            z: mesh.uv3[idx].x
+        );
+
+        this.correspondences.Add(
+            new Correspondence(
+                staticPosition: oldPosition,
+                modelPosition: newPosition
+            )
+        );
+    }
+
+    public void ComputeTransformationMatrix()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ExtractTranslationAndRotation()
+    {
+        throw new NotImplementedException();
+        done = true;
     }
 }
