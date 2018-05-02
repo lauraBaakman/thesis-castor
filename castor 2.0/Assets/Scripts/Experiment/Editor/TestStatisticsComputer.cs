@@ -18,27 +18,47 @@ namespace Tests.Experiment
 
         private static List<Point> oldPositions = new List<Point>
         {
+            //V1
             new Point(new Vector3(+1.000000f, +1.000000f, -1.000000f)),
             new Point(new Vector3(+1.000000f, +1.000000f, -1.000000f)),
             new Point(new Vector3(+1.000000f, +1.000000f, -1.000000f)),
+            new Point(new Vector3(+1.000000f, +1.000000f, -1.000000f)),
+            //V2
             new Point(new Vector3(+1.000000f, -1.000000f, -1.000000f)),
             new Point(new Vector3(+1.000000f, -1.000000f, -1.000000f)),
             new Point(new Vector3(+1.000000f, -1.000000f, -1.000000f)),
+            new Point(new Vector3(+1.000000f, -1.000000f, -1.000000f)),
+            new Point(new Vector3(+1.000000f, -1.000000f, -1.000000f)),
+            //V3
             new Point(new Vector3(-1.000000f, -1.000000f, -1.000000f)),
             new Point(new Vector3(-1.000000f, -1.000000f, -1.000000f)),
             new Point(new Vector3(-1.000000f, -1.000000f, -1.000000f)),
+            new Point(new Vector3(-1.000000f, -1.000000f, -1.000000f)),
+            new Point(new Vector3(-1.000000f, -1.000000f, -1.000000f)),
+            //V4
             new Point(new Vector3(-1.000000f, +1.000000f, -1.000000f)),
             new Point(new Vector3(-1.000000f, +1.000000f, -1.000000f)),
             new Point(new Vector3(-1.000000f, +1.000000f, -1.000000f)),
+            new Point(new Vector3(-1.000000f, +1.000000f, -1.000000f)),
+            //V5
             new Point(new Vector3(+1.000000f, +0.999999f, +1.000000f)),
             new Point(new Vector3(+1.000000f, +0.999999f, +1.000000f)),
             new Point(new Vector3(+1.000000f, +0.999999f, +1.000000f)),
+            new Point(new Vector3(+1.000000f, +0.999999f, +1.000000f)),
+            //V6
             new Point(new Vector3(+0.999999f, -1.000001f, +1.000000f)),
             new Point(new Vector3(+0.999999f, -1.000001f, +1.000000f)),
             new Point(new Vector3(+0.999999f, -1.000001f, +1.000000f)),
+            new Point(new Vector3(+0.999999f, -1.000001f, +1.000000f)),
+            new Point(new Vector3(+0.999999f, -1.000001f, +1.000000f)),
+            //V7
             new Point(new Vector3(-1.000000f, -1.000000f, +1.000000f)),
             new Point(new Vector3(-1.000000f, -1.000000f, +1.000000f)),
             new Point(new Vector3(-1.000000f, -1.000000f, +1.000000f)),
+            //V8
+            new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
+            new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
+            new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
             new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
             new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
             new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
@@ -67,6 +87,7 @@ namespace Tests.Experiment
             computer.CollectCorrespondences();
 
             CorrespondenceCollection actual = computer.Correspondences;
+
             Assert.AreEqual(expected, actual);
         }
 
@@ -77,30 +98,50 @@ namespace Tests.Experiment
                 new CorrespondenceCollection(
                     modelpoints: oldPositions,
                     staticpoints: new List<Point>{
-                        new Point(new Vector3(+1.000000f, +1.000000f -1.000000f)),
-                        new Point(new Vector3(+1.000000f, +1.000000f -1.000000f)),
-                        new Point(new Vector3(+1.000000f, +1.000000f -1.000000f)),
-                        new Point(new Vector3(+1.000000f, -1.000000f -1.000000f)),
-                        new Point(new Vector3(+1.000000f, -1.000000f -1.000000f)),
-                        new Point(new Vector3(+1.000000f, -1.000000f -1.000000f)),
-                        new Point(new Vector3(-1.000000f, -1.000000f -1.000000f)),
-                        new Point(new Vector3(-1.000000f, -1.000000f -1.000000f)),
-                        new Point(new Vector3(-1.000000f, -1.000000f -1.000000f)),
-                        new Point(new Vector3(-1.000000f, +1.000000f -1.000000f)),
-                        new Point(new Vector3(-1.000000f, +1.000000f -1.000000f)),
-                        new Point(new Vector3(-1.000000f, +1.000000f -1.000000f)),
-                        new Point(new Vector3(+1.000000f, +0.999999f +1.000000f)),
-                        new Point(new Vector3(+1.000000f, +0.999999f +1.000000f)),
-                        new Point(new Vector3(+1.000000f, +0.999999f +1.000000f)),
-                        new Point(new Vector3(+0.999999f, -1.000001f +1.000000f)),
-                        new Point(new Vector3(+0.999999f, -1.000001f +1.000000f)),
-                        new Point(new Vector3(+0.999999f, -1.000001f +1.000000f)),
-                        new Point(new Vector3(-1.000000f, -1.000000f +1.000000f)),
-                        new Point(new Vector3(-1.000000f, -1.000000f +1.000000f)),
-                        new Point(new Vector3(-1.000000f, -1.000000f +1.000000f)),
-                        new Point(new Vector3(-1.000000f, +1.000000f +1.000000f)),
-                        new Point(new Vector3(-1.000000f, +1.000000f +1.000000f)),
-                        new Point(new Vector3(-1.000000f, +1.000000f +1.000000f)),
+                    //V1
+                    new Point(new Vector3(+1.000000f, +1.000000f, -1.000000f)),
+                    new Point(new Vector3(+1.000000f, +1.000000f, -1.000000f)),
+                    new Point(new Vector3(+1.000000f, +1.000000f, -1.000000f)),
+                    new Point(new Vector3(+1.000000f, +1.000000f, -1.000000f)),
+                    //V2
+                    new Point(new Vector3(+1.000000f, -1.000000f, -1.000000f)),
+                    new Point(new Vector3(+1.000000f, -1.000000f, -1.000000f)),
+                    new Point(new Vector3(+1.000000f, -1.000000f, -1.000000f)),
+                    new Point(new Vector3(+1.000000f, -1.000000f, -1.000000f)),
+                    new Point(new Vector3(+1.000000f, -1.000000f, -1.000000f)),
+                    //V3
+                    new Point(new Vector3(-1.000000f, -1.000000f, -1.000000f)),
+                    new Point(new Vector3(-1.000000f, -1.000000f, -1.000000f)),
+                    new Point(new Vector3(-1.000000f, -1.000000f, -1.000000f)),
+                    new Point(new Vector3(-1.000000f, -1.000000f, -1.000000f)),
+                    new Point(new Vector3(-1.000000f, -1.000000f, -1.000000f)),
+                    //V4
+                    new Point(new Vector3(-1.000000f, +1.000000f, -1.000000f)),
+                    new Point(new Vector3(-1.000000f, +1.000000f, -1.000000f)),
+                    new Point(new Vector3(-1.000000f, +1.000000f, -1.000000f)),
+                    new Point(new Vector3(-1.000000f, +1.000000f, -1.000000f)),
+                    //V5
+                    new Point(new Vector3(+1.000000f, +0.999999f, +1.000000f)),
+                    new Point(new Vector3(+1.000000f, +0.999999f, +1.000000f)),
+                    new Point(new Vector3(+1.000000f, +0.999999f, +1.000000f)),
+                    new Point(new Vector3(+1.000000f, +0.999999f, +1.000000f)),
+                    //V6
+                    new Point(new Vector3(+0.999999f, -1.000001f, +1.000000f)),
+                    new Point(new Vector3(+0.999999f, -1.000001f, +1.000000f)),
+                    new Point(new Vector3(+0.999999f, -1.000001f, +1.000000f)),
+                    new Point(new Vector3(+0.999999f, -1.000001f, +1.000000f)),
+                    new Point(new Vector3(+0.999999f, -1.000001f, +1.000000f)),
+                    //V7
+                    new Point(new Vector3(-1.000000f, -1.000000f, +1.000000f)),
+                    new Point(new Vector3(-1.000000f, -1.000000f, +1.000000f)),
+                    new Point(new Vector3(-1.000000f, -1.000000f, +1.000000f)),
+                    //V8
+                    new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
+                    new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
+                    new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
+                    new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
+                    new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
+                    new Point(new Vector3(-1.000000f, +1.000000f, +1.000000f)),
                     }
                 )
             },
@@ -109,27 +150,47 @@ namespace Tests.Experiment
                 new CorrespondenceCollection(
                     modelpoints: oldPositions,
                     staticpoints: new List<Point>{
+                        //V1
                         new Point(new Vector3(+1.500000f, +1.700000f, -1.900000f)),
                         new Point(new Vector3(+1.500000f, +1.700000f, -1.900000f)),
                         new Point(new Vector3(+1.500000f, +1.700000f, -1.900000f)),
+                        new Point(new Vector3(+1.500000f, +1.700000f, -1.900000f)),
+                        //V2
                         new Point(new Vector3(+1.500000f, -0.300000f, -1.900000f)),
                         new Point(new Vector3(+1.500000f, -0.300000f, -1.900000f)),
                         new Point(new Vector3(+1.500000f, -0.300000f, -1.900000f)),
+                        new Point(new Vector3(+1.500000f, -0.300000f, -1.900000f)),
+                        new Point(new Vector3(+1.500000f, -0.300000f, -1.900000f)),
+                        //V3
                         new Point(new Vector3(-0.500000f, -0.300000f, -1.900000f)),
                         new Point(new Vector3(-0.500000f, -0.300000f, -1.900000f)),
                         new Point(new Vector3(-0.500000f, -0.300000f, -1.900000f)),
+                        new Point(new Vector3(-0.500000f, -0.300000f, -1.900000f)),
+                        new Point(new Vector3(-0.500000f, -0.300000f, -1.900000f)),
+                        //V4
                         new Point(new Vector3(-0.500000f, +1.700000f, -1.900000f)),
                         new Point(new Vector3(-0.500000f, +1.700000f, -1.900000f)),
                         new Point(new Vector3(-0.500000f, +1.700000f, -1.900000f)),
+                        new Point(new Vector3(-0.500000f, +1.700000f, -1.900000f)),
+                        //V5
                         new Point(new Vector3(+1.500000f, +1.699999f, +0.100000f)),
                         new Point(new Vector3(+1.500000f, +1.699999f, +0.100000f)),
                         new Point(new Vector3(+1.500000f, +1.699999f, +0.100000f)),
+                        new Point(new Vector3(+1.500000f, +1.699999f, +0.100000f)),
+                        //V6
                         new Point(new Vector3(+1.499999f, -0.300001f, +0.100000f)),
                         new Point(new Vector3(+1.499999f, -0.300001f, +0.100000f)),
                         new Point(new Vector3(+1.499999f, -0.300001f, +0.100000f)),
+                        new Point(new Vector3(+1.499999f, -0.300001f, +0.100000f)),
+                        new Point(new Vector3(+1.499999f, -0.300001f, +0.100000f)),
+                        //V7
                         new Point(new Vector3(-0.500000f, -0.300000f, +0.100000f)),
                         new Point(new Vector3(-0.500000f, -0.300000f, +0.100000f)),
                         new Point(new Vector3(-0.500000f, -0.300000f, +0.100000f)),
+                        //V8
+                        new Point(new Vector3(-0.500000f, +1.700000f, +0.100000f)),
+                        new Point(new Vector3(-0.500000f, +1.700000f, +0.100000f)),
+                        new Point(new Vector3(-0.500000f, +1.700000f, +0.100000f)),
                         new Point(new Vector3(-0.500000f, +1.700000f, +0.100000f)),
                         new Point(new Vector3(-0.500000f, +1.700000f, +0.100000f)),
                         new Point(new Vector3(-0.500000f, +1.700000f, +0.100000f)),
@@ -141,27 +202,47 @@ namespace Tests.Experiment
                 new CorrespondenceCollection(
                     modelpoints: oldPositions,
                     staticpoints: new List<Point>{
+                        //V1
                         new Point(new Vector3(+1.724745f, +0.158919f, -0.000000f)),
                         new Point(new Vector3(+1.724745f, +0.158919f, -0.000000f)),
                         new Point(new Vector3(+1.724745f, +0.158919f, -0.000000f)),
+                        new Point(new Vector3(+1.724745f, +0.158919f, -0.000000f)),
+                        //V2
                         new Point(new Vector3(+0.500000f, +0.866025f, -1.414214f)),
                         new Point(new Vector3(+0.500000f, +0.866025f, -1.414214f)),
                         new Point(new Vector3(+0.500000f, +0.866025f, -1.414214f)),
+                        new Point(new Vector3(+0.500000f, +0.866025f, -1.414214f)),
+                        new Point(new Vector3(+0.500000f, +0.866025f, -1.414214f)),
+                        //V3
                         new Point(new Vector3(-0.724745f, +1.573132f, +0.000000f)),
                         new Point(new Vector3(-0.724745f, +1.573132f, +0.000000f)),
                         new Point(new Vector3(-0.724745f, +1.573132f, +0.000000f)),
+                        new Point(new Vector3(-0.724745f, +1.573132f, +0.000000f)),
+                        new Point(new Vector3(-0.724745f, +1.573132f, +0.000000f)),
+                        //V4
                         new Point(new Vector3(+0.500001f, +0.866025f, +1.414214f)),
                         new Point(new Vector3(+0.500001f, +0.866025f, +1.414214f)),
                         new Point(new Vector3(+0.500001f, +0.866025f, +1.414214f)),
+                        new Point(new Vector3(+0.500001f, +0.866025f, +1.414214f)),
+                        //V5
                         new Point(new Vector3(+0.724745f, -1.573132f, -0.000001f)),
                         new Point(new Vector3(+0.724745f, -1.573132f, -0.000001f)),
                         new Point(new Vector3(+0.724745f, -1.573132f, -0.000001f)),
+                        new Point(new Vector3(+0.724745f, -1.573132f, -0.000001f)),
+                        //V6
                         new Point(new Vector3(-0.500001f, -0.866025f, -1.414213f)),
                         new Point(new Vector3(-0.500001f, -0.866025f, -1.414213f)),
                         new Point(new Vector3(-0.500001f, -0.866025f, -1.414213f)),
+                        new Point(new Vector3(-0.500001f, -0.866025f, -1.414213f)),
+                        new Point(new Vector3(-0.500001f, -0.866025f, -1.414213f)),
+                        //V7
                         new Point(new Vector3(-1.724745f, -0.158919f, +0.000000f)),
                         new Point(new Vector3(-1.724745f, -0.158919f, +0.000000f)),
                         new Point(new Vector3(-1.724745f, -0.158919f, +0.000000f)),
+                        //V8
+                        new Point(new Vector3(-0.500000f, -0.866025f, +1.414213f)),
+                        new Point(new Vector3(-0.500000f, -0.866025f, +1.414213f)),
+                        new Point(new Vector3(-0.500000f, -0.866025f, +1.414213f)),
                         new Point(new Vector3(-0.500000f, -0.866025f, +1.414213f)),
                         new Point(new Vector3(-0.500000f, -0.866025f, +1.414213f)),
                         new Point(new Vector3(-0.500000f, -0.866025f, +1.414213f)),
@@ -173,27 +254,47 @@ namespace Tests.Experiment
                 new CorrespondenceCollection(
                     modelpoints: oldPositions,
                     staticpoints: new List<Point>{
+                        //V1
                         new Point(new Vector3(+2.224745f, +0.858919f, -0.900000f)),
                         new Point(new Vector3(+2.224745f, +0.858919f, -0.900000f)),
                         new Point(new Vector3(+2.224745f, +0.858919f, -0.900000f)),
+                        new Point(new Vector3(+2.224745f, +0.858919f, -0.900000f)),
+                        //V2
                         new Point(new Vector3(+1.000000f, +1.566025f, -2.314214f)),
                         new Point(new Vector3(+1.000000f, +1.566025f, -2.314214f)),
                         new Point(new Vector3(+1.000000f, +1.566025f, -2.314214f)),
+                        new Point(new Vector3(+1.000000f, +1.566025f, -2.314214f)),
+                        new Point(new Vector3(+1.000000f, +1.566025f, -2.314214f)),
+                        //V3
                         new Point(new Vector3(-0.224745f, +2.273132f, -0.900000f)),
                         new Point(new Vector3(-0.224745f, +2.273132f, -0.900000f)),
                         new Point(new Vector3(-0.224745f, +2.273132f, -0.900000f)),
+                        new Point(new Vector3(-0.224745f, +2.273132f, -0.900000f)),
+                        new Point(new Vector3(-0.224745f, +2.273132f, -0.900000f)),
+                        //V4
                         new Point(new Vector3(+1.000000f, +1.566025f, +0.514214f)),
                         new Point(new Vector3(+1.000000f, +1.566025f, +0.514214f)),
                         new Point(new Vector3(+1.000000f, +1.566025f, +0.514214f)),
+                        new Point(new Vector3(+1.000000f, +1.566025f, +0.514214f)),
+                        //V5
                         new Point(new Vector3(+1.224745f, -0.873132f, -0.900001f)),
                         new Point(new Vector3(+1.224745f, -0.873132f, -0.900001f)),
                         new Point(new Vector3(+1.224745f, -0.873132f, -0.900001f)),
+                        new Point(new Vector3(+1.224745f, -0.873132f, -0.900001f)),
+                        //V6
                         new Point(new Vector3(-0.000001f, -0.166025f, -2.314213f)),
                         new Point(new Vector3(-0.000001f, -0.166025f, -2.314213f)),
                         new Point(new Vector3(-0.000001f, -0.166025f, -2.314213f)),
+                        new Point(new Vector3(-0.000001f, -0.166025f, -2.314213f)),
+                        new Point(new Vector3(-0.000001f, -0.166025f, -2.314213f)),
+                        //V7
                         new Point(new Vector3(-1.224745f, +0.541081f, -0.900000f)),
                         new Point(new Vector3(-1.224745f, +0.541081f, -0.900000f)),
                         new Point(new Vector3(-1.224745f, +0.541081f, -0.900000f)),
+                        //V8
+                        new Point(new Vector3(+0.000000f, -0.166025f, +0.514213f)),
+                        new Point(new Vector3(+0.000000f, -0.166025f, +0.514213f)),
+                        new Point(new Vector3(+0.000000f, -0.166025f, +0.514213f)),
                         new Point(new Vector3(+0.000000f, -0.166025f, +0.514213f)),
                         new Point(new Vector3(+0.000000f, -0.166025f, +0.514213f)),
                         new Point(new Vector3(+0.000000f, -0.166025f, +0.514213f)),
