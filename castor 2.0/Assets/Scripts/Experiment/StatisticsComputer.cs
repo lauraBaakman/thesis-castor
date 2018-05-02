@@ -98,8 +98,8 @@ public class _StatisticsComputer
 
         this.correspondences.Add(
             new Correspondence(
-                staticPosition: oldPosition,
-                modelPosition: newPosition
+                staticPosition: newPosition,
+                modelPosition: oldPosition
             )
         );
     }

@@ -64,7 +64,7 @@ namespace Tests.Experiment
         {
             _StatisticsComputer computer = new _StatisticsComputer(InputPath(file));
             computer.ReadObjFile();
-            computer.CollectTrueCorrespondences();
+            computer.CollectCorrespondences();
 
             CorrespondenceCollection actual = computer.Correspondences;
             Assert.AreEqual(expected, actual);
@@ -75,8 +75,8 @@ namespace Tests.Experiment
             new object[] {
                 inputPath_no_change,
                 new CorrespondenceCollection(
-                    staticpoints: oldPositions,
-                    modelpoints: new List<Point>{
+                    modelpoints: oldPositions,
+                    staticpoints: new List<Point>{
                         new Point(new Vector3(-1.000000f, -1.000000f, +1.000000f)),
                         new Point(new Vector3(-1.000000f, -1.000000f, +1.000000f)),
                         new Point(new Vector3(-1.000000f, -1.000000f, +1.000000f)),
@@ -107,8 +107,8 @@ namespace Tests.Experiment
             new object[] {
                 inputPath_only_translation,
                 new CorrespondenceCollection(
-                    staticpoints: oldPositions,
-                    modelpoints: new List<Point>{
+                    modelpoints: oldPositions,
+                    staticpoints: new List<Point>{
                         new Point(new Vector3(-1.500000f, -1.900000f, +1.700000f)),
                         new Point(new Vector3(-1.500000f, -1.900000f, +1.700000f)),
                         new Point(new Vector3(-1.500000f, -1.900000f, +1.700000f)),
@@ -139,8 +139,8 @@ namespace Tests.Experiment
             new object[] {
                 inputPath_only_rotation,
                 new CorrespondenceCollection(
-                    staticpoints: oldPositions,
-                    modelpoints: new List<Point>{
+                    modelpoints: oldPositions,
+                    staticpoints: new List<Point>{
                         new Point(new Vector3(-1.724745f, -0.000000f, +0.158919f)),
                         new Point(new Vector3(-1.724745f, -0.000000f, +0.158919f)),
                         new Point(new Vector3(-1.724745f, -0.000000f, +0.158919f)),
@@ -171,8 +171,8 @@ namespace Tests.Experiment
             new object[] {
                 inputPath_tranlsation_rotation,
                 new CorrespondenceCollection(
-                    staticpoints: oldPositions,
-                    modelpoints: new List<Point>{
+                    modelpoints: oldPositions,
+                    staticpoints: new List<Point>{
                         new Point(new Vector3(-2.224745f, -0.900000f, +0.858919f)),
                         new Point(new Vector3(-2.224745f, -0.900000f, +0.858919f)),
                         new Point(new Vector3(-2.224745f, -0.900000f, +0.858919f)),
