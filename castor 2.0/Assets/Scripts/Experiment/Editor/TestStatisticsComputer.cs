@@ -14,10 +14,17 @@ namespace Tests.Experiment
         const string inputPath_only_rotation = "rotation_no_translation.obj";
         const string inputPath_tranlsation_rotation = "rotation_translation.obj";
 
-        private float precision = 0.00001f;
+        private float precision = 0.000001f;
 
-        private static Vector3 translation = new Vector3(+0.5f, +07f, -0.9f);
-        private static Vector3 rotation = new Vector3();
+        private static Vector3 translation = new Vector3(+0.5f, +0.7f, -0.9f);
+
+        //Rotation in XYZ Euler: +90 +45 - 30
+        private static Quaternion rotation = new Quaternion(
+            x: +0.7010573744773865f,
+            y: +0.09229595214128494f,
+            z: -0.4304593503475189f,
+            w: +0.5609855055809021f
+        );
 
         private static List<Point> oldPositions = new List<Point>
         {
@@ -364,7 +371,7 @@ namespace Tests.Experiment
         #endregion
 
         [Test, TestCaseSource("ExtractRotationAndTranslationCases")]
-        public void Test_ExtractRotationAndTranslation(string file, Vector3 expectedTranslation, Vector3 expectedRotation)
+        public void Test_ExtractRotationAndTranslation(string file, StatisticsComputer.Run expected)
         {
             _TransformationComputer computer = new _TransformationComputer(InputPath(file));
             computer.ReadObjFile();
@@ -372,36 +379,31 @@ namespace Tests.Experiment
             computer.ComputeTransformationMatrix();
             computer.ExtractTranslationAndRotation();
 
-            Vector3 actualTranslation = computer.Translation;
-            Vector3 actualRotation = computer.Rotation;
+            StatisticsComputer.Run actual = computer.Run;
 
-            Assert.Fail("Compute expected rotation!");
+            Assert.IsTrue(expected.AppliedTranslation == actual.AppliedTranslation);
 
-            Assert.AreEqual(expectedTranslation, actualTranslation);
-            Assert.AreEqual(expectedRotation, actualRotation);
+            float deltaAngle = Quaternion.Angle(actual.AppliedRotation, expected.AppliedRotation);
+            Assert.That(deltaAngle, Is.EqualTo(0).Within(precision));
         }
 
         #region ExtractRotationAndTranslationCases
         static object[] ExtractRotationAndTranslationCases = {
             new object[] {
                 inputPath_no_change,
-                new Vector3(),
-                new Vector3(),
+                new StatisticsComputer.Run(Quaternion.identity, new Vector3(0, 0, 0))
             },
             new object[] {
                 inputPath_only_translation,
-                translation,
-                new Vector3()
+                new StatisticsComputer.Run(Quaternion.identity, translation)
             },
             new object[] {
                 inputPath_only_rotation,
-                new Vector3(),
-                rotation
+                new StatisticsComputer.Run(rotation, new Vector3(0, 0, 0))
             },
             new object[] {
                 inputPath_tranlsation_rotation,
-                translation,
-                rotation
+                new StatisticsComputer.Run(rotation, translation)
             },
         };
         #endregion

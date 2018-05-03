@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.CodeDom;
 using IO;
 using System;
 using Registration;
 
 public class StatisticsComputer : MonoBehaviour
 {
-    public Dictionary<string, object> Results { get { return transformComputer.Results; } }
+    public Dictionary<string, object> Results { get { return transformComputer.Run.ToDictionary(); } }
 
     private bool done;
     public bool Done { get { return done; } }
@@ -36,10 +35,57 @@ public class StatisticsComputer : MonoBehaviour
         transformComputer.ExtractTranslationAndRotation();
         yield return null;
 
-        throw new NotImplementedException("Compare with the expected rotation and translation and store results in Results")
+        throw new NotImplementedException("Compare with the expected rotation and translation and store results in Results");
         yield return null;
 
         done = true;
+    }
+
+    public class Run
+    {
+        /// <summary>
+        /// The rotation used to bring the modelpoints to the static points.
+        /// </summary>
+        internal Quaternion appliedRotation;
+        public Quaternion AppliedRotation { get { return appliedRotation; } }
+
+        public Vector3 ZXYEuler { get { return appliedRotation.eulerAngles; } }
+
+        /// <summary>
+        /// The translation used to bring the modelpoints to the static points.
+        /// </summary>
+        internal Vector3 appliedTranslation;
+        public Vector3 AppliedTranslation { get { return appliedTranslation; } }
+
+        public Run()
+        {
+            this.appliedRotation = Quaternion.identity;
+            this.appliedTranslation = new Vector3(0, 0, 0);
+        }
+
+        public Run(Quaternion appliedRotation, Vector3 appliedTranslation)
+        {
+            this.appliedRotation = appliedRotation;
+            this.appliedTranslation = appliedTranslation;
+        }
+
+        internal Dictionary<string, object> ToDictionary()
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+
+            dict.Add("applied translation x", appliedTranslation.x);
+            dict.Add("applied translation y", appliedTranslation.y);
+            dict.Add("applied translation z", appliedTranslation.z);
+            dict.Add("applied rotation quaterion x", appliedRotation.x);
+            dict.Add("applied rotation quaterion y", appliedRotation.y);
+            dict.Add("applied rotation quaterion z", appliedRotation.z);
+            dict.Add("applied rotation quaterion w", appliedRotation.w);
+            dict.Add("applied rotation zxy euler x", ZXYEuler.x);
+            dict.Add("applied rotation zxy euler y", ZXYEuler.y);
+            dict.Add("applied rotation zxy euler z", ZXYEuler.z);
+
+            return dict;
+        }
     }
 }
 
@@ -51,29 +97,20 @@ public class _TransformationComputer
     private Mesh mesh;
     public Mesh Mesh { get { return mesh; } }
 
-    private Vector3 translation;
-    public Vector3 Translation { get { return translation; } }
-
-    private Vector3 rotation;
-    public Vector3 Rotation { get { return rotation; } }
-
     private CorrespondenceCollection correspondences;
-    public CorrespondenceCollection Correspondences
-    {
-        get { return correspondences; }
-    }
+    public CorrespondenceCollection Correspondences { get { return correspondences; } }
+
+    private StatisticsComputer.Run run;
+    public StatisticsComputer.Run Run { get { return run; } }
 
     private Matrix4x4 transformationMatrix;
     public Matrix4x4 TransformationMatrix { get { return transformationMatrix; } }
 
-    internal Dictionary<string, object> Results;
-
     public _TransformationComputer(string path)
     {
-        this.done = false;
-        this.Results = new Dictionary<string, object>();
-
         correspondences = new CorrespondenceCollection();
+
+        this.run = new StatisticsComputer.Run();
 
         this.path = path;
     }
@@ -131,8 +168,17 @@ public class _TransformationComputer
 
     public void ExtractTranslationAndRotation()
     {
-        throw new NotImplementedException();
-        //Compute translation and rotation
-        //Store in Results object that is pubicly accessible.
+        run.appliedTranslation = ExtractTranslation();
+        run.appliedRotation = ExtractRotation();
+    }
+
+    private Vector3 ExtractTranslation()
+    {
+        return transformationMatrix.ExtractTranslation();
+    }
+
+    private Quaternion ExtractRotation()
+    {
+        return transformationMatrix.ExtractRotation();
     }
 }
