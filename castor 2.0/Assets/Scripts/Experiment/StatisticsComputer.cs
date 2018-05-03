@@ -72,6 +72,8 @@ public class StatisticsComputer : MonoBehaviour
         {
             this.appliedRotation = appliedRotation;
             this.appliedTranslation = appliedTranslation;
+
+            this.objPath = objPath;
         }
 
         internal Dictionary<string, object> ToDictionary()
