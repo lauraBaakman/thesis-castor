@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.IO;
+using System;
+using System.Globalization;
 
 namespace IO
 {
-
     /// <summary>
     /// CSV File reader.
     /// Source: https://bravenewmethod.com/2014/09/13/lightweight-csv-reader-for-unity/
@@ -16,6 +17,7 @@ namespace IO
         private static string split_regex = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
         private static string line_split_regex = @"\r\n|\n\r|\n|\r";
         private static char[] trim_characters = { '\"' };
+        private static string commentCharacter = "#";
 
         public CSVFileReader() { }
 
@@ -35,6 +37,9 @@ namespace IO
             var data = new List<Dictionary<string, object>>();
 
             string[] lines = ReadLines(fileContent);
+
+            lines = RemoveCommentLines(lines);
+
             if (IsEmptyFile(lines)) return data;
 
             string[] header = ReadHeader(lines);
@@ -50,6 +55,23 @@ namespace IO
                 data.Add(entry);
             }
             return data;
+        }
+
+        private string[] RemoveCommentLines(string[] lines)
+        {
+            List<string> content = new List<string>(lines.Length);
+
+            foreach (string line in lines)
+            {
+                if (!IsCommentLine(line)) content.Add(line);
+            }
+
+            return content.ToArray();
+        }
+
+        private bool IsCommentLine(string line)
+        {
+            return line.StartsWith(commentCharacter, StringComparison.Ordinal);
         }
 
         private bool IsEmptyFile(string[] lines)
@@ -107,4 +129,3 @@ namespace IO
 
     }
 }
-

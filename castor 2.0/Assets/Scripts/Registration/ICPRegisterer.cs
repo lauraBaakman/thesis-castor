@@ -83,6 +83,8 @@ namespace Registration
 
             iterationCounter = new Counter(Settings.MaxNumIterations);
 
+            stabilization = new StabilizationTermiationCondition();
+
             hasTerminated = false;
 
             //The static fragment does not change during ICP, consequently its points need only be sampled once.
