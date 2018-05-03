@@ -384,7 +384,7 @@ namespace Tests.Experiment
             Assert.IsTrue(expected.AppliedTranslation == actual.AppliedTranslation);
 
             float deltaAngle = Quaternion.Angle(actual.AppliedRotation, expected.AppliedRotation);
-            Assert.That(deltaAngle, Is.EqualTo(0).Within(precision));
+            Assert.That(deltaAngle, Is.EqualTo(0).Within(0.1f));
         }
 
         #region ExtractRotationAndTranslationCases
