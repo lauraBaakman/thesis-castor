@@ -7,44 +7,55 @@ using Registration;
 
 public class StatisticsComputer : MonoBehaviour
 {
-    public Dictionary<string, object> Results { get { return computer.Results; } }
+    public Dictionary<string, object> Results { get { return transformComputer.Results; } }
 
-    public bool Done { get { return computer.Done; } }
+    private bool done;
+    public bool Done { get { return done; } }
 
-    private _StatisticsComputer computer;
+    private _TransformationComputer transformComputer;
 
     public void Init()
-    { }
+    {
+        done = false;
+    }
 
     public IEnumerator<object> Compute(string objPath)
     {
-        computer = new _StatisticsComputer(objPath);
+        transformComputer = new _TransformationComputer(objPath);
         yield return null;
 
-        computer.ReadObjFile();
+        transformComputer.ReadObjFile();
         yield return null;
 
-        computer.CollectCorrespondences();
+        transformComputer.CollectCorrespondences();
         yield return null;
 
-        computer.ComputeTransformationMatrix();
+        transformComputer.ComputeTransformationMatrix();
         yield return null;
 
-        computer.ExtractTranslationAndRotation();
+        transformComputer.ExtractTranslationAndRotation();
         yield return null;
+
+        throw new NotImplementedException("Compare with the expected rotation and translation and store results in Results")
+        yield return null;
+
+        done = true;
     }
 }
 
 //Shouldn't be public, but wanted to test it
-public class _StatisticsComputer
+public class _TransformationComputer
 {
-    private bool done;
-    public bool Done { get { return done; } }
-
     private string path;
 
     private Mesh mesh;
     public Mesh Mesh { get { return mesh; } }
+
+    private Vector3 translation;
+    public Vector3 Translation { get { return translation; } }
+
+    private Vector3 rotation;
+    public Vector3 Rotation { get { return rotation; } }
 
     private CorrespondenceCollection correspondences;
     public CorrespondenceCollection Correspondences
@@ -57,7 +68,7 @@ public class _StatisticsComputer
 
     internal Dictionary<string, object> Results;
 
-    public _StatisticsComputer(string path)
+    public _TransformationComputer(string path)
     {
         this.done = false;
         this.Results = new Dictionary<string, object>();
@@ -121,6 +132,7 @@ public class _StatisticsComputer
     public void ExtractTranslationAndRotation()
     {
         throw new NotImplementedException();
-        done = true;
+        //Compute translation and rotation
+        //Store in Results object that is pubicly accessible.
     }
 }

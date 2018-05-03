@@ -16,7 +16,8 @@ namespace Tests.Experiment
 
         private float precision = 0.00001f;
 
-        private Vector3 translation = new Vector3(+0.5f, +07f, -0.9f);
+        private static Vector3 translation = new Vector3(+0.5f, +07f, -0.9f);
+        private static Vector3 rotation = new Vector3();
 
         private static List<Point> oldPositions = new List<Point>
         {
@@ -84,7 +85,7 @@ namespace Tests.Experiment
         [Test, TestCaseSource("CorrespondencesCases")]
         public void Test_CollectTrueCorrespondences(string file, CorrespondenceCollection expected)
         {
-            _StatisticsComputer computer = new _StatisticsComputer(InputPath(file));
+            _TransformationComputer computer = new _TransformationComputer(InputPath(file));
             computer.ReadObjFile();
             computer.CollectCorrespondences();
 
@@ -309,7 +310,7 @@ namespace Tests.Experiment
         [Test, TestCaseSource("TransformCases")]
         public void Test_ComputeTransformationMatrix(string file, Matrix4x4 expected)
         {
-            _StatisticsComputer computer = new _StatisticsComputer(InputPath(file));
+            _TransformationComputer computer = new _TransformationComputer(InputPath(file));
             computer.ReadObjFile();
             computer.CollectCorrespondences();
             computer.ComputeTransformationMatrix();
@@ -358,6 +359,49 @@ namespace Tests.Experiment
                     column2: new Vector4(-0.500000000000000f, -0.866025403784439f, +0.000000000000000f, 0),
                     column3: new Vector4(+0.500000000000000f, +0.700000000000000f, -0.900000000000000f, 1)
                 )
+            },
+        };
+        #endregion
+
+        [Test, TestCaseSource("ExtractRotationAndTranslationCases")]
+        public void Test_ExtractRotationAndTranslation(string file, Vector3 expectedTranslation, Vector3 expectedRotation)
+        {
+            _TransformationComputer computer = new _TransformationComputer(InputPath(file));
+            computer.ReadObjFile();
+            computer.CollectCorrespondences();
+            computer.ComputeTransformationMatrix();
+            computer.ExtractTranslationAndRotation();
+
+            Vector3 actualTranslation = computer.Translation;
+            Vector3 actualRotation = computer.Rotation;
+
+            Assert.Fail("Compute expected rotation!");
+
+            Assert.AreEqual(expectedTranslation, actualTranslation);
+            Assert.AreEqual(expectedRotation, actualRotation);
+        }
+
+        #region ExtractRotationAndTranslationCases
+        static object[] ExtractRotationAndTranslationCases = {
+            new object[] {
+                inputPath_no_change,
+                new Vector3(),
+                new Vector3(),
+            },
+            new object[] {
+                inputPath_only_translation,
+                translation,
+                new Vector3()
+            },
+            new object[] {
+                inputPath_only_rotation,
+                new Vector3(),
+                rotation
+            },
+            new object[] {
+                inputPath_tranlsation_rotation,
+                translation,
+                rotation
             },
         };
         #endregion
