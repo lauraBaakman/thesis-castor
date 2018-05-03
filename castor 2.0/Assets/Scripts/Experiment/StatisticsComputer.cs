@@ -18,9 +18,9 @@ public class StatisticsComputer : MonoBehaviour
         done = false;
     }
 
-    public IEnumerator<object> Compute(string objPath)
+    public IEnumerator<object> Compute(StatisticsComputer.Run run)
     {
-        transformComputer = new _TransformationComputer(objPath);
+        transformComputer = new _TransformationComputer(run);
         yield return null;
 
         transformComputer.ReadObjFile();
@@ -64,7 +64,7 @@ public class StatisticsComputer : MonoBehaviour
         internal Vector3 appliedTranslation;
         public Vector3 AppliedTranslation { get { return appliedTranslation; } }
 
-        public Run(string objPath = "")
+        public Run(string objPath)
             : this(objPath, Quaternion.identity, new Vector3(0, 0, 0))
         { }
 
@@ -78,6 +78,7 @@ public class StatisticsComputer : MonoBehaviour
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
 
+            dict.Add("obj path", objPath);
             dict.Add("applied translation x", appliedTranslation.x);
             dict.Add("applied translation y", appliedTranslation.y);
             dict.Add("applied translation z", appliedTranslation.z);
@@ -97,8 +98,6 @@ public class StatisticsComputer : MonoBehaviour
 //Shouldn't be public, but wanted to test it
 public class _TransformationComputer
 {
-    private string path;
-
     private Mesh mesh;
     public Mesh Mesh { get { return mesh; } }
 
@@ -111,23 +110,21 @@ public class _TransformationComputer
     private Matrix4x4 transformationMatrix;
     public Matrix4x4 TransformationMatrix { get { return transformationMatrix; } }
 
-    public _TransformationComputer(string path)
+    public _TransformationComputer(StatisticsComputer.Run run)
     {
         correspondences = new CorrespondenceCollection();
 
-        this.run = new StatisticsComputer.Run();
-
-        this.path = path;
+        this.run = run;
     }
 
     public void ReadObjFile()
     {
-        ReadResult result = ObjFile.Read(path);
+        ReadResult result = ObjFile.Read(run.objPath);
         if (result.Failed)
             throw new InvalidObjFileException(
                 string.Format(
                     "Encountered the error {0} while reading the obj file {1}.",
-                    result.Message, this.path
+                    result.Message, run.objPath
                 )
             );
 

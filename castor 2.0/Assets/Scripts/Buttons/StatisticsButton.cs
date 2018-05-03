@@ -63,7 +63,7 @@ namespace Buttons
 
             foreach (string objFile in objFilePaths)
             {
-                StartCoroutine(statisticsComputer.Compute(objFile));
+                StartCoroutine(statisticsComputer.Compute(new StatisticsComputer.Run(objFile)));
                 yield return new WaitUntil(() => statisticsComputer.Done);
             }
 
