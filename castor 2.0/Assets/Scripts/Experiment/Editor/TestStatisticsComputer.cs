@@ -80,14 +80,9 @@ namespace Tests.Experiment
 
         private StatisticsComputer.Run InputPath(string file)
         {
+            string path = Path.Combine(Application.dataPath, Path.Combine("Scripts/Experiment/Editor", file));
             return new StatisticsComputer.Run(
-                objPath: Path.Combine(
-                    Application.dataPath,
-                    Path.Combine(
-                        "Scripts/Experiment/Editor",
-                        file
-                    )
-                )
+                    objPath: path
             );
         }
 
