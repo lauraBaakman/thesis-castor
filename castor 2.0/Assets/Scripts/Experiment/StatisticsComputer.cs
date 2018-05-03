@@ -44,6 +44,13 @@ public class StatisticsComputer : MonoBehaviour
     public class Run
     {
         /// <summary>
+        /// The string to the path with the obj file that has the final position 
+        /// in its vertex coordinates, and the initial position in its 
+        /// texture coordinates.
+        /// </summary>
+        public readonly string objPath;
+
+        /// <summary>
         /// The rotation used to bring the modelpoints to the static points.
         /// </summary>
         internal Quaternion appliedRotation;
@@ -57,13 +64,11 @@ public class StatisticsComputer : MonoBehaviour
         internal Vector3 appliedTranslation;
         public Vector3 AppliedTranslation { get { return appliedTranslation; } }
 
-        public Run()
-        {
-            this.appliedRotation = Quaternion.identity;
-            this.appliedTranslation = new Vector3(0, 0, 0);
-        }
+        public Run(string objPath = "")
+            : this(objPath, Quaternion.identity, new Vector3(0, 0, 0))
+        { }
 
-        public Run(Quaternion appliedRotation, Vector3 appliedTranslation)
+        public Run(string objPath, Quaternion appliedRotation, Vector3 appliedTranslation)
         {
             this.appliedRotation = appliedRotation;
             this.appliedTranslation = appliedTranslation;

@@ -391,19 +391,19 @@ namespace Tests.Experiment
         static object[] ExtractRotationAndTranslationCases = {
             new object[] {
                 inputPath_no_change,
-                new StatisticsComputer.Run(Quaternion.identity, new Vector3(0, 0, 0))
+                new StatisticsComputer.Run("", Quaternion.identity, new Vector3(0, 0, 0))
             },
             new object[] {
                 inputPath_only_translation,
-                new StatisticsComputer.Run(Quaternion.identity, translation)
+                new StatisticsComputer.Run("", Quaternion.identity, translation)
             },
             new object[] {
                 inputPath_only_rotation,
-                new StatisticsComputer.Run(rotation, new Vector3(0, 0, 0))
+                new StatisticsComputer.Run("", rotation, new Vector3(0, 0, 0))
             },
             new object[] {
                 inputPath_tranlsation_rotation,
-                new StatisticsComputer.Run(rotation, translation)
+                new StatisticsComputer.Run("", rotation, translation)
             },
         };
         #endregion
