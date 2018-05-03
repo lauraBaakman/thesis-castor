@@ -13,7 +13,7 @@ namespace Buttons
 
         private string directory;
 
-        private List<string> objFilePaths;
+        private List<StatisticsComputer.Run> runs;
 
         public StatisticsComputer statisticsComputer;
 
@@ -37,7 +37,7 @@ namespace Buttons
         private void Reset()
         {
             directory = "";
-            objFilePaths = null;
+            runs = null;
         }
 
         private void RetrieveExperimentResultFolder()
@@ -57,13 +57,13 @@ namespace Buttons
         private IEnumerator<object> ProcessExperimentResultsFolder(string inputDirectory)
         {
             StartCoroutine(FindObjectIDs(inputDirectory));
-            yield return new WaitWhile(() => objFilePaths == null);
+            yield return new WaitWhile(() => runs == null);
 
             statisticsComputer.Init();
 
-            foreach (string objFile in objFilePaths)
+            foreach (StatisticsComputer.Run run in runs)
             {
-                StartCoroutine(statisticsComputer.Compute(new StatisticsComputer.Run(objFile)));
+                StartCoroutine(statisticsComputer.Compute(run));
                 yield return new WaitUntil(() => statisticsComputer.Done);
             }
 
@@ -86,14 +86,14 @@ namespace Buttons
             List<Dictionary<string, object>> csvData = new CSVFileReader().Read(csvDataFile);
             yield return null;
 
-            List<string> objFiles = new List<string>(csvData.Count);
+            List<StatisticsComputer.Run> intermediateRuns = new List<StatisticsComputer.Run>(csvData.Count);
             foreach (Dictionary<string, object> row in csvData)
             {
-                objFiles.Add(ExtractObjFile(row));
+                intermediateRuns.Add(ExtractRun(row));
                 yield return null;
             }
 
-            this.objFilePaths = objFiles;
+            this.runs = intermediateRuns;
         }
 
         private string GetCSVDataFile()
@@ -116,11 +116,11 @@ namespace Buttons
             }
         }
 
-        private string ExtractObjFile(Dictionary<string, object> csvRow)
+        private StatisticsComputer.Run ExtractRun(Dictionary<string, object> csvRow)
         {
             string id = csvRow["id"] as string;
             string path = Path.Combine(directory, String.Format("{0}.obj", id));
-            return path;
+            return new StatisticsComputer.Run(objPath: path);
         }
     }
 }
