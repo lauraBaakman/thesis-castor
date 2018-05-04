@@ -76,7 +76,9 @@ namespace Utils
 
         public static Matrix4x4D TransformationMatrixFromQuaternion(QuaternionD quaternion)
         {
-            return (1 / QuaternionD.Dot(quaternion, quaternion)) * TransformationMatrixFromUnitQuaternion(quaternion);
+            Matrix4x4D matrix = (1 / QuaternionD.Dot(quaternion, quaternion)) * TransformationMatrixFromUnitQuaternion(quaternion);
+            matrix.m33 = 1;
+            return matrix;
         }
         #endregion
 
