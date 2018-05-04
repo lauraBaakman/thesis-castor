@@ -19,7 +19,7 @@ namespace Experiment
 
         private int currentRunNumber = 0;
 
-        private bool isCurrentRunFinsihed = false;
+        private bool isCurrentRunFinished = false;
 
         public RunExecuter(GameObject listener, GameObject staticFragment,
                            FragmentExporter fragmentExporter, FragmentImporter fragmentImporter)
@@ -41,7 +41,7 @@ namespace Experiment
         public IEnumerator<object> Execute(Run run)
         {
             currentRunNumber++;
-            isCurrentRunFinsihed = false;
+            isCurrentRunFinished = false;
 
             string message = string.Format("Starting run number {0} with fragment {1}.",
                                            currentRunNumber, run.id);
@@ -76,12 +76,13 @@ namespace Experiment
 
             // Delete the ModelFragment
             modelFragment.GetComponent<FragmentDestroyer>().DestroyFragment();
-            isCurrentRunFinsihed = true;
+
+            isCurrentRunFinished = true;
         }
 
         public bool IsCurrentRunFinished()
         {
-            return isCurrentRunFinsihed;
+            return isCurrentRunFinished;
         }
 
         public class Run
