@@ -26,10 +26,8 @@ namespace Registration
 
         private StabilizationTermiationCondition stabilization;
 
-        public bool HasTerminated
-        {
-            get { return hasTerminated; }
-        }
+        private bool hasTerminated;
+        public bool HasTerminated { get { return hasTerminated; } }
 
         #region staticfragment
         private GameObject StaticFragment
@@ -66,8 +64,6 @@ namespace Registration
         }
         private GameObject modelFragment;
         #endregion
-
-        private bool hasTerminated;
 
         public ICPRegisterer(
             GameObject staticFragment, GameObject modelFragment,
