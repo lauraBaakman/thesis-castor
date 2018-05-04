@@ -52,6 +52,7 @@ namespace Experiment
                 value: new Ticker.Message.InfoMessage(message)
              );
             Debug.Log(message);
+            yield return null;
 
             // Load ModelFragment
             GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath, prefabPath: ExperimentRunner.ExperimentFragmentPrefabPath);
