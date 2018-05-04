@@ -22,9 +22,11 @@ namespace Experiment
         private IO.FragmentImporter fragmentImporter;
         private IO.FragmentExporter fragmentExporter;
 
+        private int completedRunCount;
+
         private string outputDirectory;
 
-        private StreamWriter runWriter;
+        private StreamWriter runSetWriter;
 
         public void Init(Configuration configuration)
         {
@@ -172,10 +174,17 @@ namespace Experiment
             fragmentExporter.Export(fragment, path);
         }
 
+        private bool CompletedAllRuns()
+        {
+            return completedRunCount == runs.Count;
+        }
+
         public IEnumerator<object> Execute()
         {
             RunExecuter executer = new RunExecuter(listener: this.gameObject, staticFragment: staticFragment,
                                                    fragmentImporter: fragmentImporter, fragmentExporter: fragmentExporter);
+
+            RunExecuter.Run run;
 
             foreach (Settings ICPSetting in this.ICPSettings)
             {
@@ -188,28 +197,29 @@ namespace Experiment
                 ICPSetting.ToJson(Path.Combine(this.outputDirectory, "settings.json"));
                 yield return null;
 
-                SetUpRunWriter();
+                SetUpRunSetWriter();
                 yield return null;
 
-                foreach (RunExecuter.Run run in runs)
+                for (completedRunCount = 0; completedRunCount < runs.Count; completedRunCount++)
                 {
+                    run = runs[completedRunCount];
+
                     run.ICPSettings = ICPSetting;
                     executer.OutputDirectory = this.outputDirectory;
 
-                    runWriter.Write(string.Format("{0}, ", run.id));
+                    runSetWriter.Write(string.Format("{0}, ", run.id));
                     yield return null;
 
                     StartCoroutine(executer.Execute(run));
                     yield return new WaitUntil(executer.IsCurrentRunFinished);
                 }
-                CleanUpRunWriter();
             }
         }
 
-        private void SetUpRunWriter()
+        private void SetUpRunSetWriter()
         {
-            runWriter = new StreamWriter(Path.Combine(this.outputDirectory, "data.csv"));
-            runWriter.WriteLine(
+            runSetWriter = new StreamWriter(Path.Combine(this.outputDirectory, "data.csv"));
+            runSetWriter.WriteLine(
                 string.Format(
                     "{0}, {1}, {2}, {3}",
                     "id", "termination message", "termination error", "termination iteration"
@@ -217,9 +227,9 @@ namespace Experiment
             );
         }
 
-        private void CleanUpRunWriter()
+        private void CleanUpRunSetWriter()
         {
-            runWriter.Close();
+            runSetWriter.Close();
         }
 
         #region ICPInterface
@@ -229,11 +239,12 @@ namespace Experiment
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
-            runWriter.WriteLine(string.Format(
+            runSetWriter.WriteLine(string.Format(
                 "'{0}', {1}, {2}",
                 message.Message,
                 message.errorAtTermination.ToString("E10", CultureInfo.InvariantCulture),
                 message.terminationIteration));
+            if (CompletedAllRuns()) CleanUpRunSetWriter();
         }
         #endregion
 
