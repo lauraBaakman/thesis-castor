@@ -34,7 +34,7 @@ namespace Ticker
 
         private bool IsMoreImportantThanCurrentMessage(Message message)
         {
-            if (currentMessage == null) return true;
+            if (!TickerIsShowingMessage()) return true;
 
             return message.Priority >= currentMessage.Priority;
         }
