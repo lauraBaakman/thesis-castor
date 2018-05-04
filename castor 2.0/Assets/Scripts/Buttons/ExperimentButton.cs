@@ -40,10 +40,10 @@ namespace Buttons
             //    loadButtonText: "Select"
             //);
             Debug.Log("temporarily using a fixed path");
-            ProcessExperimentConfigurtionFile("/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/cube_f90e89025f4cad9d1da70ddfd85c2368.json");
+            ProcessExperimentConfigurationFile("/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/cube_f90e89025f4cad9d1da70ddfd85c2368.json");
         }
 
-        private void ProcessExperimentConfigurtionFile(string path)
+        private void ProcessExperimentConfigurationFile(string path)
         {
             ExperimentRunner.Configuration configuration;
             try { configuration = ExperimentRunner.Configuration.FromJson(path); }
