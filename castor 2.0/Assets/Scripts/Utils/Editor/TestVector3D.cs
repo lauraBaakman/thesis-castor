@@ -71,16 +71,44 @@ namespace Tests.Utils
             },
         };
 
-        [Test]
-        public void Test_To_Unity_Vector3()
+        [Test, TestCaseSource("ToUnityVector3Cases")]
+        public void Test_To_Unity_Vector3(Vector3D input, Vector3 expected)
         {
-            Vector3D vector = new Vector3D(1, 2, 3);
-            Vector3 actual = vector.ToUnityVector();
-
-            Vector3 expected = new Vector3(1, 2, 3);
+            Vector3 actual = input.ToUnityVector();
 
             Assert.AreEqual(expected, actual);
         }
+
+        static object[] ToUnityVector3Cases = {
+            new object[] {
+                new Vector3D(1, 2, 3),
+                new Vector3 (1, 2, 3),
+            },
+            new object[] {
+                new Vector3D(-1.5,  2.3,  4.7),
+                new Vector3 (-1.5f, 2.3f, 4.7f),
+            },
+            new object[] {
+                new Vector3D(double.MinValue, double.MinValue, double.MinValue),
+                new Vector3(float.MinValue, float.MinValue, float.MinValue),
+            },
+            new object[] {
+                new Vector3D(double.MaxValue, double.MaxValue, double.MaxValue),
+                new Vector3(float.MaxValue, float.MaxValue, float.MaxValue),
+            },
+            new object[] {
+                new Vector3D(double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity),
+                new Vector3(float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity),
+            },
+            new object[] {
+                new Vector3D(double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity),
+                new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity),
+            },
+            new object[] {
+                new Vector3D(double.NaN, double.NaN, double.NaN),
+                new Vector3(float.NaN, float.NaN, float.NaN),
+            },
+        };
 
         [Test, TestCaseSource("ScalarMultiplicationCases")]
         public void Test_Scaling_Operator(Vector3D vector, double scale, Vector3D expected)
