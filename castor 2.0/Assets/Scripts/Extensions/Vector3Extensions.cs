@@ -75,7 +75,7 @@ public static class Vector3Extensions
     /// <param name="vector">Vector.</param>
     public static bool ContainsNaNs(this Vector3 vector)
     {
-        return false;
+        return vector.ContainsValue(float.NaN);
     }
 
     /// <summary>
@@ -85,7 +85,7 @@ public static class Vector3Extensions
     /// <param name="vector">Vector.</param>
     public static bool ContainsPositiveInfinity(this Vector3 vector)
     {
-        return false;
+        return vector.ContainsValue(float.PositiveInfinity);
     }
 
     /// <summary>
@@ -95,12 +95,12 @@ public static class Vector3Extensions
     /// <param name="vector">Vector.</param>
     public static bool ContainsNegativeInfinity(this Vector3 vector)
     {
-        return false;
+        return vector.ContainsValue(float.NegativeInfinity);
     }
 
     private static bool ContainsValue(this Vector3 vector, float value)
     {
-        return false;
+        return vector.x.Equals(value) || vector.y.Equals(value) || vector.z.Equals(value);
     }
 
     /// <summary>
