@@ -325,10 +325,10 @@ namespace Tests.Extensions
                 new Vector4(-04, +29, -30, +01),
                 new Vector4(+09, -45, +11, -33)
             );
-            Vector4D vector = new Vector4D(+33, -29, -32, -32);
+            Vector4 vector = new Vector4(+33, -29, -32, -32);
 
-            Vector4D expected = new Vector4D(-1139, +1622, +0986, +0708);
-            Vector4D actual = matrix.MultiplyVector(vector);
+            Vector4 expected = new Vector4(-1139, +1622, +0986, +0708);
+            Vector4 actual = matrix.MultiplyVector(vector);
 
             Assert.AreEqual(expected, actual);
         }

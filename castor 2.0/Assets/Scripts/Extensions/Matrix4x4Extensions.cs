@@ -115,9 +115,9 @@ public static class Matrix4x4Extensions
         return matrix;
     }
 
-    public static Vector4D MultiplyVector(this Matrix4x4 matrix, Vector4D vector)
+    public static Vector4 MultiplyVector(this Matrix4x4 matrix, Vector4 vector)
     {
-        Vector4D result = new Vector4D();
+        Vector4 result = new Vector4();
         result.x = matrix.m00 * vector.x + matrix.m01 * vector.y + matrix.m02 * vector.z + matrix.m03 * vector.w;
         result.y = matrix.m10 * vector.x + matrix.m11 * vector.y + matrix.m12 * vector.z + matrix.m13 * vector.w;
         result.z = matrix.m20 * vector.x + matrix.m21 * vector.y + matrix.m22 * vector.z + matrix.m23 * vector.w;
