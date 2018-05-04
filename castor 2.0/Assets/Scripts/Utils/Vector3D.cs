@@ -69,10 +69,23 @@ namespace Utils
         public Vector3 ToUnityVector()
         {
             return new Vector3(
-                (float)this.x,
-                (float)this.y,
-                (float)this.z
+                ToFloat(this.x),
+                ToFloat(this.y),
+                ToFloat(this.z)
             );
+        }
+
+        private float ToFloat(double value)
+        {
+            if (double.IsPositiveInfinity(value)) return float.PositiveInfinity;
+            if (double.IsNegativeInfinity(value)) return float.NegativeInfinity;
+
+            if (double.IsNaN(value)) return float.NaN;
+
+            if (value < float.MinValue) return float.MinValue;
+            if (value > float.MaxValue) return float.MaxValue;
+
+            return (float)value;
         }
         #endregion
 
