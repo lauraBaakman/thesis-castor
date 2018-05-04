@@ -1,6 +1,7 @@
 using UnityEngine;
 using Utils;
 using UnityEngine.Assertions;
+using System;
 
 [RequireComponent(typeof(MeshCollider))]
 [RequireComponent(typeof(MeshRenderer))]
@@ -51,6 +52,10 @@ public class ContainmentDetector : MonoBehaviour
     /// <param name="position">Position in worldspace of the point.</param>
     public bool GameObjectContains(Vector3 position)
     {
+        // Some positions turn out to be invalid, which my result in infinite loops
+        // I prefer to crash
+        ValidatePosition(position);
+
         //Cheap check, if the point falls outside the objects bounding box there is no need to check further.
         if (!IsInBoundingBox(position)) return false;
 
@@ -123,6 +128,21 @@ public class ContainmentDetector : MonoBehaviour
         Bounds bounds = GetComponent<MeshRenderer>().bounds;
         Vector3 position = bounds.center + bounds.extents * 2;
 
+        ValidatePosition(position);
+
         return position;
+    }
+
+    private void ValidatePosition(Vector3 position)
+    {
+        if (position.ContainsNonNumerical())
+        {
+            throw new Exception(
+                string.Format(
+                    "The found position, {0}, outside the gameobject is invalid.",
+                    position
+                )
+            );
+        }
     }
 }
