@@ -83,7 +83,7 @@ namespace Registration
         private object sharedParameters;
 
         private double error;
-        private int iteration;
+        private Counter iterationCounter;
         private double scale;
 
         internal _IGDTransformFinder(
@@ -94,6 +94,8 @@ namespace Registration
             this.staticPoints = staticPoints;
 
             this.configuration = configuration;
+
+            this.iterationCounter = new Counter(configuration.maxNumIterations);
 
             initIGD();
         }
@@ -132,8 +134,6 @@ namespace Registration
         {
             this.scale = determineScale();
 
-            iteration = 0;
-
             translation = new Vector4D(0, 0, 0, 0);
             rotation = QuaternionD.identity;
 
@@ -144,20 +144,21 @@ namespace Registration
 
         internal Matrix4x4 FindTransform()
         {
-            while (true)
+            while (!iterationCounter.IsCompleted())
             {
+                iterationCounter.Increase();
+
                 preRotateModelPoints();
 
                 sharedParameters = configuration.errorMetric.ComputeSharedParameters(preRotatedModelPoints, staticPoints, translation);
 
                 error = configuration.errorMetric.ComputeError(preRotatedModelPoints, staticPoints, translation, sharedParameters);
 
-                if (convergence()) return buildTransformationMatrix().ToUnityMatrix4x4();
+                if (convergence()) break;
 
                 step();
-
-                iteration++;
             }
+            return buildTransformationMatrix().ToUnityMatrix4x4();
         }
 
         /// <summary>
@@ -211,9 +212,7 @@ namespace Registration
 
         private bool convergence()
         {
-            return
-                (this.error < configuration.convergenceError) ||
-                (this.iteration > configuration.maxNumIterations);
+            return this.error < configuration.convergenceError;
         }
     }
 }
