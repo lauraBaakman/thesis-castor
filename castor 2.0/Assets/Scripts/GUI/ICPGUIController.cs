@@ -33,7 +33,15 @@ namespace GraphicalUI
                 modelFragment: modelFragment,
                 staticFragment: staticFragment,
                 settings: new Settings(
-                    referenceTransform: ICPFragments.transform
+                    referenceTransform: ICPFragments.transform,
+                    transformFinder: new IGDTransformFinder(
+                        new IGDTransformFinder.Configuration(
+                            convergenceError: 0.001,
+                            learningRate: 0.001,
+                            maxNumIterations: 200,
+                            errorMetric: new Registration.Error.IntersectionTermError(0.5, 0.5)
+                        )
+                    )
                 )
             );
 
