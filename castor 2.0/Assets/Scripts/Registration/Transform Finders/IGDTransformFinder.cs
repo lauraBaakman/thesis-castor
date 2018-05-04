@@ -86,6 +86,8 @@ namespace Registration
         private Counter iterationCounter;
         private double scale;
 
+        private static double minimumScale = Math.Sqrt(float.Epsilon);
+
         internal _IGDTransformFinder(
             List<Vector4D> modelPoints, List<Vector4D> staticPoints,
             IGDTransformFinder.Configuration configuration)
@@ -125,7 +127,11 @@ namespace Registration
             }
 
             double[] ranges = new double[3];
-            for (int i = 0; i < 3; i++) ranges[i] = maxima[i] - minima[i];
+            for (int i = 0; i < 3; i++)
+            {
+                //Avoid that range becomes 0
+                ranges[i] = Math.Max(maxima[i] - minima[i], minimumScale);
+            }
 
             return ranges;
         }
@@ -205,9 +211,9 @@ namespace Registration
 
         private void updateRotation(QuaternionD gradient)
         {
-            gradient /= (this.scale * this.scale);
+            QuaternionD scaledGradient = gradient / (this.scale * this.scale);
 
-            rotation = new QuaternionD(-1 * configuration.learningRate * gradient.xyz, 1);
+            rotation = new QuaternionD(-1 * configuration.learningRate * scaledGradient.xyz, 1);
         }
 
         private bool convergence()
