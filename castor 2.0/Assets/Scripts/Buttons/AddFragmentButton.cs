@@ -25,8 +25,8 @@ namespace Buttons
 
         private void LoadTestFragments()
         {
-            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/roughfracturedcube_part1_translationrotation.obj");
-            importer.Import("/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models/RoughFracturedCube/roughfracturedcube_part2.obj");
+            importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/obj/9528401f-a2c9-3502-a795-afc276db60ef.obj");
+            importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/obj/locked_fragment_f90e89025f4cad9d1da70ddfd85c2368.obj");
         }
 
         private void NotifyUser(IO.ReadResult result)
