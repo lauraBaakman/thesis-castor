@@ -24,7 +24,7 @@ namespace Experiment
 
         private string outputDirectory;
 
-        private StreamWriter streamWriter;
+        private StreamWriter runWriter;
 
         public void Init(Configuration configuration)
         {
@@ -188,13 +188,7 @@ namespace Experiment
                 ICPSetting.ToJson(Path.Combine(this.outputDirectory, "settings.json"));
                 yield return null;
 
-                streamWriter = new StreamWriter(Path.Combine(this.outputDirectory, "data.csv"));
-                streamWriter.WriteLine(
-                    string.Format(
-                        "{0}, {1}, {2}, {3}",
-                        "id", "termination message", "termination error", "termination iteration"
-                    )
-                );
+                SetUpRunWriter();
                 yield return null;
 
                 foreach (RunExecuter.Run run in runs)
@@ -202,14 +196,30 @@ namespace Experiment
                     run.ICPSettings = ICPSetting;
                     executer.OutputDirectory = this.outputDirectory;
 
-                    streamWriter.Write(string.Format("{0}, ", run.id));
+                    runWriter.Write(string.Format("{0}, ", run.id));
                     yield return null;
 
                     StartCoroutine(executer.Execute(run));
                     yield return new WaitUntil(executer.IsCurrentRunFinished);
                 }
-                streamWriter.Close();
+                CleanUpRunWriter();
             }
+        }
+
+        private void SetUpRunWriter()
+        {
+            runWriter = new StreamWriter(Path.Combine(this.outputDirectory, "data.csv"));
+            runWriter.WriteLine(
+                string.Format(
+                    "{0}, {1}, {2}, {3}",
+                    "id", "termination message", "termination error", "termination iteration"
+                )
+            );
+        }
+
+        private void CleanUpRunWriter()
+        {
+            runWriter.Close();
         }
 
         #region ICPInterface
@@ -219,7 +229,7 @@ namespace Experiment
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
-            streamWriter.WriteLine(string.Format(
+            runWriter.WriteLine(string.Format(
                 "'{0}', {1}, {2}",
                 message.Message,
                 message.errorAtTermination.ToString("E10", CultureInfo.InvariantCulture),
