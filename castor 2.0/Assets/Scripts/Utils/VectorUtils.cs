@@ -29,7 +29,7 @@ namespace Utils
                 lhs.y * rhs.z - lhs.z * rhs.y,
                 lhs.z * rhs.x - lhs.x * rhs.z,
                 lhs.x * rhs.y - lhs.y * rhs.x,
-                1
+                0
             );
         }
 
