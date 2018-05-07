@@ -50,7 +50,7 @@ namespace Registration
             this.correspondences = correspondences;
         }
 
-        public CorrespondenceCollection(List<Correspondence> correspondences)
+        public CorrespondenceCollection(IEnumerable<Correspondence> correspondences)
             : this()
         {
             foreach (Correspondence correspondence in correspondences) Add(correspondence);
@@ -161,7 +161,8 @@ namespace Registration
         /// <returns>New correspondence collection with duplicates removed.</returns>
         public static CorrespondenceCollection CopyWithDuplicatesRemoved(CorrespondenceCollection original)
         {
-            throw new NotImplementedException();
+            HashSet<Correspondence> set = new HashSet<Correspondence>(original.correspondences);
+            return new CorrespondenceCollection(set);
         }
 
         public List<Point> GetPointsByType(Fragment.ICPFragmentType type)
