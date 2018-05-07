@@ -7,6 +7,8 @@ namespace Tests.Utils
     [TestFixture]
     public class VectorUtilsTests
     {
+        float precision = 0.0005f;
+
         [Test]
         public void Test_HomogeneousCoordinate()
         {
@@ -15,10 +17,7 @@ namespace Tests.Utils
             Vector4 expected = new Vector4(1, 2, 3, 1);
             Vector4 actual = VectorUtils.HomogeneousCoordinate(input);
 
-            Assert.AreEqual(expected.x, actual.x);
-            Assert.AreEqual(expected.y, actual.y);
-            Assert.AreEqual(expected.z, actual.z);
-            Assert.AreEqual(expected.w, actual.w);
+            for (int i = 0; i < 4; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
 
         [Test, TestCaseSource("CrossCases")]
@@ -26,7 +25,7 @@ namespace Tests.Utils
         {
             Vector4 actual = VectorUtils.Cross(lhs, rhs);
 
-            Assert.IsTrue(expected.Equals(actual));
+            for (int i = 0; i < 4; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
 
         static object[] CrossCases = {
@@ -61,10 +60,7 @@ namespace Tests.Utils
 
             Vector4 actual = VectorUtils.MultiplyWithScalar(vector, scale);
 
-            Assert.AreEqual(expected.x, actual.x);
-            Assert.AreEqual(expected.y, actual.y);
-            Assert.AreEqual(expected.z, actual.z);
-            Assert.AreEqual(expected.w, actual.w);
+            for (int i = 0; i < 4; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
     }
 }
