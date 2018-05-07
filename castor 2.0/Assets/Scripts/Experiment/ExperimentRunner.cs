@@ -239,6 +239,9 @@ namespace Experiment
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
+            //This function is also called when we are not running an experiment for some reason
+            if (runSetWriter == null) return;
+
             runSetWriter.WriteLine(string.Format(
                 "'{0}', {1}, {2}",
                 message.Message,
