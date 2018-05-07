@@ -74,7 +74,7 @@ namespace Tests.Registration.TransformFinders
                     column0: new Vector4(+999.999815484386e-003f, +369.930439839439e-006f, -481.853362910449e-006f, 0),
                     column1: new Vector4(-370.655256081534e-006f, +999.998798785045e-003f, -1.50500602923799e-003f, 0),
                     column2: new Vector4(+481.296036558626e-006f, +1.50518435302250e-003f, +999.998751386315e-003f, 0),
-                    column3: new Vector4(+0.00000000000000e+000f, +0.00000000000000e+000f, +0.00000000000000e+000f, 1)
+                    column3: new Vector4(+16.6265046195479e-003f, +22.1409173161353e-003f, +38.8354427880211e-003f, 1)
                 )
             },
             // static points are rotated w.r.t. to model points.
@@ -92,7 +92,7 @@ namespace Tests.Registration.TransformFinders
                     column0: new Vector4(+999.999462263617e-003f, -1.03462391401174e-003f, -70.8931125552470e-006f, 0),
                     column1: new Vector4(+1.03458980407743e-003f, +999.999349849185e-003f, -479.505103974150e-006f, 0),
                     column2: new Vector4(+71.3891739114944e-006f, +479.431500835381e-006f, +999.999882524504e-003f, 0),
-                    column3: new Vector4(+0.00000000000000e+000f, +0.00000000000000e+000f, +0.00000000000000e+000f, 1)
+                    column3: new Vector4(-9.76981518931215e-003f, -269.613025185103e-006f, +5.89291830637307e-003f, 1)
                 )
             },
             // static points are translated and rotated w.r.t. to model points.
@@ -110,7 +110,7 @@ namespace Tests.Registration.TransformFinders
                     column0: new Vector4(+999.999624988402e-003f, -666.455410843483e-006f, -553.046327127907e-006f, 0),
                     column1: new Vector4(+665.356379273881e-006f, +999.997808450991e-003f, -1.98504259483517e-003f, 0),
                     column2: new Vector4(+554.368057477860e-006f, +1.98467387751939e-003f, +999.997876870574e-003f, 0),
-                    column3: new Vector4(+0.00000000000000e+000f, +0.00000000000000e+000f, +0.00000000000000e+000f, 1)
+                    column3: new Vector4(+6.85734710804553e-003f, +21.8713420663516e-003f, +44.7270919891988e-003f, 1)
                 )
             }
         };
