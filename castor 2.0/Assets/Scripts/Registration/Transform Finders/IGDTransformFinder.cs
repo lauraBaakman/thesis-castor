@@ -186,7 +186,7 @@ namespace Registration
         {
             preRotatedModelPoints.Clear();
 
-            Matrix4x4 rotationMatrix = new Matrix4x4().TransformationMatrixFromQuaternion(rotation);
+            Matrix4x4 rotationMatrix = MatrixUtils.TransformationMatrixFromQuaternion(rotation);
 
             Vector4 xc;
             foreach (Vector4 x in modelPoints)
@@ -198,8 +198,8 @@ namespace Registration
 
         private Matrix4x4 buildTransformationMatrix()
         {
-            Matrix4x4 translationMatrix = new Matrix4x4().TransformationMatrixFromTranslation(translation);
-            Matrix4x4 rotationMatrix = new Matrix4x4().TransformationMatrixFromQuaternion(rotation);
+            Matrix4x4 translationMatrix = MatrixUtils.TransformationMatrixFromTranslation(translation);
+            Matrix4x4 rotationMatrix = MatrixUtils.TransformationMatrixFromQuaternion(rotation);
 
             return translationMatrix * rotationMatrix;
         }

@@ -239,6 +239,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestColors.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestHeap.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\TestMatrixUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestMeshUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestNumericalMath.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
