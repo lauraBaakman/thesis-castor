@@ -36,11 +36,11 @@ public class ContainmentDetector : MonoBehaviour
     /// </summary>
     /// <returns><c>true</c>, if the position falls inside the object, <c>false</c> otherwise.</returns>
     /// <param name="point">Position in worldspace of the point in homogeneous coordinates.</param>
-    public bool GameObjectContains(Vector4D point)
+    public bool GameObjectContains(Vector4 point)
     {
-        Vector3 position = point.xyz.ToUnityVector();
-
-        return GameObjectContains(position);
+        return GameObjectContains(
+            new Vector3(point.x, point.y, point.z)
+        );
     }
 
     /// <summary>

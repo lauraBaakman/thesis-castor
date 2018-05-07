@@ -351,6 +351,7 @@
     <Compile Include="Assets\Scripts\Extensions\SystemRandomExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
+    <Compile Include="Assets\Scripts\Extensions\Vector4Extensions.cs" />
     <Compile Include="Assets\Scripts\Fragment\ContainmentDetector.cs" />
     <Compile Include="Assets\Scripts\Fragment\DoubleConnectedEdgeListStorage.cs" />
     <Compile Include="Assets\Scripts\Fragment\FaceNormalPainter.cs" />
@@ -543,20 +544,16 @@
     <Compile Include="Assets\Scripts\Utils\Colors.cs" />
     <Compile Include="Assets\Scripts\Utils\Counter.cs" />
     <Compile Include="Assets\Scripts\Utils\Heap.cs" />
-    <Compile Include="Assets\Scripts\Utils\Matrix4x4D.cs" />
     <Compile Include="Assets\Scripts\Utils\MeshTransformer.cs" />
     <Compile Include="Assets\Scripts\Utils\MeshUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Normal.cs" />
     <Compile Include="Assets\Scripts\Utils\NumericalMath.cs" />
     <Compile Include="Assets\Scripts\Utils\Pair.cs" />
     <Compile Include="Assets\Scripts\Utils\PointNormalizer.cs" />
-    <Compile Include="Assets\Scripts\Utils\QuaternionD.cs" />
     <Compile Include="Assets\Scripts\Utils\RangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\SerializableTransform.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
-    <Compile Include="Assets\Scripts\Utils\Vector3D.cs" />
-    <Compile Include="Assets\Scripts\Utils\Vector4D.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

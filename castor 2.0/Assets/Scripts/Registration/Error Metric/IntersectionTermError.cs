@@ -7,28 +7,28 @@ namespace Registration.Error
 {
     public class IntersectionTermError : IIterativeErrorMetric
     {
-        private readonly double distanceWeight;
-        private readonly double intersectionWeight;
+        private readonly float distanceWeight;
+        private readonly float intersectionWeight;
 
         private Transform referenceTransform;
         private ContainmentDetector staticModelContainmentDetector;
 
-        public IntersectionTermError(double distanceWeight, double intersectionWeight)
+        public IntersectionTermError(float distanceWeight, float intersectionWeight)
         {
             this.distanceWeight = distanceWeight;
             this.intersectionWeight = intersectionWeight;
         }
 
         #region sharedParameters
-        public object ComputeSharedParameters(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation)
+        public object ComputeSharedParameters(List<Vector4> rotatedModelPoints, List<Vector4> staticPoints, Vector4 translation)
         {
-            List<Vector4D> transformedPoints = new List<Vector4D>();
+            List<Vector4> transformedPoints = new List<Vector4>();
             int[] XIs = new int[rotatedModelPoints.Count];
 
             bool xi;
-            Vector4D transformedModelPoint;
+            Vector4 transformedModelPoint;
             int idx = 0;
-            foreach (Vector4D rotatedModelPoint in rotatedModelPoints)
+            foreach (Vector4 rotatedModelPoint in rotatedModelPoints)
             {
                 transformedModelPoint = rotatedModelPoint + translation;
                 transformedPoints.Add(transformedModelPoint);
@@ -45,9 +45,9 @@ namespace Registration.Error
         private class SharedParameters
         {
             public readonly int[] XIs;
-            public readonly List<Vector4D> TransformedPoints;
+            public readonly List<Vector4> TransformedPoints;
 
-            public SharedParameters(int[] XIs, List<Vector4D> transformedPoints)
+            public SharedParameters(int[] XIs, List<Vector4> transformedPoints)
             {
                 this.XIs = XIs;
                 this.TransformedPoints = transformedPoints;
@@ -56,14 +56,14 @@ namespace Registration.Error
         #endregion
 
         #region error
-        public double ComputeError(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation, object sharedParametersObj)
+        public double ComputeError(List<Vector4> rotatedModelPoints, List<Vector4> staticPoints, Vector4 translation, object sharedParametersObj)
         {
             SharedParameters sharedParameters = sharedParametersObj as SharedParameters;
 
             return ComputeError(sharedParameters.TransformedPoints, staticPoints, sharedParameters.XIs);
         }
 
-        public double ComputeError(List<Vector4D> transformedModelPoints, List<Vector4D> staticPoints, int[] XIs)
+        public double ComputeError(List<Vector4> transformedModelPoints, List<Vector4> staticPoints, int[] XIs)
         {
             int N = transformedModelPoints.Count;
 
@@ -74,7 +74,7 @@ namespace Registration.Error
             return error;
         }
 
-        public double ComputeError(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation, int[] XIs)
+        public double ComputeError(List<Vector4> rotatedModelPoints, List<Vector4> staticPoints, Vector4 translation, int[] XIs)
         {
             int N = rotatedModelPoints.Count;
 
@@ -85,45 +85,47 @@ namespace Registration.Error
             return error;
         }
 
-        private double ComputeError(Vector4D xc_translated, Vector4D p, int xi)
+        private double ComputeError(Vector4 xc_translated, Vector4 p, int xi)
         {
             return (this.distanceWeight + this.intersectionWeight * xi) * (xc_translated - p).SqrMagnitude();
         }
         #endregion
 
         #region rotationalGradient
-        public QuaternionD RotationalGradient(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation, object sharedParametersObj)
+        public Quaternion RotationalGradient(List<Vector4> rotatedModelPoints, List<Vector4> staticPoints, Vector4 translation, object sharedParametersObj)
         {
             SharedParameters sharedParameters = sharedParametersObj as SharedParameters;
             return RotationalGradient(rotatedModelPoints, staticPoints, translation, sharedParameters.XIs);
         }
 
-        public QuaternionD RotationalGradient(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation, int[] XIs)
+        public Quaternion RotationalGradient(List<Vector4> rotatedModelPoints, List<Vector4> staticPoints, Vector4 translation, int[] XIs)
         {
             int N = rotatedModelPoints.Count;
-            Vector4D gradient = new Vector4D();
+            Vector4 gradient = new Vector4();
 
             for (int i = 0; i < N; i++) gradient += RotationalGradient(rotatedModelPoints[i], staticPoints[i], translation, XIs[i]);
 
             gradient /= N;
 
             //Wheeler: The gradient w.r.t. to q will have no w component
-            return new QuaternionD(x: gradient.x, y: gradient.y, z: gradient.z, w: 0);
+            return new Quaternion(x: gradient.x, y: gradient.y, z: gradient.z, w: 0);
         }
 
-        public Vector4D RotationalGradient(Vector4D xc, Vector4D p, Vector4D translation, int xi)
+        public Vector4 RotationalGradient(Vector4 xc, Vector4 p, Vector4 translation, int xi)
         {
-            return (this.distanceWeight + xi * this.intersectionWeight) * Vector4D.Cross(xc, translation - p);
+            Vector4 gradient = xc.Cross(translation - p);
+            gradient.ScaleWithScalar(this.distanceWeight + xi * this.intersectionWeight);
+            return gradient;
         }
         #endregion
 
         #region translationalGradient
-        public Vector4D TranslationalGradient(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation, object sharedParametersObj)
+        public Vector4 TranslationalGradient(List<Vector4> rotatedModelPoints, List<Vector4> staticPoints, Vector4 translation, object sharedParametersObj)
         {
             SharedParameters sharedParameters = sharedParametersObj as SharedParameters;
 
             int N = rotatedModelPoints.Count;
-            Vector4D gradient = new Vector4D();
+            Vector4 gradient = new Vector4();
 
             for (int i = 0; i < N; i++) gradient += TranslationalGradient(sharedParameters.TransformedPoints[i], staticPoints[i], sharedParameters.XIs[i]);
 
@@ -131,10 +133,10 @@ namespace Registration.Error
             return gradient;
         }
 
-        public Vector4D TranslationalGradient(List<Vector4D> rotatedModelPoints, List<Vector4D> staticPoints, Vector4D translation, int[] XIs)
+        public Vector4 TranslationalGradient(List<Vector4> rotatedModelPoints, List<Vector4> staticPoints, Vector4 translation, int[] XIs)
         {
             int N = rotatedModelPoints.Count;
-            Vector4D gradient = new Vector4D();
+            Vector4 gradient = new Vector4();
 
             for (int i = 0; i < N; i++) gradient += TranslationalGradient(rotatedModelPoints[i] + translation, staticPoints[i], XIs[i]);
 
@@ -142,9 +144,11 @@ namespace Registration.Error
             return gradient;
         }
 
-        public Vector4D TranslationalGradient(Vector4D xc_translated, Vector4D p, int xi)
+        public Vector4 TranslationalGradient(Vector4 xc_translated, Vector4 p, int xi)
         {
-            return (this.distanceWeight + xi * this.intersectionWeight) * (xc_translated - p);
+            Vector4 gradient = (xc_translated - p);
+            gradient.ScaleWithScalar(this.distanceWeight + xi * this.intersectionWeight);
+            return gradient;
         }
         #endregion
 

@@ -82,10 +82,10 @@ namespace Experiment
                     this.gameObject.transform,
                     new IGDTransformFinder(
                         new IGDTransformFinder.Configuration(
-                            convergenceError: 0.001,
-                            learningRate: 0.001,
+                            convergenceError: 0.001f,
+                            learningRate: 0.001f,
                             maxNumIterations: 200,
-                            errorMetric: new Registration.Error.IntersectionTermError(0.5, 0.5)
+                            errorMetric: new Registration.Error.IntersectionTermError(0.5f, 0.5f)
                         )
                     )
                 )
@@ -96,8 +96,8 @@ namespace Experiment
                     this.gameObject.transform,
                     new IGDTransformFinder(
                         new IGDTransformFinder.Configuration(
-                            convergenceError: 0.001,
-                            learningRate: 0.001,
+                            convergenceError: 0.001f,
+                            learningRate: 0.001f,
                             maxNumIterations: 200,
                             errorMetric: new Registration.Error.WheelerIterativeError()
                         )

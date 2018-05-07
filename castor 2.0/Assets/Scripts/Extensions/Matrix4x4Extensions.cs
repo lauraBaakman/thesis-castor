@@ -1,5 +1,6 @@
 using UnityEngine;
 using Utils;
+using System;
 
 public static class Matrix4x4Extensions
 {
@@ -123,5 +124,20 @@ public static class Matrix4x4Extensions
         result.z = matrix.m20 * vector.x + matrix.m21 * vector.y + matrix.m22 * vector.z + matrix.m23 * vector.w;
         result.w = matrix.m30 * vector.x + matrix.m31 * vector.y + matrix.m32 * vector.z + matrix.m33 * vector.w;
         return result;
+    }
+
+    public static Matrix4x4 TransformationMatrixFromQuaternion(this Matrix4x4 matrix, Quaternion rotation)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static Matrix4x4 TransformationMatrixFromTranslation(this Matrix4x4 matrix, Vector3 translation)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static Matrix4x4 TransformationMatrixFromUnitQuaternion(this Matrix4x4 matrix, Quaternion rotation)
+    {
+        throw new NotImplementedException();
     }
 }
