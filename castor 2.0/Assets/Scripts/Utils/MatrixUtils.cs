@@ -13,19 +13,24 @@ namespace Utils
             float v = unitQuaternion.y;
             float w = unitQuaternion.z;
 
+            float s2 = s * s;
+            float u2 = u * u;
+            float v2 = v * v;
+            float w2 = w * w;
+
             Matrix4x4 matrix = Matrix4x4.identity;
 
-            matrix.m00 = s * s + u * u - v * v - w * w;
+            matrix.m00 = s2 + u2 - v2 - w2;
             matrix.m01 = 2 * (u * v - s * w);
             matrix.m02 = 2 * (u * w + s * v);
 
             matrix.m10 = 2 * (u * v + s * w);
-            matrix.m11 = s * s - u * u + v * v - w * w;
+            matrix.m11 = s2 - u2 + v2 - w2;
             matrix.m12 = 2 * (v * w - s * u);
 
             matrix.m20 = 2 * (u * w - s * v);
             matrix.m21 = 2 * (v * w + s * u);
-            matrix.m22 = s * s - u * u - v * v + w * w;
+            matrix.m22 = s2 - u2 - v2 + w2;
 
             return matrix;
         }
