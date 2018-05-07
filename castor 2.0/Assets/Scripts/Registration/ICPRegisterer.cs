@@ -224,8 +224,8 @@ namespace Registration
                     value: message,
                     options: SendMessageOptions.DontRequireReceiver
                 );
-                if (message is Ticker.IToTickerMessage) SendMessageToTicker(message as Ticker.IToTickerMessage);
             }
+            if (message is Ticker.IToTickerMessage) SendMessageToTicker(message as Ticker.IToTickerMessage);
         }
 
         private void SendMessageToTicker(Ticker.IToTickerMessage message)
