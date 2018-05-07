@@ -11,7 +11,12 @@ namespace Utils
 
         public static Matrix4x4 TransformationMatrixFromTranslation(Vector3 translation)
         {
-            throw new NotImplementedException();
+            Matrix4x4 matrix = Matrix4x4.identity;
+            matrix.m03 = translation.x;
+            matrix.m13 = translation.y;
+            matrix.m23 = translation.z;
+
+            return matrix;
         }
 
         public static Matrix4x4 TransformationMatrixFromQuaternion(Quaternion quaternion)
