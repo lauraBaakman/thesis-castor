@@ -115,10 +115,8 @@ namespace Tests.Registration.Error
         public void Test_TranslatonalGradient(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation, Vector4 expected)
         {
             Vector4 actual = error.TranslationalGradient(XCs, Ps, translation, null);
-            Assert.That(actual.x, Is.EqualTo(expected.x).Within(precision));
-            Assert.That(actual.y, Is.EqualTo(expected.y).Within(precision));
-            Assert.That(actual.z, Is.EqualTo(expected.z).Within(precision));
-            Assert.That(actual.w, Is.EqualTo(expected.w).Within(precision));
+
+            for (int i = 0; i < 4; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
 
         static object[] TranslationGradientsCases =
@@ -149,10 +147,8 @@ namespace Tests.Registration.Error
         public void Test_RotationalGradient(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation, Quaternion expected)
         {
             Quaternion actual = error.RotationalGradient(XCs, Ps, translation, null);
-            Assert.That(actual.x, Is.EqualTo(expected.x).Within(precision));
-            Assert.That(actual.y, Is.EqualTo(expected.y).Within(precision));
-            Assert.That(actual.z, Is.EqualTo(expected.z).Within(precision));
-            Assert.That(actual.w, Is.EqualTo(expected.w).Within(precision));
+
+            for (int i = 0; i < 4; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
 
         static object[] RotationGradientCases =
