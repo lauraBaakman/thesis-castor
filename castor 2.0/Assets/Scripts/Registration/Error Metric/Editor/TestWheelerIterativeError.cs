@@ -174,5 +174,37 @@ namespace Tests.Registration.Error
                 new Quaternion(+80.7761445472091e+000f, -22.5924461555999e+000f, +26.9911459768104e+000f, 0),
             },
         };
+
+        [Test, TestCaseSource("SingleStepRotationGradientCases")]
+        public void Test_RotationalGradient_Step(Vector4 Xc, Vector4 p, Vector4 translation, Vector4 expected)
+        {
+            Vector4 actual = error.RotationalGradient(Xc, p, translation);
+
+            for (int i = 0; i < 4; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
+        }
+
+        static object[] SingleStepRotationGradientCases =
+        {
+            // M = eye(3) iteration 1
+            new object[] {
+                XCs_identity[0], Ps_identity[0], translation_identity,
+                new Vector4(-0.007105240284854f, -0.001155085613172f, -0.001598356352837f, 0)
+            },
+            //M = TrMat, iteration 2
+            new object[] {
+                XCs_only_translation_it_2[0], Ps_only_translation_it_2[0], translation_only_translation_it_2,
+                new Vector4(+08.218687343195199f, +63.943376176097118f, -40.013460804216152f, 0)
+            },
+            //M = RotMat, iteration 2
+            new object[] {
+              XCs_only_rotation_it_2[0], Ps_only_rotation_it_2[0], translation_only_rotation_it_2,
+                new Vector4(+19.048080436560525f, +03.935388449070363f, +03.709108221008474f, 0)
+            },
+            //M = M = TrMat * RotMat, iteration 2
+            new object[] {
+                XCs_translation_rotation_it_2[0], Ps_translation_rotation_it_2[0], translation_translation_rotation_it_2,
+                new Vector4(+27.354261395500032f, +67.802134406985601f, -36.301629727500668f, 0)
+            },
+        };
     }
 }
