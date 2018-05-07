@@ -166,8 +166,8 @@ namespace Registration
 
         private bool InvalidCorrespondences(out string message)
         {
-            message = "Found zero correspondences, cannot register without correspondences.";
-            return Correspondences.Count <= 0;
+            message = "Found fewer than six correspondences, cannot register without at least size correspondences.";
+            return Correspondences.Count < 6;
         }
 
         public void Terminate(ICPTerminatedMessage.TerminationReason reason, string message = "")
