@@ -138,7 +138,7 @@ namespace Registration
                 return new ErrorMetric(Configuration._Wheeler);
             }
 
-            public static IErrorMetric IntersectionTermError(double distanceWeight, double intersectionWeight)
+            public static IErrorMetric IntersectionTermError(float distanceWeight, float intersectionWeight)
             {
                 return new IntersectionTermError(
                     distanceWeight: distanceWeight,

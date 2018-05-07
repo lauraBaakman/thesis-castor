@@ -36,7 +36,7 @@ namespace Tests.IO
         {
             Mesh mesh = GenerateNoNormalNoTextureMesh();
 
-            WriteResult writeResult = ObjFile.Write(mesh, this.outputPath);
+            ObjFile.Write(mesh, this.outputPath);
 
             ReadResult readResult = ObjFile.Read(this.outputPath);
 
@@ -65,7 +65,7 @@ namespace Tests.IO
         {
             Mesh mesh = GenerateNormalsNoTextureMesh();
 
-            WriteResult writeResult = ObjFile.Write(mesh, this.outputPath);
+            ObjFile.Write(mesh, this.outputPath);
 
             ReadResult readResult = ObjFile.Read(this.outputPath);
 

@@ -251,5 +251,53 @@ namespace Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Constructor_NoDuplicates()
+        {
+            List<Correspondence> argument = correspondenceList;
+
+            CorrespondenceCollection expected = new CorrespondenceCollection(correspondenceList);
+
+            CorrespondenceCollection actual = new CorrespondenceCollection(argument);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Constructor_FewDuplicates()
+        {
+            List<Correspondence> input = new List<Correspondence>{
+                this.correspondenceList[0],
+                this.correspondenceList[1],
+                this.correspondenceList[1],
+                this.correspondenceList[1],
+                this.correspondenceList[2],
+                this.correspondenceList[3]
+            };
+            CorrespondenceCollection expected = new CorrespondenceCollection(correspondenceList);
+
+            CorrespondenceCollection actual = new CorrespondenceCollection(input);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Constructor_OnlyDuplicates()
+        {
+            List<Correspondence> input = new List<Correspondence>{
+                this.correspondenceList[0],
+                this.correspondenceList[0],
+                this.correspondenceList[0],
+                this.correspondenceList[0],
+            };
+
+            CorrespondenceCollection expected = new CorrespondenceCollection(
+                new List<Correspondence> { this.correspondenceList[0] });
+
+            CorrespondenceCollection actual = new CorrespondenceCollection(input);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

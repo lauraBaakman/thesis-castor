@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using Registration;
 using Registration.Messages;
+using System.Globalization;
 
 namespace Experiment
 {
@@ -21,9 +22,11 @@ namespace Experiment
         private IO.FragmentImporter fragmentImporter;
         private IO.FragmentExporter fragmentExporter;
 
+        private int completedRunCount;
+
         private string outputDirectory;
 
-        private StreamWriter streamWriter;
+        private StreamWriter runSetWriter;
 
         public void Init(Configuration configuration)
         {
@@ -43,7 +46,7 @@ namespace Experiment
 
         private void FragmentReaderCallBack(IO.ReadResult result)
         {
-            if (result.Failed())
+            if (result.Failed)
             {
                 Ticker.Receiver.Instance.SendMessage(
                     methodName: "OnMessage",
@@ -79,10 +82,10 @@ namespace Experiment
                     this.gameObject.transform,
                     new IGDTransformFinder(
                         new IGDTransformFinder.Configuration(
-                            convergenceError: 0.001,
-                            learningRate: 0.001,
+                            convergenceError: 0.001f,
+                            learningRate: 0.001f,
                             maxNumIterations: 200,
-                            errorMetric: new Registration.Error.IntersectionTermError(0.5, 0.5)
+                            errorMetric: new Registration.Error.IntersectionTermError(0.5f, 0.5f)
                         )
                     )
                 )
@@ -93,8 +96,8 @@ namespace Experiment
                     this.gameObject.transform,
                     new IGDTransformFinder(
                         new IGDTransformFinder.Configuration(
-                            convergenceError: 0.001,
-                            learningRate: 0.001,
+                            convergenceError: 0.001f,
+                            learningRate: 0.001f,
                             maxNumIterations: 200,
                             errorMetric: new Registration.Error.WheelerIterativeError()
                         )
@@ -138,7 +141,7 @@ namespace Experiment
         {
             System.DateTime now = System.DateTime.Now.ToLocalTime();
             return string.Format(
-                "{0}", now.ToString("MM-dd_HH-mm-ss-fff"));
+                "results_{0}", now.ToString("MM-dd_HH-mm-ss-fff"));
         }
 
         private void HandleStaticFragment()
@@ -171,10 +174,17 @@ namespace Experiment
             fragmentExporter.Export(fragment, path);
         }
 
+        private bool CompletedAllRuns()
+        {
+            return completedRunCount == runs.Count;
+        }
+
         public IEnumerator<object> Execute()
         {
-            RunExecuter executer = new RunExecuter(this.gameObject, staticFragment,
-                                                   fragmentExporter, fragmentImporter);
+            RunExecuter executer = new RunExecuter(listener: this.gameObject, staticFragment: staticFragment,
+                                                   fragmentImporter: fragmentImporter, fragmentExporter: fragmentExporter);
+
+            RunExecuter.Run run;
 
             foreach (Settings ICPSetting in this.ICPSettings)
             {
@@ -187,28 +197,39 @@ namespace Experiment
                 ICPSetting.ToJson(Path.Combine(this.outputDirectory, "settings.json"));
                 yield return null;
 
-                streamWriter = new StreamWriter(Path.Combine(this.outputDirectory, "data.csv"));
-                streamWriter.WriteLine(
-                    string.Format(
-                        "{0}, {1}, {2}",
-                        "id", "termination message", "termination error"
-                    )
-                );
+                SetUpRunSetWriter();
                 yield return null;
 
-                foreach (RunExecuter.Run run in runs)
+                for (completedRunCount = 0; completedRunCount < runs.Count; completedRunCount++)
                 {
+                    run = runs[completedRunCount];
+
                     run.ICPSettings = ICPSetting;
                     executer.OutputDirectory = this.outputDirectory;
 
-                    streamWriter.Write(string.Format("{0}, ", run.id));
+                    runSetWriter.Write(string.Format("{0}, ", run.id));
                     yield return null;
 
                     StartCoroutine(executer.Execute(run));
                     yield return new WaitUntil(executer.IsCurrentRunFinished);
                 }
-                streamWriter.Close();
             }
+        }
+
+        private void SetUpRunSetWriter()
+        {
+            runSetWriter = new StreamWriter(Path.Combine(this.outputDirectory, "data.csv"));
+            runSetWriter.WriteLine(
+                string.Format(
+                    "{0}, {1}, {2}, {3}",
+                    "id", "termination message", "termination error", "termination iteration"
+                )
+            );
+        }
+
+        private void CleanUpRunSetWriter()
+        {
+            runSetWriter.Close();
         }
 
         #region ICPInterface
@@ -218,7 +239,15 @@ namespace Experiment
 
         public void OnICPTerminated(ICPTerminatedMessage message)
         {
-            streamWriter.WriteLine(string.Format("'{0}', {1}", message.Message, message.errorAtTermination));
+            //This function is also called when we are not running an experiment for some reason
+            if (runSetWriter == null) return;
+
+            runSetWriter.WriteLine(string.Format(
+                "'{0}', {1}, {2}",
+                message.Message,
+                message.errorAtTermination.ToString("E10", CultureInfo.InvariantCulture),
+                message.terminationIteration));
+            if (CompletedAllRuns()) CleanUpRunSetWriter();
         }
         #endregion
 

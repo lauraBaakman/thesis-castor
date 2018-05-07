@@ -1,5 +1,6 @@
 using UnityEngine;
 using Utils;
+using System;
 
 public static class Matrix4x4Extensions
 {
@@ -83,45 +84,5 @@ public static class Matrix4x4Extensions
     public static Matrix4x4 SetScale(this Matrix4x4 matrix, float scale)
     {
         return matrix.SetScale(new Vector3(scale, scale, scale));
-    }
-
-    /// <summary>
-    /// Fill the matrix with the values in the 2D array.
-    /// </summary>
-    /// <returns>The darray.</returns>
-    /// <param name="matrix">Matrix.</param>
-    /// <param name="array">Array.</param>
-    public static Matrix4x4 Filled(this Matrix4x4 matrix, double[,] array)
-    {
-        if (array.GetLength(0) != 4) throw new System.ArgumentException("The input array needs to have 4 rows");
-        if (array.GetLength(1) != 4) throw new System.ArgumentException("The input array needs to have 4 columns");
-
-        for (int row = 0; row < 4; row++)
-        {
-            for (int col = 0; col < 4; col++)
-            {
-                matrix[row, col] = (float)array[row, col];
-            }
-        }
-        return matrix;
-    }
-
-    public static Matrix4x4 DiagonalFilled(this Matrix4x4 matrix, double[] diagonal)
-    {
-        if (diagonal.GetLength(0) != 4) throw new System.ArgumentException("The input array needs to have 4 rows");
-
-        for (int i = 0; i < 4; i++) matrix[i, i] = (float)diagonal[i];
-
-        return matrix;
-    }
-
-    public static Vector4D MultiplyVector(this Matrix4x4 matrix, Vector4D vector)
-    {
-        Vector4D result = new Vector4D();
-        result.x = matrix.m00 * vector.x + matrix.m01 * vector.y + matrix.m02 * vector.z + matrix.m03 * vector.w;
-        result.y = matrix.m10 * vector.x + matrix.m11 * vector.y + matrix.m12 * vector.z + matrix.m13 * vector.w;
-        result.z = matrix.m20 * vector.x + matrix.m21 * vector.y + matrix.m22 * vector.z + matrix.m23 * vector.w;
-        result.w = matrix.m30 * vector.x + matrix.m31 * vector.y + matrix.m32 * vector.z + matrix.m33 * vector.w;
-        return result;
     }
 }

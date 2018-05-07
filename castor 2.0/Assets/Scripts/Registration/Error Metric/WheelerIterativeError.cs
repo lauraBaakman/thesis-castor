@@ -11,7 +11,7 @@ namespace Registration.Error
     /// </summary>
     public class WheelerIterativeError : IIterativeErrorMetric
     {
-        public double ComputeError(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, object sharedParameters)
+        public double ComputeError(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation, object sharedParameters)
         {
             int N = XCs.Count;
 
@@ -25,9 +25,9 @@ namespace Registration.Error
             return error;
         }
 
-        private double ComputeError(Vector4D Xc, Vector4D p, Vector4D translation)
+        private double ComputeError(Vector4 Xc, Vector4 p, Vector4 translation)
         {
-            Vector4D distance = Xc + translation - p;
+            Vector4 distance = Xc + translation - p;
             return distance.SqrMagnitude();
         }
 
@@ -38,23 +38,31 @@ namespace Registration.Error
         /// <param name="XCs">The model points, premultiplied with the rotation matrix.</param>
         /// <param name="Ps">The static points.</param>
         /// <param name="translation">The current translation vector.</param>
-        public QuaternionD RotationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, object sharedParameters)
+        public Quaternion RotationalGradient(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation, object sharedParameters)
         {
             int N = XCs.Count;
-            Vector4D gradient = new Vector4D();
+            Vector4 gradient = new Vector4();
             for (int i = 0; i < N; i++)
             {
                 gradient += RotationalGradient(XCs[i], Ps[i], translation);
             }
-            gradient *= (1.0 / (2 * N));
+
+            gradient = VectorUtils.MultiplyWithScalar(
+                vector: gradient,
+                scalar: 1.0f / (2.0f * N)
+            );
 
             //Wheeler: The gradient w.r.t. to q will have no w component
-            return new QuaternionD(x: gradient.x, y: gradient.y, z: gradient.z, w: 0);
+            return new Quaternion(x: gradient.x, y: gradient.y, z: gradient.z, w: 0);
         }
 
-        private Vector4D RotationalGradient(Vector4D Xc, Vector4D p, Vector4D translation)
+        public Vector4 RotationalGradient(Vector4 Xc, Vector4 p, Vector4 translation)
         {
-            Vector4D gradient = -4 * Vector4D.Cross(Xc, translation - p);
+            Vector4 gradient = VectorUtils.MultiplyWithScalar(
+                vector: VectorUtils.Cross(Xc, translation - p),
+                scalar: -4
+            );
+            gradient.w = 0;
             return gradient;
         }
 
@@ -65,19 +73,18 @@ namespace Registration.Error
         /// <param name="XCs">The model points, premultiplied with the rotation matrix.</param>
         /// <param name="Ps">The static points.</param>
         /// <param name="translation">The current translation vector.</param>
-        public Vector4D TranslationalGradient(List<Vector4D> XCs, List<Vector4D> Ps, Vector4D translation, object sharedParameters)
+        public Vector4 TranslationalGradient(List<Vector4> XCs, List<Vector4> Ps, Vector4 translation, object sharedParameters)
         {
             int N = XCs.Count;
-            Vector4D gradient = new Vector4D();
+            Vector4 gradient = new Vector4();
             for (int i = 0; i < N; i++)
             {
                 gradient += TranslationalGradient(XCs[i], Ps[i], translation);
             }
-            gradient *= (1.0 / (2 * N));
-            return gradient;
+            return VectorUtils.MultiplyWithScalar(gradient, 1.0f / (2.0f * N));
         }
 
-        private Vector4D TranslationalGradient(Vector4D Xc, Vector4D p, Vector4D translation)
+        private Vector4 TranslationalGradient(Vector4 Xc, Vector4 p, Vector4 translation)
         {
             return 2 * (Xc + translation - p);
         }
@@ -92,7 +99,7 @@ namespace Registration.Error
             //Do nothing, we don't need the static model, no need to store a reference to it.
         }
 
-        public object ComputeSharedParameters(List<Vector4D> modelPoints, List<Vector4D> staticPoints, Vector4D translation)
+        public object ComputeSharedParameters(List<Vector4> modelPoints, List<Vector4> staticPoints, Vector4 translation)
         {
             return null;
         }

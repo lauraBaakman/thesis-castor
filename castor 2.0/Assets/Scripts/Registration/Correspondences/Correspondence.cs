@@ -37,6 +37,13 @@ namespace Registration
             Activate();
         }
 
+        public Correspondence(Vector3 staticPosition, Vector3 modelPosition)
+            : this(
+                staticPoint: new Point(staticPosition),
+                modelPoint: new Point(modelPosition)
+            )
+        { }
+
         public Correspondence(DistanceNode node)
             : this(
                 staticPoint: node.StaticPoint,

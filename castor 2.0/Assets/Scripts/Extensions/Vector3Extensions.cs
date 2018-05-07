@@ -67,4 +67,49 @@ public static class Vector3Extensions
     {
         return sourceTransform == null || destinationTransform == null;
     }
+
+    /// <summary>
+    /// Detect if any of the values of this vector are nan. 
+    /// </summary>
+    /// <returns><c>true</c>, if any of the values of this vector contain a nan <c>false</c> otherwise.</returns>
+    /// <param name="vector">Vector.</param>
+    public static bool ContainsNaNs(this Vector3 vector)
+    {
+        return vector.ContainsValue(float.NaN);
+    }
+
+    /// <summary>
+    /// Detect if any of the values of this vector are positive infinity. 
+    /// </summary>
+    /// <returns><c>true</c>, if any of the values of this vector contain a positive infinity <c>false</c> otherwise.</returns>
+    /// <param name="vector">Vector.</param>
+    public static bool ContainsPositiveInfinity(this Vector3 vector)
+    {
+        return vector.ContainsValue(float.PositiveInfinity);
+    }
+
+    /// <summary>
+    /// Detect if any of the values of this vector are negative infinity. 
+    /// </summary>
+    /// <returns><c>true</c>, if any of the values of this vector contain a positive infinity <c>false</c> otherwise.</returns>
+    /// <param name="vector">Vector.</param>
+    public static bool ContainsNegativeInfinity(this Vector3 vector)
+    {
+        return vector.ContainsValue(float.NegativeInfinity);
+    }
+
+    private static bool ContainsValue(this Vector3 vector, float value)
+    {
+        return vector.x.Equals(value) || vector.y.Equals(value) || vector.z.Equals(value);
+    }
+
+    /// <summary>
+    /// Detect if any of the values of this vector are non numerical, i.e. nan, positive inifinity or negative infinity.
+    /// </summary>
+    /// <returns><c>true</c>, if any of the values of this vector are non numerical <c>false</c> otherwise.</returns>
+    /// <param name="vector">Vector.</param>
+    public static bool ContainsNonNumerical(this Vector3 vector)
+    {
+        return vector.ContainsNaNs() || vector.ContainsNegativeInfinity() || vector.ContainsPositiveInfinity();
+    }
 }

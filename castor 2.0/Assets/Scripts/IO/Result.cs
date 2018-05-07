@@ -28,14 +28,19 @@ namespace IO
             return new Message.ErrorMessage(messageText);
         }
 
-        public bool Succeeded()
+        public string Message
         {
-            return status.Equals(IOCode.OK);
+            get { return message.Text; }
         }
 
-        public bool Failed()
+        public bool Succeeded
         {
-            return status.Equals(IOCode.Error);
+            get { return status.Equals(IOCode.OK); }
+        }
+
+        public bool Failed
+        {
+            get { return status.Equals(IOCode.Error); }
         }
 
         public Message ToTickerMessage()

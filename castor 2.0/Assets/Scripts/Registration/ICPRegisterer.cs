@@ -26,10 +26,8 @@ namespace Registration
 
         private StabilizationTermiationCondition stabilization;
 
-        public bool HasTerminated
-        {
-            get { return hasTerminated; }
-        }
+        private bool hasTerminated;
+        public bool HasTerminated { get { return hasTerminated; } }
 
         #region staticfragment
         private GameObject StaticFragment
@@ -67,8 +65,6 @@ namespace Registration
         private GameObject modelFragment;
         #endregion
 
-        private bool hasTerminated;
-
         public ICPRegisterer(
             GameObject staticFragment, GameObject modelFragment,
             Settings settings,
@@ -77,6 +73,8 @@ namespace Registration
         {
             StaticFragment = staticFragment;
             ModelFragment = modelFragment;
+
+            stabilization = new StabilizationTermiationCondition();
 
             Settings = settings;
             FinishedCallBack = callBack;
@@ -170,8 +168,8 @@ namespace Registration
 
         private bool InvalidCorrespondences(out string message)
         {
-            message = "Found zero correspondences, cannot register without correspondences.";
-            return Correspondences.Count <= 0;
+            message = "Found fewer than six correspondences, cannot register without at least size correspondences.";
+            return Correspondences.Count < 6;
         }
 
         public void Terminate(ICPTerminatedMessage.TerminationReason reason, string message = "")
@@ -180,9 +178,8 @@ namespace Registration
             if (FinishedCallBack != null) FinishedCallBack();
             SendMessageToAllListeners(
                 methodName: "OnICPTerminated",
-                message: new ICPTerminatedMessage(reason, this.error, message)
+                message: new ICPTerminatedMessage(reason, this.error, this.iterationCounter.CurrentCount, message)
             );
-            Debug.Log(string.Format("Terminated at iteration {0}", iterationCounter.CurrentCount));
         }
 
         /// <summary>
@@ -199,7 +196,9 @@ namespace Registration
         private CorrespondenceCollection ComputeCorrespondences(List<Point> staticPoints)
         {
             Mesh modelMesh = modelFragment.GetComponent<MeshFilter>().mesh;
-            CorrespondenceCollection correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), ModelSamplingInformation);
+            CorrespondenceCollection correspondences = Settings.CorrespondenceFinder.Find(
+                staticPoints.AsReadOnly(), ModelSamplingInformation
+            );
             return correspondences;
         }
 
@@ -227,8 +226,8 @@ namespace Registration
                     value: message,
                     options: SendMessageOptions.DontRequireReceiver
                 );
-                if (message is Ticker.IToTickerMessage) SendMessageToTicker(message as Ticker.IToTickerMessage);
             }
+            if (message is Ticker.IToTickerMessage) SendMessageToTicker(message as Ticker.IToTickerMessage);
         }
 
         private void SendMessageToTicker(Ticker.IToTickerMessage message)
@@ -266,20 +265,25 @@ namespace Registration
             // We have insufficient data
             if (!ErrorsArrayIsFilled()) return false;
 
-            return StandardDeviationUnderThreshold();
+            return CoefficientOfVariationUnderThreshold();
         }
 
-        private bool StandardDeviationUnderThreshold()
+        private bool CoefficientOfVariationUnderThreshold()
         {
-            return ComputeErrorStandardDeviation() < threshold;
+            double mean = errors.Average();
+            double standardDeviation = ComputeErrorStandardDeviation(mean);
+
+            //use this instead of the SD to scale insensitivity
+            double coefficientOfVariation = standardDeviation / mean;
+
+            return coefficientOfVariation < threshold;
         }
 
-        private double ComputeErrorStandardDeviation()
+        private double ComputeErrorStandardDeviation(double mean)
         {
             double standardDeviation = 0;
             if (errors.Count() > 0)
             {
-                double mean = errors.Average();
                 double sum = errors.Sum(d => Math.Pow(d - mean, 2));
                 standardDeviation = Math.Sqrt((sum) / errors.Count());
             }

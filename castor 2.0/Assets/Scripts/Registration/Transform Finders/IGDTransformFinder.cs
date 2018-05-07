@@ -27,13 +27,13 @@ namespace Registration
 
         protected override Matrix4x4 FindTransformImplementation(CorrespondenceCollection correspondences)
         {
-            List<Vector4D> modelCoordinates = new List<Vector4D>(correspondences.Count);
-            List<Vector4D> staticCoordinates = new List<Vector4D>(correspondences.Count);
+            List<Vector4> modelCoordinates = new List<Vector4>(correspondences.Count);
+            List<Vector4> staticCoordinates = new List<Vector4>(correspondences.Count);
 
             foreach (Correspondence correspondence in correspondences)
             {
-                modelCoordinates.Add(Vector4D.HomogeneousCoordinate(correspondence.ModelPoint.Position));
-                staticCoordinates.Add(Vector4D.HomogeneousCoordinate(correspondence.StaticPoint.Position));
+                modelCoordinates.Add(VectorUtils.HomogeneousCoordinate(correspondence.ModelPoint.Position));
+                staticCoordinates.Add(VectorUtils.HomogeneousCoordinate(correspondence.StaticPoint.Position));
             }
 
             return new _IGDTransformFinder(
@@ -44,7 +44,7 @@ namespace Registration
 
         public class Configuration
         {
-            public readonly double learningRate;
+            public readonly float learningRate;
 
             /// <summary>
             /// After this many iterations the algorithm terminates.
@@ -58,7 +58,7 @@ namespace Registration
 
             public readonly IIterativeErrorMetric errorMetric;
 
-            public Configuration(double learningRate, double convergenceError, int maxNumIterations, IIterativeErrorMetric errorMetric)
+            public Configuration(float learningRate, float convergenceError, int maxNumIterations, IIterativeErrorMetric errorMetric)
             {
                 this.learningRate = learningRate;
                 this.convergenceError = convergenceError;
@@ -73,21 +73,35 @@ namespace Registration
     {
         private readonly IGDTransformFinder.Configuration configuration;
 
-        private readonly List<Vector4D> modelPoints;
-        private List<Vector4D> preRotatedModelPoints;
-        private readonly List<Vector4D> staticPoints;
+        private readonly List<Vector4> modelPoints;
+        private List<Vector4> preRotatedModelPoints;
+        private readonly List<Vector4> staticPoints;
 
-        private Vector4D translation;
-        private QuaternionD rotation;
+        private Vector4 translation;
+        private Quaternion rotation;
 
         private object sharedParameters;
 
         private double error;
-        private int iteration;
-        private double scale;
+        private Counter iterationCounter;
+
+        private float squaredScale;
+
+        private static float minimumScale = Mathf.Sqrt(float.Epsilon);
+
+        private float scale;
+        public float Scale
+        {
+            get { return scale; }
+            set
+            {
+                scale = value;
+                squaredScale = scale * scale;
+            }
+        }
 
         internal _IGDTransformFinder(
-            List<Vector4D> modelPoints, List<Vector4D> staticPoints,
+            List<Vector4> modelPoints, List<Vector4> staticPoints,
             IGDTransformFinder.Configuration configuration)
         {
             this.modelPoints = modelPoints;
@@ -95,69 +109,74 @@ namespace Registration
 
             this.configuration = configuration;
 
+            this.iterationCounter = new Counter(configuration.maxNumIterations);
+
             initIGD();
         }
 
-        private double determineScale()
+        private float determineScale()
         {
-            double[] ranges = computeXYZRange(this.modelPoints);
+            float[] ranges = computeXYZRange(this.modelPoints);
 
-            double range = Double.NegativeInfinity;
-            for (int i = 0; i < ranges.Length; i++) range = Math.Max(range, ranges[i]);
+            float range = float.NegativeInfinity;
+            for (int i = 0; i < ranges.Length; i++) range = Mathf.Max(range, ranges[i]);
 
             return range;
         }
 
-        private double[] computeXYZRange(List<Vector4D> points)
+        private float[] computeXYZRange(List<Vector4> points)
         {
-            double[] minima = { Double.PositiveInfinity, Double.PositiveInfinity, Double.PositiveInfinity };
-            double[] maxima = { Double.NegativeInfinity, Double.NegativeInfinity, Double.NegativeInfinity };
+            float[] minima = { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity };
+            float[] maxima = { float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity };
 
-            foreach (Vector4D modelPoint in points)
+            foreach (Vector4 modelPoint in points)
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    minima[i] = Math.Min(minima[i], modelPoint[i]);
-                    maxima[i] = Math.Max(maxima[i], modelPoint[i]);
+                    minima[i] = Mathf.Min(minima[i], modelPoint[i]);
+                    maxima[i] = Mathf.Max(maxima[i], modelPoint[i]);
                 }
             }
 
-            double[] ranges = new double[3];
-            for (int i = 0; i < 3; i++) ranges[i] = maxima[i] - minima[i];
+            float[] ranges = new float[3];
+            for (int i = 0; i < 3; i++)
+            {
+                //Avoid that range becomes 0
+                ranges[i] = Mathf.Max(maxima[i] - minima[i], minimumScale);
+            }
 
             return ranges;
         }
 
         private void initIGD()
         {
-            this.scale = determineScale();
+            this.Scale = determineScale();
 
-            iteration = 0;
+            translation = new Vector4(0, 0, 0, 0);
+            rotation = Quaternion.identity;
 
-            translation = new Vector4D(0, 0, 0, 0);
-            rotation = QuaternionD.identity;
-
-            preRotatedModelPoints = new List<Vector4D>(this.modelPoints.Count);
+            preRotatedModelPoints = new List<Vector4>(this.modelPoints.Count);
 
             error = 0;
         }
 
         internal Matrix4x4 FindTransform()
         {
-            while (true)
+            while (!iterationCounter.IsCompleted())
             {
+                iterationCounter.Increase();
+
                 preRotateModelPoints();
 
                 sharedParameters = configuration.errorMetric.ComputeSharedParameters(preRotatedModelPoints, staticPoints, translation);
 
                 error = configuration.errorMetric.ComputeError(preRotatedModelPoints, staticPoints, translation, sharedParameters);
 
-                if (convergence()) return buildTransformationMatrix().ToUnityMatrix4x4();
+                if (convergence()) break;
 
                 step();
-
-                iteration++;
             }
+            return buildTransformationMatrix();
         }
 
         /// <summary>
@@ -167,53 +186,59 @@ namespace Registration
         {
             preRotatedModelPoints.Clear();
 
-            Matrix4x4D rotationMatrix = Matrix4x4D.TransformationMatrixFromQuaternion(rotation);
+            Matrix4x4 rotationMatrix = MatrixUtils.TransformationMatrixFromQuaternion(rotation);
 
-            Vector4D xc;
-            foreach (Vector4D x in modelPoints)
+            Vector4 xc;
+            foreach (Vector4 x in modelPoints)
             {
                 xc = rotationMatrix * x;
                 preRotatedModelPoints.Add(xc);
             }
         }
 
-        private Matrix4x4D buildTransformationMatrix()
+        private Matrix4x4 buildTransformationMatrix()
         {
-            Matrix4x4D translationMatrix = Matrix4x4D.TransformationMatrixFromTranslation(translation);
-            Matrix4x4D rotationMatrix = Matrix4x4D.TransformationMatrixFromQuaternion(rotation);
+            Matrix4x4 translationMatrix = MatrixUtils.TransformationMatrixFromTranslation(translation);
+            Matrix4x4 rotationMatrix = MatrixUtils.TransformationMatrixFromQuaternion(rotation);
 
             return translationMatrix * rotationMatrix;
         }
 
         private void step()
         {
-            Vector4D translationalGradient = configuration.errorMetric.TranslationalGradient(preRotatedModelPoints, staticPoints, translation, sharedParameters);
-            QuaternionD rotationalGradient = configuration.errorMetric.RotationalGradient(preRotatedModelPoints, staticPoints, translation, sharedParameters);
+            Vector4 translationalGradient = configuration.errorMetric.TranslationalGradient(preRotatedModelPoints, staticPoints, translation, sharedParameters);
+            Quaternion rotationalGradient = configuration.errorMetric.RotationalGradient(preRotatedModelPoints, staticPoints, translation, sharedParameters);
 
             updateTranslation(translationalGradient);
             updateRotation(rotationalGradient);
         }
 
-        private void updateTranslation(Vector4D gradient)
+        private void updateTranslation(Vector4 gradient)
         {
             //Normalize gradient
-            gradient /= this.scale;
+            gradient = new Vector4(
+                x: (gradient.x / Scale) * configuration.learningRate,
+                y: (gradient.y / Scale) * configuration.learningRate,
+                z: (gradient.z / Scale) * configuration.learningRate,
+                w: (gradient.w / Scale) * configuration.learningRate);
 
-            translation -= configuration.learningRate * gradient;
+            translation -= gradient;
         }
 
-        private void updateRotation(QuaternionD gradient)
+        private void updateRotation(Quaternion gradient)
         {
-            gradient /= (this.scale * this.scale);
-
-            rotation = new QuaternionD(-1 * configuration.learningRate * gradient.xyz, 1);
+            Quaternion scaledGradient = new Quaternion(
+                x: (gradient.x / squaredScale) * configuration.learningRate * -1,
+                y: (gradient.y / squaredScale) * configuration.learningRate * -1,
+                z: (gradient.z / squaredScale) * configuration.learningRate * -1,
+                w: (gradient.w / squaredScale) * configuration.learningRate * -1
+            );
+            rotation = new Quaternion(x: scaledGradient.x, y: scaledGradient.y, z: scaledGradient.z, w: 1);
         }
 
         private bool convergence()
         {
-            return
-                (this.error < configuration.convergenceError) ||
-                (this.iteration > configuration.maxNumIterations);
+            return this.error < configuration.convergenceError;
         }
     }
 }

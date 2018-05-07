@@ -43,7 +43,8 @@ namespace Tests
             GameObject demisphere = GameObject.Find(demispherename);
 
             GameObject point = GameObject.Find(point_name);
-            Vector4D position = new Vector4D(point.transform.position, 1.0);
+            Vector3 center = point.transform.position;
+            Vector4 position = new Vector4(center.x, center.y, center.z, 1.0f);
 
             ContainmentDetector detector = demisphere.GetComponent<ContainmentDetector>();
             //Awake/update is not run by the test

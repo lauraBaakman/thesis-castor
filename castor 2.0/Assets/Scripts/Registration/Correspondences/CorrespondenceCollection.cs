@@ -50,7 +50,7 @@ namespace Registration
             this.correspondences = correspondences;
         }
 
-        public CorrespondenceCollection(List<Correspondence> correspondences)
+        public CorrespondenceCollection(IEnumerable<Correspondence> correspondences)
             : this()
         {
             foreach (Correspondence correspondence in correspondences) Add(correspondence);
@@ -83,6 +83,9 @@ namespace Registration
 
         public void Add(Correspondence correspondence)
         {
+            //Avoid correspondence collection with duplicate correspondences
+            if (this.correspondences.Contains(correspondence)) return;
+
             modelpoints.Add(correspondence.ModelPoint);
             staticpoints.Add(correspondence.StaticPoint);
             correspondences.Add(correspondence);

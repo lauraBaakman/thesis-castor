@@ -203,6 +203,7 @@
     <Compile Include="Assets\Scripts\DCEL\Editor\TestFace.cs" />
     <Compile Include="Assets\Scripts\DCEL\Editor\TestHalfEdge.cs" />
     <Compile Include="Assets\Scripts\DCEL\Editor\TestVertex.cs" />
+    <Compile Include="Assets\Scripts\Experiment\Editor\TestStatisticsComputer.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestICollectionExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestIEnumerableExtensions.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondenceCollection.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestNearestPointCorrespondences.cs" />
     <Compile Include="Assets\Scripts\Registration\Editor\TestPoint.cs" />
+    <Compile Include="Assets\Scripts\Registration\Editor\TestStabilizationTermiationCondition.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestAggregationMethods.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestDistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestErrorMetric.cs" />
@@ -236,16 +238,13 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestColors.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestCounter.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestHeap.cs" />
-    <Compile Include="Assets\Scripts\Utils\Editor\TestMatrix4x4D.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\TestMatrixUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestMeshUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestNumericalMath.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
-    <Compile Include="Assets\Scripts\Utils\Editor\TestQuaternionD.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestTriangleUtils.cs" />
-    <Compile Include="Assets\Scripts\Utils\Editor\TestVector3D.cs" />
-    <Compile Include="Assets\Scripts\Utils\Editor\TestVector4D.cs" />
-    <Compile Include="Assets\Scripts\Registration\Editor\TestStabilizationTermiationCondition.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\TestVectorUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

@@ -3,8 +3,8 @@ using UnityEngine;
 public static class TransformExtensions
 {
     /// <summary>
-    /// Reset the specified transform, i.e. position to the origin of the parent 
-    /// transform, scale back to unit scale and rotation of 0 around all angles 
+    /// Reset the specified transform, i.e. position to the origin of the parent
+    /// transform, scale back to unit scale and rotation of 0 around all angles
     /// repsective to the parent transform.
     /// </summary>
     /// <param name="transform">Transform.</param>
@@ -40,10 +40,10 @@ public static class TransformExtensions
     /// <returns>The point in world space.</returns>
     /// <param name="transform">Transform.</param>
     /// <param name="position">The position in local space.</param>
-    public static Utils.Vector4D TransformPoint(this Transform transform, Utils.Vector4D position)
+    public static Vector4 TransformPoint(this Transform transform, Vector4 position)
     {
-        Vector3 transformed = transform.TransformPoint(position.xyz.ToUnityVector());
-        return new Utils.Vector4D(transformed, position.w);
+        Vector3 transformed = transform.TransformPoint(new Vector3(position.x, position.y, position.z));
+        return new Vector4(transformed.x, transformed.y, transformed.z, position.w);
     }
 
     /// <summary>
@@ -52,9 +52,9 @@ public static class TransformExtensions
     /// <returns>The direction in world space.</returns>
     /// <param name="transform">Transform.</param>
     /// <param name="direction">The direction in local space.</param>
-    public static Utils.Vector4D TransformDirection(this Transform transform, Utils.Vector4D direction)
+    public static Vector4 TransformDirection(this Transform transform, Vector4 direction)
     {
-        Vector3 transformed = transform.TransformDirection(direction.xyz.ToUnityVector());
-        return new Utils.Vector4D(transformed, direction.w);
+        Vector3 transformed = transform.TransformDirection(direction.x, direction.y, direction.z);
+        return new Vector4(transformed.x, transformed.y, transformed.z, direction.w);
     }
 }
