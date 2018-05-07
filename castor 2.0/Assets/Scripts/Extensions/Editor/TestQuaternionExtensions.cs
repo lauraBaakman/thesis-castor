@@ -6,6 +6,8 @@ namespace Tests.Extensions
     [TestFixture]
     public class QuaternionExtensionTests
     {
+        float precision = 0.0001f;
+
         [Test]
         public void TestExtractEulerXAngle()
         {
@@ -16,7 +18,7 @@ namespace Tests.Extensions
 
             float actual = rotation.ExtractEulerXAngle();
 
-            Assert.That(actual, Is.EqualTo(expected).Within(0.0001));
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
         }
 
         [Test]
@@ -29,7 +31,7 @@ namespace Tests.Extensions
 
             float actual = rotation.ExtractEulerYAngle();
 
-            Assert.That(actual, Is.EqualTo(expected).Within(0.0001));
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
         }
 
         [Test]
@@ -42,7 +44,7 @@ namespace Tests.Extensions
 
             float actual = rotation.ExtractEulerZAngle();
 
-            Assert.That(actual, Is.EqualTo(expected).Within(0.0001));
+            Assert.That(actual, Is.EqualTo(expected).Within(precision));
         }
     }
 }
