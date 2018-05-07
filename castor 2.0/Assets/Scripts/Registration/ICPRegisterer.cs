@@ -194,7 +194,9 @@ namespace Registration
         private CorrespondenceCollection ComputeCorrespondences(List<Point> staticPoints)
         {
             Mesh modelMesh = modelFragment.GetComponent<MeshFilter>().mesh;
-            CorrespondenceCollection correspondences = Settings.CorrespondenceFinder.Find(staticPoints.AsReadOnly(), ModelSamplingInformation);
+            CorrespondenceCollection correspondences = Settings.CorrespondenceFinder.Find(
+                staticPoints.AsReadOnly(), ModelSamplingInformation
+            );
             return correspondences;
         }
 

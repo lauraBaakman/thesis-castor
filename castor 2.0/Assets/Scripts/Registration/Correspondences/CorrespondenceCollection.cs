@@ -83,6 +83,9 @@ namespace Registration
 
         public void Add(Correspondence correspondence)
         {
+            //Avoid correspondence collection with duplicate correspondences
+            if (this.correspondences.Contains(correspondence)) return;
+
             modelpoints.Add(correspondence.ModelPoint);
             staticpoints.Add(correspondence.StaticPoint);
             correspondences.Add(correspondence);
@@ -153,17 +156,6 @@ namespace Registration
             );
         }
         #endregion
-
-        /// <summary>
-        /// Create a copy of the current correspondence collction, where each 
-        /// correspondence from the original colleciton occures exctly once.
-        /// </summary>
-        /// <returns>New correspondence collection with duplicates removed.</returns>
-        public static CorrespondenceCollection CopyWithDuplicatesRemoved(CorrespondenceCollection original)
-        {
-            HashSet<Correspondence> set = new HashSet<Correspondence>(original.correspondences);
-            return new CorrespondenceCollection(set);
-        }
 
         public List<Point> GetPointsByType(Fragment.ICPFragmentType type)
         {
