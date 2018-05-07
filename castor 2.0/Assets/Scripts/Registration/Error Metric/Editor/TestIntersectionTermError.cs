@@ -167,7 +167,7 @@ namespace Tests.Registration.Error
             IntersectionTermError errorMetric = new IntersectionTermError(distance_weight, intersection_weight);
             Vector4 actual = errorMetric.TranslationalGradient(XCs, Ps, translation, xis);
 
-            Assert.AreEqual(expected, actual);
+            for (int i = 0; i < 4; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
 
         static object[] TranslationalGradientCases =
