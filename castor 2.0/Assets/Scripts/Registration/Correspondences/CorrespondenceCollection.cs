@@ -154,6 +154,16 @@ namespace Registration
         }
         #endregion
 
+        /// <summary>
+        /// Create a copy of the current correspondence collction, where each 
+        /// correspondence from the original colleciton occures exctly once.
+        /// </summary>
+        /// <returns>New correspondence collection with duplicates removed.</returns>
+        public static CorrespondenceCollection CopyWithDuplicatesRemoved(CorrespondenceCollection original)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Point> GetPointsByType(Fragment.ICPFragmentType type)
         {
             switch (type)

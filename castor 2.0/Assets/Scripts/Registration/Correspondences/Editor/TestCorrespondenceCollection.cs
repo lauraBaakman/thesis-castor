@@ -251,5 +251,55 @@ namespace Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void NewWithoutDuplicates_NoDuplicates()
+        {
+            CorrespondenceCollection input = new CorrespondenceCollection(correspondenceList);
+            CorrespondenceCollection expected = new CorrespondenceCollection(correspondenceList);
+
+            CorrespondenceCollection actual = CorrespondenceCollection.CopyWithDuplicatesRemoved(input);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void NewWithoutDuplicates_FewDuplicates()
+        {
+            CorrespondenceCollection input = new CorrespondenceCollection(
+                new List<Correspondence>{
+                this.correspondenceList[0],
+                this.correspondenceList[1],
+                this.correspondenceList[1],
+                this.correspondenceList[1],
+                this.correspondenceList[2],
+                this.correspondenceList[3]
+            });
+            CorrespondenceCollection expected = new CorrespondenceCollection(correspondenceList);
+
+            CorrespondenceCollection actual = CorrespondenceCollection.CopyWithDuplicatesRemoved(input);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void NewWithoutDuplicates_OnlyDuplicates()
+        {
+            CorrespondenceCollection input = new CorrespondenceCollection(
+                new List<Correspondence>{
+                this.correspondenceList[0],
+                this.correspondenceList[0],
+                this.correspondenceList[0],
+                this.correspondenceList[0],
+            });
+            CorrespondenceCollection expected = new CorrespondenceCollection(
+                new List<Correspondence>{
+                this.correspondenceList[0],
+            });
+
+            CorrespondenceCollection actual = CorrespondenceCollection.CopyWithDuplicatesRemoved(input);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
