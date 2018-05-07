@@ -23,10 +23,5 @@ namespace Utils
         {
             throw new NotImplementedException();
         }
-
-        public static Matrix4x4 FillDiagonal()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
