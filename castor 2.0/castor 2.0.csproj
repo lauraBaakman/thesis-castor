@@ -351,7 +351,6 @@
     <Compile Include="Assets\Scripts\Extensions\SystemRandomExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\TransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
-    <Compile Include="Assets\Scripts\Extensions\Vector4Extensions.cs" />
     <Compile Include="Assets\Scripts\Fragment\ContainmentDetector.cs" />
     <Compile Include="Assets\Scripts\Fragment\DoubleConnectedEdgeListStorage.cs" />
     <Compile Include="Assets\Scripts\Fragment\FaceNormalPainter.cs" />
@@ -555,6 +554,7 @@
     <Compile Include="Assets\Scripts\Utils\SerializableTransform.cs" />
     <Compile Include="Assets\Scripts\Utils\Timer.cs" />
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
+    <Compile Include="Assets\Scripts\Utils\VectorUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

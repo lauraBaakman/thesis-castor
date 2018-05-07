@@ -1,11 +1,11 @@
 using NUnit.Framework;
 using UnityEngine;
-using System.Reflection;
+using Utils;
 
-namespace Tests.Extensions
+namespace Tests.Utils
 {
     [TestFixture]
-    public class Vector4ExtensionTests
+    public class VectorUtilsTests
     {
         [Test]
         public void Test_HomogeneousCoordinate()
@@ -13,7 +13,7 @@ namespace Tests.Extensions
             Vector3 input = new Vector3(1, 2, 3);
 
             Vector4 expected = new Vector4(1, 2, 3, 1);
-            Vector4 actual = new Vector4().HomogeneousCoordinate(input);
+            Vector4 actual = VectorUtils.HomogeneousCoordinate(input);
 
             Assert.AreEqual(expected.x, actual.x);
             Assert.AreEqual(expected.y, actual.y);
@@ -24,7 +24,7 @@ namespace Tests.Extensions
         [Test, TestCaseSource("CrossCases")]
         public void Test_Cross(Vector4 lhs, Vector4 rhs, Vector4 expected)
         {
-            Vector4 actual = lhs.Cross(rhs);
+            Vector4 actual = VectorUtils.Cross(lhs, rhs);
 
             Assert.IsTrue(expected.Equals(actual));
         }
@@ -54,12 +54,12 @@ namespace Tests.Extensions
 
         public void Test_ScaleWithScalar()
         {
-            Vector4 actual = new Vector4(2, 3, 4, 5);
+            Vector4 vector = new Vector4(2, 3, 4, 5);
             float scale = 2.5f;
 
             Vector4 expected = new Vector4(5, 7.5f, 10, 12.5f);
 
-            actual.ScaleWithScalar(scale);
+            Vector4 actual = VectorUtils.MultiplyWithScalar(vector, scale);
 
             Assert.AreEqual(expected.x, actual.x);
             Assert.AreEqual(expected.y, actual.y);

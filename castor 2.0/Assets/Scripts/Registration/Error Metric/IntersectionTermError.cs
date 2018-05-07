@@ -113,9 +113,10 @@ namespace Registration.Error
 
         public Vector4 RotationalGradient(Vector4 xc, Vector4 p, Vector4 translation, int xi)
         {
-            Vector4 gradient = xc.Cross(translation - p);
-            gradient.ScaleWithScalar(this.distanceWeight + xi * this.intersectionWeight);
-            return gradient;
+            return VectorUtils.MultiplyWithScalar(
+                vector: VectorUtils.Cross(xc, translation - p),
+                scalar: this.distanceWeight + xi * this.intersectionWeight
+            );
         }
         #endregion
 
@@ -146,9 +147,10 @@ namespace Registration.Error
 
         public Vector4 TranslationalGradient(Vector4 xc_translated, Vector4 p, int xi)
         {
-            Vector4 gradient = (xc_translated - p);
-            gradient.ScaleWithScalar(this.distanceWeight + xi * this.intersectionWeight);
-            return gradient;
+            return VectorUtils.MultiplyWithScalar(
+                vector: xc_translated - p,
+                scalar: this.distanceWeight + xi * this.intersectionWeight
+            );
         }
         #endregion
 

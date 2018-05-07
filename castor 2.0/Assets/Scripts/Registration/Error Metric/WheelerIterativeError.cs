@@ -46,7 +46,7 @@ namespace Registration.Error
             {
                 gradient += RotationalGradient(XCs[i], Ps[i], translation);
             }
-            gradient.ScaleWithScalar(1.0f / (2.0f * N));
+            VectorUtils.MultiplyWithScalar(gradient, 1.0f / (2.0f * N));
 
             //Wheeler: The gradient w.r.t. to q will have no w component
             return new Quaternion(x: gradient.x, y: gradient.y, z: gradient.z, w: 0);
@@ -54,8 +54,7 @@ namespace Registration.Error
 
         private Vector4 RotationalGradient(Vector4 Xc, Vector4 p, Vector4 translation)
         {
-            Vector4 gradient = Xc.Cross(translation - p);
-            gradient.ScaleWithScalar(-4);
+            Vector4 gradient = VectorUtils.MultiplyWithScalar(VectorUtils.Cross(Xc, translation - p), -4);
             return gradient;
         }
 
@@ -74,8 +73,7 @@ namespace Registration.Error
             {
                 gradient += TranslationalGradient(XCs[i], Ps[i], translation);
             }
-            gradient.ScaleWithScalar(1.0f / (2.0f * N));
-            return gradient;
+            return VectorUtils.MultiplyWithScalar(gradient, 1.0f / (2.0f * N));
         }
 
         private Vector4 TranslationalGradient(Vector4 Xc, Vector4 p, Vector4 translation)

@@ -32,8 +32,8 @@ namespace Registration
 
             foreach (Correspondence correspondence in correspondences)
             {
-                modelCoordinates.Add(new Vector4().HomogeneousCoordinate(correspondence.ModelPoint.Position));
-                staticCoordinates.Add(new Vector4().HomogeneousCoordinate(correspondence.StaticPoint.Position));
+                modelCoordinates.Add(VectorUtils.HomogeneousCoordinate(correspondence.ModelPoint.Position));
+                staticCoordinates.Add(VectorUtils.HomogeneousCoordinate(correspondence.StaticPoint.Position));
             }
 
             return new _IGDTransformFinder(

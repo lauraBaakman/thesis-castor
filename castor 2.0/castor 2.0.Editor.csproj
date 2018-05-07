@@ -212,7 +212,6 @@
     <Compile Include="Assets\Scripts\Extensions\Editor\TestQuaternionExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestSystemRandomExtensions.cs" />
     <Compile Include="Assets\Scripts\Extensions\Editor\TestVector3Extensions.cs" />
-    <Compile Include="Assets\Scripts\Extensions\Editor\TestVector4Extensions.cs" />
     <Compile Include="Assets\Scripts\Fragment\Editor\ContainmentDetectorTest.cs" />
     <Compile Include="Assets\Scripts\IO\Editor\TestCSVFileReader.cs" />
     <Compile Include="Assets\Scripts\IO\Editor\TestObjFile.cs" />
@@ -245,6 +244,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestPointNormalizer.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestTriangleUtils.cs" />
+    <Compile Include="Assets\Scripts\Utils\Editor\TestVectorUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
