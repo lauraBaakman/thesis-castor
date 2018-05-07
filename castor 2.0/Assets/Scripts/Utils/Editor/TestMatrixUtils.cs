@@ -87,5 +87,32 @@ namespace Tests.Utils
                 )
             },
         };
+
+        [Test, TestCaseSource("MatrixScalarMultiplicationCases")]
+        public void MultiplyWithScalar(Matrix4x4 matrix, float scalar, Matrix4x4 expected)
+        {
+            Matrix4x4 actual = MatrixUtils.MultiplyWithScalar(matrix, scalar);
+
+            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
+        }
+
+        static object[] MatrixScalarMultiplicationCases =
+        {
+            new object[]{
+                new Matrix4x4(
+                    column0: new Vector4(-32, -20, +02, -07),
+                    column1: new Vector4(-21, +11, -36, -21),
+                    column2: new Vector4(-13, -04, +29, -30),
+                    column3: new Vector4(+01, +09, -45, +11)
+                ),
+                7.5f,
+                new Matrix4x4(
+                    column0: new Vector4(-240.0f, -150.0f, +015.0f, -052.5f),
+                    column1: new Vector4(-157.5f, +082.5f, -270.0f, -157.5f),
+                    column2: new Vector4(-097.5f, -030.0f, +217.5f, -225.0f),
+                    column3: new Vector4(+007.5f, +067.5f, -337.5f, +082.5f)
+                )
+            }
+        };
     }
 }

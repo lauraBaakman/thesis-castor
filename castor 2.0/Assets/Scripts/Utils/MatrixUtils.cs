@@ -40,6 +40,15 @@ namespace Utils
             return matrix;
         }
 
+        public static Matrix4x4 MultiplyWithScalar(Matrix4x4 matrix, float scalar)
+        {
+            Matrix4x4 result = new Matrix4x4();
+
+            for (int i = 0; i < 16; i++) result[i] = scalar * matrix[i];
+
+            return result;
+        }
+
         public static Matrix4x4 TransformationMatrixFromQuaternion(Quaternion quaternion)
         {
             throw new NotImplementedException();
