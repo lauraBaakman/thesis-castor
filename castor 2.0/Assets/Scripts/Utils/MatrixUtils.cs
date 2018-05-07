@@ -51,7 +51,10 @@ namespace Utils
 
         public static Matrix4x4 TransformationMatrixFromQuaternion(Quaternion quaternion)
         {
-            throw new NotImplementedException();
+            return MatrixUtils.MultiplyWithScalar(
+                matrix: TransformationMatrixFromUnitQuaternion(quaternion),
+                    scalar: 1.0f / quaternion.Dot(quaternion)
+            );
         }
     }
 }
