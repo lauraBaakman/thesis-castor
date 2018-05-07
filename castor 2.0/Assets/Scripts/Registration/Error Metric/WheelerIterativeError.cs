@@ -46,15 +46,23 @@ namespace Registration.Error
             {
                 gradient += RotationalGradient(XCs[i], Ps[i], translation);
             }
-            VectorUtils.MultiplyWithScalar(gradient, 1.0f / (2.0f * N));
+
+            gradient = VectorUtils.MultiplyWithScalar(
+                vector: gradient,
+                scalar: 1.0f / (2.0f * N)
+            );
 
             //Wheeler: The gradient w.r.t. to q will have no w component
             return new Quaternion(x: gradient.x, y: gradient.y, z: gradient.z, w: 0);
         }
 
-        private Vector4 RotationalGradient(Vector4 Xc, Vector4 p, Vector4 translation)
+        public Vector4 RotationalGradient(Vector4 Xc, Vector4 p, Vector4 translation)
         {
-            Vector4 gradient = VectorUtils.MultiplyWithScalar(VectorUtils.Cross(Xc, translation - p), -4);
+            Vector4 gradient = VectorUtils.MultiplyWithScalar(
+                vector: VectorUtils.Cross(Xc, translation - p),
+                scalar: -4
+            );
+            gradient.w = 0;
             return gradient;
         }
 
