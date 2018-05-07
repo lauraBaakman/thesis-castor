@@ -7,12 +7,14 @@ namespace Tests.Utils
     [TestFixture]
     public class MatrixUtilsTests
     {
+        float precision = 0.00001f;
+
         [Test, TestCaseSource("TranslationCases")]
         public void TestTransformationMatrixFromTranslation(Vector3 translation, Matrix4x4 expected)
         {
             Matrix4x4 actual = MatrixUtils.TransformationMatrixFromTranslation(translation);
 
-            Assert.AreEqual(actual, expected);
+            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
 
         static object[] TranslationCases =
@@ -42,7 +44,7 @@ namespace Tests.Utils
         {
             Matrix4x4 actual = MatrixUtils.TransformationMatrixFromUnitQuaternion(quaternion);
 
-            Assert.AreEqual(actual, expected);
+            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
 
         static object[] UnitQuaternionRotationCases =
@@ -67,7 +69,7 @@ namespace Tests.Utils
         {
             Matrix4x4 actual = MatrixUtils.TransformationMatrixFromQuaternion(quaternion);
 
-            Assert.AreEqual(actual, expected);
+            for (int i = 0; i < 16; i++) Assert.That(actual[i], Is.EqualTo(expected[i]).Within(precision));
         }
 
         static object[] QuaternionRotationCases =
