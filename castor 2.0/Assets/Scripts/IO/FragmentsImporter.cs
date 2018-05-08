@@ -5,144 +5,144 @@ using Utils;
 
 namespace IO
 {
-    public class FragmentsImporter
-    {
-        public delegate void CallBack(IO.ReadResult result);
+	public class FragmentsImporter
+	{
+		public delegate void CallBack(IO.ReadResult result);
 
-        public GameObject FragmentsRoot;
+		public GameObject FragmentsRoot;
 
-        private readonly CallBack callBack;
+		private readonly CallBack callBack;
 
-        private FragmentImporter fragmentImporter;
+		private FragmentImporter fragmentImporter;
 
-        public FragmentsImporter(GameObject fragmentParent, CallBack callBack, bool randomizeTransform = false, bool copyVerticesToTexture = false)
-        {
-            FragmentsRoot = fragmentParent;
-            this.callBack = callBack;
+		public FragmentsImporter(GameObject fragmentParent, CallBack callBack, bool randomizeTransform = false, bool copyVerticesToTexture = false)
+		{
+			FragmentsRoot = fragmentParent;
+			this.callBack = callBack;
 
-            this.fragmentImporter = new FragmentImporter(
-                FragmentsRoot, callBack,
-                randomizeTransform, copyVerticesToTexture
-            );
-        }
+			this.fragmentImporter = new FragmentImporter(
+				FragmentsRoot, callBack,
+				randomizeTransform, copyVerticesToTexture
+			);
+		}
 
-        public void Import()
-        {
-            GetFragmentFiles();
-        }
+		public void Import()
+		{
+			GetFragmentFiles();
+		}
 
-        public void Import(string file)
-        {
-            ProcessFragmentFile(file);
-        }
+		public void Import(string file)
+		{
+			ProcessFragmentFile(file);
+		}
 
-        private void GetFragmentFiles()
-        {
-            SimpleFileBrowser.FileBrowser.ShowLoadDialog(
-                onSuccess: ProcessFragmentFile,
-                onCancel: () => { },
-                initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models" : null
-            );
-        }
+		private void GetFragmentFiles()
+		{
+			SimpleFileBrowser.FileBrowser.ShowLoadDialog(
+				onSuccess: ProcessFragmentFile,
+				onCancel: () => { },
+				initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-castor/castor 2.0/Assets/Models" : null
+			);
+		}
 
-        private void ProcessFragmentFile(string path)
-        {
-            fragmentImporter.Import(path);
-        }
-    }
+		private void ProcessFragmentFile(string path)
+		{
+			fragmentImporter.Import(path);
+		}
+	}
 
-    public class FragmentImporter
-    {
-        private static string DefaultPrefabPath = "Fragment";
-        private readonly GameObject Parent;
+	public class FragmentImporter
+	{
+		private static string DefaultPrefabPath = "Fragment";
+		private readonly GameObject Parent;
 
-        private readonly bool RandomizeTransform;
-        private readonly bool CopyVerticesToTexture;
+		private readonly bool RandomizeTransform;
+		private readonly bool CopyVerticesToTexture;
 
-        private FragmentsImporter.CallBack CallBack;
+		private FragmentsImporter.CallBack CallBack;
 
-        internal FragmentImporter(GameObject parent, FragmentsImporter.CallBack callBack, bool randomizeTransform, bool copyVerticesToTexture)
-        {
-            Parent = parent;
-            CallBack = callBack;
+		internal FragmentImporter(GameObject parent, FragmentsImporter.CallBack callBack, bool randomizeTransform, bool copyVerticesToTexture)
+		{
+			Parent = parent;
+			CallBack = callBack;
 
-            this.RandomizeTransform = randomizeTransform;
-            this.CopyVerticesToTexture = copyVerticesToTexture;
-        }
+			this.RandomizeTransform = randomizeTransform;
+			this.CopyVerticesToTexture = copyVerticesToTexture;
+		}
 
-        public FragmentImporter(GameObject parent, FragmentsImporter.CallBack callBack)
-            : this(parent, callBack, false, false)
-        { }
+		public FragmentImporter(GameObject parent, FragmentsImporter.CallBack callBack)
+			: this(parent, callBack, false, false)
+		{ }
 
-        public GameObject Import(string path, string prefabPath = null)
-        {
-            prefabPath = prefabPath ?? DefaultPrefabPath;
+		public GameObject Import(string path, string prefabPath = null)
+		{
+			prefabPath = prefabPath ?? DefaultPrefabPath;
 
-            ReadResult result = IO.ObjFile.Read(path);
-            GameObject fragment = null;
+			ReadResult result = IO.ObjFile.Read(path);
+			GameObject fragment = null;
 
-            if (result.Succeeded)
-            {
-                if (CopyVerticesToTexture) Utils.MeshUtils.CopyVerticesToUV2AndUV3(result.Mesh);
+			if (result.Succeeded)
+			{
+				if (CopyVerticesToTexture) Utils.MeshUtils.CopyVerticesToUV2AndUV3(result.Mesh);
 
-                string name = ExtractObjectName(path);
-                fragment = AddFragmentToScene(name, result.Mesh, prefabPath);
-            }
-            CallBack(result);
-            return fragment;
-        }
+				string name = ExtractObjectName(path);
+				fragment = AddFragmentToScene(name, result.Mesh, prefabPath);
+			}
+			CallBack(result);
+			return fragment;
+		}
 
-        private string ExtractObjectName(string path)
-        {
-            return Path.GetFileNameWithoutExtension(path);
-        }
+		private string ExtractObjectName(string path)
+		{
+			return Path.GetFileNameWithoutExtension(path);
+		}
 
-        private GameObject AddFragmentToScene(string name, Mesh mesh, string prefabPath)
-        {
-            GameObject fragment = UnityEngine.Object.Instantiate(
-                original: Resources.Load(prefabPath),
-                parent: Parent.transform
-            ) as GameObject;
+		private GameObject AddFragmentToScene(string name, Mesh mesh, string prefabPath)
+		{
+			GameObject fragment = UnityEngine.Object.Instantiate(
+				original: Resources.Load(prefabPath),
+				parent: Parent.transform
+			) as GameObject;
 
-            fragment.name = name;
+			fragment.name = name;
 
-            SetDoubleConnectedEdgeList(fragment, mesh);
-            SetMesh(fragment, mesh);
-            SetMaterial(fragment);
+			SetDoubleConnectedEdgeList(fragment, mesh);
+			SetMesh(fragment, mesh);
+			SetMaterial(fragment);
 
 
-            if (RandomizeTransform) RandomizeTheTransform(fragment);
+			if (RandomizeTransform) RandomizeTheTransform(fragment);
 
-            return fragment;
-        }
+			return fragment;
+		}
 
-        private void SetDoubleConnectedEdgeList(GameObject fragment, Mesh mesh)
-        {
-            Fragment.DoubleConnectedEdgeListStorage DCELStorage = fragment.GetComponent<Fragment.DoubleConnectedEdgeListStorage>();
-            DCELStorage.DCEL = DoubleConnectedEdgeList.DCEL.FromMesh(mesh);
-        }
+		private void SetDoubleConnectedEdgeList(GameObject fragment, Mesh mesh)
+		{
+			Fragment.DoubleConnectedEdgeListStorage DCELStorage = fragment.GetComponent<Fragment.DoubleConnectedEdgeListStorage>();
+			DCELStorage.DCEL = DoubleConnectedEdgeList.DCEL.FromMesh(mesh);
+		}
 
-        private void SetMesh(GameObject fragment, Mesh mesh)
-        {
-            MeshFilter filter = fragment.GetComponent<MeshFilter>();
-            filter.mesh = mesh;
+		private void SetMesh(GameObject fragment, Mesh mesh)
+		{
+			MeshFilter filter = fragment.GetComponent<MeshFilter>();
+			filter.mesh = mesh;
 
-            MeshCollider collider = fragment.GetComponent<MeshCollider>();
-            collider.sharedMesh = mesh;
-        }
+			MeshCollider collider = fragment.GetComponent<MeshCollider>();
+			collider.sharedMesh = mesh;
+		}
 
-        private void RandomizeTheTransform(GameObject fragment)
-        {
-            fragment.AddComponent<Fragment.RandomTransformer>();
-        }
+		private void RandomizeTheTransform(GameObject fragment)
+		{
+			fragment.AddComponent<Fragment.RandomTransformer>();
+		}
 
-        private void SetMaterial(GameObject fragment)
-        {
-            MeshRenderer renderer = fragment.GetComponent<MeshRenderer>();
-            Material material = renderer.material;
-            material.color = ColorGenerator.Instance.GetNextColor();
-            renderer.material = material;
-        }
-    }
+		private void SetMaterial(GameObject fragment)
+		{
+			MeshRenderer renderer = fragment.GetComponent<MeshRenderer>();
+			Material material = renderer.material;
+			material.color = ColorGenerator.Instance.GetNextColor();
+			renderer.material = material;
+		}
+	}
 
 }

@@ -5,224 +5,224 @@ using UnityEngine;
 
 namespace DoubleConnectedEdgeList
 {
-    /// <summary>
-    /// Represents a Face in double connected edge list.
-    /// </summary>
-    public class Face : IEquatable<Face>, IComparable
-    {
-        private static float notComputed = float.NaN;
+	/// <summary>
+	/// Represents a Face in double connected edge list.
+	/// </summary>
+	public class Face : IEquatable<Face>, IComparable
+	{
+		private static float notComputed = float.NaN;
 
-        /// <summary>
-        /// The half edges on the boundary of this face in arbitrary order. 
-        /// </summary>
-        /// <value>The outer components.</value>
-        public ReadOnlyCollection<HalfEdge> OuterComponents
-        {
-            get { return outerComponents.AsReadOnly(); }
-        }
-        private List<HalfEdge> outerComponents;
+		/// <summary>
+		/// The half edges on the boundary of this face in arbitrary order. 
+		/// </summary>
+		/// <value>The outer components.</value>
+		public ReadOnlyCollection<HalfEdge> OuterComponents
+		{
+			get { return outerComponents.AsReadOnly(); }
+		}
+		private List<HalfEdge> outerComponents;
 
-        public readonly int MeshIdx;
+		public readonly int MeshIdx;
 
-        public Vector3 Centroid
-        {
-            get { return GetCentroid(); }
-        }
+		public Vector3 Centroid
+		{
+			get { return GetCentroid(); }
+		}
 
-        private Vector3 GetCentroid()
-        {
-            ReadOnlyCollection<Vertex> vertices = this.Vertices;
-            float vertexCount = (float)this.Vertices.Count;
+		private Vector3 GetCentroid()
+		{
+			ReadOnlyCollection<Vertex> vertices = this.Vertices;
+			float vertexCount = (float)this.Vertices.Count;
 
-            Vector3 centroid = new Vector3();
+			Vector3 centroid = new Vector3();
 
-            foreach (Vertex vertex in vertices) centroid += vertex.Position;
+			foreach (Vertex vertex in vertices) centroid += vertex.Position;
 
-            return centroid / vertexCount;
-        }
+			return centroid / vertexCount;
+		}
 
-        public ReadOnlyCollection<Vertex> Vertices
-        {
-            get { return GetVertices(); }
-        }
+		public ReadOnlyCollection<Vertex> Vertices
+		{
+			get { return GetVertices(); }
+		}
 
-        /// <summary>
-        /// Gets the area of the face, if the face is triangular
-        /// 
-        /// Not this method assumes that the list of outercomponents is complete.
-        /// </summary>
-        /// <value>The area.</value>
-        public float Area
-        {
-            get
-            {
-                if (!IsTriangular()) throw new InvalidOperationException("The area property is not supported for non-triangluar faces.");
-                if (area.Equals(notComputed)) area = computeTriangleArea();
-                return area;
-            }
-        }
-        float area = notComputed;
+		/// <summary>
+		/// Gets the area of the face, if the face is triangular
+		/// 
+		/// Not this method assumes that the list of outercomponents is complete.
+		/// </summary>
+		/// <value>The area.</value>
+		public float Area
+		{
+			get
+			{
+				if (!IsTriangular()) throw new InvalidOperationException("The area property is not supported for non-triangluar faces.");
+				if (area.Equals(notComputed)) area = computeTriangleArea();
+				return area;
+			}
+		}
+		float area = notComputed;
 
-        public Vector3 Normal
-        {
-            get { return normal; }
-            internal set { normal = value; }
-        }
-        private Vector3 normal;
+		public Vector3 Normal
+		{
+			get { return normal; }
+			internal set { normal = value; }
+		}
+		private Vector3 normal;
 
-        private float computeTriangleArea()
-        {
-            float edgeSum = 0.0f;
-            foreach (HalfEdge edge in OuterComponents)
-            {
-                edgeSum += edge.Length;
-            }
-            return (edgeSum * 0.5f);
-        }
+		private float computeTriangleArea()
+		{
+			float edgeSum = 0.0f;
+			foreach (HalfEdge edge in OuterComponents)
+			{
+				edgeSum += edge.Length;
+			}
+			return (edgeSum * 0.5f);
+		}
 
-        private Face(int meshIdx)
-        {
-            this.MeshIdx = meshIdx;
-            this.outerComponents = new List<HalfEdge>();
-        }
+		private Face(int meshIdx)
+		{
+			this.MeshIdx = meshIdx;
+			this.outerComponents = new List<HalfEdge>();
+		}
 
-        public Face(int meshIdx, Vector3 normal)
-            : this(meshIdx)
-        {
-            this.normal = normal;
-        }
+		public Face(int meshIdx, Vector3 normal)
+			: this(meshIdx)
+		{
+			this.normal = normal;
+		}
 
-        /// <summary>
-        /// Is the face the triangular.
-        /// 
-        /// Note this method assumes that the list of outercomponents is complete!
-        /// </summary>
-        /// <returns><c>true</c>, if the face is triangular, <c>false</c> otherwise.</returns>
-        public bool IsTriangular()
-        {
-            return (outerComponents.Count == 3);
-        }
+		/// <summary>
+		/// Is the face the triangular.
+		/// 
+		/// Note this method assumes that the list of outercomponents is complete!
+		/// </summary>
+		/// <returns><c>true</c>, if the face is triangular, <c>false</c> otherwise.</returns>
+		public bool IsTriangular()
+		{
+			return (outerComponents.Count == 3);
+		}
 
-        private ReadOnlyCollection<Vertex> GetVertices()
-        {
-            List<Vertex> vertices = new List<Vertex>();
-            foreach (HalfEdge edge in outerComponents) vertices.Add(edge.Origin);
-            return vertices.AsReadOnly();
-        }
+		private ReadOnlyCollection<Vertex> GetVertices()
+		{
+			List<Vertex> vertices = new List<Vertex>();
+			foreach (HalfEdge edge in outerComponents) vertices.Add(edge.Origin);
+			return vertices.AsReadOnly();
+		}
 
-        /// <summary>
-        /// Adds an edge to the outer component of this face, if that face is not already part of the outer component.
-        /// </summary>
-        /// <param name="edge">Edge that is part of the outer component of this face.</param>
-        public void AddOuterComponent(HalfEdge edge)
-        {
-            if (!OuterComponents.Contains(edge)) outerComponents.Add(edge);
-        }
+		/// <summary>
+		/// Adds an edge to the outer component of this face, if that face is not already part of the outer component.
+		/// </summary>
+		/// <param name="edge">Edge that is part of the outer component of this face.</param>
+		public void AddOuterComponent(HalfEdge edge)
+		{
+			if (!OuterComponents.Contains(edge)) outerComponents.Add(edge);
+		}
 
-        /// <summary>
-        /// Serves as a hash function for a <see cref="T:DoubleConnectedEdgeList.Face"/> object.
-        /// </summary>
-        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
-        /// hash table.</returns>
-        public override int GetHashCode()
-        {
-            HalfEdge.OriginDestinationComparer edgeComparer = new HalfEdge.OriginDestinationComparer();
+		/// <summary>
+		/// Serves as a hash function for a <see cref="T:DoubleConnectedEdgeList.Face"/> object.
+		/// </summary>
+		/// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+		/// hash table.</returns>
+		public override int GetHashCode()
+		{
+			HalfEdge.OriginDestinationComparer edgeComparer = new HalfEdge.OriginDestinationComparer();
 
-            int hash = 17;
-            hash *= (31 + MeshIdx.GetHashCode());
-            hash *= (31 + Normal.GetHashCode());
-            foreach (HalfEdge edge in OuterComponents)
-            {
-                hash *= (31 + edgeComparer.GetHashCode(edge));
-            }
-            return hash;
-        }
+			int hash = 17;
+			hash *= (31 + MeshIdx.GetHashCode());
+			hash *= (31 + Normal.GetHashCode());
+			foreach (HalfEdge edge in OuterComponents)
+			{
+				hash *= (31 + edgeComparer.GetHashCode(edge));
+			}
+			return hash;
+		}
 
-        public override string ToString()
-        {
-            return string.Format("[Face [{0}, {1}]]", MeshIdx, Normal);
-        }
+		public override string ToString()
+		{
+			return string.Format("[Face [{0}, {1}]]", MeshIdx, Normal);
+		}
 
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:DoubleConnectedEdgeList.Face"/>.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:DoubleConnectedEdgeList.Face"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
-        /// <see cref="T:DoubleConnectedEdgeList.Face"/>; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-                return false;
+		/// <summary>
+		/// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:DoubleConnectedEdgeList.Face"/>.
+		/// </summary>
+		/// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:DoubleConnectedEdgeList.Face"/>.</param>
+		/// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
+		/// <see cref="T:DoubleConnectedEdgeList.Face"/>; otherwise, <c>false</c>.</returns>
+		public override bool Equals(object obj)
+		{
+			if (obj == null || GetType() != obj.GetType())
+				return false;
 
-            return this.Equals(obj as Face);
-        }
+			return this.Equals(obj as Face);
+		}
 
-        /// <summary>
-        /// Determines whether the specified <see cref="DoubleConnectedEdgeList.Face"/> is equal to the current <see cref="T:DoubleConnectedEdgeList.Face"/>.
-        /// </summary>
-        /// <param name="other">The <see cref="DoubleConnectedEdgeList.Face"/> to compare with the current <see cref="T:DoubleConnectedEdgeList.Face"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="DoubleConnectedEdgeList.Face"/> is equal to the current
-        /// <see cref="T:DoubleConnectedEdgeList.Face"/>; otherwise, <c>false</c>.</returns>
-        public bool Equals(Face other)
-        {
-            return (
-                this.MeshIdx.Equals(other.MeshIdx) &&
-                this.Normal.Equals(other.Normal) &&
-                this.OuterComponents.UnorderedElementsAreEqual(other.OuterComponents)
-            );
-        }
+		/// <summary>
+		/// Determines whether the specified <see cref="DoubleConnectedEdgeList.Face"/> is equal to the current <see cref="T:DoubleConnectedEdgeList.Face"/>.
+		/// </summary>
+		/// <param name="other">The <see cref="DoubleConnectedEdgeList.Face"/> to compare with the current <see cref="T:DoubleConnectedEdgeList.Face"/>.</param>
+		/// <returns><c>true</c> if the specified <see cref="DoubleConnectedEdgeList.Face"/> is equal to the current
+		/// <see cref="T:DoubleConnectedEdgeList.Face"/>; otherwise, <c>false</c>.</returns>
+		public bool Equals(Face other)
+		{
+			return (
+				this.MeshIdx.Equals(other.MeshIdx) &&
+				this.Normal.Equals(other.Normal) &&
+				this.OuterComponents.UnorderedElementsAreEqual(other.OuterComponents)
+			);
+		}
 
-        public int CompareTo(object obj)
-        {
-            if (obj == null) return 1;
-            if (GetType() != obj.GetType()) throw new ArgumentException("Object is not a Face.");
+		public int CompareTo(object obj)
+		{
+			if (obj == null) return 1;
+			if (GetType() != obj.GetType()) throw new ArgumentException("Object is not a Face.");
 
-            Face face = obj as Face;
+			Face face = obj as Face;
 
-            return this.MeshIdx.CompareTo(face.MeshIdx);
-        }
+			return this.MeshIdx.CompareTo(face.MeshIdx);
+		}
 
-        public class MeshIdxAndNormalComparer : IEqualityComparer<Face>
-        {
-            public bool Equals(Face x, Face y)
-            {
-                if (x == null && y == null) return true;
-                if (x == null || y == null) return false;
+		public class MeshIdxAndNormalComparer : IEqualityComparer<Face>
+		{
+			public bool Equals(Face x, Face y)
+			{
+				if (x == null && y == null) return true;
+				if (x == null || y == null) return false;
 
-                return (
-                    x.MeshIdx.Equals(y.MeshIdx) &&
-                    x.Normal.Equals(y.Normal)
-                );
-            }
+				return (
+					x.MeshIdx.Equals(y.MeshIdx) &&
+					x.Normal.Equals(y.Normal)
+				);
+			}
 
-            public int GetHashCode(Face obj)
-            {
-                if (obj == null) return 0;
+			public int GetHashCode(Face obj)
+			{
+				if (obj == null) return 0;
 
-                int hash = 17;
-                hash *= (31 + obj.MeshIdx.GetHashCode());
-                hash *= (31 + obj.Normal.GetHashCode());
-                return hash;
-            }
-        }
+				int hash = 17;
+				hash *= (31 + obj.MeshIdx.GetHashCode());
+				hash *= (31 + obj.Normal.GetHashCode());
+				return hash;
+			}
+		}
 
-        public class KeyValueComparer<K> : IEqualityComparer<KeyValuePair<K, Face>> where K : IEquatable<K>
-        {
-            public bool Equals(KeyValuePair<K, Face> x, KeyValuePair<K, Face> y)
-            {
-                return (
-                    x.Key.Equals(y.Key) &&
-                    x.Value.Equals(y.Value)
-                );
-            }
+		public class KeyValueComparer<K> : IEqualityComparer<KeyValuePair<K, Face>> where K : IEquatable<K>
+		{
+			public bool Equals(KeyValuePair<K, Face> x, KeyValuePair<K, Face> y)
+			{
+				return (
+					x.Key.Equals(y.Key) &&
+					x.Value.Equals(y.Value)
+				);
+			}
 
-            public int GetHashCode(KeyValuePair<K, Face> obj)
-            {
-                int hash = 17;
-                hash *= (31 + obj.Key.GetHashCode());
-                hash *= (31 + obj.Value.GetHashCode());
-                return hash;
-            }
-        }
-    }
+			public int GetHashCode(KeyValuePair<K, Face> obj)
+			{
+				int hash = 17;
+				hash *= (31 + obj.Key.GetHashCode());
+				hash *= (31 + obj.Value.GetHashCode());
+				return hash;
+			}
+		}
+	}
 }

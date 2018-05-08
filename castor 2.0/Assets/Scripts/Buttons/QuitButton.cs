@@ -2,27 +2,27 @@
 
 namespace Buttons
 {
-    public class QuitButton : AbstractButton
-    {
-        protected override bool HasDetectedKeyBoardShortCut()
-        {
-            return Input.GetButtonDown("Quit") && RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed();
-        }
+	public class QuitButton : AbstractButton
+	{
+		protected override bool HasDetectedKeyBoardShortCut()
+		{
+			return Input.GetButtonDown("Quit") && RTEditor.InputHelper.IsAnyCtrlOrCommandKeyPressed();
+		}
 
-        protected override void ExecuteButtonAction()
-        {
-            if (Application.isEditor) QuitInEditorMode();
-            else QuitInDeploymentMode();
-        }
+		protected override void ExecuteButtonAction()
+		{
+			if (Application.isEditor) QuitInEditorMode();
+			else QuitInDeploymentMode();
+		}
 
-        private void QuitInEditorMode()
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
+		private void QuitInEditorMode()
+		{
+			UnityEditor.EditorApplication.isPlaying = false;
+		}
 
-        private void QuitInDeploymentMode()
-        {
-            Application.Quit();
-        }
-    }
+		private void QuitInDeploymentMode()
+		{
+			Application.Quit();
+		}
+	}
 }

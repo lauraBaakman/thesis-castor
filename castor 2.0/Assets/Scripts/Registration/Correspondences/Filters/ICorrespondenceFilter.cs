@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Registration
 {
-    public interface ICorrespondenceFilter
-    {
-        CorrespondenceCollection Filter(CorrespondenceCollection correspondences);
+	public interface ICorrespondenceFilter
+	{
+		CorrespondenceCollection Filter(CorrespondenceCollection correspondences);
 
-        string ToJson();
-    }
+		string ToJson();
+	}
 }

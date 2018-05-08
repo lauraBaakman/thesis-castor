@@ -4,12 +4,12 @@ using System;
 
 namespace Registration
 {
-    public interface ITransformFinder
-    {
-        Matrix4x4 FindTransform(CorrespondenceCollection correspondences);
+	public interface ITransformFinder
+	{
+		Matrix4x4 FindTransform(CorrespondenceCollection correspondences);
 
-        IErrorMetric GetErrorMetric();
+		IErrorMetric GetErrorMetric();
 
-        SerializableTransformFinder Serialize();
-    }
+		SerializableTransformFinder Serialize();
+	}
 }

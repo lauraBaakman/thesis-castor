@@ -1,5 +1,5 @@
 namespace Fragment
 {
-    public class ICPModelFragmentController : ICPAbstractFragmentController { }
+	public class ICPModelFragmentController : ICPAbstractFragmentController { }
 }
 

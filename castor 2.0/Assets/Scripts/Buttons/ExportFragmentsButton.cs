@@ -4,31 +4,31 @@ using IO;
 
 namespace Buttons
 {
-    public class ExportFragmentsButton : AbstractButton
-    {
-        public GameObject FragmentsRoot;
+	public class ExportFragmentsButton : AbstractButton
+	{
+		public GameObject FragmentsRoot;
 
-        protected override void ExecuteButtonAction()
-        {
-            new IO.FragmentsExporter(
-                fragmentsRoot: FragmentsRoot,
-                callback: NotifyUser
-            ).Export();
-        }
+		protected override void ExecuteButtonAction()
+		{
+			new IO.FragmentsExporter(
+				fragmentsRoot: FragmentsRoot,
+				callback: NotifyUser
+			).Export();
+		}
 
-        protected override bool HasDetectedKeyBoardShortCut()
-        {
-            return false;
-        }
+		protected override bool HasDetectedKeyBoardShortCut()
+		{
+			return false;
+		}
 
-        private void NotifyUser(WriteResult result)
-        {
-            Receiver.Instance.SendMessage(
-                methodName: "OnMessage",
-                value: result.ToTickerMessage(),
-                options: SendMessageOptions.RequireReceiver
-            );
-        }
-    }
+		private void NotifyUser(WriteResult result)
+		{
+			Receiver.Instance.SendMessage(
+				methodName: "OnMessage",
+				value: result.ToTickerMessage(),
+				options: SendMessageOptions.RequireReceiver
+			);
+		}
+	}
 }
 

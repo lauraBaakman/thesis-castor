@@ -1,23 +1,23 @@
 namespace Registration
 {
-    namespace Messages
-    {
-        public interface IICPListener
-        {
-            void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message);
+	namespace Messages
+	{
+		public interface IICPListener
+		{
+			void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message);
 
-            void OnStepCompleted(ICPStepCompletedMessage message);
+			void OnStepCompleted(ICPStepCompletedMessage message);
 
-            void OnICPTerminated(ICPTerminatedMessage message);
-        }
+			void OnICPTerminated(ICPTerminatedMessage message);
+		}
 
-        public interface IICPStartEndListener
-        {
-            void OnICPStarted();
+		public interface IICPStartEndListener
+		{
+			void OnICPStarted();
 
-            void OnICPTerminated(ICPTerminatedMessage message);
-        }
-    }
+			void OnICPTerminated(ICPTerminatedMessage message);
+		}
+	}
 
 }
 
