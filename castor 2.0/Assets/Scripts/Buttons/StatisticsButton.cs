@@ -17,6 +17,8 @@ namespace Buttons
 
 		public StatisticsComputer statisticsComputer;
 
+		private Dictionary<string, object> ExperimentCSVData;
+
 		protected override void Awake()
 		{
 			base.Awake();
@@ -38,6 +40,7 @@ namespace Buttons
 		{
 			directory = "";
 			runs = null;
+			ExperimentCSVData = null;
 		}
 
 		private void RetrieveOverviewCSV()
@@ -73,7 +76,7 @@ namespace Buttons
 
 		private IEnumerator<object> ProcessExperimentResultsFolder(string datasetCSVpath, string resultsDirectory)
 		{
-			throw new NotImplementedException("Read the data from datasetCSVPath");
+			ReadExperimentCSVDataFile(datasetCSVpath);
 			yield return null;
 
 			StartCoroutine(FindObjectIDs(resultsDirectory));
@@ -87,10 +90,10 @@ namespace Buttons
 				yield return new WaitUntil(() => statisticsComputer.Done);
 			}
 
-			WriteNewCSVDataFile();
+			WriteProcessedResultCSVDataFile();
 		}
 
-		private void WriteNewCSVDataFile()
+		private void WriteProcessedResultCSVDataFile()
 		{
 			throw new NotImplementedException();
 		}
@@ -100,14 +103,14 @@ namespace Buttons
 			this.directory = inputDirectory;
 			yield return null;
 
-			string csvDataFile = GetCSVDataFile();
+			string csvDataFile = GetResultsCSVDataFile();
 			yield return null;
 
-			List<Dictionary<string, object>> csvData = new CSVFileReader().Read(csvDataFile);
+			List<Dictionary<string, object>> ResultsCSVData = new CSVFileReader().Read(csvDataFile);
 			yield return null;
 
-			List<StatisticsComputer.Run> localRuns = new List<StatisticsComputer.Run>(csvData.Count);
-			foreach (Dictionary<string, object> row in csvData)
+			List<StatisticsComputer.Run> localRuns = new List<StatisticsComputer.Run>(ResultsCSVData.Count);
+			foreach (Dictionary<string, object> row in ResultsCSVData)
 			{
 				localRuns.Add(ExtractRun(row));
 				yield return null;
@@ -115,7 +118,13 @@ namespace Buttons
 			this.runs = localRuns;
 		}
 
-		private string GetCSVDataFile()
+		private void ReadExperimentCSVDataFile(string path)
+		{
+			ExperimentCSVData = new Dictionary<string, object>();
+			throw new NotImplementedException();
+		}
+
+		private string GetResultsCSVDataFile()
 		{
 			string[] csvFiles = System.IO.Directory.GetFiles(directory, "*.csv");
 			ValidateCSVFiles(csvFiles);
