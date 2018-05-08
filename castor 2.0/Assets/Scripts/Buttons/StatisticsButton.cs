@@ -26,7 +26,7 @@ namespace Buttons
 		protected override void ExecuteButtonAction()
 		{
 			Reset();
-			RetrieveExperimentResultFolder();
+			RetrieveOverviewCSV();
 		}
 
 		protected override bool HasDetectedKeyBoardShortCut()
@@ -40,23 +40,40 @@ namespace Buttons
 			runs = null;
 		}
 
-		private void RetrieveExperimentResultFolder()
+		private void RetrieveOverviewCSV()
 		{
-			//FileBrowser.ShowLoadDialog(
-			//    onSuccess: (path) => StartCoroutine(ProcessExperimentResultsFolder(path)),
-			//    onCancel: () => { },
-			//    folderMode: true,
-			//    initialPath: initialPath,
-			//    title: "Select a results directory.",
-			//    loadButtonText: "Select"
-			//);
-			Debug.Log("Temporarily using a fixed directory");
-			StartCoroutine(ProcessExperimentResultsFolder("/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/results_05-07_14-18-38-387"));
+			{
+				FileBrowser.ShowLoadDialog(
+					onSuccess: (path) => RetrieveExperimentResultFolder(path),
+					onCancel: () => { },
+					folderMode: false,
+					initialPath: initialPath,
+					title: "Select a data set overview csv.",
+					loadButtonText: "Select"
+				);
+			}
 		}
 
-		private IEnumerator<object> ProcessExperimentResultsFolder(string inputDirectory)
+		private void RetrieveExperimentResultFolder(string datasetCSVpath)
 		{
-			StartCoroutine(FindObjectIDs(inputDirectory));
+			FileBrowser.ShowLoadDialog(
+				onSuccess: (resultsDirectory) => StartCoroutine(ProcessExperimentResultsFolder(datasetCSVpath, resultsDirectory)),
+				onCancel: () => { },
+				folderMode: true,
+				initialPath: initialPath,
+				title: "Select a results directory.",
+				loadButtonText: "Select"
+			);
+			//Debug.Log("Temporarily using a fixed directory");
+			//StartCoroutine(ProcessExperimentResultsFolder("/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/results_05-08_16-45-03-534"));
+		}
+
+		private IEnumerator<object> ProcessExperimentResultsFolder(string datasetCSVpath, string resultsDirectory)
+		{
+			throw new NotImplementedException("Read the data from datasetCSVPath");
+			yield return null;
+
+			StartCoroutine(FindObjectIDs(resultsDirectory));
 			yield return new WaitWhile(() => runs == null);
 
 			statisticsComputer.Init();
@@ -92,7 +109,6 @@ namespace Buttons
 				localRuns.Add(ExtractRun(row));
 				yield return null;
 			}
-
 			this.runs = localRuns;
 		}
 
@@ -120,6 +136,9 @@ namespace Buttons
 		{
 			string id = csvRow["id"] as string;
 			string path = Path.Combine(directory, String.Format("{0}.obj", id));
+
+			throw new NotImplementedException("Retrieve the expected translation and rotation from the dataset csv data");
+
 			return new StatisticsComputer.Run(objPath: path);
 		}
 	}
