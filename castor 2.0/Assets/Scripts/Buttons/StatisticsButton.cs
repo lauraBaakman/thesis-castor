@@ -42,30 +42,33 @@ namespace Buttons
 
 		private void RetrieveOverviewCSV()
 		{
-			{
-				FileBrowser.ShowLoadDialog(
-					onSuccess: (path) => RetrieveExperimentResultFolder(path),
-					onCancel: () => { },
-					folderMode: false,
-					initialPath: initialPath,
-					title: "Select a data set overview csv.",
-					loadButtonText: "Select"
-				);
-			}
+			//FileBrowser.ShowLoadDialog(
+			//	onSuccess: (path) => RetrieveExperimentResultFolder(path),
+			//	onCancel: () => { },
+			//	folderMode: false,
+			//	initialPath: initialPath,
+			//	title: "Select a data set overview csv.",
+			//	loadButtonText: "Select"
+			//);
+			Debug.Log("Temporarily using a fixed path");
+			RetrieveExperimentResultFolder("/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/cube_f90e89025f4cad9d1da70ddfd85c2368.csv");
 		}
 
 		private void RetrieveExperimentResultFolder(string datasetCSVpath)
 		{
-			FileBrowser.ShowLoadDialog(
-				onSuccess: (resultsDirectory) => StartCoroutine(ProcessExperimentResultsFolder(datasetCSVpath, resultsDirectory)),
-				onCancel: () => { },
-				folderMode: true,
-				initialPath: initialPath,
-				title: "Select a results directory.",
-				loadButtonText: "Select"
-			);
-			//Debug.Log("Temporarily using a fixed directory");
-			//StartCoroutine(ProcessExperimentResultsFolder("/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/results_05-08_16-45-03-534"));
+			//FileBrowser.ShowLoadDialog(
+			//	onSuccess: (resultsDirectory) => StartCoroutine(ProcessExperimentResultsFolder(datasetCSVpath, resultsDirectory)),
+			//	onCancel: () => { },
+			//	folderMode: true,
+			//	initialPath: initialPath,
+			//	title: "Select a results directory.",
+			//	loadButtonText: "Select"
+			//);
+			Debug.Log("Temporarily using a fixed directory");
+			StartCoroutine(ProcessExperimentResultsFolder(
+				resultsDirectory: "/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/results_05-08_16-45-03-534",
+				datasetCSVpath: datasetCSVpath
+			));
 		}
 
 		private IEnumerator<object> ProcessExperimentResultsFolder(string datasetCSVpath, string resultsDirectory)
