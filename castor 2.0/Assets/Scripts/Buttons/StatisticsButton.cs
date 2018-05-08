@@ -17,7 +17,7 @@ namespace Buttons
 
 		public StatisticsComputer statisticsComputer;
 
-		private Dictionary<string, object> ExperimentCSVData;
+		private Dictionary<string, Dictionary<string, object>> ExperimentCSVData;
 
 		protected override void Awake()
 		{
@@ -76,7 +76,7 @@ namespace Buttons
 
 		private IEnumerator<object> ProcessExperimentResultsFolder(string datasetCSVpath, string resultsDirectory)
 		{
-			ReadExperimentCSVDataFile(datasetCSVpath);
+			ReadDataSetCSV(datasetCSVpath);
 			yield return null;
 
 			StartCoroutine(FindObjectIDs(resultsDirectory));
@@ -118,10 +118,15 @@ namespace Buttons
 			this.runs = localRuns;
 		}
 
-		private void ReadExperimentCSVDataFile(string path)
+		private void ReadDataSetCSV(string path)
 		{
-			ExperimentCSVData = new Dictionary<string, object>();
-			throw new NotImplementedException();
+			List<Dictionary<string, object>> rows = new CSVFileReader().Read(path);
+			ExperimentCSVData = new Dictionary<string, Dictionary<string, object>>();
+
+			foreach (Dictionary<string, object> row in rows)
+			{
+				ExperimentCSVData.Add((string)row["uuid"], row);
+			}
 		}
 
 		private string GetResultsCSVDataFile()
