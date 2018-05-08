@@ -44,34 +44,57 @@ public class StatisticsComputer : MonoBehaviour
 	public class Run
 	{
 		/// <summary>
-		/// The string to the path with the obj file that has the final position 
-		/// in its vertex coordinates, and the initial position in its 
+		/// The string to the path with the obj file that has the final position
+		/// in its vertex coordinates, and the initial position in its
 		/// texture coordinates.
 		/// </summary>
 		public readonly string objPath;
 
 		/// <summary>
-		/// The rotation used to bring the modelpoints to the static points.
+		/// The rotation used to bring the modelpoints to the static points, i.e.
+		/// the rotation determined by the registration process.
 		/// </summary>
-		internal Quaternion appliedRotation;
-		public Quaternion AppliedRotation { get { return appliedRotation; } }
-
-		public Vector3 ZXYEuler { get { return appliedRotation.eulerAngles; } }
+		internal Quaternion actualRotation;
+		public Quaternion ActualRotation
+		{
+			get { return actualRotation; }
+			set { actualRotation = value; }
+		}
 
 		/// <summary>
-		/// The translation used to bring the modelpoints to the static points.
+		/// The expected rotation, i.e. the inverse of the rotation used to
+		/// create the dataset.
 		/// </summary>
-		internal Vector3 appliedTranslation;
-		public Vector3 AppliedTranslation { get { return appliedTranslation; } }
+		internal Quaternion expectedRotation;
+		public Quaternion ExpectedRotation { get { return expectedRotation; } }
+
+
+		/// <summary>
+		/// The translation used to bring the modelpoints to the static points, i.e.
+		/// the translation determined by the registration process.
+		/// </summary>
+		internal Vector3 actualTranslation;
+		public Vector3 ActualTranslation
+		{
+			get { return actualTranslation; }
+			set { actualTranslation = value; }
+		}
+
+		/// <summary>
+		/// The expected translation, i.e. the inverse of the translation used to
+		/// create the dataset.
+		/// </summary>
+		internal Vector3 expectedTranslation;
+		public Vector3 ExpectedTranslation { get { return expectedTranslation; } }
 
 		public Run(string objPath)
 			: this(objPath, Quaternion.identity, new Vector3(0, 0, 0))
 		{ }
 
-		public Run(string objPath, Quaternion appliedRotation, Vector3 appliedTranslation)
+		public Run(string objPath, Quaternion expectedRotation, Vector3 expectedTranslation)
 		{
-			this.appliedRotation = appliedRotation;
-			this.appliedTranslation = appliedTranslation;
+			this.expectedRotation = expectedRotation;
+			this.expectedTranslation = expectedTranslation;
 
 			this.objPath = objPath;
 		}
@@ -81,17 +104,31 @@ public class StatisticsComputer : MonoBehaviour
 			Dictionary<string, object> dict = new Dictionary<string, object>();
 
 			dict.Add("obj path", objPath);
-			dict.Add("applied translation x", appliedTranslation.x);
-			dict.Add("applied translation y", appliedTranslation.y);
-			dict.Add("applied translation z", appliedTranslation.z);
-			dict.Add("applied rotation quaterion x", appliedRotation.x);
-			dict.Add("applied rotation quaterion y", appliedRotation.y);
-			dict.Add("applied rotation quaterion z", appliedRotation.z);
-			dict.Add("applied rotation quaterion w", appliedRotation.w);
-			dict.Add("applied rotation zxy euler x", ZXYEuler.x);
-			dict.Add("applied rotation zxy euler y", ZXYEuler.y);
-			dict.Add("applied rotation zxy euler z", ZXYEuler.z);
+			dict.Add("actual translation x", actualTranslation.x);
+			dict.Add("actual translation y", actualTranslation.y);
+			dict.Add("actual translation z", actualTranslation.z);
 
+			dict.Add("actual rotation quaterion x", actualRotation.x);
+			dict.Add("actual rotation quaterion y", actualRotation.y);
+			dict.Add("actual rotation quaterion z", actualRotation.z);
+			dict.Add("actual rotation quaterion w", actualRotation.w);
+
+			dict.Add("actual rotation zxy euler x", actualRotation.eulerAngles.x);
+			dict.Add("actual rotation zxy euler y", actualRotation.eulerAngles.y);
+			dict.Add("actual rotation zxy euler z", actualRotation.eulerAngles.z);
+
+			dict.Add("expected translation x", expectedTranslation.x);
+			dict.Add("expected translation y", expectedTranslation.y);
+			dict.Add("expected translation z", expectedTranslation.z);
+
+			dict.Add("expected rotation quaterion x", expectedRotation.x);
+			dict.Add("expected rotation quaterion y", expectedRotation.y);
+			dict.Add("expected rotation quaterion z", expectedRotation.z);
+			dict.Add("expected rotation quaterion w", expectedRotation.w);
+
+			dict.Add("expected rotation zxy euler x", expectedRotation.eulerAngles.x);
+			dict.Add("expected rotation zxy euler y", expectedRotation.eulerAngles.y);
+			dict.Add("expected rotation zxy euler z", expectedRotation.eulerAngles.z);
 			return dict;
 		}
 	}
@@ -160,8 +197,8 @@ public class _TransformationComputer
 	}
 
 	/// <summary>
-	/// Find the transformation matrix that transforms the original vertex 
-	/// positions, stored in the texture coordinates, to the output vertex 
+	/// Find the transformation matrix that transforms the original vertex
+	/// positions, stored in the texture coordinates, to the output vertex
 	/// position, stord in vertex coordinates.
 	/// </summary>
 	public void ComputeTransformationMatrix()
@@ -172,8 +209,8 @@ public class _TransformationComputer
 
 	public void ExtractTranslationAndRotation()
 	{
-		run.appliedTranslation = ExtractTranslation();
-		run.appliedRotation = ExtractRotation();
+		run.actualTranslation = ExtractTranslation();
+		run.actualRotation = ExtractRotation();
 	}
 
 	private Vector3 ExtractTranslation()

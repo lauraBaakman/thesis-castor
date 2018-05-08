@@ -378,9 +378,9 @@ namespace Tests.Experiment
 
 			StatisticsComputer.Run actual = computer.Run;
 
-			Assert.IsTrue(expected.AppliedTranslation == actual.AppliedTranslation);
+			Assert.IsTrue(expected.ActualRotation == actual.ActualRotation);
 
-			float deltaAngle = Quaternion.Angle(actual.AppliedRotation, expected.AppliedRotation);
+			float deltaAngle = Quaternion.Angle(actual.ActualRotation, expected.ActualRotation);
 			Assert.That(deltaAngle, Is.EqualTo(0).Within(0.1f));
 		}
 
