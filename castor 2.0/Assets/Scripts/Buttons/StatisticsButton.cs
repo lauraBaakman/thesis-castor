@@ -154,9 +154,30 @@ namespace Buttons
 			string id = csvRow["id"] as string;
 			string path = Path.Combine(directory, String.Format("{0}.obj", id));
 
-			throw new NotImplementedException("Retrieve the expected translation and rotation from the dataset csv data");
+			Dictionary<string, object> experimentDataRow = ExperimentCSVData[id];
 
-			return new StatisticsComputer.Run(objPath: path);
+			return new StatisticsComputer.Run(
+				objPath: path,
+				expectedRotation: ExtractExpectedRotation(experimentDataRow),
+				expectedTranslation: ExtractExpectedTranslation(experimentDataRow)
+			);
+		}
+
+		private Vector3 ExtractExpectedTranslation(Dictionary<string, object> row)
+		{
+			float x = (float)row["expected translation x"];
+			float y = (float)row["expected translation y"];
+			float z = (float)row["expected translation z"];
+			return new Vector3(x, y, z);
+		}
+
+		private Quaternion ExtractExpectedRotation(Dictionary<string, object> row)
+		{
+			float x = (float)row["expected quaternion x"];
+			float y = (float)row["expected quaternion y"];
+			float z = (float)row["expected quaternion z"];
+			float w = (float)row["expected quaternion w"];
+			return new Quaternion(x: x, y: y, z: z, w: w);
 		}
 	}
 }
