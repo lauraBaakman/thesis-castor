@@ -82,7 +82,9 @@ namespace Tests.Experiment
 		{
 			string path = Path.Combine(Application.dataPath, Path.Combine("Scripts/Experiment/Editor", file));
 			return new StatisticsComputer.Run(
-					objPath: path
+				objPath: path,
+				expectedRotation: Quaternion.identity,
+				expectedTranslation: new Vector3()
 			);
 		}
 

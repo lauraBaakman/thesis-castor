@@ -87,10 +87,6 @@ public class StatisticsComputer : MonoBehaviour
 		internal Vector3 expectedTranslation;
 		public Vector3 ExpectedTranslation { get { return expectedTranslation; } }
 
-		public Run(string objPath)
-			: this(objPath, Quaternion.identity, new Vector3(0, 0, 0))
-		{ }
-
 		public Run(string objPath, Quaternion expectedRotation, Vector3 expectedTranslation)
 		{
 			this.expectedRotation = expectedRotation;
