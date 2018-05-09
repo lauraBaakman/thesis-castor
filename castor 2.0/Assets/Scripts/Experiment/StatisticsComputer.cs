@@ -104,10 +104,10 @@ public class StatisticsComputer : MonoBehaviour
 			dict.Add("actual translation y", actualTranslation.y);
 			dict.Add("actual translation z", actualTranslation.z);
 
-			dict.Add("actual rotation quaterion x", actualRotation.x);
-			dict.Add("actual rotation quaterion y", actualRotation.y);
-			dict.Add("actual rotation quaterion z", actualRotation.z);
-			dict.Add("actual rotation quaterion w", actualRotation.w);
+			dict.Add("actual rotation quaternion x", actualRotation.x);
+			dict.Add("actual rotation quaternion y", actualRotation.y);
+			dict.Add("actual rotation quaternion z", actualRotation.z);
+			dict.Add("actual rotation quaternion w", actualRotation.w);
 
 			dict.Add("actual rotation zxy euler x", actualRotation.eulerAngles.x);
 			dict.Add("actual rotation zxy euler y", actualRotation.eulerAngles.y);
@@ -117,10 +117,10 @@ public class StatisticsComputer : MonoBehaviour
 			dict.Add("expected translation y", expectedTranslation.y);
 			dict.Add("expected translation z", expectedTranslation.z);
 
-			dict.Add("expected rotation quaterion x", expectedRotation.x);
-			dict.Add("expected rotation quaterion y", expectedRotation.y);
-			dict.Add("expected rotation quaterion z", expectedRotation.z);
-			dict.Add("expected rotation quaterion w", expectedRotation.w);
+			dict.Add("expected rotation quaternion x", expectedRotation.x);
+			dict.Add("expected rotation quaternion y", expectedRotation.y);
+			dict.Add("expected rotation quaternion z", expectedRotation.z);
+			dict.Add("expected rotation quaternion w", expectedRotation.w);
 
 			dict.Add("expected rotation zxy euler x", expectedRotation.eulerAngles.x);
 			dict.Add("expected rotation zxy euler y", expectedRotation.eulerAngles.y);
