@@ -215,6 +215,7 @@
     <Compile Include="Assets\Scripts\Extensions\Editor\TestVector3Extensions.cs" />
     <Compile Include="Assets\Scripts\Fragment\Editor\ContainmentDetectorTest.cs" />
     <Compile Include="Assets\Scripts\IO\Editor\TestCSVFileReader.cs" />
+    <Compile Include="Assets\Scripts\IO\Editor\TestCSVWriter.cs" />
     <Compile Include="Assets\Scripts\IO\Editor\TestObjFile.cs" />
     <Compile Include="Assets\Scripts\IO\Editor\TestObjFileReader.cs" />
     <Compile Include="Assets\Scripts\IO\Editor\TestObjFileWriter.cs" />
