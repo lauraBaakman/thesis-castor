@@ -209,7 +209,7 @@ public class StatisticsComputer : MonoBehaviour
 			translationError = distance / maxDistance;
 		}
 
-		internal Dictionary<string, object> ToDictionary()
+		public Dictionary<string, object> ToDictionary()
 		{
 			Dictionary<string, object> dict = new Dictionary<string, object>();
 

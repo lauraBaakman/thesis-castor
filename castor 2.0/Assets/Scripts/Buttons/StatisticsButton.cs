@@ -88,10 +88,10 @@ namespace Buttons
 				yield return new WaitUntil(() => statisticsComputer.Done);
 			}
 
-			WriteProcessedResultCSVDataFile();
+			WriteProcessedResultCSVDataFile(this.runs);
 		}
 
-		private void WriteProcessedResultCSVDataFile()
+		private void WriteProcessedResultCSVDataFile(List<StatisticsComputer.RunResult> results)
 		{
 			throw new NotImplementedException();
 		}
