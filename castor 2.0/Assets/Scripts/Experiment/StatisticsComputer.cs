@@ -93,7 +93,7 @@ public class StatisticsComputer : MonoBehaviour
 		/// <summary>
 		/// The translation error, i.e. the euclidean distance, normalized 
 		/// with maxDistance, between the actual and expected translation. If 
-		/// the actual translation is not set the translation error is set to Nan. 
+		/// the actual translation is not set an argumentexception is thrown.
 		/// </summary>
 		public float TranslationError
 		{
@@ -105,6 +105,24 @@ public class StatisticsComputer : MonoBehaviour
 			}
 		}
 		private float translationError = float.NaN;
+
+		/// <summary>
+		/// The rotation error in zxy euler angles, i.e. expected rotation - actual 
+		/// rotation. Normalized to ensure that the difference in rotation lies
+		///  between -180 and +180. If the actual rotation is not set an 
+		/// argumentexception is thrown.
+		/// </summary>
+		/// <value>The rotation error.</value>
+		public Vector3 RotationError
+		{
+			get
+			{
+				if (rotationError.ContainsNaNs())
+					throw new ArgumentException("Set the actual rotation before retrieving the rotation eror");
+				return rotationError;
+			}
+		}
+		private Vector3 rotationError = new Vector3(float.NaN, float.NaN, float.NaN);
 
 		/// <summary>
 		/// The expected translation, i.e. the inverse of the translation used to
@@ -122,7 +140,27 @@ public class StatisticsComputer : MonoBehaviour
 
 		private void ComputeRotationDifference()
 		{
-			throw new NotImplementedException();
+			Vector3 actualEuler = actualRotation.eulerAngles;
+			Vector3 expectedEuler = ExpectedRotation.eulerAngles;
+
+			Vector3 difference = expectedEuler - actualEuler;
+			for (int i = 0; i < 3; i++) rotationError[i] = NormalizeAngle(difference[i]);
+		}
+
+		/// <summary>
+		/// Normalizes the angle by ensure that it falls in the range (-180, +180].
+		/// </summary>
+		/// <returns>The angle.</returns>
+		/// <param name="angle">Angle.</param>
+		static private float NormalizeAngle(float angle)
+		{
+			// Ensure that angle in [0, 360).
+			angle = (angle + Mathf.Ceil(Mathf.Abs(angle / 360f)) * 360f) % 360f;
+
+			// Ensure that angle in (-180, +180]
+			if (angle > 180) angle -= 360;
+
+			return angle;
 		}
 
 		private void ComputeTranslationDifference()
