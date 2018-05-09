@@ -54,7 +54,7 @@ public class StatisticsComputer : MonoBehaviour
 		/// The rotation used to bring the modelpoints to the static points, i.e.
 		/// the rotation determined by the registration process.
 		/// </summary>
-		internal Quaternion actualRotation;
+		private Quaternion actualRotation;
 		public Quaternion ActualRotation
 		{
 			get { return actualRotation; }
@@ -65,7 +65,7 @@ public class StatisticsComputer : MonoBehaviour
 		/// The expected rotation, i.e. the inverse of the rotation used to
 		/// create the dataset.
 		/// </summary>
-		internal Quaternion expectedRotation;
+		private Quaternion expectedRotation;
 		public Quaternion ExpectedRotation { get { return expectedRotation; } }
 
 
@@ -73,7 +73,7 @@ public class StatisticsComputer : MonoBehaviour
 		/// The translation used to bring the modelpoints to the static points, i.e.
 		/// the translation determined by the registration process.
 		/// </summary>
-		internal Vector3 actualTranslation;
+		private Vector3 actualTranslation;
 		public Vector3 ActualTranslation
 		{
 			get { return actualTranslation; }
@@ -84,7 +84,7 @@ public class StatisticsComputer : MonoBehaviour
 		/// The expected translation, i.e. the inverse of the translation used to
 		/// create the dataset.
 		/// </summary>
-		internal Vector3 expectedTranslation;
+		private Vector3 expectedTranslation;
 		public Vector3 ExpectedTranslation { get { return expectedTranslation; } }
 
 		public Run(string objPath, Quaternion expectedRotation, Vector3 expectedTranslation)
@@ -205,8 +205,8 @@ public class _TransformationComputer
 
 	public void ExtractTranslationAndRotation()
 	{
-		run.actualTranslation = ExtractTranslation();
-		run.actualRotation = ExtractRotation();
+		run.ActualTranslation = ExtractTranslation();
+		run.ActualRotation = ExtractRotation();
 	}
 
 	private Vector3 ExtractTranslation()
