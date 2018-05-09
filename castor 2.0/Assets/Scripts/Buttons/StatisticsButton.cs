@@ -79,7 +79,7 @@ namespace Buttons
 			ReadDataSetCSV(datasetCSVpath);
 			yield return null;
 
-			StartCoroutine(FindObjectIDs(resultsDirectory));
+			StartCoroutine(RetrieveRuns(resultsDirectory));
 			yield return new WaitWhile(() => runs == null);
 
 			statisticsComputer.Init();
@@ -98,7 +98,7 @@ namespace Buttons
 			throw new NotImplementedException();
 		}
 
-		private IEnumerator<object> FindObjectIDs(string inputDirectory)
+		private IEnumerator<object> RetrieveRuns(string inputDirectory)
 		{
 			this.directory = inputDirectory;
 			yield return null;
@@ -116,6 +116,7 @@ namespace Buttons
 				yield return null;
 			}
 			this.runs = localRuns;
+			yield return null;
 		}
 
 		private void ReadDataSetCSV(string path)
