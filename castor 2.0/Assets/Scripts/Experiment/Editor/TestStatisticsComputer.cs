@@ -370,7 +370,7 @@ namespace Tests.Experiment
 		#endregion
 
 		[Test, TestCaseSource("ExtractRotationAndTranslationCases")]
-		public void Test_ExtractRotationAndTranslation(string file, StatisticsComputer.RunResult expected)
+		public void Test_ExtractRotationAndTranslation(string file, Vector3 expectedActualTranslation, Quaternion expectedActualRotation)
 		{
 			_TransformationComputer computer = new _TransformationComputer(InputPath(file));
 			computer.ReadObjFile();
@@ -380,9 +380,9 @@ namespace Tests.Experiment
 
 			StatisticsComputer.RunResult actual = computer.Run;
 
-			Assert.IsTrue(expected.ActualRotation == actual.ActualRotation);
+			Assert.IsTrue(actual.ActualTranslation == expectedActualTranslation);
 
-			float deltaAngle = Quaternion.Angle(actual.ActualRotation, expected.ActualRotation);
+			float deltaAngle = Quaternion.Angle(actual.ActualRotation, expectedActualRotation);
 			Assert.That(deltaAngle, Is.EqualTo(0).Within(0.1f));
 		}
 
@@ -390,19 +390,23 @@ namespace Tests.Experiment
 		static object[] ExtractRotationAndTranslationCases = {
 			new object[] {
 				inputPath_no_change,
-				new StatisticsComputer.RunResult("", Quaternion.identity, new Vector3(0, 0, 0))
+				new Vector3(0, 0, 0),
+				Quaternion.identity
 			},
 			new object[] {
 				inputPath_only_translation,
-				new StatisticsComputer.RunResult("", Quaternion.identity, translation)
+				translation,
+				Quaternion.identity
 			},
 			new object[] {
 				inputPath_only_rotation,
-				new StatisticsComputer.RunResult("", rotation, new Vector3(0, 0, 0))
+				new Vector3(0, 0, 0),
+				rotation
 			},
 			new object[] {
 				inputPath_tranlsation_rotation,
-				new StatisticsComputer.RunResult("", rotation, translation)
+				translation,
+				rotation
 			},
 		};
 		#endregion
