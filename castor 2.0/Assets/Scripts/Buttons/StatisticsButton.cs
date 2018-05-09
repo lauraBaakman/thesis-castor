@@ -93,7 +93,14 @@ namespace Buttons
 
 		private void WriteProcessedResultCSVDataFile(List<StatisticsComputer.RunResult> results)
 		{
-			throw new NotImplementedException();
+			//Convert resutls to a list of dictionaries
+			List<Dictionary<string, object>> dictionaries = new List<Dictionary<string, object>>();
+			foreach (StatisticsComputer.RunResult result in results) dictionaries.Add(result.ToDictionary());
+
+			//Write to csv file
+			string path = Path.Combine(this.directory, "results.csv");
+			CSVWriter writer = new CSVWriter(path);
+			writer.Write(dictionaries);
 		}
 
 		private IEnumerator<object> RetrieveRuns(string inputDirectory)
