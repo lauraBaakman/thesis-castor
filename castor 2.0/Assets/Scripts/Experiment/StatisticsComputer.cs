@@ -13,13 +13,10 @@ public class StatisticsComputer : MonoBehaviour
 
 	private _TransformationComputer transformComputer;
 
-	public void Init()
-	{
-		done = false;
-	}
-
 	public IEnumerator<object> Compute(StatisticsComputer.RunResult run)
 	{
+		this.done = false;
+
 		transformComputer = new _TransformationComputer(run);
 		yield return null;
 

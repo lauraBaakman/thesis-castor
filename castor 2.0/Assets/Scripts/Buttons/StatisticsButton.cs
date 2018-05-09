@@ -82,8 +82,6 @@ namespace Buttons
 			StartCoroutine(RetrieveRuns(resultsDirectory));
 			yield return new WaitWhile(() => runs == null);
 
-			statisticsComputer.Init();
-
 			foreach (StatisticsComputer.RunResult run in runs)
 			{
 				StartCoroutine(statisticsComputer.Compute(run));
