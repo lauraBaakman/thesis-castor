@@ -211,43 +211,44 @@ public class StatisticsComputer : MonoBehaviour
 
 		public Dictionary<string, object> ToDictionary()
 		{
-			Dictionary<string, object> dict = new Dictionary<string, object>();
+			Dictionary<string, object> dict = new Dictionary<string, object>
+			{
+				{ "obj path", objPath },
+				{ "actual translation x", actualTranslation.x },
+				{ "actual translation y", actualTranslation.y },
+				{ "actual translation z", actualTranslation.z },
 
-			dict.Add("obj path", objPath);
-			dict.Add("actual translation x", actualTranslation.x);
-			dict.Add("actual translation y", actualTranslation.y);
-			dict.Add("actual translation z", actualTranslation.z);
+				{ "actual rotation quaternion x", actualRotation.x },
+				{ "actual rotation quaternion y", actualRotation.y },
+				{ "actual rotation quaternion z", actualRotation.z },
+				{ "actual rotation quaternion w", actualRotation.w },
 
-			dict.Add("actual rotation quaternion x", actualRotation.x);
-			dict.Add("actual rotation quaternion y", actualRotation.y);
-			dict.Add("actual rotation quaternion z", actualRotation.z);
-			dict.Add("actual rotation quaternion w", actualRotation.w);
+				{ "actual rotation zxy euler x", actualRotation.eulerAngles.x },
+				{ "actual rotation zxy euler y", actualRotation.eulerAngles.y },
+				{ "actual rotation zxy euler z", actualRotation.eulerAngles.z },
 
-			dict.Add("actual rotation zxy euler x", actualRotation.eulerAngles.x);
-			dict.Add("actual rotation zxy euler y", actualRotation.eulerAngles.y);
-			dict.Add("actual rotation zxy euler z", actualRotation.eulerAngles.z);
+				{ "expected translation x", ExpectedTranslation.x },
+				{ "expected translation y", ExpectedTranslation.y },
+				{ "expected translation z", ExpectedTranslation.z },
 
-			dict.Add("expected translation x", ExpectedTranslation.x);
-			dict.Add("expected translation y", ExpectedTranslation.y);
-			dict.Add("expected translation z", ExpectedTranslation.z);
+				{ "expected rotation quaternion x", ExpectedRotation.x },
+				{ "expected rotation quaternion y", ExpectedRotation.y },
+				{ "expected rotation quaternion z", ExpectedRotation.z },
+				{ "expected rotation quaternion w", ExpectedRotation.w },
 
-			dict.Add("expected rotation quaternion x", ExpectedRotation.x);
-			dict.Add("expected rotation quaternion y", ExpectedRotation.y);
-			dict.Add("expected rotation quaternion z", ExpectedRotation.z);
-			dict.Add("expected rotation quaternion w", ExpectedRotation.w);
+				{ "expected rotation zxy euler x", ExpectedRotation.eulerAngles.x },
+				{ "expected rotation zxy euler y", ExpectedRotation.eulerAngles.y },
+				{ "expected rotation zxy euler z", ExpectedRotation.eulerAngles.z },
 
-			dict.Add("expected rotation zxy euler x", ExpectedRotation.eulerAngles.x);
-			dict.Add("expected rotation zxy euler y", ExpectedRotation.eulerAngles.y);
-			dict.Add("expected rotation zxy euler z", ExpectedRotation.eulerAngles.z);
+				{ "translation error", TranslationError },
+				{ "rotation error x", RotationError.x },
+				{ "rotation error y", RotationError.y },
+				{ "rotation error z", RotationError.z },
 
-			dict.Add("translation error", TranslationError);
-			dict.Add("rotation error x", RotationError.x);
-			dict.Add("rotation error y", RotationError.y);
-			dict.Add("rotation error z", RotationError.z);
-
-			dict.Add("termination message", RunData.TerminationMessage);
-			dict.Add("termination error", RunData.TerminationError);
-			dict.Add("termination iteration", RunData.TerminationIteration);
+				{ "termination message", RunData.TerminationMessage },
+				{ "termination error", RunData.TerminationError },
+				{ "termination iteration", RunData.TerminationIteration }
+			};
 
 			return dict;
 		}
