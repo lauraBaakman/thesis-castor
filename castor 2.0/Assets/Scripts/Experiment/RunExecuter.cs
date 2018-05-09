@@ -115,7 +115,7 @@ namespace Experiment
 
 			public static List<Run> FromCSV(string csvPath)
 			{
-				List<Dictionary<string, object>> configurations = new IO.CSVFileReader().Read(csvPath);
+				List<Dictionary<string, object>> configurations = new IO.CSVReader().Read(csvPath);
 				return FromCSV(configurations);
 			}
 

@@ -145,7 +145,7 @@ namespace Tests.IO
 			mesh.uv3 = new Vector2[0];
 
 			ReadResult expected = ReadResult.OKResult(inputPath, mesh);
-			ReadResult actual = new ObjFileReader(inputPath).ImportFile();
+			ReadResult actual = new ObjReader(inputPath).ImportFile();
 
 			Assert.IsTrue(actual.Succeeded);
 			Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
@@ -344,7 +344,7 @@ namespace Tests.IO
 			mesh.uv3 = uv_z0;
 
 			ReadResult expected = ReadResult.OKResult(inputPath, mesh);
-			ReadResult actual = new ObjFileReader(inputPath).ImportFile();
+			ReadResult actual = new ObjReader(inputPath).ImportFile();
 
 			Assert.IsTrue(actual.Succeeded);
 			Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
@@ -360,7 +360,7 @@ namespace Tests.IO
 		{
 			string inputPath = InputPath("nonexistentfile.obj");
 
-			ReadResult actual = new ObjFileReader(inputPath).ImportFile();
+			ReadResult actual = new ObjReader(inputPath).ImportFile();
 
 			Assert.IsFalse(actual.Succeeded);
 			Assert.IsTrue(actual.Failed);

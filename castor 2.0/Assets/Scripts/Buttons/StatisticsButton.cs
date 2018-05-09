@@ -104,7 +104,7 @@ namespace Buttons
 			string csvDataFile = GetResultsCSVDataFile();
 			yield return null;
 
-			List<Dictionary<string, object>> ResultsCSVData = new CSVFileReader().Read(csvDataFile);
+			List<Dictionary<string, object>> ResultsCSVData = new CSVReader().Read(csvDataFile);
 			yield return null;
 
 			List<StatisticsComputer.RunResult> localRuns = new List<StatisticsComputer.RunResult>(ResultsCSVData.Count);
@@ -119,7 +119,7 @@ namespace Buttons
 
 		private void ReadDataSetCSV(string path)
 		{
-			List<Dictionary<string, object>> rows = new CSVFileReader().Read(path);
+			List<Dictionary<string, object>> rows = new CSVReader().Read(path);
 			ExperimentCSVData = new Dictionary<string, Dictionary<string, object>>();
 
 			foreach (Dictionary<string, object> row in rows)

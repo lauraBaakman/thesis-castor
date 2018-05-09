@@ -8,7 +8,7 @@ namespace IO
 	{
 		public static ReadResult Read(string path)
 		{
-			return new ObjFileReader(path).ImportFile();
+			return new ObjReader(path).ImportFile();
 		}
 
 		public static WriteResult Write(Mesh mesh, string path)

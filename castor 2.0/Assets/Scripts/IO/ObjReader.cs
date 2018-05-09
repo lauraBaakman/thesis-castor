@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace IO
 {
-	public class ObjFileReader
+	public class ObjReader
 	{
 		private readonly string filePath;
 
 		private readonly Dictionary<string, Reader> readers;
 
-		public ObjFileReader(string filePath)
+		public ObjReader(string filePath)
 		{
 			this.filePath = filePath;
 

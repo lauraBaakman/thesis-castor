@@ -43,7 +43,7 @@ namespace Tests.IO
 					{"rotation z", +1.5707963705062866f}
 				}
 			};
-			List<Dictionary<string, object>> actual = new CSVFileReader().Read(path);
+			List<Dictionary<string, object>> actual = new CSVReader().Read(path);
 
 			Dictionary<string, object> actualRow, expectedRow;
 			for (int i = 0; i < actual.Count; i++)
