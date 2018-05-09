@@ -535,18 +535,27 @@ namespace Tests.IO
 			Assert.AreEqual(expected, actual);
 		}
 
-		[Test]
-		public void ReadTest()
+		[Test, TestCaseSource("readCases")]
+		public void ReadTest(string line, Vector3 expected)
 		{
-			string line = "vn 1.53 +2.47 -3.68";
 			reader.Read(line);
-
-			Vector3 expected = new Vector3(1.53f, 2.47f, -3.68f);
 
 			Vector3 actual = reader.elements[1];
 
 			Assert.AreEqual(expected, actual);
 		}
+
+		private static object[] readCases =
+		{
+			new object[] {
+				"vn 1.53 +2.47 -3.68",
+				new Vector3(1.53f, 2.47f, -3.68f)
+			},
+			new object[] {
+				"vn -1.1237E-06 -0.9999997 -0.000821294",
+				new Vector3(-1.1237E-06f, -0.9999997f, -0.000821294f)
+			}
+		};
 
 		[Test]
 		public void Read_CubeTest()
