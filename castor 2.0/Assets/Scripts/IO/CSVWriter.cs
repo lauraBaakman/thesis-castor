@@ -5,7 +5,7 @@ using System.IO;
 
 public class CSVWriter
 {
-	private List<string> columnNames;
+	private Dictionary<string, object>.KeyCollection columnNames;
 	private readonly StreamWriter writer;
 
 	public CSVWriter(string outputPath)
@@ -13,7 +13,7 @@ public class CSVWriter
 		this.writer = new StreamWriter(outputPath);
 	}
 
-	public void WriteHeader(List<string> columnNames)
+	public void WriteHeader(Dictionary<string, object>.KeyCollection columnNames)
 	{
 		throw new NotImplementedException();
 	}
@@ -25,7 +25,7 @@ public class CSVWriter
 
 	public void Write(List<Dictionary<string, object>> data)
 	{
-		this.columnNames = (List<string>)data[0].Keys.AsEnumerable<string>();
+		this.columnNames = data[0].Keys;
 
 		WriteHeader(columnNames);
 
