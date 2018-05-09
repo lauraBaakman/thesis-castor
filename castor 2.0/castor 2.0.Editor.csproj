@@ -245,6 +245,7 @@
     <Compile Include="Assets\Scripts\Utils\Editor\TestRangeF.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestTriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Editor\TestVectorUtils.cs" />
+    <Compile Include="Assets\Scripts\Experiment\Editor\TestRunResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

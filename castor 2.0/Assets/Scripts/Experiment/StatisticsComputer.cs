@@ -35,14 +35,18 @@ public class StatisticsComputer : MonoBehaviour
 		transformComputer.ExtractTranslationAndRotation();
 		yield return null;
 
-		throw new NotImplementedException("Compare with the expected rotation and translation and store results in Results");
-		yield return null;
-
-		done = true;
+		this.done = true;
 	}
 
 	public class RunResult
 	{
+		/// <summary>
+		/// The distance used to normalize the distance between the actual and
+		/// expected translation. The 2.0 reflects the radius of the sphere that
+		/// was used to place the model fragments. 
+		/// </summary>
+		public static float maxDistance = 2.0f;
+
 		/// <summary>
 		/// The string to the path with the obj file that has the final position
 		/// in its vertex coordinates, and the initial position in its
@@ -54,45 +58,77 @@ public class StatisticsComputer : MonoBehaviour
 		/// The rotation used to bring the modelpoints to the static points, i.e.
 		/// the rotation determined by the registration process.
 		/// </summary>
-		private Quaternion actualRotation;
 		public Quaternion ActualRotation
 		{
 			get { return actualRotation; }
-			set { actualRotation = value; }
+			set
+			{
+				actualRotation = value;
+				ComputeRotationDifference();
+			}
 		}
+		private Quaternion actualRotation;
 
 		/// <summary>
 		/// The expected rotation, i.e. the inverse of the rotation used to
 		/// create the dataset.
-		/// </summary>
-		private Quaternion expectedRotation;
-		public Quaternion ExpectedRotation { get { return expectedRotation; } }
-
+		/// </summary>      
+		public readonly Quaternion ExpectedRotation;
 
 		/// <summary>
 		/// The translation used to bring the modelpoints to the static points, i.e.
 		/// the translation determined by the registration process.
 		/// </summary>
-		private Vector3 actualTranslation;
 		public Vector3 ActualTranslation
 		{
 			get { return actualTranslation; }
-			set { actualTranslation = value; }
+			set
+			{
+				actualTranslation = value;
+				ComputeTranslationDifference();
+			}
 		}
+		private Vector3 actualTranslation;
+
+		/// <summary>
+		/// The translation error, i.e. the euclidean distance, normalized 
+		/// with maxDistance, between the actual and expected translation. If 
+		/// the actual translation is not set the translation error is set to Nan. 
+		/// </summary>
+		public float TranslationError
+		{
+			get
+			{
+				if (float.IsNaN(translationError))
+					throw new ArgumentException("Set the actual translation before retrieving the translation eror");
+				return translationError;
+			}
+		}
+		private float translationError = float.NaN;
 
 		/// <summary>
 		/// The expected translation, i.e. the inverse of the translation used to
 		/// create the dataset.
 		/// </summary>
-		private Vector3 expectedTranslation;
-		public Vector3 ExpectedTranslation { get { return expectedTranslation; } }
+		public readonly Vector3 ExpectedTranslation;
 
 		public RunResult(string objPath, Quaternion expectedRotation, Vector3 expectedTranslation)
 		{
-			this.expectedRotation = expectedRotation;
-			this.expectedTranslation = expectedTranslation;
+			this.ExpectedRotation = expectedRotation;
+			this.ExpectedTranslation = expectedTranslation;
 
 			this.objPath = objPath;
+		}
+
+		private void ComputeRotationDifference()
+		{
+			throw new NotImplementedException();
+		}
+
+		private void ComputeTranslationDifference()
+		{
+			float distance = (ExpectedTranslation - actualTranslation).magnitude;
+			translationError = distance / maxDistance;
 		}
 
 		internal Dictionary<string, object> ToDictionary()
@@ -113,18 +149,18 @@ public class StatisticsComputer : MonoBehaviour
 			dict.Add("actual rotation zxy euler y", actualRotation.eulerAngles.y);
 			dict.Add("actual rotation zxy euler z", actualRotation.eulerAngles.z);
 
-			dict.Add("expected translation x", expectedTranslation.x);
-			dict.Add("expected translation y", expectedTranslation.y);
-			dict.Add("expected translation z", expectedTranslation.z);
+			dict.Add("expected translation x", ExpectedTranslation.x);
+			dict.Add("expected translation y", ExpectedTranslation.y);
+			dict.Add("expected translation z", ExpectedTranslation.z);
 
-			dict.Add("expected rotation quaternion x", expectedRotation.x);
-			dict.Add("expected rotation quaternion y", expectedRotation.y);
-			dict.Add("expected rotation quaternion z", expectedRotation.z);
-			dict.Add("expected rotation quaternion w", expectedRotation.w);
+			dict.Add("expected rotation quaternion x", ExpectedRotation.x);
+			dict.Add("expected rotation quaternion y", ExpectedRotation.y);
+			dict.Add("expected rotation quaternion z", ExpectedRotation.z);
+			dict.Add("expected rotation quaternion w", ExpectedRotation.w);
 
-			dict.Add("expected rotation zxy euler x", expectedRotation.eulerAngles.x);
-			dict.Add("expected rotation zxy euler y", expectedRotation.eulerAngles.y);
-			dict.Add("expected rotation zxy euler z", expectedRotation.eulerAngles.z);
+			dict.Add("expected rotation zxy euler x", ExpectedRotation.eulerAngles.x);
+			dict.Add("expected rotation zxy euler y", ExpectedRotation.eulerAngles.y);
+			dict.Add("expected rotation zxy euler z", ExpectedRotation.eulerAngles.z);
 			return dict;
 		}
 	}
