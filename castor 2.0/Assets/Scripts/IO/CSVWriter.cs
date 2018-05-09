@@ -1,21 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
 
 public class CSVWriter
 {
-	private Dictionary<string, object>.KeyCollection columnNames;
-	private readonly StreamWriter writer;
+	private List<string> columnNames;
+	private string outputPath;
+	private StreamWriter writer;
+
 
 	public CSVWriter(string outputPath)
 	{
-		this.writer = new StreamWriter(outputPath);
+		this.outputPath = outputPath;
 	}
 
-	public void WriteHeader(Dictionary<string, object>.KeyCollection columnNames)
+	private void WriteTimeStamp()
 	{
-		throw new NotImplementedException();
+		string timestamp = string.Format(
+			"# Written by CAstOR on {0}",
+			System.DateTime.Now.ToLocalTime().ToString()
+		);
+		WriteLine(timestamp);
+	}
+
+	public void WriteHeader(List<string> columnNames)
+	{
+		string header = columnNames[0];
+		for (int i = 1; i < columnNames.Count; i++)
+		{
+			header = string.Format("{0}, {1}", header, columnNames[i]);
+		}
+		WriteLine(header);
+	}
+
+	private void WriteLine(string line)
+	{
+		writer.WriteLine(line);
 	}
 
 	public void WriteRow(Dictionary<string, object> rowData)
@@ -25,12 +45,14 @@ public class CSVWriter
 
 	public void Write(List<Dictionary<string, object>> data)
 	{
-		this.columnNames = data[0].Keys;
+		this.columnNames = new List<string>(data[0].Keys);
 
-		WriteHeader(columnNames);
-
-		foreach (Dictionary<string, object> row in data) WriteRow(row);
-
-		writer.Dispose();
+		using (this.writer = new StreamWriter(this.outputPath))
+		{
+			WriteTimeStamp();
+			WriteHeader(columnNames);
+			foreach (Dictionary<string, object> row in data)
+				WriteRow(row);
+		}
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using IO;
 using System.IO;
+using UnityEngine;
 
 namespace Tests.IO
 {
