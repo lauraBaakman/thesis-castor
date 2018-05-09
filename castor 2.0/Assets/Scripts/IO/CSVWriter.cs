@@ -8,7 +8,6 @@ public class CSVWriter
 	private string outputPath;
 	private StreamWriter writer;
 
-
 	public CSVWriter(string outputPath)
 	{
 		this.outputPath = outputPath;
@@ -40,7 +39,15 @@ public class CSVWriter
 
 	public void WriteRow(Dictionary<string, object> rowData)
 	{
-		throw new NotImplementedException();
+		string row = Convert.ToString(rowData[columnNames[0]]);
+
+		object value;
+		for (int i = 1; i < columnNames.Count; i++)
+		{
+			value = rowData[columnNames[i]];
+			row = string.Format("{0}, {1}", row, Convert.ToString(value));
+		}
+		WriteLine(row);
 	}
 
 	public void Write(List<Dictionary<string, object>> data)

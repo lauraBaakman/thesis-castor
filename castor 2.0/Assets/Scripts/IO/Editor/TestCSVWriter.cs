@@ -29,17 +29,17 @@ namespace Tests.IO
 			List<Dictionary<string, object>> expected = new List<Dictionary<string, object>>
 			{
 				new Dictionary<string, object>{
-					{"the string", (object) "hi"},
-					{"the int", (object) 5},
-					{"the float", 4.5f},
-					{"the double", 5.2}
+					{"the string", "hi"},
+					{"the int", 5},
+					{"the float", 4.5643f},
+					{"the double", 5.2},
 				},
 				new Dictionary<string, object>{
-					{"the string", (object) "bye"},
-					{"the int", (object) 6},
-					{"the float", 7.2f},
-					{"the double", 9.3}
-				}
+					{"the string", "bye"},
+					{"the int", 7},
+					{"the float", 9.34232f},
+					{"the double", 7.243243},
+				},
 			};
 
 			CSVWriter writer = new CSVWriter(path);
@@ -54,10 +54,8 @@ namespace Tests.IO
 				actualRow = actual[i];
 				expectedRow = expected[i];
 
-				foreach (string key in expectedRow.Keys)
-				{
-					Assert.That(actualRow[key].Equals(expectedRow[key]));
-				}
+				foreach (string key in expectedRow.Keys) Assert.That(actualRow[key], Is.EqualTo(expectedRow[key]).Within(0.001f));
+				//foreach (string key in actualRow.Keys) Assert.AreEqual(actualRow[key], expectedRow[key]);
 			}
 		}
 	}
