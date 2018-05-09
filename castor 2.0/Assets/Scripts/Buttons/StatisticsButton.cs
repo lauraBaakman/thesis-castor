@@ -151,15 +151,31 @@ namespace Buttons
 
 		private StatisticsComputer.RunResult ExtractRun(Dictionary<string, object> csvRow)
 		{
-			string id = csvRow["id"] as string;
-			string path = Path.Combine(directory, String.Format("{0}.obj", id));
+			StatisticsComputer.RunData runData = ExtractRunData(csvRow);
+			string path = Path.Combine(directory, String.Format("{0}.obj", runData.id));
 
-			Dictionary<string, object> experimentDataRow = ExperimentCSVData[id];
+			Dictionary<string, object> experimentDataRow = ExperimentCSVData[runData.id];
 
 			return new StatisticsComputer.RunResult(
 				objPath: path,
 				expectedRotation: ExtractExpectedRotation(experimentDataRow),
-				expectedTranslation: ExtractExpectedTranslation(experimentDataRow)
+				expectedTranslation: ExtractExpectedTranslation(experimentDataRow),
+				runData: runData
+			);
+		}
+
+		private StatisticsComputer.RunData ExtractRunData(Dictionary<string, object> csvRow)
+		{
+			//id, termination message, termination error, termination iteration
+			string id = csvRow["id"] as string;
+			string terminationMessage = csvRow["termination message"] as string;
+			float terminationError = (float)csvRow["termination error"];
+			int terminationIteration = (int)csvRow["termination iteration"];
+			return new StatisticsComputer.RunData(
+				id: id,
+				terminationError: terminationError,
+				terminationMessage: terminationMessage,
+				terminationIteration: terminationIteration
 			);
 		}
 

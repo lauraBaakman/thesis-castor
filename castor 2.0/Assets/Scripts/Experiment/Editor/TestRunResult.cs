@@ -16,7 +16,8 @@ namespace Tests.Experiment
 			result = new StatisticsComputer.RunResult(
 				objPath: "",
 				expectedRotation: Quaternion.Euler(new Vector3(15, 30, -45)),
-				expectedTranslation: new Vector3(+1.0f, +1.2f, -2.0f)
+				expectedTranslation: new Vector3(+1.0f, +1.2f, -2.0f),
+				runData: StatisticsComputer.RunData.RunDataForTests()
 			);
 		}
 

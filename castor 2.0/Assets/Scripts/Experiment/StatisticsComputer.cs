@@ -38,6 +38,42 @@ public class StatisticsComputer : MonoBehaviour
 		this.done = true;
 	}
 
+	public class RunData
+	{
+		/// <summary>
+		/// The id of the model fragment.
+		/// </summary>
+		public readonly string id;
+
+		/// <summary>
+		/// The termination message.
+		/// </summary>
+		public readonly string TerminationMessage;
+
+		/// <summary>
+		/// The error when the registration process terminated.
+		/// </summary>
+		public readonly float TerminationError;
+
+		/// <summary>
+		/// The iteration at which the registration proess terminated.
+		/// </summary>
+		public readonly int TerminationIteration;
+
+		public RunData(string id, string terminationMessage, float terminationError, int terminationIteration)
+		{
+			this.id = id;
+			this.TerminationMessage = terminationMessage;
+			this.TerminationError = terminationError;
+			this.TerminationIteration = terminationIteration;
+		}
+
+		public static RunData RunDataForTests()
+		{
+			return new RunData("test run data", "don't use in production", float.NaN, int.MinValue);
+		}
+	}
+
 	public class RunResult
 	{
 		/// <summary>
@@ -46,6 +82,11 @@ public class StatisticsComputer : MonoBehaviour
 		/// was used to place the model fragments. 
 		/// </summary>
 		public static float maxDistance = 2.0f;
+
+		/// <summary>
+		/// Information on the run.
+		/// </summary>
+		public readonly RunData RunData;
 
 		/// <summary>
 		/// The string to the path with the obj file that has the final position
@@ -130,10 +171,12 @@ public class StatisticsComputer : MonoBehaviour
 		/// </summary>
 		public readonly Vector3 ExpectedTranslation;
 
-		public RunResult(string objPath, Quaternion expectedRotation, Vector3 expectedTranslation)
+		public RunResult(string objPath, Quaternion expectedRotation, Vector3 expectedTranslation, RunData runData)
 		{
 			this.ExpectedRotation = expectedRotation;
 			this.ExpectedTranslation = expectedTranslation;
+
+			this.RunData = runData;
 
 			this.objPath = objPath;
 		}
@@ -199,6 +242,16 @@ public class StatisticsComputer : MonoBehaviour
 			dict.Add("expected rotation zxy euler x", ExpectedRotation.eulerAngles.x);
 			dict.Add("expected rotation zxy euler y", ExpectedRotation.eulerAngles.y);
 			dict.Add("expected rotation zxy euler z", ExpectedRotation.eulerAngles.z);
+
+			dict.Add("translation error", TranslationError);
+			dict.Add("rotation error x", RotationError.x);
+			dict.Add("rotation error y", RotationError.y);
+			dict.Add("rotation error z", RotationError.z);
+
+			dict.Add("termination message", RunData.TerminationMessage);
+			dict.Add("termination error", RunData.TerminationError);
+			dict.Add("termination iteration", RunData.TerminationIteration);
+
 			return dict;
 		}
 	}

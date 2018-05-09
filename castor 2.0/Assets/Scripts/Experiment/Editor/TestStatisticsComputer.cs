@@ -84,7 +84,8 @@ namespace Tests.Experiment
 			return new StatisticsComputer.RunResult(
 				objPath: path,
 				expectedRotation: Quaternion.identity,
-				expectedTranslation: new Vector3()
+				expectedTranslation: new Vector3(),
+				runData: StatisticsComputer.RunData.RunDataForTests()
 			);
 		}
 

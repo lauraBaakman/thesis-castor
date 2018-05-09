@@ -86,7 +86,15 @@ namespace IO
 
 		private string[] ReadHeader(string[] lines)
 		{
-			return Regex.Split(lines[0], split_regex);
+			string[] readHeader = Regex.Split(lines[0], split_regex);
+
+			int columnCount = readHeader.Length;
+
+			//Trim whitespace
+			string[] header = new string[columnCount];
+			for (int i = 0; i < columnCount; i++) header[i] = readHeader[i].Trim();
+
+			return header;
 		}
 
 		private Dictionary<string, object> ParseLine(string line, string[] header)
