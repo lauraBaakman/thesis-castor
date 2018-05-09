@@ -18,7 +18,7 @@ public class StatisticsComputer : MonoBehaviour
 		done = false;
 	}
 
-	public IEnumerator<object> Compute(StatisticsComputer.Run run)
+	public IEnumerator<object> Compute(StatisticsComputer.RunResult run)
 	{
 		transformComputer = new _TransformationComputer(run);
 		yield return null;
@@ -41,7 +41,7 @@ public class StatisticsComputer : MonoBehaviour
 		done = true;
 	}
 
-	public class Run
+	public class RunResult
 	{
 		/// <summary>
 		/// The string to the path with the obj file that has the final position
@@ -87,7 +87,7 @@ public class StatisticsComputer : MonoBehaviour
 		private Vector3 expectedTranslation;
 		public Vector3 ExpectedTranslation { get { return expectedTranslation; } }
 
-		public Run(string objPath, Quaternion expectedRotation, Vector3 expectedTranslation)
+		public RunResult(string objPath, Quaternion expectedRotation, Vector3 expectedTranslation)
 		{
 			this.expectedRotation = expectedRotation;
 			this.expectedTranslation = expectedTranslation;
@@ -139,13 +139,13 @@ public class _TransformationComputer
 	private CorrespondenceCollection correspondences;
 	public CorrespondenceCollection Correspondences { get { return correspondences; } }
 
-	private StatisticsComputer.Run run;
-	public StatisticsComputer.Run Run { get { return run; } }
+	private StatisticsComputer.RunResult run;
+	public StatisticsComputer.RunResult Run { get { return run; } }
 
 	private Matrix4x4 transformationMatrix;
 	public Matrix4x4 TransformationMatrix { get { return transformationMatrix; } }
 
-	public _TransformationComputer(StatisticsComputer.Run run)
+	public _TransformationComputer(StatisticsComputer.RunResult run)
 	{
 		correspondences = new CorrespondenceCollection();
 

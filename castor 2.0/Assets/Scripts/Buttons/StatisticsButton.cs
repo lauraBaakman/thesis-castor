@@ -13,7 +13,7 @@ namespace Buttons
 
 		private string directory;
 
-		private List<StatisticsComputer.Run> runs;
+		private List<StatisticsComputer.RunResult> runs;
 
 		public StatisticsComputer statisticsComputer;
 
@@ -84,7 +84,7 @@ namespace Buttons
 
 			statisticsComputer.Init();
 
-			foreach (StatisticsComputer.Run run in runs)
+			foreach (StatisticsComputer.RunResult run in runs)
 			{
 				StartCoroutine(statisticsComputer.Compute(run));
 				yield return new WaitUntil(() => statisticsComputer.Done);
@@ -109,7 +109,7 @@ namespace Buttons
 			List<Dictionary<string, object>> ResultsCSVData = new CSVFileReader().Read(csvDataFile);
 			yield return null;
 
-			List<StatisticsComputer.Run> localRuns = new List<StatisticsComputer.Run>(ResultsCSVData.Count);
+			List<StatisticsComputer.RunResult> localRuns = new List<StatisticsComputer.RunResult>(ResultsCSVData.Count);
 			foreach (Dictionary<string, object> row in ResultsCSVData)
 			{
 				localRuns.Add(ExtractRun(row));
@@ -149,14 +149,14 @@ namespace Buttons
 			}
 		}
 
-		private StatisticsComputer.Run ExtractRun(Dictionary<string, object> csvRow)
+		private StatisticsComputer.RunResult ExtractRun(Dictionary<string, object> csvRow)
 		{
 			string id = csvRow["id"] as string;
 			string path = Path.Combine(directory, String.Format("{0}.obj", id));
 
 			Dictionary<string, object> experimentDataRow = ExperimentCSVData[id];
 
-			return new StatisticsComputer.Run(
+			return new StatisticsComputer.RunResult(
 				objPath: path,
 				expectedRotation: ExtractExpectedRotation(experimentDataRow),
 				expectedTranslation: ExtractExpectedTranslation(experimentDataRow)

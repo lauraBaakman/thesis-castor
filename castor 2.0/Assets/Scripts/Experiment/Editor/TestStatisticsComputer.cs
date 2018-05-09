@@ -78,10 +78,10 @@ namespace Tests.Experiment
 		public void SetUp()
 		{ }
 
-		private StatisticsComputer.Run InputPath(string file)
+		private StatisticsComputer.RunResult InputPath(string file)
 		{
 			string path = Path.Combine(Application.dataPath, Path.Combine("Scripts/Experiment/Editor", file));
-			return new StatisticsComputer.Run(
+			return new StatisticsComputer.RunResult(
 				objPath: path,
 				expectedRotation: Quaternion.identity,
 				expectedTranslation: new Vector3()
@@ -370,7 +370,7 @@ namespace Tests.Experiment
 		#endregion
 
 		[Test, TestCaseSource("ExtractRotationAndTranslationCases")]
-		public void Test_ExtractRotationAndTranslation(string file, StatisticsComputer.Run expected)
+		public void Test_ExtractRotationAndTranslation(string file, StatisticsComputer.RunResult expected)
 		{
 			_TransformationComputer computer = new _TransformationComputer(InputPath(file));
 			computer.ReadObjFile();
@@ -378,7 +378,7 @@ namespace Tests.Experiment
 			computer.ComputeTransformationMatrix();
 			computer.ExtractTranslationAndRotation();
 
-			StatisticsComputer.Run actual = computer.Run;
+			StatisticsComputer.RunResult actual = computer.Run;
 
 			Assert.IsTrue(expected.ActualRotation == actual.ActualRotation);
 
@@ -390,19 +390,19 @@ namespace Tests.Experiment
 		static object[] ExtractRotationAndTranslationCases = {
 			new object[] {
 				inputPath_no_change,
-				new StatisticsComputer.Run("", Quaternion.identity, new Vector3(0, 0, 0))
+				new StatisticsComputer.RunResult("", Quaternion.identity, new Vector3(0, 0, 0))
 			},
 			new object[] {
 				inputPath_only_translation,
-				new StatisticsComputer.Run("", Quaternion.identity, translation)
+				new StatisticsComputer.RunResult("", Quaternion.identity, translation)
 			},
 			new object[] {
 				inputPath_only_rotation,
-				new StatisticsComputer.Run("", rotation, new Vector3(0, 0, 0))
+				new StatisticsComputer.RunResult("", rotation, new Vector3(0, 0, 0))
 			},
 			new object[] {
 				inputPath_tranlsation_rotation,
-				new StatisticsComputer.Run("", rotation, translation)
+				new StatisticsComputer.RunResult("", rotation, translation)
 			},
 		};
 		#endregion
