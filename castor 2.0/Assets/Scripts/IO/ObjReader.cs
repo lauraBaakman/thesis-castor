@@ -154,25 +154,21 @@ namespace IO
 
 	public abstract class VectorReader : ReferenceReader<Vector3>
 	{
-		private readonly Regex vectorRegex;
-
 		protected VectorReader(string lineTypeSymbol)
 			: base(lineTypeSymbol)
-		{
-			vectorRegex = new Regex(typeRegex + @"(?<x>\+?\-?\d+(\.\d+)?)\s+(?<y>\+?\-?\d+(\.\d+)?)\s+(?<z>\+?\-?\d+(\.\d+)?)$");
-		}
+		{ }
 
 		public override Vector3 ExtractElement(string line)
 		{
 			Vector3 vertex;
 			try
 			{
-				MatchCollection matches = vectorRegex.Matches(line);
-				GroupCollection groups = matches[0].Groups;
+				string[] values = line.Split(' ');
+				//Values[0] contains vn/v/vt
 				vertex = new Vector3(
-					x: float.Parse(groups["x"].Value),
-					y: float.Parse(groups["y"].Value),
-					z: float.Parse(groups["z"].Value)
+					x: float.Parse(values[1]),
+					y: float.Parse(values[2]),
+					z: float.Parse(values[3])
 				);
 			}
 			catch (Exception e)
