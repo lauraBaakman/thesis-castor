@@ -41,6 +41,8 @@ namespace Tests.IO
 				},
 			};
 
+			string path = Path.GetTempFileName();
+
 			CSVWriter writer = new CSVWriter(path);
 			writer.Write(expected);
 
@@ -54,7 +56,7 @@ namespace Tests.IO
 				expectedRow = expected[i];
 
 				foreach (string key in expectedRow.Keys) Assert.That(actualRow[key], Is.EqualTo(expectedRow[key]).Within(0.001f));
-				//foreach (string key in actualRow.Keys) Assert.AreEqual(actualRow[key], expectedRow[key]);
+				foreach (string key in actualRow.Keys) Assert.AreEqual(actualRow[key], expectedRow[key]);
 			}
 		}
 	}

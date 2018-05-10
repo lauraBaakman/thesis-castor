@@ -1041,7 +1041,7 @@ namespace Tests.DoubleConnectedEdgeList
 			Assert.AreEqual(comparer.GetHashCode(x), comparer.GetHashCode(y));
 		}
 
-		[Test, MaxTime(50)]
+		[Test, MaxTime(100)]
 		public void XAndyAreNotEqual_OriginDifferent()
 		{
 			HalfEdge x = Auxilaries.RandomHalfEdge();
