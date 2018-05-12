@@ -5,6 +5,7 @@ using UnityEngine;
 using Registration;
 using Registration.Messages;
 using System.Globalization;
+using System;
 
 namespace Experiment
 {
@@ -132,22 +133,17 @@ namespace Experiment
 			return RunExecuter.Run.FromCSV(configuration.configurations);
 		}
 
-		private string CreateResultsDirectory(Settings ICPSetting)
+		private void CreateResultsDirectory(string path)
 		{
-			string basePath = configuration.outputDirectory;
-			string directoryName = CreateResultsDirectoryName(ICPSetting);
-
-			string directory = Path.Combine(basePath, directoryName);
-
-			Directory.CreateDirectory(directory);
-
-			return directory;
+			Directory.CreateDirectory(path);
 		}
 
 		private string CreateResultsDirectoryName(Settings ICPSetting)
 		{
-			return string.Format(
-				"results_{0}", ICPSetting.name);
+			string basePath = configuration.outputDirectory;
+			string directoryName = string.Format("results_{0}", ICPSetting.name);
+			string directory = Path.Combine(basePath, directoryName);
+			return directory;
 		}
 
 		private void HandleStaticFragment()
@@ -185,6 +181,27 @@ namespace Experiment
 			return completedRunCount == (runs.Count - 1);
 		}
 
+		private bool ResultsDirectoryExists()
+		{
+			Debug.Log("To Be Implemented");
+			return true;
+		}
+
+		private void SetUpForSettings()
+		{
+			if (ResultsDirectoryExists()) SetUpForContinuation();
+			else SetUpForFirstTime();
+		}
+
+		private void SetUpForFirstTime()
+		{
+			Debug.Log("SetUpFor First Time");
+		}
+		private void SetUpForContinuation()
+		{
+			Debug.Log("SetUp For Continuation");
+		}
+
 		public IEnumerator<object> Execute()
 		{
 			RunExecuter executer = new RunExecuter(listener: this.gameObject, staticFragment: staticFragment,
@@ -194,7 +211,8 @@ namespace Experiment
 
 			foreach (Settings ICPSetting in this.ICPSettings)
 			{
-				this.outputDirectory = CreateResultsDirectory(ICPSetting);
+				this.outputDirectory = CreateResultsDirectoryName(ICPSetting);
+				CreateResultsDirectory(this.outputDirectory);
 				yield return null;
 
 				Write(staticFragment);

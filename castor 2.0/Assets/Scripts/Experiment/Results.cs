@@ -17,11 +17,6 @@ public class Results
 		results = new Dictionary<string, Result>();
 	}
 
-	public void ToFile()
-	{
-		throw new NotImplementedException();
-	}
-
 	public static Results FromFile(string path)
 	{
 		throw new NotImplementedException();
