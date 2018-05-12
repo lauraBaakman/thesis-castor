@@ -26,8 +26,6 @@ namespace Experiment
 
 		private Results results;
 
-		private int completedRunCount;
-
 		private string outputDirectory;
 
 		private StreamWriter runSetWriter;
@@ -202,7 +200,7 @@ namespace Experiment
 
 			this.results = new Results();
 
-			SetUpRunSetWriter(continuation: true);
+			SetUpRunSetWriter(continuation: false);
 		}
 		private void SetUpForContinuation()
 		{
@@ -210,7 +208,13 @@ namespace Experiment
 
 			this.results = Results.FromFile(path);
 
-			SetUpRunSetWriter(continuation: false);
+			if (this.results.ResultCount == runs.Count)
+			{
+				Debug.Log("Performed alle experiments in " + this.outputDirectory);
+				return;
+			}
+
+			SetUpRunSetWriter(continuation: true);
 		}
 
 		public IEnumerator<object> Execute()
