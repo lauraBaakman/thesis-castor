@@ -183,8 +183,7 @@ namespace Experiment
 
 		private bool ResultsDirectoryExists()
 		{
-			Debug.Log("To Be Implemented");
-			return true;
+			return Directory.Exists(this.outputDirectory);
 		}
 
 		private void SetUpForSettings()
@@ -195,7 +194,8 @@ namespace Experiment
 
 		private void SetUpForFirstTime()
 		{
-			Debug.Log("SetUpFor First Time");
+			Debug.Log("Set up For First time");
+			CreateResultsDirectory(this.outputDirectory);
 		}
 		private void SetUpForContinuation()
 		{
@@ -212,7 +212,9 @@ namespace Experiment
 			foreach (Settings ICPSetting in this.ICPSettings)
 			{
 				this.outputDirectory = CreateResultsDirectoryName(ICPSetting);
-				CreateResultsDirectory(this.outputDirectory);
+				yield return null;
+
+				SetUpForSettings();
 				yield return null;
 
 				Write(staticFragment);
