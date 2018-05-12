@@ -178,7 +178,7 @@ namespace Experiment
 
 		private bool CompletedAllRuns()
 		{
-			return completedRunCount == (runs.Count - 1);
+			return results.ResultCount == runs.Count;
 		}
 
 		private bool ResultsDirectoryExists()
@@ -186,20 +186,31 @@ namespace Experiment
 			return Directory.Exists(this.outputDirectory);
 		}
 
-		private void SetUpForSettings()
+		private void SetUpForSettings(Settings settings)
 		{
 			if (ResultsDirectoryExists()) SetUpForContinuation();
-			else SetUpForFirstTime();
+			else SetUpForFirstTime(settings);
 		}
 
-		private void SetUpForFirstTime()
+		private void SetUpForFirstTime(Settings settings)
 		{
-			Debug.Log("Set up For First time");
 			CreateResultsDirectory(this.outputDirectory);
+
+			Write(staticFragment);
+
+			settings.ToJson(Path.Combine(this.outputDirectory, "settings.json"));
+
+			this.results = new Results();
+
+			SetUpRunSetWriter(continuation: true);
 		}
 		private void SetUpForContinuation()
 		{
-			Debug.Log("SetUp For Continuation");
+			string path = Path.Combine(this.outputDirectory, runDataFileName);
+
+			this.results = Results.FromFile(path);
+
+			SetUpRunSetWriter(continuation: false);
 		}
 
 		public IEnumerator<object> Execute()
@@ -214,46 +225,43 @@ namespace Experiment
 				this.outputDirectory = CreateResultsDirectoryName(ICPSetting);
 				yield return null;
 
-				SetUpForSettings();
+				SetUpForSettings(ICPSetting);
 				yield return null;
 
-				Write(staticFragment);
-				yield return null;
-
-				ICPSetting.ToJson(Path.Combine(this.outputDirectory, "settings.json"));
-				yield return null;
-
-				SetUpRunSetWriter();
-				yield return null;
-
-				this.results = new Results();
-				yield return null;
-
-				for (completedRunCount = 0; completedRunCount < runs.Count; completedRunCount++)
+				while (!CompletedAllRuns())
 				{
-					run = runs[completedRunCount];
+					run = runs[results.ResultCount];
 
-					run.ICPSettings = ICPSetting;
-					executer.OutputDirectory = this.outputDirectory;
+					//This run has not been executed
+					if (!results.HasResultFor(run.id))
+					{
+						run.ICPSettings = ICPSetting;
+						executer.OutputDirectory = this.outputDirectory;
 
-					runSetWriter.Write(string.Format("{0}, ", run.id));
-					yield return null;
+						runSetWriter.Write(string.Format("{0}, ", run.id));
+						yield return null;
 
-					StartCoroutine(executer.Execute(run));
-					yield return new WaitUntil(executer.IsCurrentRunFinished);
+						StartCoroutine(executer.Execute(run));
+						yield return new WaitUntil(executer.IsCurrentRunFinished);
+					}
+					//Wait a while to give results the chance to be updated
+					yield return new WaitForSeconds(2);
 				}
 			}
 		}
 
-		private void SetUpRunSetWriter()
+		private void SetUpRunSetWriter(bool continuation = false)
 		{
-			runSetWriter = new StreamWriter(Path.Combine(this.outputDirectory, runDataFileName));
-			runSetWriter.WriteLine(
-				string.Format(
-					"{0}, {1}, {2}, {3}",
-					"id", "termination message", "termination error", "termination iteration"
-				)
-			);
+			runSetWriter = new StreamWriter(Path.Combine(this.outputDirectory, runDataFileName), append: continuation);
+			if (!continuation)
+			{
+				runSetWriter.WriteLine(
+					string.Format(
+						"{0}, {1}, {2}, {3}",
+						"id", "termination message", "termination error", "termination iteration"
+					)
+				);
+			}
 		}
 
 		private void CleanUpRunSetWriter()
