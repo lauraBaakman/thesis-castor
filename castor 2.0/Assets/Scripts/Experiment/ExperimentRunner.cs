@@ -130,10 +130,10 @@ namespace Experiment
 			return RunExecuter.Run.FromCSV(configuration.configurations);
 		}
 
-		private string CreateResultsDirectory()
+		private string CreateResultsDirectory(Settings ICPSetting)
 		{
 			string basePath = configuration.outputDirectory;
-			string directoryName = CreateResultsDirectoryName();
+			string directoryName = CreateResultsDirectoryName(ICPSetting);
 
 			string directory = Path.Combine(basePath, directoryName);
 
@@ -142,11 +142,10 @@ namespace Experiment
 			return directory;
 		}
 
-		private string CreateResultsDirectoryName()
+		private string CreateResultsDirectoryName(Settings ICPSetting)
 		{
-			System.DateTime now = System.DateTime.Now.ToLocalTime();
 			return string.Format(
-				"results_{0}", now.ToString("MM-dd_HH-mm-ss-fff"));
+				"results_{0}", ICPSetting.name);
 		}
 
 		private void HandleStaticFragment()
@@ -193,7 +192,7 @@ namespace Experiment
 
 			foreach (Settings ICPSetting in this.ICPSettings)
 			{
-				this.outputDirectory = CreateResultsDirectory();
+				this.outputDirectory = CreateResultsDirectory(ICPSetting);
 				yield return null;
 
 				Write(staticFragment);
