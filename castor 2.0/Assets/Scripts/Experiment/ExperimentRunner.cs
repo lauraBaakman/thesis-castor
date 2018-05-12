@@ -23,6 +23,8 @@ namespace Experiment
 		private IO.FragmentImporter fragmentImporter;
 		private IO.FragmentExporter fragmentExporter;
 
+		private Results results;
+
 		private int completedRunCount;
 
 		private string outputDirectory;
@@ -204,6 +206,9 @@ namespace Experiment
 				SetUpRunSetWriter();
 				yield return null;
 
+				this.results = new Results();
+				yield return null;
+
 				for (completedRunCount = 0; completedRunCount < runs.Count; completedRunCount++)
 				{
 					run = runs[completedRunCount];
@@ -246,6 +251,8 @@ namespace Experiment
 		{
 			//This function is also called when we are not running an experiment for some reason
 			if (runSetWriter == null) return;
+
+			results.AddResult(message);
 
 			string line = string.Format(
 				"'{0}', {1}, {2}",

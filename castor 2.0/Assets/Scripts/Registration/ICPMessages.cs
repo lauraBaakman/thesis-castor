@@ -61,12 +61,15 @@ namespace Registration
 
 			public readonly int terminationIteration;
 
-			public ICPTerminatedMessage(TerminationReason reason, float currentError, int terminationIteration, string message)
+			public readonly string modelFragmentName;
+
+			public ICPTerminatedMessage(TerminationReason reason, float currentError, int terminationIteration, string message, string modelFragmentName)
 			{
 				this.Reason = reason;
 				this.message = (message == "" ? ReasonToString() : message);
 				this.errorAtTermination = currentError;
 				this.terminationIteration = terminationIteration;
+				this.modelFragmentName = modelFragmentName;
 			}
 
 			public Message ToTickerMessage()

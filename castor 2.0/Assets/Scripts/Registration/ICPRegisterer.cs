@@ -178,7 +178,7 @@ namespace Registration
 			if (FinishedCallBack != null) FinishedCallBack();
 			SendMessageToAllListeners(
 				methodName: "OnICPTerminated",
-				message: new ICPTerminatedMessage(reason, this.error, this.iterationCounter.CurrentCount, message)
+				message: new ICPTerminatedMessage(reason, this.error, this.iterationCounter.CurrentCount, message, ModelFragment.name)
 			);
 		}
 
