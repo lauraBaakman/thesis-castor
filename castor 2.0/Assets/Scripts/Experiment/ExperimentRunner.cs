@@ -80,8 +80,9 @@ namespace Experiment
 		{
 			ICPSettings.Add(
 				new Settings(
-					this.gameObject.transform,
-					new IGDTransformFinder(
+					name: "igdIntersectionTermError",
+					referenceTransform: this.gameObject.transform,
+					transformFinder: new IGDTransformFinder(
 						new IGDTransformFinder.Configuration(
 							convergenceError: 0.001f,
 							learningRate: 0.001f,
@@ -94,8 +95,9 @@ namespace Experiment
 
 			ICPSettings.Add(
 				new Settings(
-					this.gameObject.transform,
-					new IGDTransformFinder(
+					name: "igdWheelerError",
+					referenceTransform: this.gameObject.transform,
+					transformFinder: new IGDTransformFinder(
 						new IGDTransformFinder.Configuration(
 							convergenceError: 0.001f,
 							learningRate: 0.001f,
@@ -108,15 +110,17 @@ namespace Experiment
 
 			ICPSettings.Add(
 				new Settings(
-					this.gameObject.transform,
-					new HornTransformFinder()
+					name: "horn",
+					referenceTransform: this.gameObject.transform,
+					transformFinder: new HornTransformFinder()
 				)
 			);
 
 			ICPSettings.Add(
 				new Settings(
-					this.gameObject.transform,
-					new LowTransformFinder()
+					name: "low",
+					referenceTransform: this.gameObject.transform,
+					transformFinder: new LowTransformFinder()
 				)
 			);
 		}

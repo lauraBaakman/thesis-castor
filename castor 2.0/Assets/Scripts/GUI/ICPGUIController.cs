@@ -33,6 +33,7 @@ namespace GraphicalUI
 				modelFragment: modelFragment,
 				staticFragment: staticFragment,
 				settings: new Settings(
+					name: "igdTransformFinderWithIntersectionError",
 					referenceTransform: ICPFragments.transform,
 					transformFinder: new IGDTransformFinder(
 						new IGDTransformFinder.Configuration(

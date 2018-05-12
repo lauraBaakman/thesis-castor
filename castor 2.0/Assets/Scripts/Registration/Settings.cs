@@ -44,6 +44,8 @@ namespace Registration
 		/// <value>The correspondence finder.</value>
 		public ICorrespondenceFinder CorrespondenceFinder { get; set; }
 
+		public readonly string name;
+
 		/// <summary>
 		/// The filters used to filter the correspondences.
 		/// </summary>
@@ -75,15 +77,18 @@ namespace Registration
 		public ITransformFinder TransFormFinder { get; set; }
 
 		public Settings(Transform referenceTransform)
-			: this(referenceTransform, new HornTransformFinder())
+			: this(referenceTransform, new HornTransformFinder(), "defaultHornTransformFinder")
 		{ }
 
 		public Settings(
 			Transform referenceTransform, ITransformFinder transformFinder,
+			string name,
 			float errorThreshold = 0.001f, int maxNumIterations = 1000,
 			float maxWithinCorrespondenceDistance = 1.0f
 		)
 		{
+			this.name = name;
+
 			ReferenceTransform = referenceTransform;
 
 			ErrorThreshold = errorThreshold;
