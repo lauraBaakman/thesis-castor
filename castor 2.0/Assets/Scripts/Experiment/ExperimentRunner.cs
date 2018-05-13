@@ -254,6 +254,7 @@ namespace Experiment
 					else Debug.Log(string.Format("Skipping {0}", run.id));
 				}
 			}
+			Debug.Log("Finished!");
 		}
 
 		private void SetUpRunSetWriter(bool continuation = false)
