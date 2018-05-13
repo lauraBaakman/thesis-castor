@@ -176,7 +176,7 @@ namespace Experiment
 
 		private bool CompletedAllRuns()
 		{
-			return results.ResultCount == runs.Count;
+			return results.Count == runs.Count;
 		}
 
 		private bool ResultsDirectoryExists()

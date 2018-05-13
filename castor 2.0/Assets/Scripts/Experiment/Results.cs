@@ -33,44 +33,11 @@ public class Results
 
 	public void AddResult(ICPTerminatedMessage message)
 	{
-		Result result = new Result(message);
 		processedModelFragments.Add(message.modelFragmentName);
 	}
 
 	public bool HasResultFor(string staticObjectID)
 	{
 		return processedModelFragments.Contains(staticObjectID);
-	}
-
-	public class Result
-	{
-		public readonly string terminationMessage;
-		public readonly float errorAtTermination;
-		public readonly int terminationIteration;
-		public readonly string modelFragmentID;
-
-		public Result(ICPTerminatedMessage message)
-		{
-			this.modelFragmentID = message.modelFragmentName;
-			this.terminationMessage = message.Message;
-			this.errorAtTermination = message.errorAtTermination;
-			this.terminationIteration = message.terminationIteration;
-		}
-
-		public Result(Dictionary<string, object> csvRow)
-		{
-			throw new NotImplementedException();
-		}
-
-		public string ToCSVLine()
-		{
-			string line = string.Format(
-				"'{0}', {1}, {2}",
-				terminationMessage,
-				errorAtTermination.ToString("E10", CultureInfo.InvariantCulture),
-				terminationIteration
-			);
-			return line;
-		}
 	}
 }
