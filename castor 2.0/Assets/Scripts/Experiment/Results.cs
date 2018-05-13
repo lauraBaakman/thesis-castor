@@ -8,29 +8,38 @@ using System.Collections.Generic;
 public class Results
 {
 
-	private Dictionary<string, Result> results;
+	private List<string> processedModelFragments;
 
-	public int ResultCount { get { return results.Count; } }
+	public int Count { get { return processedModelFragments.Count; } }
 
 	public Results()
 	{
-		results = new Dictionary<string, Result>();
+		processedModelFragments = new List<string>();
 	}
 
 	public static Results FromFile(string path)
 	{
-		throw new NotImplementedException();
+		Results results = new Results();
+		List<Dictionary<string, object>> csvData = new IO.CSVReader().Read(path);
+		foreach (Dictionary<string, object> row in csvData) results.AddResult(row);
+
+		return results;
+	}
+
+	private void AddResult(Dictionary<string, object> csvrow)
+	{
+		processedModelFragments.Add((string)csvrow["id"]);
 	}
 
 	public void AddResult(ICPTerminatedMessage message)
 	{
 		Result result = new Result(message);
-		results.Add(message.modelFragmentName, result);
+		processedModelFragments.Add(message.modelFragmentName);
 	}
 
 	public bool HasResultFor(string staticObjectID)
 	{
-		return results.ContainsKey(staticObjectID);
+		return processedModelFragments.Contains(staticObjectID);
 	}
 
 	public class Result
@@ -46,6 +55,11 @@ public class Results
 			this.terminationMessage = message.Message;
 			this.errorAtTermination = message.errorAtTermination;
 			this.terminationIteration = message.terminationIteration;
+		}
+
+		public Result(Dictionary<string, object> csvRow)
+		{
+			throw new NotImplementedException();
 		}
 
 		public string ToCSVLine()

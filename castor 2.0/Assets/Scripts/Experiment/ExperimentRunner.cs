@@ -208,7 +208,7 @@ namespace Experiment
 
 			this.results = Results.FromFile(path);
 
-			if (this.results.ResultCount == runs.Count)
+			if (this.results.Count == runs.Count)
 			{
 				Debug.Log("Performed alle experiments in " + this.outputDirectory);
 				return;
@@ -232,11 +232,11 @@ namespace Experiment
 				SetUpForSettings(ICPSetting);
 				yield return null;
 
-				while (!CompletedAllRuns())
+				for (int i = 0; i < runs.Count; i++)
 				{
-					run = runs[results.ResultCount];
+					run = runs[i];
 
-					//This run has not been executed
+					//This run has not yet been executed
 					if (!results.HasResultFor(run.id))
 					{
 						run.ICPSettings = ICPSetting;
@@ -247,9 +247,11 @@ namespace Experiment
 
 						StartCoroutine(executer.Execute(run));
 						yield return new WaitUntil(executer.IsCurrentRunFinished);
+
+						//Wait a while to give results the chance to be updated
+						yield return new WaitForSeconds(2);
 					}
-					//Wait a while to give results the chance to be updated
-					yield return new WaitForSeconds(2);
+					else Debug.Log(string.Format("Skipping {0}", run.id));
 				}
 			}
 		}
