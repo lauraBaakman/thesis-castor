@@ -28,7 +28,10 @@ namespace Experiment
 
 		private string outputDirectory;
 
-		private StreamWriter runSetWriter;
+		private string RunDataPath
+		{
+			get { return Path.Combine(this.outputDirectory, runDataFileName); }
+		}
 
 		public void Init(Configuration configuration)
 		{
@@ -188,6 +191,8 @@ namespace Experiment
 		{
 			if (ResultsDirectoryExists()) SetUpForContinuation();
 			else SetUpForFirstTime(settings);
+
+			WriteTimeStampToRunDataFile();
 		}
 
 		private void SetUpForFirstTime(Settings settings)
@@ -200,21 +205,11 @@ namespace Experiment
 
 			this.results = new Results();
 
-			SetUpRunSetWriter(continuation: false);
+			WriteHeaderToFile();
 		}
 		private void SetUpForContinuation()
 		{
-			string path = Path.Combine(this.outputDirectory, runDataFileName);
-
-			this.results = Results.FromFile(path);
-
-			if (this.results.Count == runs.Count)
-			{
-				Debug.Log("Performed alle experiments in " + this.outputDirectory);
-				return;
-			}
-
-			SetUpRunSetWriter(continuation: true);
+			this.results = Results.FromFile(RunDataPath);
 		}
 
 		public IEnumerator<object> Execute()
@@ -241,8 +236,6 @@ namespace Experiment
 					{
 						run.ICPSettings = ICPSetting;
 						executer.OutputDirectory = this.outputDirectory;
-
-						runSetWriter.Write(string.Format("{0}, ", run.id));
 						yield return null;
 
 						StartCoroutine(executer.Execute(run));
@@ -257,24 +250,33 @@ namespace Experiment
 			Debug.Log("Finished!");
 		}
 
-		private void SetUpRunSetWriter(bool continuation = false)
+		private void WriteTimeStampToRunDataFile()
 		{
-			runSetWriter = new StreamWriter(Path.Combine(this.outputDirectory, runDataFileName), append: continuation);
-			if (!continuation)
-			{
-				runSetWriter.WriteLine(
-					string.Format(
-						"{0}, {1}, {2}, {3}",
-						"id", "termination message", "termination error", "termination iteration"
-					)
-				);
-			}
+			string timestamp = string.Format(
+				"# Written by CAstOR on {0}",
+				System.DateTime.Now.ToLocalTime().ToString()
+			);
+			WriteToRunDataFile(timestamp, append: true);
 		}
 
-		private void CleanUpRunSetWriter()
+		private void WriteHeaderToFile()
 		{
-			runSetWriter.Close();
-			runSetWriter.Dispose();
+			WriteToRunDataFile(
+				string.Format(
+					"{0}, {1}, {2}, {3}",
+					"id", "termination message", "termination error", "termination iteration"
+				),
+				append: false
+			);
+		}
+
+		private void WriteToRunDataFile(string line, bool append)
+		{
+			//Close the stream after every write to handle a not so gracious shut down
+			using (StreamWriter writer = new StreamWriter(RunDataPath, append: append))
+			{
+				writer.WriteLine(line);
+			}
 		}
 
 		#region ICPInterface
@@ -285,18 +287,18 @@ namespace Experiment
 		public void OnICPTerminated(ICPTerminatedMessage message)
 		{
 			//This function is also called when we are not running an experiment for some reason
-			if (runSetWriter == null) return;
+			if (results == null) return;
 
 			results.AddResult(message);
 
 			string line = string.Format(
-				"'{0}', {1}, {2}",
+				"{0}, '{1}', {2}, {3}",
+				message.modelFragmentName,
 				message.Message,
 				message.errorAtTermination.ToString("E10", CultureInfo.InvariantCulture),
 				message.terminationIteration
 			);
-			runSetWriter.WriteLine(line);
-			if (CompletedAllRuns()) CleanUpRunSetWriter();
+			WriteToRunDataFile(line, append: true);
 		}
 		#endregion
 
