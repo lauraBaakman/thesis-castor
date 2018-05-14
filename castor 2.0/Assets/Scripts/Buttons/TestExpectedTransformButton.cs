@@ -1,16 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class TestExpectedTransformButton : MonoBehaviour {
+namespace Buttons
+{
+	public class TestExpectedTransformButton : AbstractButton
+	{
+		protected override bool HasDetectedKeyBoardShortCut()
+		{
+			return false;
+		}
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		protected override void ExecuteButtonAction()
+		{
+			Debug.Log("HI");
+		}
 	}
 }
