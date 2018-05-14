@@ -25,8 +25,8 @@ public class ApplicationInitializer : MonoBehaviour
 	private void SharedInitialization()
 	{
 		FileBrowser.Filter configurationFilter = new FileBrowser.Filter("Configuration", ".json");
-		FileBrowser.Filter fragmentFilter = new FileBrowser.Filter("Fragments", "obj");
-		FileBrowser.Filter csvFilter = new FileBrowser.Filter("csv", "csv");
+		FileBrowser.Filter fragmentFilter = new FileBrowser.Filter("Fragments", ".obj");
+		FileBrowser.Filter csvFilter = new FileBrowser.Filter("csv", ".csv");
 
 		FileBrowser.SetFilters(true, configurationFilter, fragmentFilter, csvFilter);
 		FileBrowser.SetDefaultFilter(configurationFilter.defaultExtension);
