@@ -6,6 +6,7 @@ namespace Buttons
 	public class TestExpectedTransformButton : AbstractButton
 	{
 		public Vector3 ExpectedRotationBlenderEulerAnglesDegrees;
+		public Vector3 ExpectedTranslationUnityUnits;
 
 		public GameObject Fragments;
 		public GameObject MoveObject;
@@ -49,6 +50,7 @@ namespace Buttons
 		private void ApplyTransformation()
 		{
 			this.MoveObject.transform.localRotation = BlenderToUnityRotation(ExpectedRotationBlenderEulerAnglesDegrees);
+			this.MoveObject.transform.localPosition = ExpectedTranslationUnityUnits;
 		}
 	}
 }
