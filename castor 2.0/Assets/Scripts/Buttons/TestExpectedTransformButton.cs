@@ -5,11 +5,9 @@ namespace Buttons
 {
 	public class TestExpectedTransformButton : AbstractButton
 	{
-		public Quaternion ExpectedRotation;
-		public Vector3 ExpectedTranslation;
+		public Vector3 ExpectedRotationBlenderEulerAnglesDegrees;
 
 		public GameObject Fragments;
-
 		public GameObject MoveObject;
 
 		protected override bool HasDetectedKeyBoardShortCut()
@@ -27,7 +25,10 @@ namespace Buttons
 		{
 			foreach (Transform childTransform in this.Fragments.transform)
 			{
-				if (childTransform.name.StartsWith("move_object", StringComparison.CurrentCulture))
+				if (!childTransform.name.StartsWith("lock", StringComparison.CurrentCulture) &&
+					!childTransform.name.StartsWith("Selected", StringComparison.CurrentCulture) &&
+					!childTransform.name.StartsWith("ICP", StringComparison.CurrentCulture)
+				   )
 				{
 					this.MoveObject = childTransform.gameObject;
 					break;
@@ -35,9 +36,19 @@ namespace Buttons
 			}
 		}
 
+		private Quaternion BlenderToUnityRotation(Vector3 eulerAngles)
+		{
+			//https://answers.unity.com/questions/977027/problem-with-rotation-order-of-euler-angles-when-i.html
+			//https://gamedev.stackexchange.com/questions/140579/euler-right-handed-to-quaternion-left-handed-conversion-in-unity         
+			Quaternion xRot = Quaternion.AngleAxis(eulerAngles.x, Vector3.right);
+			Quaternion yRot = Quaternion.AngleAxis(-eulerAngles.y, Vector3.forward);
+			Quaternion zRot = Quaternion.AngleAxis(-eulerAngles.z, Vector3.down);
+			return zRot * xRot * yRot;
+		}
+
 		private void ApplyTransformation()
 		{
-			throw new NotImplementedException();
+			this.MoveObject.transform.localRotation = BlenderToUnityRotation(ExpectedRotationBlenderEulerAnglesDegrees);
 		}
 	}
 }
