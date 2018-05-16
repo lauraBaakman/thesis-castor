@@ -15,7 +15,13 @@ namespace Fragment
 		void Start()
 		{
 			Vector3 parentCenter = GetParentCenter(transform.parent.gameObject);
-			transform.Translate(parentCenter);
+			SetPivot(parentCenter);
+		}
+
+		public Vector3 Center
+		{
+			get { return GetParentCenter(transform.parent.gameObject); }
+			set { this.SetPivot(value); }
 		}
 
 		private Vector3 GetParentCenter(GameObject parent)
@@ -25,6 +31,11 @@ namespace Fragment
 
 			Vector3 center = meshRenderer.bounds.center;
 			return center;
+		}
+
+		private void SetPivot(Vector3 pivot)
+		{
+			transform.Translate(pivot);
 		}
 	}
 }
