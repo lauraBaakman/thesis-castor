@@ -49,8 +49,11 @@ namespace Buttons
 
 		private void ApplyTransformation()
 		{
-			this.MoveObject.transform.localRotation = BlenderToUnityRotation(ExpectedRotationBlenderEulerAnglesDegrees);
 			this.MoveObject.transform.localPosition = ExpectedTranslationUnityUnits;
+
+			Quaternion rotation = BlenderToUnityRotation(ExpectedRotationBlenderEulerAnglesDegrees);
+			TransformController transformController = MoveObject.GetComponent<TransformController>();
+			transformController.RotateFragment(rotation, Fragments.transform);
 		}
 	}
 }

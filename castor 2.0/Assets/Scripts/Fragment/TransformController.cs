@@ -26,7 +26,7 @@ namespace Fragment
 			);
 		}
 
-		private void RotateFragment(Quaternion rotationInReferenceTransform, Transform referenceTransform)
+		public void RotateFragment(Quaternion rotationInReferenceTransform, Transform referenceTransform)
 		{
 			Transform worldTransform = transform.root;
 
