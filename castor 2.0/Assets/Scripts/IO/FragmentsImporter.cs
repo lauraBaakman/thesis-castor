@@ -41,7 +41,7 @@ namespace IO
 			SimpleFileBrowser.FileBrowser.ShowLoadDialog(
 				onSuccess: ProcessFragmentFile,
 				onCancel: () => { },
-				initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-experiment/simulated/test_data_small/cube_1/obj/" : null
+				initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-experiment/simulated/" : null
 			);
 		}
 
