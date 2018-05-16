@@ -31,7 +31,12 @@ namespace Buttons
 			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/z_translation.obj");
 			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/translation_scale.obj");
 			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/x_rotation.obj");
-			importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/y_rotation.obj");
+			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/y_rotation.obj");
+			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/z_rotation.obj");
+			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/xy_rotation.obj");
+			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/yz_rotation.obj");
+			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/xz_rotation.obj");
+			importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/xyz_rotation.obj");
 		}
 
 		private void NotifyUser(IO.ReadResult result)
