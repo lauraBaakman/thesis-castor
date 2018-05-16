@@ -6,7 +6,7 @@ namespace Buttons
 {
 	public class TestExpectedTransformButton : AbstractButton
 	{
-		public Vector3 ExpectedRotationEulerAnglesDegreesUnity;
+		public Quaternion ExpectedRotationQuaternionDegreesUnity;
 		public Vector3 ExpectedTranslationUnity;
 		public Vector3 AppliedRotationBlender;
 
@@ -57,9 +57,8 @@ namespace Buttons
 			Debug.Log("Expected quaternion:" + q);
 			Debug.Log("Expected euler:" + q.eulerAngles);
 
-			Quaternion rotation = BlenderToUnityRotation(ExpectedRotationEulerAnglesDegreesUnity);
 			TransformController transformController = MoveObject.GetComponent<TransformController>();
-			transformController.RotateFragment(Quaternion.Euler(ExpectedRotationEulerAnglesDegreesUnity), Fragments.transform);
+			transformController.RotateFragment(ExpectedRotationQuaternionDegreesUnity, Fragments.transform);
 		}
 	}
 }
