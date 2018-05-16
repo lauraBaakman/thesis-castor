@@ -35,7 +35,7 @@ namespace Fragment
 
 		private void SetPivot(Vector3 pivot)
 		{
-			transform.Translate(pivot);
+			transform.localPosition = pivot;
 		}
 	}
 }

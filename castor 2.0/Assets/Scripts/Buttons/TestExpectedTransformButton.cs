@@ -8,6 +8,7 @@ namespace Buttons
 	{
 		public Quaternion ExpectedRotationQuaternionDegreesUnity;
 		public Vector3 ExpectedTranslationUnity;
+		public Vector3 BlenderPivot = new Vector3(float.NaN, float.NaN, float.NaN);
 		public Vector3 AppliedRotationBlender;
 
 		public GameObject Fragments;
@@ -53,9 +54,14 @@ namespace Buttons
 		{
 			this.MoveObject.transform.localPosition = ExpectedTranslationUnity;
 
-			Quaternion q = BlenderToUnityRotation(AppliedRotationBlender);
-			Debug.Log("Expected quaternion:" + q);
-			Debug.Log("Expected euler:" + q.eulerAngles);
+			//Quaternion q = BlenderToUnityRotation(AppliedRotationBlender);
+
+			if (!BlenderPivot.ContainsNaNs())
+			{
+				Debug.Log("Setting the pivot!");
+				PivotController pivotController = this.MoveObject.GetComponentInChildren<PivotController>();
+				pivotController.Center = BlenderPivot;
+			}
 
 			TransformController transformController = MoveObject.GetComponent<TransformController>();
 			transformController.RotateFragment(ExpectedRotationQuaternionDegreesUnity, Fragments.transform);
