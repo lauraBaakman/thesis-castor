@@ -25,8 +25,13 @@ namespace Buttons
 
 		private void LoadTestFragments()
 		{
-			importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_data/move_object_translation.obj");
-			importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_data/lock_object.obj");
+			importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/locked_fragment.obj");
+			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/x_translation.obj");
+			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/y_translation.obj");
+			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/z_translation.obj");
+			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/translation_scale.obj");
+			//importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/x_rotation.obj");
+			importer.Import("/Users/laura/Repositories/thesis-experiment/simulated/test_cases/cube_1/obj/y_rotation.obj");
 		}
 
 		private void NotifyUser(IO.ReadResult result)
