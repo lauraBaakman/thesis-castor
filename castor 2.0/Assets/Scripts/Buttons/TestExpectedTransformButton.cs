@@ -6,10 +6,10 @@ namespace Buttons
 {
 	public class TestExpectedTransformButton : AbstractButton
 	{
-		public Quaternion ExpectedRotationQuaternionDegreesUnity;
-		public Vector3 ExpectedTranslationUnity;
-		public Vector3 BlenderPivot = new Vector3(float.NaN, float.NaN, float.NaN);
-		public Vector3 AppliedRotationBlender;
+		public Vector3 ExpectedRotationEulerUnity;
+		public Vector3 PivotUnity;
+		//public Vector3 ExpectedTranslationUnity;
+		//public Vector3 AppliedRotationBlender;
 
 		public GameObject Fragments;
 		public GameObject MoveObject;
@@ -52,19 +52,12 @@ namespace Buttons
 
 		private void ApplyTransformation()
 		{
-			this.MoveObject.transform.localPosition = ExpectedTranslationUnity;
-
 			//Quaternion q = BlenderToUnityRotation(AppliedRotationBlender);
-
-			if (!BlenderPivot.ContainsNaNs())
-			{
-				Debug.Log("Setting the pivot!");
-				PivotController pivotController = this.MoveObject.GetComponentInChildren<PivotController>();
-				pivotController.Center = BlenderPivot;
-			}
+			PivotController pivotController = MoveObject.GetComponentInChildren<PivotController>();
+			pivotController.PivotInWorldSpace = PivotUnity;
 
 			TransformController transformController = MoveObject.GetComponent<TransformController>();
-			transformController.RotateFragment(ExpectedRotationQuaternionDegreesUnity, Fragments.transform);
+			transformController.RotateFragment(Quaternion.Euler(ExpectedRotationEulerUnity), Fragments.transform);
 		}
 	}
 }
