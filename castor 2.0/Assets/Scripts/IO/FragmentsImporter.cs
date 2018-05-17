@@ -2,6 +2,7 @@
 using System.IO;
 using UnityEngine;
 using Utils;
+using Fragment;
 
 namespace IO
 {
@@ -87,6 +88,8 @@ namespace IO
 
 				string name = ExtractObjectName(path);
 				fragment = AddFragmentToScene(name, result.Mesh, prefabPath);
+
+				if (result.HasPivot) fragment.GetComponentInChildren<PivotController>().SetPivot(result.Pivot);
 			}
 			CallBack(result);
 			return fragment;

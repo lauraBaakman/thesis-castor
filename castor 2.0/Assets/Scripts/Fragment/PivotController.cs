@@ -11,23 +11,57 @@ namespace Fragment
 	/// </summary>
 	public class PivotController : MonoBehaviour
 	{
+		private bool userSetPivot;
+		private Vector3 pivot;
 
 		void Start()
 		{
-			Vector3 parentCenter = GetParentCenter(transform.parent.gameObject);
-			PivotInLocalSpace = parentCenter;
+			if (!userSetPivot)
+			{
+				Vector3 parentCenter = GetParentCenter(transform.parent.gameObject);
+				PivotInLocalSpace = parentCenter;
+			}
+			else this.pivotInWorldSpace = this.pivot;
+		}
+
+		private void Update()
+		{
+			if (userSetPivot)
+			{
+				this.pivotInWorldSpace = this.pivot;
+				userSetPivot = false;
+			}
+		}
+
+		public void SetPivot(Vector3 worldSpacePivot)
+		{
+			this.userSetPivot = true;
+			this.pivot = worldSpacePivot;
+			this.pivotInWorldSpace = worldSpacePivot;
+		}
+
+		private Vector3 pivotInWorldSpace
+		{
+			set
+			{
+				Debug.Log("Setting PivotInWorldSpace to: " + value);
+				this.transform.position = value;
+			}
 		}
 
 		public Vector3 PivotInWorldSpace
 		{
 			get { return transform.position; }
-			set { transform.position = value; }
 		}
 
 		private Vector3 PivotInLocalSpace
 		{
 			get { return transform.localPosition; }
-			set { transform.localPosition = value; }
+			set
+			{
+				Debug.Log("Setting PivotInLocalSpace to: " + value);
+				transform.localPosition = value;
+			}
 		}
 
 		private Vector3 GetParentCenter(GameObject parent)
