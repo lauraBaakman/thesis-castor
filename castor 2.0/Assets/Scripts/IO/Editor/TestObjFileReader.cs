@@ -356,6 +356,18 @@ namespace Tests.IO
 		}
 
 		[Test]
+		public void Rest_ReadCube_With_Pivot()
+		{
+			Assert.Fail("Not Implemented");
+		}
+
+		[Test]
+		public void Rest_ReadCube_No_Pivot()
+		{
+			Assert.Fail("Not Implemented");
+		}
+
+		[Test]
 		public void Test_InvalidFile()
 		{
 			string inputPath = InputPath("nonexistentfile.obj");
