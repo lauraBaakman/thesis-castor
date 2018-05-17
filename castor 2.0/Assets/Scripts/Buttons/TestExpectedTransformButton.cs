@@ -7,9 +7,6 @@ namespace Buttons
 	public class TestExpectedTransformButton : AbstractButton
 	{
 		public Vector3 ExpectedRotationEulerUnity;
-		public Vector3 PivotUnity;
-		//public Vector3 ExpectedTranslationUnity;
-		//public Vector3 AppliedRotationBlender;
 
 		public GameObject Fragments;
 		public GameObject MoveObject;
@@ -52,10 +49,6 @@ namespace Buttons
 
 		private void ApplyTransformation()
 		{
-			//Quaternion q = BlenderToUnityRotation(AppliedRotationBlender);
-			PivotController pivotController = MoveObject.GetComponentInChildren<PivotController>();
-			pivotController.PivotInWorldSpace = PivotUnity;
-
 			TransformController transformController = MoveObject.GetComponent<TransformController>();
 			transformController.RotateFragment(Quaternion.Euler(ExpectedRotationEulerUnity), Fragments.transform);
 		}
