@@ -168,7 +168,7 @@ namespace Registration
 
 		private bool InvalidCorrespondences(out string message)
 		{
-			message = "Found fewer than six correspondences cannot register without at least size correspondences.";
+			message = "Found fewer than six correspondences cannot register without at least six correspondences.";
 			return Correspondences.Count < 6;
 		}
 
