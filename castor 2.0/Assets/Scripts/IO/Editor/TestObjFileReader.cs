@@ -585,6 +585,62 @@ namespace Tests.IO
 	}
 
 	[TestFixture]
+	public class PivotReaderTest
+	{
+		PivotReader reader;
+
+		[SetUp]
+		public void SetUp()
+		{
+			reader = new PivotReader();
+		}
+
+		[TestCase("# some comment", false)]
+		[TestCase("v some vertex", false)]
+		[TestCase("vn some normal", false)]
+		[TestCase("vt some texture", false)]
+		[TestCase("f some face", false)]
+		[TestCase("p some point", false)]
+		[TestCase("l some line", false)]
+		[TestCase("curv2 some 2D curve", false)]
+		[TestCase("surf some surface", false)]
+		[TestCase("g some group", false)]
+		[TestCase("s some smoothing group", false)]
+		[TestCase("mg some merging group", false)]
+		[TestCase("o some object name", false)]
+		[TestCase("mtllib some material library", false)]
+		[TestCase("usemtl some material name", false)]
+		[TestCase("pivot 1 2 3", true)]
+		public void IsApplicableReaderTest(string line, bool expected)
+		{
+			bool actual = reader.IsApplicable(line);
+			Assert.AreEqual(expected, actual);
+		}
+
+		[Test, TestCaseSource("readCases")]
+		public void ReadTest(string line, Vector3 expected)
+		{
+			reader.Read(line);
+
+			Vector3 actual = reader.elements[1];
+
+			Assert.AreEqual(expected, actual);
+		}
+
+		private static object[] readCases =
+		{
+			new object[] {
+				"pivot 1.53 +2.47 -3.68",
+				new Vector3(1.53f, 2.47f, -3.68f)
+			},
+			new object[] {
+				"pivot -1.1237E-06 -0.9999997 -0.000821294",
+				new Vector3(-1.1237E-06f, -0.9999997f, -0.000821294f)
+			}
+		};
+	}
+
+	[TestFixture]
 	public class VertexTextureReaderTest
 	{
 		VertexTextureReader reader;

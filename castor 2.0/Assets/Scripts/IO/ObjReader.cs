@@ -204,6 +204,13 @@ namespace IO
 		{ }
 	}
 
+	public class PivotReader : VectorReader
+	{
+		public PivotReader()
+			: base("pivot")
+		{ }
+	}
+
 	public class FaceReader : Reader
 	{
 		private Regex noTexturesNoNormalsRegex;
