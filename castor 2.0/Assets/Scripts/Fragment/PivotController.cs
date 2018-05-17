@@ -40,28 +40,14 @@ namespace Fragment
 			this.pivotInWorldSpace = worldSpacePivot;
 		}
 
-		private Vector3 pivotInWorldSpace
-		{
-			set
-			{
-				Debug.Log("Setting PivotInWorldSpace to: " + value);
-				this.transform.position = value;
-			}
-		}
+		private Vector3 pivotInWorldSpace { set { this.transform.position = value; } }
 
-		public Vector3 PivotInWorldSpace
-		{
-			get { return transform.position; }
-		}
+		public Vector3 PivotInWorldSpace { get { return transform.position; } }
 
 		private Vector3 PivotInLocalSpace
 		{
 			get { return transform.localPosition; }
-			set
-			{
-				Debug.Log("Setting PivotInLocalSpace to: " + value);
-				transform.localPosition = value;
-			}
+			set { transform.localPosition = value; }
 		}
 
 		private Vector3 GetParentCenter(GameObject parent)
