@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using UnityEngine;
 using IO;
+using System;
 
 namespace Tests.IO
 {
@@ -26,5 +27,19 @@ namespace Tests.IO
 				false
 			}
 		};
+
+		[Test]
+		public void TestNoPivotThrowError()
+		{
+			ReadResult actual = ReadResult.OKResult("some path", new Mesh());
+
+			Assert.IsFalse(actual.HasPivot);
+			Assert.Throws<InvalidOperationException>(
+				delegate
+				{
+					Vector3 pivot = actual.Pivot;
+				}
+			);
+		}
 	}
 }

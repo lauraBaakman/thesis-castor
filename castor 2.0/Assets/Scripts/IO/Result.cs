@@ -56,9 +56,17 @@ namespace IO
 
 		public readonly Mesh Mesh;
 
-		public readonly Vector3 Pivot;
+		private readonly Vector3 pivot;
+		public Vector3 Pivot
+		{
+			get
+			{
+				if (!HasPivot) throw new InvalidOperationException("Cannot retrieve the pivot from a read result without pivot");
+				return this.pivot;
+			}
+		}
 
-		public bool HasPivot { get { return !this.Pivot.ContainsNaNs(); } }
+		public bool HasPivot { get { return !this.pivot.ContainsNaNs(); } }
 
 		private ReadResult(IOCode status, string message)
 			: base(status, message)
@@ -68,7 +76,7 @@ namespace IO
 			: base(status, message)
 		{
 			this.Mesh = mesh;
-			this.Pivot = pivot;
+			this.pivot = pivot;
 		}
 
 		public static ReadResult OKResult(string path, Mesh mesh)
