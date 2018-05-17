@@ -769,7 +769,7 @@ namespace Tests.IO
 		{
 			reader.Read(line);
 
-			Vector3 actual = reader.elements[1];
+			Vector3 actual = reader.Pivot;
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -785,6 +785,16 @@ namespace Tests.IO
 				new Vector3(-1.1237E-06f, -0.9999997f, -0.000821294f)
 			}
 		};
+
+		[Test]
+		public void GetPivot()
+		{
+			Vector3 expected = new Vector3(float.NaN, float.NaN, float.NaN);
+
+			Vector3 actual = reader.Pivot;
+
+			Assert.AreEqual(expected, actual);
+		}
 	}
 
 	[TestFixture]

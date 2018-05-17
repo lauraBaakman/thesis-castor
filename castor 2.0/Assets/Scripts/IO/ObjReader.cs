@@ -26,6 +26,7 @@ namespace IO
 			this.readers.Add("object", new ObjectReader());
 			this.readers.Add("material name", new MaterialNameReader());
 			this.readers.Add("material library", new MaterialLibraryReader());
+			this.readers.Add("pivot", new PivotReader());
 		}
 
 		public ReadResult ImportFile()
@@ -38,7 +39,9 @@ namespace IO
 
 				Mesh mesh = BuildMesh();
 
-				result = ReadResult.OKResult(filePath, mesh);
+				PivotReader pivotReader = (PivotReader)readers["pivot"];
+
+				result = ReadResult.OKResult(filePath, mesh, pivotReader.Pivot);
 			}
 			catch (Exception exception)
 			{
@@ -209,6 +212,17 @@ namespace IO
 		public PivotReader()
 			: base("pivot")
 		{ }
+
+		private static readonly Vector3 noPivot = new Vector3(float.NaN, float.NaN, float.NaN);
+
+		public Vector3 Pivot
+		{
+			get
+			{
+				if (this.elements.Count == 0) return noPivot;
+				return this.elements[1];
+			}
+		}
 	}
 
 	public class FaceReader : Reader
