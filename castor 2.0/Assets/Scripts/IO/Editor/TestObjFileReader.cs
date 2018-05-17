@@ -148,6 +148,8 @@ namespace Tests.IO
 			ReadResult actual = new ObjReader(inputPath).ImportFile();
 
 			Assert.IsTrue(actual.Succeeded);
+			Assert.IsFalse(actual.HasPivot);
+
 			Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
 			Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);
 			Assert.AreEqual(expected.Mesh.triangles, actual.Mesh.triangles);
@@ -347,6 +349,8 @@ namespace Tests.IO
 			ReadResult actual = new ObjReader(inputPath).ImportFile();
 
 			Assert.IsTrue(actual.Succeeded);
+			Assert.IsFalse(actual.HasPivot);
+
 			Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
 			Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);
 			Assert.AreEqual(expected.Mesh.triangles, actual.Mesh.triangles);
@@ -356,15 +360,146 @@ namespace Tests.IO
 		}
 
 		[Test]
-		public void Rest_ReadCube_With_Pivot()
+		public void Test_ReadCube_With_Pivot()
 		{
-			Assert.Fail("Not Implemented");
-		}
+			string inputPath = InputPath("cube_pivot.obj");
 
-		[Test]
-		public void Rest_ReadCube_No_Pivot()
-		{
-			Assert.Fail("Not Implemented");
+			Mesh mesh = new Mesh();
+
+			Vector3[] vertices = {
+                //face 1
+                new Vector3(-1.000000f, -1.000000f, -1.000000f),
+				new Vector3(+1.000000f, -1.000000f, +1.000000f),
+				new Vector3(-1.000000f, -1.000000f, +1.000000f),
+                //face 2
+                new Vector3(+1.000000f, +1.000000f, +1.000000f),
+				new Vector3(-0.999999f, +1.000000f, -1.000001f),
+				new Vector3(-1.000000f, +1.000000f, +0.999999f),
+                //face 3
+                new Vector3(-1.000000f, +1.000000f, +0.999999f),
+				new Vector3(-1.000000f, -1.000000f, -1.000000f),
+				new Vector3(-1.000000f, -1.000000f, +1.000000f),
+                //face 4
+                new Vector3(-0.999999f, +1.000000f, -1.000001f),
+				new Vector3(+1.000000f, -1.000000f, -1.000000f),
+				new Vector3(-1.000000f, -1.000000f, -1.000000f),
+                //face 5
+                new Vector3(+1.000000f, -1.000000f, -1.000000f),
+				new Vector3(+1.000000f, +1.000000f, +1.000000f),
+				new Vector3(+1.000000f, -1.000000f, +1.000000f),
+                //face 6
+                new Vector3(-1.000000f, -1.000000f, +1.000000f),
+				new Vector3(+1.000000f, +1.000000f, +1.000000f),
+				new Vector3(-1.000000f, +1.000000f, +0.999999f),
+                //face 7
+                new Vector3(-1.000000f, -1.000000f, -1.000000f),
+				new Vector3(+1.000000f, -1.000000f, -1.000000f),
+				new Vector3(+1.000000f, -1.000000f, +1.000000f),
+                //face 8
+                new Vector3(+1.000000f, +1.000000f, +1.000000f),
+				new Vector3(+1.000000f, +1.000000f, -1.000000f),
+				new Vector3(-0.999999f, +1.000000f, -1.000001f),
+                //face 9
+                new Vector3(-1.000000f, +1.000000f, +0.999999f),
+				new Vector3(-0.999999f, +1.000000f, -1.000001f),
+				new Vector3(-1.000000f, -1.000000f, -1.000000f),
+                //face 10
+                new Vector3(-0.999999f, +1.000000f, -1.000001f),
+				new Vector3(+1.000000f, +1.000000f, -1.000000f),
+				new Vector3(+1.000000f, -1.000000f, -1.000000f),
+                //face 11
+                new Vector3(+1.000000f, -1.000000f, -1.000000f),
+				new Vector3(+1.000000f, +1.000000f, -1.000000f),
+				new Vector3(+1.000000f, +1.000000f, +1.000000f),
+                //face 12
+                new Vector3(-1.000000f, -1.000000f, +1.000000f),
+				new Vector3(+1.000000f, -1.000000f, +1.000000f),
+				new Vector3(+1.000000f, +1.000000f, +1.000000f),
+			};
+			mesh.vertices = vertices;
+
+			Vector3[] normals = {
+                //face 1
+                new Vector3(+0.0000f, -1.0000f, +0.0000f),
+				new Vector3(+0.0000f, -1.0000f, +0.0000f),
+				new Vector3(+0.0000f, -1.0000f, +0.0000f),
+                //face 2
+                new Vector3(+0.0000f, +1.0000f, -0.0000f),
+				new Vector3(+0.0000f, +1.0000f, -0.0000f),
+				new Vector3(+0.0000f, +1.0000f, -0.0000f),
+                //face 3
+                new Vector3(-1.0000f, -0.0000f, +0.0000f),
+				new Vector3(-1.0000f, -0.0000f, +0.0000f),
+				new Vector3(-1.0000f, -0.0000f, +0.0000f),
+                //face 4
+                new Vector3(+0.0000f, -0.0000f, -1.0000f),
+				new Vector3(+0.0000f, -0.0000f, -1.0000f),
+				new Vector3(+0.0000f, -0.0000f, -1.0000f),
+                //face 5
+                new Vector3(+1.0000f, -0.0000f, +0.0000f),
+				new Vector3(+1.0000f, -0.0000f, +0.0000f),
+				new Vector3(+1.0000f, -0.0000f, +0.0000f),
+                //face 6
+                new Vector3(-0.0000f, +0.0000f, +1.0000f),
+				new Vector3(-0.0000f, +0.0000f, +1.0000f),
+				new Vector3(-0.0000f, +0.0000f, +1.0000f),
+                //face 7
+                new Vector3(+0.0000f, -1.0000f, +0.0000f),
+				new Vector3(+0.0000f, -1.0000f, +0.0000f),
+				new Vector3(+0.0000f, -1.0000f, +0.0000f),
+                //face 8
+                new Vector3(+0.0000f, +1.0000f, -0.0000f),
+				new Vector3(+0.0000f, +1.0000f, -0.0000f),
+				new Vector3(+0.0000f, +1.0000f, -0.0000f),
+                //face 9
+                new Vector3(-1.0000f, -0.0000f, +0.0000f),
+				new Vector3(-1.0000f, -0.0000f, +0.0000f),
+				new Vector3(-1.0000f, -0.0000f, +0.0000f),
+                //face 10
+                new Vector3(+0.0000f, -0.0000f, -1.0000f),
+				new Vector3(+0.0000f, -0.0000f, -1.0000f),
+				new Vector3(+0.0000f, -0.0000f, -1.0000f),
+                //face 11
+                new Vector3(+1.0000f, -0.0000f, +0.0000f),
+				new Vector3(+1.0000f, -0.0000f, +0.0000f),
+				new Vector3(+1.0000f, -0.0000f, +0.0000f),
+                //face 12
+                new Vector3(-0.0000f, +0.0000f, +1.0000f),
+				new Vector3(-0.0000f, +0.0000f, +1.0000f),
+				new Vector3(-0.0000f, +0.0000f, +1.0000f),
+			};
+			mesh.normals = normals;
+
+			int[] triangles = {
+				00, 01, 02,
+				03, 04, 05,
+				06, 07, 08,
+				09, 10, 11,
+				12, 13, 14,
+				15, 16, 17,
+				18, 19, 20,
+				21, 22, 23,
+				24, 25, 26,
+				27, 28, 29,
+				30, 31, 32,
+				33, 34, 35
+			};
+			mesh.triangles = triangles;
+			mesh.uv2 = new Vector2[0];
+			mesh.uv3 = new Vector2[0];
+
+			ReadResult expected = ReadResult.OKResult(inputPath, mesh);
+			ReadResult actual = new ObjReader(inputPath).ImportFile();
+
+			Assert.IsTrue(actual.Succeeded);
+			Assert.IsTrue(actual.HasPivot);
+			Assert.AreEqual(actual.Pivot, new Vector3(1, 2, -3));
+
+			Assert.AreEqual(expected.Mesh.vertices, actual.Mesh.vertices);
+			Assert.AreEqual(expected.Mesh.normals, actual.Mesh.normals);
+			Assert.AreEqual(expected.Mesh.triangles, actual.Mesh.triangles);
+			Assert.AreEqual(expected.Mesh.uv2, actual.Mesh.uv2);
+			Assert.AreEqual(expected.Mesh.uv3, actual.Mesh.uv3);
 		}
 
 		[Test]
