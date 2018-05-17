@@ -394,6 +394,7 @@ namespace Tests.IO
 		[TestCase("o some object name", false)]
 		[TestCase("mtllib some material library", false)]
 		[TestCase("usemtl some material name", false)]
+		[TestCase("pivot 1 2 3", false)]
 		public void IsApplicableReaderTest(string line, bool expected)
 		{
 			bool actual = reader.IsApplicable(line);
@@ -427,6 +428,7 @@ namespace Tests.IO
 		[TestCase("o some object name", false)]
 		[TestCase("mtllib some material library", false)]
 		[TestCase("usemtl some material name", false)]
+		[TestCase("pivot 1 2 3", false)]
 		public void IsApplicableReaderTest(string line, bool expected)
 		{
 			bool actual = reader.IsApplicable(line);
@@ -529,6 +531,7 @@ namespace Tests.IO
 		[TestCase("o some object name", false)]
 		[TestCase("mtllib some material library", false)]
 		[TestCase("usemtl some material name", false)]
+		[TestCase("pivot 1 2 3", false)]
 		public void IsApplicableReaderTest(string line, bool expected)
 		{
 			bool actual = reader.IsApplicable(line);
@@ -607,6 +610,7 @@ namespace Tests.IO
 		[TestCase("o some object name", false)]
 		[TestCase("mtllib some material library", false)]
 		[TestCase("usemtl some material name", false)]
+		[TestCase("pivot 1 2 3", false)]
 		public void IsApplicableReaderTest(string line, bool expected)
 		{
 			bool actual = reader.IsApplicable(line);
@@ -677,6 +681,7 @@ namespace Tests.IO
 		[TestCase("o some object name", false)]
 		[TestCase("mtllib some material library", false)]
 		[TestCase("usemtl some material name", false)]
+		[TestCase("pivot 1 2 3", false)]
 		public void IsApplicableReaderTest(string line, bool expected)
 		{
 			bool actual = reader.IsApplicable(line);
@@ -851,6 +856,7 @@ namespace Tests.IO
 		[TestCase("o some object name", false)]
 		[TestCase("mtllib some material library", false)]
 		[TestCase("usemtl some material name", false)]
+		[TestCase("pivot 1 2 3", false)]
 		public void IsApplicableReaderTest(string line, bool expected)
 		{
 			bool actual = reader.IsApplicable(line);
@@ -885,6 +891,7 @@ namespace Tests.IO
 		[TestCase("o some object name", false)]
 		[TestCase("mtllib some material library", false)]
 		[TestCase("usemtl some material name", false)]
+		[TestCase("pivot 1 2 3", false)]
 		public void IsApplicableReaderTest(string line, bool expected)
 		{
 			bool actual = reader.IsApplicable(line);
@@ -919,6 +926,7 @@ namespace Tests.IO
 		[TestCase("o some object name", true)]
 		[TestCase("mtllib some material library", false)]
 		[TestCase("usemtl some material name", false)]
+		[TestCase("pivot 1 2 3", false)]
 		public void IsApplicableReaderTest(string line, bool expected)
 		{
 			bool actual = reader.IsApplicable(line);
@@ -953,6 +961,7 @@ namespace Tests.IO
 		[TestCase("o some object name", false)]
 		[TestCase("mtllib some material library", true)]
 		[TestCase("usemtl some material name", false)]
+		[TestCase("pivot 1 2 3", false)]
 		public void IsApplicableReaderTest(string line, bool expected)
 		{
 			bool actual = reader.IsApplicable(line);
@@ -987,6 +996,7 @@ namespace Tests.IO
 		[TestCase("o some object name", false)]
 		[TestCase("mtllib some material library", false)]
 		[TestCase("usemtl some material name", true)]
+		[TestCase("pivot 1 2 3", false)]
 		public void IsApplicableReaderTest(string line, bool expected)
 		{
 			bool actual = reader.IsApplicable(line);
