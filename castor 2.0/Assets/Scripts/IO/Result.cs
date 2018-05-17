@@ -51,27 +51,36 @@ namespace IO
 
 	public class ReadResult : IOResult
 	{
-		private Mesh mesh;
 
-		public Mesh Mesh
-		{
-			get { return mesh; }
-		}
+		private static Vector3 noPivot = new Vector3(float.NaN, float.NaN, float.NaN);
+
+		public readonly Mesh Mesh;
+
+		public readonly Vector3 Pivot;
+
+		public bool HasPivot { get { return !this.Pivot.ContainsNaNs(); } }
 
 		private ReadResult(IOCode status, string message)
 			: base(status, message)
 		{ }
 
-		private ReadResult(IOCode status, string message, Mesh mesh)
+		private ReadResult(IOCode status, string message, Mesh mesh, Vector3 pivot)
 			: base(status, message)
 		{
-			this.mesh = mesh;
+			this.Mesh = mesh;
+			this.Pivot = pivot;
 		}
 
 		public static ReadResult OKResult(string path, Mesh mesh)
 		{
+			Vector3 pivot = noPivot;
+			return OKResult(path, mesh, pivot);
+		}
+
+		public static ReadResult OKResult(string path, Mesh mesh, Vector3 pivot)
+		{
 			string messageText = string.Format("Succesfully read the file {0}", path);
-			return new ReadResult(IOCode.OK, messageText, mesh);
+			return new ReadResult(IOCode.OK, messageText, mesh, pivot);
 		}
 
 		public static ReadResult ErrorResult(string messageText)
