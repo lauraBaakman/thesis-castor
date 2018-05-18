@@ -55,7 +55,7 @@ namespace Buttons
 			ClearScene();
 
 			ExperimentRunner experiment = ICPFragmentParent.GetComponent<ExperimentRunner>();
-			experiment.Init(configuration, Path.GetDirectoryName(path));
+			experiment.Init(configuration);
 
 			StartCoroutine(experiment.Execute());
 		}

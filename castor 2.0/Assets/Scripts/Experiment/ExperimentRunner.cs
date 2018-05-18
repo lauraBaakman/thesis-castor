@@ -27,17 +27,15 @@ namespace Experiment
 		private Results results;
 
 		private string outputDirectory;
-		private string workingDirectory;
 
 		private string RunDataPath
 		{
 			get { return Path.Combine(this.outputDirectory, runDataFileName); }
 		}
 
-		public void Init(Configuration configuration, string workingDirectory)
+		public void Init(Configuration configuration)
 		{
 			this.configuration = configuration;
-			this.workingDirectory = workingDirectory;
 
 			this.fragmentImporter = new IO.FragmentImporter(
 				this.gameObject, FragmentReaderCallBack,
@@ -133,7 +131,7 @@ namespace Experiment
 
 		private List<RunExecuter.Run> CollectRuns()
 		{
-			return RunExecuter.Run.FromCSV(configuration.configurations);
+			return RunExecuter.Run.FromCSV(configuration.ConfigurationsFile);
 		}
 
 		private void CreateResultsDirectory(string path)
@@ -143,7 +141,7 @@ namespace Experiment
 
 		private string CreateResultsDirectoryName(Settings ICPSetting)
 		{
-			string basePath = configuration.outputDirectory;
+			string basePath = configuration.OutputDirectory;
 			string directoryName = string.Format("results_{0}", ICPSetting.name);
 			string directory = Path.Combine(basePath, directoryName);
 			return directory;
@@ -152,8 +150,7 @@ namespace Experiment
 
 		private void HandleStaticFragment()
 		{
-			string absolutePath = Path.GetFullPath(Path.Combine(this.workingDirectory, configuration.lockedFragmentFile));
-			this.staticFragment = Import(absolutePath);
+			this.staticFragment = Import(configuration.LockedFragmentFile);
 			Lock(staticFragment);
 		}
 
@@ -175,7 +172,7 @@ namespace Experiment
 		{
 			string path = System.IO.Path.Combine(
 				path1: this.outputDirectory,
-				path2: Path.GetFileName(configuration.lockedFragmentFile)
+				path2: Path.GetFileName(configuration.LockedFragmentFile)
 			);
 			fragmentExporter.Export(fragment, path);
 		}
@@ -307,17 +304,17 @@ namespace Experiment
 
 		public class Configuration
 		{
-			public string lockedFragmentFile;
-			public string outputDirectory;
-			public string configurations;
-			public string id;
+			public string LockedFragmentFile;
+			public string OutputDirectory;
+			public string ConfigurationsFile;
+			public string ID;
 
 			public Configuration(_Configuration jsonConfiguration)
 			{
-				this.lockedFragmentFile = jsonConfiguration.lockedFragmentFile;
-				this.outputDirectory = jsonConfiguration.outputDirectory;
-				this.configurations = jsonConfiguration.configurations;
-				this.id = jsonConfiguration.id;
+				this.LockedFragmentFile = jsonConfiguration.lockedFragmentFile;
+				this.OutputDirectory = jsonConfiguration.outputDirectory;
+				this.ConfigurationsFile = jsonConfiguration.configurations;
+				this.ID = jsonConfiguration.id;
 			}
 
 			public static Configuration FromJson(string path)
