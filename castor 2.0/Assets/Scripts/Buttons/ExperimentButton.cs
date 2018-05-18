@@ -32,12 +32,12 @@ namespace Buttons
 		private void RetrieveExperimentInputData()
 		{
 			FileBrowser.ShowLoadDialog(
-                onSuccess: ProcessExperimentConfigurationFile,
-			    onCancel: () => { },
-			    folderMode: false,
-			    initialPath: initialPath,
-			    title: "Select the configuration file that was generated with the obj files.",
-			    loadButtonText: "Select"
+				onSuccess: ProcessExperimentConfigurationFile,
+				onCancel: () => { },
+				folderMode: false,
+				initialPath: initialPath,
+				title: "Select the configuration file (config.json) that was generated with the obj files.",
+				loadButtonText: "Select"
 			);
 		}
 
