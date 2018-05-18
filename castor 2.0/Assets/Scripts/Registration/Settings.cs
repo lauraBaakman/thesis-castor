@@ -83,8 +83,8 @@ namespace Registration
 		public Settings(
 			Transform referenceTransform, ITransformFinder transformFinder,
 			string name,
-			float errorThreshold = 0.001f, int maxNumIterations = 1000,
-			float maxWithinCorrespondenceDistance = 1.0f
+			float errorThreshold = 0.000001f, int maxNumIterations = 500,
+			float maxWithinCorrespondenceDistance = 0.5f
 		)
 		{
 			this.name = name;
