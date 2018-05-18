@@ -305,7 +305,6 @@ namespace Experiment
 		}
 		#endregion
 
-		[System.Serializable]
 		public class Configuration
 		{
 			public string lockedFragmentFile;
@@ -313,10 +312,33 @@ namespace Experiment
 			public string configurations;
 			public string id;
 
+			public Configuration(_Configuration jsonConfiguration)
+			{
+				this.lockedFragmentFile = jsonConfiguration.lockedFragmentFile;
+				this.outputDirectory = jsonConfiguration.outputDirectory;
+				this.configurations = jsonConfiguration.configurations;
+				this.id = jsonConfiguration.id;
+			}
+
 			public static Configuration FromJson(string path)
 			{
+				_Configuration json_config = _Configuration.FromJson(path);
+				return new Configuration(json_config);
+			}
+		}
+
+		[System.Serializable]
+		public class _Configuration
+		{
+			public string lockedFragmentFile;
+			public string outputDirectory;
+			public string configurations;
+			public string id;
+
+			public static _Configuration FromJson(string path)
+			{
 				string json_string = File.ReadAllText(path);
-				Configuration configuration = JsonUtility.FromJson<Configuration>(json_string);
+				_Configuration configuration = JsonUtility.FromJson<_Configuration>(json_string);
 
 				return configuration;
 			}
