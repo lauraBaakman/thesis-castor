@@ -304,23 +304,28 @@ namespace Experiment
 
 		public class Configuration
 		{
-			public string LockedFragmentFile;
-			public string OutputDirectory;
-			public string ConfigurationsFile;
-			public string ID;
+			public readonly string LockedFragmentFile;
+			public readonly string OutputDirectory;
+			public readonly string ConfigurationsFile;
+			public readonly string ID;
 
-			public Configuration(_Configuration jsonConfiguration)
+			public Configuration(_Configuration jsonConfiguration, string working_directory)
 			{
-				this.LockedFragmentFile = jsonConfiguration.lockedFragmentFile;
-				this.OutputDirectory = jsonConfiguration.outputDirectory;
-				this.ConfigurationsFile = jsonConfiguration.configurations;
+				this.LockedFragmentFile = RelativePathToAbsolute(jsonConfiguration.lockedFragmentFile, working_directory);
+				this.OutputDirectory = RelativePathToAbsolute(jsonConfiguration.outputDirectory, working_directory);
+				this.ConfigurationsFile = RelativePathToAbsolute(jsonConfiguration.configurations, working_directory);
 				this.ID = jsonConfiguration.id;
+			}
+
+			private string RelativePathToAbsolute(string relative, string workingDirectory)
+			{
+				return Path.GetFullPath(Path.Combine(workingDirectory, relative));
 			}
 
 			public static Configuration FromJson(string path)
 			{
 				_Configuration json_config = _Configuration.FromJson(path);
-				return new Configuration(json_config);
+				return new Configuration(json_config, working_directory: Path.GetDirectoryName(path));
 			}
 		}
 
