@@ -104,25 +104,25 @@ namespace Experiment
 				return Path.Combine(outputDirectory, string.Format("{0}.obj", this.id));
 			}
 
-			public static List<Run> FromCSV(List<Dictionary<string, object>> rows)
+			public static List<Run> FromCSV(List<Dictionary<string, object>> rows, ExperimentRunner.Configuration experimentConfiguration)
 			{
 				List<Run> configurations = new List<Run>(rows.Count);
 
-				foreach (Dictionary<string, object> entry in rows) configurations.Add(FromCSV(entry));
+				foreach (Dictionary<string, object> entry in rows) configurations.Add(FromCSV(entry, experimentConfiguration));
 
 				return configurations;
 			}
 
-			public static List<Run> FromCSV(string csvPath)
+			public static List<Run> FromCSV(ExperimentRunner.Configuration experimentConfiguration)
 			{
-				List<Dictionary<string, object>> configurations = new IO.CSVReader().Read(csvPath);
-				return FromCSV(configurations);
+				List<Dictionary<string, object>> runConfigurations = new IO.CSVReader().Read(experimentConfiguration.ConfigurationsFile);
+				return FromCSV(runConfigurations, experimentConfiguration);
 			}
 
-			public static Run FromCSV(Dictionary<string, object> csvRow)
+			public static Run FromCSV(Dictionary<string, object> csvRow, ExperimentRunner.Configuration experimentConfiguration)
 			{
 				return new Run(
-					modelFragmentPath: (string)csvRow["path"],
+					modelFragmentPath: experimentConfiguration.RelativePathToAbsolute((string)csvRow["path"]),
 					id: (string)csvRow["uuid"]
 				);
 			}

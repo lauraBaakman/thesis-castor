@@ -131,7 +131,7 @@ namespace Experiment
 
 		private List<RunExecuter.Run> CollectRuns()
 		{
-			return RunExecuter.Run.FromCSV(configuration.ConfigurationsFile);
+			return RunExecuter.Run.FromCSV(configuration);
 		}
 
 		private void CreateResultsDirectory(string path)
@@ -308,18 +308,21 @@ namespace Experiment
 			public readonly string OutputDirectory;
 			public readonly string ConfigurationsFile;
 			public readonly string ID;
+			public readonly string WorkingDirectory;
 
 			public Configuration(_Configuration jsonConfiguration, string working_directory)
 			{
-				this.LockedFragmentFile = RelativePathToAbsolute(jsonConfiguration.lockedFragmentFile, working_directory);
-				this.OutputDirectory = RelativePathToAbsolute(jsonConfiguration.outputDirectory, working_directory);
-				this.ConfigurationsFile = RelativePathToAbsolute(jsonConfiguration.configurations, working_directory);
+				this.WorkingDirectory = working_directory;
+
+				this.LockedFragmentFile = RelativePathToAbsolute(jsonConfiguration.lockedFragmentFile);
+				this.OutputDirectory = RelativePathToAbsolute(jsonConfiguration.outputDirectory);
+				this.ConfigurationsFile = RelativePathToAbsolute(jsonConfiguration.configurations);
 				this.ID = jsonConfiguration.id;
 			}
 
-			private string RelativePathToAbsolute(string relative, string workingDirectory)
+			public string RelativePathToAbsolute(string relativePath)
 			{
-				return Path.GetFullPath(Path.Combine(workingDirectory, relative));
+				return Path.GetFullPath(Path.Combine(this.WorkingDirectory, relativePath));
 			}
 
 			public static Configuration FromJson(string path)
