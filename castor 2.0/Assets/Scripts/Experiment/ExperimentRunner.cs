@@ -27,15 +27,17 @@ namespace Experiment
 		private Results results;
 
 		private string outputDirectory;
+		private string workingDirectory;
 
 		private string RunDataPath
 		{
 			get { return Path.Combine(this.outputDirectory, runDataFileName); }
 		}
 
-		public void Init(Configuration configuration)
+		public void Init(Configuration configuration, string workingDirectory)
 		{
 			this.configuration = configuration;
+			this.workingDirectory = workingDirectory;
 
 			this.fragmentImporter = new IO.FragmentImporter(
 				this.gameObject, FragmentReaderCallBack,
@@ -147,10 +149,11 @@ namespace Experiment
 			return directory;
 		}
 
+
 		private void HandleStaticFragment()
 		{
-			this.staticFragment = Import(configuration.lockedFragmentFile);
-
+			string absolutePath = Path.GetFullPath(Path.Combine(this.workingDirectory, configuration.lockedFragmentFile));
+			this.staticFragment = Import(absolutePath);
 			Lock(staticFragment);
 		}
 

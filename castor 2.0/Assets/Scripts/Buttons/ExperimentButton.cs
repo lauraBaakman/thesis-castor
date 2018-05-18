@@ -2,6 +2,7 @@
 using SimpleFileBrowser;
 using UnityEngine;
 using Experiment;
+using System.IO;
 
 namespace Buttons
 {
@@ -54,7 +55,7 @@ namespace Buttons
 			ClearScene();
 
 			ExperimentRunner experiment = ICPFragmentParent.GetComponent<ExperimentRunner>();
-			experiment.Init(configuration);
+			experiment.Init(configuration, Path.GetDirectoryName(path));
 
 			StartCoroutine(experiment.Execute());
 		}
