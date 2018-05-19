@@ -17,7 +17,7 @@ namespace Buttons
 
 		private void QuitInEditorMode()
 		{
-			UnityEditor.EditorApplication.isPlaying = false;
+			//UnityEditor.EditorApplication.isPlaying = false;
 		}
 
 		private void QuitInDeploymentMode()
