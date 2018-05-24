@@ -1823,7 +1823,7 @@ MonoBehaviour:
     _isVisible: 1
     _topColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
     _bottomColor: {r: 1, g: 1, b: 1, a: 1}
-    _gradientOffset: 0
+    _gradientOffset: 1
 --- !u!1 &291394184
 GameObject:
   m_ObjectHideFlags: 0
@@ -3617,7 +3617,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Button: {fileID: 0}
   ExpectedRotationEulerUnity: {x: 0, y: 0, z: 0}
-  ExpectedTranslationUnity: {x: 0, y: 0, z: 0}
   Fragments: {fileID: 1276394742}
   MoveObject: {fileID: 0}
 --- !u!1 &1213796976 stripped
