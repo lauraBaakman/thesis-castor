@@ -12,7 +12,7 @@ namespace Fragment
 		private MaterialSet MaterialSet;
 		private MeshRenderer Renderer;
 
-		void Awake()
+		public void Init()
 		{
 			Renderer = GetComponent<MeshRenderer>();
 			MaterialSet = new MaterialSet(Renderer.material);
