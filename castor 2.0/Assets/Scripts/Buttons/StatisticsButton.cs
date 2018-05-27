@@ -194,10 +194,10 @@ namespace Buttons
 
 		private Quaternion ExtractExpectedRotation(Dictionary<string, object> row)
 		{
-			float x = (float)row["expected quaternion x"];
-			float y = (float)row["expected quaternion y"];
-			float z = (float)row["expected quaternion z"];
-			float w = (float)row["expected quaternion w"];
+			float x = (float)row["expected rotation quaternion x"];
+			float y = (float)row["expected rotation quaternion y"];
+			float z = (float)row["expected rotation quaternion z"];
+			float w = (float)row["expected rotation quaternion w"];
 			return new Quaternion(x: x, y: y, z: z, w: w);
 		}
 	}
