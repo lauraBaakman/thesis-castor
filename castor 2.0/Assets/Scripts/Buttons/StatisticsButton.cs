@@ -88,6 +88,7 @@ namespace Buttons
 			}
 
 			WriteProcessedResultCSVDataFile(this.runs);
+			Debug.Log("Finished!");
 		}
 
 		private void WriteProcessedResultCSVDataFile(List<StatisticsComputer.RunResult> results)
