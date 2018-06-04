@@ -3617,7 +3617,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Button: {fileID: 0}
   ExpectedRotationEulerUnity: {x: 0, y: 0, z: 0}
-  ExpectedTranslationUnity: {x: 0, y: 0, z: 0}
   Fragments: {fileID: 1276394742}
   MoveObject: {fileID: 0}
 --- !u!1 &1213796976 stripped
@@ -6403,7 +6402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2082258122
 RectTransform:
   m_ObjectHideFlags: 0
