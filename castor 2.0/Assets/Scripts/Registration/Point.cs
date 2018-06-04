@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Utils;
 
 namespace Registration
 {
@@ -7,6 +8,7 @@ namespace Registration
 	{
 		private static Color DefaultColor = Color.white;
 		private static readonly Vector3 NoNormal = new Vector3();
+		private static ColorGenerator colorGenerator = new ColorGenerator();
 
 		#region position
 		public Vector3 Position
@@ -53,7 +55,7 @@ namespace Registration
 		public Point(Vector3 position, Vector3 normal)
 		{
 			this.position = position;
-			this.Color = new Color().Random(0f, 1f, 1f, 1f, 0.5f, 1f);
+			this.Color = colorGenerator.GetNextColor();
 			this.normal = normal;
 		}
 
