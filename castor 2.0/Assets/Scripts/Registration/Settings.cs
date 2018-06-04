@@ -4,6 +4,7 @@ using UnityEngine;
 using Registration.Error;
 using System.IO;
 using Utils;
+using System;
 
 namespace Registration
 {
@@ -81,8 +82,10 @@ namespace Registration
 		{ }
 
 		public Settings(
-			Transform referenceTransform, ITransformFinder transformFinder,
+			Transform referenceTransform,
+			ITransformFinder transformFinder,
 			string name,
+			string correspondenceFinder = "normalshooting",
 			float errorThreshold = 0.000001f, int maxNumIterations = 500,
 			float maxWithinCorrespondenceDistance = 0.5f
 		)
@@ -108,7 +111,28 @@ namespace Registration
 
 			this.TransFormFinder = transformFinder;
 
-			CorrespondenceFinder = new NormalShootingCorrespondenceFinder(this);
+			if (correspondenceFinder == "normalshooting")
+			{
+				CorrespondenceFinder = new NormalShootingCorrespondenceFinder(this);
+			}
+			else if (correspondenceFinder == "nearestneighbour")
+			{
+				CorrespondenceFinder = new NearstPointCorrespondenceFinder(PointSampler);
+			}
+			else
+			{
+				throw new Exception("Invalid Correspondence Finder name");
+			}
+		}
+
+		public static Settings SeminalICP(Transform referenceTransform)
+		{
+			return new Settings(
+				referenceTransform: referenceTransform,
+				transformFinder: new HornTransformFinder(),
+				name: "Seminal ICP",
+				correspondenceFinder: "nearestneighbour"
+			);
 		}
 
 		public void ToJson(string outputPath)
