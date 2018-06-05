@@ -11,6 +11,10 @@ namespace Registration
 		private static ColorGenerator colorGenerator = new ColorGenerator();
 
 		#region position
+		/// <summary>
+		/// Gets the position of the point.
+		/// </summary>
+		/// <value>The position.</value>
 		public Vector3 Position
 		{
 			get { return position; }
@@ -19,6 +23,10 @@ namespace Registration
 		#endregion
 
 		#region color
+		/// <summary>
+		/// Gets or sets the color of the point.
+		/// </summary>
+		/// <value>The color.</value>
 		public Color Color
 		{
 			get { return color; }
@@ -28,6 +36,11 @@ namespace Registration
 		#endregion
 
 		#region normal
+		/// <summary>
+		/// Gets the normal of the point. If the point has no normal an error 
+		/// is thrown.
+		/// </summary>
+		/// <value>The normal.</value>
 		public Vector3 Normal
 		{
 			get
@@ -38,6 +51,11 @@ namespace Registration
 		}
 		private Vector3 normal;
 
+		/// <summary>
+		/// Gets the unit normal of the point. If the point has no normal an 
+		/// error is thrown.
+		/// </summary>
+		/// <value>The unit normal.</value>
 		public Vector3 UnitNormal
 		{
 			get
@@ -46,6 +64,11 @@ namespace Registration
 			}
 		}
 
+		/// <summary>
+		/// Gets a value indicating whether this 
+		/// <see cref="T:Registration.Point"/> has normal.
+		/// </summary>
+		/// <value><c>true</c> if has normal; otherwise, <c>false</c>.</value>
 		public bool HasNormal
 		{
 			get { return hasNormal(); }
@@ -83,6 +106,12 @@ namespace Registration
 			this.Color = DefaultColor;
 		}
 
+		/// <summary>
+		///Compares this point to anouther point based on their position. If 
+		/// the points have the same position their normals are compared.
+		/// </summary>
+		/// <returns>The to.</returns>
+		/// <param name="other">Other.</param>
 		public int CompareTo(Point other)
 		{
 			if (other == null) return 1;
@@ -93,6 +122,16 @@ namespace Registration
 			return this.normal.CompareTo(other.normal);
 		}
 
+		/// <summary>
+		/// Determines whether the specified <see cref="object"/> is equal to 
+		/// the current <see cref="T:Registration.Point"/>. Based on their 
+		/// position and normal.
+		/// </summary>
+		/// <param name="obj">The <see cref="object"/> to compare with the 
+		/// current <see cref="T:Registration.Point"/>.</param>
+		/// <returns><c>true</c> if the specified <see cref="object"/> is equal 
+		/// to the current
+		/// <see cref="T:Registration.Point"/>; otherwise, <c>false</c>.</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj == null || GetType() != obj.GetType())
@@ -100,6 +139,16 @@ namespace Registration
 			return this.Equals(obj as Point);
 		}
 
+		/// <summary>
+		/// Determines whether the specified <see cref="Registration.Point"/> is 
+		/// equal to the current <see cref="T:Registration.Point"/>. Based on its 
+		/// position and normal.
+		/// </summary>
+		/// <param name="other">The <see cref="Registration.Point"/> to compare 
+		/// with the current <see cref="T:Registration.Point"/>.</param>
+		/// <returns><c>true</c> if the specified <see cref="Registration.Point"/> 
+		/// is equal to the current
+		/// <see cref="T:Registration.Point"/>; otherwise, <c>false</c>.</returns>
 		public bool Equals(Point other)
 		{
 			if (other == null) return false;
@@ -110,6 +159,12 @@ namespace Registration
 			return (positionEqual && normalEqual);
 		}
 
+		/// <summary>
+		/// Serves as a hash function for a <see cref="T:Registration.Point"/> object.
+		/// </summary>
+		/// <returns>A hash code for this instance that is suitable for use in 
+		/// hashing algorithms and data structures such as a
+		/// hash table.</returns>
 		public override int GetHashCode()
 		{
 			int hashCode = 67;
@@ -120,6 +175,12 @@ namespace Registration
 			return hashCode;
 		}
 
+		/// <summary>
+		/// Returns a <see cref="T:System.String"/> that represents the current 
+		/// <see cref="T:Registration.Point"/>.
+		/// </summary>
+		/// <returns>A <see cref="T:System.String"/> that represents the current 
+		/// <see cref="T:Registration.Point"/>.</returns>
 		public override string ToString()
 		{
 			if (hasNormal())
@@ -132,14 +193,35 @@ namespace Registration
 		}
 
 		/// <summary>
-		/// Convert the point to a ray in world space
+		/// Convert the point to a ray in world space shooting out of the model.
 		/// </summary>
 		/// <returns>The ray starting at thhe position of this point in the direction of its normal.</returns>
 		/// <param name="localTransform">The local transform of the point.</param>
-		public Ray ToWorldSpaceRay(Transform localTransform)
+		public Ray ToForwardWorldSpaceRay(Transform localTransform)
+		{
+			return ToWorldSpaceRay(localTransform, +1);
+		}
+
+		/// <summary>
+		/// Convert the point to a ray in world space shooting inside of the model
+		/// </summary>
+		/// <returns>The ray starting at thhe position of this point in the direction of its normal.</returns>
+		/// <param name="localTransform">The local transform of the point.</param>
+		public Ray ToBackwardWorldSpaceRay(Transform localTransform)
+		{
+			return ToWorldSpaceRay(localTransform, -1);
+		}
+
+		/// <summary>
+		/// Compute a world space ray based on the point, that points either out of the model or inside it.
+		/// </summary>
+		/// <returns>The world space ray.</returns>
+		/// <param name="localTransform">Local transform.</param>
+		/// <param name="direction">Direction -1 means the ray points inside the model, direction is one means the ray points outside the model..</param>
+		private Ray ToWorldSpaceRay(Transform localTransform, int direction)
 		{
 			Vector3 worldSpacePosition = localTransform.TransformPoint(Position);
-			Vector3 worldSpaceDirection = localTransform.TransformDirection(Normal);
+			Vector3 worldSpaceDirection = localTransform.TransformDirection(direction * Normal);
 
 			worldSpaceDirection.Normalize();
 
@@ -149,6 +231,10 @@ namespace Registration
 			);
 		}
 
+		/// <summary>
+		/// Returns the position of this point as a homogeneous vector.
+		/// </summary>
+		/// <returns>The homogeneous vector4.</returns>
 		public Vector4 ToHomogeneousVector4()
 		{
 			return new Vector4(Position.x, Position.y, Position.z, 1.0f);
@@ -168,6 +254,12 @@ namespace Registration
 			);
 		}
 
+		/// <summary>
+		/// Transform this points with the passed transformation matrix. Does not 
+		/// changes the normal.
+		/// </summary>
+		/// <returns>The transform.</returns>
+		/// <param name="transformation">Transformation.</param>
 		public Point ChangeTransform(Matrix4x4 transformation)
 		{
 			return new Point(
@@ -176,6 +268,11 @@ namespace Registration
 			);
 		}
 
+		/// <summary>
+		/// Applies the transformation matrix to this point. Changes the normal.
+		/// </summary>
+		/// <returns>The transform.</returns>
+		/// <param name="transformationMatrix">Transformation matrix.</param>
 		public Point ApplyTransform(Matrix4x4 transformationMatrix)
 		{
 			Vector3 transformedPosition = transformationMatrix.MultiplyPoint(this.Position);

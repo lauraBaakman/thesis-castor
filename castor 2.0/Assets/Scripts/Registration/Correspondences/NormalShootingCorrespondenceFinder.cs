@@ -26,17 +26,36 @@ namespace Registration
 		/// </summary>
 		private readonly Transform ReferenceTransform;
 
+		/// <summary>
+		/// Initializes a new instance of the 
+		/// <see cref="T:Registration.NormalShootingCorrespondenceFinder"/> class.
+		/// </summary>
+		/// <param name="settings">Settings.</param>
 		public NormalShootingCorrespondenceFinder(Settings settings)
 		{
 			MaxDistance = settings.MaxWithinCorrespondenceDistance;
 			ReferenceTransform = settings.ReferenceTransform;
 		}
 
+		/// <summary>
+		/// Find the specified staticPoints and modelPoints. This function is not supported for this approach to correspondence finding. It will throw an exception.
+		/// </summary>
+		/// <returns>The find.</returns>
+		/// <param name="staticPoints">Static points.</param>
+		/// <param name="modelPoints">Model points.</param>
 		public CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, ReadOnlyCollection<Point> modelPoints)
 		{
 			throw new System.ArgumentException("The NormalShootingCorrespondenceFinder cannot find correspondences between two sets of points.");
 		}
 
+		/// <summary>
+		/// Find the point where for the specified staticPoints their normal, 
+		/// hits the model fragment. If no intersection is found for the normal 
+		/// shooting outward of the object the normal is reversed.
+		/// </summary>
+		/// <returns>A new correspondence collection.</returns>
+		/// <param name="staticPoints">Static points.</param>
+		/// <param name="modelSamplingInformation">Model sampling information.</param>
 		public CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation)
 		{
 			Correspondence correspondence;
@@ -51,6 +70,10 @@ namespace Registration
 			return correspondences;
 		}
 
+		/// <summary>
+		/// Serialize this instance.
+		/// </summary>
+		/// <returns>The serialize.</returns>
 		public SerializebleCorrespondenceFinder Serialize()
 		{
 			return new SerializebleCorrespondenceFinder(
@@ -59,6 +82,12 @@ namespace Registration
 			);
 		}
 
+		/// <summary>
+		/// Finds the correspondence for static point. 
+		/// </summary>
+		/// <returns>The correspondence.</returns>
+		/// <param name="staticPoint">Static point.</param>
+		/// <param name="model">Model.</param>
 		private Correspondence FindCorrespondence(Point staticPoint, SamplingInformation model)
 		{
 			Point intersectionInReferenceTransform = FindIntersection(staticPoint, model);
@@ -71,12 +100,39 @@ namespace Registration
 			);
 		}
 
+		/// <summary>
+		/// Finds the intersection of the (reversed) normal of the static point 
+		/// with the model fragment. Returns null if no intersection is found.
+		/// </summary>
+		/// <returns>The intersection.</returns>
+		/// <param name="staticPoint">Static point.</param>
+		/// <param name="model">Model.</param>
 		private Point FindIntersection(Point staticPoint, SamplingInformation model)
 		{
-			Ray rayInWorldSpace = staticPoint.ToWorldSpaceRay(model.Transform);
+			Point hit;
 
+			Ray forwardRay = staticPoint.ToForwardWorldSpaceRay(model.Transform);
+			hit = FindIntersection(forwardRay, model);
+
+			if (hit == null)
+			{
+				Ray backwardRay = staticPoint.ToBackwardWorldSpaceRay(model.Transform);
+				hit = FindIntersection(backwardRay, model);
+			}
+			return hit;
+		}
+
+		/// <summary>
+		/// Finds the intersection of the ray with the model fragment. Returns 
+		/// null if no intersection is found.
+		/// </summary>
+		/// <returns>The intersection.</returns>
+		/// <param name="ray">Ray.</param>
+		/// <param name="model">Model.</param>
+		private Point FindIntersection(Ray ray, SamplingInformation model)
+		{
 			RaycastHit hit;
-			bool collided = model.Collider.Raycast(rayInWorldSpace, out hit, MaxDistance);
+			bool collided = model.Collider.Raycast(ray, out hit, MaxDistance);
 
 			if (!collided) return null;
 
