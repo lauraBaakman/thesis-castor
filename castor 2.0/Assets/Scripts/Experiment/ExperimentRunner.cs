@@ -13,6 +13,7 @@ namespace Experiment
 	{
 		private Configuration configuration;
 
+		public GameObject Listener;
 		public static string ExperimentFragmentPrefabPath = "ExperimentFragment";
 		private static string runDataFileName = "data.csv";
 
@@ -247,7 +248,9 @@ namespace Experiment
 					else Debug.Log(string.Format("Skipping {0}", run.id));
 				}
 			}
-			Debug.Log("Finished!");
+			Listener.SendMessage(
+				methodName: "OnExperimentFinished",
+				options: SendMessageOptions.RequireReceiver);
 		}
 
 		private void WriteTimeStampToRunDataFile()

@@ -7,6 +7,8 @@ public class CLI : MonoBehaviour
 
 	private static string reductionSceneName = "reduction";
 
+	private bool CLIUsed = false;
+
 	public ExperimentButton experiment;
 
 	private string[] CLIArguments;
@@ -21,10 +23,21 @@ public class CLI : MonoBehaviour
 		Run();
 	}
 
+	public void OnExperimentFinished()
+	{
+		if (CLIUsed) Application.Quit();
+	}
+
 	private void Run()
 	{
 		int experiment_index = IsCommandlineArgumentPassed(experiment_flag);
 		if (experiment_index != -1) RunExperiment(experiment_index);
+	}
+
+	private void PrepApplicationForCLI()
+	{
+		Ticker.Receiver.Instance.ToHeadLessMode();
+		CLIUsed = true;
 	}
 
 	private int IsCommandlineArgumentPassed(string argument)
@@ -41,7 +54,7 @@ public class CLI : MonoBehaviour
 
 	private void RunExperiment(string configFile)
 	{
-		Ticker.Receiver.Instance.ToHeadLessMode();
+		PrepApplicationForCLI();
 		experiment.ProcessExperimentConfigurationFile(configFile);
 	}
 }
