@@ -9,6 +9,8 @@ public class CLI : MonoBehaviour
 
 	private bool CLIUsed = false;
 
+	private float startTime;
+
 	public ExperimentButton experiment;
 
 	private string[] CLIArguments;
@@ -25,7 +27,11 @@ public class CLI : MonoBehaviour
 
 	public void OnExperimentFinished()
 	{
-		if (CLIUsed) Application.Quit();
+		if (CLIUsed)
+		{
+			Debug.Log(string.Format("Needed {0} seconds", Time.realtimeSinceStartup - startTime));
+			Application.Quit();
+		}
 	}
 
 	private void Run()
@@ -38,6 +44,7 @@ public class CLI : MonoBehaviour
 	{
 		Ticker.Receiver.Instance.ToHeadLessMode();
 		CLIUsed = true;
+		startTime = Time.realtimeSinceStartup;
 	}
 
 	private int IsCommandlineArgumentPassed(string argument)
