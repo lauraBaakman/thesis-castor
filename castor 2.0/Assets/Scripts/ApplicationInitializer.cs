@@ -39,8 +39,7 @@ public class ApplicationInitializer : MonoBehaviour
 	/// Initialization that only needs to be done if we are running from a deployed application.
 	/// </summary>
 	private void DeploySpecificInitialization()
-	{
-	}
+	{ }
 
 	/// <summary>
 	/// Initialization that only needs to be done if wer are running from the editor.

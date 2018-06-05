@@ -42,13 +42,22 @@ namespace Buttons
 			);
 		}
 
-		private void ProcessExperimentConfigurationFile(string path)
+		public void ProcessExperimentConfigurationFile(string path)
 		{
+			Ticker.Receiver.Instance.SendMessage(
+				methodName: "OnMessage",
+				value: new Ticker.Message.InfoMessage("Starting experiment with the configuration from " + path),
+				options: SendMessageOptions.RequireReceiver
+			);
 			ExperimentRunner.Configuration configuration;
 			try { configuration = ExperimentRunner.Configuration.FromJson(path); }
 			catch (Exception e)
 			{
-				Debug.LogError("Could not read the file " + path + "\n\t error: " + e.Message);
+				Ticker.Receiver.Instance.SendMessage(
+					methodName: "OnMessage",
+					value: new Ticker.Message.ErrorMessage("Could not read the file " + path + "\n\t error: " + e.Message),
+					options: SendMessageOptions.RequireReceiver
+				);
 				return;
 			}
 

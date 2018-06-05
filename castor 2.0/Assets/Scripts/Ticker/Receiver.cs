@@ -15,12 +15,22 @@ namespace Ticker
 		private Timer Timer;
 		private Message currentMessage;
 
+		bool headless = false;
+
 		private static string noMessageText = "";
 
 		private void Awake()
 		{
 			TickerText = FindTickerTextComponent();
 			Timer = new Timer(OnMessageHasDecayed);
+		}
+
+		/// <summary>
+		/// Run the Ticker in Headless mode, i.e. write everything to Debug.Log instead of to the Ticker.
+		/// </summary>
+		public void ToHeadLessMode()
+		{
+			headless = true;
 		}
 
 		/// <summary>
@@ -80,6 +90,8 @@ namespace Ticker
 		{
 			TickerText.text = message.Text;
 			TickerText.color = message.Color;
+
+			if (headless) Debug.Log(message.Text);
 		}
 	}
 }

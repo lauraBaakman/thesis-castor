@@ -334,6 +334,7 @@
     <Compile Include="Assets\Scripts\Buttons\Transformations\TransformButton.cs" />
     <Compile Include="Assets\Scripts\Buttons\Transformations\TransformSpaceToggle.cs" />
     <Compile Include="Assets\Scripts\Buttons\UndoButton.cs" />
+    <Compile Include="Assets\Scripts\CLI.cs" />
     <Compile Include="Assets\Scripts\DCEL\DCEL.cs" />
     <Compile Include="Assets\Scripts\DCEL\Face.cs" />
     <Compile Include="Assets\Scripts\DCEL\HalfEdge.cs" />
