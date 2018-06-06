@@ -14,6 +14,12 @@ namespace Fragments
 
 		static Material CorrespondenceMaterial;
 
+		public void Start()
+		{
+			//Don't show correspondences if we are in CLI mode
+			showCorrespondences = !CLI.Instance.CLIModeActive;
+		}
+
 		#region Correspondences
 		private void RenderCorrespondences()
 		{
