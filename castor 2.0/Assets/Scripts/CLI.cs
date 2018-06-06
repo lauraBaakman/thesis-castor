@@ -5,8 +5,6 @@ public class CLI : MonoBehaviour
 {
 	private static string experiment_flag = "-experiment";
 
-	private static string reductionSceneName = "reduction";
-
 	private bool CLIUsed = false;
 
 	private float startTime;
