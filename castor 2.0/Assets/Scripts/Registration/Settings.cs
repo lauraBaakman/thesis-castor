@@ -17,11 +17,11 @@ namespace Registration
 		public Transform ReferenceTransform { get; set; }
 
 		/// <summary>
-		/// If the error of the registration is smaller than this threshold the
-		/// registration process terminates.
+		/// If the error of the current registration is smaller than the initial 
+		/// error scaled with this value the algorithm terminates.
 		/// </summary>
 		/// <value>The error threshold.</value>
-		public float ErrorThreshold { get; set; }
+		public float ErrorThresholdScale { get; set; }
 
 		/// <summary>
 		/// The maximum number of iterations to execute.
@@ -86,7 +86,7 @@ namespace Registration
 			ITransformFinder transformFinder,
 			string name,
 			string correspondenceFinder = "normalshooting",
-			float errorThreshold = 0.000001f, int maxNumIterations = 500,
+			float errorThresholdScale = 0.001f, int maxNumIterations = 500,
 			float maxWithinCorrespondenceDistance = 0.5f
 		)
 		{
@@ -94,7 +94,7 @@ namespace Registration
 
 			ReferenceTransform = referenceTransform;
 
-			ErrorThreshold = errorThreshold;
+			ErrorThresholdScale = errorThresholdScale;
 
 			MaxWithinCorrespondenceDistance = maxWithinCorrespondenceDistance;
 
@@ -191,7 +191,7 @@ namespace Registration
 				}
 
 				public SerializableError(Settings settings)
-					: this(settings.ErrorThreshold, settings.ErrorMetric.Serialize())
+					: this(settings.ErrorThresholdScale, settings.ErrorMetric.Serialize())
 				{ }
 			}
 

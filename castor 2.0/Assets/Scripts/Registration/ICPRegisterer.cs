@@ -24,6 +24,8 @@ namespace Registration
 
 		private float error = float.MaxValue;
 
+		private readonly float errorThreshold;
+
 		private readonly float initialError;
 
 		private StabilizationTermiationCondition stabilization;
@@ -95,6 +97,7 @@ namespace Registration
 			settings.ErrorMetric.Set(staticFragment, settings.ReferenceTransform);
 
 			this.initialError = computeIntialError();
+			this.errorThreshold = Settings.ErrorThresholdScale * this.initialError;
 		}
 
 		private float computeIntialError()
@@ -178,7 +181,7 @@ namespace Registration
 
 		private bool ErrorBelowThreshold()
 		{
-			return error < Settings.ErrorThreshold;
+			return error < this.errorThreshold;
 		}
 
 		private bool InvalidCorrespondences(out string message)
