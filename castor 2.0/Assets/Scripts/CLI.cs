@@ -53,7 +53,9 @@ public class CLI : MonoBehaviour
 	private void PrepApplicationForCLI()
 	{
 		Ticker.Receiver.Instance.ToHeadLessMode();
+
 		CLIUsed = true;
+
 		startTime = Time.realtimeSinceStartup;
 	}
 
