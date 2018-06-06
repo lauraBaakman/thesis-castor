@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Buttons;
 
-public class CLI : MonoBehaviour
+public class CLI : RTEditor.MonoSingletonBase<CLI>
 {
 	private static string experiment_flag = "-experiment";
 
@@ -12,6 +12,8 @@ public class CLI : MonoBehaviour
 	public ExperimentButton experiment;
 
 	private string[] CLIArguments;
+
+	public bool CLIModeActive { get { return CLIUsed; } }
 
 	private void Awake()
 	{
