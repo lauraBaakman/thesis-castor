@@ -25,7 +25,7 @@ namespace Experiment
 		private IO.FragmentImporter fragmentImporter;
 		private IO.FragmentExporter fragmentExporter;
 
-		private float initialError;
+		private ICPStartedMessage ICPStartedMessage;
 
 		private Results results;
 
@@ -358,8 +358,9 @@ namespace Experiment
 		{
 			WriteToRunDataFile(
 				string.Format(
-					"{0}, {1}, {2}, {3}, {4}",
-					"id", "initial error", "termination message", "termination error", "termination iteration"
+					"'{0}', '{1}', '{2}', '{3}', '{4}', '{5}'",
+					"id", "initial error", "error termination threshold",
+					"termination message", "termination error", "termination iteration"
 				),
 				append: false
 			);
@@ -411,9 +412,10 @@ namespace Experiment
 			results.AddResult(message);
 
 			string line = string.Format(
-				"{0}, {1}, '{2}', {3}, {4}",
+				"{0}, {1}, {2}, '{3}', {4}, {5}",
 				message.modelFragmentName,
-				this.initialError.ToString("E10", CultureInfo.InvariantCulture),
+				this.ICPStartedMessage.InitialError.ToString("E10", CultureInfo.InvariantCulture),
+				this.ICPStartedMessage.TerminationThreshold.ToString("E10", CultureInfo.InvariantCulture),
 				message.Message,
 				message.errorAtTermination.ToString("E10", CultureInfo.InvariantCulture),
 				message.terminationIteration
@@ -423,7 +425,7 @@ namespace Experiment
 
 		public void OnICPStarted(ICPStartedMessage message)
 		{
-			this.initialError = message.InitialError;
+			this.ICPStartedMessage = message;
 		}
 		#endregion
 
