@@ -16,8 +16,7 @@ namespace Fragments
 
 		public void Start()
 		{
-			//Don't show correspondences if we are in CLI mode
-			showCorrespondences = !CLI.Instance.CLIModeActive;
+			if (CLI.Instance.CLIModeActive) Destroy(this);
 		}
 
 		#region Correspondences
