@@ -273,6 +273,13 @@ namespace Registration
 			idx = 0;
 		}
 
+		/// <summary>
+		/// Returns true if the error has stabilized. I.e. if the error for the 
+		/// past numPatternsToConsider is relativley constant. Stores the passed 
+		/// error in the list of errors.
+		/// </summary>
+		/// <returns><c>true</c>, if the error has stabilized, <c>false</c> otherwise.</returns>
+		/// <param name="currentError">Current error.</param>
 		public bool ErrorHasStabilized(float currentError)
 		{
 			AddErrorToErrors(currentError);
@@ -283,17 +290,26 @@ namespace Registration
 			return CoefficientOfVariationUnderThreshold();
 		}
 
+		/// <summary>
+		/// Returns true if the variantion coefficient is below the threshold.
+		/// </summary>
+		/// <returns><c>true</c>, if the variation coeffiecient is below the threshold <c>false</c> otherwise.</returns>
 		private bool CoefficientOfVariationUnderThreshold()
 		{
 			double mean = errors.Average();
 			double standardDeviation = ComputeErrorStandardDeviation(mean);
 
-			//use this instead of the SD to scale insensitivity
+			//use this instead of the SD to be scale insensitive
 			double coefficientOfVariation = standardDeviation / mean;
 
 			return coefficientOfVariation < threshold;
 		}
 
+		/// <summary>
+		/// Compute the biased standarddeviation of the stored errors.
+		/// </summary>
+		/// <returns>The error standard deviation.</returns>
+		/// <param name="mean">Mean.</param>
 		private double ComputeErrorStandardDeviation(double mean)
 		{
 			double standardDeviation = 0;
@@ -305,11 +321,20 @@ namespace Registration
 			return standardDeviation;
 		}
 
+		/// <summary>
+		/// Returns true if numCountErrors are stored.
+		/// </summary>
+		/// <returns><c>true</c>, if numCountErrors are stored <c>false</c> otherwise.</returns>
 		private bool ErrorsArrayIsFilled()
 		{
 			return storedErrorsCount >= numPatternsToConsider;
 		}
 
+		/// <summary>
+		/// Adds the error to the list of errors. If the list of errors is full 
+		/// the oldest error is removed.
+		/// </summary>
+		/// <param name="error">Error.</param>
 		private void AddErrorToErrors(float error)
 		{
 			errors[idx] = (double)error;
