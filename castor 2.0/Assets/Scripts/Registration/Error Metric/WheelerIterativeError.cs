@@ -94,6 +94,11 @@ namespace Registration.Error
 			return ErrorMetric.Wheeler().ComputeError(correspondences, originalTransform, newTransform);
 		}
 
+		public float ComputeInitialError(CorrespondenceCollection correspondences)
+		{
+			return ErrorMetric.Wheeler().ComputeInitialError(correspondences);
+		}
+
 		public void Set(GameObject staticModel, Transform referenceTransform)
 		{
 			//Do nothing, we don't need the static model, no need to store a reference to it.

@@ -24,6 +24,8 @@ namespace Registration
 
 		private float error = float.MaxValue;
 
+		private readonly float initialError;
+
 		private StabilizationTermiationCondition stabilization;
 
 		private bool hasTerminated;
@@ -90,9 +92,17 @@ namespace Registration
 
 			ModelSamplingInformation = new SamplingInformation(ModelFragment);
 
-			SendMessageToAllListeners("OnICPStarted");
-
 			settings.ErrorMetric.Set(staticFragment, settings.ReferenceTransform);
+
+			this.initialError = computeIntialError();
+		}
+
+		private float computeIntialError()
+		{
+			CorrespondenceCollection initialCorrespondences = ComputeCorrespondences(StaticPoints);
+			initialCorrespondences = FilterCorrespondences(initialCorrespondences);
+
+			return Settings.ErrorMetric.ComputeInitialError(initialCorrespondences);
 		}
 
 		public void AddListener(GameObject listener)
@@ -111,6 +121,11 @@ namespace Registration
 
 		public void PrepareStep()
 		{
+			if (iterationCounter.AtFirstCount())
+			{
+				SendMessageToAllListeners("OnICPStarted", new ICPStartedMessage(this.initialError));
+			}
+
 			if (HasTerminated) return;
 
 			Correspondences = ComputeCorrespondences(StaticPoints);

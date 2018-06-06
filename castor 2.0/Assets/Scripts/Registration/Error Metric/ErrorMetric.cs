@@ -46,6 +46,24 @@ namespace Registration
 				return error;
 			}
 
+			public float ComputeInitialError(CorrespondenceCollection correspondences)
+			{
+				Matrix4x4 normalizationMatrix = Matrix4x4.identity;
+
+				if (configuration.NormalizePoints) normalizationMatrix = new PointNormalizer().ComputeNormalizationMatrix(correspondences.ModelPoints, correspondences.StaticPoints);
+
+				List<float> errors = ComputeCorrespondenceErrors(
+					normalizationMatrix,
+					modelPoints: correspondences.ModelPoints,
+					staticPoints: correspondences.StaticPoints
+				);
+
+				//Aggregate the errors
+				float error = configuration.AggregationMethod(errors);
+
+				return error;
+			}
+
 			private List<Point> TransformPoints(List<Point> points, Transform orignalTransform, Transform newTransform)
 			{
 				List<Point> transformedPoints = new List<Point>(points.Count);

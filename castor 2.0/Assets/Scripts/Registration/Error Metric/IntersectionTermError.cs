@@ -177,6 +177,24 @@ namespace Registration.Error
 			return error / (4 * modelPoints.Count);
 		}
 
+		public float ComputeInitialError(CorrespondenceCollection correspondences)
+		{
+			bool xi;
+			float error = 0;
+			Vector3 modelPoint;
+			for (int i = 0; i < correspondences.Count; i++)
+			{
+				modelPoint = correspondences.ModelPoints[i].Position;
+				xi = staticModelContainmentDetector.GameObjectContains(modelPoint);
+				error += ComputeError(
+					modelPoint: modelPoint,
+					staticPoint: correspondences[i].StaticPoint.Position,
+					xi: xi ? 1 : 0
+				);
+			}
+			return error / (4 * correspondences.Count);
+		}
+
 		private float ComputeError(Vector3 modelPoint, Vector3 staticPoint, int xi)
 		{
 			float weight = (float)(this.distanceWeight + this.intersectionWeight * xi);
