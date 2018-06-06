@@ -181,12 +181,12 @@ namespace Registration
 			[System.Serializable]
 			public class SerializableError
 			{
-				public float errorThreshold;
+				public float errorThresholdScale;
 				public SerializableErrorMetric errorMetric;
 
-				private SerializableError(float errorThreshold, SerializableErrorMetric errorMetric)
+				private SerializableError(float errorThresholdScale, SerializableErrorMetric errorMetric)
 				{
-					this.errorThreshold = errorThreshold;
+					this.errorThresholdScale = errorThresholdScale;
 					this.errorMetric = errorMetric;
 				}
 
