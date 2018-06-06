@@ -152,10 +152,10 @@ namespace Registration
 			Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(Correspondences);
 			TransformModelFragment(transformationMatrix);
 
-			error = Settings.ErrorMetric.ComputeError(
+			error = Settings.ErrorMetric.ComputeTerminationError(
 				correspondences: Correspondences,
 				originalTransform: Settings.ReferenceTransform,
-				newTransform: ModelFragment.transform
+				currentTransform: ModelFragment.transform
 			);
 
 			SendMessageToAllListeners(
