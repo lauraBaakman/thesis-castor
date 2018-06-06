@@ -126,7 +126,7 @@ namespace Registration
 		{
 			if (iterationCounter.AtFirstCount())
 			{
-				SendMessageToAllListeners("OnICPStarted", new ICPStartedMessage(this.initialError));
+				SendMessageToAllListeners("OnICPStarted", new ICPStartedMessage(this.initialError, this.errorThreshold));
 			}
 
 			if (HasTerminated) return;

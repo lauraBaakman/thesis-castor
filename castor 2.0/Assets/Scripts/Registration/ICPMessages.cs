@@ -99,10 +99,12 @@ namespace Registration
 		public class ICPStartedMessage
 		{
 			public readonly float InitialError;
+			public readonly float TerminationThreshold;
 
-			public ICPStartedMessage(float initialError)
+			public ICPStartedMessage(float initialError, float terminationThreshold)
 			{
 				this.InitialError = initialError;
+				this.TerminationThreshold = terminationThreshold;
 			}
 		}
 
