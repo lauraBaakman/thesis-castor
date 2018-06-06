@@ -5,6 +5,8 @@ namespace Utils
 {
 	public class Counter
 	{
+		private static int firstCount = 0;
+
 		public int CurrentCount
 		{
 			get { return currentCount; }
@@ -20,11 +22,12 @@ namespace Utils
 		public Counter(int CountToReach)
 		{
 			countToReach = CountToReach;
+			currentCount = firstCount;
 		}
 
 		public void Reset()
 		{
-			currentCount = 0;
+			currentCount = firstCount;
 		}
 
 		public void Increase()
@@ -41,6 +44,11 @@ namespace Utils
 		{
 			Reset();
 			this.countToReach = countToReach;
+		}
+
+		public bool AtFirstCount()
+		{
+			return this.currentCount == firstCount;
 		}
 	}
 
