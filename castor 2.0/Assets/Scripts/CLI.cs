@@ -58,6 +58,7 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 
 		CLIUsed = true;
 
+		//Store the current time so that we can show how long the run took.
 		startTime = Time.realtimeSinceStartup;
 	}
 
