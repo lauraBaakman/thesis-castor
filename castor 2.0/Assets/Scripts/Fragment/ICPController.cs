@@ -100,7 +100,7 @@ namespace Fragment
 		#endregion
 
 		#region ICPStartEndListener
-		public void OnICPStarted()
+		public void OnICPStarted(ICPStartedMessage message)
 		{
 			StartCoroutine(ChangeTransformOnObjectDeselection());
 		}

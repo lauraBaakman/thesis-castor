@@ -96,6 +96,16 @@ namespace Registration
 			}
 		}
 
+		public class ICPStartedMessage
+		{
+			public readonly float InitialError;
+
+			public ICPStartedMessage(float initialError)
+			{
+				this.InitialError = initialError;
+			}
+		}
+
 		public class ICPStepCompletedMessage : IToTickerMessage
 		{
 			public readonly int iteration;

@@ -35,7 +35,7 @@ namespace Fragment
 			Renderer.material = material;
 		}
 
-		public void OnICPStarted()
+		public void OnICPStarted(ICPStartedMessage message)
 		{
 			SetMaterial(MaterialSet.Registration);
 		}
