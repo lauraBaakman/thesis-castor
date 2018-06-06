@@ -9,6 +9,8 @@ namespace Registration.Error
 
 		float ComputeInitialError(CorrespondenceCollection correspondences);
 
+		float ComputeTerminationError(CorrespondenceCollection correspondences, Transform originalTransform, Transform currentTransform);
+
 		void Set(GameObject staticModel, Transform referenceTransform);
 
 		SerializableErrorMetric Serialize();

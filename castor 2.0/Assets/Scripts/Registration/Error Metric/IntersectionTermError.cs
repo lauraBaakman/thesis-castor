@@ -157,8 +157,20 @@ namespace Registration.Error
 		#region IErrorMetric
 		public float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
 		{
+			float errorSum = ComputeErrorSumAfterTransform(correspondences, originalTransform, newTransform);
+			return errorSum / (4 * correspondences.Count);
+		}
+
+		public float ComputeTerminationError(CorrespondenceCollection correspondences, Transform originalTransform, Transform currentTransform)
+		{
+			float errorSum = ComputeErrorSumAfterTransform(correspondences, originalTransform, currentTransform);
+			return errorSum / (correspondences.Count);
+		}
+
+		private float ComputeErrorSumAfterTransform(CorrespondenceCollection correspondences, Transform originalTransform, Transform currentTransform)
+		{
 			//Apply the newTransform to the model points
-			List<Point> modelPoints = TransformPoints(correspondences.ModelPoints, originalTransform, newTransform);
+			List<Point> modelPoints = TransformPoints(correspondences.ModelPoints, originalTransform, currentTransform);
 
 			bool xi;
 
@@ -166,7 +178,7 @@ namespace Registration.Error
 			for (int i = 0; i < modelPoints.Count; i++)
 			{
 				xi = staticModelContainmentDetector.GameObjectContains(
-					newTransform.TransformPoint(modelPoints[i].Position)
+					currentTransform.TransformPoint(modelPoints[i].Position)
 				);
 				error += ComputeError(
 					modelPoint: modelPoints[i].Position,
@@ -174,7 +186,7 @@ namespace Registration.Error
 					xi: xi ? 1 : 0
 				);
 			}
-			return error / (4 * modelPoints.Count);
+			return error;
 		}
 
 		public float ComputeInitialError(CorrespondenceCollection correspondences)
@@ -192,7 +204,7 @@ namespace Registration.Error
 					xi: xi ? 1 : 0
 				);
 			}
-			return error / (4 * correspondences.Count);
+			return error / (correspondences.Count);
 		}
 
 		private float ComputeError(Vector3 modelPoint, Vector3 staticPoint, int xi)
