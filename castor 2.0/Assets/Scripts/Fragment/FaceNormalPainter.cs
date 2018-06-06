@@ -17,6 +17,8 @@ namespace Fragment
 
 		public void Start()
 		{
+			if (CLI.Instance.CLIModeActive) Destroy(this);
+
 			Normal.MagnitudeFactor = normalScale;
 
 			normals = new List<Normal>();

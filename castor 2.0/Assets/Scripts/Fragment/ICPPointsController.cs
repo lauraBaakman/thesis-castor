@@ -21,6 +21,8 @@ namespace Fragment
 
 		private void Awake()
 		{
+			if (CLI.Instance.CLIModeActive) Destroy(this);
+
 			GameObject parent = this.transform.parent.gameObject;
 			parentsICPController = parent.GetComponent<ICPController>();
 			Debug.Assert(parentsICPController != null, "The parent gameobject of the object that has the " + this.name + " is expected to have an ICPController.");
