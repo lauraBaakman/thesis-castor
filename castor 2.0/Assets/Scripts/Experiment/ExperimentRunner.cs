@@ -9,7 +9,7 @@ using System;
 
 namespace Experiment
 {
-	public class ExperimentRunner : MonoBehaviour, IICPListener
+	public class ExperimentRunner : MonoBehaviour, IICPListener, IICPStartEndListener
 	{
 		private Configuration configuration;
 
@@ -24,6 +24,8 @@ namespace Experiment
 
 		private IO.FragmentImporter fragmentImporter;
 		private IO.FragmentExporter fragmentExporter;
+
+		private float initialError;
 
 		private Results results;
 
@@ -356,8 +358,8 @@ namespace Experiment
 		{
 			WriteToRunDataFile(
 				string.Format(
-					"{0}, {1}, {2}, {3}",
-					"id", "termination message", "termination error", "termination iteration"
+					"{0}, {1}, {2}, {3}, {4}",
+					"id", "initial error", "termination message", "termination error", "termination iteration"
 				),
 				append: false
 			);
@@ -409,13 +411,19 @@ namespace Experiment
 			results.AddResult(message);
 
 			string line = string.Format(
-				"{0}, '{1}', {2}, {3}",
+				"{0}, {1}, '{2}', {3}, {4}",
 				message.modelFragmentName,
+				this.initialError.ToString("E10", CultureInfo.InvariantCulture),
 				message.Message,
 				message.errorAtTermination.ToString("E10", CultureInfo.InvariantCulture),
 				message.terminationIteration
 			);
 			WriteToRunDataFile(line, append: true);
+		}
+
+		public void OnICPStarted(ICPStartedMessage message)
+		{
+			this.initialError = message.InitialError;
 		}
 		#endregion
 
