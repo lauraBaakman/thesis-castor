@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using Fragment;
 using Registration;
+using System.Collections;
 
 namespace Experiment
 {
@@ -40,6 +41,13 @@ namespace Experiment
 
 		public IEnumerator<object> Execute(Run run)
 		{
+			if (CLI.Instance.CLIModeActive) return ExecuteRunCLI(run);
+			else return ExecuteRunGUI(run);
+		}
+
+		private IEnumerator<object> ExecuteRunCLI(Run run)
+		{
+			Debug.Log("ExecuteRunCLI");
 			currentRunNumber++;
 			isCurrentRunFinished = false;
 
@@ -51,7 +59,44 @@ namespace Experiment
 				 methodName: "OnMessage",
 				value: new Ticker.Message.InfoMessage(message)
 			 );
-			Debug.Log(message);
+
+			// Load ModelFragment
+			GameObject modelFragment = fragmentImporter.Import(run.modelFragmentPath, prefabPath: ExperimentRunner.ExperimentFragmentPrefabPath);
+
+			// Run ICP
+			ICPRegisterer icp = new ICPRegisterer(staticFragment, modelFragment, run.ICPSettings);
+			icp.AddListener(this.listener);
+
+			while (!icp.HasTerminated)
+			{
+				icp.PrepareStep();
+				icp.Step();
+			}
+
+			// Export Current Position of the ModelFragment
+			fragmentExporter.Export(modelFragment, run.GetOutputPath(this.outputDirectory));
+
+			// Delete the ModelFragment
+			modelFragment.GetComponent<FragmentDestroyer>().DestroyFragment();
+
+			isCurrentRunFinished = true;
+			yield return null;
+		}
+
+		private IEnumerator<object> ExecuteRunGUI(Run run)
+		{
+			Debug.Log("ExecuteRunGUI");
+			currentRunNumber++;
+			isCurrentRunFinished = false;
+
+			string message = string.Format("Starting run number {0} with fragment {1}.",
+										   currentRunNumber, run.id);
+
+			//Notify the user via the ticker and via the debug log
+			Ticker.Receiver.Instance.SendMessage(
+				 methodName: "OnMessage",
+				value: new Ticker.Message.InfoMessage(message)
+			 );
 			yield return null;
 
 			// Load ModelFragment
