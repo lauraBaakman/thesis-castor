@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using Buttons;
+using System;
 
 public class CLI : RTEditor.MonoSingletonBase<CLI>
 {
-	private static string experiment_flag = "-experiment";
+	private static string experimentFlag = "-experiment";
+	private static string statisticsFlag = "-statistics";
 
 	private bool CLIUsed = false;
 
@@ -44,8 +46,17 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	/// </summary>
 	private void Run()
 	{
-		int experiment_index = IsCommandlineArgumentPassed(experiment_flag);
-		if (experiment_index != -1) RunExperiment(experiment_index);
+		string configFile;
+		if (ExtractExperimentArgument(out configFile)) RunExperiment(configFile);
+
+		string resultsFile;
+		if (ExtractStatisticsArguments(out configFile, out resultsFile)) RunStatisticsComputation(configFile, resultsFile);
+
+	}
+
+	private void RunStatisticsComputation(string configFile, string resultsFile)
+	{
+		throw new NotImplementedException();
 	}
 
 	/// <summary>
@@ -63,27 +74,52 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	}
 
 	/// <summary>
+	/// Extracts the statistics arguments from the command line arguments
+	/// </summary>
+	/// <returns><c>true</c>, if statistics arguments was extracted, <c>false</c> otherwise.</returns>
+	/// <param name="configFile">Config file.</param>
+	/// <param name="resultsFile">Results file.</param>
+	private bool ExtractStatisticsArguments(out string configFile, out string resultsFile)
+	{
+		configFile = null;
+		resultsFile = null;
+
+		int statisticsArgument = GetCLIArgumentIndex(statisticsFlag);
+		if (statisticsArgument == -1) return false;
+
+		configFile = CLIArguments[statisticsArgument + 1];
+		resultsFile = CLIArguments[statisticsArgument + 2];
+
+		return true;
+	}
+
+	/// <summary>
+	/// Extracts the experiment argument, i.e. the config file, from the command line arguments and stores it in confgiFile.
+	/// </summary>
+	/// <returns><c>true</c>, if experiment argument was extracted, <c>false</c> otherwise.</returns>
+	/// <param name="configFile">The path of the config file.</param>
+	private bool ExtractExperimentArgument(out string configFile)
+	{
+		configFile = null;
+
+		int experimentIndex = GetCLIArgumentIndex(experimentFlag);
+		if (experimentIndex == -1) return false;
+
+		configFile = CLIArguments[experimentIndex + 1];
+		return true;
+	}
+
+	/// <summary>
 	/// Method to check if a specific command line argument is passed. Note that
 	///  if a dash is expected in front of the parameter name that dash should 
 	/// be included in <param name="argument">.
 	/// </summary>
 	/// <returns>The commandline argument passed.</returns>
 	/// <param name="argument">Argument.</param>
-	private int IsCommandlineArgumentPassed(string argument)
+	private int GetCLIArgumentIndex(string argument)
 	{
 		for (int i = 0; i < CLIArguments.Length; i++) if (CLIArguments[i].Equals(argument)) return i;
 		return -1;
-	}
-
-	/// <summary>
-	/// This function handles running the experiment from the command line, it 
-	/// reads the configuration file from the command line arguments.
-	/// </summary>
-	/// <param name="experiment_argument_index">Experiment argument index.</param>
-	private void RunExperiment(int experiment_argument_index)
-	{
-		string config_file = CLIArguments[experiment_argument_index + 1];
-		RunExperiment(config_file);
 	}
 
 	/// <summary>
