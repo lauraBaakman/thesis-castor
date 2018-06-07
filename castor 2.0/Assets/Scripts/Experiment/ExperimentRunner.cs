@@ -29,6 +29,9 @@ namespace Experiment
 
 		private Results results;
 
+		//Make sure the algorithm does not continue until the results are written to file
+		private bool finishedWriting = false;
+
 		private string outputDirectory;
 
 		/// <summary>
@@ -328,15 +331,16 @@ namespace Experiment
 						StartCoroutine(executer.Execute(run));
 						yield return new WaitUntil(executer.IsCurrentRunFinished);
 
-						//Wait a while to give results the chance to be updated
-						yield return new WaitForSeconds(2);
+						//Wait until the results are written to file
+						yield return new WaitUntil(() => this.finishedWriting);
+						this.finishedWriting = false;
 					}
 					else Debug.Log(string.Format("Skipping {0}", run.id));
 				}
 			}
 			Listener.SendMessage(
 				methodName: "OnExperimentFinished",
-				options: SendMessageOptions.RequireReceiver);
+						options: SendMessageOptions.RequireReceiver);
 		}
 
 		/// <summary>
@@ -421,6 +425,7 @@ namespace Experiment
 				message.terminationIteration
 			);
 			WriteToRunDataFile(line, append: true);
+			this.finishedWriting = true;
 		}
 
 		public void OnICPStarted(ICPStartedMessage message)
