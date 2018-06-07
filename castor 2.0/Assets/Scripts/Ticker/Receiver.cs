@@ -15,14 +15,17 @@ namespace Ticker
 		private Timer Timer;
 		private Message currentMessage;
 
-		bool headless = false;
+		private delegate void WriteMethod(Message message);
+		WriteMethod write;
 
 		private static string noMessageText = "";
 
 		private void Awake()
 		{
 			TickerText = FindTickerTextComponent();
-			Timer = new Timer(OnMessageHasDecayed);
+			if (Timer == null) Timer = new Timer(OnMessageHasDecayed);
+
+			write = WriteToTicker;
 		}
 
 		/// <summary>
@@ -30,7 +33,8 @@ namespace Ticker
 		/// </summary>
 		public void ToHeadLessMode()
 		{
-			headless = true;
+			if (Timer == null) Timer = new Timer(OnMessageHasDecayed);
+			write = WriteToConsole;
 		}
 
 		/// <summary>
@@ -62,7 +66,7 @@ namespace Ticker
 		private void Display(Message message)
 		{
 			currentMessage = message;
-			WriteToTicker(message);
+			this.write(message);
 			Timer.Set(message.DecayInS);
 		}
 
@@ -90,8 +94,11 @@ namespace Ticker
 		{
 			TickerText.text = message.Text;
 			TickerText.color = message.Color;
+		}
 
-			if (headless) Debug.Log(message.Text);
+		private void WriteToConsole(Message message)
+		{
+			Debug.Log(message.Text);
 		}
 	}
 }
