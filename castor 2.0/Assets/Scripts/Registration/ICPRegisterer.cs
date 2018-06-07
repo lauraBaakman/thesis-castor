@@ -33,6 +33,11 @@ namespace Registration
 		private bool hasTerminated;
 		public bool HasTerminated { get { return hasTerminated; } }
 
+		private delegate void SendMessageDelegate();
+
+		private SendMessageDelegate stepEndNotification;
+		private SendMessageDelegate preparationStepEndNotification;
+
 		#region staticfragment
 		private GameObject StaticFragment
 		{
@@ -87,6 +92,8 @@ namespace Registration
 
 			stabilization = new StabilizationTermiationCondition();
 
+			setNotifcationFunctions();
+
 			hasTerminated = false;
 
 			//The static fragment does not change during ICP, consequently its points need only be sampled once.
@@ -98,6 +105,46 @@ namespace Registration
 
 			this.initialError = computeIntialError();
 			this.errorThreshold = Settings.ErrorThresholdScale * this.initialError;
+		}
+
+		private void setNotifcationFunctions()
+		{
+			if (CLI.Instance.CLIModeActive)
+			{
+				stepEndNotification = DontNotify;
+				preparationStepEndNotification = DontNotify;
+			}
+			else
+			{
+				stepEndNotification = GUIStepEndNotification;
+				preparationStepEndNotification = GUIPreparationStepEndNotification;
+			}
+		}
+
+		private void GUIStepEndNotification()
+		{
+			SendMessageToAllListeners(
+				"OnStepCompleted",
+				new ICPStepCompletedMessage(this.iterationCounter.CurrentCount, this.error)
+			);
+		}
+
+		private void GUIPreparationStepEndNotification()
+		{
+			SendMessageToAllListeners(
+				"OnPreparationStepCompleted",
+				new ICPPreparationStepCompletedMessage(
+					this.Correspondences,
+					this.Settings.ReferenceTransform,
+					//The counter is only updated after the step has been set
+					this.iterationCounter.CurrentCount + 1
+				)
+			);
+		}
+
+		private void DontNotify()
+		{
+			//do nothing
 		}
 
 		private float computeIntialError()
@@ -134,15 +181,7 @@ namespace Registration
 			Correspondences = ComputeCorrespondences(StaticPoints);
 			Correspondences = FilterCorrespondences(Correspondences);
 
-			SendMessageToAllListeners(
-				"OnPreparationStepCompleted",
-				new ICPPreparationStepCompletedMessage(
-					Correspondences,
-					Settings.ReferenceTransform,
-					//The counter is only updated after the step has been set
-					iterationCounter.CurrentCount + 1
-				)
-			);
+			this.preparationStepEndNotification();
 
 			TerminateIfNeeded();
 		}
@@ -161,10 +200,7 @@ namespace Registration
 				currentTransform: ModelFragment.transform
 			);
 
-			SendMessageToAllListeners(
-				"OnStepCompleted",
-				new ICPStepCompletedMessage(iterationCounter.CurrentCount, error)
-			);
+			this.stepEndNotification();
 
 			TerminateIfNeeded();
 		}
