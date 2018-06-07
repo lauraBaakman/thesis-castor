@@ -47,7 +47,6 @@ namespace Experiment
 
 		private IEnumerator<object> ExecuteRunCLI(Run run)
 		{
-			Debug.Log("ExecuteRunCLI");
 			currentRunNumber++;
 			isCurrentRunFinished = false;
 
@@ -85,7 +84,6 @@ namespace Experiment
 
 		private IEnumerator<object> ExecuteRunGUI(Run run)
 		{
-			Debug.Log("ExecuteRunGUI");
 			currentRunNumber++;
 			isCurrentRunFinished = false;
 
