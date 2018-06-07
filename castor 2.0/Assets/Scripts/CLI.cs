@@ -130,6 +130,6 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	private void RunExperiment(string configFile)
 	{
 		PrepApplicationForCLI();
-		experiment.ProcessExperimentConfigurationFile(configFile);
+		experiment.RunExperimentWithConfigurationFile(configFile);
 	}
 }

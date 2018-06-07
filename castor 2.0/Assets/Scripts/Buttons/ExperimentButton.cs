@@ -33,7 +33,7 @@ namespace Buttons
 		private void RetrieveExperimentInputData()
 		{
 			FileBrowser.ShowLoadDialog(
-				onSuccess: ProcessExperimentConfigurationFile,
+				onSuccess: RunExperimentWithConfigurationFile,
 				onCancel: () => { },
 				folderMode: false,
 				initialPath: initialPath,
@@ -42,7 +42,7 @@ namespace Buttons
 			);
 		}
 
-		public void ProcessExperimentConfigurationFile(string path)
+		public void RunExperimentWithConfigurationFile(string path)
 		{
 			Ticker.Receiver.Instance.SendMessage(
 				methodName: "OnMessage",
