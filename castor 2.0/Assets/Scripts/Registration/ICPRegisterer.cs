@@ -24,9 +24,7 @@ namespace Registration
 
 		private float error = float.MaxValue;
 
-		private readonly float errorThreshold;
-
-		private readonly float initialError;
+		private float errorThreshold;
 
 		private StabilizationTermiationCondition stabilization;
 
@@ -102,9 +100,6 @@ namespace Registration
 			ModelSamplingInformation = new SamplingInformation(ModelFragment);
 
 			settings.ErrorMetric.Set(staticFragment, settings.ReferenceTransform);
-
-			this.initialError = computeIntialError();
-			this.errorThreshold = Settings.ErrorThresholdScale * this.initialError;
 		}
 
 		private void setNotifcationFunctions()
@@ -147,11 +142,8 @@ namespace Registration
 			//do nothing
 		}
 
-		private float computeIntialError()
+		private float ComputeIntialError(CorrespondenceCollection initialCorrespondences)
 		{
-			CorrespondenceCollection initialCorrespondences = ComputeCorrespondences(StaticPoints);
-			initialCorrespondences = FilterCorrespondences(initialCorrespondences);
-
 			if (initialCorrespondences.Count < 6)
 			{
 				Terminate(ICPTerminatedMessage.TerminationReason.Error, "Could only find " + initialCorrespondences.Count + " to compute the initial error.");
@@ -174,18 +166,24 @@ namespace Registration
 			}
 		}
 
+		private float ComputeErrorThreshold(float initialError)
+		{
+			return Settings.ErrorThresholdScale * initialError;
+		}
+
 		public void PrepareStep()
 		{
-			if (iterationCounter.AtFirstCount())
-			{
-				SendMessageToAllListeners("OnICPStarted", new ICPStartedMessage(this.initialError, this.errorThreshold));
-			}
-
 			if (HasTerminated) return;
 
 			Correspondences = ComputeCorrespondences(StaticPoints);
 			Correspondences = FilterCorrespondences(Correspondences);
 
+			if (iterationCounter.AtFirstCount())
+			{
+				float initialError = ComputeIntialError(Correspondences);
+				this.errorThreshold = ComputeErrorThreshold(initialError);
+				SendMessageToAllListeners("OnICPStarted", new ICPStartedMessage(initialError, this.errorThreshold));
+			}
 			this.preparationStepEndNotification();
 
 			TerminateIfNeeded();
