@@ -30,7 +30,7 @@ namespace Registration
 		/// that we can find correspondences between points that lie at the same
 		/// position.    
 		/// </summary>
-		private static float epislon = 0.0000001f;
+		private static float epsilon = 0.0000001f;
 
 		/// <summary>
 		/// Initializes a new instance of the 
@@ -117,12 +117,12 @@ namespace Registration
 		{
 			Point hit;
 
-			Ray forwardRay = staticPoint.ToForwardWorldSpaceRay(model.Transform, epislon);
+			Ray forwardRay = staticPoint.ToForwardWorldSpaceRay(model.Transform, epsilon);
 			hit = FindIntersection(forwardRay, model);
 
 			if (hit == null)
 			{
-				Ray backwardRay = staticPoint.ToBackwardWorldSpaceRay(model.Transform, epislon);
+				Ray backwardRay = staticPoint.ToBackwardWorldSpaceRay(model.Transform, epsilon);
 				hit = FindIntersection(backwardRay, model);
 			}
 			return hit;
