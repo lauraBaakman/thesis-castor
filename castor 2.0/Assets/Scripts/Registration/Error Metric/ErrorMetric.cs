@@ -26,8 +26,26 @@ namespace Registration
 			/// <param name="originalTransform">the original transform of the correspondences.</param>
 			public float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform)
 			{
+				return ComputeErrorAfterTransform(correspondences,
+												  originalTransform, newTransform,
+												  configuration.AggregationMethod);
+			}
+
+			public float ComputeTerminationError(CorrespondenceCollection correspondences, Transform originalTransform, Transform currentTransform)
+			{
+				//Always use the mean of the errors for the termination error to
+				//ensure that the number of correspondences does not influence the error
+				return ComputeErrorAfterTransform(correspondences,
+												 originalTransform, currentTransform,
+												 AggregationMethods.Mean);
+			}
+
+			private float ComputeErrorAfterTransform(CorrespondenceCollection correspondences,
+													 Transform originalTransform, Transform currentTransform,
+													 AggregationMethods.AggregationMethod aggregationMethod)
+			{
 				//Apply the newTransform to the model points
-				List<Point> modelPoints = TransformPoints(correspondences.ModelPoints, originalTransform, newTransform);
+				List<Point> modelPoints = TransformPoints(correspondences.ModelPoints, originalTransform, currentTransform);
 
 				//Normalize the points if required
 				Matrix4x4 normalizationMatrix = Matrix4x4.identity;
@@ -40,8 +58,27 @@ namespace Registration
 					staticPoints: correspondences.StaticPoints
 				);
 
-				//Aggregate the errors
-				float error = configuration.AggregationMethod(errors);
+				//Always use the mean of the errors for the termination error to
+				// ensure that the number of correspondences does not influence the error
+				float error = aggregationMethod(errors);
+
+				return error;
+			}
+
+			public float ComputeInitialError(CorrespondenceCollection correspondences)
+			{
+				Matrix4x4 normalizationMatrix = Matrix4x4.identity;
+
+				if (configuration.NormalizePoints) normalizationMatrix = new PointNormalizer().ComputeNormalizationMatrix(correspondences.ModelPoints, correspondences.StaticPoints);
+
+				List<float> errors = ComputeCorrespondenceErrors(
+					normalizationMatrix,
+					modelPoints: correspondences.ModelPoints,
+					staticPoints: correspondences.StaticPoints
+				);
+
+				//Aggregate the errors, use mean to ensure that the number of correspondences does not influence the error
+				float error = AggregationMethods.Mean(errors);
 
 				return error;
 			}
@@ -138,6 +175,12 @@ namespace Registration
 				return new ErrorMetric(Configuration._Wheeler);
 			}
 
+			/// <summary>
+			/// Error metric that adds a second term that punishes intersections.
+			/// </summary>
+			/// <returns>The term error.</returns>
+			/// <param name="distanceWeight">Distance weight.</param>
+			/// <param name="intersectionWeight">Intersection weight.</param>
 			public static IErrorMetric IntersectionTermError(float distanceWeight, float intersectionWeight)
 			{
 				return new IntersectionTermError(

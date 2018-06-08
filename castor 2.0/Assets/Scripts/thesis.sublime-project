@@ -9,7 +9,33 @@
 			]
 		},
 		{
-			"path": "../Temp"
+			"path": "../..",
+			"name": "Project",
+			"file_exclude_patterns": [
+				"*.meta",
+				"*.sublime-workspace",
+				"*.csproj",
+				"*.sln"
+			],
+			"folder_exclude_patterns": [
+				".vs",
+				".vscode",
+				"Library",
+				"obj",
+				"Temp",
+				"ProjectSettings",
+				"Packages",
+			]
+		},
+		{
+			"path": "../../..",
+			"name": "Repository",
+			"file_exclude_patterns": [
+				"*.meta",
+			],
+			"folder_exclude_patterns": [
+				"iconpack",
+			]
 		},
 		{
 			"path": "../Models",

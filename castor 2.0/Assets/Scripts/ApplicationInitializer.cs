@@ -29,8 +29,8 @@ public class ApplicationInitializer : MonoBehaviour
 		FileBrowser.Filter csvFilter = new FileBrowser.Filter("csv", ".csv");
 
 		FileBrowser.SetFilters(true, configurationFilter, fragmentFilter, csvFilter);
-		FileBrowser.SetDefaultFilter(configurationFilter.defaultExtension);
-		FileBrowser.SetExcludedExtensions(".lnk", ".tmp", ".zip", ".rar", ".exe", fragmentFilter.defaultExtension);
+		FileBrowser.SetDefaultFilter(fragmentFilter.defaultExtension);
+		FileBrowser.SetExcludedExtensions(".lnk", ".tmp", ".zip", ".rar", ".exe");
 
 		Application.runInBackground = true;
 	}
@@ -39,8 +39,7 @@ public class ApplicationInitializer : MonoBehaviour
 	/// Initialization that only needs to be done if we are running from a deployed application.
 	/// </summary>
 	private void DeploySpecificInitialization()
-	{
-	}
+	{ }
 
 	/// <summary>
 	/// Initialization that only needs to be done if wer are running from the editor.

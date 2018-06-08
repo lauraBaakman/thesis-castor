@@ -145,6 +145,7 @@ namespace IO
 			Material material = renderer.material;
 			material.color = ColorGenerator.Instance.GetNextColor();
 			renderer.material = material;
+			fragment.GetComponent<MaterialController>().Init();
 		}
 	}
 

@@ -24,10 +24,19 @@ namespace Registration
 
 		private float error = float.MaxValue;
 
+		private readonly float errorThreshold;
+
+		private readonly float initialError;
+
 		private StabilizationTermiationCondition stabilization;
 
 		private bool hasTerminated;
 		public bool HasTerminated { get { return hasTerminated; } }
+
+		private delegate void SendMessageDelegate();
+
+		private SendMessageDelegate stepEndNotification;
+		private SendMessageDelegate preparationStepEndNotification;
 
 		#region staticfragment
 		private GameObject StaticFragment
@@ -83,6 +92,8 @@ namespace Registration
 
 			stabilization = new StabilizationTermiationCondition();
 
+			setNotifcationFunctions();
+
 			hasTerminated = false;
 
 			//The static fragment does not change during ICP, consequently its points need only be sampled once.
@@ -90,9 +101,58 @@ namespace Registration
 
 			ModelSamplingInformation = new SamplingInformation(ModelFragment);
 
-			SendMessageToAllListeners("OnICPStarted");
-
 			settings.ErrorMetric.Set(staticFragment, settings.ReferenceTransform);
+
+			this.initialError = computeIntialError();
+			this.errorThreshold = Settings.ErrorThresholdScale * this.initialError;
+		}
+
+		private void setNotifcationFunctions()
+		{
+			if (CLI.Instance.CLIModeActive)
+			{
+				stepEndNotification = DontNotify;
+				preparationStepEndNotification = DontNotify;
+			}
+			else
+			{
+				stepEndNotification = GUIStepEndNotification;
+				preparationStepEndNotification = GUIPreparationStepEndNotification;
+			}
+		}
+
+		private void GUIStepEndNotification()
+		{
+			SendMessageToAllListeners(
+				"OnStepCompleted",
+				new ICPStepCompletedMessage(this.iterationCounter.CurrentCount, this.error)
+			);
+		}
+
+		private void GUIPreparationStepEndNotification()
+		{
+			SendMessageToAllListeners(
+				"OnPreparationStepCompleted",
+				new ICPPreparationStepCompletedMessage(
+					this.Correspondences,
+					this.Settings.ReferenceTransform,
+					//The counter is only updated after the step has been set
+					this.iterationCounter.CurrentCount + 1
+				)
+			);
+		}
+
+		private void DontNotify()
+		{
+			//do nothing
+		}
+
+		private float computeIntialError()
+		{
+			CorrespondenceCollection initialCorrespondences = ComputeCorrespondences(StaticPoints);
+			initialCorrespondences = FilterCorrespondences(initialCorrespondences);
+
+			return Settings.ErrorMetric.ComputeInitialError(initialCorrespondences);
 		}
 
 		public void AddListener(GameObject listener)
@@ -111,20 +171,17 @@ namespace Registration
 
 		public void PrepareStep()
 		{
+			if (iterationCounter.AtFirstCount())
+			{
+				SendMessageToAllListeners("OnICPStarted", new ICPStartedMessage(this.initialError, this.errorThreshold));
+			}
+
 			if (HasTerminated) return;
 
 			Correspondences = ComputeCorrespondences(StaticPoints);
 			Correspondences = FilterCorrespondences(Correspondences);
 
-			SendMessageToAllListeners(
-				"OnPreparationStepCompleted",
-				new ICPPreparationStepCompletedMessage(
-					Correspondences,
-					Settings.ReferenceTransform,
-					//The counter is only updated after the step has been set
-					iterationCounter.CurrentCount + 1
-				)
-			);
+			this.preparationStepEndNotification();
 
 			TerminateIfNeeded();
 		}
@@ -137,16 +194,13 @@ namespace Registration
 			Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(Correspondences);
 			TransformModelFragment(transformationMatrix);
 
-			error = Settings.ErrorMetric.ComputeError(
+			error = Settings.ErrorMetric.ComputeTerminationError(
 				correspondences: Correspondences,
 				originalTransform: Settings.ReferenceTransform,
-				newTransform: ModelFragment.transform
+				currentTransform: ModelFragment.transform
 			);
 
-			SendMessageToAllListeners(
-				"OnStepCompleted",
-				new ICPStepCompletedMessage(iterationCounter.CurrentCount, error)
-			);
+			this.stepEndNotification();
 
 			TerminateIfNeeded();
 		}
@@ -163,7 +217,7 @@ namespace Registration
 
 		private bool ErrorBelowThreshold()
 		{
-			return error < Settings.ErrorThreshold;
+			return error < this.errorThreshold;
 		}
 
 		private bool InvalidCorrespondences(out string message)
@@ -258,6 +312,13 @@ namespace Registration
 			idx = 0;
 		}
 
+		/// <summary>
+		/// Returns true if the error has stabilized. I.e. if the error for the 
+		/// past numPatternsToConsider is relativley constant. Stores the passed 
+		/// error in the list of errors.
+		/// </summary>
+		/// <returns><c>true</c>, if the error has stabilized, <c>false</c> otherwise.</returns>
+		/// <param name="currentError">Current error.</param>
 		public bool ErrorHasStabilized(float currentError)
 		{
 			AddErrorToErrors(currentError);
@@ -268,17 +329,26 @@ namespace Registration
 			return CoefficientOfVariationUnderThreshold();
 		}
 
+		/// <summary>
+		/// Returns true if the variantion coefficient is below the threshold.
+		/// </summary>
+		/// <returns><c>true</c>, if the variation coeffiecient is below the threshold <c>false</c> otherwise.</returns>
 		private bool CoefficientOfVariationUnderThreshold()
 		{
 			double mean = errors.Average();
 			double standardDeviation = ComputeErrorStandardDeviation(mean);
 
-			//use this instead of the SD to scale insensitivity
+			//use this instead of the SD to be scale insensitive
 			double coefficientOfVariation = standardDeviation / mean;
 
 			return coefficientOfVariation < threshold;
 		}
 
+		/// <summary>
+		/// Compute the biased standarddeviation of the stored errors.
+		/// </summary>
+		/// <returns>The error standard deviation.</returns>
+		/// <param name="mean">Mean.</param>
 		private double ComputeErrorStandardDeviation(double mean)
 		{
 			double standardDeviation = 0;
@@ -290,11 +360,20 @@ namespace Registration
 			return standardDeviation;
 		}
 
+		/// <summary>
+		/// Returns true if numCountErrors are stored.
+		/// </summary>
+		/// <returns><c>true</c>, if numCountErrors are stored <c>false</c> otherwise.</returns>
 		private bool ErrorsArrayIsFilled()
 		{
 			return storedErrorsCount >= numPatternsToConsider;
 		}
 
+		/// <summary>
+		/// Adds the error to the list of errors. If the list of errors is full 
+		/// the oldest error is removed.
+		/// </summary>
+		/// <param name="error">Error.</param>
 		private void AddErrorToErrors(float error)
 		{
 			errors[idx] = (double)error;

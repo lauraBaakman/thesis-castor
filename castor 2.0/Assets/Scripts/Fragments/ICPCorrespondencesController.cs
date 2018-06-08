@@ -14,10 +14,15 @@ namespace Fragments
 
 		static Material CorrespondenceMaterial;
 
+		public void Start()
+		{
+			if (CLI.Instance.CLIModeActive) Destroy(this);
+		}
+
 		#region Correspondences
 		private void RenderCorrespondences()
 		{
-			if (CorrespondencesPresent())
+			if (CorrespondencesPresent() && showCorrespondences)
 			{
 				Debug.Assert(ReferenceTransform, "The reference transform needs to be set");
 
@@ -119,8 +124,9 @@ namespace Fragments
 
 		public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
 		{
-			Correspondences.AddRange(message.Correspondences);
+			if (!showCorrespondences) return;
 
+			Correspondences.AddRange(message.Correspondences);
 			ReferenceTransform = message.Transform;
 		}
 		#endregion

@@ -15,12 +15,26 @@ namespace Ticker
 		private Timer Timer;
 		private Message currentMessage;
 
+		private delegate void WriteMethod(Message message);
+		WriteMethod write;
+
 		private static string noMessageText = "";
 
 		private void Awake()
 		{
 			TickerText = FindTickerTextComponent();
-			Timer = new Timer(OnMessageHasDecayed);
+			if (Timer == null) Timer = new Timer(OnMessageHasDecayed);
+
+			write = WriteToTicker;
+		}
+
+		/// <summary>
+		/// Run the Ticker in Headless mode, i.e. write everything to Debug.Log instead of to the Ticker.
+		/// </summary>
+		public void ToHeadLessMode()
+		{
+			if (Timer == null) Timer = new Timer(OnMessageHasDecayed);
+			write = WriteToConsole;
 		}
 
 		/// <summary>
@@ -52,7 +66,7 @@ namespace Ticker
 		private void Display(Message message)
 		{
 			currentMessage = message;
-			WriteToTicker(message);
+			this.write(message);
 			Timer.Set(message.DecayInS);
 		}
 
@@ -80,6 +94,11 @@ namespace Ticker
 		{
 			TickerText.text = message.Text;
 			TickerText.color = message.Color;
+		}
+
+		private void WriteToConsole(Message message)
+		{
+			Debug.Log(message.Text);
 		}
 	}
 }

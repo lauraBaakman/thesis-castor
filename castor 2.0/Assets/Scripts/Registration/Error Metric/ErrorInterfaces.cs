@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Utils;
-using System;
 
 namespace Registration.Error
 {
 	public interface IErrorMetric
 	{
 		float ComputeError(CorrespondenceCollection correspondences, Transform originalTransform, Transform newTransform);
+
+		float ComputeInitialError(CorrespondenceCollection correspondences);
+
+		float ComputeTerminationError(CorrespondenceCollection correspondences, Transform originalTransform, Transform currentTransform);
 
 		void Set(GameObject staticModel, Transform referenceTransform);
 

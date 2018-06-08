@@ -13,7 +13,7 @@ namespace Registration
 
 		public interface IICPStartEndListener
 		{
-			void OnICPStarted();
+			void OnICPStarted(ICPStartedMessage message);
 
 			void OnICPTerminated(ICPTerminatedMessage message);
 		}

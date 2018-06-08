@@ -4,6 +4,7 @@ using UnityEngine;
 using Registration.Error;
 using System.IO;
 using Utils;
+using System;
 
 namespace Registration
 {
@@ -16,11 +17,11 @@ namespace Registration
 		public Transform ReferenceTransform { get; set; }
 
 		/// <summary>
-		/// If the error of the registration is smaller than this threshold the
-		/// registration process terminates.
+		/// If the error of the current registration is smaller than the initial 
+		/// error scaled with this value the algorithm terminates.
 		/// </summary>
 		/// <value>The error threshold.</value>
-		public float ErrorThreshold { get; set; }
+		public float ErrorThresholdScale { get; set; }
 
 		/// <summary>
 		/// The maximum number of iterations to execute.
@@ -81,9 +82,11 @@ namespace Registration
 		{ }
 
 		public Settings(
-			Transform referenceTransform, ITransformFinder transformFinder,
+			Transform referenceTransform,
+			ITransformFinder transformFinder,
 			string name,
-			float errorThreshold = 0.000001f, int maxNumIterations = 500,
+			string correspondenceFinder = "normalshooting",
+			float errorThresholdScale = 0.001f, int maxNumIterations = 500,
 			float maxWithinCorrespondenceDistance = 0.5f
 		)
 		{
@@ -91,7 +94,7 @@ namespace Registration
 
 			ReferenceTransform = referenceTransform;
 
-			ErrorThreshold = errorThreshold;
+			ErrorThresholdScale = errorThresholdScale;
 
 			MaxWithinCorrespondenceDistance = maxWithinCorrespondenceDistance;
 
@@ -108,7 +111,28 @@ namespace Registration
 
 			this.TransFormFinder = transformFinder;
 
-			CorrespondenceFinder = new NormalShootingCorrespondenceFinder(this);
+			if (correspondenceFinder == "normalshooting")
+			{
+				CorrespondenceFinder = new NormalShootingCorrespondenceFinder(this);
+			}
+			else if (correspondenceFinder == "nearestneighbour")
+			{
+				CorrespondenceFinder = new NearstPointCorrespondenceFinder(PointSampler);
+			}
+			else
+			{
+				throw new Exception("Invalid Correspondence Finder name");
+			}
+		}
+
+		public static Settings SeminalICP(Transform referenceTransform)
+		{
+			return new Settings(
+				referenceTransform: referenceTransform,
+				transformFinder: new HornTransformFinder(),
+				name: "Seminal ICP",
+				correspondenceFinder: "nearestneighbour"
+			);
 		}
 
 		public void ToJson(string outputPath)
@@ -157,17 +181,17 @@ namespace Registration
 			[System.Serializable]
 			public class SerializableError
 			{
-				public float errorThreshold;
+				public float errorThresholdScale;
 				public SerializableErrorMetric errorMetric;
 
-				private SerializableError(float errorThreshold, SerializableErrorMetric errorMetric)
+				private SerializableError(float errorThresholdScale, SerializableErrorMetric errorMetric)
 				{
-					this.errorThreshold = errorThreshold;
+					this.errorThresholdScale = errorThresholdScale;
 					this.errorMetric = errorMetric;
 				}
 
 				public SerializableError(Settings settings)
-					: this(settings.ErrorThreshold, settings.ErrorMetric.Serialize())
+					: this(settings.ErrorThresholdScale, settings.ErrorMetric.Serialize())
 				{ }
 			}
 

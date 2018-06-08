@@ -86,7 +86,7 @@ namespace Fragment
 		#endregion
 
 		#region IICPStartEndListener
-		public void OnICPStarted()
+		public void OnICPStarted(ICPStartedMessage message)
 		{
 			Selectable = false;
 		}

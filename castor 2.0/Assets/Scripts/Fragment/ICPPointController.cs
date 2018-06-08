@@ -11,6 +11,8 @@ namespace Fragment
 
 		public void Awake()
 		{
+			if (CLI.Instance.CLIModeActive) Destroy(this);
+
 			meshRenderer = GetComponent<MeshRenderer>();
 			defaultColor = meshRenderer.material.color;
 		}

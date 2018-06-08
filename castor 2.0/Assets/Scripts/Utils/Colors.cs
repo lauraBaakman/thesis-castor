@@ -13,21 +13,17 @@ namespace Utils
 		{
 			idx = 0;
 
-			//Source Spectral_11 at https://jiffyclub.github.io/palettable/colorbrewer/diverging/
-			colors = new List<Color>(11)
+			colors = new List<Color>(8)
 				{
-					new Color(0.55f, 0.00f, 0.20f), //deep red (140, 0, 51)
-                    new Color(0.29f, 0.22f, 0.57f), //purple
-                    new Color(0.93f, 0.33f, 0.20f), //deep orange
-                    new Color(1.00f, 1.00f, 0.70f), //yellow
-                    new Color(0.61f, 0.85f, 0.58f), //green
-                    new Color(0.16f, 0.45f, 0.69f), //blue
-                    new Color(0.78f, 0.16f, 0.25f), //red
-                    new Color(0.98f, 0.62f, 0.31f), //orange
-                    new Color(0.88f, 0.96f, 0.53f), //pale green
-                    new Color(0.99f, 0.85f, 0.47f), //light orange
-                    new Color(0.34f, 0.72f, 0.58f)  //blueish-green
-                };
+					new Color(247f / 255f, 146f / 255f, 086 / 255f),
+					new Color(029f / 255f, 078f / 255f, 137 / 255f),
+					new Color(117f / 255f, 166f / 255f, 157 / 255f),
+					new Color(251f / 255f, 210f / 255f, 162 / 255f),
+					new Color(8f / 255f, 159f / 255f, 179 / 255f),
+					new Color(125f / 255f, 206f / 255f, 181 / 255f),
+					new Color(38f / 255f, 056f / 255f, 075 / 255f),
+					new Color(177f / 255f, 143f / 255f, 122 / 255f)
+				};
 		}
 
 		public void Reset()

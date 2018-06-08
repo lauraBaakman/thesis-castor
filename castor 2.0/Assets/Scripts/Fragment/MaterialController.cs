@@ -12,7 +12,7 @@ namespace Fragment
 		private MaterialSet MaterialSet;
 		private MeshRenderer Renderer;
 
-		void Awake()
+		public void Init()
 		{
 			Renderer = GetComponent<MeshRenderer>();
 			MaterialSet = new MaterialSet(Renderer.material);
@@ -35,7 +35,7 @@ namespace Fragment
 			Renderer.material = material;
 		}
 
-		public void OnICPStarted()
+		public void OnICPStarted(ICPStartedMessage message)
 		{
 			SetMaterial(MaterialSet.Registration);
 		}

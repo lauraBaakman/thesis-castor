@@ -19,6 +19,11 @@ namespace Fragment
 
 		private ICPController ICPControllerOfParent;
 
+		public void Start()
+		{
+			if (CLI.Instance.CLIModeActive) Destroy(this);
+		}
+
 		private void Awake()
 		{
 			GameObject parent = this.transform.parent.gameObject;
