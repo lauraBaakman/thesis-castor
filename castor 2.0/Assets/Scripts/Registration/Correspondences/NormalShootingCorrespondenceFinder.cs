@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
@@ -25,6 +24,13 @@ namespace Registration
 		/// The reference transform.
 		/// </summary>
 		private readonly Transform ReferenceTransform;
+
+		/// <summary>
+		/// Offset of the point before it is used as the basis of a ray to ensure
+		/// that we can find correspondences between points that lie at the same
+		/// position.    
+		/// </summary>
+		private static float epislon = 0.0000001f;
 
 		/// <summary>
 		/// Initializes a new instance of the 
@@ -111,12 +117,12 @@ namespace Registration
 		{
 			Point hit;
 
-			Ray forwardRay = staticPoint.ToForwardWorldSpaceRay(model.Transform);
+			Ray forwardRay = staticPoint.ToForwardWorldSpaceRay(model.Transform, epislon);
 			hit = FindIntersection(forwardRay, model);
 
 			if (hit == null)
 			{
-				Ray backwardRay = staticPoint.ToBackwardWorldSpaceRay(model.Transform);
+				Ray backwardRay = staticPoint.ToBackwardWorldSpaceRay(model.Transform, epislon);
 				hit = FindIntersection(backwardRay, model);
 			}
 			return hit;

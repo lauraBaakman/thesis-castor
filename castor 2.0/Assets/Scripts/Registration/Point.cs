@@ -197,9 +197,10 @@ namespace Registration
 		/// </summary>
 		/// <returns>The ray starting at thhe position of this point in the direction of its normal.</returns>
 		/// <param name="localTransform">The local transform of the point.</param>
-		public Ray ToForwardWorldSpaceRay(Transform localTransform)
+		/// <param name="epsilon">Offset of the origin of the ray w.r.t. to the point in the direction of the normal.</param>
+		public Ray ToForwardWorldSpaceRay(Transform localTransform, float epsilon)
 		{
-			return ToWorldSpaceRay(localTransform, +1);
+			return ToWorldSpaceRay(localTransform, +1, epsilon);
 		}
 
 		/// <summary>
@@ -207,9 +208,10 @@ namespace Registration
 		/// </summary>
 		/// <returns>The ray starting at thhe position of this point in the direction of its normal.</returns>
 		/// <param name="localTransform">The local transform of the point.</param>
-		public Ray ToBackwardWorldSpaceRay(Transform localTransform)
+		/// <param name="epsilon">Offset of the origin of the ray w.r.t. to the point in the direction of the normal.</param>
+		public Ray ToBackwardWorldSpaceRay(Transform localTransform, float epsilon)
 		{
-			return ToWorldSpaceRay(localTransform, -1);
+			return ToWorldSpaceRay(localTransform, -1, epsilon);
 		}
 
 		/// <summary>
@@ -218,9 +220,10 @@ namespace Registration
 		/// <returns>The world space ray.</returns>
 		/// <param name="localTransform">Local transform.</param>
 		/// <param name="direction">Direction -1 means the ray points inside the model, direction is one means the ray points outside the model..</param>
-		private Ray ToWorldSpaceRay(Transform localTransform, int direction)
+		/// <param name="epsilon">Offset of the origin of the ray</param>
+		private Ray ToWorldSpaceRay(Transform localTransform, int direction, float epsilon)
 		{
-			Vector3 worldSpacePosition = localTransform.TransformPoint(Position);
+			Vector3 worldSpacePosition = localTransform.TransformPoint(Position - epsilon * direction * Normal.normalized);
 			Vector3 worldSpaceDirection = localTransform.TransformDirection(direction * Normal);
 
 			worldSpaceDirection.Normalize();
