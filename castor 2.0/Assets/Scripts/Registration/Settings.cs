@@ -86,7 +86,7 @@ namespace Registration
 			ITransformFinder transformFinder,
 			string name,
 			string correspondenceFinder = "normalshooting",
-			float errorThresholdScale = 0.001f, int maxNumIterations = 500,
+			float errorThresholdScale = 0.0001f, int maxNumIterations = 500,
 			float maxWithinCorrespondenceDistance = 0.5f
 		)
 		{

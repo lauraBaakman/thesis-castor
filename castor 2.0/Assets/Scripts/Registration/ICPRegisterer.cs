@@ -302,7 +302,7 @@ namespace Registration
 
 		private double[] errors;
 
-		public StabilizationTermiationCondition(int numPatternsToConsider = 20, double threshold = 5e-07)
+		public StabilizationTermiationCondition(int numPatternsToConsider = 50, double threshold = 5e-08)
 		{
 			this.numPatternsToConsider = numPatternsToConsider;
 			this.threshold = threshold;
