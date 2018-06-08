@@ -28,7 +28,7 @@ public class Results
 
 	private void AddResult(Dictionary<string, object> csvrow)
 	{
-		processedModelFragments.Add((string)csvrow["id"]);
+		processedModelFragments.Add((string)csvrow["'id'"]);
 	}
 
 	public void AddResult(ICPTerminatedMessage message)
