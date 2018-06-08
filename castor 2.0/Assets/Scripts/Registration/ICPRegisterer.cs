@@ -97,8 +97,6 @@ namespace Registration
 			StaticFragment = staticFragment;
 			ModelFragment = modelFragment;
 
-			stabilization = new StabilizationTermiationCondition();
-
 			Settings = settings;
 			FinishedCallBack = callBack;
 
