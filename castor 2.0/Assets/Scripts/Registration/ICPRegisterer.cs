@@ -300,7 +300,7 @@ namespace Registration
 		//If the SD is smaller than this value we terminate
 		private double threshold;
 
-		private static int storedErrorsCount;
+		private int storedErrorsCount;
 		private int idx;
 
 		private double[] errors;
