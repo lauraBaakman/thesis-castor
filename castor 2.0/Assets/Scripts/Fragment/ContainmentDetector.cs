@@ -10,10 +10,13 @@ public class ContainmentDetector : MonoBehaviour
 {
 	public new Collider collider;
 	private static float stepSize = 0.0001f;
+	private Vector3 pointOutsideObject;
+	private bool isPointOnObject;
 
 	private void Start()
 	{
 		collider = this.GetComponent<MeshCollider>();
+		pointOutsideObject = FindPointOutsideGameObject();
 	}
 
 	/// <summary>
@@ -75,12 +78,15 @@ public class ContainmentDetector : MonoBehaviour
 
 	private bool DetermineContainmentWithRayCasting(Vector3 position)
 	{
-		Vector3 pointOutsideObject = FindPointOutsideGameObject();
-
 		int intersections = 0;
+
+		this.isPointOnObject = false;
 
 		intersections += CountIntersectionsOnRay(pointOutsideObject, position);
 		intersections += CountIntersectionsOnRay(position, pointOutsideObject);
+
+		//If the point falls on the object it is not contained within the object
+		if (isPointOnObject) return false;
 
 		return IsOdd(intersections);
 	}
@@ -103,10 +109,15 @@ public class ContainmentDetector : MonoBehaviour
 		{
 			if (HasHitThisColliderAlongRay(current, end, out hit))
 			{
+				if (hit.point == end)
+				{
+					this.isPointOnObject = true;
+					break;
+				}
 				intersections++;
 				current = hit.point + stepSize * direction;
 			}
-			else current = end;
+			else break;
 		}
 		return intersections;
 	}
