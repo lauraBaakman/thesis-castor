@@ -152,6 +152,11 @@ namespace Registration
 			CorrespondenceCollection initialCorrespondences = ComputeCorrespondences(StaticPoints);
 			initialCorrespondences = FilterCorrespondences(initialCorrespondences);
 
+			if (initialCorrespondences.Count < 6)
+			{
+				Terminate(ICPTerminatedMessage.TerminationReason.Error, "Could only find " + initialCorrespondences.Count + " to compute the initial error.");
+			}
+
 			return Settings.ErrorMetric.ComputeInitialError(initialCorrespondences);
 		}
 
