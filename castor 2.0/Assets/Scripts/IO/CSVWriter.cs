@@ -16,7 +16,7 @@ public class CSVWriter
 	private void WriteTimeStamp()
 	{
 		string timestamp = string.Format(
-			"# Written by CAstOR on {0}",
+			"# Written by CAstOR on {0}\n",
 			System.DateTime.Now.ToLocalTime().ToString()
 		);
 		WriteLine(timestamp);

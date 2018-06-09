@@ -177,9 +177,7 @@ namespace Registration.Error
 			float error = 0;
 			for (int i = 0; i < modelPoints.Count; i++)
 			{
-				xi = staticModelContainmentDetector.GameObjectContains(
-					currentTransform.TransformPoint(modelPoints[i].Position)
-				);
+				xi = staticModelContainmentDetector.GameObjectContains(currentTransform.TransformPoint(modelPoints[i].Position));
 				error += ComputeError(
 					modelPoint: modelPoints[i].Position,
 					staticPoint: correspondences[i].StaticPoint.Position,

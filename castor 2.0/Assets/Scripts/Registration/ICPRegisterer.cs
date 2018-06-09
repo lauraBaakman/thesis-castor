@@ -4,6 +4,7 @@ using System;
 using Utils;
 using Registration.Messages;
 using System.Linq;
+using System.Globalization;
 
 namespace Registration
 {
@@ -24,14 +25,14 @@ namespace Registration
 
 		private float error = float.MaxValue;
 
-		private readonly float errorThreshold;
-
-		private readonly float initialError;
+		private float errorThreshold;
 
 		private StabilizationTermiationCondition stabilization;
 
 		private bool hasTerminated;
 		public bool HasTerminated { get { return hasTerminated; } }
+
+		private string errorsString = "";
 
 		private delegate void SendMessageDelegate();
 
@@ -71,6 +72,19 @@ namespace Registration
 				AddListener(modelFragment);
 			}
 		}
+
+		private float Error
+		{
+			get { return error; }
+
+			set
+			{
+				error = value;
+				stabilization.AddError(error);
+				StoreError(error);
+			}
+		}
+
 		private GameObject modelFragment;
 		#endregion
 
@@ -82,8 +96,6 @@ namespace Registration
 		{
 			StaticFragment = staticFragment;
 			ModelFragment = modelFragment;
-
-			stabilization = new StabilizationTermiationCondition();
 
 			Settings = settings;
 			FinishedCallBack = callBack;
@@ -102,9 +114,6 @@ namespace Registration
 			ModelSamplingInformation = new SamplingInformation(ModelFragment);
 
 			settings.ErrorMetric.Set(staticFragment, settings.ReferenceTransform);
-
-			this.initialError = computeIntialError();
-			this.errorThreshold = Settings.ErrorThresholdScale * this.initialError;
 		}
 
 		private void setNotifcationFunctions()
@@ -125,7 +134,7 @@ namespace Registration
 		{
 			SendMessageToAllListeners(
 				"OnStepCompleted",
-				new ICPStepCompletedMessage(this.iterationCounter.CurrentCount, this.error)
+				new ICPStepCompletedMessage(this.iterationCounter.CurrentCount, this.Error)
 			);
 		}
 
@@ -147,12 +156,16 @@ namespace Registration
 			//do nothing
 		}
 
-		private float computeIntialError()
+		private float ComputeIntialError(CorrespondenceCollection initialCorrespondences)
 		{
-			CorrespondenceCollection initialCorrespondences = ComputeCorrespondences(StaticPoints);
-			initialCorrespondences = FilterCorrespondences(initialCorrespondences);
+			if (initialCorrespondences.Count < 6)
+			{
+				Terminate(ICPTerminatedMessage.TerminationReason.Error, "Could only find " + initialCorrespondences.Count + " to compute the initial error.");
+			}
 
-			return Settings.ErrorMetric.ComputeInitialError(initialCorrespondences);
+			float initialError = Settings.ErrorMetric.ComputeInitialError(initialCorrespondences);
+			this.Error = initialError;
+			return initialError;
 		}
 
 		public void AddListener(GameObject listener)
@@ -169,18 +182,31 @@ namespace Registration
 			}
 		}
 
+		private void StoreError(float newError)
+		{
+			string newErrorString = newError.ToString("E10", CultureInfo.InvariantCulture);
+			if (this.errorsString.Equals("")) this.errorsString = newErrorString;
+			this.errorsString += (" " + newErrorString);
+		}
+
+		private float ComputeErrorThreshold(float initialError)
+		{
+			return Settings.ErrorThresholdScale * initialError;
+		}
+
 		public void PrepareStep()
 		{
-			if (iterationCounter.AtFirstCount())
-			{
-				SendMessageToAllListeners("OnICPStarted", new ICPStartedMessage(this.initialError, this.errorThreshold));
-			}
-
 			if (HasTerminated) return;
 
 			Correspondences = ComputeCorrespondences(StaticPoints);
 			Correspondences = FilterCorrespondences(Correspondences);
 
+			if (iterationCounter.AtFirstCount())
+			{
+				float initialError = ComputeIntialError(Correspondences);
+				this.errorThreshold = ComputeErrorThreshold(initialError);
+				SendMessageToAllListeners("OnICPStarted", new ICPStartedMessage(initialError, this.errorThreshold));
+			}
 			this.preparationStepEndNotification();
 
 			TerminateIfNeeded();
@@ -194,12 +220,11 @@ namespace Registration
 			Matrix4x4 transformationMatrix = Settings.TransFormFinder.FindTransform(Correspondences);
 			TransformModelFragment(transformationMatrix);
 
-			error = Settings.ErrorMetric.ComputeTerminationError(
+			Error = Settings.ErrorMetric.ComputeTerminationError(
 				correspondences: Correspondences,
 				originalTransform: Settings.ReferenceTransform,
 				currentTransform: ModelFragment.transform
 			);
-
 			this.stepEndNotification();
 
 			TerminateIfNeeded();
@@ -212,12 +237,12 @@ namespace Registration
 			if (iterationCounter.IsCompleted()) Terminate(ICPTerminatedMessage.TerminationReason.ExceededNumberOfIterations);
 			if (ErrorBelowThreshold()) Terminate(ICPTerminatedMessage.TerminationReason.ErrorBelowThreshold);
 			if (InvalidCorrespondences(out message)) Terminate(ICPTerminatedMessage.TerminationReason.Error, message);
-			if (stabilization.ErrorHasStabilized(error)) Terminate(ICPTerminatedMessage.TerminationReason.ErrorStabilized);
+			if (stabilization.ErrorHasStabilized()) Terminate(ICPTerminatedMessage.TerminationReason.ErrorStabilized);
 		}
 
 		private bool ErrorBelowThreshold()
 		{
-			return error < this.errorThreshold;
+			return Error < this.errorThreshold;
 		}
 
 		private bool InvalidCorrespondences(out string message)
@@ -232,7 +257,7 @@ namespace Registration
 			if (FinishedCallBack != null) FinishedCallBack();
 			SendMessageToAllListeners(
 				methodName: "OnICPTerminated",
-				message: new ICPTerminatedMessage(reason, this.error, this.iterationCounter.CurrentCount, message, ModelFragment.name)
+				message: new ICPTerminatedMessage(reason, this.Error, this.iterationCounter.CurrentCount, message, ModelFragment.name, this.errorsString)
 			);
 		}
 
@@ -297,7 +322,7 @@ namespace Registration
 		//If the SD is smaller than this value we terminate
 		private double threshold;
 
-		private static int storedErrorsCount;
+		private int storedErrorsCount;
 		private int idx;
 
 		private double[] errors;
@@ -319,10 +344,8 @@ namespace Registration
 		/// </summary>
 		/// <returns><c>true</c>, if the error has stabilized, <c>false</c> otherwise.</returns>
 		/// <param name="currentError">Current error.</param>
-		public bool ErrorHasStabilized(float currentError)
+		public bool ErrorHasStabilized()
 		{
-			AddErrorToErrors(currentError);
-
 			// We have insufficient data
 			if (!ErrorsArrayIsFilled()) return false;
 
@@ -374,7 +397,7 @@ namespace Registration
 		/// the oldest error is removed.
 		/// </summary>
 		/// <param name="error">Error.</param>
-		private void AddErrorToErrors(float error)
+		public void AddError(float error)
 		{
 			errors[idx] = (double)error;
 			idx = (idx + 1) % numPatternsToConsider;

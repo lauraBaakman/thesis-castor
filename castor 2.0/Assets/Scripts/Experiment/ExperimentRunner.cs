@@ -362,9 +362,9 @@ namespace Experiment
 		{
 			WriteToRunDataFile(
 				string.Format(
-					"'{0}', '{1}', '{2}', '{3}', '{4}', '{5}'",
+					"'{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}'",
 					"id", "initial error", "error termination threshold",
-					"termination message", "termination error", "termination iteration"
+					"termination message", "termination error", "termination iteration", "errors"
 				),
 				append: false
 			);
@@ -416,13 +416,14 @@ namespace Experiment
 			results.AddResult(message);
 
 			string line = string.Format(
-				"{0}, {1}, {2}, '{3}', {4}, {5}",
+				"{0}, {1}, {2}, '{3}', {4}, {5}, {6}",
 				message.modelFragmentName,
 				this.ICPStartedMessage.InitialError.ToString("E10", CultureInfo.InvariantCulture),
 				this.ICPStartedMessage.TerminationThreshold.ToString("E10", CultureInfo.InvariantCulture),
 				message.Message,
 				message.errorAtTermination.ToString("E10", CultureInfo.InvariantCulture),
-				message.terminationIteration
+				message.terminationIteration,
+				message.errors
 			);
 			WriteToRunDataFile(line, append: true);
 			this.finishedWriting = true;

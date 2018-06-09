@@ -227,7 +227,6 @@
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestCorrespondenceCollection.cs" />
     <Compile Include="Assets\Scripts\Registration\Correspondences\Editor\TestNearestPointCorrespondences.cs" />
     <Compile Include="Assets\Scripts\Registration\Editor\TestPoint.cs" />
-    <Compile Include="Assets\Scripts\Registration\Editor\TestStabilizationTermiationCondition.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestAggregationMethods.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestDistanceMetrics.cs" />
     <Compile Include="Assets\Scripts\Registration\Error Metric\Editor\TestErrorMetric.cs" />
