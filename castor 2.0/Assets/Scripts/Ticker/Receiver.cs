@@ -13,28 +13,34 @@ namespace Ticker
 	{
 		private Text TickerText;
 		private Timer Timer;
-		private Message currentMessage;
+		private Message currentMessage = null;
 
-		private delegate void WriteMethod(Message message);
-		WriteMethod write;
+		private delegate void DisplayMethod(Message message);
+		private delegate void UpdateMethod();
+		DisplayMethod Display;
+		UpdateMethod ModeSpecificUpdate;
 
 		private static string noMessageText = "";
 
 		private void Awake()
 		{
-			TickerText = FindTickerTextComponent();
-			if (Timer == null) Timer = new Timer(OnMessageHasDecayed);
-
-			write = WriteToTicker;
+			if (CLI.Instance.CLIModeActive) CLIAwake();
+			else GUIAwake();
 		}
 
-		/// <summary>
-		/// Run the Ticker in Headless mode, i.e. write everything to Debug.Log instead of to the Ticker.
-		/// </summary>
-		public void ToHeadLessMode()
+		private void CLIAwake()
 		{
-			if (Timer == null) Timer = new Timer(OnMessageHasDecayed);
-			write = WriteToConsole;
+			Display = DisplayWithConsole;
+			ModeSpecificUpdate = CLIUpdate;
+		}
+
+		private void GUIAwake()
+		{
+			Timer = new Timer(OnMessageHasDecayed);
+			TickerText = FindTickerTextComponent();
+
+			Display = DisplayWithTicker;
+			ModeSpecificUpdate = GUIUpdate;
 		}
 
 		/// <summary>
@@ -43,7 +49,7 @@ namespace Ticker
 		/// <param name="message">Message.</param>
 		public void OnMessage(Message message)
 		{
-			if (IsMoreImportantThanCurrentMessage(message)) Display(message);
+			if (IsMoreImportantThanCurrentMessage(message)) this.Display(message);
 		}
 
 		private bool IsMoreImportantThanCurrentMessage(Message message)
@@ -63,17 +69,17 @@ namespace Ticker
 			currentMessage = null;
 		}
 
-		private void Display(Message message)
+		private void Update()
 		{
-			currentMessage = message;
-			this.write(message);
-			Timer.Set(message.DecayInS);
+			ModeSpecificUpdate();
 		}
 
-		private void Update()
+		private void GUIUpdate()
 		{
 			Timer.Tic();
 		}
+
+		private void CLIUpdate() { }
 
 		private Text FindTickerTextComponent()
 		{
@@ -90,13 +96,20 @@ namespace Ticker
 			ResetCurretMessage();
 		}
 
+		private void DisplayWithTicker(Message message)
+		{
+			currentMessage = message;
+			WriteToTicker(message);
+			Timer.Set(message.DecayInS);
+		}
+
 		private void WriteToTicker(Message message)
 		{
 			TickerText.text = message.Text;
 			TickerText.color = message.Color;
 		}
 
-		private void WriteToConsole(Message message)
+		private void DisplayWithConsole(Message message)
 		{
 			Debug.Log(message.Text);
 		}
