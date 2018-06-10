@@ -337,7 +337,7 @@ namespace Experiment
 					}
 					else
 					{
-						Debug.Log(string.Format("Skipping {0}", run.id));
+						Debug.Log(string.Format("{1} Skipping {0}", run.id, DateTime.Now.ToString()));
 					}
 				}
 			}
