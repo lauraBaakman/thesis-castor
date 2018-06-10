@@ -335,7 +335,10 @@ namespace Experiment
 						yield return new WaitUntil(() => this.finishedWriting);
 						this.finishedWriting = false;
 					}
-					else Debug.Log(string.Format("Skipping {0}", run.id));
+					else
+					{
+						Debug.Log(string.Format("Skipping {0}", run.id));
+					}
 				}
 			}
 			Listener.SendMessage(
