@@ -112,4 +112,16 @@ public static class Vector3Extensions
 	{
 		return vector.ContainsNaNs() || vector.ContainsNegativeInfinity() || vector.ContainsPositiveInfinity();
 	}
+
+	/// <summary>
+	/// Returns true if this vector is approximately equal to the other vector. Two vectors are approximately equal if the magnitude of their difference is smaller than <param name="epsilon">. The default <param name="epsilon">, 1E-05, ensures that the function behaves the same way as ==.
+	/// </summary>
+	/// <returns><c>true</c>, the two vectors are approximatley equal <c>false</c> otherwise.</returns>
+	/// <param name="thisVector">This vector.</param>
+	/// <param name="otherVector">Other vector.</param>
+	/// <param name="epsilon">The threshold value of the magnitude of the difference.</param>
+	public static bool ApproximatelyEqualTo(this Vector3 thisVector, Vector3 otherVector, float epsilon = 1E-05f)
+	{
+		return (thisVector - otherVector).magnitude < epsilon;
+	}
 }
