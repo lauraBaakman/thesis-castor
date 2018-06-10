@@ -65,9 +65,9 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	/// </summary>
 	private void PrepApplicationForCLI()
 	{
-		Ticker.Receiver.Instance.ToHeadLessMode();
-
 		CLIUsed = true;
+
+		GetComponent<CatchException>().enabled = true;
 
 		//Store the current time so that we can show how long the run took.
 		startTime = Time.realtimeSinceStartup;

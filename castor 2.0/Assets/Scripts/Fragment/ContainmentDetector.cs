@@ -101,12 +101,17 @@ public class ContainmentDetector : MonoBehaviour
 		Vector3 direction = (end - start).normalized;
 		Vector3 current = start;
 
+		int stepsTaken = 0;
+
 		int intersections = 0;
 
 		RaycastHit hit;
 
-		while (current != end)
+		while (current.ApproximatelyEqualTo(end, 1E-04f))
 		{
+			if (stepsTaken++ > 10)
+				throw new Exception("Entering the 10th iteration in CountIntersectionsOnRay(), which cannot be right.");
+
 			if (HasHitThisColliderAlongRay(current, end, out hit))
 			{
 				if (hit.point == end)
