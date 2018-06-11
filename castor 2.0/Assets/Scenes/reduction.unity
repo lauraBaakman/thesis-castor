@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e6dcd3c2c184c4386ed66cbd3490f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ReferenceTransform: {fileID: 33415125}
   Listener: {fileID: 1270377251}
 --- !u!114 &33415128
 MonoBehaviour:

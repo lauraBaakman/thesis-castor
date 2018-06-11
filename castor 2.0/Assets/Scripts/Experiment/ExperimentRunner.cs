@@ -13,6 +13,8 @@ namespace Experiment
 	{
 		private Configuration configuration;
 
+		public Transform ReferenceTransform;
+
 		public GameObject Listener;
 		public static string ExperimentFragmentPrefabPath = "ExperimentFragment";
 		private static string runDataFileName = "data.csv";
