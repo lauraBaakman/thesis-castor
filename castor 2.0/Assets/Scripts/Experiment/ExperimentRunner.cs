@@ -111,51 +111,10 @@ namespace Experiment
 		/// </summary>
 		private void GenerateICPSettings()
 		{
-			ICPSettings.Add(
-				new Settings(
-					name: "igdIntersectionTermError",
-					referenceTransform: this.gameObject.transform,
-					transformFinder: new IGDTransformFinder(
-						new IGDTransformFinder.Configuration(
-							convergenceError: 0.001f,
-							learningRate: 0.001f,
-							maxNumIterations: 200,
-							errorMetric: new Registration.Error.IntersectionTermError(0.5f, 0.5f)
-						)
-					)
-				)
-			);
-
-			ICPSettings.Add(
-				new Settings(
-					name: "igdWheelerError",
-					referenceTransform: this.gameObject.transform,
-					transformFinder: new IGDTransformFinder(
-						new IGDTransformFinder.Configuration(
-							convergenceError: 0.001f,
-							learningRate: 0.001f,
-							maxNumIterations: 200,
-							errorMetric: new Registration.Error.WheelerIterativeError()
-						)
-					)
-				)
-			);
-
-			ICPSettings.Add(
-				new Settings(
-					name: "horn",
-					referenceTransform: this.gameObject.transform,
-					transformFinder: new HornTransformFinder()
-				)
-			);
-
-			ICPSettings.Add(
-				new Settings(
-					name: "low",
-					referenceTransform: this.gameObject.transform,
-					transformFinder: new LowTransformFinder()
-				)
-			);
+			ICPSettings.Add(Settings.IntersectionError(this.ReferenceTransform));
+			ICPSettings.Add(Settings.Wheeler(this.ReferenceTransform));
+			ICPSettings.Add(Settings.Horn(this.ReferenceTransform));
+			ICPSettings.Add(Settings.Low(this.ReferenceTransform));
 		}
 
 		/// <summary>
@@ -189,7 +148,6 @@ namespace Experiment
 			string directory = Path.Combine(basePath, directoryName);
 			return directory;
 		}
-
 
 		/// <summary>
 		/// Load the static fragment and lock it to make sure that ICP treats it

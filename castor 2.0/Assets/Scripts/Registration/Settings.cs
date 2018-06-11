@@ -135,6 +135,54 @@ namespace Registration
 			);
 		}
 
+		public static Settings Horn(Transform referenceTransform)
+		{
+			return new Settings(
+				name: "Horn",
+				referenceTransform: referenceTransform,
+				transformFinder: new HornTransformFinder());
+		}
+
+		public static Settings IntersectionError(Transform referenceTransform)
+		{
+			return new Settings(
+				name: "igdIntersectionTermError",
+				referenceTransform: referenceTransform,
+				transformFinder: new IGDTransformFinder(
+					new IGDTransformFinder.Configuration(
+						convergenceError: 0.001f,
+						learningRate: 0.001f,
+						maxNumIterations: 200,
+						errorMetric: new Registration.Error.IntersectionTermError(0.5f, 0.5f)
+					)
+				)
+			);
+		}
+
+		public static Settings Wheeler(Transform referecenTransform)
+		{
+			return new Settings(
+				name: "igdWheelerError",
+				referenceTransform: referecenTransform,
+				transformFinder: new IGDTransformFinder(
+					new IGDTransformFinder.Configuration(
+						convergenceError: 0.001f,
+						learningRate: 0.001f,
+						maxNumIterations: 200,
+						errorMetric: new Registration.Error.WheelerIterativeError()
+					)
+				)
+			);
+		}
+
+		public static Settings Low(Transform referenceTransform)
+		{
+			return new Settings(
+				name: "low",
+				referenceTransform: referenceTransform,
+				transformFinder: new LowTransformFinder());
+		}
+
 		public void ToJson(string outputPath)
 		{
 			new SerializableSettings(this).ToJson(outputPath);

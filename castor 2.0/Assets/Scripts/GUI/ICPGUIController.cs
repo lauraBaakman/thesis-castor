@@ -29,10 +29,7 @@ namespace GraphicalUI
 			GameObject modelFragment, staticFragment;
 			GetModelAndStaticFragment(out modelFragment, out staticFragment);
 
-			Settings settings = new Settings(
-				name: "horn",
-				referenceTransform: this.gameObject.transform,
-				transformFinder: new HornTransformFinder());
+			Settings settings = Settings.Horn(ICPFragments.transform);
 
 			registerer = new ICPRegisterer(
 				modelFragment: modelFragment,
