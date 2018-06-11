@@ -46,7 +46,7 @@ namespace Buttons
 		{
 			Ticker.Receiver.Instance.SendMessage(
 				methodName: "OnMessage",
-				value: new Ticker.Message.InfoMessage("Starting experiment with the configuration from " + path),
+				value: new Ticker.Message.InfoMessage(DateTime.Now.ToString() + " starting experiment with the configuration from " + path),
 				options: SendMessageOptions.RequireReceiver
 			);
 			ExperimentRunner.Configuration configuration;

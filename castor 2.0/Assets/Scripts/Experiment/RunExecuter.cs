@@ -5,6 +5,7 @@ using System.IO;
 using Fragment;
 using Registration;
 using System.Collections;
+using System;
 
 namespace Experiment
 {
@@ -50,8 +51,8 @@ namespace Experiment
 			currentRunNumber++;
 			isCurrentRunFinished = false;
 
-			string message = string.Format("Starting run number {0} with fragment {1}.",
-										   currentRunNumber, run.id);
+			string message = string.Format("{2} Starting run number {0} with fragment {1}.",
+			                               currentRunNumber, run.id, DateTime.Now.ToString());
 
 			//Notify the user
 			Ticker.Receiver.Instance.SendMessage(
