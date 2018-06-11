@@ -29,21 +29,20 @@ namespace GraphicalUI
 			GameObject modelFragment, staticFragment;
 			GetModelAndStaticFragment(out modelFragment, out staticFragment);
 
+			Settings settings = new Settings(
+				name: "horn",
+				referenceTransform: this.gameObject.transform,
+				transformFinder: new HornTransformFinder());
+
 			registerer = new ICPRegisterer(
 				modelFragment: modelFragment,
 				staticFragment: staticFragment,
-				settings: new Settings(
-					name: "igdTransformFinderWithIntersectionError",
-					referenceTransform: ICPFragments.transform,
-					transformFinder: new IGDTransformFinder(
-						new IGDTransformFinder.Configuration(
-							convergenceError: 0.001f,
-							learningRate: 0.001f,
-							maxNumIterations: 200,
-							errorMetric: new Registration.Error.IntersectionTermError(0.5f, 0.5f)
-						)
-					)
-				)
+				settings: settings
+			);
+			Ticker.Receiver.Instance.SendMessage(
+				methodName: "OnMessage",
+				value: new Ticker.Message.InfoMessage("Using " + settings.name + " to determine the registration."),
+				options: SendMessageOptions.RequireReceiver
 			);
 
 			//Note these objects do not receive the ICPStarted message.
