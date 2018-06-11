@@ -160,7 +160,7 @@ namespace Registration
 		{
 			if (initialCorrespondences.Count < 6)
 			{
-				Terminate(ICPTerminatedMessage.TerminationReason.Error, "Could only find " + initialCorrespondences.Count + " to compute the initial error.");
+				Terminate(ICPTerminatedMessage.TerminationReason.Error, "Could only find " + initialCorrespondences.Count + " correspondences to compute the initial error.");
 			}
 
 			float initialError = Settings.ErrorMetric.ComputeInitialError(initialCorrespondences);
