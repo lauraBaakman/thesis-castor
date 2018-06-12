@@ -87,7 +87,7 @@ namespace Registration
 			string name,
 			string correspondenceFinder = "normalshooting",
 			float errorThresholdScale = 0.0001f, int maxNumIterations = 500,
-			float maxWithinCorrespondenceDistance = 0.5f
+			float maxWithinCorrespondenceDistance = 0.8f
 		)
 		{
 			this.name = name;
