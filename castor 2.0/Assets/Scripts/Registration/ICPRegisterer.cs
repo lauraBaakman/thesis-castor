@@ -161,11 +161,14 @@ namespace Registration
 			if (initialCorrespondences.Count < 6)
 			{
 				Terminate(ICPTerminatedMessage.TerminationReason.Error, "Could only find " + initialCorrespondences.Count + " correspondences to compute the initial error.");
+				return float.NaN;
 			}
-
-			float initialError = Settings.ErrorMetric.ComputeInitialError(initialCorrespondences);
-			this.Error = initialError;
-			return initialError;
+			else
+			{
+				float initialError = Settings.ErrorMetric.ComputeInitialError(initialCorrespondences);
+				this.Error = initialError;
+				return initialError;
+			}
 		}
 
 		public void AddListener(GameObject listener)
@@ -204,6 +207,7 @@ namespace Registration
 			if (iterationCounter.AtFirstCount())
 			{
 				float initialError = ComputeIntialError(Correspondences);
+				if (HasTerminated) return;
 				this.errorThreshold = ComputeErrorThreshold(initialError);
 				SendMessageToAllListeners("OnICPStarted", new ICPStartedMessage(initialError, this.errorThreshold));
 			}
