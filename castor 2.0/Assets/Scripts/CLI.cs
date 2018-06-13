@@ -124,10 +124,8 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	private void RunStatisticsComputation(string dataSetFile, string resultsDirectory)
 	{
 		PrepApplicationForCLI();
-		statistics.CLIProcessExperimentResultsFolder(
-			datasetCSVpath: dataSetFile,
-			resultsDirectory: resultsDirectory,
-			listener: this.gameObject);
+		statistics.Listener = this.gameObject;
+		StartCoroutine(statistics.ProcessExperimentResultsFolder(dataSetFile, resultsDirectory));
 	}
 
 	/// <summary>
