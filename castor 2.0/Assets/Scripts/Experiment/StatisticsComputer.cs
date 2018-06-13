@@ -42,32 +42,14 @@ public class StatisticsComputer : MonoBehaviour
 		/// </summary>
 		public readonly string id;
 
-		/// <summary>
-		/// The termination message.
-		/// </summary>
-		public readonly string TerminationMessage;
-
-		/// <summary>
-		/// The error when the registration process terminated.
-		/// </summary>
-		public readonly float TerminationError;
-
-		/// <summary>
-		/// The iteration at which the registration proess terminated.
-		/// </summary>
-		public readonly int TerminationIteration;
-
-		public RunData(string id, string terminationMessage, float terminationError, int terminationIteration)
+		public RunData(string id)
 		{
 			this.id = id;
-			this.TerminationMessage = terminationMessage;
-			this.TerminationError = terminationError;
-			this.TerminationIteration = terminationIteration;
 		}
 
 		public static RunData RunDataForTests()
 		{
-			return new RunData("test run data", "don't use in production", float.NaN, int.MinValue);
+			return new RunData("test run data don't use in production");
 		}
 	}
 
@@ -213,7 +195,8 @@ public class StatisticsComputer : MonoBehaviour
 		{
 			Dictionary<string, object> dict = new Dictionary<string, object>
 			{
-				{ "obj path", objPath },
+				{ "id", RunData.id },
+
 				{ "actual translation x", actualTranslation.x },
 				{ "actual translation y", actualTranslation.y },
 				{ "actual translation z", actualTranslation.z },
@@ -227,27 +210,9 @@ public class StatisticsComputer : MonoBehaviour
 				{ "actual rotation zxy euler y", actualRotation.eulerAngles.y },
 				{ "actual rotation zxy euler z", actualRotation.eulerAngles.z },
 
-				{ "expected translation x", ExpectedTranslation.x },
-				{ "expected translation y", ExpectedTranslation.y },
-				{ "expected translation z", ExpectedTranslation.z },
-
-				{ "expected rotation quaternion x", ExpectedRotation.x },
-				{ "expected rotation quaternion y", ExpectedRotation.y },
-				{ "expected rotation quaternion z", ExpectedRotation.z },
-				{ "expected rotation quaternion w", ExpectedRotation.w },
-
-				{ "expected rotation zxy euler x", ExpectedRotation.eulerAngles.x },
-				{ "expected rotation zxy euler y", ExpectedRotation.eulerAngles.y },
-				{ "expected rotation zxy euler z", ExpectedRotation.eulerAngles.z },
-
-				{ "translation error", TranslationError },
 				{ "rotation error x", RotationError.x },
 				{ "rotation error y", RotationError.y },
 				{ "rotation error z", RotationError.z },
-
-				{ "termination message", RunData.TerminationMessage },
-				{ "termination error", RunData.TerminationError },
-				{ "termination iteration", RunData.TerminationIteration }
 			};
 
 			return dict;

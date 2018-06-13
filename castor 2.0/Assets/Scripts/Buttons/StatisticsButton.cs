@@ -226,17 +226,8 @@ namespace Buttons
 
 		private StatisticsComputer.RunData ExtractRunData(Dictionary<string, object> csvRow)
 		{
-			//id, termination message, termination error, termination iteration
-			string id = csvRow["id"] as string;
-			string terminationMessage = csvRow["termination message"] as string;
-			float terminationError = (float)csvRow["termination error"];
-			int terminationIteration = (int)csvRow["termination iteration"];
-			return new StatisticsComputer.RunData(
-				id: id,
-				terminationError: terminationError,
-				terminationMessage: terminationMessage,
-				terminationIteration: terminationIteration
-			);
+			string id = csvRow["'id'"] as string;
+			return new StatisticsComputer.RunData(id);
 		}
 
 		private Vector3 ExtractExpectedTranslation(Dictionary<string, object> row)
