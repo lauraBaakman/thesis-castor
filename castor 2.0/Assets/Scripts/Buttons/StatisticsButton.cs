@@ -67,7 +67,7 @@ namespace Buttons
 				),
 				onCancel: () => { },
 				folderMode: true,
-				initialPath: initialPath,
+				initialPath: Path.GetDirectoryName(datasetCSVpath),
 				title: "Select a results directory.",
 				loadButtonText: "Select"
 			);
@@ -87,7 +87,7 @@ namespace Buttons
 				yield return new WaitUntil(() => statisticsComputer.Done);
 				Ticker.Receiver.Instance.SendMessage(
 					methodName: "OnMessage",
-					value: new Ticker.Message.InfoMessage(DateTime.Now.ToString() + " finished analyzing " + run.objPath),
+					value: new Ticker.Message.InfoMessage("Finished analyzing " + run.objPath),
 					options: SendMessageOptions.RequireReceiver
 				);
 			}
@@ -95,7 +95,7 @@ namespace Buttons
 			WriteProcessedResultCSVDataFile(this.runs);
 			Ticker.Receiver.Instance.SendMessage(
 				methodName: "OnMessage",
-				value: new Ticker.Message.InfoMessage(DateTime.Now.ToString() + " finished analyzing results in " + resultsDirectory),
+				value: new Ticker.Message.InfoMessage("Finished analyzing results in " + resultsDirectory),
 				options: SendMessageOptions.RequireReceiver
 			);
 		}
