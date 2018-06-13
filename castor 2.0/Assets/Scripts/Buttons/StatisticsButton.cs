@@ -192,21 +192,11 @@ namespace Buttons
 		private string GetResultsCSVDataFile()
 		{
 			string[] csvFiles = System.IO.Directory.GetFiles(directory, "*.csv");
-			ValidateCSVFiles(csvFiles);
-			return csvFiles[0];
-		}
-
-		private void ValidateCSVFiles(string[] csvFiles)
-		{
-			if (csvFiles.Length != 1)
+			foreach (string file in csvFiles)
 			{
-				Debug.LogError(
-					string.Format(
-						"Unexpectedly found {0} csv file(s), expected exactly one file.",
-						csvFiles.Length
-					)
-				);
+				if (Path.GetFileName(file).Equals("data.csv")) return file;
 			}
+			throw new Exception("Could not find the file data.csv in " + directory + ".");
 		}
 
 		private StatisticsComputer.RunResult ExtractRun(Dictionary<string, object> csvRow)
