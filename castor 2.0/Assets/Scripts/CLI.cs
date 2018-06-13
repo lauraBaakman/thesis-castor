@@ -32,7 +32,7 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	/// Once the experiment is finished this method will be called. It prints the 
 	/// time needed for the experiment and quits the application.
 	/// </summary>
-	public void OnExperimentFinished()
+	public void OnCommandFinished()
 	{
 		if (CLIUsed)
 		{
@@ -119,12 +119,12 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	/// <summary>
 	/// Runs the statistics computation for the passed config and results file.
 	/// </summary>
-	/// <param name="configFile">Config file.</param>
-	/// <param name="resultsFile">Results file.</param>
+	/// <param name="dataSetFile">Config file.</param>
+	/// <param name="resultsDirectory">Results file.</param>
 	private void RunStatisticsComputation(string dataSetFile, string resultsDirectory)
 	{
 		PrepApplicationForCLI();
-		statistics.ProcessExperimentResultsFolder(
+		statistics.CLIProcessExperimentResultsFolder(
 			datasetCSVpath: dataSetFile,
 			resultsDirectory: resultsDirectory,
 			listener: this.gameObject);

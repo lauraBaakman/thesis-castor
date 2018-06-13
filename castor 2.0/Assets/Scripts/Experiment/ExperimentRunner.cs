@@ -302,7 +302,7 @@ namespace Experiment
 				}
 			}
 			Listener.SendMessage(
-				methodName: "OnExperimentFinished",
+				methodName: "OnCommandFinished",
 						options: SendMessageOptions.RequireReceiver);
 		}
 
