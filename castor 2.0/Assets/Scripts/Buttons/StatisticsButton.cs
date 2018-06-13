@@ -85,10 +85,48 @@ namespace Buttons
 			{
 				StartCoroutine(statisticsComputer.Compute(run));
 				yield return new WaitUntil(() => statisticsComputer.Done);
+				Ticker.Receiver.Instance.SendMessage(
+					methodName: "OnMessage",
+					value: new Ticker.Message.InfoMessage(DateTime.Now.ToString() + " finished analyzing " + run.objPath),
+					options: SendMessageOptions.RequireReceiver
+				);
 			}
 
 			WriteProcessedResultCSVDataFile(this.runs);
-			Debug.Log("Finished!");
+			Ticker.Receiver.Instance.SendMessage(
+				methodName: "OnMessage",
+				value: new Ticker.Message.InfoMessage(DateTime.Now.ToString() + " finished analyzing results in " + resultsDirectory),
+				options: SendMessageOptions.RequireReceiver
+			);
+		}
+
+		public void CLIProcessExperimentResultsFolder(string datasetCSVpath, string resultsDirectory, GameObject listener)
+		{
+			ReadDataSetCSV(datasetCSVpath);
+
+			CLIRetrieveRuns(resultsDirectory);
+
+			foreach (StatisticsComputer.RunResult run in runs)
+			{
+				statisticsComputer.Compute(run);
+				Ticker.Receiver.Instance.SendMessage(
+					methodName: "OnMessage",
+					value: new Ticker.Message.InfoMessage(DateTime.Now.ToString() + " finished analyzing " + run.objPath),
+					options: SendMessageOptions.RequireReceiver
+				);
+			}
+
+			WriteProcessedResultCSVDataFile(this.runs);
+
+			Ticker.Receiver.Instance.SendMessage(
+				methodName: "OnMessage",
+				value: new Ticker.Message.InfoMessage(DateTime.Now.ToString() + " finished analyzing results in " + resultsDirectory),
+				options: SendMessageOptions.RequireReceiver
+			);
+			listener.SendMessage(
+				methodName: "OnCommandFinished",
+				value: null,
+				options: SendMessageOptions.RequireReceiver);
 		}
 
 		private void WriteProcessedResultCSVDataFile(List<StatisticsComputer.RunResult> results)
@@ -101,6 +139,22 @@ namespace Buttons
 			string path = Path.Combine(this.directory, "results.csv");
 			CSVWriter writer = new CSVWriter(path);
 			writer.Write(dictionaries);
+		}
+
+		private void CLIRetrieveRuns(string inputDirectory)
+		{
+			this.directory = inputDirectory;
+
+			string csvDataFile = GetResultsCSVDataFile();
+
+			List<Dictionary<string, object>> ResultsCSVData = new CSVReader().Read(csvDataFile);
+
+			List<StatisticsComputer.RunResult> localRuns = new List<StatisticsComputer.RunResult>(ResultsCSVData.Count);
+			foreach (Dictionary<string, object> row in ResultsCSVData)
+			{
+				localRuns.Add(ExtractRun(row));
+			}
+			this.runs = localRuns;
 		}
 
 		private IEnumerator<object> RetrieveRuns(string inputDirectory)
