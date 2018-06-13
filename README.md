@@ -18,3 +18,7 @@ At some point I'll create a manual here.
 		castor.app/Contents/MacOS/castor -batchmode -logFile /dev/stdout -experiment full_path/config.json
 
 	make sure to use the full path to the config file.
+
+* To analyze the results of an experiment input the full path to the `data.csv` generated when generating the dataset and the full path to the directory with the results.
+
+		castor.app/Contents/MacOS/castor -batchmode -logFile /dev/stdout -statistics full_path/data.csv full_path/results_Horn/
