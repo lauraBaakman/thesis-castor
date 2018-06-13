@@ -3828,6 +3828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experiment: {fileID: 1213796977}
+  statistics: {fileID: 1675405566}
 --- !u!4 &1270377253
 Transform:
   m_ObjectHideFlags: 0

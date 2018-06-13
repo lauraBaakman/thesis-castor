@@ -12,6 +12,7 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	private float startTime;
 
 	public ExperimentButton experiment;
+	public StatisticsButton statistics;
 
 	private string[] CLIArguments;
 
@@ -49,46 +50,28 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 		string configFile;
 		if (ExtractExperimentArgument(out configFile)) RunExperiment(configFile);
 
-		string resultsFile;
-		if (ExtractStatisticsArguments(out configFile, out resultsFile)) RunStatisticsComputation(configFile, resultsFile);
+		string resultsDirectory;
+		string dataFile;
+		if (ExtractStatisticsArguments(out dataFile, out resultsDirectory)) RunStatisticsComputation(dataFile, resultsDirectory);
 
-	}
-
-	private void RunStatisticsComputation(string configFile, string resultsFile)
-	{
-		throw new NotImplementedException();
-	}
-
-	/// <summary>
-	/// If a commandline option is passed this method makes sure that the other 
-	/// components of the application behave accordingly.
-	/// </summary>
-	private void PrepApplicationForCLI()
-	{
-		CLIUsed = true;
-
-		GetComponent<CatchException>().enabled = true;
-
-		//Store the current time so that we can show how long the run took.
-		startTime = Time.realtimeSinceStartup;
 	}
 
 	/// <summary>
 	/// Extracts the statistics arguments from the command line arguments
 	/// </summary>
 	/// <returns><c>true</c>, if statistics arguments was extracted, <c>false</c> otherwise.</returns>
-	/// <param name="configFile">Config file.</param>
-	/// <param name="resultsFile">Results file.</param>
-	private bool ExtractStatisticsArguments(out string configFile, out string resultsFile)
+	/// <param name="dataSetFile">Data set file.</param>
+	/// <param name="resultsDirectory">Results directory.</param>
+	private bool ExtractStatisticsArguments(out string dataSetFile, out string resultsDirectory)
 	{
-		configFile = null;
-		resultsFile = null;
+		dataSetFile = null;
+		resultsDirectory = null;
 
 		int statisticsArgument = GetCLIArgumentIndex(statisticsFlag);
 		if (statisticsArgument == -1) return false;
 
-		configFile = CLIArguments[statisticsArgument + 1];
-		resultsFile = CLIArguments[statisticsArgument + 2];
+		dataSetFile = CLIArguments[statisticsArgument + 1];
+		resultsDirectory = CLIArguments[statisticsArgument + 2];
 
 		return true;
 	}
@@ -131,5 +114,33 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	{
 		PrepApplicationForCLI();
 		experiment.RunExperimentWithConfigurationFile(configFile);
+	}
+
+	/// <summary>
+	/// Runs the statistics computation for the passed config and results file.
+	/// </summary>
+	/// <param name="configFile">Config file.</param>
+	/// <param name="resultsFile">Results file.</param>
+	private void RunStatisticsComputation(string dataSetFile, string resultsDirectory)
+	{
+		PrepApplicationForCLI();
+		statistics.ProcessExperimentResultsFolder(
+			datasetCSVpath: dataSetFile,
+			resultsDirectory: resultsDirectory,
+			listener: this.gameObject);
+	}
+
+	/// <summary>
+	/// If a commandline option is passed this method makes sure that the other 
+	/// components of the application behave accordingly.
+	/// </summary>
+	private void PrepApplicationForCLI()
+	{
+		CLIUsed = true;
+
+		GetComponent<CatchException>().enabled = true;
+
+		//Store the current time so that we can show how long the run took.
+		startTime = Time.realtimeSinceStartup;
 	}
 }
