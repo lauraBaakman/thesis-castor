@@ -576,7 +576,6 @@ namespace IO
 			mesh.triangles = meshTriangles;
 			mesh.uv2 = meshUV2.ToArray();
 			mesh.uv3 = meshUV3.ToArray();
-
 			return mesh;
 		}
 
