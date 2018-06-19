@@ -149,7 +149,14 @@ namespace Buttons
 
 			foreach (Dictionary<string, object> row in rows)
 			{
-				ExperimentCSVData.Add((string)row["uuid"], row);
+				try
+				{
+					ExperimentCSVData.Add((string)row["uuid"], row);
+				}
+				catch (ArgumentException)
+				{
+					Debug.Log(string.Format("Skipping {0} since it already exists", (string)row["uuid"]));
+				}
 			}
 		}
 
