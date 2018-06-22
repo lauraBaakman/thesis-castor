@@ -561,6 +561,7 @@
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\VectorUtils.cs" />
     <Compile Include="Assets\Scripts\RealExperimentLogger.cs" />
+    <Compile Include="Assets\Scripts\Buttons\AddFragmentsButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />

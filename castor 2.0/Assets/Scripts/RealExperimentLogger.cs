@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLogger>
 {
-	void Start()
+	private string outputPath;
+
+	public string OutputPath
 	{
-		Debug.Log("HI!");
+		get { return outputPath; }
+		set { outputPath = value; }
 	}
 }
