@@ -527,6 +527,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", true)]
+		[TestCase("## some comment", true)]
+		[TestCase("### some comment", true)]
+		[TestCase("#### some comment", true)]
+		[TestCase("##### some comment", true)]
+		[TestCase("#####", true)]
 		[TestCase("v some vertex", false)]
 		[TestCase("vn some normal", false)]
 		[TestCase("vt some texture", false)]
@@ -561,6 +566,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", false)]
+		[TestCase("## some comment", false)]
+		[TestCase("### some comment", false)]
+		[TestCase("#### some comment", false)]
+		[TestCase("##### some comment", false)]
+		[TestCase("#####", false)]
 		[TestCase("v some vertex", true)]
 		[TestCase("vn some normal", false)]
 		[TestCase("vt some texture", false)]
@@ -664,6 +674,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", false)]
+		[TestCase("## some comment", false)]
+		[TestCase("### some comment", false)]
+		[TestCase("#### some comment", false)]
+		[TestCase("##### some comment", false)]
+		[TestCase("#####", false)]
 		[TestCase("v some vertex", false)]
 		[TestCase("vn some normal", true)]
 		[TestCase("vt some texture", false)]
@@ -743,6 +758,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", false)]
+		[TestCase("## some comment", false)]
+		[TestCase("### some comment", false)]
+		[TestCase("#### some comment", false)]
+		[TestCase("##### some comment", false)]
+		[TestCase("#####", false)]
 		[TestCase("v some vertex", false)]
 		[TestCase("vn some normal", false)]
 		[TestCase("vt some texture", false)]
@@ -809,6 +829,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", false)]
+		[TestCase("## some comment", false)]
+		[TestCase("### some comment", false)]
+		[TestCase("#### some comment", false)]
+		[TestCase("##### some comment", false)]
+		[TestCase("#####", false)]
 		[TestCase("v some vertex", false)]
 		[TestCase("vn some normal", false)]
 		[TestCase("vt some texture", true)]
@@ -880,6 +905,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", false)]
+		[TestCase("## some comment", false)]
+		[TestCase("### some comment", false)]
+		[TestCase("#### some comment", false)]
+		[TestCase("##### some comment", false)]
+		[TestCase("#####", false)]
 		[TestCase("v some vertex", false)]
 		[TestCase("vn some normal", false)]
 		[TestCase("f some face", true)]
@@ -1055,6 +1085,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", false)]
+		[TestCase("## some comment", false)]
+		[TestCase("### some comment", false)]
+		[TestCase("#### some comment", false)]
+		[TestCase("##### some comment", false)]
+		[TestCase("#####", false)]
 		[TestCase("v some vertex", false)]
 		[TestCase("vn some normal", false)]
 		[TestCase("f some face", false)]
@@ -1090,6 +1125,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", false)]
+		[TestCase("## some comment", false)]
+		[TestCase("### some comment", false)]
+		[TestCase("#### some comment", false)]
+		[TestCase("##### some comment", false)]
+		[TestCase("#####", false)]
 		[TestCase("v some vertex", false)]
 		[TestCase("vn some normal", false)]
 		[TestCase("f some face", false)]
@@ -1125,6 +1165,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", false)]
+		[TestCase("## some comment", false)]
+		[TestCase("### some comment", false)]
+		[TestCase("#### some comment", false)]
+		[TestCase("##### some comment", false)]
+		[TestCase("#####", false)]
 		[TestCase("v some vertex", false)]
 		[TestCase("vn some normal", false)]
 		[TestCase("f some face", false)]
@@ -1160,6 +1205,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", false)]
+		[TestCase("## some comment", false)]
+		[TestCase("### some comment", false)]
+		[TestCase("#### some comment", false)]
+		[TestCase("##### some comment", false)]
+		[TestCase("#####", false)]
 		[TestCase("v some vertex", false)]
 		[TestCase("vn some normal", false)]
 		[TestCase("f some face", false)]
@@ -1195,6 +1245,11 @@ namespace Tests.IO
 		}
 
 		[TestCase("# some comment", false)]
+		[TestCase("## some comment", false)]
+		[TestCase("### some comment", false)]
+		[TestCase("#### some comment", false)]
+		[TestCase("##### some comment", false)]
+		[TestCase("#####", false)]
 		[TestCase("v some vertex", false)]
 		[TestCase("vn some normal", false)]
 		[TestCase("f some face", false)]

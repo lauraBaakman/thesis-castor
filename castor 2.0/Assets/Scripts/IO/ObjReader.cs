@@ -117,6 +117,9 @@ namespace IO
 	{
 		protected Regex typeRegex;
 
+		protected Reader()
+		{ }
+
 		protected Reader(string lineTypeSymbol)
 		{
 			typeRegex = new Regex(@"^" + lineTypeSymbol + @"\s+");
@@ -186,9 +189,10 @@ namespace IO
 
 	public class CommentReader : Reader
 	{
-		public CommentReader()
-			: base("#")
-		{ }
+		public CommentReader() : base()
+		{
+			typeRegex = new Regex(@"^#+");
+		}
 
 		public override void Read(string line) { }
 	}
