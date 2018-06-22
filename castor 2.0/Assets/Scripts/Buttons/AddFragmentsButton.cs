@@ -30,6 +30,9 @@ namespace Buttons
 				value: result.ToTickerMessage(),
 				options: SendMessageOptions.RequireReceiver
 			);
+
+			RealExperimentLogger.Instance.Log(result);
+
 			recievedReadFragmentNotification = true;
 		}
 

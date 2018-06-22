@@ -3,17 +3,13 @@ using UnityEngine.UI;
 using System.IO;
 using System;
 using UnityEditor.MemoryProfiler;
+using Registration.Messages;
 
-public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLogger>
+public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLogger>, IICPListener, IICPStartEndListener
 {
-	private string outputPath;
+	private string outputPath = null;
 
 	private static string outputDirectory = "/Users/laura/Repositories/thesis-experiment/real/metadata";
-
-	private void Start()
-	{
-		CheckIfOutputDirectoryExists();
-	}
 
 	private void CheckIfOutputDirectoryExists()
 	{
@@ -23,10 +19,16 @@ public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLog
 
 	public void Log(string message)
 	{
+		if (outputPath == null) return;
 		using (StreamWriter writer = new StreamWriter(this.outputPath, append: true))
 		{
 			writer.WriteLine(TimeStamp() + " -- " + message);
 		}
+	}
+
+	public void Log(IO.ReadResult result)
+	{
+		Log(result.Message);
 	}
 
 	private string TimeStamp()
@@ -36,6 +38,9 @@ public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLog
 
 	public void SetInputDirectory(string path)
 	{
+		//No need to do this check if the logger is not used
+		CheckIfOutputDirectoryExists();
+
 		//GetFileName returns the last component of the path
 		string directoryName = Path.GetFileName(path);
 
@@ -48,5 +53,25 @@ public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLog
 						  timeSpan.TotalSeconds.ToString())
 		);
 		Log("Created File");
+	}
+
+	public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
+	{
+		throw new NotImplementedException();
+	}
+
+	public void OnStepCompleted(ICPStepCompletedMessage message)
+	{
+		throw new NotImplementedException();
+	}
+
+	public void OnICPTerminated(ICPTerminatedMessage message)
+	{
+		throw new NotImplementedException();
+	}
+
+	public void OnICPStarted(ICPStartedMessage message)
+	{
+		throw new NotImplementedException();
 	}
 }

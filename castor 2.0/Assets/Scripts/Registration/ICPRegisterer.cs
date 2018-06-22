@@ -114,6 +114,8 @@ namespace Registration
 			ModelSamplingInformation = new SamplingInformation(ModelFragment);
 
 			settings.ErrorMetric.Set(staticFragment, settings.ReferenceTransform);
+
+			Listeners.Add(RealExperimentLogger.Instance.gameObject);
 		}
 
 		private void setNotifcationFunctions()
