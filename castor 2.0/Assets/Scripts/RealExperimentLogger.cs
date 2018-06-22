@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLogger>
 {
 	private string outputPath;
 
-	public string OutputPath
+	public void SetInputDirectory(string path)
 	{
-		get { return outputPath; }
-		set { outputPath = value; }
+		string directoryName = Path.GetDirectoryName(path);
+		Debug.Log(directoryName);
+		//TODO build the output path
 	}
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using IO;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Buttons
 {
@@ -11,6 +12,7 @@ namespace Buttons
 
 		private FragmentsImporter importer;
 
+		private bool recievedReadFragmentNotification = false;
 
 		private void Start()
 		{
@@ -23,11 +25,12 @@ namespace Buttons
 
 		private void NotifyUser(IO.ReadResult result)
 		{
-			SendMessage(
-				methodName: "OnSendMessageToTicker",
+			Ticker.Receiver.Instance.SendMessage(
+				methodName: "OnMessage",
 				value: result.ToTickerMessage(),
 				options: SendMessageOptions.RequireReceiver
 			);
+			recievedReadFragmentNotification = true;
 		}
 
 		protected override bool HasDetectedKeyBoardShortCut()
@@ -47,12 +50,20 @@ namespace Buttons
 
 		private void ImportFragmentsInDirectory(string path)
 		{
-			string[] objFiles = Directory.GetFiles(path, "*.obj");
+			RealExperimentLogger.Instance.SetInputDirectory(path);
 
+			string[] objFiles = Directory.GetFiles(path, "*.obj");
+			StartCoroutine(ImportFragments(objFiles));
+		}
+
+		private IEnumerator<object> ImportFragments(string[] objFiles)
+		{
 			foreach (string currentFile in objFiles)
 			{
 				importer.Import(currentFile);
+				yield return new WaitUntil(() => this.recievedReadFragmentNotification);
 			}
+			recievedReadFragmentNotification = false;
 		}
 	}
 }
