@@ -211,7 +211,15 @@ namespace Registration
 				float initialError = ComputeIntialError(Correspondences);
 				if (HasTerminated) return;
 				this.errorThreshold = ComputeErrorThreshold(initialError);
-				SendMessageToAllListeners("OnICPStarted", new ICPStartedMessage(initialError, this.errorThreshold));
+				SendMessageToAllListeners(
+					"OnICPStarted",
+					new ICPStartedMessage(
+						initialError: initialError,
+						terminationThreshold: this.errorThreshold,
+						staticFragment: this.staticFragment,
+						modelFragment: this.modelFragment
+					)
+				);
 			}
 			this.preparationStepEndNotification();
 

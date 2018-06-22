@@ -1,8 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.IO;
+﻿using System.IO;
 using System;
-using UnityEditor.MemoryProfiler;
 using Registration.Messages;
 
 public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLogger>, IICPListener, IICPStartEndListener
@@ -55,23 +52,53 @@ public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLog
 		Log("Created File");
 	}
 
+	public void OnICPStarted(ICPStartedMessage message)
+	{
+		this.Log("Started ICP");
+		this.Log("Model Fragment: " + message.ModelFragment);
+		this.Log("Static Fragment: " + message.StaticFrament);
+		this.Log("Initial Error: " + message.InitialError);
+		this.Log("Termination Threshold: " + message.TerminationThreshold);
+	}
+
 	public void OnPreparationStepCompleted(ICPPreparationStepCompletedMessage message)
 	{
-		throw new NotImplementedException();
+		this.LogIteration(
+			message.IterationIndex,
+			string.Format(
+				"{0} correspondences",
+				message.Correspondences.Count
+			)
+		);
+	}
+
+	private void LogIteration(int iteration, string message)
+	{
+		this.Log(
+			string.Format(
+				"Iteration {0}: {1}",
+				iteration, message
+			)
+		);
 	}
 
 	public void OnStepCompleted(ICPStepCompletedMessage message)
 	{
-		throw new NotImplementedException();
+		this.LogIteration(
+			message.iteration,
+			string.Format(
+				"Error: {0}",
+				message.Error
+			)
+		);
 	}
 
 	public void OnICPTerminated(ICPTerminatedMessage message)
 	{
-		throw new NotImplementedException();
-	}
-
-	public void OnICPStarted(ICPStartedMessage message)
-	{
-		throw new NotImplementedException();
+		this.LogIteration(
+			message.terminationIteration,
+			"terminated: " + message.Message
+		);
+		this.Log("Termination error: " + message.errorAtTermination);
 	}
 }

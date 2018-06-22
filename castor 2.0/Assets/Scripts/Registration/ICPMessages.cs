@@ -103,11 +103,17 @@ namespace Registration
 		{
 			public readonly float InitialError;
 			public readonly float TerminationThreshold;
+			public readonly GameObject StaticFrament;
+			public readonly GameObject ModelFragment;
 
-			public ICPStartedMessage(float initialError, float terminationThreshold)
+			public ICPStartedMessage(float initialError, float terminationThreshold,
+									GameObject staticFragment, GameObject modelFragment)
 			{
 				this.InitialError = initialError;
 				this.TerminationThreshold = terminationThreshold;
+
+				this.StaticFrament = staticFragment;
+				this.ModelFragment = modelFragment;
 			}
 		}
 
