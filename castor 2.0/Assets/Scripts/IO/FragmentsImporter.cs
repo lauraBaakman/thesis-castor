@@ -116,7 +116,7 @@ namespace IO
 
 			fragment.name = name;
 
-			SetDoubleConnectedEdgeList(fragment, mesh);
+			//SetDoubleConnectedEdgeList(fragment, mesh);
 			SetMesh(fragment, mesh);
 			SetMaterial(fragment);
 
