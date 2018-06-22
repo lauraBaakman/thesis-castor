@@ -3,7 +3,6 @@ using System.IO;
 using UnityEngine;
 using Utils;
 using Fragment;
-using System.Collections.Generic;
 
 namespace IO
 {
@@ -42,20 +41,14 @@ namespace IO
 		{
 			SimpleFileBrowser.FileBrowser.ShowLoadDialog(
 				onSuccess: ProcessFragmentFile,
-				folderMode: true,
 				onCancel: () => { },
-				initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-experiment/real/subsampled" : null
+				initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-experiment/simulated/" : null
 			);
 		}
 
 		private void ProcessFragmentFile(string path)
 		{
-			string[] objFiles = Directory.GetFiles(path, "*.obj");
-
-			foreach (string currentFile in objFiles)
-			{
-				fragmentImporter.Import(currentFile);
-			}
+			fragmentImporter.Import(path);
 		}
 	}
 
@@ -116,7 +109,7 @@ namespace IO
 
 			fragment.name = name;
 
-			//SetDoubleConnectedEdgeList(fragment, mesh);
+			SetDoubleConnectedEdgeList(fragment, mesh);
 			SetMesh(fragment, mesh);
 			SetMaterial(fragment);
 
