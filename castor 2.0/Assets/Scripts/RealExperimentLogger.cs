@@ -55,6 +55,7 @@ public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLog
 	public void OnICPStarted(ICPStartedMessage message)
 	{
 		this.Log("Started ICP");
+		this.Log("Settings: " + message.RegistrationSettings.ToJson());
 		this.Log("Model Fragment: " + message.ModelFragment);
 		this.Log("Static Fragment: " + message.StaticFrament);
 		this.Log("Initial Error: " + message.InitialError);

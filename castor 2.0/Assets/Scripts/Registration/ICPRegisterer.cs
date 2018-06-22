@@ -217,7 +217,8 @@ namespace Registration
 						initialError: initialError,
 						terminationThreshold: this.errorThreshold,
 						staticFragment: this.staticFragment,
-						modelFragment: this.modelFragment
+						modelFragment: this.modelFragment,
+						RegistrationSettings: this.Settings
 					)
 				);
 			}

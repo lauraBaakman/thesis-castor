@@ -188,6 +188,11 @@ namespace Registration
 			new SerializableSettings(this).ToJson(outputPath);
 		}
 
+		public string ToJson()
+		{
+			return new SerializableSettings(this).ToJson();
+		}
+
 		[System.Serializable]
 		public class SerializableSettings
 		{
@@ -273,6 +278,11 @@ namespace Registration
 				StreamWriter streamWriter = new StreamWriter(outputPath);
 				streamWriter.Write(jsonString);
 				streamWriter.Close();
+			}
+
+			public string ToJson()
+			{
+				return JsonUtility.ToJson(this);
 			}
 		}
 	}
