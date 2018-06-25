@@ -34,7 +34,7 @@ namespace Tests.Utils
 
 		private void TestNextColor(Color expected)
 		{
-			Color actual = ColorGenerator.Instance.GetNextColor();
+			Color actual = ColorGenerator.Instance.GetNextColor().color;
 			Assert.That(actual, Is.EqualTo(expected));
 		}
 	}

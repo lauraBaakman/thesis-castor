@@ -143,7 +143,16 @@ namespace IO
 		{
 			MeshRenderer renderer = fragment.GetComponent<MeshRenderer>();
 			Material material = renderer.material;
-			material.color = ColorGenerator.Instance.GetNextColor();
+			NamedColor namedColor = ColorGenerator.Instance.GetNextColor();
+
+			RealExperimentLogger.Instance.Log(
+				string.Format(
+					"Using the color {0} for {1}",
+					namedColor.name, fragment.name
+				)
+			);
+
+			material.color = namedColor.color;
 			renderer.material = material;
 			fragment.GetComponent<MaterialController>().Init();
 		}

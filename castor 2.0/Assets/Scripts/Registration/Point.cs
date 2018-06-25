@@ -78,7 +78,7 @@ namespace Registration
 		public Point(Vector3 position, Vector3 normal)
 		{
 			this.position = position;
-			this.Color = colorGenerator.GetNextColor();
+			this.Color = colorGenerator.GetNextColor().color;
 			this.normal = normal;
 		}
 
