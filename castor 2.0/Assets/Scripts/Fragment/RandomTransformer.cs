@@ -6,6 +6,8 @@ namespace Fragment
 	public class RandomTransformer : MonoBehaviour
 	{
 
+		private float translationFactor = 0.1f;
+
 		private void Awake()
 		{
 			if (Application.isEditor) TransformRandomly();
@@ -13,17 +15,47 @@ namespace Fragment
 
 		private void TransformRandomly()
 		{
-			transform.rotation = Random.rotation;
+			Bounds bounds;
 
-			Vector3 translation = new Vector3(
-				Random.Range(-2, 2),
-				Random.Range(-2, 2),
-				Random.Range(-2, 2)
+			Vector3 randomRotation = DetermineRotation();
+
+			Vector3 randomTranslation = DetermineTranslation(out bounds);
+
+			RealExperimentLogger.Instance.Log(
+				string.Format("Random transform {0}, translationFactor: {4}, bounds: [{1}], rotation: {2}, translation: {3}",
+							 this.gameObject.name,
+							 bounds,
+							 randomRotation,
+							 randomTranslation,
+							  translationFactor)
 			);
-			transform.Translate(translation);
+
+			transform.Rotate(randomRotation);
+			transform.Translate(randomTranslation);
 		}
 
+		private Vector3 DetermineRotation()
+		{
+			Vector3 rotation = new Vector3(
+				Random.Range(-10, 10),
+				Random.Range(-10, 10),
+				Random.Range(-10, 10)
+			);
+			return rotation;
+		}
 
+		private Vector3 DetermineTranslation(out Bounds bounds)
+		{
+			//Get bounds in local space since we translate in local space
+			bounds = gameObject.GetComponent<MeshFilter>().mesh.bounds;
+
+			Vector3 translation = new Vector3(
+				Random.Range(-1 * translationFactor * bounds.size.x, +1 * translationFactor * bounds.size.x),
+				Random.Range(-1 * translationFactor * bounds.size.y, +1 * translationFactor * bounds.size.y),
+				Random.Range(-1 * translationFactor * bounds.size.z, +1 * translationFactor * bounds.size.z)
+			);
+			return translation;
+		}
 	}
 }
 
