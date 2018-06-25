@@ -150,7 +150,8 @@ namespace Registration
 			}
 		}
 
-		public static Settings SeminalICP(Transform referenceTransform)
+		public static Settings SeminalICP(Transform referenceTransform,
+										  string sampler = "allpoints")
 		{
 			return new Settings(
 				referenceTransform: referenceTransform,
@@ -161,7 +162,8 @@ namespace Registration
 			);
 		}
 
-		public static Settings Horn(Transform referenceTransform)
+		public static Settings Horn(Transform referenceTransform,
+									string sampler = "allpoints")
 		{
 			return new Settings(
 				name: "Horn",
@@ -171,7 +173,8 @@ namespace Registration
 			);
 		}
 
-		public static Settings IntersectionError(Transform referenceTransform)
+		public static Settings IntersectionError(Transform referenceTransform,
+												 string sampler = "allpoints")
 		{
 			return new Settings(
 				name: "igdIntersectionTermError",
@@ -188,7 +191,8 @@ namespace Registration
 			);
 		}
 
-		public static Settings Wheeler(Transform referecenTransform)
+		public static Settings Wheeler(Transform referecenTransform,
+									   string sampler = "allpoints")
 		{
 			return new Settings(
 				name: "igdWheelerError",
@@ -205,7 +209,8 @@ namespace Registration
 			);
 		}
 
-		public static Settings Low(Transform referenceTransform)
+		public static Settings Low(Transform referenceTransform,
+								   string sampler = "allpoints")
 		{
 			return new Settings(
 				name: "low",
