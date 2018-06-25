@@ -288,6 +288,8 @@ namespace Registration
 
 			public SerializableTransformFinder transformFinder;
 
+			public SerializablePointSampler sampler;
+
 			public int maxNumIterations;
 
 			public SerializableSettings(Settings settings)
@@ -299,6 +301,8 @@ namespace Registration
 				correspondences = new SerializableCorrespondences(settings);
 
 				error = new SerializableError(settings);
+
+				sampler = settings.PointSampler.ToSerializableObject();
 
 				transformFinder = settings.TransFormFinder.Serialize();
 			}

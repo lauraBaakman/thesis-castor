@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
 
 namespace Registration
 {
@@ -18,28 +17,29 @@ namespace Registration
 		public string normalProcessing;
 		public float percentage;
 		public int numberOfBins;
+		public string name;
 
 		public SerializablePointSampler(
 			Transform referenceTransform,
 			AllPointsSampler.Configuration.NormalProcessing normalProcessing,
-			float percentage, int numberOfBins
+			float percentage, int numberOfBins, string name
 		) : this(new Utils.SerializableTransform(referenceTransform),
 				 NormalProcessingEnumToString(normalProcessing),
-				 percentage, numberOfBins)
+				 percentage, numberOfBins, name)
 		{ }
 
 		public SerializablePointSampler(AllPointsSampler.Configuration configuration)
 			: this(
 				configuration.referenceTransform,
 				configuration.normalProcessing,
-				100, 1)
+				100, 1, "all")
 		{ }
 
 		public SerializablePointSampler(RandomSubSampling.Configuration configuration)
 			: this(
 				configuration.referenceTransform,
 				configuration.normalProcessing,
-				configuration.Percentage, 1)
+				configuration.Percentage, 1, "random")
 		{ }
 
 		public SerializablePointSampler(NDOSubsampling.Configuration configuration)
@@ -47,17 +47,18 @@ namespace Registration
 				configuration.referenceTransform,
 				configuration.normalProcessing,
 				configuration.Percentage,
-				configuration.BinCount)
+				configuration.BinCount, "ndo")
 		{ }
 
 		private SerializablePointSampler(
 			Utils.SerializableTransform referenceTransform, string normalProcessing,
-			float percentage, int numberOfBins)
+			float percentage, int numberOfBins, string name)
 		{
 			this.referenceTransform = referenceTransform;
 			this.normalProcessing = normalProcessing;
 			this.percentage = percentage;
 			this.numberOfBins = numberOfBins;
+			this.name = name;
 		}
 
 		private static string NormalProcessingEnumToString(AllPointsSampler.Configuration.NormalProcessing normalProcessing)
