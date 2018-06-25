@@ -21,11 +21,6 @@ namespace Buttons
 				callBack: NotifyUser,
 				randomizeTransform: true, copyVerticesToTexture: false
 			);
-
-			if (Application.isEditor)
-			{
-				ImportFragmentsInDirectory("/Users/laura/Repositories/thesis-experiment/real/subsampled/Tiny");
-			}
 		}
 
 		private void NotifyUser(IO.ReadResult result)
