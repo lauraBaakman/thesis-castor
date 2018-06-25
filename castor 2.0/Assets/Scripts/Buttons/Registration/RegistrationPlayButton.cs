@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 namespace Buttons
 {
 	namespace RegistrationButtons
@@ -15,7 +16,19 @@ namespace Buttons
 			protected override void ExecuteButtonAction()
 			{
 				if (registerer == null) return;
-				registerer.RunUntilTermination();
+				StartCoroutine(RegistrationCoroutine());
+			}
+
+			private IEnumerator<object> RegistrationCoroutine()
+			{
+				while (!registerer.HasTerminated)
+				{
+					registerer.PrepareStep();
+					yield return null;
+
+					registerer.Step();
+					yield return null;
+				}
 			}
 
 			protected override bool HasDetectedKeyBoardShortCut()
