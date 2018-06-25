@@ -283,6 +283,7 @@ namespace Registration
 		/// <param name="fragment">Fragment.</param>
 		private List<Point> SamplePoints(GameObject fragment)
 		{
+			RealExperimentLogger.Instance.Log("Sampling " + fragment.name);
 			List<Point> points = Settings.PointSampler.Sample(new SamplingInformation(fragment));
 			return points;
 		}

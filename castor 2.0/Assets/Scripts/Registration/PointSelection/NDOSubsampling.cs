@@ -132,6 +132,16 @@ namespace Registration
 					)
 				);
 			}
+
+			foreach (KeyValuePair<int, List<Point>> entry in bins)
+			{
+				RealExperimentLogger.Instance.Log(
+					string.Format("{0} patterns in bin {1} with normal {2}",
+								  entry.Value.Count,
+								  entry.Key,
+								  polyhedron.GetNormalForBin(entry.Key))
+				);
+			}
 			return bins;
 		}
 
@@ -167,6 +177,11 @@ namespace Registration
 			public int DetermineFaceIdx(Vector3 normal)
 			{
 				return ArgMaxDot(normal, this.normals);
+			}
+
+			public Vector3 GetNormalForBin(int bin)
+			{
+				return normals[bin];
 			}
 
 			protected int ArgMaxDot(Vector3 normal, Vector3[] normals)
