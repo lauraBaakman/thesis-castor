@@ -14,7 +14,7 @@ namespace IO
 
 		private readonly CallBack callBack;
 
-		private FragmentImporter fragmentImporter;
+		private readonly FragmentImporter fragmentImporter;
 
 		public FragmentsImporter(GameObject fragmentParent, CallBack callBack, bool randomizeTransform = false, bool copyVerticesToTexture = false)
 		{
@@ -48,7 +48,7 @@ namespace IO
 
 		private void ProcessFragmentFile(string path)
 		{
-			fragmentImporter.Import(path);
+			fragmentImporter.Import(path, prefabPath: "ExperimentFragment");
 		}
 	}
 
