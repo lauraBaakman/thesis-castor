@@ -32,7 +32,11 @@ public class ApplicationInitializer : MonoBehaviour
 		FileBrowser.SetDefaultFilter(fragmentFilter.defaultExtension);
 		FileBrowser.SetExcludedExtensions(".lnk", ".tmp", ".zip", ".rar", ".exe");
 
+		// Continue computations if the applicaiton is no longer in focus
 		Application.runInBackground = true;
+
+		// Set the seed fo the random generator, which is used to randomly translate fragments
+		Random.InitState(42);
 	}
 
 	/// <summary>
