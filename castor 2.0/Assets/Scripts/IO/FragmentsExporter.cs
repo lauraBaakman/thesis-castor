@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 namespace IO
 {
@@ -37,8 +38,18 @@ namespace IO
 			);
 		}
 
-		private void ExportFragments(string directory)
+		private void ExportFragments(string path)
 		{
+			var sinceUnixTime = (DateTime.Now.ToLocalTime() - new DateTime(1970, 1, 1, 0, 0, 0));
+
+			string directory = Path.Combine(
+				path,
+				sinceUnixTime.TotalSeconds.ToString()
+			);
+			Directory.CreateDirectory(directory);
+
+			RealExperimentLogger.Instance.Log("Wrote object files to " + directory);
+
 			FragmentExporter exporter = new FragmentExporter(callback);
 
 			List<GameObject> exportFragments = GetExportFragments();
