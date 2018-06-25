@@ -11,6 +11,11 @@ namespace Registration
 	public class Settings
 	{
 		/// <summary>
+		/// Boolean to indicate if you are running the real data experiment.
+		/// </summary>
+		private static bool runningRealDataExperiment = true;
+
+		/// <summary>
 		/// The transform in which the registration is performed. 
 		/// </summary>
 		/// <value>The reference transform.</value>
@@ -120,6 +125,7 @@ namespace Registration
 
 			if (pointSampler == "allpoints")
 			{
+				Debug.Log("Using allpoints!");
 				PointSampler = new AllPointsSampler(
 					new AllPointsSampler.Configuration(
 						referenceTransform,
@@ -129,6 +135,7 @@ namespace Registration
 			}
 			else if (pointSampler == "ndosubsampling")
 			{
+				Debug.Log("Using NDO subsampling!");
 				PointSampler = new NDOSubsampling(
 					new NDOSubsampling.Configuration(
 						referenceTransform: referenceTransform,
@@ -150,7 +157,7 @@ namespace Registration
 				transformFinder: new HornTransformFinder(),
 				name: "Seminal ICP",
 				correspondenceFinder: "nearestneighbour",
-				pointSampler: "allpoints"
+				pointSampler: runningRealDataExperiment ? "ndosubsampling" : "allpoints"
 			);
 		}
 
@@ -160,7 +167,7 @@ namespace Registration
 				name: "Horn",
 				referenceTransform: referenceTransform,
 				transformFinder: new HornTransformFinder(),
-				pointSampler: "allpoints"
+				pointSampler: runningRealDataExperiment ? "ndosubsampling" : "allpoints"
 			);
 		}
 
@@ -177,7 +184,7 @@ namespace Registration
 						errorMetric: new Registration.Error.IntersectionTermError(0.5f, 0.5f)
 					)
 				),
-				pointSampler: "allpoints"
+				pointSampler: runningRealDataExperiment ? "ndosubsampling" : "allpoints"
 			);
 		}
 
@@ -194,7 +201,7 @@ namespace Registration
 						errorMetric: new Registration.Error.WheelerIterativeError()
 					)
 				),
-				pointSampler: "allpoints"
+				pointSampler: runningRealDataExperiment ? "ndosubsampling" : "allpoints"
 			);
 		}
 
@@ -204,7 +211,7 @@ namespace Registration
 				name: "low",
 				referenceTransform: referenceTransform,
 				transformFinder: new LowTransformFinder(),
-				pointSampler: "allpoints"
+				pointSampler: runningRealDataExperiment ? "ndosubsampling" : "allpoints"
 			);
 		}
 
