@@ -19,7 +19,7 @@ namespace Buttons
 				randomizeTransform: false, copyVerticesToTexture: true
 			);
 
-			if (Application.isEditor) LoadTestFragments();
+			//if (Application.isEditor) LoadTestFragments();
 		}
 
 
