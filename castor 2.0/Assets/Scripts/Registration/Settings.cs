@@ -86,6 +86,7 @@ namespace Registration
 			ITransformFinder transformFinder,
 			string name,
 			string correspondenceFinder = "normalshooting",
+			string pointSampler = "allpoints",
 			float errorThresholdScale = 0.0001f, int maxNumIterations = 500,
 			float maxWithinCorrespondenceDistance = 0.8f
 		)
@@ -99,13 +100,6 @@ namespace Registration
 			MaxWithinCorrespondenceDistance = maxWithinCorrespondenceDistance;
 
 			MaxNumIterations = maxNumIterations;
-
-			PointSampler = new AllPointsSampler(
-				new AllPointsSampler.Configuration(
-					referenceTransform,
-					AllPointsSampler.Configuration.NormalProcessing.VertexNormals
-				)
-			);
 
 			correspondenceFilters = new List<ICorrespondenceFilter>();
 
@@ -123,27 +117,57 @@ namespace Registration
 			{
 				throw new Exception("Invalid Correspondence Finder name");
 			}
+
+			if (pointSampler == "allpoints")
+			{
+				PointSampler = new AllPointsSampler(
+					new AllPointsSampler.Configuration(
+						referenceTransform,
+						AllPointsSampler.Configuration.NormalProcessing.VertexNormals
+					)
+				);
+			}
+			else if (pointSampler == "ndosubsampling")
+			{
+				PointSampler = new NDOSubsampling(
+					new NDOSubsampling.Configuration(
+						referenceTransform: referenceTransform,
+						percentage: 50,
+						binCount: 12
+					)
+				);
+			}
+			else
+			{
+				throw new Exception("Invalid Point Sampler name");
+			}
 		}
 
-		public static Settings SeminalICP(Transform referenceTransform)
+		public static Settings SeminalICP(Transform referenceTransform,
+										  string sampler = "allpoints")
 		{
 			return new Settings(
 				referenceTransform: referenceTransform,
 				transformFinder: new HornTransformFinder(),
 				name: "Seminal ICP",
-				correspondenceFinder: "nearestneighbour"
+				correspondenceFinder: "nearestneighbour",
+				pointSampler: sampler
 			);
 		}
 
-		public static Settings Horn(Transform referenceTransform)
+		public static Settings Horn(Transform referenceTransform,
+									string sampler = "allpoints")
 		{
 			return new Settings(
 				name: "Horn",
 				referenceTransform: referenceTransform,
-				transformFinder: new HornTransformFinder());
+				transformFinder: new HornTransformFinder(),
+				pointSampler: sampler
+			);
 		}
 
-		public static Settings IntersectionError(Transform referenceTransform)
+		public static Settings IntersectionError(Transform referenceTransform,
+												 string sampler = "allpoints")
 		{
 			return new Settings(
 				name: "igdIntersectionTermError",
@@ -155,11 +179,13 @@ namespace Registration
 						maxNumIterations: 200,
 						errorMetric: new Registration.Error.IntersectionTermError(0.5f, 0.5f)
 					)
-				)
+				),
+				pointSampler: sampler
 			);
 		}
 
-		public static Settings Wheeler(Transform referecenTransform)
+		public static Settings Wheeler(Transform referecenTransform,
+									   string sampler = "allpoints")
 		{
 			return new Settings(
 				name: "igdWheelerError",
@@ -171,16 +197,20 @@ namespace Registration
 						maxNumIterations: 200,
 						errorMetric: new Registration.Error.WheelerIterativeError()
 					)
-				)
+				),
+				pointSampler: sampler
 			);
 		}
 
-		public static Settings Low(Transform referenceTransform)
+		public static Settings Low(Transform referenceTransform,
+								   string sampler = "allpoints")
 		{
 			return new Settings(
 				name: "low",
 				referenceTransform: referenceTransform,
-				transformFinder: new LowTransformFinder());
+				transformFinder: new LowTransformFinder(),
+				pointSampler: sampler
+			);
 		}
 
 		public void ToJson(string outputPath)
