@@ -45,6 +45,15 @@ namespace Fragment
 				value: true,
 				options: SendMessageOptions.RequireReceiver
 			);
+			Ticker.Receiver.Instance.SendMessage(
+				methodName: "OnMessage",
+				value: new Ticker.Message.InfoMessage(
+					string.Format(
+						"Selected {0}.", gameObject.name
+					)
+				),
+				options: SendMessageOptions.RequireReceiver
+			);
 		}
 
 		private void ObjectHasBeenDeselected()
