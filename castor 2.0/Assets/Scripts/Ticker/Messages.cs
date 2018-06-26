@@ -84,6 +84,12 @@ namespace Ticker
 				19f / 256.0f, 36f / 256.0f, 21f / 256.0f
 			);
 
+			public InfoMessage(string text, float decayInS)
+				: base(
+					text: text, color: DefaultColor,
+					decayInS: decayInS, priority: PriorityLevel.info)
+			{ }
+
 			/// <summary>
 			/// Initializes a new instance of the <see cref="T:Ticker.Message.InfoMessage"/> class.
 			/// </summary>

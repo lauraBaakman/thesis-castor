@@ -283,6 +283,13 @@ namespace Registration
 		/// <param name="fragment">Fragment.</param>
 		private List<Point> SamplePoints(GameObject fragment)
 		{
+			Ticker.Receiver.Instance.SendMessage(
+				methodName: "OnMessage",
+				value: new Ticker.Message.InfoMessage(
+					string.Format("Sampling the fragment with name {0}.", fragment.name)
+				),
+				options: SendMessageOptions.RequireReceiver
+			);
 			RealExperimentLogger.Instance.Log("Sampling " + fragment.name);
 			List<Point> points = Settings.PointSampler.Sample(new SamplingInformation(fragment));
 			return points;

@@ -79,6 +79,14 @@ namespace IO
 		{
 			prefabPath = prefabPath ?? DefaultPrefabPath;
 
+			Ticker.Receiver.Instance.SendMessage(
+				methodName: "OnMessage",
+				value: new Ticker.Message.InfoMessage(
+					string.Format("Reading the file {0}.", path)
+				),
+				options: SendMessageOptions.RequireReceiver
+			);
+
 			ReadResult result = IO.ObjFile.Read(path);
 			GameObject fragment = null;
 
