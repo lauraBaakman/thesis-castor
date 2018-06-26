@@ -125,7 +125,6 @@ namespace Registration
 
 			if (pointSampler == "allpoints")
 			{
-				Debug.Log("Using allpoints!");
 				PointSampler = new AllPointsSampler(
 					new AllPointsSampler.Configuration(
 						referenceTransform,
@@ -135,7 +134,6 @@ namespace Registration
 			}
 			else if (pointSampler == "ndosubsampling")
 			{
-				Debug.Log("Using NDO subsampling!");
 				PointSampler = new NDOSubsampling(
 					new NDOSubsampling.Configuration(
 						referenceTransform: referenceTransform,
