@@ -366,7 +366,6 @@ namespace Registration
 		/// error in the list of errors.
 		/// </summary>
 		/// <returns><c>true</c>, if the error has stabilized, <c>false</c> otherwise.</returns>
-		/// <param name="currentError">Current error.</param>
 		public bool ErrorHasStabilized()
 		{
 			// We have insufficient data
