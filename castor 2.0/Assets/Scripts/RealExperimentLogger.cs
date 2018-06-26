@@ -10,8 +10,7 @@ public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLog
 
 	private void CheckIfOutputDirectoryExists()
 	{
-		if (!Directory.Exists(outputDirectory))
-			throw new Exception(string.Format("The directory {0} does not exist.", outputDirectory));
+		if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
 	}
 
 	public void Log(string message)
