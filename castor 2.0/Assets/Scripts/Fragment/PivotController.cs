@@ -40,14 +40,31 @@ namespace Fragment
 			this.pivotInWorldSpace = worldSpacePivot;
 		}
 
-		private Vector3 pivotInWorldSpace { set { this.transform.position = value; } }
+		private Vector3 pivotInWorldSpace
+		{
+			set
+			{
+				this.SendMessageUpwards(
+					"OnSetPivot",
+					SendMessageOptions.DontRequireReceiver
+				);
+				this.transform.position = value;
+			}
+		}
 
 		public Vector3 PivotInWorldSpace { get { return transform.position; } }
 
 		private Vector3 PivotInLocalSpace
 		{
 			get { return transform.localPosition; }
-			set { transform.localPosition = value; }
+			set
+			{
+				this.SendMessageUpwards(
+					"OnSetPivot",
+					SendMessageOptions.DontRequireReceiver
+				);
+				transform.localPosition = value;
+			}
 		}
 
 		private Vector3 GetParentCenter(GameObject parent)

@@ -18,7 +18,7 @@ namespace Fragment
 			RotateFragment(transformMatrix.ExtractRotation(), referenceTransform);
 		}
 
-		private void TranslateFragment(Vector3 translation, Transform referenceTransform)
+		public void TranslateFragment(Vector3 translation, Transform referenceTransform)
 		{
 			transform.Translate(
 				translation: translation,

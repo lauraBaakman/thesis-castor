@@ -6,11 +6,11 @@ namespace Fragment
 	public class RandomTransformer : MonoBehaviour
 	{
 
-		private float translationFactor = 0.1f;
+		private float translationFactor = 0.01f;
 
-		private void Awake()
+		public void OnSetPivot()
 		{
-			if (Application.isEditor) TransformRandomly();
+			TransformRandomly();
 		}
 
 		private void TransformRandomly()
@@ -18,7 +18,6 @@ namespace Fragment
 			Bounds bounds;
 
 			Vector3 randomRotation = DetermineRotation();
-
 			Vector3 randomTranslation = DetermineTranslation(out bounds);
 
 			RealExperimentLogger.Instance.Log(
@@ -30,16 +29,18 @@ namespace Fragment
 							  translationFactor)
 			);
 
-			transform.Rotate(randomRotation);
-			transform.Translate(randomTranslation);
+			TransformController transformController = this.GetComponent<TransformController>();
+
+			transformController.RotateFragment(Quaternion.Euler(randomRotation), this.transform);
+			transformController.TranslateFragment(randomTranslation, this.transform);
 		}
 
 		private Vector3 DetermineRotation()
 		{
 			Vector3 rotation = new Vector3(
-				Random.Range(-10, 10),
-				Random.Range(-10, 10),
-				Random.Range(-10, 10)
+				Random.Range(-5, 5),
+				Random.Range(-5, 5),
+				Random.Range(-5, 5)
 			);
 			return rotation;
 		}
