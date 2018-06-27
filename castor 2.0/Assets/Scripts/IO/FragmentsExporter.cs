@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using Registration.Messages;
 
 namespace IO
 {
@@ -13,12 +14,15 @@ namespace IO
 
 		private readonly CallBack callback;
 
+		private string defaultOutputPath = "/Users/laura/Repositories/thesis-experiment/real/results";
 		private static string extension = "obj";
 
 		public FragmentsExporter(GameObject fragmentsRoot, CallBack callback)
 		{
 			FragmentsRoot = fragmentsRoot;
 			this.callback = callback;
+
+			if (!Directory.Exists(defaultOutputPath)) Directory.CreateDirectory(defaultOutputPath);
 		}
 
 		public void Export()
@@ -58,6 +62,11 @@ namespace IO
 			{
 				exporter.Export(fragment, BuildExportPath(directory, fragment.name));
 			}
+		}
+
+		public void ExportFragments()
+		{
+			ExportFragments(defaultOutputPath);
 		}
 
 		private string BuildExportPath(string directory, string fragment_name)
