@@ -11,6 +11,7 @@ namespace Buttons
 		public GameObject FragmentsRoot;
 
 		private FragmentsImporter importer;
+		private string defaultOutputPath = "/Users/laura/Repositories/thesis-experiment/real/results/initial";
 
 		private bool recievedReadFragmentNotification = false;
 
@@ -67,6 +68,17 @@ namespace Buttons
 				yield return new WaitUntil(() => this.recievedReadFragmentNotification);
 			}
 			recievedReadFragmentNotification = false;
+			ExportRandomlyTransformedFragments();
 		}
+
+		private void ExportRandomlyTransformedFragments()
+		{
+			IO.FragmentsExporter exporter = new IO.FragmentsExporter(FragmentsRoot, DoNothing);
+
+			if (!Directory.Exists(defaultOutputPath)) Directory.CreateDirectory(defaultOutputPath);
+			exporter.ExportFragments(defaultOutputPath);
+		}
+
+		private void DoNothing(IO.WriteResult result) { }
 	}
 }

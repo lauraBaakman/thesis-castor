@@ -27,6 +27,11 @@ public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLog
 		Log(result.Message);
 	}
 
+	public void Log(IO.WriteResult result)
+	{
+		Log(result.Message);
+	}
+
 	private string TimeStamp()
 	{
 		return DateTime.Now.ToLocalTime().ToString();

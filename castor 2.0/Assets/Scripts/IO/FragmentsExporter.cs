@@ -38,7 +38,7 @@ namespace IO
 			);
 		}
 
-		private void ExportFragments(string path)
+		public void ExportFragments(string path)
 		{
 			var sinceUnixTime = (DateTime.Now.ToLocalTime() - new DateTime(1970, 1, 1, 0, 0, 0));
 
