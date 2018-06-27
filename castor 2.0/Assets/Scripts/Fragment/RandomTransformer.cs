@@ -6,7 +6,7 @@ namespace Fragment
 	public class RandomTransformer : MonoBehaviour
 	{
 
-		private float translationFactor = 0.01f;
+		private float translationFactor = 0.001f;
 
 		public void OnSetPivot()
 		{
