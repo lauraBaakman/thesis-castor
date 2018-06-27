@@ -48,7 +48,7 @@ namespace Buttons
 				onSuccess: ImportFragmentsInDirectory,
 				folderMode: true,
 				onCancel: () => { },
-				initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-experiment/real/subsampled" : null
+				initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-experiment/real/_3_subsampled" : null
 			);
 		}
 
