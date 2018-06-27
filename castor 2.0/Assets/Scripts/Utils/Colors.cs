@@ -15,16 +15,16 @@ namespace Utils
 
 			colors = new List<NamedColor>(11){
 				new NamedColor(new Color(166/255f, 206/255f, 227/255f), "light blue"),
-				new NamedColor(new Color(031/255f, 120/255f, 180/255f), "dark blue"),
 				new NamedColor(new Color(178/255f, 223/255f, 138/255f), "light green"),
-				new NamedColor(new Color(051/255f, 160/255f, 044/255f), "dark green"),
 				new NamedColor(new Color(251/255f, 154/255f, 153/255f), "pink"),
-				new NamedColor(new Color(227/255f, 026/255f, 028/255f), "red"),
 				new NamedColor(new Color(253/255f, 191/255f, 111/255f), "light orange"),
-				new NamedColor(new Color(255/255f, 127/255f, 000/255f), "dark orange"),
 				new NamedColor(new Color(202/255f, 178/255f, 214/255f), "light purple"),
-				new NamedColor(new Color(106/255f, 061/255f, 154/255f), "dark purple"),
-				new NamedColor(new Color(255/255f, 255/255f, 000/255f), "yellow")
+				new NamedColor(new Color(255/255f, 255/255f, 000/255f), "yellow"),
+				new NamedColor(new Color(031/255f, 120/255f, 180/255f), "dark blue"),
+				new NamedColor(new Color(051/255f, 160/255f, 044/255f), "dark green"),
+				new NamedColor(new Color(227/255f, 026/255f, 028/255f), "red"),
+				new NamedColor(new Color(255/255f, 127/255f, 000/255f), "dark orange"),
+				new NamedColor(new Color(106/255f, 061/255f, 154/255f), "dark purple")
 			};
 		}
 
