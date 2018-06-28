@@ -53,7 +53,7 @@ namespace Buttons
 
 		private void ImportFragmentsInDirectory(string path)
 		{
-			RealExperimentLogger.Instance.SetInputDirectory(path);
+			RealExperimentLogger.Instance.CreateLogFile(path);
 
 			string[] objFiles = Directory.GetFiles(path, "*.obj");
 			StartCoroutine(ImportFragments(objFiles));

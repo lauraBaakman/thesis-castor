@@ -34,19 +34,19 @@ namespace IO
 
 		public void Import(string file)
 		{
-			ProcessFragmentFile(file);
+			ImportFragmentFile(file);
 		}
 
 		private void GetFragmentFiles()
 		{
 			SimpleFileBrowser.FileBrowser.ShowLoadDialog(
-				onSuccess: ProcessFragmentFile,
+				onSuccess: ImportFragmentFile,
 				onCancel: () => { },
 				initialPath: Application.isEditor ? "/Users/laura/Repositories/thesis-experiment/simulated/" : null
 			);
 		}
 
-		private void ProcessFragmentFile(string path)
+		private void ImportFragmentFile(string path)
 		{
 			fragmentImporter.Import(path, prefabPath: "ExperimentFragment");
 		}

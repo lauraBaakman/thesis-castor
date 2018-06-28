@@ -5,13 +5,7 @@ using Registration.Messages;
 public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLogger>, IICPListener, IICPStartEndListener
 {
 	private string outputPath = null;
-
-	private static string outputDirectory = "/Users/laura/Repositories/thesis-experiment/real/metadata";
-
-	private void CheckIfOutputDirectoryExists()
-	{
-		if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
-	}
+	private static string filename = "log.txt";
 
 	public void Log(string message)
 	{
@@ -37,22 +31,12 @@ public class RealExperimentLogger : RTEditor.MonoSingletonBase<RealExperimentLog
 		return DateTime.Now.ToLocalTime().ToString();
 	}
 
-	public void SetInputDirectory(string path)
+	public void CreateLogFile(string directory)
 	{
-		//No need to do this check if the logger is not used
-		CheckIfOutputDirectoryExists();
+		Directory.CreateDirectory(directory);
 
-		//GetFileName returns the last component of the path
-		string directoryName = Path.GetFileName(path);
+		this.outputPath = Path.Combine(directory, filename);
 
-		var timeSpan = (DateTime.Now.ToLocalTime() - new DateTime(1970, 1, 1, 0, 0, 0));
-
-		this.outputPath = Path.Combine(
-			outputDirectory,
-			string.Format("{0}_{1}.txt",
-						  directoryName,
-						  timeSpan.TotalSeconds.ToString())
-		);
 		Log("Created File");
 	}
 

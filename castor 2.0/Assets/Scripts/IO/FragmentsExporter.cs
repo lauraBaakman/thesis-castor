@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
-using Registration.Messages;
 
 namespace IO
 {
@@ -42,14 +41,8 @@ namespace IO
 			);
 		}
 
-		public void ExportFragments(string path)
+		public void ExportFragments(string directory)
 		{
-			var sinceUnixTime = (DateTime.Now.ToLocalTime() - new DateTime(1970, 1, 1, 0, 0, 0));
-
-			string directory = Path.Combine(
-				path,
-				sinceUnixTime.TotalSeconds.ToString()
-			);
 			Directory.CreateDirectory(directory);
 
 			RealExperimentLogger.Instance.Log("Wrote object files to " + directory);
