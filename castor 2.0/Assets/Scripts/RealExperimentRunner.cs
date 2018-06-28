@@ -95,7 +95,8 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 		IO.FragmentImporter importer = new IO.FragmentImporter(FragmentsRoot, ImportedFragment);
 		foreach (string currentFile in objFiles)
 		{
-			importer.Import(currentFile);
+			importer.Import(currentFile,
+							prefabPath: "ExperimentFragment");
 			yield return new WaitUntil(() => this.continueCoroutine);
 			callback(false);
 		}
