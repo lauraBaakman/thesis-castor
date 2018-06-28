@@ -6,6 +6,7 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using Utils;
+using Registration;
 
 public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRunner>, IICPStartEndListener
 {
@@ -14,6 +15,9 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 	private bool continueCoroutine = false;
 
 	private string inputDirectory;
+
+	//Maximum number of attempts to register two fragments to each other.
+	private static int maxAttempts = 1;
 
 	private string outputDirectory;
 	public string OutputDirectory
@@ -26,7 +30,11 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 		}
 	}
 
+	private RegistrationPair currentPair;
+
 	private FragmentsExporter exporter;
+
+	private Settings settings;
 
 	private Queue<RegistrationPair> pairs = new Queue<RegistrationPair>();
 
@@ -51,18 +59,19 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 			fragmentCallBack: DoNothing,
 			allCallBack: WroteCurrentRegistrationToFile
 		);
+		this.settings = Settings.SettingsFromName(
+			name: ICPMethod,
+			referenceTransform: FragmentsRoot.transform,
+			sampler: "ndosubsampling"
+		);
 
 		RealExperimentLogger.Instance.CreateLogFile(outputDirectory);
+		RealExperimentLogger.Instance.Log("Settings: " + settings.ToJson());
 
 		ProcessFragmentsAndStartRegistration();
 	}
 
 	private void DoNothing(object something) { }
-
-	private void WroteCurrentRegistrationToFile()
-	{
-		RegisterNextPair();
-	}
 
 	private void ProcessFragmentsAndStartRegistration()
 	{
@@ -138,9 +147,46 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 		return fragments;
 	}
 
-	private void RegisterNextPair()
+	private IEnumerator RegisterNextPair()
 	{
-		throw new NotImplementedException();
+		if (this.pairs.Count == 0) Terminate();
+
+		try
+		{
+			this.currentPair = this.pairs.Dequeue();
+			this.currentPair.AttemptedRegistration();
+		}
+		catch (InvalidOperationException)
+		{
+			//No more pairs to consider
+			Terminate();
+		}
+
+		Debug.Log(
+			string.Format(
+				"{0} registering {1} to {2}",
+				DateTime.Now.ToString(),
+				this.currentPair.ModelFragment,
+				this.currentPair.StaticFragment
+			)
+		);
+
+		ICPRegisterer registerer = new ICPRegisterer(
+			staticFragment: this.currentPair.StaticFragment,
+			modelFragment: this.currentPair.ModelFragment,
+			settings: this.settings
+		);
+		registerer.AddListener(this.gameObject);
+		yield return null;
+
+		while (!registerer.HasTerminated)
+		{
+			registerer.PrepareStep();
+			yield return null;
+
+			registerer.Step();
+			yield return null;
+		}
 	}
 
 	private void ExportFragments()
@@ -151,19 +197,25 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 		counter++;
 	}
 
-	private void Terminate()
+	private void WroteCurrentRegistrationToFile()
 	{
-		throw new NotImplementedException();
+		StartCoroutine(RegisterNextPair());
 	}
 
-	public void OnICPStarted(ICPStartedMessage message)
+	private void Terminate()
 	{
-		throw new NotImplementedException();
+		CLI.Instance.OnCommandFinished();
 	}
+
+	public void OnICPStarted(ICPStartedMessage message) { }
 
 	public void OnICPTerminated(ICPTerminatedMessage message)
 	{
-		throw new NotImplementedException();
+		if (currentPair.AttemptedRegistrationsCount < maxAttempts)
+		{
+			this.pairs.Enqueue(this.currentPair);
+		}
+		ExportFragments();
 	}
 }
 

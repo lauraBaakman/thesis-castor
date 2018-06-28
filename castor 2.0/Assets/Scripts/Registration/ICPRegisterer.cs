@@ -89,8 +89,6 @@ namespace Registration
 		private GameObject modelFragment;
 		#endregion
 
-		private FragmentsExporter exporter;
-
 		public ICPRegisterer(
 			GameObject staticFragment, GameObject modelFragment,
 			Settings settings,
@@ -107,11 +105,6 @@ namespace Registration
 
 			stabilization = new StabilizationTermiationCondition();
 
-			this.exporter = new FragmentsExporter(
-				modelFragment.GetComponent<Transform>().root.gameObject,
-				DoNothing
-			);
-
 			setNotifcationFunctions();
 
 			hasTerminated = false;
@@ -125,8 +118,6 @@ namespace Registration
 
 			Listeners.Add(RealExperimentLogger.Instance.gameObject);
 		}
-
-		private void DoNothing(IO.WriteResult result) { }
 
 		private void setNotifcationFunctions()
 		{
@@ -279,7 +270,6 @@ namespace Registration
 		{
 			hasTerminated = true;
 			if (FinishedCallBack != null) FinishedCallBack();
-			exporter.ExportFragments();
 			SendMessageToAllListeners(
 				methodName: "OnICPTerminated",
 				message: new ICPTerminatedMessage(reason, this.Error, this.iterationCounter.CurrentCount, message, ModelFragment.name, this.errorsString)

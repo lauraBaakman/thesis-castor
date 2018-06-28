@@ -11,11 +11,6 @@ namespace Registration
 	public class Settings
 	{
 		/// <summary>
-		/// Boolean to indicate if you are running the real data experiment.
-		/// </summary>
-		private static bool runningRealDataExperiment = true;
-
-		/// <summary>
 		/// The transform in which the registration is performed. 
 		/// </summary>
 		/// <value>The reference transform.</value>
@@ -156,7 +151,7 @@ namespace Registration
 				transformFinder: new HornTransformFinder(),
 				name: "Seminal ICP",
 				correspondenceFinder: "nearestneighbour",
-				pointSampler: runningRealDataExperiment ? "ndosubsampling" : "allpoints"
+				pointSampler: sampler
 			);
 		}
 
@@ -167,7 +162,7 @@ namespace Registration
 				name: "Horn",
 				referenceTransform: referenceTransform,
 				transformFinder: new HornTransformFinder(),
-				pointSampler: runningRealDataExperiment ? "ndosubsampling" : "allpoints"
+				pointSampler: sampler
 			);
 		}
 
@@ -185,7 +180,7 @@ namespace Registration
 						errorMetric: new Registration.Error.IntersectionTermError(0.5f, 0.5f)
 					)
 				),
-				pointSampler: runningRealDataExperiment ? "ndosubsampling" : "allpoints"
+				pointSampler: sampler
 			);
 		}
 
@@ -203,7 +198,7 @@ namespace Registration
 						errorMetric: new Registration.Error.WheelerIterativeError()
 					)
 				),
-				pointSampler: runningRealDataExperiment ? "ndosubsampling" : "allpoints"
+				pointSampler: sampler
 			);
 		}
 
@@ -214,8 +209,18 @@ namespace Registration
 				name: "low",
 				referenceTransform: referenceTransform,
 				transformFinder: new LowTransformFinder(),
-				pointSampler: runningRealDataExperiment ? "ndosubsampling" : "allpoints"
+				pointSampler: sampler
 			);
+		}
+
+		public static Settings SettingsFromName(string name, Transform referenceTransform, string sampler)
+		{
+			if (name.ToLower().Equals("horn")) return Horn(referenceTransform, sampler);
+			if (name.ToLower().Equals("low")) return Low(referenceTransform, sampler);
+			if (name.ToLower().Equals("wheeler")) return Wheeler(referenceTransform, sampler);
+			if (name.ToLower().Equals("intersection")) return IntersectionError(referenceTransform, sampler);
+
+			throw new Exception("The name " + name + " does not represent a valid settings object");
 		}
 
 		public void ToJson(string outputPath)
