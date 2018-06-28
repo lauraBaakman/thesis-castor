@@ -57,7 +57,9 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 		ProcessFragmentsAndStartRegistration();
 	}
 
-	private void WroteCurrentRegistrationToFile(WriteResult result)
+	private void DoNothing(object something) { }
+
+	private void WroteCurrentRegistrationToFile()
 	{
 		RegisterNextPair();
 	}
