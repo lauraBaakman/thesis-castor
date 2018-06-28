@@ -148,6 +148,7 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 		this.exporter.ExportFragments(
 		  directory: Path.Combine(OutputDirectory, counter.ToString())
 		);
+		counter++;
 	}
 
 	private void Terminate()
