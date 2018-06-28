@@ -39,6 +39,7 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 			Debug.Log(string.Format("Needed {0} seconds", Time.realtimeSinceStartup - startTime));
 			Application.Quit();
 		}
+		if (Application.isEditor) UnityEditor.EditorApplication.isPlaying = false;
 	}
 
 	/// <summary>
