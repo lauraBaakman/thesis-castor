@@ -40,16 +40,6 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 
 	private int counter = 0;
 
-	IEnumerator Start()
-	{
-		yield return new WaitForSeconds(3);
-		Run(
-			inputDirectory: "/Users/laura/Repositories/thesis-experiment/real/_3_subsampled/test",
-			outputDirectory: "/Users/laura/Repositories/thesis-experiment/real/results",
-			ICPMethod: "Horn"
-		);
-	}
-
 	public void Run(string inputDirectory, string outputDirectory, string ICPMethod)
 	{
 		this.OutputDirectory = outputDirectory;

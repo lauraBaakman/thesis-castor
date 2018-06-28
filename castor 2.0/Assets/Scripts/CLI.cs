@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using Buttons;
-using System;
 
 public class CLI : RTEditor.MonoSingletonBase<CLI>
 {
 	private static string experimentFlag = "-experiment";
 	private static string statisticsFlag = "-statistics";
+	private static string realDataFlag = "-real";
 
 	private bool CLIUsed = false;
 
@@ -48,12 +48,16 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	private void Run()
 	{
 		string configFile;
-		if (ExtractExperimentArgument(out configFile)) RunExperiment(configFile);
+		if (ExtractExperimentArgument(out configFile)) RunSimulatedExperiment(configFile);
 
 		string resultsDirectory;
 		string dataFile;
 		if (ExtractStatisticsArguments(out dataFile, out resultsDirectory)) RunStatisticsComputation(dataFile, resultsDirectory);
 
+		string inputDirectory;
+		string outputDirectory;
+		string ICPMethod;
+		if (ExtractRealDataArguments(out inputDirectory, out outputDirectory, out ICPMethod)) RunRealDataExperiment(inputDirectory, outputDirectory, ICPMethod);
 	}
 
 	/// <summary>
@@ -72,6 +76,23 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 
 		dataSetFile = CLIArguments[statisticsArgument + 1];
 		resultsDirectory = CLIArguments[statisticsArgument + 2];
+
+		return true;
+	}
+
+	private bool ExtractRealDataArguments(out string inputDirectory, out string resultsDirectory, out string ICPMethod)
+	{
+		inputDirectory = null;
+		resultsDirectory = null;
+		ICPMethod = null;
+
+
+		int statisticsArgument = GetCLIArgumentIndex(realDataFlag);
+		if (statisticsArgument == -1) return false;
+
+		inputDirectory = CLIArguments[statisticsArgument + 1];
+		resultsDirectory = CLIArguments[statisticsArgument + 2];
+		ICPMethod = CLIArguments[statisticsArgument + 3];
 
 		return true;
 	}
@@ -110,7 +131,7 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	/// uses the passed configuration file.
 	/// </summary>
 	/// <param name="configFile">Config file.</param>
-	private void RunExperiment(string configFile)
+	private void RunSimulatedExperiment(string configFile)
 	{
 		PrepApplicationForCLI();
 		experiment.RunExperimentWithConfigurationFile(configFile);
@@ -126,6 +147,12 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 		PrepApplicationForCLI();
 		statistics.Listener = this.gameObject;
 		StartCoroutine(statistics.ProcessExperimentResultsFolder(dataSetFile, resultsDirectory));
+	}
+
+	private void RunRealDataExperiment(string inputDirectory, string outputDirectory, string ICPMethod)
+	{
+		PrepApplicationForCLI();
+		RealExperimentRunner.Instance.Run(inputDirectory, outputDirectory, ICPMethod);
 	}
 
 	/// <summary>
