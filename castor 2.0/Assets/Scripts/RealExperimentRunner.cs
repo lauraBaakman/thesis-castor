@@ -28,7 +28,7 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 
 	private FragmentsExporter exporter;
 
-	private Queue<FragmentPair> pairs = new Queue<FragmentPair>();
+	private Queue<RegistrationPair> pairs = new Queue<RegistrationPair>();
 
 	private int counter = 0;
 
@@ -115,7 +115,7 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 				if (first == second) continue;
 
 				pairs.Enqueue(
-					new FragmentPair(
+					new RegistrationPair(
 						first: fragments[first],
 						second: fragments[second]
 					)
@@ -164,13 +164,23 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 	}
 }
 
-public class FragmentPair : Pair<GameObject, GameObject>
+public class RegistrationPair : Pair<GameObject, GameObject>
 {
 	private int attemptedRegistrationsCount = 0;
 
-	public FragmentPair(GameObject first, GameObject second) : base(first, second)
+	public RegistrationPair(GameObject first, GameObject second)
+		: base(first, second)
+	{ }
+
+	public GameObject StaticFragment { get { return this.First; } }
+
+	public GameObject ModelFragment { get { return this.Second; } }
+
+	public int AttemptedRegistrationsCount { get { return attemptedRegistrationsCount; } }
+
+	public void AttemptedRegistration()
 	{
-		Debug.Log("Create the pair: " + first.name + " " + second.name);
+		attemptedRegistrationsCount += 1;
 	}
 }
 
