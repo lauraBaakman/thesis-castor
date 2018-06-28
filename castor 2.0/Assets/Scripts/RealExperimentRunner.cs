@@ -46,7 +46,11 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 	{
 		this.OutputDirectory = outputDirectory;
 		this.inputDirectory = inputDirectory;
-		this.exporter = new FragmentsExporter(FragmentsRoot, WroteCurrentRegistrationToFile);
+		this.exporter = new FragmentsExporter(
+			FragmentsRoot,
+			fragmentCallBack: DoNothing,
+			allCallBack: WroteCurrentRegistrationToFile
+		);
 
 		RealExperimentLogger.Instance.CreateLogFile(outputDirectory);
 

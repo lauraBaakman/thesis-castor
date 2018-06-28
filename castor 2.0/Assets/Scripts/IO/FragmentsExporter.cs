@@ -2,24 +2,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using System.CodeDom;
 
 namespace IO
 {
 	public class FragmentsExporter
 	{
-		public delegate void CallBack(IO.WriteResult result);
+		public delegate void FinishedFragmentCallBack(IO.WriteResult result);
+		public delegate void FinsihedAllCallBack();
 
 		private readonly GameObject FragmentsRoot;
 
-		private readonly CallBack callback;
+		private readonly FinishedFragmentCallBack fragmentCallBack;
+		private readonly FinsihedAllCallBack allCallBack;
 
 		private string defaultOutputPath = "/Users/laura/Repositories/thesis-experiment/real/results";
 		private static string extension = "obj";
 
-		public FragmentsExporter(GameObject fragmentsRoot, CallBack callback)
+		public FragmentsExporter(GameObject fragmentsRoot,
+								 FinishedFragmentCallBack fragmentCallBack,
+								 FinsihedAllCallBack allCallBack = null)
 		{
 			FragmentsRoot = fragmentsRoot;
-			this.callback = callback;
+			this.fragmentCallBack = fragmentCallBack;
+			this.allCallBack = allCallBack;
 
 			if (!Directory.Exists(defaultOutputPath)) Directory.CreateDirectory(defaultOutputPath);
 		}
@@ -47,7 +53,7 @@ namespace IO
 
 			RealExperimentLogger.Instance.Log("Wrote object files to " + directory);
 
-			FragmentExporter exporter = new FragmentExporter(callback);
+			FragmentExporter exporter = new FragmentExporter(fragmentCallBack);
 
 			List<GameObject> exportFragments = GetExportFragments();
 
@@ -55,6 +61,7 @@ namespace IO
 			{
 				exporter.Export(fragment, BuildExportPath(directory, fragment.name));
 			}
+			if (this.allCallBack != null) allCallBack();
 		}
 
 		public void ExportFragments()
@@ -97,18 +104,18 @@ namespace IO
 	{
 		private static string defaultSuffix = "_transformed";
 
-		private FragmentsExporter.CallBack callback;
+		private FragmentsExporter.FinishedFragmentCallBack callback;
 
 		/// <summary>
 		/// The suffix to postpend to the name of the fragment.
 		/// </summary>
 		private string suffix;
 
-		public FragmentExporter(FragmentsExporter.CallBack callback)
+		public FragmentExporter(FragmentsExporter.FinishedFragmentCallBack callback)
 			: this(callback, "")
 		{ }
 
-		public FragmentExporter(FragmentsExporter.CallBack callback, string suffix = null)
+		public FragmentExporter(FragmentsExporter.FinishedFragmentCallBack callback, string suffix = null)
 		{
 			this.callback = callback;
 			this.suffix = suffix ?? defaultSuffix;

@@ -12,7 +12,7 @@ namespace Buttons
 		{
 			new IO.FragmentsExporter(
 				fragmentsRoot: FragmentsRoot,
-				callback: NotifyUser
+				fragmentCallBack: NotifyUser
 			).Export();
 		}
 
