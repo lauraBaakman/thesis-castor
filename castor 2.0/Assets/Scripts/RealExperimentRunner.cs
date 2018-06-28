@@ -17,7 +17,7 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 	private string inputDirectory;
 
 	//Maximum number of attempts to register two fragments to each other.
-	private static int maxAttempts = 1;
+	private static int maxAttempts = 3;
 
 	private string outputDirectory;
 	public string OutputDirectory
