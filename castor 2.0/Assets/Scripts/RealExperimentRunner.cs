@@ -5,6 +5,7 @@ using IO;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+using Utils;
 
 public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRunner>, IICPStartEndListener
 {
@@ -27,6 +28,8 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 
 	private FragmentsExporter exporter;
 
+	private Queue<FragmentPair> pairs = new Queue<FragmentPair>();
+
 	private int counter = 0;
 
 	IEnumerator Start()
@@ -43,14 +46,14 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 	{
 		this.OutputDirectory = outputDirectory;
 		this.inputDirectory = inputDirectory;
-		this.exporter = new FragmentsExporter(FragmentsRoot, WroteCurrentConfigurationToFile);
+		this.exporter = new FragmentsExporter(FragmentsRoot, WroteCurrentRegistrationToFile);
 
 		RealExperimentLogger.Instance.CreateLogFile(outputDirectory);
 
 		ProcessFragmentsAndStartRegistration();
 	}
 
-	private void WroteCurrentConfigurationToFile(WriteResult result)
+	private void WroteCurrentRegistrationToFile(WriteResult result)
 	{
 		RegisterNextPair();
 	}
@@ -63,7 +66,6 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 			{
 				CreateFragmentPairs();
 				ExportFragments();
-				RegisterNextPair();
 			}
 		}));
 	}
@@ -102,9 +104,19 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 	private void CreateFragmentPairs()
 	{
 		List<GameObject> fragments = GetAllFragments();
-		foreach (GameObject fragment in fragments)
+		for (int first = 0; first < fragments.Count; first++)
 		{
-			Debug.Log(fragment.name);
+			for (int second = 0; second < fragments.Count; second++)
+			{
+				if (first == second) continue;
+
+				pairs.Enqueue(
+					new FragmentPair(
+						first: fragments[first],
+						second: fragments[second]
+					)
+				);
+			}
 		}
 	}
 
@@ -114,6 +126,8 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 		foreach (Transform child in FragmentsRoot.transform)
 			//Add only fragments, not the other children of 'Fragments'
 			if (child.GetComponent<MeshFilter>() != null) fragments.Add(child.gameObject);
+
+		fragments.Sort(new SortFragmentOnVertexCount());
 
 		return fragments;
 	}
@@ -143,5 +157,26 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 	public void OnICPTerminated(ICPTerminatedMessage message)
 	{
 		throw new NotImplementedException();
+	}
+}
+
+public class FragmentPair : Pair<GameObject, GameObject>
+{
+	private int attemptedRegistrationsCount = 0;
+
+	public FragmentPair(GameObject first, GameObject second) : base(first, second)
+	{
+		Debug.Log("Create the pair: " + first.name + " " + second.name);
+	}
+}
+
+class SortFragmentOnVertexCount : IComparer<GameObject>
+{
+	public int Compare(GameObject x, GameObject y)
+	{
+		int xCount = x.GetComponent<MeshFilter>().mesh.vertexCount;
+		int yCount = y.GetComponent<MeshFilter>().mesh.vertexCount;
+
+		return xCount.CompareTo(yCount);
 	}
 }
