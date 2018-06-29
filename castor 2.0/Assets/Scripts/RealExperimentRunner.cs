@@ -81,10 +81,10 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 		yield return null;
 		callback(false);
 
-		continueCoroutine = false;
 		IO.FragmentImporter importer = new IO.FragmentImporter(FragmentsRoot, ImportedFragment);
 		foreach (string currentFile in objFiles)
 		{
+			this.continueCoroutine = false;
 			importer.Import(currentFile,
 							prefabPath: "ExperimentFragment");
 			yield return new WaitUntil(() => this.continueCoroutine);

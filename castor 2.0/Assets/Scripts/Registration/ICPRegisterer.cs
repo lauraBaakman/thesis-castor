@@ -101,6 +101,9 @@ namespace Registration
 			Settings = settings;
 			FinishedCallBack = callBack;
 
+			staticFragment.GetComponent<SampleStorage>().PointSampler = Settings.PointSampler;
+			modelFragment.GetComponent<SampleStorage>().PointSampler = Settings.PointSampler;
+
 			iterationCounter = new Counter(Settings.MaxNumIterations);
 
 			stabilization = new StabilizationTermiationCondition();
@@ -283,16 +286,17 @@ namespace Registration
 		/// <param name="fragment">Fragment.</param>
 		private List<Point> SamplePoints(GameObject fragment)
 		{
-			Ticker.Receiver.Instance.SendMessage(
-				methodName: "OnMessage",
-				value: new Ticker.Message.InfoMessage(
-					string.Format("Sampling the fragment with name {0}.", fragment.name)
-				),
-				options: SendMessageOptions.RequireReceiver
-			);
-			RealExperimentLogger.Instance.Log("Sampling " + fragment.name);
-			List<Point> points = Settings.PointSampler.Sample(new SamplingInformation(fragment));
-			return points;
+			//Ticker.Receiver.Instance.SendMessage(
+			//	methodName: "OnMessage",
+			//	value: new Ticker.Message.InfoMessage(
+			//		string.Format("Sampling the fragment with name {0}.", fragment.name)
+			//	),
+			//	options: SendMessageOptions.RequireReceiver
+			//);
+			//RealExperimentLogger.Instance.Log("Sampling " + fragment.name);
+			//List<Point> points = Settings.PointSampler.Sample(new SamplingInformation(fragment));
+			//return points;
+			return fragment.GetComponent<SampleStorage>().GetSample();
 		}
 
 		private CorrespondenceCollection ComputeCorrespondences(List<Point> staticPoints)
