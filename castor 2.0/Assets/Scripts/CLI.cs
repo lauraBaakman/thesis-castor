@@ -30,11 +30,7 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	/// </summary>
 	public void OnCommandFinished()
 	{
-		if (CLIUsed)
-		{
-			Debug.Log(string.Format("Needed {0} seconds", Time.realtimeSinceStartup - startTime));
-			Application.Quit();
-		}
+		if (CLIUsed) Application.Quit();
 	}
 
 	/// <summary>
