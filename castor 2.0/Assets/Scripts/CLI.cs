@@ -18,13 +18,9 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 
 	public bool CLIModeActive { get { return CLIUsed; } }
 
-	private void Awake()
+	private void Start()
 	{
 		CLIArguments = System.Environment.GetCommandLineArgs();
-	}
-
-	private void OnEnable()
-	{
 		Run();
 	}
 
@@ -162,8 +158,6 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	private void PrepApplicationForCLI()
 	{
 		CLIUsed = true;
-
-		GetComponent<CatchException>().enabled = true;
 
 		//Store the current time so that we can show how long the run took.
 		startTime = Time.realtimeSinceStartup;
