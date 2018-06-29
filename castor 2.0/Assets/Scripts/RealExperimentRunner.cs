@@ -157,8 +157,8 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 			string.Format(
 				"{0} registering {1} to {2}",
 				DateTime.Now.ToString(),
-				this.currentPair.ModelFragment,
-				this.currentPair.StaticFragment
+				this.currentPair.ModelFragment.name,
+				this.currentPair.StaticFragment.name
 			)
 		);
 
