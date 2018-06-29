@@ -11,13 +11,13 @@ namespace Registration
 	public class Settings
 	{
 		/// <summary>
-		/// The transform in which the registration is performed. 
+		/// The transform in which the registration is performed.
 		/// </summary>
 		/// <value>The reference transform.</value>
 		public Transform ReferenceTransform { get; set; }
 
 		/// <summary>
-		/// If the error of the current registration is smaller than the initial 
+		/// If the error of the current registration is smaller than the initial
 		/// error scaled with this value the algorithm terminates.
 		/// </summary>
 		/// <value>The error threshold.</value>
@@ -32,7 +32,7 @@ namespace Registration
 		public float MaxWithinCorrespondenceDistance { get; set; }
 
 		/// <summary>
-		/// The method used to select points from a mesh, that can be used in a 
+		/// The method used to select points from a mesh, that can be used in a
 		/// correspondence.
 		/// </summary>
 		/// <value>The selector.</value>
