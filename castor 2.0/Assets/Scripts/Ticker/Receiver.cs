@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 using Utils;
@@ -111,7 +112,10 @@ namespace Ticker
 
 		private void DisplayWithConsole(Message message)
 		{
-			Debug.Log(message.Text);
+			Debug.Log(
+				string.Format("{0}: {1}",
+							  DateTime.Now.ToString(),
+							  message.Text));
 		}
 	}
 }

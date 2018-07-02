@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CatchException : MonoBehaviour
 {
@@ -42,7 +43,10 @@ public class CatchException : MonoBehaviour
 
 	private void LogEntryToConsole(string logEntry, string stackTrace, LogType logType)
 	{
-		Debug.Log(string.Format("{0}: {1}\n{2}", logType, logEntry, stackTrace));
+		Debug.Log(
+			string.Format("{3}: {0}: {1}\n{2}",
+						  logType, logEntry,
+						  stackTrace, DateTime.Now.ToString()));
 	}
 }
 

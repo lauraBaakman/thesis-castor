@@ -55,19 +55,16 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	/// </summary>
 	public void OnCommandFinished()
 	{
-		Debug.Log("OnCommandFinished");
 		Quit();
 	}
 
 	public void OnEncounteredException()
 	{
-		Debug.Log("OnEncounteredException");
 		Quit();
 	}
 
 	private void Quit()
 	{
-		Debug.Log("Quit");
 #if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -81,12 +78,8 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	/// </summary>
 	private void Run()
 	{
-		if (IsEditorRun())
-		{
-			return;
-		}
+		if (IsEditorRun()) return;
 
-		Debug.Log("Run");
 		string configFile;
 		if (ExtractExperimentArgument(out configFile))
 		{
