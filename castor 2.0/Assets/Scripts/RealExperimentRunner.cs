@@ -199,6 +199,7 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 
 	private void Terminate()
 	{
+		this.enabled = false;
 		CLI.Instance.OnCommandFinished();
 	}
 
