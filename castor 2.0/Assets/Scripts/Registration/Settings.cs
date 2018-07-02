@@ -29,7 +29,7 @@ namespace Registration
 		/// <value>The max number iterations.</value>
 		public int MaxNumIterations { get; set; }
 
-		public float MaxWithinCorrespondenceDistance { get; set; }
+		public float MaxWithinCorrespondenceDistanceFactor { get; set; }
 
 		/// <summary>
 		/// The method used to select points from a mesh, that can be used in a
@@ -88,7 +88,7 @@ namespace Registration
 			string correspondenceFinder = "normalshooting",
 			string pointSampler = "allpoints",
 			float errorThresholdScale = 0.0001f, int maxNumIterations = 500,
-			float maxWithinCorrespondenceDistance = 2f
+			float maxWithinCorrespondenceDistanceFactor = 2f
 		)
 		{
 			this.name = name;
@@ -97,7 +97,7 @@ namespace Registration
 
 			ErrorThresholdScale = errorThresholdScale;
 
-			MaxWithinCorrespondenceDistance = maxWithinCorrespondenceDistance;
+			MaxWithinCorrespondenceDistanceFactor = maxWithinCorrespondenceDistanceFactor;
 
 			MaxNumIterations = maxNumIterations;
 
@@ -264,7 +264,7 @@ namespace Registration
 				public SerializableCorrespondences(Settings settings)
 					: this(
 						settings.CorrespondenceFilters,
-						settings.MaxWithinCorrespondenceDistance,
+						settings.MaxWithinCorrespondenceDistanceFactor,
 						settings.PointSampler,
 						settings.CorrespondenceFinder
 					)

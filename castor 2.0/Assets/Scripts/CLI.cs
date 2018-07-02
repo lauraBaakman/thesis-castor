@@ -10,7 +10,7 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	private static string editorArgument = "/Applications/Unity/Unity.app/Contents/MacOS/Unity";
 
 	private static string helpMessage = @"Invalid CLI arguments use:
-            \n\t-real INPUTDIR OUTPUTDIR [horn|low|intersection|wheeler] ITERATIONCOUNT WITHINCORRESPONDENCEDISTANCE
+            \n\t-real INPUTDIR OUTPUTDIR [horn|low|intersection|wheeler] ITERATIONCOUNT WITHINCORRESPONDENCEDISTANCEFACTOR
             \n\t-statistics DATAFILE OUTPUTDIRs
             \n\t-experiment CONFIGFILE";
 
@@ -229,10 +229,10 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	}
 
 	private void RunRealDataExperiment(string inputDirectory, string outputDirectory, string ICPMethod,
-									   int maxNumIterations, float maxWithinCorrespondenceDistance)
+									   int maxNumIterations, float maxWithinCorrespondenceDistanceFactor)
 	{
 		PrepApplicationForCLI();
-		RealExperimentRunner.Instance.Run(inputDirectory, outputDirectory, ICPMethod, maxNumIterations, maxWithinCorrespondenceDistance);
+		RealExperimentRunner.Instance.Run(inputDirectory, outputDirectory, ICPMethod, maxNumIterations, maxWithinCorrespondenceDistanceFactor);
 	}
 
 	/// <summary>

@@ -41,7 +41,7 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 
 	private int counter = 0;
 
-	public void Run(string inputDirectory, string outputDirectory, string ICPMethod, int maxNumIterations, float maxWithinCorrespondenceDistance)
+	public void Run(string inputDirectory, string outputDirectory, string ICPMethod, int maxNumIterations, float maxWithinCorrespondenceDistanceFactor)
 	{
 		this.OutputDirectory = outputDirectory;
 		this.inputDirectory = inputDirectory;
@@ -56,7 +56,7 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 			sampler: "ndosubsampling"
 		);
 		this.settings.MaxNumIterations = maxNumIterations;
-		this.settings.MaxWithinCorrespondenceDistance = maxWithinCorrespondenceDistance;
+		this.settings.MaxWithinCorrespondenceDistanceFactor = maxWithinCorrespondenceDistanceFactor;
 
 		RealExperimentLogger.Instance.CreateLogFile(outputDirectory);
 		RealExperimentLogger.Instance.Log("Settings: " + settings.ToJson());

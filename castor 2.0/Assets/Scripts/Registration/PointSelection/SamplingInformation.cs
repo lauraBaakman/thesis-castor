@@ -10,6 +10,7 @@ namespace Registration
 		public readonly Mesh Mesh;
 		public readonly Collider Collider;
 		public readonly DCEL DCEL;
+		public readonly Bounds bounds;
 
 		public int VertexCount
 		{
@@ -33,6 +34,7 @@ namespace Registration
 
 			this.Transform = transform;
 			this.Mesh = Application.isEditor ? meshFilter.sharedMesh : meshFilter.mesh;
+			this.bounds = this.Mesh.bounds;
 			this.Collider = collider;
 			this.DCEL = dcelStorage.DCEL;
 		}

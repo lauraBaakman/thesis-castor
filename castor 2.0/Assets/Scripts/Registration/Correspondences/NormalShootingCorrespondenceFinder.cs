@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 namespace Registration
 {
@@ -18,7 +19,8 @@ namespace Registration
 		/// <summary>
 		/// The maximum distance between a static point and the intersection point on the model fragment.
 		/// </summary>
-		private readonly float MaxDistance;
+		private readonly float MaxDistanceFactor;
+		private float MaxDistance;
 
 		/// <summary>
 		/// The reference transform.
@@ -39,7 +41,8 @@ namespace Registration
 		/// <param name="settings">Settings.</param>
 		public NormalShootingCorrespondenceFinder(Settings settings)
 		{
-			MaxDistance = settings.MaxWithinCorrespondenceDistance;
+			MaxDistanceFactor
+			= settings.MaxWithinCorrespondenceDistanceFactor;
 			ReferenceTransform = settings.ReferenceTransform;
 		}
 
@@ -64,6 +67,8 @@ namespace Registration
 		/// <param name="modelSamplingInformation">Model sampling information.</param>
 		public CorrespondenceCollection Find(ReadOnlyCollection<Point> staticPoints, SamplingInformation modelSamplingInformation)
 		{
+			ComputeMaxDistance(staticPoints, modelSamplingInformation.bounds);
+
 			Correspondence correspondence;
 			CorrespondenceCollection correspondences = new CorrespondenceCollection();
 			foreach (Point staticPoint in staticPoints)
@@ -76,6 +81,20 @@ namespace Registration
 			return correspondences;
 		}
 
+		private void ComputeMaxDistance(ReadOnlyCollection<Point> staticPoints, Bounds modelFragmentBounds)
+		{
+			foreach (Point staticPoint in staticPoints) modelFragmentBounds.Encapsulate(staticPoint.Position);
+
+			//Compute the average of the three dimensions of the bounding box
+			this.MaxDistance = (modelFragmentBounds.extents.x + modelFragmentBounds.extents.y + modelFragmentBounds.extents.z) * 2.0f / 3.0f;
+
+			RealExperimentLogger.Instance.Log(
+				string.Format(
+						"Model Fragment Bounds: {0}, Max Distance Factor: {1}, Max Distance: {2}",
+					modelFragmentBounds, this.MaxDistanceFactor, this.MaxDistance)
+				);
+		}
+
 		/// <summary>
 		/// Serialize this instance.
 		/// </summary>
@@ -84,7 +103,7 @@ namespace Registration
 		{
 			return new SerializebleCorrespondenceFinder(
 				"normal shooting",
-				MaxDistance, ReferenceTransform
+				MaxDistanceFactor, ReferenceTransform
 			);
 		}
 
