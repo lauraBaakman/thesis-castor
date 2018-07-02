@@ -563,7 +563,6 @@
     <Compile Include="Assets\Scripts\Utils\TriangleUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\VectorUtils.cs" />
     <Compile Include="Assets\Scripts\RealExperimentRunner.cs" />
-    <Compile Include="Assets\Scripts\Fragment\SampleStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\DebugDrawingExtension\readme.txt" />
