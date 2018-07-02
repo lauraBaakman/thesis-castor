@@ -7,6 +7,7 @@ using System.IO;
 using System.Collections.Generic;
 using Utils;
 using Registration;
+using System.Linq;
 
 public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRunner>, IICPStartEndListener
 {
@@ -82,6 +83,11 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 		string[] objFiles = Directory.GetFiles(inputDirectory, "*.obj");
 		yield return null;
 		callback(false);
+
+		if (objFiles.Length == 0)
+		{
+			throw new Exception("Found no obj files in " + this.inputDirectory);
+		}
 
 		IO.FragmentImporter importer = new IO.FragmentImporter(FragmentsRoot, ImportedFragment);
 		foreach (string currentFile in objFiles)
