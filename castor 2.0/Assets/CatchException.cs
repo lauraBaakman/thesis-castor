@@ -37,7 +37,7 @@ public class CatchException : MonoBehaviour
 	private void TerminateApplication(string logEntry, string stackTrace, LogType logType)
 	{
 		LogEntryToConsole(logEntry, stackTrace, logType);
-		Application.Quit();
+		CLI.Instance.OnEncounteredException();
 	}
 
 	private void LogEntryToConsole(string logEntry, string stackTrace, LogType logType)
