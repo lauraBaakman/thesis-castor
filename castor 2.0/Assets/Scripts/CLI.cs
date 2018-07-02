@@ -9,6 +9,11 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	private static string realDataFlag = "-real";
 	private static string editorArgument = "/Applications/Unity/Unity.app/Contents/MacOS/Unity";
 
+	private static string helpMessage = @"Invalid CLI arguments use:
+            \n\t-real INPUTDIR OUTPUTDIR [horn|low|intersection|wheeler] ITERATIONCOUNT WITHINCORRESPONDENCEDISTANCE
+            \n\t-statistics DATAFILE OUTPUTDIRs
+            \n\t-experiment CONFIGFILE";
+
 	private bool CLIUsed = false;
 
 	private float startTime;
@@ -22,7 +27,25 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 
 	private void Start()
 	{
+#if UNITY_EDITOR
+		Debug.Log("use fixed CLI arguments if running from editor");
+		CLIArguments = new string[]{
+			"./castormaxdist2.app/Contents/MacOS/castormaxdist2",
+			"./castormaxdist2",
+			"-batchmode",
+			"-logFile",
+			"/dev/stdout",
+			"-real",
+			"/Users/laura/Repositories/thesis-experiment/real/_3_subsampled/test/A",
+			"/Users/laura/Desktop/results",
+			"Horn",
+			"5",
+			"2.0"
+		};
+#else
 		CLIArguments = System.Environment.GetCommandLineArgs();
+#endif
+
 		Run();
 	}
 
@@ -92,11 +115,7 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 			RunRealDataExperiment(inputDirectory, outputDirectory, ICPMethod, numIterations, maxWithinCorrespondenceDistance);
 			return;
 		}
-
-		throw new Exception(@"Invalid CLI arguments use:
-        	\n\t-real INPUTDIR OUTPUTDIR [horn|low|intersection|wheeler] ITERATIONCOUNT WITHINCORRESPONDENCEDISTANCE
-			\n\t-statistics DATAFILE OUTPUTDIRs
-			\n\t-experiment CONFIGFILE");
+		throw new Exception(helpMessage);
 	}
 
 	/// <summary>
@@ -130,12 +149,18 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 		int statisticsArgument = GetCLIArgumentIndex(realDataFlag);
 		if (statisticsArgument == -1) return false;
 
-		inputDirectory = CLIArguments[statisticsArgument + 1];
-		resultsDirectory = CLIArguments[statisticsArgument + 2];
-		ICPMethod = CLIArguments[statisticsArgument + 3];
-		int.TryParse(CLIArguments[statisticsArgument + 4], out numIterations);
-		float.TryParse(CLIArguments[statisticsArgument + 5], out maxWithinCorrespondenceDistance);
-
+		try
+		{
+			inputDirectory = CLIArguments[statisticsArgument + 1];
+			resultsDirectory = CLIArguments[statisticsArgument + 2];
+			ICPMethod = CLIArguments[statisticsArgument + 3];
+			int.TryParse(CLIArguments[statisticsArgument + 4], out numIterations);
+			float.TryParse(CLIArguments[statisticsArgument + 5], out maxWithinCorrespondenceDistance);
+		}
+		catch (IndexOutOfRangeException)
+		{
+			throw new Exception(helpMessage);
+		}
 		return true;
 	}
 
@@ -157,7 +182,14 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 		int experimentIndex = GetCLIArgumentIndex(experimentFlag);
 		if (experimentIndex == -1) return false;
 
-		configFile = CLIArguments[experimentIndex + 1];
+		try
+		{
+			configFile = CLIArguments[experimentIndex + 1];
+		}
+		catch (IndexOutOfRangeException)
+		{
+			throw new Exception(helpMessage);
+		}
 		return true;
 	}
 
