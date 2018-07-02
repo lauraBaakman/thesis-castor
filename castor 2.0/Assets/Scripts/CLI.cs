@@ -40,7 +40,6 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 
 	private void Quit()
 	{
-		Debug.Log("OnCommandFinished");
 #if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;
 #else
