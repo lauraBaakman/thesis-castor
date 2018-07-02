@@ -40,7 +40,7 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 
 	private int counter = 0;
 
-	public void Run(string inputDirectory, string outputDirectory, string ICPMethod)
+	public void Run(string inputDirectory, string outputDirectory, string ICPMethod, int maxNumIterations, float maxWithinCorrespondenceDistance)
 	{
 		this.OutputDirectory = outputDirectory;
 		this.inputDirectory = inputDirectory;
@@ -54,6 +54,8 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 			referenceTransform: FragmentsRoot.transform,
 			sampler: "ndosubsampling"
 		);
+		this.settings.MaxNumIterations = maxNumIterations;
+		this.settings.MaxWithinCorrespondenceDistance = maxWithinCorrespondenceDistance;
 
 		RealExperimentLogger.Instance.CreateLogFile(outputDirectory);
 		RealExperimentLogger.Instance.Log("Settings: " + settings.ToJson());
@@ -140,26 +142,22 @@ public class RealExperimentRunner : RTEditor.MonoSingletonBase<RealExperimentRun
 
 	private IEnumerator RegisterNextPair()
 	{
-		if (this.pairs.Count == 0) Terminate();
-
-		try
+		if (this.pairs.Count == 0)
 		{
-			this.currentPair = this.pairs.Dequeue();
-			this.currentPair.AttemptedRegistration();
-		}
-		catch (InvalidOperationException)
-		{
-			//No more pairs to consider
 			Terminate();
+			//Give th application time to quit before trying to continue
+			yield return new WaitForSeconds(5);
 		}
+
+		this.currentPair = this.pairs.Dequeue();
+		this.currentPair.AttemptedRegistration();
 
 		Debug.Log(
 			string.Format(
 				"{0} registering {1} to {2}",
 				DateTime.Now.ToString(),
 				this.currentPair.ModelFragment.name,
-				this.currentPair.StaticFragment.name
-			)
+				this.currentPair.StaticFragment.name)
 		);
 
 		ICPRegisterer registerer = new ICPRegisterer(

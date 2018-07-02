@@ -25,16 +25,20 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	}
 
 	/// <summary>
-	/// Once the experiment is finished this method will be called. It prints the 
+	/// Once the experiment is finished this method will be called. It prints the
 	/// time needed for the experiment and quits the application.
 	/// </summary>
 	public void OnCommandFinished()
 	{
-		if (CLIUsed) Application.Quit();
+#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+#else
+			Application.Quit();
+#endif
 	}
 
 	/// <summary>
-	/// Check for the different command line options if they have been passed, 
+	/// Check for the different command line options if they have been passed,
 	/// and if so handles them.
 	/// </summary>
 	private void Run()
@@ -49,7 +53,12 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 		string inputDirectory;
 		string outputDirectory;
 		string ICPMethod;
-		if (ExtractRealDataArguments(out inputDirectory, out outputDirectory, out ICPMethod)) RunRealDataExperiment(inputDirectory, outputDirectory, ICPMethod);
+		int numIterations;
+		float maxWithinCorrespondenceDistance;
+		if (ExtractRealDataArguments(
+			out inputDirectory, out outputDirectory, out ICPMethod,
+			out numIterations, out maxWithinCorrespondenceDistance
+		)) RunRealDataExperiment(inputDirectory, outputDirectory, ICPMethod, numIterations, maxWithinCorrespondenceDistance);
 	}
 
 	/// <summary>
@@ -72,12 +81,13 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 		return true;
 	}
 
-	private bool ExtractRealDataArguments(out string inputDirectory, out string resultsDirectory, out string ICPMethod)
+	private bool ExtractRealDataArguments(out string inputDirectory, out string resultsDirectory, out string ICPMethod, out int numIterations, out float maxWithinCorrespondenceDistance)
 	{
 		inputDirectory = null;
 		resultsDirectory = null;
 		ICPMethod = null;
-
+		numIterations = -1;
+		maxWithinCorrespondenceDistance = 0.0f;
 
 		int statisticsArgument = GetCLIArgumentIndex(realDataFlag);
 		if (statisticsArgument == -1) return false;
@@ -85,6 +95,8 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 		inputDirectory = CLIArguments[statisticsArgument + 1];
 		resultsDirectory = CLIArguments[statisticsArgument + 2];
 		ICPMethod = CLIArguments[statisticsArgument + 3];
+		int.TryParse(CLIArguments[statisticsArgument + 4], out numIterations);
+		float.TryParse(CLIArguments[statisticsArgument + 5], out maxWithinCorrespondenceDistance);
 
 		return true;
 	}
@@ -107,7 +119,7 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 
 	/// <summary>
 	/// Method to check if a specific command line argument is passed. Note that
-	///  if a dash is expected in front of the parameter name that dash should 
+	///  if a dash is expected in front of the parameter name that dash should
 	/// be included in <param name="argument">.
 	/// </summary>
 	/// <returns>The commandline argument passed.</returns>
@@ -119,7 +131,7 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 	}
 
 	/// <summary>
-	/// This function handles running the experiment from the command line, it 
+	/// This function handles running the experiment from the command line, it
 	/// uses the passed configuration file.
 	/// </summary>
 	/// <param name="configFile">Config file.</param>
@@ -141,14 +153,15 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 		StartCoroutine(statistics.ProcessExperimentResultsFolder(dataSetFile, resultsDirectory));
 	}
 
-	private void RunRealDataExperiment(string inputDirectory, string outputDirectory, string ICPMethod)
+	private void RunRealDataExperiment(string inputDirectory, string outputDirectory, string ICPMethod,
+									   int maxNumIterations, float maxWithinCorrespondenceDistance)
 	{
 		PrepApplicationForCLI();
-		RealExperimentRunner.Instance.Run(inputDirectory, outputDirectory, ICPMethod);
+		RealExperimentRunner.Instance.Run(inputDirectory, outputDirectory, ICPMethod, maxNumIterations, maxWithinCorrespondenceDistance);
 	}
 
 	/// <summary>
-	/// If a commandline option is passed this method makes sure that the other 
+	/// If a commandline option is passed this method makes sure that the other
 	/// components of the application behave accordingly.
 	/// </summary>
 	private void PrepApplicationForCLI()
