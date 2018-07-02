@@ -132,9 +132,15 @@ public class CLI : RTEditor.MonoSingletonBase<CLI>
 		int statisticsArgument = GetCLIArgumentIndex(statisticsFlag);
 		if (statisticsArgument == -1) return false;
 
-		dataSetFile = CLIArguments[statisticsArgument + 1];
-		resultsDirectory = CLIArguments[statisticsArgument + 2];
-
+		try
+		{
+			dataSetFile = CLIArguments[statisticsArgument + 1];
+			resultsDirectory = CLIArguments[statisticsArgument + 2];
+		}
+		catch (IndexOutOfRangeException)
+		{
+			throw new Exception(helpMessage);
+		}
 		return true;
 	}
 

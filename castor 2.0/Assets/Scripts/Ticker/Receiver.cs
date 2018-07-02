@@ -22,7 +22,7 @@ namespace Ticker
 
 		private static string noMessageText = "";
 
-		private void Awake()
+		private void Start()
 		{
 			if (CLI.Instance.CLIModeActive) CLIAwake();
 			else GUIAwake();
